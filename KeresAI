@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ═══════════════════════════════════════════
+     PRIMARY SEO
+═══════════════════════════════════════════ -->
+<title>Keres AI — AI Automation Agents That Save Time & Money | USA</title>
+<meta name="description" content="Keres AI builds custom AI Agents that automate repetitive business tasks — saving your team hours every week and cutting operational costs. Book a free discovery call today.">
+<meta name="keywords" content="AI automation, AI agents, business automation, save time with AI, AI workflow automation, custom AI agents USA, automate business tasks, AI for small business, reduce operational costs AI, AI consulting USA, Keres AI">
+<meta name="author" content="Keres AI">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#E85D04">
+<link rel="canonical" href="https://www.keresai.com/">
+
+<!-- ═══════════════════════════════════════════
+     OPEN GRAPH (Facebook, LinkedIn, WhatsApp)
+═══════════════════════════════════════════ -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.keresai.com/">
+<meta property="og:title" content="Keres AI — AI Agents That Automate Your Business">
+<meta property="og:description" content="We build custom AI Agents that eliminate time-consuming tasks — so your team can focus on work that actually grows your business. Average 70% time saved. Book a free call.">
+<meta property="og:image" content="https://www.keresai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Keres AI — AI Automation Agents">
+<meta property="og:site_name" content="Keres AI">
+<meta property="og:locale" content="en_US">
+
+<!-- ═══════════════════════════════════════════
+     TWITTER / X CARD
+═══════════════════════════════════════════ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@keresai">
+<meta name="twitter:creator" content="@keresai">
+<meta name="twitter:title" content="Keres AI — AI Agents That Automate Your Business">
+<meta name="twitter:description" content="Custom AI Agents that handle the repetitive work draining your team. 70% avg time saved. Book a free 30-min discovery call.">
+<meta name="twitter:image" content="https://www.keresai.com/og-image.jpg">
+<meta name="twitter:image:alt" content="Keres AI — AI Automation Agents">
+
+<!-- ═══════════════════════════════════════════
+     GEO & BUSINESS
+═══════════════════════════════════════════ -->
+<meta name="geo.region" content="US">
+<meta name="geo.placename" content="United States">
+<meta name="language" content="English">
+<meta name="revisit-after" content="7 days">
+<meta name="rating" content="general">
+
+<!-- ═══════════════════════════════════════════
+     STRUCTURED DATA — Organization
+═══════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Keres AI",
+  "url": "https://www.keresai.com",
+  "logo": "https://www.keresai.com/logo.png",
+  "description": "Keres AI builds custom AI Agents that automate repetitive business tasks, saving companies time and money across the USA.",
+  "foundingDate": "2024",
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "serviceType": ["AI Automation", "AI Agent Development", "Business Process Automation", "Workflow Automation"],
+  "sameAs": [
+    "https://twitter.com/keresai",
+    "https://www.linkedin.com/company/keresai",
+    "https://calendly.com/ops-keresai/30min"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "sales",
+    "url": "https://calendly.com/keres-ai",
+    "availableLanguage": "English"
+  }
+}
+</script>
+
+<!-- ═══════════════════════════════════════════
+     STRUCTURED DATA — WebSite + SiteLinks Searchbox
+═══════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Keres AI",
+  "url": "https://www.keresai.com",
+  "description": "Custom AI Agents for business automation — save time, cut costs, and scale smarter.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://www.keresai.com/?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- ═══════════════════════════════════════════
+     STRUCTURED DATA — Service
+═══════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "AI Agent Development & Business Automation",
+  "provider": {
+    "@type": "Organization",
+    "name": "Keres AI",
+    "url": "https://www.keresai.com"
+  },
+  "name": "Custom AI Agents for Business Automation",
+  "description": "We design and deploy intelligent AI Agents that automate the repetitive, time-consuming tasks in your business — reducing costs and freeing your team for high-value work.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI Automation Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Email & Support Agent",
+          "description": "Autonomous agent that reads, categorizes, and responds to inbound emails and support tickets — reducing response time from hours to seconds."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Automated Reporting Agent",
+          "description": "Pulls data from your tools, compiles insights, and delivers formatted reports on schedule — no analyst required."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Lead Qualification Agent",
+          "description": "Monitors inbound leads, scores them against your criteria, and routes only the best opportunities to your sales team."
+        }
+      }
+    ]
+  }
+}
+</script>
+
+<!-- ═══════════════════════════════════════════
+     STRUCTURED DATA — FAQ (boosts Google rich results)
+═══════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does Keres AI do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Keres AI builds custom AI Agents that automate repetitive, time-consuming business tasks — saving companies an average of 70% of the time previously spent on manual work, while significantly reducing operational costs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly can Keres AI deploy an AI agent for my business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most AI agents are scoped, built, and deployed within 2–4 weeks depending on complexity. We begin with a free 30-minute discovery call to understand your workflows before building anything."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kinds of tasks can Keres AI automate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Keres AI automates tasks including email and support ticket handling, data collection and reporting, lead qualification and outreach, document processing, scheduling, and any other repetitive workflow that currently requires manual effort."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get started with Keres AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Book a free 30-minute discovery call via our website at keresai.com. We'll learn about your business, identify the highest-impact automation opportunities, and outline a plan — at no cost or obligation."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════
+     STRUCTURED DATA — Breadcrumb
+═══════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.keresai.com/"},
+    {"@type": "ListItem", "position": 2, "name": "AI Automation Services", "item": "https://www.keresai.com/#demos"},
+    {"@type": "ListItem", "position": 3, "name": "Book a Call", "item": "https://www.keresai.com/#contact"}
+  ]
+}
+</script>
+
+<!-- ═══════════════════════════════════════════
+     PERFORMANCE
+═══════════════════════════════════════════ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="dns-prefetch" href="https://formspree.io">
+<link rel="dns-prefetch" href="https://calendly.com">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #E85D04;
+    --orange-light: #F48C06;
+    --dark: #0f0f0f;
+    --dark2: #1a1a1a;
+    --dark3: #242424;
+    --light: #f8f6f2;
+    --light2: #eeebe4;
+    --text-muted: #888;
+    --text-dim: #555;
+    --border: rgba(255,255,255,0.08);
+    --border-light: rgba(0,0,0,0.09);
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background: var(--light);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(248,246,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+    padding: 0 48px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--orange); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-orb {
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, rgba(232,93,4,0.18) 0%, rgba(232,93,4,0.05) 50%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -60%);
+    pointer-events: none;
+  }
+  .hero-orb-2 {
+    position: absolute;
+    width: 320px;
+    height: 160px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.06);
+    bottom: 15%; left: 50%;
+    transform: translateX(-50%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(56px, 8vw, 100px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: #0f0f0f;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-title .accent { color: var(--orange); font-style: italic; }
+  .hero-sub {
+    margin-top: 28px;
+    max-width: 520px;
+    font-size: 17px;
+    font-weight: 300;
+    color: #555;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-ctas {
+    margin-top: 44px;
+    display: flex;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-primary {
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    padding: 14px 32px;
+    font-size: 15px;
+    font-family: var(--sans);
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #c94d00; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: #1a1a1a;
+    border: 1.5px solid rgba(0,0,0,0.2);
+    padding: 14px 32px;
+    font-size: 15px;
+    font-family: var(--sans);
+    font-weight: 400;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: rgba(0,0,0,0.5); transform: translateY(-1px); }
+  .hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.25));
+    z-index: 1;
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--dark);
+    color: #fff;
+    padding: 100px 48px;
+  }
+  .about-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+  .about-title {
+    font-family: var(--serif);
+    font-size: clamp(38px, 4vw, 56px);
+    line-height: 1.1;
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .about-title .accent { color: var(--orange); font-style: italic; }
+  .about-body {
+    margin-top: 24px;
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+  }
+  .about-body p + p { margin-top: 16px; }
+  .stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 36px;
+    color: var(--orange);
+    font-weight: 400;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+  .values-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .value-card {
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 6px;
+    padding: 20px 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .value-icon {
+    width: 34px;
+    height: 34px;
+    background: rgba(232,93,4,0.15);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .value-icon svg { width: 16px; height: 16px; stroke: var(--orange); fill: none; stroke-width: 1.8; }
+  .value-title { font-size: 14px; font-weight: 500; color: #fff; }
+  .value-desc { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; line-height: 1.6; }
+
+  /* DEMOS */
+  #demos {
+    background: var(--light);
+    padding: 100px 48px;
+  }
+  .demos-header {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: #0f0f0f;
+    margin-bottom: 16px;
+  }
+  .section-body {
+    font-size: 16px;
+    font-weight: 300;
+    color: #666;
+    max-width: 440px;
+    line-height: 1.7;
+  }
+  .demos-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .demo-card { cursor: pointer; }
+  .demo-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--dark);
+    position: relative;
+  }
+  .demo-img-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .demo-img-inner svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.3;
+  }
+  .demo-cat {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 16px;
+  }
+  .demo-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #0f0f0f;
+    margin-top: 6px;
+    line-height: 1.3;
+  }
+  .demo-desc {
+    font-size: 13.5px;
+    color: #666;
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+  .demo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--orange);
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .demo-link::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 8px solid var(--orange);
+  }
+
+  /* TESTIMONIALS */
+  #testimonials {
+    background: var(--light2);
+    padding: 100px 48px;
+  }
+  .testimonials-header {
+    max-width: 1100px;
+    margin: 0 auto 56px;
+  }
+  .testimonials-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .testimonial-card {
+    background: var(--light);
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .quote-mark {
+    font-family: var(--serif);
+    font-size: 36px;
+    color: rgba(232,93,4,0.3);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .testimonial-text {
+    font-size: 14.5px;
+    color: #333;
+    line-height: 1.75;
+    flex: 1;
+  }
+  .testimonial-divider {
+    height: 1px;
+    background: var(--border-light);
+    margin: 22px 0 18px;
+  }
+  .testimonial-name {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #111;
+  }
+  .testimonial-role {
+    font-size: 12.5px;
+    color: #888;
+    margin-top: 3px;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--light);
+    padding: 100px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-bg {
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .contact-header { margin-bottom: 60px; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-col-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+  .contact-col-sub {
+    font-size: 13.5px;
+    color: #888;
+    margin-bottom: 28px;
+  }
+  .form-group { margin-bottom: 18px; }
+  .form-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 7px;
+  }
+  .form-input {
+    width: 100%;
+    padding: 11px 14px;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.18);
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: var(--sans);
+    color: #1a1a1a;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-input::placeholder { color: #aaa; }
+  .form-input:focus { border-color: var(--orange); }
+  textarea.form-input { resize: vertical; min-height: 100px; }
+  .form-submit {
+    margin-top: 8px;
+    width: 100%;
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    padding: 14px;
+    font-size: 15px;
+    font-family: var(--sans);
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .form-submit:hover { background: #c94d00; }
+
+  /* CALENDAR */
+  .cal-wrapper {
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .cal-month { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+  .cal-nav { background: none; border: none; cursor: pointer; color: #888; font-size: 16px; padding: 4px 8px; }
+  .cal-nav:hover { color: var(--orange); }
+  .cal-grid { padding: 12px 14px 16px; }
+  .cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: #aaa;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .cal-day:hover:not(.empty):not(.past) { background: rgba(232,93,4,0.1); color: var(--orange); }
+  .cal-day.available { font-weight: 500; }
+  .cal-day.today { background: var(--orange); color: #fff !important; }
+  .cal-day.selected { background: var(--orange); color: #fff !important; }
+  .cal-day.past { color: #ccc; cursor: default; }
+  .cal-day.empty { cursor: default; }
+  .cal-day.has-dot::after {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 3px;
+    background: var(--orange);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .cal-day { position: relative; }
+  .cal-selected-time {
+    padding: 14px 20px;
+    border-top: 1px solid var(--border-light);
+    font-size: 13px;
+    color: #555;
+  }
+  .cal-selected-time strong { color: var(--orange); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.4);
+    padding: 36px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+  .footer-logo {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+  }
+  .footer-logo span { color: var(--orange); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-title { animation: fadeUp 0.8s cubic-bezier(0.22,0.61,0.36,1) both; }
+  .hero-sub { animation: fadeUp 0.8s 0.15s cubic-bezier(0.22,0.61,0.36,1) both; }
+  .hero-ctas { animation: fadeUp 0.8s 0.28s cubic-bezier(0.22,0.61,0.36,1) both; }
+
+  /* DEMO CARD COLORS */
+  .demo-img.c1 { background: linear-gradient(135deg, #1a1a1a 0%, #2d1a0a 100%); }
+  .demo-img.c2 { background: linear-gradient(135deg, #1a1a1a 0%, #0a1a2d 100%); }
+  .demo-img.c3 { background: linear-gradient(135deg, #1a1a1a 0%, #1a2d0a 100%); }
+  .field-error { font-size: 12px; color: #c0392b; margin-top: 5px; min-height: 16px; }
+  .form-input.invalid { border-color: #c0392b; }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--border-light); padding: 0; }
+  .faq-item:first-child { border-top: 1px solid var(--border-light); }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 4px; font-size: 15px; font-weight: 500; color: #1a1a1a;
+    cursor: pointer; list-style: none; gap: 16px;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::after { content: '+'; font-size: 20px; font-weight: 300; color: var(--orange); flex-shrink: 0; transition: transform 0.2s; }
+  details[open] .faq-q::after { transform: rotate(45deg); }
+  .faq-a { padding: 0 4px 20px; font-size: 14.5px; color: #555; line-height: 1.75; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="logo">Keres <span>AI</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#demos">Demos</a></li>
+    <li><a href="#contact">Booking</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" aria-label="Keres AI — AI Automation Agents">
+  <div class="hero-orb"></div>
+  <h1 class="hero-title">Your Time.<br><span class="accent">Reclaimed.</span></h1>
+  <p class="hero-sub">
+    We build AI Agents that handle the work your team shouldn't be doing — so you can focus on the work that actually moves the needle.
+  </p>
+  <div class="hero-ctas">
+    <a href="#demos" class="btn-primary">Explore Our Work</a>
+    <a href="#contact" class="btn-outline">Book a Call</a>
+  </div>
+  <div class="hero-scroll"></div>
+  <div class="hero-orb-2"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-label">About Us</div>
+      <div class="about-title">We are the <span class="accent">builders</span> of your unfair advantage.</div>
+      <div class="about-body">
+        <p>Keres AI is a boutique AI automation studio. We design and deploy intelligent agents that take over the repetitive, time-consuming tasks draining your team's energy and your company's budget.</p>
+        <p>We don't hand you a tool and walk away. We engineer purpose-built AI agents that slot directly into your operations — working autonomously, around the clock, so your people don't have to.</p>
+      </div>
+      <div class="stats">
+        <div>
+          <div class="stat-num">40+</div>
+          <div class="stat-label">Agents Deployed</div>
+        </div>
+        <div>
+          <div class="stat-num">70%</div>
+          <div class="stat-label">Avg. Time Saved</div>
+        </div>
+        <div>
+          <div class="stat-num">5×</div>
+          <div class="stat-label">Avg. ROI</div>
+        </div>
+      </div>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+        </div>
+        <div>
+          <div class="value-title">Built for Your Business</div>
+          <div class="value-desc">No generic tools. Every agent we build is designed from scratch around your exact workflows, systems, and goals.</div>
+        </div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <div class="value-title">Always On</div>
+          <div class="value-desc">Our AI agents work 24/7 without breaks, errors, or escalations — handling volume your team never could alone.</div>
+        </div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <div>
+          <div class="value-title">Measurable Savings</div>
+          <div class="value-desc">We obsess over ROI. Every agent we deploy is measured against real cost and time metrics — you see exactly what you're saving.</div>
+        </div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <div class="value-title">Your Team, Amplified</div>
+          <div class="value-desc">We free your people from the grind so they can focus on creative, high-value work that machines can't replicate.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMOS -->
+<section id="demos">
+  <div class="demos-header">
+    <div class="section-title">What We've Built</div>
+    <p class="section-body">Each agent is precision-engineered to eliminate a specific bottleneck — and the results speak for themselves.</p>
+  </div>
+  <div class="demos-grid">
+    <div class="demo-card">
+      <div class="demo-img c1">
+        <div class="demo-img-inner">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="20" width="60" height="8" rx="2" fill="rgba(232,93,4,0.5)"/>
+            <rect x="10" y="36" width="44" height="8" rx="2" fill="rgba(255,255,255,0.3)"/>
+            <rect x="10" y="52" width="52" height="8" rx="2" fill="rgba(255,255,255,0.15)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="demo-cat">Inbox Automation</div>
+      <div class="demo-name">AI Email & Support Agent</div>
+      <p class="demo-desc">An autonomous agent that reads, categorises, and responds to inbound emails and support tickets — reducing response time from hours to seconds.</p>
+      <span class="demo-link">Watch Demo</span>
+    </div>
+    <div class="demo-card">
+      <div class="demo-img c2">
+        <div class="demo-img-inner">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="22" stroke="rgba(232,93,4,0.5)" stroke-width="2"/>
+            <circle cx="40" cy="40" r="12" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            <circle cx="40" cy="40" r="4" fill="rgba(232,93,4,0.7)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="demo-cat">Data & Reporting</div>
+      <div class="demo-name">Automated Reporting Agent</div>
+      <p class="demo-desc">Pulls data from your tools, compiles insights, and delivers formatted reports to your team on schedule — no analyst required.</p>
+      <span class="demo-link">Watch Demo</span>
+    </div>
+    <div class="demo-card">
+      <div class="demo-img c3">
+        <div class="demo-img-inner">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 60 L40 20 L60 60" stroke="rgba(232,93,4,0.5)" stroke-width="2" fill="none"/>
+            <path d="M28 45 L52 45" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <path d="M24 52 L56 52" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+          </svg>
+        </div>
+      </div>
+      <div class="demo-cat">Sales & Outreach</div>
+      <div class="demo-name">Lead Qualification Agent</div>
+      <p class="demo-desc">Monitors inbound leads, scores them against your criteria, enriches their profiles, and routes only the best opportunities to your sales team.</p>
+      <span class="demo-link">Watch Demo</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header">
+    <div class="section-label">Testimonials</div>
+    <div class="section-title">What they say</div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div>
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">Keres AI built us an agent that handles what used to take our team three hours every morning. It just runs. The time we've gotten back is genuinely hard to put a number on — but the impact is everywhere.</p>
+      </div>
+      <div>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-name">Sarah Okafor</div>
+        <div class="testimonial-role">Chief Operations Officer, Meridian Group</div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div>
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">We were skeptical that AI could handle our support queue without dropping the ball. Within two weeks of going live, our response time dropped by 80% and customer satisfaction went up. It just works.</p>
+      </div>
+      <div>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-name">James O'Connell</div>
+        <div class="testimonial-role">VP of Operations, NovaBuild Systems</div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div>
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">The reporting agent Keres AI built saves my team roughly 12 hours a week. That's not a rounding error — that's nearly a full working day back, every single week. The ROI was clear within the first month.</p>
+      </div>
+      <div>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-name">Daniel Ferreira</div>
+        <div class="testimonial-role">CEO, Stratos Capital</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" aria-labelledby="contact-heading">
+  <div class="contact-bg"></div>
+  <div class="contact-inner">
+    <div class="contact-header">
+      <h2 id="contact-heading" class="section-title">Let's Connect</h2>
+      <p class="section-body">Whether you have a question or want to explore a partnership, we're here.</p>
+    </div>
+    <div class="contact-grid">
+
+      <!-- CONTACT FORM (Formspree) -->
+      <div>
+        <div class="contact-col-title">Send a Message</div>
+        <div class="contact-col-sub">We respond within 24 hours.</div>
+
+        <!-- Success state (hidden by default) -->
+        <div id="form-success" style="display:none; background:#f0faf4; border:1px solid #a8d5b5; border-radius:6px; padding:24px; text-align:center;">
+          <div style="font-size:28px; margin-bottom:10px;">✓</div>
+          <div style="font-weight:500; color:#1a6135; font-size:15px;">Message sent successfully!</div>
+          <div style="color:#555; font-size:13px; margin-top:6px;">We'll get back to you within 24 hours.</div>
+        </div>
+
+        <!-- Error state (hidden by default) -->
+        <div id="form-error" style="display:none; background:#fff5f5; border:1px solid #f5c6c6; border-radius:6px; padding:14px; margin-bottom:16px; font-size:13px; color:#c0392b;">
+          Something went wrong. Please try again or email us directly.
+        </div>
+
+        <form id="contact-form" action="https://formspree.io/f/mojywlnn" method="POST" novalidate>
+          <!-- Replace YOUR_FORM_ID with your Formspree form ID after signing up at formspree.io -->
+          <input type="hidden" name="_subject" value="New enquiry from Keres AI website">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="form-group">
+            <label class="form-label" for="fname">Full Name *</label>
+            <input type="text" id="fname" name="name" class="form-input" placeholder="Jane Doe" required autocomplete="name">
+            <div class="field-error" id="fname-err"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="femail">Email *</label>
+            <input type="email" id="femail" name="email" class="form-input" placeholder="jane@company.com" required autocomplete="email">
+            <div class="field-error" id="femail-err"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fcompany">Company</label>
+            <input type="text" id="fcompany" name="company" class="form-input" placeholder="Acme Inc." autocomplete="organization">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fmessage">Message *</label>
+            <textarea id="fmessage" name="message" class="form-input" placeholder="Tell us about your project..." required></textarea>
+            <div class="field-error" id="fmessage-err"></div>
+          </div>
+          <button type="submit" class="form-submit" id="form-btn">Send Message</button>
+        </form>
+      </div>
+
+      <!-- CALENDLY BOOKING -->
+      <div>
+        <div class="contact-col-title">Book a Call</div>
+        <div class="contact-col-sub">Schedule a free 30-minute discovery call.</div>
+        <div class="cal-wrapper">
+          <div class="cal-header">
+            <button class="cal-nav" id="calPrev" aria-label="Previous month">&#8249;</button>
+            <span class="cal-month" id="calMonth">April 2026</span>
+            <button class="cal-nav" id="calNext" aria-label="Next month">&#8250;</button>
+          </div>
+          <div class="cal-grid">
+            <div class="cal-weekdays" aria-hidden="true">
+              <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+            </div>
+            <div class="cal-days" id="calDays" role="grid" aria-label="Select a date"></div>
+          </div>
+          <div class="cal-selected-time" id="calInfo">Select a date to open booking.</div>
+        </div>
+        <p style="font-size:12px; color:#999; margin-top:12px; line-height:1.6;">
+          Clicking a date will open our Calendly booking page where you can choose a time that works for you.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ SECTION (drives rich results in Google) -->
+<section id="faq" aria-labelledby="faq-heading" style="background:#fff; padding:80px 48px;">
+  <div style="max-width:800px; margin:0 auto;">
+    <div class="section-label">FAQ</div>
+    <h2 id="faq-heading" class="section-title" style="margin-bottom:40px;">Common questions</h2>
+    <div style="display:flex; flex-direction:column; gap:0;">
+      <details class="faq-item">
+        <summary class="faq-q">What does Keres AI do?</summary>
+        <p class="faq-a">Keres AI builds custom AI Agents that automate repetitive, time-consuming business tasks — saving companies an average of 70% of the time previously spent on manual work, while significantly cutting operational costs.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How quickly can you deploy an AI agent for my business?</summary>
+        <p class="faq-a">Most agents are scoped, built, and live within 2–4 weeks depending on complexity. We start with a free 30-minute discovery call to understand your workflows before writing a single line of code.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">What kinds of tasks can you automate?</summary>
+        <p class="faq-a">Email and support ticket handling, data collection and reporting, lead qualification, document processing, scheduling, CRM updates, invoice processing — and any other repetitive workflow that currently requires manual effort.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Do I need a technical team to work with Keres AI?</summary>
+        <p class="faq-a">Not at all. We handle everything — scoping, building, testing, and deploying the agent. We integrate with your existing tools (email, Slack, CRM, spreadsheets, etc.) and hand you something that just works.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How do I get started?</summary>
+        <p class="faq-a">Book a free 30-minute discovery call using the calendar on this page. We'll identify your highest-impact automation opportunity and outline a plan — no cost, no obligation.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Keres <span>AI</span></div>
+  <div>&copy; 2026 Keres AI. All rights reserved.</div>
+  <div>Automate Everything.</div>
+</footer>
+
+<script>
+  /* ── CALENDLY CONFIG ── */
+  const CALENDLY_URL = 'https://calendly.com/ops-keresai/30min';
+  /* Replace with your actual Calendly link e.g. https://calendly.com/yourname/30min */
+
+  /* ── CALENDAR ── */
+  const today = new Date();
+  let currentYear = today.getFullYear(), currentMonth = today.getMonth();
+  let selectedDay = null;
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  function renderCalendar() {
+    document.getElementById('calMonth').textContent = monthNames[currentMonth] + ' ' + currentYear;
+    const calDays = document.getElementById('calDays');
+    calDays.innerHTML = '';
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const todayD = today.getDate(), todayM = today.getMonth(), todayY = today.getFullYear();
+
+    for (let i = 0; i < firstDay; i++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day empty';
+      calDays.appendChild(el);
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const el = document.createElement('div');
+      const isToday = d === todayD && currentMonth === todayM && currentYear === todayY;
+      const isPast = new Date(currentYear, currentMonth, d) < new Date(todayY, todayM, todayD);
+      const isWeekend = [0,6].includes(new Date(currentYear, currentMonth, d).getDay());
+      const isSelected = d === selectedDay;
+      el.className = 'cal-day' + (isToday ? ' today' : '') + (isPast || isWeekend ? ' past' : ' available') + (isSelected ? ' selected' : '');
+      el.textContent = d;
+      el.setAttribute('role', 'gridcell');
+      if (!isPast && !isWeekend) {
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('aria-label', dayNames[new Date(currentYear, currentMonth, d).getDay()] + ' ' + monthNames[currentMonth] + ' ' + d);
+        const captureD = d;
+        const handler = () => {
+          selectedDay = captureD;
+          renderCalendar();
+          const dow = new Date(currentYear, currentMonth, captureD).getDay();
+          const info = document.getElementById('calInfo');
+          info.innerHTML = '<strong style="color:var(--orange)">' + dayNames[dow] + ', ' + monthNames[currentMonth] + ' ' + captureD + '</strong> — opening booking page...';
+          setTimeout(() => { window.open(CALENDLY_URL, '_blank', 'noopener'); }, 600);
+        };
+        el.addEventListener('click', handler);
+        el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); } });
+      }
+      calDays.appendChild(el);
+    }
+  }
+
+  document.getElementById('calPrev').addEventListener('click', () => {
+    currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; } renderCalendar();
+  });
+  document.getElementById('calNext').addEventListener('click', () => {
+    currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderCalendar();
+  });
+  renderCalendar();
+
+  /* ── CONTACT FORM (Formspree) ── */
+  const form = document.getElementById('contact-form');
+  const btnSubmit = document.getElementById('form-btn');
+
+  function validateField(input, errId, msg) {
+    const err = document.getElementById(errId);
+    if (!input.value.trim() || (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value))) {
+      input.classList.add('invalid');
+      err.textContent = msg;
+      return false;
+    }
+    input.classList.remove('invalid');
+    err.textContent = '';
+    return true;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nameOk = validateField(document.getElementById('fname'), 'fname-err', 'Please enter your full name.');
+    const emailOk = validateField(document.getElementById('femail'), 'femail-err', 'Please enter a valid email address.');
+    const msgOk = validateField(document.getElementById('fmessage'), 'fmessage-err', 'Please enter a message.');
+    if (!nameOk || !emailOk || !msgOk) return;
+
+    btnSubmit.textContent = 'Sending...';
+    btnSubmit.disabled = true;
+    document.getElementById('form-error').style.display = 'none';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        throw new Error('Server error');
+      }
+    } catch {
+      document.getElementById('form-error').style.display = 'block';
+      btnSubmit.textContent = 'Send Message';
+      btnSubmit.disabled = false;
+    }
+  });
+
+  /* Live validation clear on input */
+  ['fname','femail','fmessage'].forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => { el.classList.remove('invalid'); document.getElementById(id+'-err').textContent = ''; });
+  });
+
+  /* ── NAV ACTIVE STATE ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  }, { passive: true });
+
+</script>
+
+<!-- CHATBOT WIDGET -->
+<style>
+  #chat-btn {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: var(--orange); border: none; cursor: pointer;
+    box-shadow: 0 4px 20px rgba(232,93,4,0.45);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  #chat-btn:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(232,93,4,0.55); }
+  #chat-btn svg { width: 26px; height: 26px; fill: #fff; }
+  #chat-badge {
+    display: none; position: absolute; top: -4px; right: -4px;
+    width: 18px; height: 18px; background: #22c55e; border-radius: 50%;
+    border: 2px solid #fff; font-size: 10px; font-weight: 700;
+    color: #fff; align-items: center; justify-content: center;
+  }
+  #chat-box {
+    display: none; position: fixed; bottom: 100px; right: 28px; z-index: 998;
+    width: 360px; max-height: 540px; border-radius: 14px;
+    background: #fff; box-shadow: 0 8px 48px rgba(0,0,0,0.18);
+    flex-direction: column; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.08);
+    font-family: var(--sans);
+  }
+  #chat-header {
+    background: var(--orange); padding: 16px 18px;
+    display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+  }
+  .chat-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 16px;
+  }
+  #chat-header-text { flex: 1; }
+  #chat-header-text strong { display: block; font-size: 14px; font-weight: 500; color: #fff; }
+  #chat-header-text span { font-size: 11.5px; color: rgba(255,255,255,0.75); }
+  #chat-close {
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.8); font-size: 20px; line-height: 1; padding: 4px;
+  }
+  #chat-close:hover { color: #fff; }
+  #chat-messages {
+    flex: 1; overflow-y: auto; padding: 16px;
+    display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth;
+  }
+  #chat-messages::-webkit-scrollbar { width: 4px; }
+  #chat-messages::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+  .cm-wrap { display: flex; }
+  .cm-bot { justify-content: flex-start; }
+  .cm-user { justify-content: flex-end; }
+  .cm-bubble { max-width: 82%; padding: 10px 14px; border-radius: 14px; font-size: 13.5px; line-height: 1.6; white-space: pre-wrap; }
+  .cm-bot .cm-bubble { background: #f3f3f3; color: #1a1a1a; border-bottom-left-radius: 4px; }
+  .cm-user .cm-bubble { background: var(--orange); color: #fff; border-bottom-right-radius: 4px; }
+  .cm-typing { display: flex; gap: 4px; align-items: center; padding: 12px 16px; }
+  .cm-typing span { width: 7px; height: 7px; background: #aaa; border-radius: 50%; animation: bounce 1.2s infinite; }
+  .cm-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .cm-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+  #chat-suggestions { padding: 0 14px 10px; display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0; }
+  .chat-suggestion {
+    background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 20px;
+    padding: 5px 12px; font-size: 12px; color: #444; cursor: pointer;
+    font-family: var(--sans); transition: background 0.15s, border-color 0.15s;
+  }
+  .chat-suggestion:hover { background: #fff0e8; border-color: var(--orange); color: var(--orange); }
+  #chat-footer {
+    padding: 12px 14px; border-top: 1px solid #eee;
+    display: flex; gap: 8px; align-items: center; flex-shrink: 0; background: #fafafa;
+  }
+  #chat-input {
+    flex: 1; border: 1px solid #ddd; border-radius: 22px;
+    padding: 9px 16px; font-size: 13.5px; font-family: var(--sans);
+    outline: none; background: #fff; color: #1a1a1a; transition: border-color 0.2s;
+  }
+  #chat-input:focus { border-color: var(--orange); }
+  #chat-input::placeholder { color: #aaa; }
+  #chat-send {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--orange);
+    border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: background 0.15s, transform 0.15s;
+  }
+  #chat-send:hover { background: #c94d00; transform: scale(1.05); }
+  #chat-send svg { width: 16px; height: 16px; fill: #fff; }
+</style>
+
+<button id="chat-btn" aria-label="Open chat" aria-expanded="false">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  <span id="chat-badge">1</span>
+</button>
+
+<div id="chat-box" role="dialog" aria-label="Keres AI Chat" aria-modal="true">
+  <div id="chat-header">
+    <div class="chat-avatar">🤖</div>
+    <div id="chat-header-text">
+      <strong>Keres AI Assistant</strong>
+      <span>● Online — ask me anything</span>
+    </div>
+    <button id="chat-close" aria-label="Close chat">×</button>
+  </div>
+  <div id="chat-messages" aria-live="polite"></div>
+  <div id="chat-suggestions">
+    <button class="chat-suggestion">What do you do?</button>
+    <button class="chat-suggestion">How long does it take?</button>
+    <button class="chat-suggestion">How much does it cost?</button>
+    <button class="chat-suggestion">Book a call</button>
+  </div>
+  <div id="chat-footer">
+    <input type="text" id="chat-input" placeholder="Ask a question..." maxlength="500">
+    <button id="chat-send" aria-label="Send">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var KB = [
+    { tags: ['what','keres','company','about','who','does','do'], answer: "Keres AI is a boutique AI automation studio based in the USA. We design and deploy custom AI Agents that handle repetitive, time-consuming tasks — saving businesses an average of 70% of manual work time and cutting costs significantly." },
+    { tags: ['agents','agent','services','types','offer','build','make','kind'], answer: "We build three core types of AI Agents:\n\n📧 AI Email & Support Agent — auto-reads and responds to emails and support tickets.\n📊 Automated Reporting Agent — pulls data and delivers formatted reports on schedule.\n🎯 Lead Qualification Agent — scores inbound leads and routes the best ones to your sales team.\n\nWe also build fully custom agents for unique workflows!" },
+    { tags: ['email','support','ticket','inbox','customer'], answer: "Our AI Email & Support Agent reads every inbound email or ticket, categorises it, and responds automatically — cutting response times from hours to seconds. It works with Gmail, Outlook, Zendesk, and most major platforms." },
+    { tags: ['report','reporting','data','analytics','insights'], answer: "Our Automated Reporting Agent pulls from your tools — spreadsheets, CRMs, ad platforms — and delivers clean reports on schedule. No analyst, no manual work, no delays." },
+    { tags: ['lead','leads','sales','qualify','crm','pipeline'], answer: "Our Lead Qualification Agent scores inbound leads, enriches their profiles, and routes only the highest-quality ones to your sales team — so your team spends time on deals that actually close." },
+    { tags: ['long','timeline','weeks','deploy','launch','fast','quick'], answer: "Most agents are scoped, built, tested, and live within 2–4 weeks. We handle everything — there's no bottleneck on your side." },
+    { tags: ['price','pricing','cost','much','fee','charge','expensive','budget'], answer: "Pricing is custom to your scope. The best way to get a number is to book a free 30-minute discovery call — we'll scope it together with no obligation." },
+    { tags: ['roi','return','save','saving','money','worth','results','impact'], answer: "Our clients average a 5× ROI and 70% reduction in manual work time. One client recovered 12 hours per week — paying back the investment in the first month." },
+    { tags: ['technical','tech','developer','coding','team','setup'], answer: "No technical team needed at all. We handle scoping, building, testing, deploying, and integrating with your existing stack — you just tell us what's slowing you down." },
+    { tags: ['tools','integrate','slack','gmail','hubspot','salesforce','zapier','existing'], answer: "We integrate with Gmail, Outlook, Slack, HubSpot, Salesforce, Notion, Airtable, Google Sheets, and many more. If you use it, chances are we can connect to it." },
+    { tags: ['book','call','meeting','schedule','calendly','discovery','talk','speak'], answer: "Book a free 30-minute discovery call using the calendar on this page — scroll to 'Let's Connect' and pick a date. It opens our booking page to choose your time. No cost, no commitment. You can also go directly to calendly.com/ops-keresai/30min" },
+    { tags: ['contact','message','reach','touch','form','send'], answer: "Use the contact form on this page — scroll to 'Let's Connect'. We respond within 24 hours. Or book a call right there using the calendar next to the form." },
+    { tags: ['clients','projects','deployed','experience','record'], answer: "We've deployed 40+ AI agents across many industries. Our client retention is 97% — most clients return for a second agent after seeing the results." },
+    { tags: ['usa','america','location','where','based','country'], answer: "Keres AI is based in the USA, serving businesses nationwide. We work fully remotely and have partnered with companies across the country." },
+    { tags: ['custom','bespoke','unique','specific','tailored'], answer: "Every agent is 100% custom-built. No templates, no off-the-shelf software. We engineer each agent around your exact workflows, tools, and goals." },
+    { tags: ['why','different','competitor','versus','compare','choose'], answer: "We build precision-engineered agents for your exact workflow — not generic tools. Every agent is held to real ROI and time-saving metrics. We don't ship demos. We ship results." },
+    { tags: ['hi','hello','hey','morning','afternoon','greetings'], answer: "Hey there! 👋 I'm the Keres AI assistant. Ask me anything about what we do, our agents, pricing, timelines, or how to get started!" },
+    { tags: ['thanks','thank','cheers','appreciate','helpful'], answer: "You're very welcome! 😊 If you have more questions or want to explore what an AI agent could do for you, just ask — or book a free call on this page." }
+  ];
+
+  var FALLBACK = "Great question! I don't have a specific answer for that, but our team would love to help. Use the contact form on this page or book a free discovery call — we respond within 24 hours. 🙌";
+
+  function ragAnswer(query) {
+    var q = query.toLowerCase().replace(/[^a-z0-9 ]/g, ' ');
+    var words = q.split(/\s+/).filter(Boolean);
+    var best = 0, answer = null;
+    for (var i = 0; i < KB.length; i++) {
+      var score = 0;
+      for (var j = 0; j < words.length; j++) {
+        for (var k = 0; k < KB[i].tags.length; k++) {
+          if (KB[i].tags[k] === words[j] || words[j].indexOf(KB[i].tags[k]) > -1 || KB[i].tags[k].indexOf(words[j]) > -1) { score++; break; }
+        }
+      }
+      if (score > best) { best = score; answer = KB[i].answer; }
+    }
+    return best > 0 ? answer : FALLBACK;
+  }
+
+  var chatOpen = false, hasGreeted = false;
+  var chatBtn = document.getElementById('chat-btn');
+  var chatBox = document.getElementById('chat-box');
+  var chatMessages = document.getElementById('chat-messages');
+  var chatInput = document.getElementById('chat-input');
+  var chatSend = document.getElementById('chat-send');
+  var chatClose = document.getElementById('chat-close');
+  var chatBadge = document.getElementById('chat-badge');
+
+  function toggleChat() {
+    chatOpen = !chatOpen;
+    chatBox.style.display = chatOpen ? 'flex' : 'none';
+    chatBtn.setAttribute('aria-expanded', chatOpen);
+    chatBadge.style.display = 'none';
+    if (chatOpen && !hasGreeted) {
+      hasGreeted = true;
+      setTimeout(function() { addMessage('bot', "Hi! 👋 I'm the Keres AI assistant. Ask me anything about what we do, our agents, pricing, or timelines — I'm here to help!"); }, 350);
+    }
+    if (chatOpen) setTimeout(function() { chatInput.focus(); }, 100);
+  }
+
+  function addMessage(role, text) {
+    var wrap = document.createElement('div');
+    wrap.className = 'cm-wrap cm-' + role;
+    var bubble = document.createElement('div');
+    bubble.className = 'cm-bubble';
+    bubble.textContent = text;
+    wrap.appendChild(bubble);
+    chatMessages.appendChild(wrap);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function addTyping() {
+    var wrap = document.createElement('div');
+    wrap.className = 'cm-wrap cm-bot';
+    wrap.id = 'cm-typing';
+    wrap.innerHTML = '<div class="cm-bubble cm-typing"><span></span><span></span><span></span></div>';
+    chatMessages.appendChild(wrap);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return wrap;
+  }
+
+  function sendMessage() {
+    var text = chatInput.value.trim();
+    if (!text) return;
+    chatInput.value = '';
+    addMessage('user', text);
+    var typing = addTyping();
+    var delay = 500 + Math.random() * 600;
+    setTimeout(function() { typing.remove(); addMessage('bot', ragAnswer(text)); }, delay);
+  }
+
+  chatBtn.addEventListener('click', toggleChat);
+  chatClose.addEventListener('click', toggleChat);
+  chatSend.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); sendMessage(); } });
+  setTimeout(function() { if (!chatOpen) chatBadge.style.display = 'flex'; }, 4000);
+
+  var suggestions = document.querySelectorAll('.chat-suggestion');
+  for (var i = 0; i < suggestions.length; i++) {
+    (function(btn) {
+      btn.addEventListener('click', function() {
+        if (!chatOpen) { toggleChat(); setTimeout(function() { chatInput.value = btn.textContent; sendMessage(); }, 450); }
+        else { chatInput.value = btn.textContent; sendMessage(); }
+      });
+    })(suggestions[i]);
+  }
+})();
+</script>
+</body>
+</html>
