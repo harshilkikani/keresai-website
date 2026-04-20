@@ -33,8 +33,8 @@
       'skip.content': 'Skip to main content',
 
       'hero.eyebrow': 'Now onboarding Q2 2026 clients',
-      'hero.title.1': 'Your Time.',
-      'hero.title.2': 'Reclaimed.',
+      'hero.title.1': 'AI Automation for',
+      'hero.title.2': 'Field Service Businesses',
       'hero.sub': 'Custom AI agents that handle customer intake, scheduling, invoicing, and follow-ups — so your team can focus on the jobs that generate revenue.',
       'hero.cta.primary': 'Explore Our Work',
       'hero.cta.secondary': 'Book a Free Call',
@@ -47,8 +47,8 @@
       'trust.2': 'Roofing',
       'trust.3': 'HVAC',
       'trust.4': 'Towing',
-      'trust.5': 'Septic Service',
-      'trust.6': 'Roofing',
+      'trust.5': 'Plumbing',
+      'trust.6': 'Electrical',
 
       'about.label': 'About Us',
       'about.title.1': 'We are the',
@@ -240,7 +240,7 @@
       'footer.link.privacy': 'Privacy Policy',
       'footer.link.terms': 'Terms of Service',
       'footer.link.security': 'Security',
-      'footer.copy': '© 2026 Keres AI. All rights reserved.',
+      'footer.copy': '© Keres AI. All rights reserved.',
       'footer.tag': 'Automate Everything.',
 
       'modal.demo.title': 'Demo coming soon',

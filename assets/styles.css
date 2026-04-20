@@ -187,13 +187,7 @@ section.dark .section-body { color: var(--text-on-dark); }
   font-family: var(--sans); font-size: 18px; font-weight: 600;
   color: var(--text); letter-spacing: -0.02em;
 }
-.logo-mark {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: linear-gradient(135deg, var(--orange-light), var(--orange));
-  display: grid; place-items: center; color: #fff;
-  box-shadow: 0 2px 8px rgba(232,93,4,0.3);
-}
-.logo-mark svg { width: 18px; height: 18px; }
+.logo-img { width: 48px; height: 48px; object-fit: contain; }
 .logo-text span { color: var(--orange); }
 
 .nav-links { display: flex; gap: 32px; align-items: center; }
