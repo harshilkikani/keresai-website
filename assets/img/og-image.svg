@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f0f0f"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="0.7" cy="0.3" r="0.6">
+      <stop offset="0%" stop-color="rgba(232,93,4,0.35)"/>
+      <stop offset="100%" stop-color="rgba(232,93,4,0)"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#orb)"/>
+  <text x="80" y="260" font-family="Georgia, serif" font-size="82" font-weight="400" fill="#fff" letter-spacing="-2">Your Time.</text>
+  <text x="80" y="360" font-family="Georgia, serif" font-size="82" font-style="italic" fill="#E85D04" letter-spacing="-2">Reclaimed.</text>
+  <text x="80" y="430" font-family="system-ui, sans-serif" font-size="26" fill="rgba(255,255,255,0.7)">Custom AI Agents that automate the work draining your team.</text>
+  <text x="80" y="560" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="#E85D04">KERES AI</text>
+  <text x="210" y="560" font-family="system-ui, sans-serif" font-size="22" fill="rgba(255,255,255,0.5)">keresai.com</text>
+</svg>
