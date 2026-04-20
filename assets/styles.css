@@ -213,13 +213,15 @@ section.dark .section-body { color: var(--text-on-dark); }
 
 .nav-actions { display: flex; align-items: center; gap: 10px; }
 .icon-btn {
-  width: 38px; height: 38px; border-radius: 8px;
+  min-width: 38px; height: 38px; border-radius: 8px;
   background: transparent; border: 1px solid var(--border-strong);
-  color: var(--text); display: grid; place-items: center;
+  color: var(--text); display: flex; align-items: center; justify-content: center; gap: 4px;
   transition: background var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
 }
 .icon-btn:hover { background: var(--bg-alt); border-color: var(--orange); color: var(--orange); }
 .icon-btn svg { width: 16px; height: 16px; }
+
+.lang-label { font-size: 12px; font-weight: 600; line-height: 1; }
 
 .lang-switch { position: relative; }
 .lang-menu {
