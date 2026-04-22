@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light dark">
+
+<!-- Security (replicates netlify.toml headers where possible) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://calendly.com; frame-src https://calendly.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Privacy Policy | Keres AI</title>
 <meta name="description" content="How Keres AI collects, uses, and protects information from visitors and customers.">
 <meta name="robots" content="index, follow">
@@ -95,7 +99,7 @@
     <h2><span class="num">03</span>Third-party processors</h2>
     <p>To run this site and respond to inquiries, we use a small set of vendors:</p>
     <ul>
-      <li><strong>Netlify</strong> — hosts the website.</li>
+      <li><strong>GitHub Pages</strong> &mdash; hosts the website.</li>
       <li><strong>Formspree</strong> — processes contact form submissions.</li>
       <li><strong>Calendly</strong> — handles discovery-call scheduling.</li>
       <li><strong>Google Fonts</strong> — serves typefaces.</li>
