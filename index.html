@@ -172,6 +172,7 @@
         <li><a href="#services"   data-i18n="nav.services">Services</a></li>
         <li><a href="#industries" data-i18n="nav.industries">Industries</a></li>
         <li><a href="#integrations">Integrations</a></li>
+        <li><a href="#roi">ROI</a></li>
         <li><a href="/resources.html">Resources</a></li>
         <li><a href="#contact"    data-i18n="nav.contact">Contact</a></li>
       </ul>
@@ -229,6 +230,7 @@
   <a href="#services"   data-i18n="nav.services">Services</a>
   <a href="#industries" data-i18n="nav.industries">Industries</a>
   <a href="#integrations">Integrations</a>
+  <a href="#roi">ROI</a>
   <a href="/resources.html">Resources</a>
   <a href="#contact"    data-i18n="nav.contact">Contact</a>
   <div class="mobile-cta">
@@ -496,6 +498,70 @@
     </div>
 
     <p class="integrations-foot">Don't see your stack? Keres speaks generic webhooks + CSV out of the box — most one-off integrations go live during onboarding.</p>
+  </div>
+</section>
+
+<!-- ════════════════════ ROI CALCULATOR ════════════════════ -->
+<section id="roi" class="alt" aria-labelledby="roi-title">
+  <div class="container container-narrow reveal">
+    <div class="section-label">ROI Calculator</div>
+    <h2 id="roi-title" class="section-title">
+      <span>What's slow response</span>
+      <span class="accent">costing you?</span>
+    </h2>
+    <p class="section-body">Four inputs. Transparent math. Defaults per vertical — tune to match your shop.</p>
+
+    <div class="roi-shell" data-vertical="septic">
+      <div class="roi-vert-row">
+        <button type="button" class="roi-vert-btn active" data-vert="septic">Septic</button>
+        <button type="button" class="roi-vert-btn" data-vert="roofing">Roofing</button>
+        <button type="button" class="roi-vert-btn" data-vert="hvac">HVAC</button>
+      </div>
+
+      <div class="roi-grid">
+        <div class="roi-inputs">
+          <label class="roi-field">
+            <span class="roi-field-label">Monthly leads</span>
+            <input type="number" id="roi-leads" min="0" value="200">
+          </label>
+          <label class="roi-field">
+            <span class="roi-field-label">Answer rate %</span>
+            <input type="number" id="roi-answer" min="0" max="100" value="60">
+          </label>
+          <label class="roi-field">
+            <span class="roi-field-label">Avg job value</span>
+            <div class="roi-field-prefix">
+              <span>$</span>
+              <input type="number" id="roi-job" min="0" value="680">
+            </div>
+          </label>
+          <label class="roi-field">
+            <span class="roi-field-label">After-hours lead %</span>
+            <input type="number" id="roi-afterhours" min="0" max="100" value="35">
+          </label>
+        </div>
+
+        <div class="roi-output">
+          <div class="roi-headline-label">You're losing</div>
+          <div class="roi-headline-value"><span id="roi-lost-mo">$0</span><span class="roi-per">/mo</span></div>
+          <div class="roi-headline-year">≈ <span id="roi-lost-yr">$0</span> / year</div>
+
+          <div class="roi-math">
+            <div class="roi-math-row"><span>Missed leads / mo</span><span id="roi-missed">0</span></div>
+            <div class="roi-math-row muted"><span id="roi-missed-calc">= 200 × (100% − 60%)</span><span></span></div>
+            <div class="roi-math-row"><span>Would-have-closed jobs</span><span id="roi-jobs">0</span></div>
+            <div class="roi-math-row muted"><span>= missed × 25% close rate</span><span></span></div>
+            <div class="roi-math-row"><span>Lost revenue</span><span id="roi-lost-mo-2">$0</span></div>
+            <div class="roi-math-row muted"><span id="roi-job-calc">= jobs × $680 avg ticket</span><span></span></div>
+            <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">0</span></div>
+            <div class="roi-math-row muted"><span>— the ones most at risk</span><span></span></div>
+          </div>
+
+          <a id="roi-cta" class="btn btn-primary" href="#contact">Book a call with these numbers →</a>
+          <div class="roi-note">Close rate (25%) is the industry-median answered-lead close rate for home services (IBISWorld 2024). Swap in your own number if you track it.</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -848,6 +914,7 @@
 <!-- Scripts -->
 <script src="/assets/i18n.js?v=2" defer></script>
 <script src="/assets/app.js?v=2" defer></script>
+<script src="/assets/roi.js" defer></script>
 <script src="/assets/chatbot.js" defer></script>
 </body>
 </html>
