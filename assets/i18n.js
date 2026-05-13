@@ -241,8 +241,8 @@
       'chat.s2': 'How long does it take?',
       'chat.s3': 'How much does it cost?',
       'chat.s4': 'Book a call',
-      'chat.greeting': 'Hi! 👋 I\'m the Keres AI assistant. Ask me anything about what we do, our agents, pricing, or timelines — I\'m here to help!'
-    
+      'chat.greeting': 'Hi! 👋 I\'m the Keres AI assistant. Ask me anything about what we do, our agents, pricing, or timelines — I\'m here to help!',
+
       // ── new sections (pricing/integrations/roi/pilots) ──
       'p2.label': 'Pricing',
       'p2.title.1': 'Pick the tier that',
@@ -423,8 +423,8 @@
       'chat.title': 'Asistente Keres AI', 'chat.status': 'En línea — pregúntame',
       'chat.placeholder': 'Haz una pregunta…', 'chat.send': 'Enviar', 'chat.open': 'Abrir chat', 'chat.close': 'Cerrar chat',
       'chat.s1': '¿Qué hacen?', 'chat.s2': '¿Cuánto tarda?', 'chat.s3': '¿Cuánto cuesta?', 'chat.s4': 'Agendar llamada',
-      'chat.greeting': '¡Hola! 👋 Soy el asistente de Keres AI. Pregúntame sobre lo que hacemos, nuestros agentes, precios o tiempos.'
-    
+      'chat.greeting': '¡Hola! 👋 Soy el asistente de Keres AI. Pregúntame sobre lo que hacemos, nuestros agentes, precios o tiempos.',
+
       // ── new sections (pricing/integrations/roi/pilots) ──
       'p2.label': 'Precios',
       'p2.title.1': 'Elige el plan que',
@@ -601,8 +601,8 @@
       'chat.title': 'Assistant Keres AI', 'chat.status': 'En ligne — posez-moi une question',
       'chat.placeholder': 'Posez une question…', 'chat.send': 'Envoyer', 'chat.open': 'Ouvrir le chat', 'chat.close': 'Fermer le chat',
       'chat.s1': 'Que faites-vous ?', 'chat.s2': 'Combien de temps ?', 'chat.s3': 'Combien ça coûte ?', 'chat.s4': 'Réserver',
-      'chat.greeting': 'Bonjour ! 👋 Je suis l\'assistant Keres AI. Posez-moi vos questions sur nos services, agents, tarifs ou délais.'
-    
+      'chat.greeting': 'Bonjour ! 👋 Je suis l\'assistant Keres AI. Posez-moi vos questions sur nos services, agents, tarifs ou délais.',
+
       // ── new sections (pricing/integrations/roi/pilots) ──
       'p2.label': 'Tarifs',
       'p2.title.1': 'Choisissez le plan qui',
@@ -777,8 +777,8 @@
       'chat.title': 'Keres AI Assistent', 'chat.status': 'Online — fragen Sie mich',
       'chat.placeholder': 'Frage stellen…', 'chat.send': 'Senden', 'chat.open': 'Chat öffnen', 'chat.close': 'Chat schließen',
       'chat.s1': 'Was macht ihr?', 'chat.s2': 'Wie lange?', 'chat.s3': 'Was kostet es?', 'chat.s4': 'Termin buchen',
-      'chat.greeting': 'Hallo! 👋 Ich bin der Keres AI-Assistent. Fragen Sie mich alles zu Services, Agenten, Preisen oder Zeitplänen.'
-    
+      'chat.greeting': 'Hallo! 👋 Ich bin der Keres AI-Assistent. Fragen Sie mich alles zu Services, Agenten, Preisen oder Zeitplänen.',
+
       // ── new sections (pricing/integrations/roi/pilots) ──
       'p2.label': 'Preise',
       'p2.title.1': 'Wählen Sie den Tarif, der',
@@ -953,8 +953,8 @@
       'chat.title': 'Assistente Keres AI', 'chat.status': 'Online — pergunte algo',
       'chat.placeholder': 'Faça uma pergunta…', 'chat.send': 'Enviar', 'chat.open': 'Abrir chat', 'chat.close': 'Fechar chat',
       'chat.s1': 'O que fazem?', 'chat.s2': 'Quanto tempo?', 'chat.s3': 'Quanto custa?', 'chat.s4': 'Agendar',
-      'chat.greeting': 'Oi! 👋 Sou o assistente Keres AI. Pergunte sobre nossos serviços, agentes, preços ou prazos.'
-    
+      'chat.greeting': 'Oi! 👋 Sou o assistente Keres AI. Pergunte sobre nossos serviços, agentes, preços ou prazos.',
+
       // ── new sections (pricing/integrations/roi/pilots) ──
       'p2.label': 'Preços',
       'p2.title.1': 'Escolha o plano que',
