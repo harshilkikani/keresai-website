@@ -35,31 +35,47 @@
 
   /* ─── i18n init + language switcher ─────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
-    if (window.KeresI18n) window.KeresI18n.init();
+    if (window.KeresI18n) {
+      try { window.KeresI18n.init(); } catch (e) { console.error('[i18n init]', e); }
+    }
 
     const switcher = document.getElementById('lang-switch');
     const trigger  = document.getElementById('lang-trigger');
     if (!switcher || !trigger) return;
 
-    function closeMenu() { switcher.setAttribute('aria-expanded', 'false'); trigger.setAttribute('aria-expanded', 'false'); }
-    function openMenu()  { switcher.setAttribute('aria-expanded', 'true');  trigger.setAttribute('aria-expanded', 'true'); }
+    const setOpen = (open) => {
+      switcher.setAttribute('aria-expanded', String(open));
+      trigger.setAttribute('aria-expanded', String(open));
+    };
 
     trigger.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
-      const open = switcher.getAttribute('aria-expanded') === 'true';
-      open ? closeMenu() : openMenu();
+      setOpen(switcher.getAttribute('aria-expanded') !== 'true');
     });
-    document.addEventListener('click', (e) => {
-      if (!switcher.contains(e.target)) closeMenu();
-    });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
 
-    document.querySelectorAll('#lang-switch .lang-menu button').forEach(b => {
-      b.addEventListener('click', () => {
-        window.KeresI18n.apply(b.dataset.lang);
-        closeMenu();
-      });
+    document.addEventListener('click', (e) => {
+      if (!switcher.contains(e.target)) setOpen(false);
     });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+
+    // Event delegation on the menu — survives dynamic content, immune to timing.
+    // Click target may be a child <span> (flag emoji or label), so walk up to the button.
+    const menu = switcher.querySelector('.lang-menu');
+    if (menu) {
+      menu.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-lang]');
+        if (!btn || !menu.contains(btn)) return;
+        const lang = btn.dataset.lang;
+        if (!lang) return;
+        try {
+          window.KeresI18n && window.KeresI18n.apply(lang);
+        } catch (err) {
+          console.error('[i18n apply]', err);
+        }
+        setOpen(false);
+      });
+    }
   });
 
   /* ─── Mobile nav (hamburger) ────────────────────────── */

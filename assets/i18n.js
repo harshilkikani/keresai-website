@@ -637,8 +637,15 @@
     }
   };
 
+  function safeGet(key) {
+    try { return localStorage.getItem(key); } catch (_) { return null; }
+  }
+  function safeSet(key, val) {
+    try { localStorage.setItem(key, val); } catch (_) { /* private mode / disabled storage */ }
+  }
+
   function detectLang() {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = safeGet(STORAGE_KEY);
     if (saved && T[saved]) return saved;
     const nav = (navigator.language || 'en').slice(0, 2).toLowerCase();
     return T[nav] ? nav : 'en';
@@ -654,14 +661,15 @@
   function applyLang(lang) {
     if (!T[lang]) lang = 'en';
     current = lang;
-    localStorage.setItem(STORAGE_KEY, lang);
+    safeSet(STORAGE_KEY, lang);
     document.documentElement.lang = lang;
-    document.documentElement.dir = LANGS[lang].dir;
+    if (LANGS[lang] && LANGS[lang].dir) document.documentElement.dir = LANGS[lang].dir;
 
     // Text content
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      el.textContent = t(key, lang);
+      const value = t(key, lang);
+      if (value !== undefined && value !== null) el.textContent = value;
     });
     // Attributes (placeholder, aria-label, title, content)
     document.querySelectorAll('[data-i18n-attr]').forEach(el => {
