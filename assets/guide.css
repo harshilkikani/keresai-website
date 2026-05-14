@@ -47,8 +47,13 @@
 }
 .guide-hero-img svg { width: 60%; max-width: 400px; position: relative; z-index: 1; }
 
-.guide-body { padding-bottom: 80px; font-size: 17px; line-height: 1.8; color: var(--text); }
-.guide-body p { margin-bottom: 24px; color: var(--text-muted); }
+.guide-body {
+  padding-bottom: 80px;
+  font-size: 17.5px; line-height: 1.75;
+  color: var(--text);
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+.guide-body p { margin-bottom: 24px; color: var(--text-muted); text-wrap: pretty; }
 .guide-body h2 {
   font-family: var(--serif);
   font-size: clamp(30px, 3.4vw, 38px);
