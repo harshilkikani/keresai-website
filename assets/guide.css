@@ -8,22 +8,23 @@
 .guide-crumbs a:hover { color: var(--orange); }
 .guide-category {
   display: inline-block;
-  font-size: 11px; font-weight: 600;
+  font-family: var(--mono);
+  font-size: 11.5px; font-weight: 500;
   letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--orange);
   background: color-mix(in srgb, var(--orange) 10%, transparent);
   border: 1px solid color-mix(in srgb, var(--orange) 25%, transparent);
-  padding: 6px 14px; border-radius: 100px;
-  margin-bottom: 20px;
+  padding: 7px 16px; border-radius: 100px;
+  margin-bottom: 22px;
 }
 .guide-title {
   font-family: var(--serif);
-  font-size: clamp(36px, 5vw, 60px);
-  font-weight: 400; line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--text); margin-bottom: 20px;
+  font-size: clamp(40px, 5.4vw, 64px);
+  font-weight: 300; line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--text); margin-bottom: 22px;
 }
-.guide-title .accent { color: var(--orange); font-style: italic; }
+.guide-title .accent { color: var(--orange); font-style: italic; font-weight: 400; }
 .guide-meta {
   display: flex; gap: 20px; justify-content: center;
   color: var(--text-muted); font-size: 14px; flex-wrap: wrap;
@@ -50,11 +51,11 @@
 .guide-body p { margin-bottom: 24px; color: var(--text-muted); }
 .guide-body h2 {
   font-family: var(--serif);
-  font-size: clamp(28px, 3.2vw, 36px);
-  font-weight: 400; color: var(--text);
-  margin: 56px 0 20px; letter-spacing: -0.01em;
+  font-size: clamp(30px, 3.4vw, 38px);
+  font-weight: 300; color: var(--text);
+  margin: 56px 0 20px; letter-spacing: -0.025em;
 }
-.guide-body h2 .num { color: var(--orange); font-style: italic; margin-right: 12px; }
+.guide-body h2 .num { color: var(--orange); font-style: italic; font-weight: 400; margin-right: 12px; }
 .guide-body h3 { font-size: 20px; font-weight: 600; color: var(--text); margin: 32px 0 12px; }
 .guide-body strong { color: var(--text); font-weight: 600; }
 .guide-body ul { margin: 0 0 24px 0; padding-left: 24px; color: var(--text-muted); }
