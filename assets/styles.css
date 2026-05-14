@@ -256,12 +256,22 @@ section.dark .section-body { color: var(--text-on-dark); }
 /* ─── Navigation ───────────────────────────────────────── */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  border-bottom: 1px solid transparent;
   height: var(--nav-h);
   display: flex; align-items: center;
+  transition: background var(--t), border-color var(--t), height var(--t), box-shadow var(--t);
+}
+/* Refined compact state — applied via JS scroll listener.
+   Settles the bar with a hairline border + tighter height so the nav
+   visibly "lands" once you scroll past the hero. */
+.nav.is-scrolled {
+  height: 60px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  border-bottom-color: var(--border);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02), 0 8px 24px -16px rgba(0,0,0,0.18);
 }
 .nav-inner {
   width: 100%; max-width: var(--container);
@@ -283,7 +293,9 @@ section.dark .section-body { color: var(--text-on-dark); }
   object-fit: contain;
   object-position: center;
   flex-shrink: 0;
+  transition: width var(--t), height var(--t);
 }
+.nav.is-scrolled .logo-img { width: 40px; height: 40px; }
 .logo-text { display: none; }
 .logo-text span { color: var(--orange); }
 
@@ -1423,19 +1435,19 @@ footer {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 18px 12px 14px;
+  padding: 22px 12px 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+  gap: 12px;
+  transition: transform var(--t), border-color var(--t), box-shadow var(--t);
   cursor: default;
 }
 #integrations .integration-tile:hover,
 #integrations .integration-tile:focus {
-  border-color: var(--orange);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
+  border-color: color-mix(in srgb, var(--orange) 45%, var(--border));
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
   outline: none;
 }
 #integrations .integration-tile:hover .integration-tooltip,
@@ -1445,41 +1457,33 @@ footer {
   pointer-events: auto;
 }
 #integrations .integration-logo {
-  width: 44px; height: 44px;
-  border-radius: 10px;
+  width: 56px; height: 56px;
+  border-radius: 14px;
   color: #fff;
-  font-weight: 800;
-  font-size: 13px;
-  letter-spacing: 0.05em;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 6px 14px -4px rgba(0,0,0,0.18);
+  position: relative;
+  overflow: hidden;
+}
+/* Subtle inner highlight for depth on logo tiles */
+#integrations .integration-logo::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.16) 0%, transparent 50%);
+  pointer-events: none;
+}
+#integrations .integration-logo svg {
+  width: 26px; height: 26px;
+  position: relative; z-index: 1;
 }
 #integrations .integration-name {
-  font-size: 13.5px;
-  font-weight: 600;
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   text-align: center;
   color: var(--text);
 }
-#integrations .integration-status {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 3px 9px;
-  border-radius: 999px;
-  border: 1px solid var(--border-strong);
-  font-weight: 700;
-}
-#integrations .integration-status.integration-live {
-  color: #1f7a3e; border-color: rgba(31, 122, 62, 0.4); background: rgba(31, 122, 62, 0.08);
-}
-#integrations .integration-status.integration-beta {
-  color: var(--orange-dark); border-color: rgba(184, 71, 0, 0.4); background: rgba(244, 140, 6, 0.1);
-}
-#integrations .integration-status.integration-q2 {
-  color: var(--text-muted); border-color: var(--border-strong); background: var(--bg-alt);
-}
-[data-theme="dark"] #integrations .integration-status.integration-live { color: #6fd28a; }
-[data-theme="dark"] #integrations .integration-status.integration-beta { color: var(--orange-light); }
 
 #integrations .integration-tooltip {
   position: absolute;

@@ -95,6 +95,24 @@
     window.addEventListener('resize', () => { if (window.innerWidth > 768) setOpen(false); });
   });
 
+  /* ─── Nav compact-on-scroll ─────────────────────────── */
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    let ticking = false;
+    const update = () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > 24);
+      ticking = false;
+    };
+    update();
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+  });
+
   /* ─── Scroll-spy (IntersectionObserver-based) ──────── */
   document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section[id]');
