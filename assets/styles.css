@@ -390,7 +390,25 @@ section.dark .section-body { color: var(--text-on-dark); }
     grid-template-columns: 1fr;
     padding-top: calc(var(--nav-h) + 32px);
     padding-bottom: 64px;
+    row-gap: 40px;
   }
+}
+/* Phone-specific: tighten everything so the hero still feels deliberate
+   without horizontal cramping. */
+@media (max-width: 540px) {
+  .hero-grid {
+    padding: calc(var(--nav-h) + 24px) 20px 56px;
+    row-gap: 32px;
+  }
+  .hero-title { letter-spacing: -0.022em; max-width: none; }
+  .hero-sub { margin-top: 22px; }
+  .hero-ctas { gap: 20px; margin-top: 28px; }
+  .hero-meta {
+    margin-top: 30px;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .hero-meta li { font-size: 10.5px; }
 }
 
 /* Ambient glows removed — references use a clean flat warm cream bg.
@@ -487,76 +505,90 @@ section.dark .section-body { color: var(--text-on-dark); }
    stack tricks. The depth comes from a layered ambient shadow system
    (Linear/Stripe pattern) and a hairline border. The card sits on
    the page; it doesn't perform. */
+/* Refined paper card. Generous interior spacing. Dashed dividers
+   softened to a calmer tone. Tabular nums for timestamps. */
 .anchor-card {
   position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 26px 28px 22px;
+  border-radius: 8px;
+  padding: 28px 32px 24px;
   display: flex; flex-direction: column;
   font-variant-numeric: lining-nums tabular-nums;
-  /* Three-layer ambient shadow — sharp contact, soft mid-field,
-     atmospheric halo. Subtle but architectural. */
   box-shadow:
     0 1px 0 rgba(28,24,20,0.04),
-    0 8px 24px -8px rgba(28,24,20,0.08),
-    0 24px 48px -20px rgba(28,24,20,0.12);
+    0 10px 28px -10px rgba(28,24,20,0.10),
+    0 30px 60px -28px rgba(28,24,20,0.14);
+}
+/* Subtle top edge highlight — like raked light catching the paper. */
+.anchor-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 24px; right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(245,241,232,0.6) 50%,
+    transparent 100%);
+  pointer-events: none;
 }
 
 .anchor-head {
   display: flex; justify-content: space-between; align-items: center;
-  padding-bottom: 14px;
-  border-bottom: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  padding-bottom: 16px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
   font-family: var(--mono);
-  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--text-muted);
 }
-.anchor-head-left { display: inline-flex; align-items: center; gap: 9px; }
+.anchor-head-left { display: inline-flex; align-items: center; gap: 10px; }
 .anchor-dot {
   width: 7px; height: 7px; border-radius: 50%;
   background: var(--orange);
   box-shadow: 0 0 0 0 rgba(232,93,4,0.6);
-  animation: anchor-pulse 2s infinite;
+  animation: anchor-pulse 2.2s infinite;
 }
 @keyframes anchor-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(232,93,4,0.45); }
-  50%      { box-shadow: 0 0 0 5px rgba(232,93,4,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,93,4,0.40); }
+  50%      { box-shadow: 0 0 0 6px rgba(232,93,4,0); }
 }
 @media (prefers-reduced-motion: reduce) { .anchor-dot { animation: none; } }
-.anchor-status { color: var(--text); }
+.anchor-status { color: var(--text); letter-spacing: 0.14em; }
 .anchor-timer  { color: var(--text-muted); }
 
 .anchor-caller {
-  padding: 18px 0 14px;
-  border-bottom: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  padding: 18px 0 16px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
 }
 .anchor-caller-num {
   font-family: var(--serif);
-  font-size: 17px; font-weight: 400;
-  letter-spacing: -0.015em;
+  font-size: 19px; font-weight: 400;
+  letter-spacing: -0.02em;
   color: var(--text);
+  line-height: 1.2;
 }
 .anchor-caller-loc {
-  margin-top: 4px;
+  margin-top: 6px;
   font-family: var(--mono);
-  font-size: 10.5px; letter-spacing: 0.10em; text-transform: uppercase;
+  font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--text-muted);
 }
 
 .anchor-stream {
-  padding: 16px 0 4px;
-  display: flex; flex-direction: column; gap: 14px;
+  padding: 18px 0 6px;
+  display: flex; flex-direction: column; gap: 16px;
 }
-.anchor-line { display: flex; flex-direction: column; gap: 4px; }
+.anchor-line { display: flex; flex-direction: column; gap: 5px; }
 .anchor-tag {
   font-family: var(--mono);
-  font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase;
+  font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.20em; text-transform: uppercase;
   color: var(--text-dim);
 }
 .anchor-line-bot .anchor-tag { color: var(--orange); }
 .anchor-line p {
   font-family: var(--serif);
-  font-size: 14.5px; font-weight: 400; line-height: 1.5;
+  font-size: 15px; font-weight: 400; line-height: 1.52;
   color: var(--text);
   font-style: italic;
   letter-spacing: -0.005em;
@@ -564,23 +596,37 @@ section.dark .section-body { color: var(--text-on-dark); }
 .anchor-line-bot p { font-style: normal; }
 
 .anchor-foot {
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px dashed color-mix(in srgb, var(--text) 18%, transparent);
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
   display: flex; justify-content: space-between; align-items: center;
+  gap: 16px;
   font-family: var(--mono);
-  font-size: 11px; letter-spacing: 0.06em;
+  font-size: 11px; letter-spacing: 0.08em;
   color: var(--text);
 }
-.anchor-foot-left { display: inline-flex; align-items: center; gap: 10px; }
+.anchor-foot-left { display: inline-flex; align-items: center; gap: 12px; min-width: 0; }
 .anchor-check {
   display: inline-grid; place-items: center;
-  width: 16px; height: 16px;
-  border-radius: 2px;
+  width: 18px; height: 18px;
+  border-radius: 3px;
   background: var(--orange); color: #fff;
+  flex-shrink: 0;
 }
-.anchor-check svg { width: 10px; height: 10px; }
-.anchor-foot-right { color: var(--text-muted); letter-spacing: 0.10em; text-transform: uppercase; font-size: 10px; }
+.anchor-check svg { width: 11px; height: 11px; }
+.anchor-foot-right {
+  color: var(--text-muted);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+/* Mobile — keep the paper feeling but tighten everything. */
+@media (max-width: 540px) {
+  .anchor-card { padding: 22px 22px 20px; }
+  .anchor-caller-num { font-size: 17px; }
+  .anchor-line p { font-size: 14px; }
+}
 
 /* ─── Buttons ─────────────────────────────────────────── */
 .btn {
@@ -1471,45 +1517,48 @@ footer {
   line-height: 1.6;
 }
 
-/* ─── Chatbot ──────────────────────────────────────── */
+/* ─── Chatbot — refined ────────────────────────────── */
+/* FAB: cleaner round button on warm ink, multi-layer ambient drop.
+   No pulse glow ring (was Dribbble-energy). No "Have a question?"
+   badge (noisy). The button alone is enough invitation. */
 .chat-btn {
   position: fixed; bottom: 24px; right: 24px;
-  width: 56px; height: 56px; border-radius: 999px;
-  background: var(--orange); color: #fff;
+  width: 52px; height: 52px; border-radius: 999px;
+  background: var(--bg-inverse); color: var(--bg);
   border: 0; cursor: pointer;
   display: grid; place-items: center;
   z-index: 90;
-  box-shadow: var(--shadow-lg), 0 0 0 0 rgba(232,93,4,0.4);
-  transition: transform var(--t), box-shadow var(--t);
+  box-shadow:
+    0 1px 2px rgba(28,24,20,0.10),
+    0 8px 20px -4px rgba(28,24,20,0.22),
+    0 18px 36px -16px rgba(28,24,20,0.28);
+  transition: transform var(--t), box-shadow var(--t-fast);
 }
-.chat-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-xl), 0 0 0 6px rgba(232,93,4,0.12); }
-.chat-btn svg { width: 22px; height: 22px; }
-.chat-btn-badge {
-  position: absolute; right: 100%; margin-right: 12px;
-  white-space: nowrap;
-  background: var(--bg-card); color: var(--text);
-  border: 1px solid var(--border);
-  font-family: var(--mono); font-size: 11.5px;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 7px 12px; border-radius: 999px;
-  box-shadow: var(--shadow);
-  opacity: 0; transform: translateX(8px);
-  pointer-events: none;
-  transition: opacity var(--t), transform var(--t);
+.chat-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 2px rgba(28,24,20,0.10),
+    0 10px 24px -4px rgba(28,24,20,0.26),
+    0 22px 40px -16px rgba(28,24,20,0.32);
 }
-.chat-btn-badge.show { opacity: 1; transform: translateX(0); }
+.chat-btn svg { width: 20px; height: 20px; }
+/* Badge kept in markup but hidden by default; can be revealed later if wanted. */
+.chat-btn-badge { display: none; }
 
 .chat-box {
-  position: fixed; bottom: 96px; right: 24px;
-  width: 380px; max-width: calc(100vw - 32px);
-  max-height: 70vh;
+  position: fixed; bottom: 92px; right: 24px;
+  width: 360px; max-width: calc(100vw - 32px);
+  max-height: min(78vh, 640px);
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
+  border-radius: 10px;
+  box-shadow:
+    0 1px 0 rgba(28,24,20,0.04),
+    0 10px 28px -10px rgba(28,24,20,0.10),
+    0 30px 60px -28px rgba(28,24,20,0.18);
   display: flex; flex-direction: column;
   overflow: hidden;
   z-index: 91;
-  opacity: 0; transform: translateY(8px) scale(0.98);
+  opacity: 0; transform: translateY(6px) scale(0.985);
   pointer-events: none;
   transition: opacity var(--t), transform var(--t);
 }
@@ -1519,40 +1568,44 @@ footer {
 }
 .chat-header {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 18px;
+  padding: 16px 18px 14px;
   border-bottom: 1px solid var(--border);
   background: var(--bg-card);
 }
 .chat-title {
   font-family: var(--serif);
   font-size: 17px; font-weight: 400;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   color: var(--text);
+  line-height: 1.2;
 }
 .chat-status {
-  display: flex; align-items: center; gap: 6px;
+  display: flex; align-items: center; gap: 7px;
   font-family: var(--mono);
-  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--text-muted);
-  margin-top: 2px;
+  margin-top: 5px;
 }
+/* Match the hero anchor dot — brand-orange pulse, not green. */
 .chat-pulse {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: #2ea44f;
-  box-shadow: 0 0 0 0 rgba(46,164,79,0.4);
-  animation: chat-pulse 2s infinite;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 0 0 rgba(232,93,4,0.4);
+  animation: chat-pulse 2.4s infinite;
+  flex-shrink: 0;
 }
 @keyframes chat-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(46,164,79,0.5); }
-  50%      { box-shadow: 0 0 0 6px rgba(46,164,79,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,93,4,0.4); }
+  50%      { box-shadow: 0 0 0 5px rgba(232,93,4,0); }
 }
 .chat-close {
   background: transparent; border: 0; color: var(--text-muted);
-  cursor: pointer; padding: 6px; border-radius: 6px;
+  cursor: pointer; padding: 8px; margin: -8px -6px -8px 0;
+  border-radius: 6px;
   transition: background var(--t-fast), color var(--t-fast);
 }
 .chat-close:hover { background: var(--bg-alt); color: var(--text); }
-.chat-close svg { width: 18px; height: 18px; display: block; }
+.chat-close svg { width: 16px; height: 16px; display: block; }
 
 .chat-messages {
   flex: 1; min-height: 0; overflow-y: auto;
@@ -1560,9 +1613,9 @@ footer {
   display: flex; flex-direction: column; gap: 10px;
 }
 .chat-msg {
-  max-width: 86%;
+  max-width: 88%;
   padding: 10px 14px;
-  border-radius: 14px;
+  border-radius: 12px;
   font-size: 14px; line-height: 1.55;
   white-space: pre-wrap; word-wrap: break-word;
 }
@@ -1579,20 +1632,20 @@ footer {
 }
 
 .chat-suggestions {
-  display: flex; gap: 8px; flex-wrap: wrap;
+  display: flex; gap: 6px; flex-wrap: wrap;
   padding: 0 18px 14px;
 }
 .chat-suggest {
-  background: var(--bg-alt); border: 1px solid var(--border);
+  background: transparent; border: 1px solid var(--border-strong);
   color: var(--text-muted);
-  font-family: var(--sans); font-size: 12.5px;
-  padding: 7px 12px; border-radius: 999px;
+  font-family: var(--sans); font-size: 12px;
+  padding: 6px 11px; border-radius: 999px;
   cursor: pointer;
   transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
 }
 .chat-suggest:hover {
-  border-color: var(--orange); color: var(--text);
-  background: color-mix(in srgb, var(--orange) 6%, var(--bg-alt));
+  border-color: var(--orange); color: var(--orange);
+  background: color-mix(in srgb, var(--orange) 5%, transparent);
 }
 
 .chat-form {
@@ -1602,34 +1655,42 @@ footer {
   background: var(--bg-card);
 }
 .chat-form input {
-  flex: 1;
+  flex: 1; min-width: 0;
   background: var(--bg-alt); color: var(--text);
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 10px 14px;
-  font-size: 13.5px;
+  font-size: 14px;
   outline: none;
   transition: border-color var(--t-fast);
 }
-.chat-form input:focus { border-color: var(--orange); }
+.chat-form input:focus { border-color: color-mix(in srgb, var(--orange) 60%, var(--border-strong)); }
+.chat-form input::placeholder { color: var(--text-dim); }
 .chat-send {
-  background: var(--orange); color: #fff;
+  background: var(--bg-inverse); color: var(--bg);
   border: 0; border-radius: 50%;
-  width: 36px; height: 36px;
+  width: 34px; height: 34px;
   display: grid; place-items: center;
   cursor: pointer; flex-shrink: 0;
   transition: background var(--t-fast), transform var(--t-fast);
 }
-.chat-send:hover { background: var(--orange-dark); transform: translateY(-1px); }
-.chat-send svg { width: 16px; height: 16px; }
+.chat-send:hover { background: var(--orange); transform: translateY(-1px); }
+.chat-send svg { width: 14px; height: 14px; }
 
-@media (max-width: 480px) {
-  .chat-box { right: 12px; left: 12px; bottom: 86px; width: auto; }
-  .chat-btn-badge { display: none; }
+/* Mobile: chat panel becomes nearly full-screen, FAB stays accessible. */
+@media (max-width: 640px) {
+  .chat-btn { width: 48px; height: 48px; bottom: 18px; right: 18px; }
+  .chat-btn svg { width: 18px; height: 18px; }
+  .chat-box {
+    right: 12px; left: 12px; bottom: 78px;
+    width: auto;
+    max-height: min(82vh, 560px);
+  }
+  .chat-suggestions { padding-bottom: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .chat-pulse { animation: none; }
-  .chat-btn-badge, .chat-box { transition: none; }
+  .chat-box { transition: none; }
 }
 
 /* ─── Print ────────────────────────────────────────── */
