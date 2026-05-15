@@ -480,50 +480,27 @@ section.dark .section-body { color: var(--text-on-dark); }
   position: relative; z-index: 1;
   justify-self: end;
   max-width: 440px; width: 100%;
-  /* Right-side padding so the second sheet behind never clips on tight viewports. */
-  padding-right: 18px; padding-bottom: 18px;
 }
 @media (max-width: 960px) { .hero-anchor { justify-self: start; max-width: 480px; } }
 
-/* Paper-card — looks like a sheet of paper that someone set down on
-   a desk. A second sheet sits behind it (via ::before), the whole
-   stack has a subtle tilt and a soft ambient drop. */
+/* Anchor card — grounded, architectural. Single sheet, no tilt, no
+   stack tricks. The depth comes from a layered ambient shadow system
+   (Linear/Stripe pattern) and a hairline border. The card sits on
+   the page; it doesn't perform. */
 .anchor-card {
   position: relative;
   background: var(--bg-card);
-  border: 1px solid var(--border-strong);
-  border-radius: 3px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
   padding: 26px 28px 22px;
   display: flex; flex-direction: column;
   font-variant-numeric: lining-nums tabular-nums;
-  transform: rotate(1.2deg);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Three-layer ambient shadow — sharp contact, soft mid-field,
+     atmospheric halo. Subtle but architectural. */
   box-shadow:
-    0 1px 1px rgba(28,24,20,0.04),
-    0 14px 30px -10px rgba(28,24,20,0.18),
-    0 30px 60px -24px rgba(28,24,20,0.14);
-}
-/* Second sheet behind the front card — same paper, slight counter-rotation,
-   peeks out by ~10px down-right. Creates the real "stacked sheets" feel. */
-.anchor-card::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: var(--bg-card);
-  border: 1px solid var(--border-strong);
-  border-radius: 3px;
-  transform: rotate(-2deg) translate(10px, 12px);
-  z-index: -1;
-  box-shadow: 0 12px 24px -12px rgba(28,24,20,0.16);
-}
-/* Settle the tilt on hover — like picking the card up. */
-.anchor-card:hover { transform: rotate(0deg); }
-.anchor-card:hover::before { transform: rotate(-1deg) translate(7px, 9px); }
-@media (prefers-reduced-motion: reduce) {
-  .anchor-card, .anchor-card::before, .anchor-card:hover, .anchor-card:hover::before {
-    transform: none;
-    transition: none;
-  }
-  .anchor-card::before { transform: translate(8px, 10px); }
+    0 1px 0 rgba(28,24,20,0.04),
+    0 8px 24px -8px rgba(28,24,20,0.08),
+    0 24px 48px -20px rgba(28,24,20,0.12);
 }
 
 .anchor-head {
