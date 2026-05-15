@@ -152,9 +152,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" integrity="sha384-5d4d10adc96e57d530ea8ec6cab3c4d60fa9bacfb90db8c5ad5ddb87dfc68b3" crossorigin="anonymous">
 <link rel="dns-prefetch" href="https://formspree.io">
 <link rel="dns-prefetch" href="https://calendly.com">
-<link rel="preload" href="/assets/styles.css?v=11" as="style">
+<link rel="preload" href="/assets/styles.css?v=12" as="style">
 
-<link rel="stylesheet" href="/assets/styles.css?v=11">
+<link rel="stylesheet" href="/assets/styles.css?v=12">
 </head>
 
 <body>
@@ -243,29 +243,87 @@
 <main id="main">
 
 <!-- ════════════════════ HERO ════════════════════ -->
-<section id="hero" aria-labelledby="hero-title">
-  <div class="hero-orb" aria-hidden="true"></div>
-  <span class="hero-eyebrow">
-    <span class="pulse" aria-hidden="true"></span>
-    <span data-i18n="hero.eyebrow">Now accepting new clients</span>
-  </span>
-  <h1 id="hero-title" class="hero-title">
-    <span data-i18n="hero.title.1">Your Time.</span><br>
-    <span class="accent" data-i18n="hero.title.2">Reclaimed.</span>
-  </h1>
-  <p class="hero-sub" data-i18n="hero.sub">
-    Custom AI agents that handle customer intake, scheduling, invoicing, and follow-ups, so your team can focus on the jobs that generate revenue.
-  </p>
-  <div class="hero-ctas">
-    <a href="#services" class="btn btn-primary" data-i18n="hero.cta.primary">Explore Our Work</a>
-    <a href="#contact" class="btn btn-outline" data-i18n="hero.cta.secondary">Book a Free Call</a>
+<section id="hero" aria-labelledby="hero-title" class="hero-grid">
+  <div class="hero-ambient" aria-hidden="true"></div>
+
+  <div class="hero-left">
+    <div class="hero-edition" aria-hidden="true">
+      <span class="hero-edition-mark">K</span>
+      <span class="hero-edition-num">01 · 2026</span>
+    </div>
+
+    <h1 id="hero-title" class="hero-title">
+      <span data-i18n="hero.title.1">Your time.</span><br>
+      <span class="accent" data-i18n="hero.title.2">Reclaimed.</span>
+    </h1>
+
+    <div class="hero-rule" aria-hidden="true"></div>
+
+    <p class="hero-sub" data-i18n="hero.sub">
+      The AI receptionist that answers every inbound call, qualifies the lead, and books the job — before your dispatcher picks up.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary" data-i18n="hero.cta.primary">Book a Call</a>
+      <a href="#services" class="hero-cta-ghost" data-i18n="hero.cta.secondary">
+        <span>See how it works</span>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <ul class="hero-strip" aria-label="At a glance">
+      <li><span class="hero-strip-num">60s</span><span class="hero-strip-lbl">average response</span></li>
+      <li><span class="hero-strip-num">24/7</span><span class="hero-strip-lbl">always answering</span></li>
+      <li><span class="hero-strip-num">4</span><span class="hero-strip-lbl">verticals served</span></li>
+    </ul>
   </div>
-  <div class="hero-meta">
-    <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero.meta.1">1-week deployment</span></span>
-    <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero.meta.2">No long-term contracts</span></span>
-    <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero.meta.3">Custom-built for your stack</span></span>
-  </div>
-  <div class="hero-orb-2" aria-hidden="true"></div>
+
+  <!-- Visual anchor: a poised live-call card.  Pure HTML/CSS, no media. -->
+  <aside class="hero-anchor" aria-hidden="true">
+    <div class="anchor-card">
+      <header class="anchor-head">
+        <div class="anchor-head-left">
+          <span class="anchor-dot"></span>
+          <span class="anchor-status">Live call</span>
+        </div>
+        <span class="anchor-timer">02:34</span>
+      </header>
+
+      <div class="anchor-caller">
+        <div class="anchor-caller-num">+1 (228) 555-0142</div>
+        <div class="anchor-caller-loc">Saltwater Creek, MS</div>
+      </div>
+
+      <div class="anchor-stream">
+        <div class="anchor-line anchor-line-bot">
+          <span class="anchor-tag">Keres</span>
+          <p>Hey, this is the Keres line for Saltwater Creek Septic. How can I help?</p>
+        </div>
+        <div class="anchor-line anchor-line-user">
+          <span class="anchor-tag">Caller</span>
+          <p>Tank&rsquo;s backing up. Smells bad. We need someone today.</p>
+        </div>
+        <div class="anchor-line anchor-line-bot">
+          <span class="anchor-tag">Keres</span>
+          <p>Sounds urgent. What&rsquo;s the address, and is the tank accessible?</p>
+        </div>
+        <div class="anchor-line anchor-line-user">
+          <span class="anchor-tag">Caller</span>
+          <p>456 Marsh Lane. Yeah, it&rsquo;s by the back fence.</p>
+        </div>
+      </div>
+
+      <footer class="anchor-foot">
+        <div class="anchor-foot-left">
+          <span class="anchor-check">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span>Job booked &middot; today 2:30 PM</span>
+        </div>
+        <span class="anchor-foot-right">&rarr; ServiceTitan</span>
+      </footer>
+    </div>
+  </aside>
 </section>
 
 <!-- ════════════════════ TRUST BAR ════════════════════ -->
