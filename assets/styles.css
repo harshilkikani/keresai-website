@@ -450,93 +450,86 @@ section.dark .section-body { color: var(--text-on-dark); }
 
 .hero-left { position: relative; z-index: 1; }
 
-/* Editorial mark — like a magazine masthead. K, then date. */
-.hero-edition {
-  display: inline-flex; align-items: center; gap: 14px;
+/* Eyebrow — a simple status chip. Quiet, not editorial. */
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.14em; text-transform: uppercase;
+  font-size: 11.5px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 36px;
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  margin-bottom: 32px;
 }
-.hero-edition-mark {
-  display: inline-grid; place-items: center;
-  width: 24px; height: 24px;
-  border: 1px solid var(--border-strong);
-  border-radius: 4px;
-  color: var(--orange);
-  font-family: var(--serif); font-style: italic;
-  font-size: 14px; font-weight: 400;
-  letter-spacing: 0;
+.hero-eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 0 0 rgba(232,93,4,0.55);
+  animation: hero-eyebrow-pulse 2.4s infinite;
 }
-.hero-edition-num::before {
-  content: ''; display: inline-block;
-  width: 18px; height: 1px;
-  background: currentColor;
-  vertical-align: middle;
-  margin-right: 12px; opacity: 0.5;
+@keyframes hero-eyebrow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,93,4,0.5); }
+  50%      { box-shadow: 0 0 0 5px rgba(232,93,4,0); }
 }
+@media (prefers-reduced-motion: reduce) { .hero-eyebrow-dot { animation: none; } }
 
+/* Restrained display type — confident, not theatrical. */
 .hero-title {
   font-family: var(--serif);
-  font-size: clamp(52px, 8.6vw, 124px);
-  line-height: 0.94;
-  letter-spacing: -0.045em;
-  color: var(--text); font-weight: 300;
-  max-width: 12ch;
+  font-size: clamp(42px, 5.6vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--text); font-weight: 400;
+  max-width: 14ch;
 }
 .hero-title .accent { color: var(--orange); font-style: italic; font-weight: 400; }
 
-.hero-rule {
-  width: 64px; height: 1px;
-  background: color-mix(in srgb, var(--text) 28%, transparent);
-  margin: 36px 0 28px;
-}
-
 .hero-sub {
-  max-width: 50ch;
-  font-size: clamp(17px, 1.55vw, 20px);
-  font-weight: 300;
+  margin-top: 24px;
+  max-width: 52ch;
+  font-size: clamp(16px, 1.25vw, 18px);
+  font-weight: 400;
   color: var(--text-muted);
-  line-height: 1.55;
-  letter-spacing: -0.005em;
+  line-height: 1.6;
 }
 
 .hero-ctas {
-  margin-top: 40px;
-  display: flex; gap: 28px; align-items: center; flex-wrap: wrap;
+  margin-top: 36px;
+  display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
 }
 .hero-cta-ghost {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; gap: 6px;
   font-family: var(--mono);
-  font-size: 13.5px; font-weight: 500;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 0.02em;
   color: var(--text);
-  padding: 4px 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 25%, transparent);
-  transition: gap var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+  padding: 6px 0;
+  transition: gap var(--t-fast), color var(--t-fast);
 }
-.hero-cta-ghost:hover { gap: 12px; border-color: var(--orange); color: var(--orange); }
+.hero-cta-ghost:hover { gap: 10px; color: var(--orange); }
 .hero-cta-ghost svg { width: 14px; height: 14px; }
 
-/* Bottom strip — three numerical proof points, evenly weighted. */
+/* Proof strip — three points, tightly scoped. Smaller, calmer. */
 .hero-strip {
-  margin-top: 64px;
+  margin-top: 56px;
   display: grid; grid-template-columns: repeat(3, auto);
-  column-gap: clamp(28px, 4vw, 56px);
+  column-gap: clamp(24px, 3.5vw, 48px);
   border-top: 1px solid var(--border);
-  padding-top: 22px;
+  padding-top: 20px;
 }
 .hero-strip li { display: flex; flex-direction: column; gap: 4px; }
 .hero-strip-num {
   font-family: var(--serif);
-  font-size: 28px; font-weight: 300;
-  letter-spacing: -0.025em;
+  font-size: 22px; font-weight: 400;
+  letter-spacing: -0.02em;
   color: var(--text);
   font-variant-numeric: lining-nums;
 }
 .hero-strip-lbl {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 10px;
   letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--text-muted);
 }
@@ -556,10 +549,7 @@ section.dark .section-body { color: var(--text-on-dark); }
   box-shadow: var(--shadow-xl);
   overflow: hidden;
   display: flex; flex-direction: column;
-  transform: rotate(-0.6deg);
-  transition: transform var(--t);
 }
-.anchor-card:hover { transform: rotate(0deg); }
 
 .anchor-head {
   display: flex; justify-content: space-between; align-items: center;
@@ -581,10 +571,7 @@ section.dark .section-body { color: var(--text-on-dark); }
   0%, 100% { box-shadow: 0 0 0 0 rgba(232,93,4,0.55); }
   50%      { box-shadow: 0 0 0 6px rgba(232,93,4,0); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .anchor-dot { animation: none; }
-  .anchor-card { transform: rotate(0deg); }
-}
+@media (prefers-reduced-motion: reduce) { .anchor-dot { animation: none; } }
 .anchor-status { color: var(--text); }
 .anchor-timer  { color: var(--text-muted); font-variant-numeric: tabular-nums; }
 
@@ -618,13 +605,12 @@ section.dark .section-body { color: var(--text-on-dark); }
 }
 .anchor-line-bot .anchor-tag { color: var(--orange); }
 .anchor-line p {
-  font-family: var(--serif);
-  font-size: 14.5px; font-weight: 400; line-height: 1.45;
+  font-family: var(--sans);
+  font-size: 14px; font-weight: 400; line-height: 1.5;
   color: var(--text);
   letter-spacing: -0.005em;
-  font-feature-settings: "kern" 1, "liga" 1;
 }
-.anchor-line-user p { color: var(--text-muted); font-style: italic; }
+.anchor-line-user p { color: var(--text-muted); }
 
 .anchor-foot {
   display: flex; justify-content: space-between; align-items: center;
@@ -1230,16 +1216,15 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 /* Hero entrance — staggered, restrained, lands rather than slams. */
-.hero-edition, .hero-title, .hero-rule, .hero-sub, .hero-ctas, .hero-strip, .hero-anchor {
-  animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+.hero-eyebrow, .hero-title, .hero-sub, .hero-ctas, .hero-strip, .hero-anchor {
+  animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.hero-edition { animation-delay: 0.00s; }
+.hero-eyebrow { animation-delay: 0.00s; }
 .hero-title   { animation-delay: 0.08s; }
-.hero-rule    { animation-delay: 0.20s; }
-.hero-sub     { animation-delay: 0.24s; }
-.hero-ctas    { animation-delay: 0.34s; }
-.hero-strip   { animation-delay: 0.44s; }
-.hero-anchor  { animation-delay: 0.18s; }
+.hero-sub     { animation-delay: 0.20s; }
+.hero-ctas    { animation-delay: 0.30s; }
+.hero-strip   { animation-delay: 0.40s; }
+.hero-anchor  { animation-delay: 0.16s; }
 
 .reveal {
   opacity: 0; transform: translateY(14px);

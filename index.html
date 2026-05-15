@@ -152,9 +152,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" integrity="sha384-5d4d10adc96e57d530ea8ec6cab3c4d60fa9bacfb90db8c5ad5ddb87dfc68b3" crossorigin="anonymous">
 <link rel="dns-prefetch" href="https://formspree.io">
 <link rel="dns-prefetch" href="https://calendly.com">
-<link rel="preload" href="/assets/styles.css?v=12" as="style">
+<link rel="preload" href="/assets/styles.css?v=13" as="style">
 
-<link rel="stylesheet" href="/assets/styles.css?v=12">
+<link rel="stylesheet" href="/assets/styles.css?v=13">
 </head>
 
 <body>
@@ -247,9 +247,9 @@
   <div class="hero-ambient" aria-hidden="true"></div>
 
   <div class="hero-left">
-    <div class="hero-edition" aria-hidden="true">
-      <span class="hero-edition-mark">K</span>
-      <span class="hero-edition-num">01 · 2026</span>
+    <div class="hero-eyebrow" aria-hidden="true">
+      <span class="hero-eyebrow-dot"></span>
+      <span data-i18n="hero.eyebrow">Now accepting new clients</span>
     </div>
 
     <h1 id="hero-title" class="hero-title">
@@ -257,10 +257,8 @@
       <span class="accent" data-i18n="hero.title.2">Reclaimed.</span>
     </h1>
 
-    <div class="hero-rule" aria-hidden="true"></div>
-
     <p class="hero-sub" data-i18n="hero.sub">
-      The AI receptionist that answers every inbound call, qualifies the lead, and books the job — before your dispatcher picks up.
+      The AI receptionist for real estate, septic, roofing, and HVAC. Every call answered, every lead qualified, every appointment booked — in under sixty seconds.
     </p>
 
     <div class="hero-ctas">
@@ -274,7 +272,7 @@
     <ul class="hero-strip" aria-label="At a glance">
       <li><span class="hero-strip-num">60s</span><span class="hero-strip-lbl">average response</span></li>
       <li><span class="hero-strip-num">24/7</span><span class="hero-strip-lbl">always answering</span></li>
-      <li><span class="hero-strip-num">4</span><span class="hero-strip-lbl">verticals served</span></li>
+      <li><span class="hero-strip-num">5</span><span class="hero-strip-lbl">verticals served</span></li>
     </ul>
   </div>
 
@@ -284,32 +282,32 @@
       <header class="anchor-head">
         <div class="anchor-head-left">
           <span class="anchor-dot"></span>
-          <span class="anchor-status">Live call</span>
+          <span class="anchor-status">Inbound call</span>
         </div>
-        <span class="anchor-timer">02:34</span>
+        <span class="anchor-timer">Sat 9:42 PM</span>
       </header>
 
       <div class="anchor-caller">
-        <div class="anchor-caller-num">+1 (228) 555-0142</div>
-        <div class="anchor-caller-loc">Saltwater Creek, MS</div>
+        <div class="anchor-caller-num">+1 (617) 555-0142</div>
+        <div class="anchor-caller-loc">Cambridge, MA</div>
       </div>
 
       <div class="anchor-stream">
         <div class="anchor-line anchor-line-bot">
           <span class="anchor-tag">Keres</span>
-          <p>Hey, this is the Keres line for Saltwater Creek Septic. How can I help?</p>
+          <p>Hi, you&rsquo;ve reached the Hollowbrook team. How can I help?</p>
         </div>
         <div class="anchor-line anchor-line-user">
           <span class="anchor-tag">Caller</span>
-          <p>Tank&rsquo;s backing up. Smells bad. We need someone today.</p>
+          <p>I saw the listing at 24 Oak Hill Lane. Can I tour it this weekend?</p>
         </div>
         <div class="anchor-line anchor-line-bot">
           <span class="anchor-tag">Keres</span>
-          <p>Sounds urgent. What&rsquo;s the address, and is the tank accessible?</p>
+          <p>Of course. Saturday at 2 PM or Sunday at 10 AM works for the agent.</p>
         </div>
         <div class="anchor-line anchor-line-user">
           <span class="anchor-tag">Caller</span>
-          <p>456 Marsh Lane. Yeah, it&rsquo;s by the back fence.</p>
+          <p>Sunday 10 AM is great.</p>
         </div>
       </div>
 
@@ -318,9 +316,9 @@
           <span class="anchor-check">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
-          <span>Job booked &middot; today 2:30 PM</span>
+          <span>Showing booked &middot; Sunday 10:00 AM</span>
         </div>
-        <span class="anchor-foot-right">&rarr; ServiceTitan</span>
+        <span class="anchor-foot-right">&rarr; CRM</span>
       </footer>
     </div>
   </aside>
@@ -330,12 +328,12 @@
 <div class="trust" aria-label="Industries served">
   <div class="container trust-inner">
     <span class="trust-label" data-i18n="trust.label">Trusted by teams in</span>
-    <span class="trust-logo" data-i18n="trust.1">Septic Service</span>
-    <span class="trust-logo" data-i18n="trust.2">Roofing</span>
-    <span class="trust-logo" data-i18n="trust.3">HVAC</span>
-    <span class="trust-logo" data-i18n="trust.4">Towing</span>
-    <span class="trust-logo" data-i18n="trust.5">Plumbing</span>
-    <span class="trust-logo" data-i18n="trust.6">Electrical</span>
+    <span class="trust-logo" data-i18n="trust.1">Real Estate</span>
+    <span class="trust-logo" data-i18n="trust.2">Septic Service</span>
+    <span class="trust-logo" data-i18n="trust.3">Roofing</span>
+    <span class="trust-logo" data-i18n="trust.4">HVAC</span>
+    <span class="trust-logo" data-i18n="trust.5">Towing</span>
+    <span class="trust-logo" data-i18n="trust.6">Property Management</span>
   </div>
 </div>
 
@@ -436,31 +434,36 @@
   <div class="container reveal">
     <div class="section-label" data-i18n="industries.label">Industries</div>
     <h2 id="industries-title" class="section-title">
-      <span data-i18n="industries.title.1">Built for</span>
-      <span class="accent" data-i18n="industries.title.accent">field service</span>
+      <span data-i18n="industries.title.1">Built for the</span>
+      <span class="accent" data-i18n="industries.title.accent">businesses that pick up the phone</span>
     </h2>
-    <p class="section-body" data-i18n="industries.body">From one-truck operations to multi-location fleets, our agents adapt to your service business.</p>
+    <p class="section-body" data-i18n="industries.body">From one-agent brokerages to multi-location service fleets, Keres adapts to the way your team already works — and to the way your customers already call.</p>
 
     <div class="industries-grid">
+      <div class="industry-card industry-card-flag">
+        <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 21V5l9-2 9 2v16M3 21h18M9 21v-8h6v8M9 9h2M13 9h2M9 12h2M13 12h2" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="industry-name" data-i18n="industries.1.name">Real Estate</div>
+        <div class="industry-desc" data-i18n="industries.1.desc">After-hours buyer inquiries, showing coordination, listing follow-ups, and seller intake — handled before the lead goes cold.</div>
+      </div>
       <div class="industry-card">
         <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M3 12h18M8 8l8 8M16 8l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <div class="industry-name" data-i18n="industries.1.name">Septic Service</div>
-        <div class="industry-desc" data-i18n="industries.1.desc">Automated intake forms, appointment scheduling, follow-up reminders, and invoice delivery.</div>
+        <div class="industry-name" data-i18n="industries.2.name">Septic Service</div>
+        <div class="industry-desc" data-i18n="industries.2.desc">Automated intake forms, appointment scheduling, follow-up reminders, and invoice delivery.</div>
       </div>
       <div class="industry-card">
         <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 20h18M6 20V10M10 20V6M14 20v-8M18 20v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <div class="industry-name" data-i18n="industries.2.name">Roofing</div>
-        <div class="industry-desc" data-i18n="industries.2.desc">Lead qualification, job scheduling, material estimates, and weather-triggered follow-ups.</div>
+        <div class="industry-name" data-i18n="industries.3.name">Roofing</div>
+        <div class="industry-desc" data-i18n="industries.3.desc">Lead qualification, job scheduling, material estimates, and weather-triggered follow-ups.</div>
       </div>
       <div class="industry-card">
         <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 11l9-8 9 8M5 9v11h14V9" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-        <div class="industry-name" data-i18n="industries.3.name">HVAC</div>
-        <div class="industry-desc" data-i18n="industries.3.desc">Seasonal campaign automation, maintenance reminders, emergency dispatch coordination, billing.</div>
+        <div class="industry-name" data-i18n="industries.4.name">HVAC</div>
+        <div class="industry-desc" data-i18n="industries.4.desc">Seasonal campaign automation, maintenance reminders, emergency dispatch coordination, billing.</div>
       </div>
       <div class="industry-card">
         <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-2 10H8L6 4H3M10 22a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm8 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="industry-name" data-i18n="industries.4.name">Towing</div>
-        <div class="industry-desc" data-i18n="industries.4.desc">Real-time dispatch, customer intake, location tracking updates, roadside assistance follow-up.</div>
+        <div class="industry-name" data-i18n="industries.5.name">Towing</div>
+        <div class="industry-desc" data-i18n="industries.5.desc">Real-time dispatch, customer intake, location tracking updates, roadside assistance follow-up.</div>
       </div>
     </div>
   </div>
@@ -475,7 +478,7 @@
       <span data-i18n="int.title.1">Plugs into</span>
       <span class="accent" data-i18n="int.title.accent">your stack</span>
     </h2>
-    <p class="section-body" data-i18n="int.body">Keres fits into the tools your field team already uses, calendars, CRMs, phone systems, and the field-service platforms you run the business on.</p>
+    <p class="section-body" data-i18n="int.body">Keres connects to the tools your team already uses — calendars, CRMs, phone systems, and the property or field-service platforms you run the business on.</p>
 
     <div class="integrations-grid">
       <div class="integration-tile" tabindex="0">
@@ -728,10 +731,11 @@
               <label class="form-label" for="findustry" data-i18n="contact.form.industry">Industry</label>
               <select id="findustry" name="industry" class="form-input">
                 <option value="" data-i18n="contact.form.industry.select">Select your industry</option>
-                <option value="septic"   data-i18n="industries.1.name">Septic Service</option>
-                <option value="roofing"  data-i18n="industries.2.name">Roofing</option>
-                <option value="hvac"     data-i18n="industries.3.name">HVAC</option>
-                <option value="towing"   data-i18n="industries.4.name">Towing</option>
+                <option value="real-estate" data-i18n="industries.1.name">Real Estate</option>
+                <option value="septic"      data-i18n="industries.2.name">Septic Service</option>
+                <option value="roofing"     data-i18n="industries.3.name">Roofing</option>
+                <option value="hvac"        data-i18n="industries.4.name">HVAC</option>
+                <option value="towing"      data-i18n="industries.5.name">Towing</option>
               </select>
             </div>
           </div>
@@ -895,7 +899,7 @@
   </form>
 </div>
 
-<script src="/assets/i18n.js?v=9" defer></script>
+<script src="/assets/i18n.js?v=10" defer></script>
 <script src="/assets/app.js?v=9" defer></script>
 <script src="/assets/roi.js" defer></script>
 <script src="/assets/chatbot.js?v=2" defer></script>
