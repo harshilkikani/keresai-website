@@ -512,7 +512,7 @@ section.dark .section-body { color: var(--text-on-dark); }
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 28px 32px 24px;
+  padding: 28px 32px 22px;
   display: flex; flex-direction: column;
   font-variant-numeric: lining-nums tabular-nums;
   box-shadow:
@@ -575,7 +575,7 @@ section.dark .section-body { color: var(--text-on-dark); }
 }
 
 .anchor-stream {
-  padding: 18px 0 6px;
+  padding: 18px 0 0;
   display: flex; flex-direction: column; gap: 16px;
 }
 .anchor-line { display: flex; flex-direction: column; gap: 5px; }
@@ -596,8 +596,8 @@ section.dark .section-body { color: var(--text-on-dark); }
 .anchor-line-bot p { font-style: normal; }
 
 .anchor-foot {
-  margin-top: 20px;
-  padding-top: 18px;
+  margin-top: 14px;
+  padding-top: 12px;
   border-top: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
   display: flex; justify-content: space-between; align-items: center;
   gap: 16px;
