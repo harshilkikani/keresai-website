@@ -455,27 +455,24 @@ section.dark .section-body { color: var(--text-on-dark); }
 .hero-cta-ghost:hover { gap: 10px; color: var(--orange); }
 .hero-cta-ghost svg { width: 14px; height: 14px; }
 
-/* Proof strip — three points, tightly scoped. Smaller, calmer. */
-.hero-strip {
-  margin-top: 56px;
-  display: grid; grid-template-columns: repeat(3, auto);
-  column-gap: clamp(24px, 3.5vw, 48px);
-  border-top: 1px solid var(--border);
-  padding-top: 20px;
+/* Quiet trust marks below the CTAs — small checkmarks, mono caps. */
+.hero-meta {
+  margin-top: 40px;
+  display: flex; flex-wrap: wrap;
+  gap: 18px 28px;
+  list-style: none; padding: 0;
 }
-.hero-strip li { display: flex; flex-direction: column; gap: 4px; }
-.hero-strip-num {
-  font-family: var(--serif);
-  font-size: 22px; font-weight: 400;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  font-variant-numeric: lining-nums;
-}
-.hero-strip-lbl {
+.hero-meta li {
+  display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.10em; text-transform: uppercase;
   color: var(--text-muted);
+}
+.hero-meta svg {
+  width: 13px; height: 13px;
+  color: var(--orange);
+  flex-shrink: 0;
 }
 
 /* ─── Hero anchor: live-call card ─────────────────────── */
@@ -483,27 +480,50 @@ section.dark .section-body { color: var(--text-on-dark); }
   position: relative; z-index: 1;
   justify-self: end;
   max-width: 440px; width: 100%;
+  /* Right-side padding so the second sheet behind never clips on tight viewports. */
+  padding-right: 18px; padding-bottom: 18px;
 }
 @media (max-width: 960px) { .hero-anchor { justify-self: start; max-width: 480px; } }
 
-/* Paper-card — references treat the live-call demo like a sheet of paper.
-   Single warm surface, dashed hairline dividers (printout aesthetic),
-   serif italic dialog body, rust mono caps for speaker tags. */
+/* Paper-card — looks like a sheet of paper that someone set down on
+   a desk. A second sheet sits behind it (via ::before), the whole
+   stack has a subtle tilt and a soft ambient drop. */
 .anchor-card {
   position: relative;
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 22px 24px 20px;
-  box-shadow:
-    0 1px 0 rgba(28,24,20,0.04),
-    8px 8px 0 0 color-mix(in srgb, var(--text) 92%, transparent);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  padding: 26px 28px 22px;
   display: flex; flex-direction: column;
   font-variant-numeric: lining-nums tabular-nums;
+  transform: rotate(1.2deg);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow:
+    0 1px 1px rgba(28,24,20,0.04),
+    0 14px 30px -10px rgba(28,24,20,0.18),
+    0 30px 60px -24px rgba(28,24,20,0.14);
 }
-[data-theme="dark"] .anchor-card,
-@media (prefers-color-scheme: dark) {
-  /* keep the offset stack but on dark; rely on the cascading var */
+/* Second sheet behind the front card — same paper, slight counter-rotation,
+   peeks out by ~10px down-right. Creates the real "stacked sheets" feel. */
+.anchor-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  transform: rotate(-2deg) translate(10px, 12px);
+  z-index: -1;
+  box-shadow: 0 12px 24px -12px rgba(28,24,20,0.16);
+}
+/* Settle the tilt on hover — like picking the card up. */
+.anchor-card:hover { transform: rotate(0deg); }
+.anchor-card:hover::before { transform: rotate(-1deg) translate(7px, 9px); }
+@media (prefers-reduced-motion: reduce) {
+  .anchor-card, .anchor-card::before, .anchor-card:hover, .anchor-card:hover::before {
+    transform: none;
+    transition: none;
+  }
+  .anchor-card::before { transform: translate(8px, 10px); }
 }
 
 .anchor-head {
@@ -1170,14 +1190,14 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 /* Hero entrance — staggered, restrained, lands rather than slams. */
-.hero-eyebrow, .hero-title, .hero-sub, .hero-ctas, .hero-strip, .hero-anchor {
+.hero-eyebrow, .hero-title, .hero-sub, .hero-ctas, .hero-meta, .hero-anchor {
   animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .hero-eyebrow { animation-delay: 0.00s; }
 .hero-title   { animation-delay: 0.08s; }
 .hero-sub     { animation-delay: 0.20s; }
 .hero-ctas    { animation-delay: 0.30s; }
-.hero-strip   { animation-delay: 0.40s; }
+.hero-meta    { animation-delay: 0.40s; }
 .hero-anchor  { animation-delay: 0.16s; }
 
 .reveal {
