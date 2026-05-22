@@ -275,9 +275,15 @@ section.dark .section-body { color: var(--text-on-dark); }
   object-fit: contain;
   object-position: center;
   flex-shrink: 0;
+  /* Optical centering — the wordmark sits low in the logo canvas,
+     so geometric centering looks visually high. Nudge down 3px. */
+  transform: translateY(3px);
   transition: width var(--t), height var(--t);
 }
-.nav.is-scrolled .logo-img { width: 40px; height: 40px; }
+.nav.is-scrolled .logo-img {
+  width: 40px; height: 40px;
+  transform: translateY(2px);
+}
 .logo-text { display: none; }
 .logo-text span { color: var(--orange); }
 
