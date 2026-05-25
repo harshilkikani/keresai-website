@@ -1,0 +1,21 @@
+---
+export interface Props {
+  faqs: { q: string; a: string }[];
+  title?: string;
+}
+const { faqs, title = 'Frequently asked questions' } = Astro.props;
+---
+<section class="page-section" aria-labelledby="faq-title">
+  <div class="container container-narrow">
+    <div class="section-label">FAQ</div>
+    <h2 id="faq-title" class="section-title">{title}</h2>
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary class="faq-q">{f.q}</summary>
+          <p class="faq-a" set:html={f.a} />
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

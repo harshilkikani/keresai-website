@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, softwareApplicationSchema, faqSchema, breadcrumbSchema } from '../data/schema';
+
+const path = '/pricing';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Pricing', path }];
+const faqs = [
+  { q: 'How much does Keres AI cost?', a: 'Keres is priced per business. Because call volume, number of locations, integrations, and whether you run inbound, outbound, or both vary widely, we quote a flat monthly rate tailored to your operation — typically far less than a full-time receptionist or a per-minute answering service. Book a demo for an exact quote.' },
+  { q: 'Why is pricing custom?', a: 'Keres is a B2B platform. A one-agent brokerage and a multi-location HVAC company have very different needs, so we scope your call volume and features and give you one predictable monthly price — no per-minute surprises.' },
+  { q: 'Is there a contract?', a: 'No. Keres is month-to-month — cancel anytime. We earn your business every month.' },
+  { q: 'What is included in setup?', a: 'Onboarding, number and calendar connection, CRM integration, training the AI on your business, and testing — all included. Most accounts go live within five business days.' },
+  { q: 'Can I use just the AI receptionist or just the AI SDR?', a: 'Yes. Start with inbound (AI receptionist), outbound (AI SDR), or both. Your quote scales to what you use.' },
+];
+---
+<Layout
+  title="Pricing — AI Receptionist & AI SDR | Keres AI"
+  description="Keres AI pricing is tailored to your business — a flat monthly rate based on call volume and features, month-to-month, no contracts. Book a demo for a quote."
+  path={path}
+>
+  <Schema slot="head" graph={[softwareApplicationSchema, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Pricing</span>
+    <h1>Pricing built <span class="accent">around your business</span></h1>
+    <p class="lead">Keres is a B2B platform, so we price per operation — one flat monthly rate scoped to your call volume, locations, and whether you run inbound, outbound, or both. Month-to-month, no contracts. Book a demo for an exact quote.</p>
+    <div class="hero-ctas"><a href="/demo" class="btn btn-primary">Get a Quote</a></div>
+  </header>
+
+  <section class="page-section container">
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="plan">AI Receptionist</div>
+        <div class="amount">Custom<small> /mo</small></div>
+        <div class="plan-desc">Answer and book every inbound call, 24/7.</div>
+        <ul>
+          <li>24/7 call answering in two rings</li>
+          <li>Lead qualification &amp; capture</li>
+          <li>Automated appointment booking</li>
+          <li>SMS confirmations &amp; owner alerts</li>
+          <li>Calendar + CRM integration</li>
+        </ul>
+        <a href="/demo" class="btn btn-outline">Book a Demo</a>
+      </div>
+      <div class="price-card featured">
+        <div class="plan">Receptionist + SDR</div>
+        <div class="amount">Custom<small> /mo</small></div>
+        <div class="plan-desc">Inbound and outbound in one platform. Most popular.</div>
+        <ul>
+          <li>Everything in AI Receptionist</li>
+          <li>AI SDR outbound email</li>
+          <li>Deliverability: SPF / DKIM / DMARC + warmup</li>
+          <li>Personalized sequences &amp; reply handling</li>
+          <li>Meetings booked to your calendar</li>
+        </ul>
+        <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      </div>
+      <div class="price-card">
+        <div class="plan">Enterprise</div>
+        <div class="amount">Custom<small> /mo</small></div>
+        <div class="plan-desc">Multi-location, high volume, custom workflows.</div>
+        <ul>
+          <li>Multi-location &amp; high call volume</li>
+          <li>Custom integrations &amp; routing</li>
+          <li>Dedicated onboarding</li>
+          <li>DPA, data residency, SOC 2-aligned workflows</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="/demo" class="btn btn-outline">Talk to Sales</a>
+      </div>
+    </div>
+    <p class="prose" style="margin-top:8px">Pricing depends on call volume and features. <a href="/demo">Book a demo</a> for an exact quote — most accounts are live within five business days.</p>
+  </section>
+
+  <FaqSection faqs={faqs} title="Pricing FAQ" />
+  <CtaBand heading="Get a quote in 30 minutes" sub="Book a demo. We’ll scope your call volume and outbound goals and give you exact pricing." />
+</Layout>

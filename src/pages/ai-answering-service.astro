@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema } from '../data/schema';
+
+const path = '/ai-answering-service';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'AI Receptionist', path: '/ai-receptionist' }, { name: 'AI Answering Service', path }];
+const faqs = [
+  { q: 'What is an AI answering service?', a: 'An AI answering service uses artificial intelligence to answer your business calls, qualify callers, and book appointments — instead of a human operator who only takes a message. It answers in two rings, 24/7, at a flat monthly rate with no per-minute charges.' },
+  { q: 'How is it better than a traditional answering service?', a: 'Traditional services charge per minute and usually just relay a message. Keres handles the call end to end — qualifies the lead, books the appointment on your calendar, updates your CRM, and texts a confirmation — for a predictable flat fee.' },
+  { q: 'Does it sound robotic?', a: 'No. Keres speaks naturally, handles interruptions, and follows your call scripts and tone so callers get a smooth, professional experience.' },
+  { q: 'How much does it cost?', a: 'A flat monthly subscription based on call volume — typically less than a per-minute answering service or a part-time receptionist. See <a href="/pricing">pricing</a>.' },
+];
+---
+<Layout
+  title="AI Answering Service — Answer & Book Every Call | Keres AI"
+  description="Keres AI is an AI answering service that answers every call in two rings, qualifies leads, and books appointments 24/7 — for a flat monthly rate, no per-minute charges."
+  path={path}
+>
+  <Schema slot="head" graph={[
+    serviceSchema({ name: 'AI Answering Service', serviceType: 'Answering Service', description: 'AI answering service that answers, qualifies, and books calls 24/7 at a flat monthly rate.', path }),
+    faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema,
+  ]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">AI Answering Service</span>
+    <h1>An answering service that <span class="accent">actually books the job</span></h1>
+    <p class="lead">Traditional answering services take a message. Keres answers in two rings, qualifies the caller, books the appointment, and texts a confirmation — 24/7, at a flat monthly rate.</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/ai-receptionist" class="btn btn-outline">How it works</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block">
+      <p>An <strong>AI answering service</strong> answers your business calls with artificial intelligence — greeting callers, answering questions, qualifying leads, and booking appointments automatically, 24/7. Unlike a per-minute human service that just takes a message, Keres completes the call and books the work.</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Flat-rate, full-service, always on</h2>
+      <ul>
+        <li>Answers every call in two rings — no hold, no voicemail</li>
+        <li>Books and reschedules on your calendar</li>
+        <li>Flags emergencies to your team instantly</li>
+        <li>Flat monthly price — no per-minute billing</li>
+      </ul>
+      <p>Need round-the-clock coverage specifically? See our <a href="/24-7-ai-receptionist">24/7 AI receptionist</a>. Want it tailored to your trade? Browse <a href="/ai-receptionist-for-hvac">HVAC</a>, <a href="/ai-receptionist-for-plumbers">plumbing</a>, <a href="/ai-receptionist-for-dentists">dental</a>, and <a href="/ai-receptionist-for-real-estate">real estate</a>.</p>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} title="AI answering service FAQ" />
+  <CtaBand heading="Replace voicemail with booked jobs" sub="Book a demo and hear Keres answer and book a call live." />
+</Layout>

@@ -1,0 +1,12 @@
+---
+// Reusable JSON-LD blocks. Pass plain objects; they are serialized verbatim.
+// Usage:
+//   <Schema graph={[orgSchema, faqSchema(...)]} />
+export interface Props {
+  graph: Record<string, unknown>[];
+}
+const { graph } = Astro.props;
+---
+{graph.map((node) => (
+  <script type="application/ld+json" set:html={JSON.stringify(node)} />
+))}

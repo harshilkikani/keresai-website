@@ -1,0 +1,16 @@
+---
+export interface Props {
+  heading: string;
+  sub: string;
+  cta?: string;
+  href?: string;
+}
+const { heading, sub, cta = 'Book a Demo', href = '/demo' } = Astro.props;
+---
+<section class="cta-band" aria-labelledby="cta-title">
+  <div class="container cta-band-inner">
+    <h2 id="cta-title">{heading}</h2>
+    <p>{sub}</p>
+    <a href={href} class="btn btn-primary">{cta}</a>
+  </div>
+</section>

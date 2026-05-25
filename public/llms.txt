@@ -1,0 +1,40 @@
+# Keres AI
+
+> Keres AI is an AI receptionist and AI SDR platform for businesses that live on the phone. It answers every inbound call 24/7 in two rings, qualifies leads, and books appointments automatically, and runs AI-powered outbound email that lands in the inbox and books qualified meetings.
+
+Keres AI replaces missed calls, voicemail, and slow follow-up with an always-on front desk and sales team. It is used by home-services contractors (HVAC, plumbing, roofing, septic, towing), dental and med-spa practices, real estate teams, and professional-services firms.
+
+Key facts:
+- Answers every call within two rings, 24/7 (nights, weekends, holidays).
+- Books and reschedules appointments on Google Calendar, Outlook, or field-service software.
+- AI SDR runs personalized outbound email with deliverability (SPF, DKIM, DMARC, inbox warmup) built in.
+- Integrations: Twilio, Google Calendar, Outlook, HubSpot, Zapier, Make, ServiceTitan, Jobber, Housecall Pro, FieldEdge, Service Fusion, RingCentral.
+- Setup: most accounts live within five business days. Month-to-month, cancel anytime.
+- Contact: ops@keresai.com
+
+## Core pages
+- [Home](https://www.keresai.com/): AI receptionist and AI SDR platform overview.
+- [AI Receptionist](https://www.keresai.com/ai-receptionist): Answer and book every call 24/7.
+- [AI Answering Service](https://www.keresai.com/ai-answering-service): Flat-rate AI answering that books jobs.
+- [24/7 AI Receptionist](https://www.keresai.com/24-7-ai-receptionist): Round-the-clock call coverage.
+- [AI SDR](https://www.keresai.com/ai-sdr): Outbound email that books meetings.
+- [Email Deliverability](https://www.keresai.com/email-deliverability): Land in the inbox, not spam.
+- [Pricing](https://www.keresai.com/pricing): Plans and pricing.
+- [Book a Demo](https://www.keresai.com/demo): Schedule a live demo.
+
+## Industry pages
+- [AI Receptionist for HVAC](https://www.keresai.com/ai-receptionist-for-hvac)
+- [AI Receptionist for Plumbers](https://www.keresai.com/ai-receptionist-for-plumbers)
+- [AI Receptionist for Dentists](https://www.keresai.com/ai-receptionist-for-dentists)
+- [AI Receptionist for Real Estate](https://www.keresai.com/ai-receptionist-for-real-estate)
+
+## Comparisons
+- [Apollo Alternative](https://www.keresai.com/apollo-alternative)
+- [Instantly Alternative](https://www.keresai.com/instantly-alternative)
+- [Smartlead Alternative](https://www.keresai.com/smartlead-alternative)
+
+## Tools
+- [Missed Call Revenue Calculator](https://www.keresai.com/missed-call-calculator)
+
+## Resources
+- [Guides & Playbooks](https://www.keresai.com/blog)

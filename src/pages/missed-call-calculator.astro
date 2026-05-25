@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema } from '../data/schema';
+
+const path = '/missed-call-calculator';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Missed Call Calculator', path }];
+const faqs = [
+  { q: 'How do you calculate lost revenue from missed calls?', a: 'Missed leads = monthly leads × (100% − answer rate). Lost jobs = missed leads × close rate (default 25%, the industry-median answered-lead close rate for home services). Lost revenue = lost jobs × your average job value. After-hours percentage highlights the leads most at risk.' },
+  { q: 'What is a typical answer rate for service businesses?', a: 'Many service businesses answer only 60–75% of inbound calls, and far fewer after hours. Every unanswered call is a lead that usually calls a competitor.' },
+  { q: 'How does an AI receptionist recover this revenue?', a: 'An AI receptionist answers 100% of calls in two rings, 24/7, so the missed-call gap closes to nearly zero. See the <a href="/ai-receptionist">AI receptionist</a> page.' },
+];
+---
+<Layout
+  title="Missed Call Revenue Calculator — What Are You Losing? | Keres AI"
+  description="Free missed-call calculator. Enter your call volume, answer rate, and average job value to see how much revenue you lose to unanswered calls every month and year."
+  path={path}
+>
+  <Schema slot="head" graph={[faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Free tool</span>
+    <h1>What are missed calls <span class="accent">costing you?</span></h1>
+    <p class="lead">Four inputs, transparent math. See how much revenue slips away every month when calls go unanswered — and how much an AI receptionist recovers.</p>
+  </header>
+
+  <section class="page-section container container-narrow">
+    <div class="roi-shell" data-vertical="septic">
+      <div class="roi-vert-row">
+        <button type="button" class="roi-vert-btn active" data-vert="septic">Septic</button>
+        <button type="button" class="roi-vert-btn" data-vert="roofing">Roofing</button>
+        <button type="button" class="roi-vert-btn" data-vert="hvac">HVAC</button>
+      </div>
+      <div class="roi-grid">
+        <div class="roi-inputs">
+          <label class="roi-field"><span class="roi-field-label">Monthly leads</span><input type="number" id="roi-leads" min="0" value="200"></label>
+          <label class="roi-field"><span class="roi-field-label">Answer rate %</span><input type="number" id="roi-answer" min="0" max="100" value="60"></label>
+          <label class="roi-field"><span class="roi-field-label">Avg job value</span><div class="roi-field-prefix"><span>$</span><input type="number" id="roi-job" min="0" value="680"></div></label>
+          <label class="roi-field"><span class="roi-field-label">After-hours lead %</span><input type="number" id="roi-afterhours" min="0" max="100" value="35"></label>
+        </div>
+        <div class="roi-output">
+          <div class="roi-headline-label">You're losing</div>
+          <div class="roi-headline-value"><span id="roi-lost-mo">$0</span><span class="roi-per">/mo</span></div>
+          <div class="roi-headline-year">≈ <span id="roi-lost-yr">$0</span> / year</div>
+          <div class="roi-math">
+            <div class="roi-math-row"><span>Missed leads / mo</span><span id="roi-missed">0</span></div>
+            <div class="roi-math-row muted"><span id="roi-missed-calc">= 200 × (100% − 60%)</span><span></span></div>
+            <div class="roi-math-row"><span>Would-have-closed jobs</span><span id="roi-jobs">0</span></div>
+            <div class="roi-math-row muted"><span>= missed × 25% close rate</span><span></span></div>
+            <div class="roi-math-row"><span>Lost revenue</span><span id="roi-lost-mo-2">$0</span></div>
+            <div class="roi-math-row muted"><span id="roi-job-calc">= jobs × $680 avg ticket</span><span></span></div>
+            <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">0</span></div>
+            <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
+          </div>
+          <a id="roi-cta" class="btn btn-primary" href="/demo">Book a demo with these numbers →</a>
+          <div class="roi-note">Close rate (25%) is the industry-median answered-lead close rate for home services (IBISWorld 2024). Swap in your own number if you track it.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} title="Missed-call calculator FAQ" />
+  <CtaBand heading="Recover those missed calls" sub="Book a demo and see the AI receptionist answer and book the calls you’re losing today." />
+
+  <script slot="scripts" src="/assets/roi.js?v=2" is:inline></script>
+</Layout>

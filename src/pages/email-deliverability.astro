@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema } from '../data/schema';
+
+const path = '/email-deliverability';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Email Deliverability', path }];
+const faqs = [
+  { q: 'What is email deliverability?', a: 'Email deliverability is the rate at which your emails reach the recipient’s primary inbox instead of spam or the promotions tab. For cold outbound, deliverability is the difference between booked meetings and emails no one ever sees.' },
+  { q: 'Why do cold emails land in spam?', a: 'Usually missing or misconfigured authentication (SPF, DKIM, DMARC), cold domains sent without warmup, sending volume ramped too fast, spammy copy, or poor list hygiene. Keres handles all of these for you.' },
+  { q: 'What is inbox warmup?', a: 'Warmup gradually builds a new sending domain and mailbox’s reputation by sending and engaging with email over time, so mailbox providers learn to trust you before you send at volume.' },
+  { q: 'Do I need SPF, DKIM, and DMARC?', a: 'Yes. These three records authenticate that your mail is really from you. Gmail and Outlook now require them for bulk senders. Keres configures and monitors all three.' },
+  { q: 'How does Keres improve deliverability?', a: 'We set up authentication, warm your inboxes, ramp volume safely, rotate sending across healthy mailboxes, keep lists clean, and monitor placement — so your outbound consistently reaches the primary inbox.' },
+];
+---
+<Layout
+  title="Email Deliverability — Land in the Inbox, Not Spam | Keres AI"
+  description="Keres handles SPF, DKIM, DMARC, inbox warmup, and list hygiene so your cold outbound reaches the primary inbox. Improve deliverability and book more replies."
+  path={path}
+>
+  <Schema slot="head" graph={[
+    serviceSchema({ name: 'Email Deliverability', serviceType: 'Email Deliverability', description: 'Email deliverability service: SPF, DKIM, DMARC, inbox warmup, and list hygiene so outbound lands in the inbox.', path }),
+    faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema,
+  ]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Deliverability</span>
+    <h1>Land in the inbox, <span class="accent">not in spam</span></h1>
+    <p class="lead">Authentication, inbox warmup, volume ramp, and list hygiene — handled for you. Keres keeps your outbound reaching the primary inbox so your emails actually get read and replied to.</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/ai-sdr" class="btn btn-outline">See the AI SDR</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block">
+      <p><strong>Email deliverability</strong> is the rate at which your emails reach the recipient’s primary inbox instead of spam or promotions. For cold outbound it is everything: an email in spam can never book a meeting. Keres maximizes deliverability with proper authentication, warmup, safe sending, and clean lists.</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-label">What we handle</div>
+    <h2 class="section-title" style="margin-bottom:8px">Deliverability, done for you</h2>
+    <div class="feature-grid">
+      <div class="feature-card"><h3>SPF, DKIM &amp; DMARC</h3><p>Full authentication setup and monitoring — now required by Gmail and Outlook for senders.</p></div>
+      <div class="feature-card"><h3>Inbox warmup</h3><p>Gradually builds domain and mailbox reputation before you send at volume.</p></div>
+      <div class="feature-card"><h3>Safe volume ramp</h3><p>Scales sending across healthy, rotated mailboxes so you never trip spam filters.</p></div>
+      <div class="feature-card"><h3>List hygiene</h3><p>Verifies and cleans lists to cut bounces and protect sender reputation.</p></div>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} title="Email deliverability FAQ" />
+  <CtaBand heading="Get your outbound into the inbox" sub="Book a demo and we’ll audit your current deliverability and show you what Keres fixes." />
+</Layout>

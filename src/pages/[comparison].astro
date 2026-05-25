@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema } from '../data/schema';
+import { comparisons } from '../data/comparisons';
+
+export function getStaticPaths() {
+  return comparisons.map((c) => ({ params: { comparison: c.slug }, props: { c } }));
+}
+
+const { c } = Astro.props;
+const path = `/${c.slug}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'AI SDR', path: '/ai-sdr' },
+  { name: `${c.competitor} Alternative`, path },
+];
+---
+<Layout title={c.title} description={c.description} path={path}>
+  <Schema slot="head" graph={[faqSchema(c.faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">{c.category}</span>
+    <h1>A smarter <span class="accent">{c.h1Accent}</span> alternative</h1>
+    <p class="lead">{c.intro}</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/ai-sdr" class="btn btn-outline">How the AI SDR works</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="section-label">At a glance</div>
+    <h2 class="section-title" style="margin-bottom:8px">Keres AI vs. {c.competitor}</h2>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr><th>Feature</th><th class="keres">Keres AI</th><th>{c.competitor}</th></tr>
+        </thead>
+        <tbody>
+          {c.rows.map((r) => (
+            <tr>
+              <td>{r.feature}</td>
+              <td class="keres"><span class={r.keres === 'Yes' ? 'yes' : ''}>{r.keres}</span></td>
+              <td><span class={r.them === 'No' ? 'no' : ''}>{r.them}</span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="margin-top:6px">Comparison reflects typical product positioning and may change as each product evolves. Want the current picture for your use case? <a href="/demo">Book a demo</a>.</p>
+  </section>
+
+  <FaqSection faqs={c.faqs} title={`${c.competitor} alternative FAQ`} />
+  <CtaBand heading={`See why teams pick Keres over ${c.competitor}`} sub="Book a demo and watch Keres book a meeting end to end — targeting, sending, replies, and scheduling." />
+</Layout>

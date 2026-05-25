@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema } from '../data/schema';
+import { industries } from '../data/industries';
+
+export function getStaticPaths() {
+  return industries.map((ind) => ({ params: { industry: ind.slug }, props: { ind } }));
+}
+
+const { ind } = Astro.props;
+const path = `/ai-receptionist-for-${ind.slug}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'AI Receptionist', path: '/ai-receptionist' },
+  { name: `For ${ind.short}`, path },
+];
+---
+<Layout title={ind.title} description={ind.description} path={path}>
+  <Schema slot="head" graph={[
+    serviceSchema({ name: `AI Receptionist for ${ind.name}`, serviceType: 'AI Receptionist', description: ind.description, path }),
+    faqSchema(ind.faqs), breadcrumbSchema(crumbs), organizationSchema,
+  ]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">AI Receptionist · {ind.short}</span>
+    <h1>The AI receptionist built for <span class="accent">{ind.name.toLowerCase()}</span></h1>
+    <p class="lead">{ind.intro}</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block">
+      <p>Keres AI is an <strong>AI receptionist for {ind.name.toLowerCase()}</strong> that answers every inbound call 24/7, qualifies the caller, and books the appointment automatically — so no lead goes to voicemail and every call becomes a booked job.</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Why {ind.short.toLowerCase() === ind.short ? ind.short : ind.short.toLowerCase()} businesses lose calls</h2>
+      <ul>
+        {ind.pains.map((p) => <li>{p}</li>)}
+      </ul>
+      <p>Every one of those is a job that went to a competitor. Keres closes the gap by answering instantly, every time.</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-label">What Keres books</div>
+    <h2 class="section-title" style="margin-bottom:8px">Booked, not just answered</h2>
+    <div class="feature-grid">
+      {ind.books.map((b) => (
+        <div class="feature-card"><h3>{b}</h3></div>
+      ))}
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <p>Keres works alongside our <a href="/24-7-ai-receptionist">24/7 AI receptionist</a> and <a href="/ai-answering-service">AI answering service</a>, and connects to the tools you already run on. Want outbound too? Add the <a href="/ai-sdr">AI SDR</a>.</p>
+      <p>Serving other industries: <a href="/ai-receptionist-for-hvac">HVAC</a> · <a href="/ai-receptionist-for-plumbers">Plumbers</a> · <a href="/ai-receptionist-for-dentists">Dentists</a> · <a href="/ai-receptionist-for-real-estate">Real Estate</a>.</p>
+    </div>
+  </section>
+
+  <FaqSection faqs={ind.faqs} title={`AI receptionist for ${ind.short.toLowerCase()} — FAQ`} />
+  <CtaBand heading={`Stop losing ${ind.short.toLowerCase()} jobs to voicemail`} sub="Book a free 30-minute demo and see Keres answer and book a call live." />
+</Layout>
