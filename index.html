@@ -152,9 +152,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" integrity="sha384-5d4d10adc96e57d530ea8ec6cab3c4d60fa9bacfb90db8c5ad5ddb87dfc68b3" crossorigin="anonymous">
 <link rel="dns-prefetch" href="https://formspree.io">
 <link rel="dns-prefetch" href="https://calendly.com">
-<link rel="preload" href="/assets/styles.css?v=19" as="style">
+<link rel="preload" href="/assets/styles.css?v=20" as="style">
 
-<link rel="stylesheet" href="/assets/styles.css?v=19">
+<link rel="stylesheet" href="/assets/styles.css?v=20">
 </head>
 
 <body>
@@ -397,41 +397,54 @@
 
     <div class="services-grid">
       <article class="service-card">
-        <div class="service-visual v3"><svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><path d="M20 60L40 20L60 60" stroke="rgba(232,93,4,0.5)" stroke-width="2" fill="none"/><path d="M28 45H52" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><path d="M24 52H56" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/></svg></div>
+        <div class="service-visual">
+          <video
+            class="service-video"
+            src="/assets/video/ai-receptionist.mp4"
+            preload="metadata"
+            playsinline
+            muted
+            loop
+            controls
+            aria-label="AI receptionist demo"></video>
+        </div>
         <div class="service-body">
-          <div class="service-cat" data-i18n="services.3.cat">Lead Management</div>
-          <h3 class="service-name" data-i18n="services.3.name">Lead Qualification Agent</h3>
-          <p class="service-desc" data-i18n="services.3.desc">Screens inbound calls and forms, qualifies leads, and books appointments directly into your calendar.</p>
-          <button class="service-cta" type="button" data-demo="leads">
-            <span data-i18n="services.watch">Watch Demo</span>
+          <div class="service-cat" data-i18n="services.3.cat">Live demo</div>
+          <h3 class="service-name" data-i18n="services.3.name">AI Receptionist</h3>
+          <p class="service-desc" data-i18n="services.3.desc">Watch our agent answer a live call, qualify the lead, and book the appointment — start to finish, in under a minute.</p>
+        </div>
+      </article>
+
+      <article class="service-card service-card-placeholder">
+        <div class="service-visual">
+          <div class="service-placeholder">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-          </button>
+            <span data-i18n="services.5.placeholder">Demo coming soon</span>
+          </div>
+        </div>
+        <div class="service-body">
+          <div class="service-cat" data-i18n="services.5.cat">In production</div>
+          <h3 class="service-name" data-i18n="services.5.name">Outbound Campaign Agent</h3>
+          <p class="service-desc" data-i18n="services.5.desc">A walkthrough of the agent that runs follow-up sequences, re-engages cold leads, and books second-touch conversations.</p>
         </div>
       </article>
 
       <article class="service-card">
-        <div class="service-visual v5"><svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><rect x="16" y="20" width="48" height="44" rx="4" stroke="rgba(232,93,4,0.5)" stroke-width="2"/><path d="M16 32h48" stroke="rgba(232,93,4,0.5)" stroke-width="2"/><path d="M28 14v10M52 14v10" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/><circle cx="32" cy="46" r="2.5" fill="rgba(255,255,255,0.4)"/><circle cx="40" cy="46" r="2.5" fill="rgba(232,93,4,0.7)"/></svg></div>
-        <div class="service-body">
-          <div class="service-cat" data-i18n="services.5.cat">Scheduling</div>
-          <h3 class="service-name" data-i18n="services.5.name">Appointment & Dispatch Agent</h3>
-          <p class="service-desc" data-i18n="services.5.desc">Handles all scheduling requests, reschedules, sends crew confirmations, and coordinates multi-location routing.</p>
-          <button class="service-cta" type="button" data-demo="calendar">
-            <span data-i18n="services.watch">Watch Demo</span>
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-          </button>
+        <div class="service-visual">
+          <video
+            class="service-video"
+            src="/assets/video/custom-agents.mp4"
+            preload="metadata"
+            playsinline
+            muted
+            loop
+            controls
+            aria-label="Custom AI agents demo"></video>
         </div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-visual v4"><svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><rect x="20" y="14" width="40" height="52" rx="4" stroke="rgba(232,93,4,0.5)" stroke-width="2"/><path d="M28 28h24M28 38h24M28 48h16" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/></svg></div>
         <div class="service-body">
-          <div class="service-cat" data-i18n="services.6.cat">Operations</div>
-          <h3 class="service-name" data-i18n="services.6.name">Invoice & Estimate Agent</h3>
-          <p class="service-desc" data-i18n="services.6.desc">Generates estimates from job data, sends invoices automatically, processes payments, and sends follow-up reminders.</p>
-          <button class="service-cta" type="button" data-demo="docs">
-            <span data-i18n="services.watch">Watch Demo</span>
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-          </button>
+          <div class="service-cat" data-i18n="services.6.cat">Client work</div>
+          <h3 class="service-name" data-i18n="services.6.name">Custom AI Agents</h3>
+          <p class="service-desc" data-i18n="services.6.desc">A real lead-generation agent we built for a client — and a look at how we design custom agents around your exact workflow.</p>
         </div>
       </article>
     </div>
@@ -903,7 +916,7 @@
   </form>
 </div>
 
-<script src="/assets/i18n.js?v=14" defer></script>
+<script src="/assets/i18n.js?v=15" defer></script>
 <script src="/assets/app.js?v=9" defer></script>
 <script src="/assets/roi.js" defer></script>
 <script src="/assets/chatbot.js?v=2" defer></script>
