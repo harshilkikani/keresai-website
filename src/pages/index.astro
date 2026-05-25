@@ -224,12 +224,12 @@ const faqs = [
           <div class="industry-name">Home Services</div>
           <div class="industry-desc">HVAC, plumbing, roofing, septic, electrical, and towing. Intake, dispatch, scheduling, and follow-up handled around the clock.</div>
         </a>
-        <a class="industry-card" href="/ai-receptionist-for-dentists">
+        <a class="industry-card" href="/ai-receptionist-for-med-spas">
           <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v4M12 17v4M5 12H1M23 12h-4M6.34 6.34l-2.83-2.83M20.49 20.49l-2.83-2.83M6.34 17.66l-2.83 2.83M20.49 3.51l-2.83 2.83M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
           <div class="industry-name">Med Spas &amp; Dental</div>
           <div class="industry-desc">Aesthetic clinics, wellness studios, and dental practices. Booking, rescheduling, intake forms, and pre-treatment qualification.</div>
         </a>
-        <a class="industry-card" href="/ai-receptionist">
+        <a class="industry-card" href="/ai-receptionist-for-professional-intake">
           <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M8 13h8 M8 17h6 M8 9h2" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
           <div class="industry-name">Professional Intake</div>
           <div class="industry-desc">Law firms, financial advisors, accountants, consultants. New-client qualification, conflict screening, and consultation booking.</div>
@@ -274,17 +274,18 @@ const faqs = [
       </h2>
       <p class="section-body">Four inputs. Transparent math. <a href="/missed-call-calculator">Open the full calculator &rarr;</a></p>
 
-      <div class="roi-shell" data-vertical="septic">
+      <div class="roi-shell" data-vertical="home-services">
         <div class="roi-vert-row">
-          <button type="button" class="roi-vert-btn active" data-vert="septic">Septic</button>
-          <button type="button" class="roi-vert-btn" data-vert="roofing">Roofing</button>
-          <button type="button" class="roi-vert-btn" data-vert="hvac">HVAC</button>
+          <button type="button" class="roi-vert-btn" data-vert="real-estate">Real Estate</button>
+          <button type="button" class="roi-vert-btn active" data-vert="home-services">Home Services</button>
+          <button type="button" class="roi-vert-btn" data-vert="med-spa">Med Spa</button>
+          <button type="button" class="roi-vert-btn" data-vert="professional">Professional</button>
         </div>
         <div class="roi-grid">
           <div class="roi-inputs">
-            <label class="roi-field"><span class="roi-field-label">Monthly leads</span><input type="number" id="roi-leads" min="0" value="200"></label>
+            <label class="roi-field"><span class="roi-field-label">Monthly leads</span><input type="number" id="roi-leads" min="0" value="250"></label>
             <label class="roi-field"><span class="roi-field-label">Answer rate %</span><input type="number" id="roi-answer" min="0" max="100" value="60"></label>
-            <label class="roi-field"><span class="roi-field-label">Avg job value</span><div class="roi-field-prefix"><span>$</span><input type="number" id="roi-job" min="0" value="680"></div></label>
+            <label class="roi-field"><span class="roi-field-label">Avg ticket value</span><div class="roi-field-prefix"><span>$</span><input type="number" id="roi-job" min="0" value="680"></div></label>
             <label class="roi-field"><span class="roi-field-label">After-hours lead %</span><input type="number" id="roi-afterhours" min="0" max="100" value="35"></label>
           </div>
           <div class="roi-output">
@@ -293,16 +294,16 @@ const faqs = [
             <div class="roi-headline-year">≈ <span id="roi-lost-yr">$0</span> / year</div>
             <div class="roi-math">
               <div class="roi-math-row"><span>Missed leads / mo</span><span id="roi-missed">0</span></div>
-              <div class="roi-math-row muted"><span id="roi-missed-calc">= 200 × (100% − 60%)</span><span></span></div>
+              <div class="roi-math-row muted"><span id="roi-missed-calc">= 250 × (100% − 60%)</span><span></span></div>
               <div class="roi-math-row"><span>Would-have-closed jobs</span><span id="roi-jobs">0</span></div>
-              <div class="roi-math-row muted"><span>= missed × 25% close rate</span><span></span></div>
+              <div class="roi-math-row muted"><span id="roi-close-calc">= missed × 25% close rate</span><span></span></div>
               <div class="roi-math-row"><span>Lost revenue</span><span id="roi-lost-mo-2">$0</span></div>
               <div class="roi-math-row muted"><span id="roi-job-calc">= jobs × $680 avg ticket</span><span></span></div>
               <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">0</span></div>
               <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
             </div>
             <a id="roi-cta" class="btn btn-primary" href="/demo">Book a demo with these numbers →</a>
-            <div class="roi-note">Close rate (25%) is the industry-median answered-lead close rate for home services (IBISWorld 2024). Swap in your own number if you track it.</div>
+            <div class="roi-note" id="roi-note">Close rate (25%) is the typical answered-lead close rate for home services. Swap in your own number if you track it.</div>
           </div>
         </div>
       </div>
@@ -430,19 +431,5 @@ const faqs = [
     </div>
   </section>
 
-  <!-- DEMO MODAL (triggered by service placeholder cards via app.js) -->
-  <div id="demo-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true" data-open="false">
-    <div class="modal">
-      <button class="modal-close" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-      <h3 id="modal-title" class="modal-title">Demo coming soon</h3>
-      <p class="modal-sub">We're polishing the video demos. In the meantime, book a free 30-minute call and we'll walk you through this live.</p>
-      <div class="modal-video"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Video preview</span></div>
-      <div class="modal-actions">
-        <a href="/demo" class="btn btn-primary" data-close>Book a Live Walkthrough</a>
-        <button type="button" class="btn btn-outline" data-close>Close</button>
-      </div>
-    </div>
-  </div>
-
-  <script slot="scripts" src="/assets/roi.js?v=2" is:inline></script>
+  <script slot="scripts" src="/assets/roi.js?v=3" is:inline></script>
 </Layout>

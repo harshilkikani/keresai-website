@@ -28,7 +28,7 @@ const crumbs = [
   <Breadcrumbs crumbs={crumbs} />
   <header class="page-hero container">
     <span class="eyebrow">AI Receptionist · {ind.short}</span>
-    <h1>The AI receptionist built for <span class="accent">{ind.name.toLowerCase()}</span></h1>
+    <h1>The AI receptionist built for <span class="accent">{ind.nameLower}</span></h1>
     <p class="lead">{ind.intro}</p>
     <div class="hero-ctas">
       <a href="/demo" class="btn btn-primary">Book a Demo</a>
@@ -38,17 +38,17 @@ const crumbs = [
 
   <section class="page-section container">
     <div class="answer-block">
-      <p>Keres AI is an <strong>AI receptionist for {ind.name.toLowerCase()}</strong> that answers every inbound call 24/7, qualifies the caller, and books the appointment automatically — so no lead goes to voicemail and every call becomes a booked job.</p>
+      <p>Keres AI is an <strong>AI receptionist for {ind.nameLower}</strong> that answers every inbound call 24/7, qualifies the caller, and books the appointment automatically — so no lead goes to voicemail and every call becomes a booked job.</p>
     </div>
   </section>
 
   <section class="page-section container">
     <div class="prose">
-      <h2>Why {ind.short.toLowerCase() === ind.short ? ind.short : ind.short.toLowerCase()} businesses lose calls</h2>
+      <h2>Why {ind.shortLower} teams lose calls</h2>
       <ul>
         {ind.pains.map((p) => <li>{p}</li>)}
       </ul>
-      <p>Every one of those is a job that went to a competitor. Keres closes the gap by answering instantly, every time.</p>
+      <p>Every one of those is a lead that went to a competitor. Keres closes the gap by answering instantly, every time.</p>
     </div>
   </section>
 
@@ -65,10 +65,10 @@ const crumbs = [
   <section class="page-section container">
     <div class="prose">
       <p>Keres works alongside our <a href="/24-7-ai-receptionist">24/7 AI receptionist</a> and <a href="/ai-answering-service">AI answering service</a>, and connects to the tools you already run on. Want outbound too? Add the <a href="/ai-sdr">AI SDR</a>.</p>
-      <p>Serving other industries: <a href="/ai-receptionist-for-hvac">HVAC</a> · <a href="/ai-receptionist-for-plumbers">Plumbers</a> · <a href="/ai-receptionist-for-dentists">Dentists</a> · <a href="/ai-receptionist-for-real-estate">Real Estate</a>.</p>
+      <p>Serving other industries: <a href="/ai-receptionist-for-hvac">HVAC</a> · <a href="/ai-receptionist-for-plumbers">Plumbers</a> · <a href="/ai-receptionist-for-dentists">Dentists</a> · <a href="/ai-receptionist-for-real-estate">Real Estate</a> · <a href="/ai-receptionist-for-med-spas">Med Spas</a> · <a href="/ai-receptionist-for-professional-intake">Professional Intake</a>.</p>
     </div>
   </section>
 
-  <FaqSection faqs={ind.faqs} title={`AI receptionist for ${ind.short.toLowerCase()} — FAQ`} />
-  <CtaBand heading={`Stop losing ${ind.short.toLowerCase()} jobs to voicemail`} sub="Book a free 30-minute demo and see Keres answer and book a call live." />
+  <FaqSection faqs={ind.faqs} title={`AI receptionist for ${ind.shortLower} — FAQ`} />
+  <CtaBand heading={`Stop losing ${ind.shortLower} leads to voicemail`} sub="Book a free 30-minute demo and see Keres answer and book a call live." />
 </Layout>

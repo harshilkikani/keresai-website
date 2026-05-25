@@ -1,31 +1,27 @@
-# Keres AI Website
+# Keres AI website
 
-Marketing site for [Keres AI](https://www.keresai.com) — the **AI receptionist & AI SDR platform** for businesses that live on the phone. Answer every call, book every appointment, and run outbound that lands in the inbox.
+Marketing site for [Keres AI](https://www.keresai.com) — the AI receptionist and AI SDR platform for businesses that live on the phone.
 
 ## Stack
-[Astro](https://astro.build) (static output) + the original vanilla CSS/JS. No framework runtime ships to the browser — Astro renders everything to static HTML at build time, so it deploys to any static host (GitHub Pages, Netlify, Vercel, Cloudflare Pages).
+[Astro](https://astro.build) (static output) + the original vanilla CSS and JS. No framework code ships to the browser — Astro renders everything to plain HTML at build time, so it deploys to any static host (the production deploy is GitHub Pages via GitHub Actions).
 
 ## Structure
 ```
 src/
-├── layouts/Layout.astro        # Shared <head> (SEO, schema slot, CSP, analytics), Nav, Footer
-├── components/
-│   ├── Nav.astro  Footer.astro
-│   ├── Schema.astro            # Renders JSON-LD blocks
-│   ├── Breadcrumbs.astro  FaqSection.astro  CtaBand.astro
+├── layouts/Layout.astro        # Shared <head> (SEO, schema slot, CSP, analytics)
+├── components/                 # Nav, Footer, Schema, Breadcrumbs, FaqSection, CtaBand
 ├── data/
-│   ├── schema.ts               # Organization / SoftwareApplication / FAQ / Breadcrumb / Service helpers
+│   ├── schema.ts               # Reusable JSON-LD building blocks
 │   ├── industries.ts           # Drives /ai-receptionist-for-{industry}
 │   └── comparisons.ts          # Drives /{competitor}-alternative
 └── pages/                      # One file per route; dynamic routes generate programmatic pages
 public/
 ├── assets/                     # styles.css, pages.css, app.js, roi.js, img, video (served verbatim)
-├── guides/  legal/             # Static content pages
+├── guides/  legal/             # Static long-form content pages
 ├── robots.txt  llms.txt  CNAME
-_legacy/                        # Pre-Astro static site, kept for reference (gitignored)
 ```
 
-Build output goes to `dist/`. Clean URLs (`/ai-receptionist`, no `.html`) work because Astro emits `*.html` files and GitHub Pages serves them at the extensionless path.
+Build output lands in `dist/`. Clean URLs (`/ai-receptionist`, no `.html`) work because Astro emits `*.html` files at the page path and GitHub Pages serves them at the extensionless URL.
 
 ## Local development
 ```bash
@@ -39,15 +35,31 @@ npm run preview    # serve dist/ locally
 - **New industry page** → add an entry to `src/data/industries.ts`. A `/ai-receptionist-for-{slug}` page builds automatically.
 - **New comparison page** → add an entry to `src/data/comparisons.ts`. A `/{slug}` page builds automatically.
 
+Each entry includes the title, description, FAQ list, and page-specific copy used in both the visible page and the generated FAQ / Service / Breadcrumb JSON-LD.
+
 ## Deployment (GitHub Pages)
-`.github/workflows/deploy.yml` builds with Astro and deploys `dist/` on every push to `main`.
-**One-time setup:** in the GitHub repo, Settings → Pages → Build and deployment → Source = **GitHub Actions**. The `public/CNAME` (`www.keresai.com`) is included in the build output, so the custom domain is preserved.
+`.github/workflows/deploy.yml` builds with Astro and deploys `dist/` to GitHub Pages on every push to `main`.
 
-## Analytics & Search Console
-- **Analytics:** [GoatCounter](https://www.goatcounter.com) (free, cookieless, no consent banner) is wired in `src/layouts/Layout.astro` (`GOATCOUNTER_CODE = 'keresai'`). Claim the free code at <https://www.goatcounter.com/signup> (use `keresai`) and data flows immediately — the script points at `https://keresai.goatcounter.com/count`. Set `GOATCOUNTER_CODE = ''` to disable. The CSP already allows `gc.zgo.at` and the count endpoint. To use GA4 instead, swap the script and update CSP `script-src`/`connect-src`.
-- **Search Console / Bing:** prefer **DNS TXT verification** (no CSP impact). If you must use the HTML-tag method, set `GSC_VERIFICATION` in `Layout.astro`. After verifying, submit `https://www.keresai.com/sitemap-index.xml`.
+One-time setup in the GitHub repo: **Settings → Pages → Build and deployment → Source = GitHub Actions**. `public/CNAME` (`www.keresai.com`) is copied into the build output, so the custom domain is preserved on every deploy.
 
-## Configuration
-- **Formspree form ID:** `mojywlnn`
-- **Calendly URL:** `https://calendly.com/ops-keresai/30min` (in `public/assets/app.js`)
-- **Contact email:** `ops@keresai.com`
+## Analytics and Search Console
+- **Analytics:** [GoatCounter](https://www.goatcounter.com) — free, cookieless, no consent banner needed. The script is wired in `src/layouts/Layout.astro` via the `GOATCOUNTER_CODE` constant. The CSP already allows `https://gc.zgo.at` and the per-site count endpoint. Set `GOATCOUNTER_CODE` to an empty string to disable.
+- **Search Console / Bing:** prefer DNS-TXT verification (no CSP impact). If you must use the HTML-tag method instead, set the `GSC_VERIFICATION` constant in `Layout.astro` and rebuild. After verifying, submit `https://www.keresai.com/sitemap-index.xml`.
+
+## SEO surface
+- `src/layouts/Layout.astro` renders `<title>`, meta description, canonical, Open Graph, Twitter, robots, hreflang.
+- `src/components/Schema.astro` accepts a `graph` prop and emits one `<script type="application/ld+json">` per node. Pages compose org / software / service / FAQ / breadcrumb blocks from `src/data/schema.ts`.
+- Sitemap is generated by `@astrojs/sitemap` at `/sitemap-index.xml` (referenced from `public/robots.txt`).
+
+## Content references
+- Contact email: `ops@keresai.com`
+- Calendly URL: in `public/assets/app.js`
+- Contact form: Formspree — form ID is committed in the page source
+
+These values appear directly in the published HTML, so they are intentionally public.
+
+## DNS reminder
+Custom domain is configured via `public/CNAME`. For email reputation on outbound (since the contact email is mentioned across the site), add a DMARC TXT record at `_dmarc.keresai.com` with at minimum:
+```
+v=DMARC1; p=none; rua=mailto:ops@keresai.com
+```

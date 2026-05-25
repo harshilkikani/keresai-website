@@ -33,13 +33,10 @@ export const softwareApplicationSchema = {
   url: ORIGIN,
   description:
     'AI receptionist and AI SDR platform. Answers every call in two rings, books appointments, qualifies leads, and runs outbound email that lands in the inbox.',
-  offers: {
-    '@type': 'Offer',
-    priceCurrency: 'USD',
-    description: 'Custom B2B pricing based on call volume and features. Book a demo for a quote.',
-    availability: 'https://schema.org/InStock',
-    url: `${ORIGIN}/pricing`,
-  },
+  // Offer intentionally omitted: Keres uses custom B2B quotes, not a public
+  // numeric price. Google's structured-data guidelines reject Offer entries
+  // without a real `price`, so we surface pricing on the /pricing page and
+  // leave the Offer node out rather than emit a fake one.
   featureList: [
     '24/7 AI call answering',
     'Automated appointment booking',

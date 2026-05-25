@@ -1,36 +1,45 @@
-/* Keres ROI calculator — vanilla JS, no deps.
- * Same math model as the demo app's RoiCalculator.jsx. Methodology:
- *   missed = leads × (1 − answer_rate)
- *   recoverable_jobs = missed × 0.25   (IBISWorld 2024 home-services median
- *                                       answered-lead close rate)
- *   lost_revenue = recoverable_jobs × avg_job_value
+/* Keres ROI / missed-call calculator — vanilla JS, no deps.
+ * Methodology:
+ *   missed       = leads × (1 − answer_rate)
+ *   would-close  = missed × close_rate            (per-vertical)
+ *   lost_revenue = would-close × avg_ticket_value
+ *
+ * Per-vertical close rates reflect typical answered-lead → closed-deal
+ * conversion: home services 25% (industry-median), real estate ~8%
+ * (buyer-agent qualified-lead close), med spas ~50% (qualified inquiry
+ * to booked appointment), professional services ~15% (qualified
+ * consultation to engaged client).
  */
 (function () {
   const DEFAULTS = {
-    septic:  { leads: 200, answer: 60, job: 680,  ah: 35, label: "Septic" },
-    roofing: { leads: 180, answer: 55, job: 8500, ah: 15, label: "Roofing" },
-    hvac:    { leads: 320, answer: 65, job: 950,  ah: 25, label: "HVAC" },
+    "real-estate":   { leads: 150, answer: 55, job: 4500, ah: 40, close: 0.08, label: "Real-estate" },
+    "home-services": { leads: 250, answer: 60, job: 680,  ah: 35, close: 0.25, label: "Home-services" },
+    "med-spa":       { leads: 180, answer: 70, job: 350,  ah: 20, close: 0.50, label: "Med-spa" },
+    "professional":  { leads: 80,  answer: 50, job: 3500, ah: 30, close: 0.15, label: "Professional-services" },
   };
-  const CLOSE_RATE = 0.25;
 
   const fmt = (n) => "$" + Math.round(n).toLocaleString("en-US");
+  const pct = (f) => Math.round(f * 100) + "%";
 
   function $(id) { return document.getElementById(id); }
 
   function getState() {
+    const shell = document.querySelector(".roi-shell");
+    const v = shell ? shell.dataset.vertical : "home-services";
     return {
-      leads:  Math.max(0, parseInt($("roi-leads").value, 10) || 0),
-      answer: Math.max(0, Math.min(100, parseInt($("roi-answer").value, 10) || 0)),
-      job:    Math.max(0, parseInt($("roi-job").value, 10) || 0),
-      ah:     Math.max(0, Math.min(100, parseInt($("roi-afterhours").value, 10) || 0)),
-      vertical: document.querySelector(".roi-shell").dataset.vertical,
+      leads:    Math.max(0, parseInt($("roi-leads").value, 10) || 0),
+      answer:   Math.max(0, Math.min(100, parseInt($("roi-answer").value, 10) || 0)),
+      job:      Math.max(0, parseInt($("roi-job").value, 10) || 0),
+      ah:       Math.max(0, Math.min(100, parseInt($("roi-afterhours").value, 10) || 0)),
+      vertical: v,
+      close:    (DEFAULTS[v] && DEFAULTS[v].close) || 0.25,
     };
   }
 
   function recompute() {
     const s = getState();
     const missed = s.leads * (1 - s.answer / 100);
-    const jobs = missed * CLOSE_RATE;
+    const jobs = missed * s.close;
     const lostMo = jobs * s.job;
     const lostYr = lostMo * 12;
     const ah = s.leads * (s.ah / 100);
@@ -44,17 +53,24 @@
     $("roi-job-calc").textContent = `= jobs × ${fmt(s.job)} avg ticket`;
     $("roi-ah").textContent = Math.round(ah).toLocaleString();
 
-    // CTA — prefill a message we can relay via the Calendly/contact link.
+    const closeEl = $("roi-close-calc");
+    if (closeEl) closeEl.textContent = `= missed × ${pct(s.close)} close rate`;
+    const noteEl = $("roi-note");
+    if (noteEl) {
+      const labelNice = (DEFAULTS[s.vertical]?.label || "Home-services").toLowerCase();
+      noteEl.textContent =
+        `Close rate (${pct(s.close)}) is the typical answered-lead close rate for ${labelNice}. ` +
+        `Swap in your own number if you track it.`;
+    }
+
     const label = DEFAULTS[s.vertical]?.label || "Home-services";
     const msg =
-      `Hi — I run a ${label} shop doing ~${s.leads} leads/mo with a ` +
-      `${s.answer}% answer rate and ~$${s.job.toLocaleString()} avg job. ` +
-      `ROI calc says we're leaving ~${fmt(lostMo)}/mo on the table — let's talk.`;
+      `Hi — I run a ${label.toLowerCase()} operation doing ~${s.leads} leads/mo with a ` +
+      `${s.answer}% answer rate and ~$${s.job.toLocaleString()} avg ticket. ` +
+      `Missed-call calc says we're leaving ~${fmt(lostMo)}/mo on the table — let's talk.`;
     const cta = $("roi-cta");
     if (cta) {
-      // Keep anchor to #contact as a fallback; ?prefill hash kept for the form to
-      // pick up if we ever wire it up.
-      cta.href = `#contact?prefill=${encodeURIComponent(msg)}`;
+      cta.href = `/demo?prefill=${encodeURIComponent(msg)}`;
       cta.dataset.prefill = msg;
     }
   }
@@ -83,8 +99,6 @@
       btn.addEventListener("click", () => applyVertical(btn.dataset.vert));
     });
 
-    // Carry the prefilled note into the contact form's message field when the
-    // user clicks the ROI CTA and lands at #contact.
     const cta = $("roi-cta");
     if (cta) {
       cta.addEventListener("click", () => {

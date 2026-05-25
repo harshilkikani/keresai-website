@@ -33,51 +33,6 @@
     });
   });
 
-  /* ─── i18n init + language switcher ─────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
-    if (window.KeresI18n) {
-      try { window.KeresI18n.init(); } catch (e) { console.error('[i18n init]', e); }
-    }
-
-    const switcher = document.getElementById('lang-switch');
-    const trigger  = document.getElementById('lang-trigger');
-    if (!switcher || !trigger) return;
-
-    const setOpen = (open) => {
-      switcher.setAttribute('aria-expanded', String(open));
-      trigger.setAttribute('aria-expanded', String(open));
-    };
-
-    trigger.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setOpen(switcher.getAttribute('aria-expanded') !== 'true');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!switcher.contains(e.target)) setOpen(false);
-    });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
-
-    // Event delegation on the menu — survives dynamic content, immune to timing.
-    // Click target may be a child <span> (flag emoji or label), so walk up to the button.
-    const menu = switcher.querySelector('.lang-menu');
-    if (menu) {
-      menu.addEventListener('click', (e) => {
-        const btn = e.target.closest('button[data-lang]');
-        if (!btn || !menu.contains(btn)) return;
-        const lang = btn.dataset.lang;
-        if (!lang) return;
-        try {
-          window.KeresI18n && window.KeresI18n.apply(lang);
-        } catch (err) {
-          console.error('[i18n apply]', err);
-        }
-        setOpen(false);
-      });
-    }
-  });
-
   /* ─── Mobile nav (hamburger) ────────────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
     const btn  = document.getElementById('hamburger');
@@ -323,39 +278,6 @@
         el.removeAttribute('aria-invalid');
         document.getElementById(id + '-err').textContent = '';
       });
-    });
-  });
-
-  /* ─── Demo modal ───────────────────────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
-    const backdrop = document.getElementById('demo-modal');
-    if (!backdrop) return;
-    const closeEls = backdrop.querySelectorAll('[data-close]');
-    let lastFocus = null;
-
-    function open(ctx) {
-      lastFocus = document.activeElement;
-      backdrop.setAttribute('data-open', 'true');
-      backdrop.setAttribute('aria-hidden', 'false');
-      const titleEl = backdrop.querySelector('.modal-title');
-      if (titleEl && ctx) titleEl.dataset.service = ctx;
-      document.body.style.overflow = 'hidden';
-      setTimeout(() => backdrop.querySelector('.modal-close').focus(), 100);
-    }
-    function close() {
-      backdrop.setAttribute('data-open', 'false');
-      backdrop.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      lastFocus && lastFocus.focus();
-    }
-
-    document.querySelectorAll('[data-demo]').forEach(btn => {
-      btn.addEventListener('click', () => open(btn.dataset.demo));
-    });
-    closeEls.forEach(el => el.addEventListener('click', close));
-    backdrop.addEventListener('click', (e) => { if (e.target === backdrop) close(); });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && backdrop.getAttribute('data-open') === 'true') close();
     });
   });
 
