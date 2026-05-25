@@ -26,12 +26,13 @@ const canonical = origin + path;
 const ogImageAbs = ogImage.startsWith('http') ? ogImage : origin + ogImage;
 
 // ── Analytics + verification ──────────────────────────────
-// Plausible is privacy-friendly and cookieless. Set to '' to disable.
-// To use a different provider, swap the script in the <head> below and
-// update the CSP `script-src`/`connect-src` accordingly.
-const ANALYTICS_DOMAIN = 'keresai.com';
+// GoatCounter: free, privacy-friendly, cookieless (no consent banner needed).
+// Claim the free code at https://www.goatcounter.com/signup (use "keresai").
+// Set to '' to disable. CSP already allows gc.zgo.at + the count endpoint.
+const GOATCOUNTER_CODE = 'keresai';
+const goatcounterEndpoint = GOATCOUNTER_CODE ? `https://${GOATCOUNTER_CODE}.goatcounter.com/count` : '';
 // Google Search Console HTML-tag verification. Prefer DNS TXT verification
-// (no CSP impact); use this only if you verify via the HTML tag method.
+// (no CSP impact); paste the token here only if you verify via the HTML tag.
 const GSC_VERIFICATION = '';
 ---
 <!DOCTYPE html>
@@ -41,11 +42,11 @@ const GSC_VERIFICATION = '';
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="light dark" />
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://plausible.io; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://calendly.com https://plausible.io; frame-src https://calendly.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://gc.zgo.at; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://calendly.com https://keresai.goatcounter.com; frame-src https://calendly.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
-{ANALYTICS_DOMAIN && <script defer data-domain={ANALYTICS_DOMAIN} src="https://plausible.io/js/script.js" is:inline></script>}
+{goatcounterEndpoint && <script data-goatcounter={goatcounterEndpoint} async src="https://gc.zgo.at/count.js" is:inline></script>}
 
 <title>{title}</title>
 <meta name="description" content={description} />

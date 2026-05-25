@@ -44,7 +44,7 @@ npm run preview    # serve dist/ locally
 **One-time setup:** in the GitHub repo, Settings → Pages → Build and deployment → Source = **GitHub Actions**. The `public/CNAME` (`www.keresai.com`) is included in the build output, so the custom domain is preserved.
 
 ## Analytics & Search Console
-- **Analytics:** [Plausible](https://plausible.io) is wired in `src/layouts/Layout.astro` (`ANALYTICS_DOMAIN = 'keresai.com'`). Add the site in your Plausible account to start collecting data, or set `ANALYTICS_DOMAIN = ''` to disable. The CSP already allows `plausible.io`. To use GA4 instead, swap the script and update the CSP `script-src`/`connect-src`.
+- **Analytics:** [GoatCounter](https://www.goatcounter.com) (free, cookieless, no consent banner) is wired in `src/layouts/Layout.astro` (`GOATCOUNTER_CODE = 'keresai'`). Claim the free code at <https://www.goatcounter.com/signup> (use `keresai`) and data flows immediately — the script points at `https://keresai.goatcounter.com/count`. Set `GOATCOUNTER_CODE = ''` to disable. The CSP already allows `gc.zgo.at` and the count endpoint. To use GA4 instead, swap the script and update CSP `script-src`/`connect-src`.
 - **Search Console / Bing:** prefer **DNS TXT verification** (no CSP impact). If you must use the HTML-tag method, set `GSC_VERIFICATION` in `Layout.astro`. After verifying, submit `https://www.keresai.com/sitemap-index.xml`.
 
 ## Configuration
