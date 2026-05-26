@@ -92,7 +92,7 @@ export const glossary: GlossaryTerm[] = [
     term: 'Virtual Receptionist',
     category: 'AI Receptionist',
     targetKeyword: 'what is a virtual receptionist',
-    title: 'What Is a Virtual Receptionist? Definition & AI Alternatives | Keres AI',
+    title: 'What Is a Virtual Receptionist? Definition + AI Options | Keres AI',
     description:
       'A virtual receptionist answers and manages business calls remotely. Learn the difference between human virtual receptionists and AI receptionists, and which fits your business.',
     definition:
@@ -805,7 +805,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'The revenue cost of no-shows',
         body:
-          'A single no-show at a dental practice can represent $200–$500 in lost revenue; for a med spa, a missed Botox or filler appointment is $600–$1,200 gone. Multiplied across a month, even a 10–15% no-show rate is a significant, avoidable loss. Most no-shows happen because the patient forgot or found a scheduling conflict — both solvable with timely <a href="/glossary/appointment-reminders">appointment reminders</a> and frictionless rescheduling.',
+          'Industry estimates put a single dental no-show at roughly $200–$500 in lost revenue, and a missed med-spa injection appointment often higher — exact figures vary by practice, geography, and treatment mix. Multiplied across a month, even a 10–15% no-show rate is a significant, avoidable loss. Most no-shows happen because the patient forgot or found a scheduling conflict — both solvable with timely <a href="/glossary/appointment-reminders">appointment reminders</a> and frictionless rescheduling.',
       },
       {
         h2: 'How AI reminders reduce no-shows',
@@ -886,7 +886,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['automated dispatch', 'AI dispatch'],
     category: 'AI Receptionist',
     targetKeyword: 'what is dispatch automation',
-    title: 'What Is Dispatch Automation? AI for HVAC, Towing & Field Service | Keres AI',
+    title: 'What Is Dispatch Automation? AI for Field Service | Keres AI',
     description:
       'Dispatch automation uses AI to capture service requests, qualify urgency, assign jobs, and alert your field crew — without a human dispatcher on every call.',
     definition:

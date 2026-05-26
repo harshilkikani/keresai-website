@@ -196,7 +196,7 @@ export async function GET() {
   push('- About 85% of callers who reach voicemail do not call back — they call a competitor.');
   push('- An estimated 30–45% of service calls arrive outside business hours (nights, weekends, holidays).');
   push('- Responding to a lead within five minutes makes it many times more likely to qualify than waiting 30 minutes.');
-  push('- Roughly 78% of customers buy from the business that responds first.');
+  push('- Studies estimate a strong majority of customers buy from the business that responds first — speed to lead is consistently one of the largest predictors of conversion.');
   push('- For high-ticket trades (HVAC, roofing, restoration), one missed emergency call can exceed $1,200 in lost revenue.');
   push('- Example: 250 leads/month at a 60% answer rate, 25% close rate, and $680 average ticket ≈ $17,000/month in missed-call revenue loss.');
   push();

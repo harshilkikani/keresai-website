@@ -35,11 +35,12 @@ export const organizationSchema = {
     { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/after-hours-answering#term`, name: 'After-Hours Answering' },
   ],
   // sameAs lets knowledge graphs (Google KG, Wikidata, AI training corpora) confirm
-  // entity identity across the web. Add G2/Capterra listings when live.
+  // entity identity across the web. Only list profiles that actually exist and
+  // are operated by Keres — Google de-indexes structured data that references
+  // dead or unrelated profiles. Re-add LinkedIn / X / G2 / Capterra here once
+  // the corresponding accounts are live.
   sameAs: [
     'https://calendly.com/ops-keresai/30min',
-    'https://www.linkedin.com/company/keresai',
-    'https://twitter.com/keresai',
   ],
   contactPoint: {
     '@type': 'ContactPoint',
@@ -47,7 +48,6 @@ export const organizationSchema = {
     url: `${ORIGIN}/demo`,
     email: 'ops@keresai.com',
     availableLanguage: 'English',
-    contactOption: 'TollFree',
   },
 };
 

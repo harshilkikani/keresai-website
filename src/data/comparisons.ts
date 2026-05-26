@@ -219,7 +219,7 @@ export const comparisons: Comparison[] = [
     pillar: 'inbound',
     title: 'The Best AnsweringLegal Alternative for Law Firms | Keres AI',
     description:
-      'Looking for an AnsweringLegal alternative? Keres AI answers every call 24/7, qualifies legal intake, screens conflicts, and books consultations — at a flat monthly rate instead of per-minute billing.',
+      'AnsweringLegal alternative: Keres AI answers every call 24/7, qualifies intake, screens conflicts, and books consultations — flat monthly rate, no per-minute billing.',
     h1Accent: 'AnsweringLegal',
     intro:
       'AnsweringLegal is a human-staffed legal answering service that charges per minute. Keres is an AI-powered legal intake receptionist that answers every call 24/7, screens conflict-of-interest questions, captures case details, and books consultations — all at a flat monthly rate with no per-minute billing.',

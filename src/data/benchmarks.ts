@@ -76,9 +76,9 @@ export const benchmarks: Benchmark[] = [
     lead: 'How fast roofing companies must respond after a storm, why the first inspector usually wins the insurance claim, and what a missed storm-season lead really costs.',
     datePublished: '2026-02-12',
     answer:
-      '<strong>In roofing, the first company to respond and inspect typically wins the insurance claim</strong> — and roughly 78% of customers buy from whoever responds first. Because hail and wind events generate huge simultaneous call surges, a roofer whose phone goes to voicemail during a storm hands five-figure jobs directly to faster competitors.',
+      '<strong>In roofing, the first company to respond and inspect typically wins the insurance claim</strong> — studies of lead response consistently show a strong majority of customers buy from whoever answers first. Because hail and wind events generate huge simultaneous call surges, a roofer whose phone goes to voicemail during a storm hands five-figure jobs directly to faster competitors.',
     stats: [
-      { num: '78%', stat: 'of customers buy from the business that responds first', context: 'Speed to lead decides the job; in a post-storm rush, the first roofer to answer and schedule an inspection usually signs the contract.' },
+      { num: 'First', stat: 'responder usually wins the storm claim', context: 'Lead-response research consistently finds a strong majority of customers buy from the business that answers first; in a post-storm rush, the first roofer to inspect usually signs the contract.' },
       { num: '5 min', stat: 'response window that dramatically lifts qualification odds', context: 'Studies of lead response time find that contacting a lead within five minutes makes it many times more likely to convert than waiting even 30 minutes.' },
       { num: '100s', stat: 'of calls a single storm can trigger in hours', context: 'A hailstorm can damage thousands of roofs in minutes, generating a call surge no normal front desk can absorb.' },
       { num: '$10k+', stat: 'typical value of a roof replacement job', context: 'A single missed storm lead can be a five-figure replacement or insurance job handed to a competitor.' },
@@ -105,7 +105,7 @@ export const benchmarks: Benchmark[] = [
     category: 'Pricing',
     pillar: 'pricing',
     eyebrow: 'Pricing · Study',
-    title: 'AI Receptionist Cost Study (2026): What Answering Coverage Costs | Keres AI',
+    title: 'AI Receptionist Cost Study 2026 — What Coverage Costs | Keres AI',
     description:
       'A 2026 cost study comparing an AI receptionist to a full-time front-desk hire and a per-minute answering service — by coverage, predictability, and cost per booked call.',
     h1: 'AI receptionist',
