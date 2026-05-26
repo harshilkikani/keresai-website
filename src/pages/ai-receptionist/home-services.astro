@@ -1,0 +1,168 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import {
+  organizationSchema,
+  faqSchema,
+  breadcrumbSchema,
+  serviceSchema,
+  webPageSchema,
+} from '../../data/schema';
+import { industries } from '../../data/industries';
+import { cities } from '../../data/cities';
+
+const path = '/ai-receptionist/home-services';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'AI Receptionist', path: '/ai-receptionist' },
+  { name: 'Home Services', path },
+];
+
+const homeServiceIndustries = industries.filter((i) =>
+  ['hvac', 'plumbers', 'roofing', 'towing', 'septic'].includes(i.slug)
+);
+
+const faqs = [
+  {
+    q: 'What is an AI receptionist for home services?',
+    a: 'An AI receptionist for home services is software that answers every inbound call 24/7 in two rings, qualifies the caller — capturing service type, location, and urgency — books the job on your calendar, and dispatches your on-call crew by text for emergencies. It covers the after-hours calls, surge periods, and overflow that a human front desk can\'t absorb, at a flat monthly rate.',
+  },
+  {
+    q: 'Which home-service trades does Keres support?',
+    a: 'Keres is purpose-built for HVAC, plumbing, roofing, towing, and septic service companies — with call flows, integrations, and emergency dispatch logic tuned for each trade.',
+  },
+  {
+    q: 'Does Keres integrate with ServiceTitan, Jobber, and Housecall Pro?',
+    a: 'Yes — Keres integrates natively with ServiceTitan, Jobber, Housecall Pro, FieldEdge, and Service Fusion, pushing jobs and customer records automatically so your dispatch board stays accurate.',
+  },
+  {
+    q: 'How does Keres handle peak-season call surges?',
+    a: 'Keres answers unlimited simultaneous calls, so a heat wave, hailstorm, or major storm never sends a caller to voicemail. Every lead gets answered and booked — even when 10 callers hit your line at once.',
+  },
+  {
+    q: 'Can it handle emergency dispatch calls?',
+    a: 'Yes. Keres recognizes emergencies — no-heat, burst pipe, tarp-and-board, stranded motorist — captures the address and details, books the call, and texts your on-call tech immediately.',
+  },
+];
+
+const webpage = webPageSchema({
+  path,
+  name: 'AI Receptionist for Home Services — HVAC, Plumbing, Roofing & More | Keres AI',
+  description: 'Keres AI is the AI receptionist for home services: HVAC, plumbing, roofing, towing, and septic. Answer every call, dispatch emergencies, and book jobs 24/7.',
+  speakableSelectors: ['.answer-block', '.faq-a', '.lead'],
+});
+---
+<Layout
+  title="AI Receptionist for Home Services — HVAC, Plumbing, Roofing & More | Keres AI"
+  description="Keres AI answers every home-services call 24/7, dispatches emergencies to your crew, and books jobs directly in ServiceTitan, Jobber, and Housecall Pro. Purpose-built for HVAC, plumbing, roofing, towing, and septic companies."
+  path={path}
+>
+  <Schema slot="head" graph={[
+    serviceSchema({
+      name: 'AI Receptionist for Home Services',
+      serviceType: 'AI Receptionist',
+      description: 'AI receptionist purpose-built for home-service contractors: HVAC, plumbing, roofing, towing, and septic. Answers every call 24/7, dispatches emergencies, and books jobs in your field-service software.',
+      path,
+      audience: 'Home services contractors — HVAC, plumbing, roofing, towing, septic',
+    }),
+    webpage,
+    faqSchema(faqs),
+    breadcrumbSchema(crumbs),
+    organizationSchema,
+  ]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">AI Receptionist · Home Services</span>
+    <h1>The AI receptionist built for <span class="accent">home-services contractors</span></h1>
+    <p class="lead">HVAC, plumbing, roofing, towing, and septic companies run on the phone. Keres answers every call in two rings, dispatches emergencies to your crew, and books jobs straight into ServiceTitan, Jobber, and Housecall Pro — 24/7, including storm surges and 2 AM breakdowns.</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/tools/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
+    </div>
+  </header>
+
+  <!-- DIRECT ANSWER BLOCK -->
+  <section class="page-section container">
+    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
+      <p itemprop="text">A <strong>home-services AI receptionist</strong> answers every inbound call 24/7, qualifies the service request, books the job on your calendar or field-service platform, and dispatches your on-call crew by text for emergencies — all without a human dispatcher on the phones. Keres is purpose-built for the call volumes, emergency patterns, and software integrations that HVAC, plumbing, roofing, towing, and septic companies run on.</p>
+    </div>
+  </section>
+
+  <!-- WHY HOME SERVICES NEEDS 24/7 -->
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Why home-services businesses lose so many calls — and jobs</h2>
+      <p>Home services is a phone-first business. The next job arrives as a call, and the first contractor to answer wins it. The problem: the highest-urgency calls — no-cool in a heat wave, burst pipe at midnight, storm damage the morning after a hailstorm — arrive exactly when your office is closed or your techs are in the field.</p>
+      <ul>
+        <li>After-hours and weekend calls go to voicemail — and most callers never leave one</li>
+        <li>Peak-season surges overwhelm the front desk, sending calls to voicemail while the line is busy</li>
+        <li>Emergency calls need immediate dispatch, but no dispatcher is available at 3 AM</li>
+        <li>Techs in the field can't answer and drive simultaneously</li>
+      </ul>
+      <p>Every missed call is a booked job handed to the next contractor on the list. Keres closes every one of those gaps — answering unlimited calls simultaneously, 24/7, and dispatching your crew in seconds for anything urgent.</p>
+    </div>
+  </section>
+
+  <!-- INDUSTRY CARDS -->
+  <section class="page-section container">
+    <div class="section-label">By trade</div>
+    <h2 class="section-title" style="margin-bottom:8px">Purpose-built for every trade</h2>
+    <p class="prose" style="margin-bottom:var(--space-4)">Each trade has its own call flows, emergency types, and field-service software. Keres is tuned for each one — not a generic answering service.</p>
+    <div class="feature-grid">
+      {homeServiceIndustries.map((i) => (
+        <a class="feature-card" href={`/ai-receptionist-for-${i.slug}`} style="text-decoration:none;display:block">
+          <h3>AI receptionist for {i.short}</h3>
+          <p>{i.intro.slice(0, 130)}…</p>
+          <span class="inline-cta-link" style="display:inline-block;margin-top:8px">See {i.short} features →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS -->
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Built for your field-service stack</h2>
+      <p>Keres syncs to the platforms home-service businesses run on — not just a calendar, but the full field-service system where you manage jobs, customers, and dispatch.</p>
+      <ul>
+        <li><a href="/integrations/servicetitan">ServiceTitan</a> — jobs, customers, and call records sync in real time</li>
+        <li><a href="/integrations/jobber">Jobber</a> — two-way sync for clients, jobs, and invoices</li>
+        <li><a href="/integrations/housecall-pro">Housecall Pro</a> — customers, jobs, and payments</li>
+        <li><a href="/integrations/twilio">Twilio</a> — call handling and SMS dispatch alerts</li>
+        <li>FieldEdge and Service Fusion — plus generic webhooks for any other system</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SOFT CTA -->
+  <div class="container" style="margin-bottom:var(--space-6)">
+    <div class="inline-cta-row">
+      <a href="/glossary/emergency-dispatch" class="inline-cta-link">→ What is emergency dispatch?</a>
+      <a href="/glossary/dispatch-automation" class="inline-cta-link">→ Dispatch automation explained</a>
+      <a href="/use-cases/after-hours-answering" class="inline-cta-link">→ After-hours answering</a>
+    </div>
+  </div>
+
+  <!-- BY CITY -->
+  <section class="page-section container">
+    <div class="section-label">By market</div>
+    <h2 class="section-title" style="margin-bottom:8px">Serving home-services businesses across the US</h2>
+    <p class="prose" style="margin-bottom:14px">
+      {cities.map((c, i) => (
+        <>{i > 0 ? ' · ' : ''}<a href={`/ai-receptionist/${c.slug}`}>{c.city}, {c.state}</a></>
+      ))}
+    </p>
+  </section>
+
+  <FaqSection faqs={faqs} title="AI receptionist for home services — FAQ" />
+
+  <CtaBand
+    heading="Stop losing home-services jobs to voicemail"
+    sub="Book a free 30-minute demo and see Keres answer a call, dispatch an emergency, and book a job live."
+  />
+</Layout>

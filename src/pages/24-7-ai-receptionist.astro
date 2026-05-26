@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema } from '../data/schema';
+
+const path = '/24-7-ai-receptionist';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'AI Receptionist', path: '/ai-receptionist' }, { name: '24/7 Receptionist', path }];
+const faqs = [
+  { q: 'What is a 24/7 AI receptionist?', a: 'A 24/7 AI receptionist answers your business phone every hour of every day — nights, weekends, and holidays included — qualifying callers and booking appointments automatically so you never miss a lead, even when your team is off the clock.' },
+  { q: 'Why does after-hours coverage matter?', a: 'A large share of inbound calls — and most emergencies — come in after hours, and the majority of callers who reach voicemail never call back. 24/7 coverage captures the leads your competitors lose overnight.' },
+  { q: 'Does it really work on weekends and holidays?', a: 'Yes. Keres never closes. It answers in two rings at 2 PM on a Tuesday or 2 AM on a holiday, with the same quality.' },
+  { q: 'Can it alert me to emergencies overnight?', a: 'Yes. Keres recognizes urgent calls, captures the details, books the visit, and texts your on-call person immediately.' },
+];
+---
+<Layout
+  title="24/7 AI Receptionist — Answer Calls Day and Night | Keres AI"
+  description="Keres AI is a 24/7 AI receptionist that answers every call day and night — nights, weekends, and holidays — qualifying leads and booking appointments so you never miss revenue."
+  path={path}
+>
+  <Schema slot="head" graph={[
+    serviceSchema({ name: '24/7 AI Receptionist', serviceType: 'AI Receptionist', description: '24/7 AI receptionist answering calls nights, weekends, and holidays, qualifying leads and booking appointments.', path }),
+    faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema,
+  ]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">24/7 Coverage</span>
+    <h1>A receptionist that <span class="accent">never closes</span></h1>
+    <p class="lead">Nights, weekends, holidays, overflow — Keres answers every call in two rings, around the clock, and books the appointment while the lead is hot. The hours you’re closed are the hours you lose the most leads.</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/missed-call-calculator" class="btn btn-outline">See what after-hours calls cost</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block">
+      <p>A <strong>24/7 AI receptionist</strong> answers your business phone every hour of every day — including nights, weekends, and holidays — qualifying callers and booking appointments automatically, so leads are captured even when your team is off the clock.</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Capture the leads your competitors miss overnight</h2>
+      <p>Most callers who hit voicemail never call back — they call the next business that answers. After-hours and weekend calls are the ones most at risk, and often the most urgent. Keres answers all of them, instantly.</p>
+      <p>Pair 24/7 coverage with our <a href="/ai-answering-service">AI answering service</a>, or get the full picture on the <a href="/ai-receptionist">AI receptionist</a> page.</p>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} title="24/7 AI receptionist FAQ" />
+  <CtaBand heading="Never miss an after-hours lead again" sub="Book a demo and see Keres answer and book a call at any hour." />
+</Layout>

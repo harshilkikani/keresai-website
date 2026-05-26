@@ -1,0 +1,16 @@
+---
+// Emits one connected JSON-LD @graph per page. Nodes cross-reference each other
+// by @id (e.g. #organization, #website), so a single graph lets search engines
+// and AI crawlers resolve the entity relationships instead of reading each block
+// in isolation.
+// Usage:
+//   <Schema graph={[orgSchema, faqSchema(...)]} />
+export interface Props {
+  graph: Record<string, unknown>[];
+}
+const { graph } = Astro.props;
+// Hoist @context to the graph root; nodes keep their own @id/@type.
+const nodes = graph.map(({ ['@context']: _ctx, ...rest }) => rest);
+const doc = { '@context': 'https://schema.org', '@graph': nodes };
+---
+<script type="application/ld+json" set:html={JSON.stringify(doc)} />

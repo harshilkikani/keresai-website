@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import {
+  organizationSchema,
+  faqSchema,
+  breadcrumbSchema,
+  webPageSchema,
+  articleSchema,
+  statisticListSchema,
+} from '../data/schema';
+
+const path = '/missed-call-statistics';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Missed Call Statistics', path },
+];
+
+// Honest, hedged industry ranges/estimates — matches the voice used elsewhere on
+// the site. Each is citable as a data point by AI search engines.
+const stats = [
+  { num: '25–40%', stat: '25–40% of inbound calls to service businesses go unanswered', context: 'Industry estimates put the share of inbound calls that service businesses miss between a quarter and two-fifths — higher after hours and during seasonal surges.' },
+  { num: '~85%', stat: 'About 85% of people whose call is not answered will not call back', context: 'When a caller reaches voicemail or a busy signal, the large majority do not leave a message or try again — they call the next business on the list.' },
+  { num: '30–45%', stat: '30–45% of service calls arrive outside business hours', context: 'A large share of inbound demand — emergencies especially — comes at night, on weekends, and on holidays, when most front desks are closed.' },
+  { num: '5 min', stat: 'Responding within 5 minutes dramatically raises the odds of qualifying a lead', context: 'Studies of lead response time have found that contacting a lead within five minutes makes it many times more likely to be qualified than waiting even 30 minutes.' },
+  { num: '78%', stat: 'Roughly 78% of customers buy from the business that responds first', context: 'Speed to lead is decisive: the first business to respond typically wins the job, which is why missed and delayed calls leak revenue to faster competitors.' },
+  { num: '$1,200+', stat: 'A single missed high-ticket job can exceed $1,200 in lost revenue', context: 'For trades like HVAC, roofing, and restoration, one missed emergency call can represent a four- or five-figure job handed to a competitor.' },
+];
+
+const faqs = [
+  { q: 'What percentage of calls do small businesses miss?', a: 'Industry estimates put missed inbound calls for service businesses at 25–40%, with the rate climbing after hours and during seasonal surges. Most callers who reach voicemail never call back — they call a competitor instead.' },
+  { q: 'How much revenue do missed calls cost a business?', a: 'It depends on call volume, close rate, and average ticket. For a business taking 250 calls a month at a 60% answer rate with a $680 average job, missed calls cost roughly $17,000 a month. Use the <a href="/tools/missed-call-calculator">missed-call calculator</a> to estimate your own number.' },
+  { q: 'Why do customers not leave voicemails?', a: 'Calling a service business is usually an urgent, in-the-moment need. When the call is not answered live, most callers simply hang up and dial the next business rather than wait for a callback — so voicemail rarely recovers the lead.' },
+  { q: 'How does answering speed affect conversion?', a: 'Speed to lead is one of the strongest predictors of conversion. Research on lead response time has repeatedly found that responding within five minutes makes a lead far more likely to qualify and book than a delayed response — and the first business to respond usually wins the job.' },
+  { q: 'How can a business stop missing calls?', a: 'An <a href="/ai-receptionist">AI receptionist</a> answers every call in two rings, 24/7, qualifies the caller, and books the appointment during the call — closing the missed-call gap to near zero, including the after-hours and overflow calls a front desk cannot absorb.' },
+];
+
+const article = articleSchema({
+  path,
+  headline: 'Missed Call Statistics for Service Businesses (2026)',
+  description: 'How many calls service businesses miss, what those missed calls cost, and why speed to lead decides the job — with citable industry statistics.',
+  datePublished: '2026-02-01',
+  dateModified: '2026-05-26',
+  readingTime: 'PT6M',
+});
+
+const statSchema = statisticListSchema({
+  name: 'Missed Call Statistics for Service Businesses (2026)',
+  stats: stats.map((s) => ({ stat: s.stat, context: s.context })),
+});
+
+const webpage = webPageSchema({
+  path,
+  name: 'Missed Call Statistics for Service Businesses (2026) | Keres AI',
+  description: 'How many calls service businesses miss, what those missed calls cost, and why speed to lead decides the job — with citable industry statistics.',
+  speakableSelectors: ['.answer-block', '.stat-card', '.faq-a'],
+});
+---
+<Layout
+  title="Missed Call Statistics for Service Businesses (2026) | Keres AI"
+  description="How many calls do service businesses miss, what does it cost, and why does answering speed decide the job? Citable missed-call statistics for 2026."
+  path={path}
+  ogType="article"
+>
+  <Schema slot="head" graph={[article, statSchema, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">Data · 2026</span>
+    <h1>Missed call statistics for <span class="accent">service businesses</span></h1>
+    <p class="lead">How many calls service businesses miss, what those missed calls cost, and why the first business to answer wins the job — the numbers every owner should know.</p>
+    <div class="hero-ctas">
+      <a href="/tools/missed-call-calculator" class="btn btn-primary">Calculate your losses</a>
+      <a href="/demo" class="btn btn-outline">Book a demo</a>
+    </div>
+  </header>
+
+  <!-- DIRECT ANSWER BLOCK -->
+  <section class="page-section container">
+    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
+      <p itemprop="text"><strong>Service businesses miss an estimated 25–40% of inbound calls</strong>, and about 85% of callers who reach voicemail never call back — they call a competitor. Because 30–45% of service calls arrive after hours and the first business to respond usually wins the job, every unanswered call is measurable lost revenue.</p>
+    </div>
+  </section>
+
+  <!-- STAT GRID -->
+  <section class="page-section container">
+    <div class="section-label">The numbers</div>
+    <h2 class="section-title" style="margin-bottom:8px">Missed-call statistics at a glance</h2>
+    <div class="stat-grid">
+      {stats.map((s) => (
+        <div class="stat-card">
+          <span class="stat-num">{s.num}</span>
+          <p class="stat-label"><strong>{s.stat}.</strong> {s.context}</p>
+        </div>
+      ))}
+    </div>
+    <p class="prose" style="font-size:13.5px;color:var(--text-dim);max-width:70ch">Figures are industry estimates and ranges compiled from commonly cited service-business and lead-response research; treat them as directional benchmarks, not guarantees. Your own numbers depend on your call volume, close rate, and average ticket.</p>
+  </section>
+
+  <!-- ANALYSIS -->
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Why missed calls cost more than the call itself</h2>
+      <p>A missed call is not a deferred call — it is usually a lost customer. When someone calls a service business, the need is immediate: a broken AC, a burst pipe, a roof leak, a consultation they decided to book right now. If no one answers live, most callers do not leave a voicemail and wait. They hang up and dial the next business, and the marketing dollars that generated that lead are gone.</p>
+      <p>The damage concentrates in two windows. The first is <a href="/glossary/after-hours-answering">after hours</a> — nights, weekends, and holidays — when 30–45% of demand arrives but most front desks are dark. The second is <a href="/use-cases/overflow-call-handling">overflow</a>, when your team is already on the phone and a second caller hits a busy signal. Both are exactly when high-intent and emergency calls come in.</p>
+
+      <h2>Speed to lead decides who wins</h2>
+      <p>Even answered calls leak revenue when the response is slow. Research on <a href="/glossary/lead-response-time">lead response time</a> has consistently shown that contacting a lead within five minutes makes it dramatically more likely to qualify than waiting even half an hour — and that the first business to respond wins the majority of jobs. For phone-driven businesses, "first to respond" simply means "first to pick up."</p>
+
+      <h2>What the math looks like for one business</h2>
+      <p>Put the ranges together for a typical home-services operation: 250 inbound leads a month, a 60% answer rate, a 25% close rate on answered leads, and a $680 average ticket. That missed-call gap alone is roughly $17,000 in lost revenue every month — over $200,000 a year. Plug in your own numbers with the <a href="/tools/missed-call-calculator">missed-call revenue calculator</a>.</p>
+
+      <h2>Closing the gap</h2>
+      <p>The fix is structural, not motivational: you cannot hire your way to two-ring pickup at 2 a.m. An <a href="/ai-receptionist">AI receptionist</a> answers every call in two rings, 24/7, qualifies the caller, and books the appointment during the call — driving the missed-call rate toward zero across after-hours, overflow, and surge periods. See how it works by <a href="/ai-receptionist-for-hvac">industry</a> or compare it to a traditional <a href="/ai-answering-service">answering service</a>.</p>
+      <p>For deeper, industry-specific data, see our <a href="/benchmarks">benchmarks hub</a> — including <a href="/benchmarks/hvac-answering">HVAC answering benchmarks</a>, <a href="/benchmarks/roofing-lead-response">roofing lead-response benchmarks</a>, the <a href="/benchmarks/ai-receptionist-cost-study">AI receptionist cost study</a>, <a href="/benchmarks/dental-no-show">dental no-show benchmarks</a>, and <a href="/benchmarks/legal-intake-conversion">legal intake conversion benchmarks</a>.</p>
+    </div>
+  </section>
+
+  <!-- MEDIUM CTA -->
+  <div class="container" style="margin-bottom:var(--space-6)">
+    <div class="soft-cta-card">
+      <div class="soft-cta-body">
+        <span class="soft-cta-label">Run your numbers</span>
+        <p class="soft-cta-heading">What are missed calls costing your business?</p>
+        <p class="soft-cta-sub">Enter your call volume, answer rate, and average job value for a transparent monthly and annual estimate.</p>
+      </div>
+      <a href="/tools/missed-call-calculator" class="btn btn-primary">Open the calculator →</a>
+    </div>
+  </div>
+
+  <FaqSection faqs={faqs} title="Missed-call statistics FAQ" />
+
+  <CtaBand
+    heading="Stop being the business that missed the call"
+    sub="Book a free 30-minute demo and watch Keres answer, qualify, and book a call in under sixty seconds."
+  />
+</Layout>

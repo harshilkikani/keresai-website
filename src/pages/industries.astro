@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, breadcrumbSchema } from '../data/schema';
+import { industries } from '../data/industries';
+
+const path = '/industries';
+const ORIGIN = 'https://www.keresai.com';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Industries', path }];
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Industries Keres AI serves',
+  itemListElement: industries.map((ind, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: ind.name,
+    url: `${ORIGIN}/ai-receptionist-for-${ind.slug}`,
+  })),
+};
+---
+<Layout
+  title="Industries — AI Receptionist by Industry | Keres AI"
+  description="Keres AI is built for the businesses that live on the phone: HVAC, plumbing, dental, med spas, real estate, and professional intake. See the AI receptionist for your industry."
+  path={path}
+>
+  <Schema slot="head" graph={[breadcrumbSchema(crumbs), itemList, organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Industries</span>
+    <h1>Built for the <span class="accent">businesses that live on the phone</span></h1>
+    <p class="lead">From one-agent brokerages to multi-location contractors, Keres answers every call and books every lead. Find the AI receptionist tuned for your industry.</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="feature-grid">
+      {industries.map((ind) => (
+        <a class="feature-card" href={`/ai-receptionist-for-${ind.slug}`} style="text-decoration:none; display:block;">
+          <h3>{ind.name}</h3>
+          <p>{ind.intro.slice(0, 150)}…</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand heading="Don’t see your industry?" sub="Keres adapts to any phone-driven business. Book a demo and we’ll tailor it to your call flows." />
+</Layout>

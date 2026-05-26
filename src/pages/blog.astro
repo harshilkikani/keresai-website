@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, breadcrumbSchema } from '../data/schema';
+import { guides as guideData } from '../data/guides';
+
+const path = '/blog';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Resources', path }];
+
+const guides = [...guideData]
+  .sort((a, b) => a.order - b.order)
+  .map((g) => ({
+    href: `/guides/${g.slug}.html`,
+    cat: g.category,
+    title: g.listTitle,
+    desc: g.listDesc,
+  }));
+---
+<Layout
+  title="Resources & Guides — AI Receptionist & Outbound Playbooks | Keres AI"
+  description="Guides, playbooks, and case studies on AI receptionists, missed-call recovery, appointment automation, and AI outbound for service businesses."
+  path={path}
+>
+  <Schema slot="head" graph={[
+    breadcrumbSchema(crumbs),
+    organizationSchema,
+    { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Keres AI Resources', url: 'https://www.keresai.com/blog', isPartOf: { '@id': 'https://www.keresai.com/#website' } },
+  ]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Resources</span>
+    <h1>Playbooks for <span class="accent">capturing every lead</span></h1>
+    <p class="lead">Guides and case studies on answering every call, recovering missed-call revenue, automating appointments, and running outbound that books meetings.</p>
+  </header>
+
+  <section class="page-section container">
+    <div class="feature-grid">
+      {guides.map((g) => (
+        <a class="feature-card" href={g.href} style="text-decoration:none; display:block;">
+          <div class="plan" style="font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px">{g.cat}</div>
+          <h3>{g.title}</h3>
+          <p>{g.desc}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand heading="Ready to stop losing leads?" sub="Book a free 30-minute demo and see Keres answer and book a call live." />
+</Layout>
