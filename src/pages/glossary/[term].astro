@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import {
+  organizationSchema,
+  faqSchema,
+  breadcrumbSchema,
+  definedTermSchema,
+  webPageSchema,
+} from '../../data/schema';
+import { glossary } from '../../data/glossary';
+
+export function getStaticPaths() {
+  return glossary.map((t) => ({ params: { term: t.slug }, props: { t } }));
+}
+
+const { t } = Astro.props;
+const path = `/glossary/${t.slug}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Glossary', path: '/glossary' },
+  { name: t.term, path },
+];
+
+const related = t.related
+  .map((slug) => glossary.find((g) => g.slug === slug))
+  .filter((g): g is NonNullable<typeof g> => Boolean(g));
+
+const cleanDefinition = t.definition.replace(/<[^>]+>/g, '');
+
+// Soft CTA: sends informational readers to the most relevant product/use-case page
+// rather than jumping straight to demo — matches where they are in the funnel.
+const softCtaMap: Record<string, { href: string; label: string; context: string }> = {
+  'AI Receptionist': {
+    href: t.cta?.href ?? '/ai-receptionist',
+    label: 'See how it works for your industry →',
+    context: 'See the product behind this concept',
+  },
+  'AI SDR & Outbound': {
+    href: t.cta?.href ?? '/ai-sdr',
+    label: 'See the AI SDR →',
+    context: 'See outbound in action',
+  },
+  'Email Deliverability': {
+    href: t.cta?.href ?? '/email-deliverability',
+    label: 'Fix your deliverability →',
+    context: 'See deliverability tools',
+  },
+};
+const softCta = softCtaMap[t.category];
+
+const webpage = webPageSchema({
+  path,
+  name: t.title,
+  description: t.description,
+  speakableSelectors: ['.answer-block', '.faq-a'],
+});
+---
+<Layout title={t.title} description={t.description} path={path}>
+  <Schema slot="head" graph={[
+    definedTermSchema({ term: t.term, definition: cleanDefinition, path }),
+    faqSchema(t.faqs),
+    webpage,
+    breadcrumbSchema(crumbs),
+    organizationSchema,
+  ]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">{t.category} · Glossary</span>
+    <h1>What is {t.term.replace(/\s*\(.*\)\s*/, '')}?</h1>
+  </header>
+
+  <!-- DIRECT ANSWER BLOCK — marked speakable and as schema.org Answer for AI retrieval -->
+  <section class="page-section container">
+    <div class="answer-block" itemscope itemtype="https://schema.org/Answer" id={`${t.slug}-definition`}>
+      <p set:html={t.definition} itemprop="text" />
+    </div>
+  </section>
+
+  <!-- DEPTH SECTIONS -->
+  {t.sections.map((s) => (
+    <section class="page-section container">
+      <div class="prose">
+        <h2>{s.h2}</h2>
+        <p set:html={s.body} />
+      </div>
+    </section>
+  ))}
+
+  <!-- SOFT CTA — bridges informational intent to product before asking for demo -->
+  {softCta && (
+    <div class="container" style="margin:var(--space-4) 0">
+      <div class="soft-cta-card">
+        <div class="soft-cta-body">
+          <p class="soft-cta-label">{softCta.context}</p>
+          <h3 class="soft-cta-heading">Want to see {t.term.replace(/\s*\(.*\)\s*/, '')} working in practice?</h3>
+          <p class="soft-cta-sub">Keres AI uses this in every call — see how it works for your specific vertical and workflow.</p>
+        </div>
+        <a href={softCta.href} class="btn btn-outline">{softCta.label}</a>
+      </div>
+    </div>
+  )}
+
+  <!-- MEDIUM CTA — calculator for revenue-related terms -->
+  {['missed-call-recovery', 'missed-call-text-back', 'lead-response-time', 'after-hours-answering', 'front-desk-automation'].includes(t.slug) && (
+    <div class="container" style="margin-bottom:var(--space-4)">
+      <div class="soft-cta-card soft-cta-card--secondary">
+        <div class="soft-cta-body">
+          <h3 class="soft-cta-heading">How much is this costing your business?</h3>
+          <p class="soft-cta-sub">Plug in your call volume and average job value to see the monthly revenue at risk.</p>
+        </div>
+        <a href="/tools/missed-call-calculator" class="btn btn-outline">Open the calculator →</a>
+      </div>
+    </div>
+  )}
+
+  <!-- RELATED TERMS -->
+  {related.length > 0 && (
+    <section class="page-section container">
+      <div class="section-label">Related terms</div>
+      <div class="feature-grid">
+        {related.map((r) => (
+          <a class="feature-card" href={`/glossary/${r.slug}`} style="text-decoration:none; display:block;">
+            <h3>{r.term}</h3>
+            <p>{r.definition.replace(/<[^>]+>/g, '').slice(0, 120)}…</p>
+          </a>
+        ))}
+      </div>
+      <p class="prose" style="margin-top:18px"><a href="/glossary">← Back to the full glossary</a></p>
+    </section>
+  )}
+
+  <FaqSection faqs={t.faqs} title={`${t.term.replace(/\s*\(.*\)\s*/, '')} — FAQ`} />
+
+  <!-- HARD CTA — only after full content consumed -->
+  <CtaBand
+    heading={t.cta ? `See ${t.term.replace(/\s*\(.*\)\s*/, '')} working live` : 'Stop losing leads to voicemail'}
+    sub="Book a free 30-minute demo and watch Keres answer a call, qualify the lead, and book an appointment in under sixty seconds."
+    cta={t.cta ? t.cta.label : 'Book a Demo'}
+    href={t.cta ? t.cta.href : '/demo'}
+  />
+</Layout>

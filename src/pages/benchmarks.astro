@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, breadcrumbSchema, webPageSchema, itemListSchema } from '../data/schema';
+import { benchmarks } from '../data/benchmarks';
+
+const path = '/benchmarks';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Benchmarks', path }];
+
+const webpage = webPageSchema({
+  path,
+  name: 'Service Business Benchmarks & Data Studies | Keres AI',
+  description: 'Citable benchmarks on missed calls, lead response, answering costs, and conversion for HVAC, roofing, dental, and legal service businesses.',
+  speakableSelectors: ['.answer-block', '.lead'],
+});
+
+const list = itemListSchema({
+  name: 'Keres AI — Benchmarks & Data Studies',
+  items: benchmarks.map((b) => ({ name: `${b.h1} ${b.h1Accent}`, description: b.description })),
+});
+---
+<Layout
+  title="Service Business Benchmarks & Data Studies | Keres AI"
+  description="Citable benchmarks on missed calls, lead response, answering costs, and conversion for HVAC, roofing, dental, and legal service businesses. Updated for 2026."
+  path={path}
+>
+  <Schema slot="head" graph={[list, webpage, breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">Data &amp; Benchmarks</span>
+    <h1>Benchmarks for businesses that <span class="accent">live on the phone</span></h1>
+    <p class="lead">Citable data on missed calls, lead response, answering costs, and conversion — compiled for the service industries where the next call is the next job.</p>
+    <div class="hero-ctas">
+      <a href="/tools/missed-call-calculator" class="btn btn-primary">Calculate your losses</a>
+      <a href="/demo" class="btn btn-outline">Book a demo</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block">
+      <p>These benchmarks compile commonly cited industry estimates on call answering, lead response, and conversion for service businesses. Use them as directional context — and run your own numbers with the <a href="/tools/missed-call-calculator">missed-call calculator</a>.</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="feature-grid">
+      <a class="feature-card" href="/missed-call-statistics" style="text-decoration:none;display:block">
+        <div class="service-cat" style="margin-bottom:4px">All industries</div>
+        <h3>Missed-call statistics (2026)</h3>
+        <p>How many calls service businesses miss, what it costs, and why speed to lead decides the job.</p>
+        <span class="inline-cta-link" style="margin-top:8px;display:inline-block">Read the data →</span>
+      </a>
+      {benchmarks.map((b) => (
+        <a class="feature-card" href={`/benchmarks/${b.slug}`} style="text-decoration:none;display:block">
+          <div class="service-cat" style="margin-bottom:4px">{b.category}</div>
+          <h3>{b.h1} {b.h1Accent}</h3>
+          <p>{b.lead.slice(0, 120)}…</p>
+          <span class="inline-cta-link" style="margin-top:8px;display:inline-block">Read the data →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand
+    heading="See the numbers work for your business"
+    sub="Book a free 30-minute demo and watch Keres answer, qualify, and book a call live."
+  />
+</Layout>

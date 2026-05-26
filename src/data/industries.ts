@@ -196,4 +196,91 @@ export const industries: Industry[] = [
       { q: 'How does it protect confidential information?', a: 'Keres can be configured for SOC 2-aligned workflows, signs DPAs, and never uses your data to train third-party models. Discuss compliance specifics on your demo.' },
     ],
   },
+  {
+    slug: 'roofing',
+    name: 'Roofing Companies',
+    nameLower: 'roofing companies',
+    short: 'Roofing',
+    shortLower: 'roofing',
+    title: 'AI Receptionist for Roofers — Never Lose a Storm Lead | Keres AI',
+    description:
+      'Keres AI answers every roofing call 24/7, books estimates and inspections, and captures storm-season surges the moment they call — before a competitor answers first.',
+    intro:
+      'Storm seasons create call surges that overwhelm even the best front desks — and every missed call during a hailstorm or hurricane is a five-figure job handed to a competitor. Keres answers in two rings, books the estimate, and flags emergency tarp jobs to your crew immediately.',
+    pains: [
+      'Hailstorm and hurricane call surges your office cannot absorb',
+      'After-hours storm damage calls going unanswered while competitors pick up',
+      'Insurance inspection leads lost during the first critical hours after a storm',
+      'Estimators in the field missing inbound calls during the busiest days',
+    ],
+    books: [
+      'Storm damage estimates and inspections',
+      'Insurance inspection appointments',
+      'Repair and replacement scheduling',
+      'Emergency tarp and board-up dispatch',
+    ],
+    faqs: [
+      { q: 'Can the AI receptionist handle a storm-season call surge?', a: 'Yes — Keres answers unlimited simultaneous calls, so a hailstorm or hurricane never sends a caller to voicemail. Every storm lead gets booked before a competitor answers.' },
+      { q: 'Does it capture insurance claim leads?', a: 'Yes. Keres qualifies the damage type, captures the address and contact details, and books the inspection appointment — everything your estimator needs in their calendar.' },
+      { q: 'Does it work with field-service software?', a: 'Yes — Keres integrates with ServiceTitan, Jobber, and Housecall Pro, pushing new jobs and customer records automatically.' },
+    ],
+  },
+  {
+    slug: 'towing',
+    name: 'Towing Companies',
+    nameLower: 'towing companies',
+    short: 'Towing',
+    shortLower: 'towing',
+    title: 'AI Receptionist for Towing — 24/7 Dispatch Answering | Keres AI',
+    description:
+      'Keres AI answers every towing call 24/7, captures roadside assistance requests, and dispatches your drivers — so no stranded motorist ever calls a competitor.',
+    intro:
+      'In towing, every call is urgent — a stranded driver dials the next company the moment a call goes unanswered. Keres answers in two rings around the clock, captures the location and situation, and gets the job to your dispatcher immediately, day or night.',
+    pains: [
+      'Stranded motorists who immediately call a competitor when the line is busy',
+      'After-hours dispatch gaps when the office is closed',
+      'High call volume during bad weather or accidents overwhelming the front desk',
+      'Drivers missing inbound calls while running another job',
+    ],
+    books: [
+      'Roadside assistance and tow requests',
+      'Dispatch alerts to the on-call driver',
+      'Lockout, jump-start, and fuel-delivery bookings',
+      'Accident recovery and impound intake',
+    ],
+    faqs: [
+      { q: 'Can the AI handle emergency tow requests?', a: 'Yes — Keres captures the location, vehicle type, and situation, flags the job as an emergency to your dispatcher by text, and keeps the motorist informed until help is confirmed.' },
+      { q: 'Does it cover 24/7 dispatch?', a: 'Keres answers around the clock — including nights, weekends, and holidays — so your towing business never misses a call at 2 AM when stranded motorists need you most.' },
+      { q: 'Can it handle high call volume during bad weather?', a: 'Yes — Keres answers unlimited simultaneous calls, so ice storms, accidents, and high-volume nights never overwhelm your dispatch line.' },
+    ],
+  },
+  {
+    slug: 'septic',
+    name: 'Septic Service Companies',
+    nameLower: 'septic service companies',
+    short: 'Septic',
+    shortLower: 'septic',
+    title: 'AI Receptionist for Septic Services — Book Every Pumping Job | Keres AI',
+    description:
+      'Keres AI answers every septic call 24/7, books pumping and inspection appointments, and dispatches emergency backups instantly. Never lose a job to voicemail.',
+    intro:
+      'Septic backups are emergencies — homeowners call whoever picks up first. Keres answers every call in two rings, books routine pumping appointments, and dispatches your crew immediately when an emergency comes in, so every job stays yours.',
+    pains: [
+      'Emergency backup calls missed while crews are in the field',
+      'Routine pumping reminders and bookings falling through',
+      'Callers hiring a competitor because no one answered',
+      'After-hours emergencies with no dispatch coverage',
+    ],
+    books: [
+      'Routine pumping and inspection appointments',
+      'Emergency backup and overflow dispatch',
+      'System inspection and repair scheduling',
+      'Maintenance reminder follow-ups',
+    ],
+    faqs: [
+      { q: 'Can it handle septic emergency calls?', a: 'Yes. Keres identifies backup and overflow emergencies, captures the address and details, books the dispatch, and texts your on-call crew immediately.' },
+      { q: 'Does it send maintenance reminders?', a: 'Keres captures customer information and service history so you can trigger pumping reminders — typically every 2–3 years — to keep your schedule full year-round.' },
+      { q: 'Does it integrate with field-service software?', a: 'Yes — Keres integrates with Jobber, Housecall Pro, ServiceTitan, and generic webhooks so jobs sync to your existing system automatically.' },
+    ],
+  },
 ];

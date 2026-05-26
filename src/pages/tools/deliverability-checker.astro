@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema } from '../../data/schema';
+
+const path = '/tools/deliverability-checker';
+const ORIGIN = 'https://www.keresai.com';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Tools', path: '/tools' },
+  { name: 'Deliverability Checker', path },
+];
+const faqs = [
+  { q: 'What does this email deliverability checker do?', a: 'It looks up your domain’s SPF, DKIM, and DMARC DNS records (plus MX) in real time and tells you what’s configured, what’s missing, and what to fix so your email reaches the inbox.' },
+  { q: 'Why does DKIM sometimes show as not found?', a: 'DKIM records live under custom selectors that aren’t publicly discoverable. This tool checks the most common selectors, so a valid DKIM setup under a non-standard selector may not be detected. The result is best-effort.' },
+  { q: 'Do I need SPF, DKIM, and DMARC?', a: 'Yes. All three authenticate your mail, and Gmail and Yahoo now require them for bulk senders. Missing or misconfigured records are a leading cause of email landing in spam.' },
+  { q: 'How do I fix what this finds?', a: 'You add or correct TXT records in your domain’s DNS. Keres sets up and monitors SPF, DKIM, and DMARC for you, warms your inboxes, and ramps volume safely — book a demo to have it handled.' },
+];
+
+const webApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Email Deliverability Checker',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: ORIGIN + path,
+  description:
+    'Free tool that checks a domain’s SPF, DKIM, DMARC, and MX records and reports email-deliverability issues.',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  provider: { '@id': `${ORIGIN}/#organization` },
+};
+---
+<Layout
+  title="Free Email Deliverability Checker — SPF, DKIM & DMARC | Keres AI"
+  description="Free email deliverability checker. Enter your domain to instantly check SPF, DKIM, DMARC, and MX records and see what’s keeping your email out of the inbox."
+  path={path}
+>
+  <Schema slot="head" graph={[webApp, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Free tool</span>
+    <h1>Is your email <span class="accent">landing in spam?</span></h1>
+    <p class="lead">Check your domain’s SPF, DKIM, and DMARC in seconds. Enter a domain and we’ll look up the records live and tell you exactly what to fix.</p>
+  </header>
+
+  <section class="page-section container container-narrow">
+    <div class="answer-block">
+      <p>This free checker queries your domain’s live DNS for <strong>SPF</strong>, <strong>DKIM</strong>, <strong>DMARC</strong>, and <strong>MX</strong> records — the authentication that decides whether your email reaches the inbox or the spam folder. Missing or misconfigured records are the most common reason cold and transactional email gets filtered.</p>
+    </div>
+
+    <div class="dc-tool">
+      <div class="dc-input-row">
+        <input type="text" id="dc-domain" placeholder="yourcompany.com" autocomplete="off" spellcheck="false" aria-label="Domain to check" />
+        <button type="button" id="dc-run" class="btn btn-primary">Check domain</button>
+      </div>
+      <div id="dc-results" class="dc-results" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} title="Deliverability checker FAQ" />
+  <CtaBand heading="Want this fixed and monitored for you?" sub="Keres sets up SPF, DKIM, and DMARC, warms your inboxes, and ramps volume safely. Book a demo." />
+
+  <script slot="scripts" src="/assets/deliverability.js?v=1" is:inline></script>
+</Layout>

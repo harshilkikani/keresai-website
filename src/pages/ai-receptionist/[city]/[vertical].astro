@@ -1,0 +1,230 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Schema from '../../../components/Schema.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import FaqSection from '../../../components/FaqSection.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import {
+  organizationSchema,
+  faqSchema,
+  breadcrumbSchema,
+  webPageSchema,
+  howToSchema,
+} from '../../../data/schema';
+import { geoVerticals } from '../../../data/geoVerticals';
+import { cities, stateSlug } from '../../../data/cities';
+import { industries } from '../../../data/industries';
+
+export function getStaticPaths() {
+  return geoVerticals.map((g) => {
+    const city = cities.find((c) => c.slug === g.citySlug)!;
+    const industry = industries.find((i) => i.slug === g.industrySlug)!;
+    return {
+      params: { city: g.citySlug, vertical: g.verticalSlug },
+      props: { g, city, industry },
+    };
+  });
+}
+
+const { g, city, industry } = Astro.props;
+const ORIGIN = 'https://www.keresai.com';
+const path = `/ai-receptionist/${g.citySlug}/${g.verticalSlug}`;
+const cityPath = `/ai-receptionist/${city.slug}`;
+const statePath = `/ai-receptionist/state/${stateSlug(city.stateFull)}`;
+const verticalPath = `/ai-receptionist-for-${industry.slug}`;
+const vLabel = g.verticalLabel;
+const isFieldService = ['hvac', 'plumbers', 'roofing', 'towing', 'septic'].includes(industry.slug);
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'AI Receptionist', path: '/ai-receptionist' },
+  { name: city.stateFull, path: statePath },
+  { name: `${city.city}, ${city.state}`, path: cityPath },
+  { name: `${vLabel} receptionist`, path },
+];
+
+const faqs = [
+  g.faq,
+  {
+    q: `How fast does Keres answer ${vLabel} calls in ${city.city}?`,
+    a: `Every call is answered within two rings, 24/7 — including nights, weekends, and holidays — so no ${city.city}-area ${industry.shortLower} lead ever reaches voicemail.`,
+  },
+  {
+    q: `Does Keres integrate with my ${vLabel} software?`,
+    a: isFieldService
+      ? 'Yes — Keres books jobs directly in ServiceTitan, Jobber, Housecall Pro, FieldEdge, and Service Fusion, plus Google Calendar and Outlook, so every booking lands in your existing system.'
+      : 'Yes — Keres books directly on Google Calendar, Outlook, and your CRM, and connects to thousands of apps via Zapier and Make.',
+  },
+  {
+    q: 'Do I keep my existing phone number?',
+    a: 'Yes. You point your existing number at Keres — no porting, no new hardware. Most accounts go live within five business days.',
+  },
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${ORIGIN}${path}#service`,
+  name: `AI Receptionist for ${vLabel} in ${city.city}, ${city.state}`,
+  serviceType: `${vLabel} AI Receptionist`,
+  description: `24/7 AI receptionist for ${city.city}, ${city.stateFull} ${industry.nameLower} — answers every call, qualifies the job, and books appointments automatically.`,
+  url: ORIGIN + path,
+  provider: { '@id': `${ORIGIN}/#organization` },
+  areaServed: [
+    { '@type': 'City', name: city.city, containedInPlace: { '@type': 'State', name: city.stateFull } },
+  ],
+  audience: {
+    '@type': 'Audience',
+    audienceType: `${city.city} ${industry.nameLower}`,
+    geographicArea: { '@type': 'City', name: city.city },
+  },
+};
+
+const howto = howToSchema({
+  name: `How Keres handles a ${city.city} ${vLabel} call`,
+  description: `How the Keres AI receptionist answers, qualifies, books, and dispatches a ${vLabel} call for a ${city.city} business.`,
+  steps: [
+    { name: 'Answers in two rings', text: `Every ${city.city} ${industry.shortLower} call is picked up within two rings, 24/7 — no voicemail, no hold music.` },
+    { name: 'Qualifies the job', text: 'Asks your qualifying questions, captures the address and details, and identifies emergencies.' },
+    { name: 'Books the appointment', text: 'Checks live availability and books the visit directly on your calendar or field-service software.' },
+    { name: 'Dispatches and summarizes', text: 'Texts your on-call team for emergencies and pushes a clean summary into your CRM.' },
+  ],
+});
+
+const webpage = webPageSchema({
+  path,
+  name: `AI Receptionist for ${vLabel} in ${city.city}, ${city.state} | Keres AI`,
+  description: `Keres AI is a 24/7 AI receptionist for ${city.city}, ${city.stateFull} ${industry.nameLower}. Answer every call, book jobs, and never miss a lead.`,
+  speakableSelectors: ['.answer-block', '.faq-a', '.lead'],
+});
+
+// Other verticals available in this same city
+const peerVerticals = geoVerticals.filter((x) => x.citySlug === g.citySlug && x.verticalSlug !== g.verticalSlug);
+// Same vertical in other cities
+const sameVerticalOtherCities = geoVerticals.filter((x) => x.verticalSlug === g.verticalSlug && x.citySlug !== g.citySlug);
+---
+<Layout
+  title={`AI Receptionist for ${vLabel} in ${city.city}, ${city.state} | Keres AI`}
+  description={`Keres AI is a 24/7 AI receptionist for ${city.city}, ${city.stateFull} ${industry.nameLower}. Answer every call, book jobs, and never miss a lead — day or night. Book a demo.`}
+  path={path}
+>
+  <Schema slot="head" graph={[serviceSchema, howto, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">AI Receptionist · {city.city} {vLabel}</span>
+    <h1>The 24/7 AI receptionist for <span class="accent">{city.city} {vLabel} businesses</span></h1>
+    <p class="lead">{g.angle}</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/tools/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
+    </div>
+  </header>
+
+  <!-- DIRECT ANSWER BLOCK -->
+  <section class="page-section container">
+    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
+      <p itemprop="text">Keres AI is a <strong>24/7 AI receptionist for {city.city}, {city.state} {industry.nameLower}</strong>. It answers every inbound call in two rings, qualifies the {industry.shortLower} job, books the appointment on your calendar, and texts your team the moment a call is an emergency — so no {city.city}-area lead is lost to voicemail, day or night.</p>
+    </div>
+  </section>
+
+  <!-- LOCAL × VERTICAL PAINS -->
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Why {city.city} {industry.nameLower} miss calls — and what it costs</h2>
+      <ul>
+        {g.localPains.map((p) => <li>{p}</li>)}
+      </ul>
+      <p>{g.bookingFocus}</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS (HowTo) -->
+  <section class="page-section container">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title" style="margin-bottom:8px">Answer → qualify → book → dispatch</h2>
+    <div class="feature-grid">
+      <div class="feature-card"><h3>1. Answers in two rings</h3><p>Every {city.city} {industry.shortLower} call, 24/7 — nights, weekends, and overflow included.</p></div>
+      <div class="feature-card"><h3>2. Qualifies the job</h3><p>Asks your questions, captures the address and details, and flags emergencies instantly.</p></div>
+      <div class="feature-card"><h3>3. Books the appointment</h3><p>Checks live availability and books straight onto your calendar or field-service software.</p></div>
+      <div class="feature-card"><h3>4. Dispatches &amp; summarizes</h3><p>Texts your on-call team for emergencies and syncs a clean summary to your CRM.</p></div>
+    </div>
+  </section>
+
+  <!-- WHAT KERES BOOKS (from industry data) -->
+  <section class="page-section container">
+    <div class="prose">
+      <h2>What Keres books for {city.city} {industry.nameLower}</h2>
+      <ul>
+        {industry.books.map((b) => <li>{b}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- SOFT CTA -->
+  <div class="container" style="margin-bottom:var(--space-6)">
+    <div class="inline-cta-row">
+      <a href={verticalPath} class="inline-cta-link">→ AI receptionist for {industry.shortLower}</a>
+      <a href={cityPath} class="inline-cta-link">→ All {city.city} coverage</a>
+      <a href="/glossary/lead-response-time" class="inline-cta-link">→ Why speed to lead matters</a>
+      {isFieldService && <a href="/glossary/emergency-dispatch" class="inline-cta-link">→ Emergency dispatch</a>}
+    </div>
+  </div>
+
+  <!-- INTEGRATIONS -->
+  {isFieldService && (
+    <section class="page-section container">
+      <div class="section-label">Integrations</div>
+      <h2 class="section-title" style="margin-bottom:8px">Books straight into your {vLabel} software</h2>
+      <p class="prose" style="margin-bottom:var(--space-4)">Every booking syncs to the tools your {city.city} crew already runs on — no double entry.</p>
+      <div class="feature-grid">
+        <a class="feature-card" href="/integrations/servicetitan" style="text-decoration:none;display:block"><h3>ServiceTitan</h3><p>Create jobs and dispatch on your board during the call.</p></a>
+        <a class="feature-card" href="/integrations/jobber" style="text-decoration:none;display:block"><h3>Jobber</h3><p>Book visits and sync customers automatically.</p></a>
+        <a class="feature-card" href="/integrations/housecall-pro" style="text-decoration:none;display:block"><h3>Housecall Pro</h3><p>Schedule jobs and push contacts in real time.</p></a>
+      </div>
+    </section>
+  )}
+
+  <!-- MEDIUM CTA -->
+  <div class="container" style="margin-bottom:var(--space-6)">
+    <div class="soft-cta-card">
+      <div class="soft-cta-body">
+        <span class="soft-cta-label">Run your numbers</span>
+        <h3 class="soft-cta-heading">What are missed {city.city} {industry.shortLower} calls costing you?</h3>
+        <p class="soft-cta-sub">Estimate the monthly revenue lost to unanswered calls based on your call volume and average ticket.</p>
+      </div>
+      <a href="/tools/missed-call-calculator" class="btn btn-outline">Open the calculator →</a>
+    </div>
+  </div>
+
+  <FaqSection faqs={faqs} title={`${city.city} ${vLabel} receptionist — FAQ`} />
+
+  <!-- CROSS-LINKS -->
+  <section class="page-section container">
+    <div class="section-label">Related coverage</div>
+    <h2 class="section-title" style="margin-bottom:8px">More {city.city} and {industry.shortLower} coverage</h2>
+    <p class="prose" style="margin-bottom:10px">
+      Explore <a href={cityPath}>AI receptionist in {city.city}</a> · <a href={statePath}>{city.stateFull} coverage</a> · <a href={verticalPath}>AI receptionist for {industry.shortLower}</a>
+    </p>
+    {peerVerticals.length > 0 && (
+      <p class="prose" style="margin-bottom:10px">
+        Other {city.city} trades:
+        {peerVerticals.map((x, i) => (
+          <>{i > 0 ? ' · ' : ' '}<a href={`/ai-receptionist/${x.citySlug}/${x.verticalSlug}`}>{x.verticalLabel}</a></>
+        ))}
+      </p>
+    )}
+    {sameVerticalOtherCities.length > 0 && (
+      <p class="prose">
+        {vLabel} in other cities:
+        {sameVerticalOtherCities.map((x, i) => {
+          const xc = cities.find((c) => c.slug === x.citySlug)!;
+          return (<>{i > 0 ? ' · ' : ' '}<a href={`/ai-receptionist/${x.citySlug}/${x.verticalSlug}`}>{xc.city}</a></>);
+        })}
+      </p>
+    )}
+  </section>
+
+  <CtaBand heading={`Stop losing ${city.city} ${industry.shortLower} leads to voicemail`} sub="Book a free 30-minute demo and watch Keres answer and book a call live." />
+</Layout>

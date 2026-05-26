@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import {
+  organizationSchema,
+  faqSchema,
+  breadcrumbSchema,
+  webPageSchema,
+  articleSchema,
+  statisticListSchema,
+} from '../../data/schema';
+import { benchmarks } from '../../data/benchmarks';
+
+export function getStaticPaths() {
+  return benchmarks.map((b) => ({ params: { slug: b.slug }, props: { b } }));
+}
+
+const { b } = Astro.props;
+const path = `/benchmarks/${b.slug}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Benchmarks', path: '/benchmarks' },
+  { name: b.category, path },
+];
+
+const article = articleSchema({
+  path,
+  headline: b.h1 + ' ' + b.h1Accent,
+  description: b.description,
+  datePublished: b.datePublished,
+  dateModified: '2026-05-26',
+  readingTime: 'PT6M',
+});
+
+const statSchema = statisticListSchema({
+  name: `${b.h1} ${b.h1Accent}`,
+  stats: b.stats.map((s) => ({ stat: s.stat, context: s.context })),
+});
+
+const webpage = webPageSchema({
+  path,
+  name: b.title,
+  description: b.description,
+  speakableSelectors: ['.answer-block', '.stat-card', '.faq-a'],
+});
+---
+<Layout title={b.title} description={b.description} path={path} ogType="article">
+  <Schema slot="head" graph={[article, statSchema, webpage, faqSchema(b.faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">{b.eyebrow}</span>
+    <h1>{b.h1} <span class="accent">{b.h1Accent}</span></h1>
+    <p class="lead">{b.lead}</p>
+    <div class="hero-ctas">
+      <a href="/tools/missed-call-calculator" class="btn btn-primary">Calculate your losses</a>
+      <a href="/demo" class="btn btn-outline">Book a demo</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
+      <p itemprop="text" set:html={b.answer} />
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-label">The numbers</div>
+    <h2 class="section-title" style="margin-bottom:8px">{b.category} benchmarks at a glance</h2>
+    <div class="stat-grid">
+      {b.stats.map((s) => (
+        <div class="stat-card">
+          <span class="stat-num">{s.num}</span>
+          <p class="stat-label"><strong>{s.stat}.</strong> {s.context}</p>
+        </div>
+      ))}
+    </div>
+    <p class="prose" style="font-size:13.5px;color:var(--text-dim);max-width:70ch">Figures are industry estimates and ranges compiled from commonly cited service-business and lead-response research; treat them as directional benchmarks, not guarantees. Your own numbers depend on your call volume, close rate, and average ticket.</p>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      {b.sections.map((s) => (
+        <>
+          <h2>{s.h2}</h2>
+          <Fragment set:html={s.body} />
+        </>
+      ))}
+    </div>
+  </section>
+
+  <div class="container" style="margin-bottom:var(--space-6)">
+    <div class="soft-cta-card">
+      <div class="soft-cta-body">
+        <span class="soft-cta-label">Run your numbers</span>
+        <p class="soft-cta-heading">See what missed calls are costing you</p>
+        <p class="soft-cta-sub">Enter your call volume, answer rate, and average ticket for a transparent monthly and annual estimate.</p>
+      </div>
+      <a href="/tools/missed-call-calculator" class="btn btn-primary">Open the calculator →</a>
+    </div>
+  </div>
+
+  <FaqSection faqs={b.faqs} title={`${b.category} benchmarks — FAQ`} />
+
+  <section class="page-section container">
+    <div class="section-label">Related</div>
+    <h2 class="section-title" style="margin-bottom:8px">Keep reading</h2>
+    <p class="prose">
+      {b.related.map((r, i) => (<>{i > 0 ? ' · ' : ''}<a href={r.href}>{r.label}</a></>))}
+      {' · '}<a href="/benchmarks">All benchmarks</a>
+    </p>
+  </section>
+
+  <CtaBand
+    heading="Stop losing leads to voicemail"
+    sub="Book a free 30-minute demo and watch Keres answer, qualify, and book a call in under sixty seconds."
+  />
+</Layout>

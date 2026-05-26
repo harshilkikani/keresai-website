@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Testimonials from '../components/Testimonials.astro';
+import { organizationSchema, breadcrumbSchema } from '../data/schema';
+import { caseStudies } from '../data/caseStudies';
+
+const path = '/customers';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Customers', path }];
+const sorted = [...caseStudies].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+---
+<Layout
+  title="Customer Results & Case Studies | Keres AI"
+  description="See how businesses use Keres AI to answer every call, recover missed-call revenue, and book more appointments — real results and case studies."
+  path={path}
+>
+  <Schema slot="head" graph={[breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Customers</span>
+    <h1>Real results from <span class="accent">teams that stopped missing calls</span></h1>
+    <p class="lead">How service businesses use Keres to recover missed-call revenue, book more appointments, and cut staffing costs.</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+    </div>
+  </header>
+
+  {sorted.length > 0 && (
+    <section class="page-section container">
+      <div class="section-label">Case studies</div>
+      <div class="feature-grid">
+        {sorted.map((cs) => (
+          <a class="feature-card" href={`/customers/${cs.slug}`} style="text-decoration:none; display:block;">
+            <div class="plan" style="font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px">{cs.industry}</div>
+            <h3>{cs.headline}</h3>
+            <p>{cs.summary}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <Testimonials />
+
+  <section class="page-section container">
+    <div class="section-label">Featured story</div>
+    <div class="feature-grid">
+      <a class="feature-card" href="/guides/roofing-case-study-15-hours.html" style="text-decoration:none; display:block;">
+        <div class="plan" style="font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px">Case study</div>
+        <h3>Roofing Company Saves 15 Hours/Week</h3>
+        <p>How one roofing company reclaimed 15 hours a week and stopped losing storm-season leads with automation.</p>
+      </a>
+      <a class="feature-card" href="/missed-call-calculator" style="text-decoration:none; display:block;">
+        <div class="plan" style="font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px">Estimate your own</div>
+        <h3>What are missed calls costing you?</h3>
+        <p>Run the numbers for your business and see the revenue you could recover.</p>
+      </a>
+    </div>
+  </section>
+
+  <CtaBand heading="Be the next result" sub="Book a free 30-minute demo and see Keres answer and book a call live." />
+</Layout>

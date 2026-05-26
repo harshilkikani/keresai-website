@@ -4,7 +4,9 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema } from '../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema, videoObjectSchema, webPageSchema } from '../data/schema';
+import { cities, states } from '../data/cities';
+import { industries } from '../data/industries';
 
 const path = '/ai-receptionist';
 const crumbs = [
@@ -19,6 +21,21 @@ const faqs = [
   { q: 'How much does an AI receptionist cost?', a: 'Keres is a flat monthly subscription based on call volume and features — typically far less than a full-time receptionist or per-minute answering service. See the <a href="/pricing">pricing page</a> or book a demo for a quote.' },
   { q: 'How long does setup take?', a: 'Most accounts are live within five business days. We map your call flows, connect your number and calendar, train the AI on your business, and launch. Month-to-month, cancel anytime.' },
 ];
+
+const video = videoObjectSchema({
+  name: 'Keres AI Receptionist — Live Demo',
+  description: 'A walkthrough of the Keres AI receptionist operator portal showing how calls are answered, leads qualified, and appointments booked in real time.',
+  contentUrl: '/assets/video/ai-receptionist.mp4',
+  uploadDate: '2026-01-15',
+  duration: 'PT2M30S',
+});
+
+const webpage = webPageSchema({
+  path,
+  name: 'AI Receptionist — Answer Every Call 24/7 | Keres AI',
+  description: 'An AI receptionist that answers every call in two rings, books appointments, and texts you a summary. 24/7, no missed leads, no extra staff.',
+  speakableSelectors: ['.answer-block', '.faq-a', '.lead'],
+});
 ---
 <Layout
   title="AI Receptionist — Answer Every Call 24/7 | Keres AI"
@@ -26,7 +43,9 @@ const faqs = [
   path={path}
 >
   <Schema slot="head" graph={[
-    serviceSchema({ name: 'AI Receptionist', serviceType: 'AI Receptionist', description: 'AI receptionist that answers every call 24/7, qualifies leads, and books appointments automatically.', path }),
+    serviceSchema({ name: 'AI Receptionist', serviceType: 'AI Receptionist', description: 'AI receptionist that answers every call 24/7, qualifies leads, and books appointments automatically.', path, audience: 'Service businesses with high inbound call volume' }),
+    video,
+    webpage,
     faqSchema(faqs),
     breadcrumbSchema(crumbs),
     organizationSchema,
@@ -53,7 +72,7 @@ const faqs = [
   <section class="page-section container">
     <div class="prose">
       <h2>Why businesses miss calls — and what it costs</h2>
-      <p>Studies put missed inbound calls for service businesses at 25–40% — and most callers who hit voicemail never call back. They call the next business on the list. Every missed call is a missed job, and after-hours and overflow calls are the ones most at risk.</p>
+      <p>Studies put missed inbound calls for service businesses at 25–40% — and most callers who hit voicemail never call back. They call the next business on the list. Every missed call is a missed job, and after-hours and overflow calls are the ones most at risk. See the full <a href="/missed-call-statistics">missed-call statistics</a>.</p>
       <p>Keres closes that gap completely. The moment a call comes in, the AI picks up, talks like a trained front-desk rep, and gets the caller booked before they have a chance to hang up.</p>
     </div>
   </section>
@@ -88,15 +107,29 @@ const faqs = [
   <section class="page-section container">
     <div class="prose">
       <h2>Built for businesses that live on the phone</h2>
-      <p>Keres works for any business where the next call is the next deal:</p>
+      <p>Keres works for any business where the next call is the next deal. See the industry-specific pages for call flows, integrations, and pricing context tuned to your trade:</p>
       <ul>
-        <li><a href="/ai-receptionist-for-hvac">AI receptionist for HVAC</a> and home-services contractors</li>
-        <li><a href="/ai-receptionist-for-plumbers">AI receptionist for plumbers</a></li>
-        <li><a href="/ai-receptionist-for-dentists">AI receptionist for dental practices</a></li>
-        <li><a href="/ai-receptionist-for-real-estate">AI receptionist for real estate</a> agents and brokerages</li>
+        <li><a href="/ai-receptionist/home-services">AI receptionist for home services</a> — HVAC, plumbing, roofing, towing, and septic</li>
+        <li><a href="/ai-receptionist-for-hvac">AI receptionist for HVAC</a> — emergency dispatch, ServiceTitan and Jobber sync</li>
+        <li><a href="/ai-receptionist-for-plumbers">AI receptionist for plumbers</a> — burst pipe and emergency answering</li>
+        <li><a href="/ai-receptionist-for-roofing">AI receptionist for roofing</a> — storm season surge coverage</li>
+        <li><a href="/ai-receptionist-for-towing">AI receptionist for towing</a> — 24/7 dispatch answering</li>
+        <li><a href="/ai-receptionist-for-dentists">AI receptionist for dental practices</a> — patient intake and appointment booking</li>
+        <li><a href="/ai-receptionist-for-med-spas">AI receptionist for med spas</a> — treatment booking and consultation intake</li>
+        <li><a href="/ai-receptionist-for-real-estate">AI receptionist for real estate</a> — showing requests, lead qualification</li>
+        <li><a href="/ai-receptionist-for-professional-intake">AI receptionist for legal intake</a> — conflict screening, consultation booking</li>
       </ul>
-      <p>Looking for specific coverage? See our <a href="/24-7-ai-receptionist">24/7 AI receptionist</a> and <a href="/ai-answering-service">AI answering service</a> pages, or pair it with our <a href="/ai-sdr">AI SDR</a> for outbound.</p>
+      <p>Looking for specific coverage? See our <a href="/24-7-ai-receptionist">24/7 AI receptionist</a> and <a href="/ai-answering-service">AI answering service</a> pages, or pair it with our <a href="/ai-sdr">AI SDR</a> for outbound. Comparing options? See <a href="/compare">all comparisons</a>.</p>
+      <p>New to the terms? Learn <a href="/glossary/ai-receptionist">what an AI receptionist is</a>, <a href="/glossary/after-hours-answering">after-hours answering</a>, <a href="/glossary/emergency-dispatch">emergency dispatch</a>, <a href="/glossary/appointment-booking-automation">appointment booking automation</a>, and <a href="/glossary/lead-response-time">why speed to lead wins</a>.</p>
     </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-label">By location</div>
+    <h2 class="section-title" style="margin-bottom:8px">AI receptionist by state</h2>
+    <p class="prose" style="margin-bottom:18px">{states.map((s, i) => (<>{i > 0 ? ' · ' : ''}<a href={`/ai-receptionist/state/${s.slug}`}>{s.stateFull}</a></>))}</p>
+    <h2 class="section-title" style="margin-bottom:8px">AI receptionist by city</h2>
+    <p class="prose" style="margin-bottom:14px">{cities.map((c, i) => (<>{i > 0 ? ' · ' : ''}<a href={`/ai-receptionist/${c.slug}`}>{c.city}, {c.state}</a></>))}</p>
   </section>
 
   <FaqSection faqs={faqs} title="AI receptionist FAQ" />

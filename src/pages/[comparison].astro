@@ -4,7 +4,7 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema } from '../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, itemListSchema, webPageSchema } from '../data/schema';
 import { comparisons } from '../data/comparisons';
 
 export function getStaticPaths() {
@@ -13,26 +13,78 @@ export function getStaticPaths() {
 
 const { c } = Astro.props;
 const path = `/${c.slug}`;
+
+const parent =
+  c.pillar === 'inbound'
+    ? { name: 'AI Receptionist', path: '/ai-receptionist' }
+    : { name: 'AI SDR', path: '/ai-sdr' };
+
 const crumbs = [
   { name: 'Home', path: '/' },
-  { name: 'AI SDR', path: '/ai-sdr' },
-  { name: `${c.competitor} Alternative`, path },
+  parent,
+  { name: `vs. ${c.competitor}`, path },
 ];
+
+const secondaryCta =
+  c.pillar === 'inbound'
+    ? { href: '/ai-receptionist', label: 'How the AI receptionist works' }
+    : { href: '/ai-sdr', label: 'How the AI SDR works' };
+
+// ItemList schema makes the comparison table machine-readable for AI crawlers
+// so they can extract structured comparison data rather than parsing HTML.
+const comparisonList = itemListSchema({
+  name: `Keres AI vs. ${c.competitor} — Feature Comparison`,
+  items: c.rows.map((r) => ({
+    name: r.feature,
+    description: `Keres AI: ${r.keres}. ${c.competitor}: ${r.them}.`,
+  })),
+});
+
+const webpage = webPageSchema({
+  path,
+  name: c.title,
+  description: c.description,
+  speakableSelectors: ['.answer-block', '.faq-a', '.lead'],
+});
+
+// Related comparisons in the same pillar (excludes current page)
+const relatedComparisons = comparisons
+  .filter((x) => x.pillar === c.pillar && x.slug !== c.slug)
+  .slice(0, 3);
 ---
 <Layout title={c.title} description={c.description} path={path}>
-  <Schema slot="head" graph={[faqSchema(c.faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[
+    faqSchema(c.faqs),
+    comparisonList,
+    webpage,
+    breadcrumbSchema(crumbs),
+    organizationSchema,
+  ]} />
 
   <Breadcrumbs crumbs={crumbs} />
+
   <header class="page-hero container">
     <span class="eyebrow">{c.category}</span>
-    <h1>A smarter <span class="accent">{c.h1Accent}</span> alternative</h1>
+    <h1>Why teams choose Keres over <span class="accent">{c.h1Accent}</span></h1>
     <p class="lead">{c.intro}</p>
     <div class="hero-ctas">
       <a href="/demo" class="btn btn-primary">Book a Demo</a>
-      <a href="/ai-sdr" class="btn btn-outline">How the AI SDR works</a>
+      <a href={secondaryCta.href} class="btn btn-outline">{secondaryCta.label}</a>
     </div>
   </header>
 
+  <!-- DIRECT ANSWER BLOCK (AI citation target) -->
+  <section class="page-section container">
+    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
+      <p itemprop="text">
+        {c.pillar === 'inbound'
+          ? `Keres AI is an alternative to ${c.competitor} for businesses that need a done-for-you AI receptionist: it answers every call 24/7, books appointments on your calendar, integrates with field-service software, and charges flat-rate pricing — rather than per-call or per-minute fees.`
+          : `Keres AI is an alternative to ${c.competitor} that goes beyond sending and infrastructure: it adds AI personalization at scale, handles replies, and books qualified meetings directly to your calendar — replacing the need for a human SDR to follow through on every sequence.`}
+      </p>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
   <section class="page-section container">
     <div class="section-label">At a glance</div>
     <h2 class="section-title" style="margin-bottom:8px">Keres AI vs. {c.competitor}</h2>
@@ -52,9 +104,55 @@ const crumbs = [
         </tbody>
       </table>
     </div>
-    <p class="prose" style="margin-top:6px">Comparison reflects typical product positioning and may change as each product evolves. Want the current picture for your use case? <a href="/demo">Book a demo</a>.</p>
+    <p class="prose" style="margin-top:6px">Comparison reflects typical product positioning and may change as each product evolves. <a href="/demo">Book a demo</a> to get a current, use-case-specific comparison.</p>
   </section>
 
-  <FaqSection faqs={c.faqs} title={`${c.competitor} alternative FAQ`} />
-  <CtaBand heading={`See why teams pick Keres over ${c.competitor}`} sub="Book a demo and watch Keres book a meeting end to end — targeting, sending, replies, and scheduling." />
+  <!-- MEDIUM CTA — pricing before hard demo ask -->
+  <div class="container" style="margin-bottom:var(--space-6)">
+    <div class="soft-cta-card">
+      <div class="soft-cta-body">
+        <h3 class="soft-cta-heading">What does Keres cost vs. {c.competitor}?</h3>
+        <p class="soft-cta-sub">Keres uses flat monthly pricing — no per-call, per-minute, or per-seat fees. See what's included at each level.</p>
+      </div>
+      <a href="/pricing" class="btn btn-outline">See pricing →</a>
+    </div>
+  </div>
+
+  <!-- WHY KERES WINS -->
+  <section class="page-section container">
+    <div class="prose">
+      <h2>The key difference</h2>
+      {c.pillar === 'inbound' ? (
+        <p>The difference isn't just features — it's the model. Keres is built as a <strong>done-for-you AI receptionist</strong>: we map your call flows, integrate your calendar and field-service stack, train the AI on your business, and launch in five business days. You don't build a bot; you get a front desk. The AI answers every call, books every job, and escalates every emergency — without you touching the configuration after go-live.</p>
+      ) : (
+        <p>The difference is where execution stops. Most outbound tools give you infrastructure to run yourself — you still need to manage sequences, review replies, and book the meetings manually. Keres does the whole motion: targeting, personalization, sending, reply handling, and booking. You focus on the meetings it books, not the machine that books them.</p>
+      )}
+      <p>See the <a href={secondaryCta.href}>{secondaryCta.label}</a> for the full picture, or <a href="/demo">book a 30-minute demo</a> to watch it work live.</p>
+    </div>
+  </section>
+
+  <FaqSection faqs={c.faqs} title={`${c.competitor} alternative — FAQ`} />
+
+  <!-- RELATED COMPARISONS -->
+  {relatedComparisons.length > 0 && (
+    <section class="page-section container">
+      <div class="section-label">Also comparing</div>
+      <h2 class="section-title" style="margin-bottom:8px">Other {c.pillar === 'inbound' ? 'AI receptionist' : 'AI SDR'} comparisons</h2>
+      <div class="feature-grid">
+        {relatedComparisons.map((r) => (
+          <a class="feature-card" href={`/${r.slug}`} style="text-decoration:none;display:block">
+            <h3>Keres vs. {r.competitor}</h3>
+            <p>{r.intro.slice(0, 120)}…</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <CtaBand
+    heading={`See why teams pick Keres over ${c.competitor}`}
+    sub={c.pillar === 'inbound'
+      ? 'Book a demo and watch Keres answer a call and book an appointment in under sixty seconds.'
+      : 'Book a demo and watch Keres book a meeting end to end — targeting, sending, replies, and scheduling.'}
+  />
 </Layout>

@@ -1,0 +1,107 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema, howToSchema, webPageSchema } from '../../data/schema';
+import { usecases } from '../../data/usecases';
+
+export function getStaticPaths() {
+  return usecases.map((u) => ({ params: { usecase: u.slug }, props: { u } }));
+}
+
+const { u } = Astro.props;
+const path = `/use-cases/${u.slug}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Use Cases', path: '/use-cases' },
+  { name: u.name, path },
+];
+const related = u.related
+  .map((slug) => usecases.find((g) => g.slug === slug))
+  .filter((g): g is NonNullable<typeof g> => Boolean(g));
+
+// The `how` steps are a procedure → expose as HowTo for AI Overviews / voice.
+const howto = howToSchema({
+  name: `How Keres handles ${u.name.toLowerCase()}`,
+  description: u.description,
+  steps: u.how.map((h, i) => ({ name: `Step ${i + 1}`, text: h })),
+});
+const webpage = webPageSchema({
+  path,
+  name: u.title,
+  description: u.description,
+  speakableSelectors: ['.answer-block', '.faq-a'],
+});
+---
+<Layout title={u.title} description={u.description} path={path}>
+  <Schema slot="head" graph={[
+    serviceSchema({ name: u.name, serviceType: 'AI Receptionist', description: u.description, path }),
+    howto,
+    webpage,
+    faqSchema(u.faqs),
+    breadcrumbSchema(crumbs),
+    organizationSchema,
+  ]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Use Case</span>
+    <h1 set:html={u.h1} />
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/use-cases" class="btn btn-outline">All use cases</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
+      <p itemprop="text">{u.intro}</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>The problem</h2>
+      <p>{u.problem}</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-label">How Keres handles it</div>
+    <h2 class="section-title" style="margin-bottom:8px">What Keres does</h2>
+    <div class="feature-grid">
+      {u.how.map((h) => (
+        <div class="feature-card"><h3>{h}</h3></div>
+      ))}
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>What you get</h2>
+      <ul>
+        {u.outcomes.map((o) => <li>{o}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="page-section container">
+      <div class="section-label">Related use cases</div>
+      <div class="feature-grid">
+        {related.map((r) => (
+          <a class="feature-card" href={`/use-cases/${r.slug}`} style="text-decoration:none; display:block;">
+            <h3>{r.name}</h3>
+            <p>{r.intro.replace(/<[^>]+>/g, '').slice(0, 120)}…</p>
+          </a>
+        ))}
+      </div>
+      <p class="prose" style="margin-top:18px"><a href="/use-cases">← All use cases</a></p>
+    </section>
+  )}
+
+  <FaqSection faqs={u.faqs} title={`${u.name} — FAQ`} />
+  <CtaBand heading="See it work for your business" sub="Book a free 30-minute demo and watch Keres answer a call and book an appointment live." cta={u.cta.label} href={u.cta.href} />
+</Layout>

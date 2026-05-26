@@ -1,0 +1,81 @@
+<p>A mid-size roofing company in the Midwest came to us with a specific problem: their operations manager was spending 20+ hours per week on inbound lead handling, scheduling, and estimate follow-up. Revenue was growing but her workload was unsustainable &mdash; and they were losing leads on the weekends because nobody was picking up the phone.</p>
+
+    <p>This is the story of what we built for them, what it cost, and what changed in the 90 days after it went live.</p>
+
+    <h2><span class="num">01</span>The situation going in</h2>
+
+    <p>The company &mdash; Ridge Roofing Co. (real client, name used with permission) &mdash; was a 12-person operation doing $4.2M in annual revenue. They had grown 35% the previous year but hit a wall: their ops manager, Lisa, was the single point of failure for the entire intake-to-invoice workflow.</p>
+
+    <ul>
+      <li>30&ndash;50 inbound leads per week (forms and calls)</li>
+      <li>Lisa personally qualifying each one, scheduling inspections</li>
+      <li>Estimate turnaround: 3&ndash;5 business days</li>
+      <li>Weekend/after-hours calls: almost all going to voicemail</li>
+      <li>Lisa working 55&ndash;60 hour weeks, owner starting to worry about burnout</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-label">Customer's own words</div>
+      <p>"I was the bottleneck. Every lead, every inspection, every estimate came through me. I couldn't take a vacation without leads going cold."</p>
+    </div>
+
+    <h2><span class="num">02</span>What we built</h2>
+
+    <p>Over 8 days, we deployed two connected agents:</p>
+
+    <h3>Lead qualification agent</h3>
+
+    <p>Handles all inbound form submissions and after-hours calls. Asks 4 qualifying questions (property type, roof age, damage type, insurance involved), captures contact info, and either books an inspection slot or routes to Lisa with full context.</p>
+
+    <h3>Estimate follow-up agent</h3>
+
+    <p>Once an estimate goes out, automatically follows up at 3, 7, and 14 days with personalized messages. If the homeowner engages (opens, clicks, responds), flags for Lisa. If not, politely closes the loop at 21 days.</p>
+
+    <p>Both agents integrated directly with their existing CRM (Housecall Pro), their Twilio phone system, and Google Calendar. Deployment was 8 calendar days from first call to fully live.</p>
+
+    <h2><span class="num">03</span>What changed in 90 days</h2>
+
+    <div class="stat-row">
+      <div class="stat-box"><div class="stat-num">15 hrs</div><div class="stat-lbl">Weekly time saved</div></div>
+      <div class="stat-box"><div class="stat-num">22%</div><div class="stat-lbl">Close rate lift</div></div>
+      <div class="stat-box"><div class="stat-num">4&times;</div><div class="stat-lbl">Faster lead response</div></div>
+    </div>
+
+    <p>By month three, the numbers were clear:</p>
+
+    <ul>
+      <li><strong>Weekend leads stopped leaking.</strong> Previously ~12 weekend leads per month converted to ~2 jobs. Now: ~8 jobs from the same lead volume.</li>
+      <li><strong>Lead response time dropped from hours to under 90 seconds</strong> on average.</li>
+      <li><strong>Close rate went from 34% to 42%.</strong> They attribute this primarily to faster first response.</li>
+      <li><strong>Lisa's hours dropped from 55+ to ~40.</strong> She now runs the estimating team properly &mdash; the thing she was supposed to be doing all along.</li>
+      <li><strong>No missed calls in 90 days.</strong> Literally zero. Every inbound call was either handled by the agent or routed to a human in real time.</li>
+    </ul>
+
+    <h2><span class="num">04</span>What didn't change</h2>
+
+    <p>Being honest about what automation doesn't do matters:</p>
+
+    <ul>
+      <li><strong>Pricing didn't improve.</strong> Their average job value was essentially flat. Automation doesn't fix pricing problems.</li>
+      <li><strong>Crew issues didn't disappear.</strong> They still had the same hiring and training challenges. Automation doesn't solve people problems.</li>
+      <li><strong>Complex insurance claims still needed a human.</strong> Any claim work was routed straight to Lisa. Correct call.</li>
+    </ul>
+
+    <h2><span class="num">05</span>The honest ROI</h2>
+
+    <p>Total cost in year one: $8,500 setup + $500/month = $14,500.</p>
+
+    <p>Value delivered:</p>
+
+    <ul>
+      <li>15 hours/week of Lisa's time = ~$45,000/year at her loaded cost</li>
+      <li>8 additional jobs/month from previously-lost weekend leads = ~$85,000/year in revenue</li>
+      <li>Close rate lift on existing lead volume = ~$120,000/year in additional revenue</li>
+    </ul>
+
+    <p>Even if you heavily discount the revenue numbers, ROI inside year one was comfortably over 10&times;.</p>
+
+    <div class="callout">
+      <div class="callout-label">Customer's bottom line</div>
+      <p>"We're not a 'tech company.' We're a roofing company. What mattered to us was: does it work, and does it pay for itself. Answer to both was yes, in the first month."</p>
+    </div>

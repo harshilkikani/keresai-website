@@ -4,23 +4,22 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { organizationSchema, breadcrumbSchema } from '../data/schema';
+import { guides as guideData } from '../data/guides';
 
 const path = '/blog';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Resources', path }];
 
-const guides = [
-  { href: '/guides/septic-automation-playbook.html', cat: 'Featured · Deep dive', title: 'The Septic Service Automation Playbook', desc: 'Where AI delivers the highest ROI for septic operators: intake triage, pumping reminders, emergency call handling, and invoice follow-up.' },
-  { href: '/guides/customer-intake-automation.html', cat: 'Guide', title: 'Customer Intake Automation for Field Service', desc: 'How to automate customer intake calls and forms so no lead slips through the cracks.' },
-  { href: '/guides/roofing-growth-through-ai.html', cat: 'Deep dive', title: 'Roofing Company Growth Through AI', desc: 'A practical look at how roofing companies use AI to capture and book more storm-season leads.' },
-  { href: '/guides/hvac-scaling-checklist.html', cat: 'Deep dive', title: 'HVAC Business Scaling Checklist', desc: 'Seasonal automation, maintenance reminders, emergency dispatch, and billing automation for HVAC leaders.' },
-  { href: '/guides/towing-operations-automation.html', cat: 'Deep dive', title: 'Towing Dispatch & Operations Automation', desc: 'Automating dispatch, intake, and follow-up for high-volume towing operations.' },
-  { href: '/guides/measuring-automation-roi.html', cat: 'Best practice', title: 'Measuring the ROI of Business Automation', desc: 'A simple framework for measuring the real cost and time savings of automation.' },
-  { href: '/guides/integrating-ai-into-your-stack.html', cat: 'Best practice', title: 'Integrating AI Into Your Current Stack', desc: 'How to connect AI agents to the CRM, calendar, and phone systems you already run on.' },
-  { href: '/guides/roofing-case-study-15-hours.html', cat: 'Case study', title: 'Roofing Company Saves 15 Hours/Week', desc: 'A real client story: how one roofing company reclaimed 15 hours a week with automation.' },
-];
+const guides = [...guideData]
+  .sort((a, b) => a.order - b.order)
+  .map((g) => ({
+    href: `/guides/${g.slug}.html`,
+    cat: g.category,
+    title: g.listTitle,
+    desc: g.listDesc,
+  }));
 ---
 <Layout
-  title="Resources & Guides — AI Receptionist & Outbound Playbooks | Keres AI"
+  title="Resources & Guides — AI Receptionist Playbooks | Keres AI"
   description="Guides, playbooks, and case studies on AI receptionists, missed-call recovery, appointment automation, and AI outbound for service businesses."
   path={path}
 >

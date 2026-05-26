@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, breadcrumbSchema } from '../data/schema';
+import { usecases } from '../data/usecases';
+
+const path = '/use-cases';
+const ORIGIN = 'https://www.keresai.com';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Use Cases', path }];
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Keres AI use cases',
+  itemListElement: usecases.map((u, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: u.name,
+    url: `${ORIGIN}/use-cases/${u.slug}`,
+  })),
+};
+---
+<Layout
+  title="Use Cases — What Keres AI Solves | Keres AI"
+  description="See how Keres AI handles after-hours answering, overflow calls, appointment booking, lead capture, staffing costs, and spam screening for businesses that live on the phone."
+  path={path}
+>
+  <Schema slot="head" graph={[breadcrumbSchema(crumbs), itemList, organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Use Cases</span>
+    <h1>Every call, <span class="accent">handled</span></h1>
+    <p class="lead">From after-hours coverage to overflow, booking, and spam screening — see exactly what Keres solves for businesses that live on the phone.</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="feature-grid">
+      {usecases.map((u) => (
+        <a class="feature-card" href={`/use-cases/${u.slug}`} style="text-decoration:none; display:block;">
+          <h3>{u.name}</h3>
+          <p>{u.intro.replace(/<[^>]+>/g, '').slice(0, 140)}…</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand heading="See it solve yours" sub="Book a free 30-minute demo and watch Keres answer a call and book an appointment live." />
+</Layout>

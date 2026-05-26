@@ -1,12 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Schema from '../components/Schema.astro';
+import Testimonials from '../components/Testimonials.astro';
 import {
   organizationSchema,
   softwareApplicationSchema,
   websiteSchema,
   faqSchema,
+  withReviews,
 } from '../data/schema';
+import { testimonials } from '../data/testimonials';
 
 const faqs = [
   {
@@ -44,7 +47,7 @@ const faqs = [
   description="Keres AI answers every call 24/7, books appointments automatically, and runs AI outbound that lands in the inbox. Capture every lead, book more meetings, cut staffing costs. Book a demo."
   path="/"
 >
-  <Schema slot="head" graph={[organizationSchema, softwareApplicationSchema, websiteSchema, faqSchema(faqs)]} />
+  <Schema slot="head" graph={[organizationSchema, withReviews(softwareApplicationSchema, testimonials), websiteSchema, faqSchema(faqs)]} />
 
   <!-- HERO -->
   <section id="hero" aria-labelledby="hero-title" class="hero-grid">
@@ -260,7 +263,7 @@ const faqs = [
         <div class="integration-tile" tabindex="0"><div class="integration-logo" style="background:#0078d4"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><rect x="14" y="6" width="14" height="20" rx="1" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m14 11 7 5 7-5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/><ellipse cx="8" cy="16" rx="5" ry="6" fill="none" stroke="currentColor" stroke-width="2.4"/><ellipse cx="8" cy="16" rx="1.5" ry="2.2" fill="currentColor"/></svg></div><div class="integration-name">Outlook</div><div class="integration-tooltip">Two-way sync with Outlook / Microsoft 365 calendars.</div></div>
         <div class="integration-tile" tabindex="0"><div class="integration-logo" style="background:#6d00cc"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><rect x="4" y="6" width="4" height="20"/><rect x="10" y="6" width="4" height="20"/><rect x="16" y="6" width="4" height="20"/><rect x="22" y="6" width="4" height="20"/></svg></div><div class="integration-name">Make</div><div class="integration-tooltip">Wire Keres into Make (Integromat) scenarios as a trigger or action.</div></div>
       </div>
-      <p class="integrations-foot">Don't see your stack? Keres speaks generic webhooks + CSV out of the box — most one-off integrations go live during onboarding.</p>
+      <p class="integrations-foot">Don't see your stack? Keres speaks generic webhooks + CSV out of the box — most one-off integrations go live during onboarding. <a href="/integrations">See all integrations &rarr;</a></p>
     </div>
   </section>
 
@@ -327,6 +330,9 @@ const faqs = [
       </div>
     </div>
   </section>
+
+  <!-- TESTIMONIALS (renders only when real testimonials exist) -->
+  <Testimonials />
 
   <!-- FAQ -->
   <section id="faq" aria-labelledby="faq-title">

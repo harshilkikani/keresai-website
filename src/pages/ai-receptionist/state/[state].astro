@@ -1,0 +1,184 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Schema from '../../../components/Schema.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import FaqSection from '../../../components/FaqSection.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema } from '../../../data/schema';
+import { states, citiesInState } from '../../../data/cities';
+import { industries } from '../../../data/industries';
+
+export function getStaticPaths() {
+  return states.map((s) => ({ params: { state: s.slug }, props: { s } }));
+}
+
+const { s } = Astro.props;
+const ORIGIN = 'https://www.keresai.com';
+const path = `/ai-receptionist/state/${s.slug}`;
+const stateCities = citiesInState(s.slug);
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'AI Receptionist', path: '/ai-receptionist' },
+  { name: s.stateFull, path },
+];
+
+const faqs = [
+  s.faq,
+  {
+    q: `How fast does Keres answer calls in ${s.stateFull}?`,
+    a: `Every call is answered within two rings, 24/7 — including nights, weekends, and holidays — so no ${s.stateFull} lead ever reaches voicemail.`,
+  },
+  {
+    q: `Which ${s.stateFull} cities does Keres serve?`,
+    a: `Keres serves businesses statewide. We have dedicated coverage pages for ${stateCities.map((c) => c.city).join(', ')}, and we answer calls for service businesses in every ${s.stateFull} market.`,
+  },
+  {
+    q: `What industries does Keres serve in ${s.stateFull}?`,
+    a: `Keres serves HVAC, plumbing, roofing, towing, septic, dental, med spa, real estate, and professional services businesses across ${s.stateFull}.`,
+  },
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${ORIGIN}${path}#service`,
+  name: `AI Receptionist in ${s.stateFull}`,
+  serviceType: 'AI Receptionist',
+  description: `24/7 AI receptionist for ${s.stateFull} businesses — answers every call, qualifies leads, and books appointments automatically across the state.`,
+  url: ORIGIN + path,
+  provider: { '@id': `${ORIGIN}/#organization` },
+  areaServed: { '@type': 'State', name: s.stateFull },
+  audience: {
+    '@type': 'Audience',
+    audienceType: 'Service businesses and contractors',
+    geographicArea: { '@type': 'State', name: s.stateFull },
+  },
+};
+
+const webpage = webPageSchema({
+  path,
+  name: `AI Receptionist in ${s.stateFull} — Answer Every Call 24/7 | Keres AI`,
+  description: `Keres AI is a 24/7 AI receptionist for ${s.stateFull} businesses. Answer every call, book appointments, and never miss a lead — statewide.`,
+  speakableSelectors: ['.answer-block', '.faq-a', '.lead'],
+});
+
+const homeServiceVerticals = industries.filter((i) =>
+  ['hvac', 'plumbers', 'roofing', 'towing', 'septic'].includes(i.slug)
+);
+const professionalVerticals = industries.filter((i) =>
+  ['dentists', 'med-spas', 'real-estate', 'professional-intake'].includes(i.slug)
+);
+
+const otherStates = states.filter((x) => x.slug !== s.slug);
+---
+<Layout
+  title={`AI Receptionist in ${s.stateFull} — Answer Every Call 24/7 | Keres AI`}
+  description={`Keres AI is a 24/7 AI receptionist for ${s.stateFull} businesses. Answer every call, book appointments, and never miss a lead — statewide. Book a demo.`}
+  path={path}
+>
+  <Schema slot="head" graph={[serviceSchema, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">AI Receptionist · {s.stateFull}</span>
+    <h1>The 24/7 AI receptionist for <span class="accent">{s.stateFull} businesses</span></h1>
+    <p class="lead">{s.intro}</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/tools/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
+    </div>
+  </header>
+
+  <!-- DIRECT ANSWER BLOCK -->
+  <section class="page-section container">
+    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
+      <p itemprop="text">Keres AI is a <strong>24/7 AI receptionist for {s.stateFull}</strong> businesses. It answers every inbound call in two rings, qualifies the caller, books the appointment on your calendar, and texts your team the moment a call is an emergency — so no {s.stateFull} lead is lost to voicemail, day or night, in any market across the state.</p>
+    </div>
+  </section>
+
+  <!-- STATE DEMAND DRIVERS -->
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Why {s.stateFull} businesses miss calls — and what it costs</h2>
+      <ul>
+        {s.drivers.map((d) => <li>{d}</li>)}
+      </ul>
+      <p>Every unanswered call is a {s.stateFull} customer calling the next business on the list. Keres closes that gap by answering instantly, every time — including the after-hours and surge calls your front desk can't absorb.</p>
+    </div>
+  </section>
+
+  <!-- CITIES IN STATE -->
+  <section class="page-section container">
+    <div class="section-label">By city</div>
+    <h2 class="section-title" style="margin-bottom:8px">AI receptionist coverage across {s.stateFull}</h2>
+    <p class="prose" style="margin-bottom:var(--space-4)">Dedicated coverage for {s.stateFull}'s biggest markets — each tuned to local demand patterns:</p>
+    <div class="feature-grid">
+      {stateCities.map((c) => (
+        <a class="feature-card" href={`/ai-receptionist/${c.slug}`} style="text-decoration:none;display:block">
+          <h3>{c.city}, {c.state}</h3>
+          <p>{c.intro.slice(0, 110)}…</p>
+          <span class="inline-cta-link" style="margin-top:8px;display:inline-block">{c.city} coverage →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- SOFT CTA -->
+  <div class="container" style="margin-bottom:var(--space-6)">
+    <div class="inline-cta-row">
+      <a href="/use-cases/after-hours-answering" class="inline-cta-link">→ After-hours answering</a>
+      <a href="/use-cases/overflow-call-handling" class="inline-cta-link">→ Overflow call handling</a>
+      <a href="/glossary/lead-response-time" class="inline-cta-link">→ Why speed to lead matters</a>
+    </div>
+  </div>
+
+  <!-- VERTICAL LINKS -->
+  <section class="page-section container">
+    <div class="section-label">By industry</div>
+    <h2 class="section-title" style="margin-bottom:8px">Built for every {s.stateFull} service business</h2>
+    <p class="prose" style="margin-bottom:var(--space-4)">Keres handles the specific call flows, integrations, and emergency patterns of each industry — not a generic answering service.</p>
+    <div class="feature-grid">
+      {homeServiceVerticals.map((i) => (
+        <a class="feature-card" href={`/ai-receptionist-for-${i.slug}`} style="text-decoration:none;display:block">
+          <h3>AI receptionist for {i.short}</h3>
+          <p>{i.intro.slice(0, 100)}…</p>
+        </a>
+      ))}
+      {professionalVerticals.map((i) => (
+        <a class="feature-card" href={`/ai-receptionist-for-${i.slug}`} style="text-decoration:none;display:block">
+          <h3>AI receptionist for {i.short}</h3>
+          <p>{i.intro.slice(0, 100)}…</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- MEDIUM CTA -->
+  <div class="container" style="margin-bottom:var(--space-6)">
+    <div class="soft-cta-card">
+      <div class="soft-cta-body">
+        <h3 class="soft-cta-heading">What are missed {s.stateFull} calls costing you?</h3>
+        <p class="soft-cta-sub">Estimate the monthly revenue lost to unanswered calls based on your industry and call volume.</p>
+      </div>
+      <a href="/tools/missed-call-calculator" class="btn btn-outline">Open the calculator →</a>
+    </div>
+  </div>
+
+  <FaqSection faqs={faqs} title={`AI receptionist in ${s.stateFull} — FAQ`} />
+
+  <!-- OTHER STATES -->
+  <section class="page-section container">
+    <div class="section-label">Other states</div>
+    <h2 class="section-title" style="margin-bottom:8px">AI receptionist by state</h2>
+    <p class="prose" style="margin-bottom:14px">
+      {otherStates.map((x, i) => (
+        <>{i > 0 ? ' · ' : ''}<a href={`/ai-receptionist/state/${x.slug}`}>{x.stateFull}</a></>
+      ))}
+    </p>
+    <p class="prose"><a href="/ai-receptionist">See all AI receptionist features →</a></p>
+  </section>
+
+  <CtaBand heading={`Stop losing ${s.stateFull} leads to voicemail`} sub="Book a free 30-minute demo and watch Keres answer and book a call live." />
+</Layout>

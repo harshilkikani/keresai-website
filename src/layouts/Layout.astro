@@ -31,9 +31,12 @@ const ogImageAbs = ogImage.startsWith('http') ? ogImage : origin + ogImage;
 // Set to '' to disable. CSP already allows gc.zgo.at + the count endpoint.
 const GOATCOUNTER_CODE = 'keresai';
 const goatcounterEndpoint = GOATCOUNTER_CODE ? `https://${GOATCOUNTER_CODE}.goatcounter.com/count` : '';
-// Google Search Console HTML-tag verification. Prefer DNS TXT verification
-// (no CSP impact); paste the token here only if you verify via the HTML tag.
+// Search-engine verification. Prefer DNS TXT verification (no CSP impact);
+// paste a token here only if you verify via the HTML meta-tag method.
+// GSC: Search Console → Settings → Ownership → HTML tag (content value only).
+// Bing: Bing Webmaster Tools → verify → Meta tag (the content value only).
 const GSC_VERIFICATION = '';
+const BING_VERIFICATION = '';
 ---
 <!DOCTYPE html>
 <html lang="en" prefix="og: https://ogp.me/ns#">
@@ -42,10 +45,11 @@ const GSC_VERIFICATION = '';
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="light dark" />
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://gc.zgo.at; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://calendly.com https://keresai.goatcounter.com; frame-src https://calendly.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://calendly.com https://keresai.goatcounter.com https://dns.google; frame-src https://calendly.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
+{BING_VERIFICATION && <meta name="msvalidate.01" content={BING_VERIFICATION} />}
 {goatcounterEndpoint && <script data-goatcounter={goatcounterEndpoint} async src="https://gc.zgo.at/count.js" is:inline></script>}
 
 <title>{title}</title>
@@ -57,6 +61,7 @@ const GSC_VERIFICATION = '';
 <meta name="theme-color" content="#E85D04" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
 <link rel="canonical" href={canonical} />
+<link rel="alternate" type="application/rss+xml" title="Keres AI — Resources & Guides" href="/rss.xml" />
 
 <!-- US English market. Multilingual UI is client-side only, so we do not advertise phantom localized URLs. -->
 <link rel="alternate" hreflang="en" href={canonical} />
@@ -84,13 +89,14 @@ const GSC_VERIFICATION = '';
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImageAbs} />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://formspree.io" crossorigin />
 <link rel="preconnect" href="https://calendly.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<!-- Self-hosted fonts (latin subset). No third-party font CDN → faster LCP, no extra DNS/TLS. -->
+<link rel="preload" href="/assets/fonts/6NU58FyLNQOQZAnv9ZwNjucMHVn85Ni7emAe9lKqZTnbB-gzTK0K1ChjeveQ.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/fonts/rP2Hp2ywxg089UriCZOIHQ.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/assets/fonts.css?v=1" />
 <link rel="stylesheet" href="/assets/styles.css?v=22" />
-<link rel="stylesheet" href="/assets/pages.css?v=1" />
+<link rel="stylesheet" href="/assets/pages.css?v=3" />
 
 <!-- Page-specific structured data + head extras -->
 <slot name="head" />
@@ -103,6 +109,9 @@ const GSC_VERIFICATION = '';
   <slot />
 </main>
 <Footer />
+{path !== '/demo' && path !== '/contact' && (
+  <a href="/demo" class="sticky-cta" aria-label="Book a demo">Book a Demo</a>
+)}
 <script src="/assets/app.js?v=11" is:inline></script>
 <slot name="scripts" />
 </body>
