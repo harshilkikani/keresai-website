@@ -57,7 +57,7 @@ export const industries: Industry[] = [
     nameLower: 'plumbing companies',
     short: 'Plumbers',
     shortLower: 'plumbers',
-    title: 'AI Receptionist for Plumbers — Never Miss a Service Call | Keres AI',
+    title: 'AI Receptionist for Plumbers | Keres AI',
     description:
       'Keres AI answers every plumbing call 24/7, books service appointments, and flags burst pipes and floods to your team instantly. Capture every job, day or night.',
     intro:
@@ -86,7 +86,7 @@ export const industries: Industry[] = [
     nameLower: 'dental practices',
     short: 'Dentists',
     shortLower: 'dentists',
-    title: 'AI Receptionist for Dental Practices — Book More Patients | Keres AI',
+    title: 'AI Receptionist for Dental Practices | Keres AI',
     description:
       'Keres AI answers every patient call, books and reschedules appointments, and handles after-hours intake for dental practices. Stop losing patients to voicemail.',
     intro:
@@ -260,7 +260,7 @@ export const industries: Industry[] = [
     nameLower: 'septic service companies',
     short: 'Septic',
     shortLower: 'septic',
-    title: 'AI Receptionist for Septic Services — Book Every Pumping Job | Keres AI',
+    title: 'AI Receptionist for Septic Services | Keres AI',
     description:
       'Keres AI answers every septic call 24/7, books pumping and inspection appointments, and dispatches emergency backups instantly. Never lose a job to voicemail.',
     intro:

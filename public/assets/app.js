@@ -116,6 +116,30 @@
 
   /* ─── Reveal-on-scroll ─────────────────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
+    // Progressive enhancement: auto-tag sub-page content so it settles in as
+    // you scroll, matching the homepage. Only elements BELOW the initial
+    // viewport are tagged — above-the-fold content (hero, first answer block)
+    // is never hidden, so there is no FOUC and no LCP penalty. Grid children
+    // are staggered for a cascading reveal.
+    const vh = window.innerHeight || 800;
+    const blocks = document.querySelectorAll(
+      '.feature-grid, .stat-grid, .pricing-grid, .compare-wrap, .soft-cta-card, .prose'
+    );
+    blocks.forEach((el) => {
+      if (el.classList.contains('reveal')) return;
+      if (el.getBoundingClientRect().top <= vh * 0.92) return; // in/near view → leave visible
+      if (el.matches('.feature-grid, .stat-grid, .pricing-grid')) {
+        const is3d = el.matches('.stat-grid'); // data cards flip in on the Z-axis
+        Array.from(el.children).forEach((child, i) => {
+          child.classList.add('reveal');
+          if (is3d) child.classList.add('reveal-3d');
+          child.style.transitionDelay = Math.min(i * 55, 280) + 'ms';
+        });
+      } else {
+        el.classList.add('reveal');
+      }
+    });
+
     if (!('IntersectionObserver' in window)) {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
       return;
@@ -126,6 +150,59 @@
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  });
+
+  /* ─── 3D pointer-tilt on interactive cards ─────────── */
+  document.addEventListener('DOMContentLoaded', () => {
+    // Desktop + fine-pointer only; never for touch or reduced-motion users.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const cards = document.querySelectorAll('a.feature-card, .tilt');
+    if (!cards.length) return;
+    const ROT = 15; // peak rotation ≈ ±7.5deg (pointer offset is ±0.5)
+    cards.forEach((el) => {
+      let raf = null, nx = 0, ny = 0;
+      const paint = () => {
+        el.style.setProperty('--ry', (nx * ROT).toFixed(2) + 'deg');
+        el.style.setProperty('--rx', (-ny * ROT).toFixed(2) + 'deg');
+        el.style.setProperty('--mx', ((nx + 0.5) * 100).toFixed(1) + '%');
+        el.style.setProperty('--my', ((ny + 0.5) * 100).toFixed(1) + '%');
+        raf = null;
+      };
+      el.addEventListener('pointerenter', () => el.classList.add('is-tilting'));
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        nx = (e.clientX - r.left) / r.width - 0.5;
+        ny = (e.clientY - r.top) / r.height - 0.5;
+        if (!raf) raf = requestAnimationFrame(paint);
+      }, { passive: true });
+      el.addEventListener('pointerleave', () => {
+        el.classList.remove('is-tilting');
+        ['--rx', '--ry', '--mx', '--my'].forEach((p) => el.style.removeProperty(p));
+      });
+    });
+  });
+
+  /* ─── Reading-progress bar (long pages only) ───────── */
+  document.addEventListener('DOMContentLoaded', () => {
+    const doc = document.documentElement;
+    // Skip short pages — a progress bar that fills instantly looks broken.
+    if (doc.scrollHeight < (window.innerHeight || 800) * 2.5) return;
+    const bar = document.createElement('div');
+    bar.className = 'read-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+    let ticking = false;
+    const update = () => {
+      const max = doc.scrollHeight - window.innerHeight;
+      bar.style.transform = `scaleX(${max > 0 ? Math.min(window.scrollY / max, 1) : 0})`;
+      ticking = false;
+    };
+    update();
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
   });
 
   /* ─── Calendar + Calendly launcher ─────────────────── */
@@ -278,6 +355,56 @@
         el.removeAttribute('aria-invalid');
         document.getElementById(id + '-err').textContent = '';
       });
+    });
+  });
+
+  /* ─── Font-preview switcher (local preview only) ───── */
+  document.addEventListener('DOMContentLoaded', () => {
+    const isPreview = ['localhost', '127.0.0.1'].includes(location.hostname);
+    if (!isPreview) return; // never render for real visitors
+    const KEY = 'keres.font';
+    const presets = [
+      ['default', 'Fraunces · DM Sans'],
+      ['editorial', 'Editorial serif'],
+      ['modern', 'Modern sans'],
+      ['system', 'System UI'],
+      ['grotesk', 'Grotesk'],
+      ['humanist', 'Humanist'],
+      ['classic', 'Classic'],
+    ];
+    const apply = (id) => {
+      if (id && id !== 'default') document.documentElement.setAttribute('data-font', id);
+      else document.documentElement.removeAttribute('data-font');
+      localStorage.setItem(KEY, id || 'default');
+    };
+    apply(localStorage.getItem(KEY) || 'default');
+
+    const wrap = document.createElement('div');
+    wrap.className = 'font-switch';
+    wrap.innerHTML =
+      '<button class="font-switch-toggle" type="button" aria-expanded="false" aria-label="Font preview">Aa</button>' +
+      '<div class="font-switch-menu" role="menu"><div class="font-switch-title">Font preview</div>' +
+      presets.map(([id, label]) =>
+        `<button type="button" data-font-id="${id}" role="menuitemradio" aria-checked="false">${label}</button>`
+      ).join('') + '</div>';
+    document.body.appendChild(wrap);
+
+    const toggle = wrap.querySelector('.font-switch-toggle');
+    const mark = () => {
+      const cur = localStorage.getItem(KEY) || 'default';
+      wrap.querySelectorAll('[data-font-id]').forEach((b) =>
+        b.setAttribute('aria-checked', String(b.dataset.fontId === cur))
+      );
+    };
+    mark();
+    toggle.addEventListener('click', () => {
+      toggle.setAttribute('aria-expanded', String(wrap.classList.toggle('open')));
+    });
+    wrap.querySelectorAll('[data-font-id]').forEach((b) =>
+      b.addEventListener('click', () => { apply(b.dataset.fontId); mark(); })
+    );
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { wrap.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
     });
   });
 

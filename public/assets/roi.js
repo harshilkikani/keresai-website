@@ -44,7 +44,14 @@
     const lostYr = lostMo * 12;
     const ah = s.leads * (s.ah / 100);
 
-    $("roi-lost-mo").textContent = fmt(lostMo);
+    const lostMoEl = $("roi-lost-mo");
+    const lostMoStr = fmt(lostMo);
+    if (lostMoEl.textContent !== lostMoStr) {
+      lostMoEl.textContent = lostMoStr;
+      lostMoEl.classList.remove("calc-bump");
+      void lostMoEl.offsetWidth; // force reflow so the pulse restarts
+      lostMoEl.classList.add("calc-bump");
+    }
     $("roi-lost-mo-2").textContent = fmt(lostMo);
     $("roi-lost-yr").textContent = fmt(lostYr);
     $("roi-missed").textContent = Math.round(missed).toLocaleString();

@@ -20,7 +20,7 @@ export const usecases: UseCase[] = [
     slug: 'after-hours-answering',
     name: 'After-hours answering',
     targetKeyword: 'after hours answering service',
-    title: 'After-Hours Answering Service — Never Miss a Night Call | Keres AI',
+    title: 'After-Hours Answering Service | Keres AI',
     description:
       'Keres answers every call after hours, on weekends, and on holidays — booking appointments and flagging emergencies so you never lose a lead to voicemail at 9 PM.',
     h1: 'Answer every call <span class="accent">after hours</span>',
@@ -140,7 +140,7 @@ export const usecases: UseCase[] = [
     slug: 'reduce-staffing-costs',
     name: 'Reduce staffing costs',
     targetKeyword: 'reduce front desk staffing costs',
-    title: 'Reduce Front-Desk Staffing Costs With an AI Receptionist | Keres AI',
+    title: 'Reduce Front-Desk Staffing Costs | Keres AI',
     description:
       'Cover the phones 24/7 without hiring. Keres answers, qualifies, and books at a flat monthly rate — far less than a full-time receptionist or a per-minute answering service.',
     h1: 'Cover the phones <span class="accent">without hiring</span>',

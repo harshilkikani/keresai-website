@@ -1,10 +1,26 @@
 ---
+// Normalize the current path so active-state matching works for both clean and
+// .html URLs (GitHub Pages serves /foo.html for /foo).
+const path = (Astro.url.pathname.replace(/\.html$/, '').replace(/\/+$/, '') || '/');
+const startsAny = (prefixes: string[]) =>
+  prefixes.some((s) => path === s || path.startsWith(s + '/'));
+
 const links = [
-  { href: '/ai-receptionist', label: 'AI Receptionist' },
-  { href: '/ai-sdr', label: 'AI SDR' },
-  { href: '/email-deliverability', label: 'Deliverability' },
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/blog', label: 'Resources' },
+  {
+    href: '/ai-receptionist',
+    label: 'AI Receptionist',
+    active:
+      startsAny(['/ai-receptionist', '/ai-answering-service', '/24-7-ai-receptionist']) ||
+      path.startsWith('/ai-receptionist-for-'),
+  },
+  { href: '/ai-sdr', label: 'AI SDR', active: startsAny(['/ai-sdr']) },
+  { href: '/email-deliverability', label: 'Deliverability', active: startsAny(['/email-deliverability']) },
+  { href: '/pricing', label: 'Pricing', active: path === '/pricing' },
+  {
+    href: '/blog',
+    label: 'Resources',
+    active: startsAny(['/blog', '/guides', '/glossary', '/benchmarks', '/use-cases', '/integrations', '/industries', '/tools', '/customers']),
+  },
 ];
 ---
 <header class="nav" role="banner">
@@ -15,7 +31,9 @@ const links = [
 
     <nav aria-label="Primary">
       <ul class="nav-links">
-        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        {links.map((l) => (
+          <li><a href={l.href} class={l.active ? 'active' : undefined} aria-current={l.active ? 'page' : undefined}>{l.label}</a></li>
+        ))}
       </ul>
     </nav>
 
@@ -40,7 +58,9 @@ const links = [
 </header>
 
 <div id="mobile-menu" class="mobile-menu" data-open="false" aria-label="Mobile navigation">
-  {links.map((l) => <a href={l.href}>{l.label}</a>)}
+  {links.map((l) => (
+    <a href={l.href} class={l.active ? 'active' : undefined} aria-current={l.active ? 'page' : undefined}>{l.label}</a>
+  ))}
   <a href="/about">About</a>
   <a href="/contact">Contact</a>
   <div class="mobile-cta">

@@ -69,7 +69,7 @@ export const calculators: Calculator[] = [
     kind: 'missed-call',
     closeRate: 0.3,
     eyebrow: 'Roofing · Free tool',
-    title: 'Roofing Storm-Lead Calculator — Lost Revenue per Surge | Keres AI',
+    title: 'Roofing Storm-Lead Calculator | Keres AI',
     description:
       'Free roofing storm-lead calculator. Enter your storm-season call volume, answer rate, and average job value to see the revenue lost when surge calls go unanswered.',
     h1: 'What are missed storm leads',
@@ -168,7 +168,7 @@ export const calculators: Calculator[] = [
     kind: 'response-time',
     closeRate: 0.25,
     eyebrow: 'All industries · Free tool',
-    title: 'Lead Response Time Calculator — Revenue You Can Recover | Keres AI',
+    title: 'Lead Response Time Calculator | Keres AI',
     description:
       'Free lead response time calculator. See how much revenue you can recover by responding to inbound leads in under five minutes instead of hours.',
     h1: 'What is slow response',

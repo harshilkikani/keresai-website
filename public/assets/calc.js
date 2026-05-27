@@ -36,7 +36,15 @@
 
   function setOut(shell, key, text) {
     shell.querySelectorAll(`[data-calc-out="${key}"]`).forEach((el) => {
+      const changed = el.textContent !== text;
       el.textContent = text;
+      // Pulse the headline figure when it actually changes, so the tool feels
+      // responsive. Re-trigger the animation by toggling the class on reflow.
+      if (changed && key === 'primary') {
+        el.classList.remove('calc-bump');
+        void el.offsetWidth; // force reflow so the animation restarts
+        el.classList.add('calc-bump');
+      }
     });
   }
 

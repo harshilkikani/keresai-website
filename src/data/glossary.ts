@@ -116,7 +116,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['missed call automation'],
     category: 'AI Receptionist',
     targetKeyword: 'what is missed call text back',
-    title: 'What Is Missed-Call Text-Back? How It Recovers Lost Leads | Keres AI',
+    title: 'What Is Missed-Call Text-Back? How It Works | Keres AI',
     description:
       'Missed-call text-back automatically sends a text to any caller you miss, so the lead never goes cold. Learn how it works and why it recovers revenue.',
     definition:
@@ -187,7 +187,7 @@ export const glossary: GlossaryTerm[] = [
     term: 'Lead Qualification',
     category: 'AI Receptionist',
     targetKeyword: 'what is lead qualification',
-    title: 'What Is Lead Qualification? Definition & How AI Does It | Keres AI',
+    title: 'What Is Lead Qualification? How AI Does It | Keres AI',
     description:
       'Lead qualification is the process of determining whether a prospect is a good fit. Learn how AI qualifies leads on every call so your team only talks to real opportunities.',
     definition:
@@ -241,7 +241,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['cold emailing', 'outbound email'],
     category: 'AI SDR & Outbound',
     targetKeyword: 'what is cold email outreach',
-    title: 'What Is Cold Email Outreach? Definition & Best Practices | Keres AI',
+    title: 'What Is Cold Email Outreach? Best Practices | Keres AI',
     description:
       'Cold email outreach is sending unsolicited but relevant emails to prospects to start a sales conversation. Learn how to do it without landing in spam.',
     definition:
@@ -437,7 +437,7 @@ export const glossary: GlossaryTerm[] = [
     term: 'Missed-Call Recovery',
     category: 'AI Receptionist',
     targetKeyword: 'what is missed call recovery',
-    title: 'What Is Missed-Call Recovery? How to Win Back Lost Calls | Keres AI',
+    title: 'What Is Missed-Call Recovery? Win Back Lost Calls | Keres AI',
     description:
       'Missed-call recovery is the practice of recapturing leads from calls you didn’t answer. Learn how AI answering and text-back turn missed calls into booked jobs.',
     definition:
@@ -674,7 +674,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['after-hours answering service', 'after-hours call answering'],
     category: 'AI Receptionist',
     targetKeyword: 'what is after-hours answering',
-    title: 'What Is After-Hours Answering? Definition & Best Options | Keres AI',
+    title: 'What Is After-Hours Answering? Definition | Keres AI',
     description:
       'After-hours answering handles calls that come in when your office is closed — booking appointments and capturing leads 24/7 so no after-hours caller is lost.',
     definition:
@@ -705,7 +705,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['emergency call dispatch', 'dispatch automation'],
     category: 'AI Receptionist',
     targetKeyword: 'what is emergency dispatch',
-    title: 'What Is Emergency Dispatch? How AI Handles Urgent Calls | Keres AI',
+    title: 'What Is Emergency Dispatch? How AI Handles It | Keres AI',
     description:
       'Emergency dispatch routes urgent calls — HVAC no-cools, burst pipes, storm damage, roadside rescues — to your on-call crew instantly. Learn how AI automates it.',
     definition:
@@ -828,7 +828,7 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is lead response time',
     title: 'What Is Lead Response Time? Why Speed to Lead Wins | Keres AI',
     description:
-      'Lead response time is how quickly you contact a new lead after they reach out. Research consistently shows the first business to respond wins the job — learn how AI closes the gap.',
+      'Lead response time is how quickly you contact a new lead. Research shows the first business to respond wins the job — learn how AI closes the gap.',
     definition:
       'Lead response time (also called speed to lead) is the time between a prospect first reaching out — calling, submitting a form, or clicking an ad — and receiving a response from your business. Research consistently shows that responding within the first minute dramatically increases the likelihood of qualifying the lead, and that the first business to respond wins the majority of competitive inquiries. Every minute of delay reduces your chance of closing.',
     sections: [
@@ -856,7 +856,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['AI front desk', 'automated front desk'],
     category: 'AI Receptionist',
     targetKeyword: 'what is front desk automation',
-    title: 'What Is Front Desk Automation? AI That Runs Your Front Desk | Keres AI',
+    title: 'What Is Front Desk Automation? Definition & Uses | Keres AI',
     description:
       'Front desk automation uses AI to handle calls, book appointments, qualify leads, and answer questions automatically — replacing or supplementing human receptionists.',
     definition:

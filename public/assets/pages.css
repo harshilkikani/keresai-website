@@ -30,9 +30,76 @@
 .prose p { font-size: 16.5px; line-height: 1.75; color: var(--text-muted); margin: 0 0 16px; }
 .prose h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 3vw, 36px); letter-spacing: -0.02em; color: var(--text); margin: 44px 0 14px; }
 .prose h3 { font-size: 19px; font-weight: 600; color: var(--text); margin: 28px 0 10px; }
-.prose ul { margin: 0 0 18px; padding-left: 22px; }
+/* Branded list markers — the global `ul { list-style:none }` reset strips
+   bullets, so prose lists need their own. Orange disc for unordered, accent
+   numerals for ordered. */
+.prose ul { list-style: none; margin: 0 0 18px; padding-left: 0; }
+.prose ul > li { position: relative; padding-left: 24px; }
+.prose ul > li::before {
+  content: ""; position: absolute; left: 5px; top: 0.62em;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--orange); opacity: 0.9;
+}
+.prose ol { margin: 0 0 18px; padding-left: 24px; }
+.prose ol > li::marker { color: var(--orange); font-weight: 600; }
 .prose li { font-size: 16.5px; line-height: 1.7; color: var(--text-muted); margin-bottom: 8px; }
-.prose a { color: var(--orange); text-decoration: underline; text-underline-offset: 2px; }
+.prose a { color: var(--orange); text-decoration: underline; text-underline-offset: 2px; transition: color var(--t-fast); }
+.prose a:hover { color: var(--orange-dark); }
+
+/* Interactive cards — when a .feature-card is itself a link, give it real 3D
+   depth: a pointer-driven perspective tilt (vars set by app.js), a spotlight
+   sheen that tracks the cursor, and inner content that floats forward on a
+   second plane. Static info cards (<div>) stay flat and grounded. At rest no
+   transform is set, so the scroll-reveal rise is unaffected. */
+a.feature-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform var(--t), border-color var(--t), box-shadow var(--t);
+}
+/* Cursor-tracking spotlight — sits below the content, above the card surface. */
+a.feature-card::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  pointer-events: none; z-index: 0; opacity: 0; transition: opacity var(--t);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--orange) 20%, transparent), transparent 58%);
+}
+a.feature-card > * { position: relative; z-index: 1; transition: transform var(--t); }
+a.feature-card:focus-visible { border-color: var(--orange); }
+a.feature-card.is-tilting { transition: transform 0.1s ease-out, border-color var(--t), box-shadow var(--t); }
+
+@media (hover: hover) {
+  a.feature-card:hover {
+    transform: perspective(820px) translateY(-5px) scale(1.015)
+      rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    border-color: color-mix(in srgb, var(--orange) 42%, var(--border));
+    box-shadow: var(--shadow-xl);
+  }
+  a.feature-card:hover::after { opacity: 1; }
+  /* Inner content lifts onto a forward plane for genuine parallax depth. */
+  a.feature-card:hover h3 { transform: translateZ(38px); }
+  a.feature-card:hover p { transform: translateZ(26px); }
+  a.feature-card:hover .inline-cta-link { transform: translateZ(48px); }
+  a.feature-card:hover .inline-cta-link {
+    background: color-mix(in srgb, var(--orange) 15%, transparent);
+  }
+}
+
+/* Data figures read better with lining tabular numerals than the body's
+   default old-style proportional figures (which vary in height). */
+.stat-card .stat-num, .roi-headline-value, .ss-score-num {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Calculator headline pulses when the result changes (added by calc.js /
+   roi.js to the primary output span). */
+.roi-headline-value [data-calc-out="primary"],
+.roi-headline-value #roi-lost-mo { display: inline-block; transform-origin: left center; }
+.calc-bump { animation: calcBump 0.42s cubic-bezier(0.22, 1, 0.36, 1); }
+@keyframes calcBump {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.06); color: var(--orange); }
+  100% { transform: scale(1); }
+}
 
 /* Feature grid */
 .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin: 28px 0; }

@@ -44,7 +44,7 @@ export const comparisons: Comparison[] = [
     competitor: 'Instantly',
     category: 'Cold email sending',
     pillar: 'outbound',
-    title: 'The Best Instantly Alternative — AI That Books Meetings | Keres AI',
+    title: 'Best Instantly Alternative — Books Meetings | Keres AI',
     description:
       'Searching for an Instantly alternative? Keres AI adds AI personalization, reply handling, and meeting booking on top of deliverability and sending. See the comparison.',
     h1Accent: 'Instantly',
@@ -94,7 +94,7 @@ export const comparisons: Comparison[] = [
     competitor: 'Smith.ai',
     category: 'Virtual receptionist & answering service',
     pillar: 'inbound',
-    title: 'The Best Smith.ai Alternative — Flat-Rate AI Receptionist | Keres AI',
+    title: 'Best Smith.ai Alternative — AI Receptionist | Keres AI',
     description:
       'Looking for a Smith.ai alternative? Keres AI answers every call 24/7, books appointments, and runs on flat-rate pricing — no per-call fees. See the full comparison.',
     h1Accent: 'Smith.ai',
@@ -144,7 +144,7 @@ export const comparisons: Comparison[] = [
     competitor: 'Goodcall',
     category: 'AI phone agent',
     pillar: 'inbound',
-    title: 'The Best Goodcall Alternative — Done-For-You AI Receptionist | Keres AI',
+    title: 'Best Goodcall Alternative — AI Receptionist | Keres AI',
     description:
       'Need a Goodcall alternative? Keres AI is a done-for-you AI receptionist — we build your call flows, integrate your stack, and book appointments, not just answer.',
     h1Accent: 'Goodcall',
@@ -169,7 +169,7 @@ export const comparisons: Comparison[] = [
     competitor: 'Rosie',
     category: 'AI answering service',
     pillar: 'inbound',
-    title: 'The Best Rosie Alternative — AI Receptionist That Books | Keres AI',
+    title: 'Best Rosie Alternative — AI Receptionist | Keres AI',
     description:
       'Comparing Rosie alternatives? Keres AI answers every call 24/7, books appointments live, integrates with your CRM and field-service tools, and adds AI outbound.',
     h1Accent: 'Rosie',
@@ -291,7 +291,7 @@ export const comparisons: Comparison[] = [
     pillar: 'inbound',
     title: 'The Best Calendly Alternative for Inbound Calls | Keres AI',
     description:
-      'Calendly handles online self-scheduling. Keres AI handles inbound calls — answering every call 24/7, qualifying the caller, and booking the appointment in real time without a link.',
+      'Calendly handles online self-scheduling; Keres AI handles inbound calls — answering 24/7, qualifying the caller, and booking the appointment in real time.',
     h1Accent: 'Calendly',
     intro:
       'Calendly is an online self-scheduling link for callers who are already online. Keres fills the gap Calendly cannot: answering every inbound phone call 24/7, qualifying the caller by voice, and booking the appointment in real time — for the majority of service customers who pick up the phone rather than filling out a form.',
