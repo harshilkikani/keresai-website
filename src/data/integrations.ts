@@ -19,7 +19,7 @@ export const integrations: Integration[] = [
     name: 'ServiceTitan',
     category: 'Field Service',
     targetKeyword: 'servicetitan ai receptionist',
-    title: 'Keres AI + ServiceTitan — AI Receptionist for ServiceTitan | Keres AI',
+    title: 'Keres AI + ServiceTitan — AI Receptionist Integration',
     description:
       'Connect Keres AI to ServiceTitan to answer every call 24/7 and book jobs straight into your ServiceTitan tenant. Customers, calls, and jobs sync automatically.',
     intro:
@@ -42,7 +42,7 @@ export const integrations: Integration[] = [
     name: 'Jobber',
     category: 'Field Service',
     targetKeyword: 'jobber ai receptionist',
-    title: 'Keres AI + Jobber — AI Receptionist That Books Into Jobber | Keres AI',
+    title: 'Keres AI + Jobber — Book Jobs From Every Call',
     description:
       'Connect Keres AI to Jobber to answer calls 24/7 and book work directly in Jobber. Quotes, jobs, and customers sync both ways.',
     intro:
@@ -65,7 +65,7 @@ export const integrations: Integration[] = [
     name: 'Housecall Pro',
     category: 'Field Service',
     targetKeyword: 'housecall pro ai receptionist',
-    title: 'Keres AI + Housecall Pro — AI Receptionist Integration | Keres AI',
+    title: 'Keres AI + Housecall Pro — AI Receptionist',
     description:
       'Connect Keres AI to Housecall Pro to answer every call 24/7 and book jobs into Housecall Pro. Customers, jobs, and payments stay in sync.',
     intro:
@@ -88,7 +88,7 @@ export const integrations: Integration[] = [
     name: 'HubSpot',
     category: 'CRM',
     targetKeyword: 'hubspot ai receptionist integration',
-    title: 'Keres AI + HubSpot — AI Receptionist & SDR for HubSpot | Keres AI',
+    title: 'Keres AI + HubSpot — AI Receptionist & SDR',
     description:
       'Connect Keres AI to HubSpot to log every call, create contacts and deals as leads qualify, and book meetings — inbound and outbound, straight into your CRM.',
     intro:
@@ -111,7 +111,7 @@ export const integrations: Integration[] = [
     name: 'Twilio',
     category: 'Phone & SMS',
     targetKeyword: 'twilio ai receptionist',
-    title: 'Keres AI + Twilio — AI Receptionist on Your Twilio Numbers | Keres AI',
+    title: 'Keres AI + Twilio — AI on Your Twilio Numbers',
     description:
       'Connect Keres AI to Twilio to answer calls, send SMS, and stream voice transcripts through your Twilio numbers — a full AI receptionist on your existing telephony.',
     intro:
@@ -134,7 +134,7 @@ export const integrations: Integration[] = [
     name: 'RingCentral',
     category: 'Phone & SMS',
     targetKeyword: 'ringcentral ai receptionist',
-    title: 'Keres AI + RingCentral — AI Receptionist for RingCentral | Keres AI',
+    title: 'Keres AI + RingCentral — AI Receptionist',
     description:
       'Connect Keres AI to RingCentral to auto-answer and intelligently route calls from your RingCentral numbers, 24/7, and book appointments automatically.',
     intro:
@@ -157,7 +157,7 @@ export const integrations: Integration[] = [
     name: 'Google Calendar',
     category: 'Calendar',
     targetKeyword: 'ai receptionist google calendar',
-    title: 'Keres AI + Google Calendar — Book Appointments Automatically | Keres AI',
+    title: 'Keres AI + Google Calendar — Automatic Booking',
     description:
       'Connect Keres AI to Google Calendar so the AI receptionist books, confirms, and reschedules appointments on your team’s calendar in real time.',
     intro:
@@ -180,7 +180,7 @@ export const integrations: Integration[] = [
     name: 'Outlook',
     category: 'Calendar',
     targetKeyword: 'ai receptionist outlook calendar',
-    title: 'Keres AI + Outlook — AI Receptionist for Microsoft 365 | Keres AI',
+    title: 'Keres AI + Outlook — AI for Microsoft 365',
     description:
       'Connect Keres AI to Outlook / Microsoft 365 so the AI receptionist books and reschedules appointments on your calendar in real time, two-way.',
     intro:
@@ -226,7 +226,7 @@ export const integrations: Integration[] = [
     name: 'Make',
     category: 'Automation',
     targetKeyword: 'keres ai make integration',
-    title: 'Keres AI + Make (Integromat) — Automate Your Workflows | Keres AI',
+    title: 'Keres AI + Make — Automate Your Workflows',
     description:
       'Connect Keres AI to Make (Integromat) to use Keres events as triggers or actions in any scenario — automate bookings, leads, and follow-up across your stack.',
     intro:
@@ -249,7 +249,7 @@ export const integrations: Integration[] = [
     name: 'FieldEdge',
     category: 'Field Service',
     targetKeyword: 'keres ai fieldedge integration',
-    title: 'Keres AI + FieldEdge — AI Receptionist for HVAC & Plumbing | Keres AI',
+    title: 'Keres AI + FieldEdge — AI for HVAC & Plumbing',
     description:
       'Connect Keres AI to FieldEdge so every inbound call books a job directly in FieldEdge — dispatching techs, creating service agreements, and syncing customers automatically.',
     intro:
@@ -272,7 +272,7 @@ export const integrations: Integration[] = [
     name: 'Service Fusion',
     category: 'Field Service',
     targetKeyword: 'keres ai service fusion integration',
-    title: 'Keres AI + Service Fusion — AI Receptionist for Field Service | Keres AI',
+    title: 'Keres AI + Service Fusion — Field Service AI',
     description:
       'Connect Keres AI to Service Fusion so every inbound call books directly onto your dispatch board — no voicemail, no missed leads, no manual entry.',
     intro:
@@ -295,7 +295,7 @@ export const integrations: Integration[] = [
     name: 'Acuity Scheduling',
     category: 'Calendar',
     targetKeyword: 'keres ai acuity scheduling integration',
-    title: 'Keres AI + Acuity Scheduling — Book Appointments by Phone | Keres AI',
+    title: 'Keres AI + Acuity — Book Appointments by Phone',
     description:
       'Connect Keres AI to Acuity Scheduling so every inbound call books directly on your Acuity calendar — dental, med spa, and professional service bookings handled automatically 24/7.',
     intro:
@@ -318,7 +318,7 @@ export const integrations: Integration[] = [
     name: 'Slack',
     category: 'Automation',
     targetKeyword: 'keres ai slack integration',
-    title: 'Keres AI + Slack — Real-Time Call Alerts for Your Team | Keres AI',
+    title: 'Keres AI + Slack — Real-Time Call Alerts',
     description:
       'Connect Keres AI to Slack so your team gets instant notifications for every booked appointment, qualified lead, and emergency call — in the channel that matters.',
     intro:

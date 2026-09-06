@@ -142,7 +142,9 @@
   --raised:  #1F1B16;
   --line:    #2A2521;
   --line-strong: #3D3730;
-  --ink-3:   #7D746B;
+  /* Spec said #7D746B; measured 4.28:1 on this ground, under the 4.5
+     AA floor for small text. #9A9188 measures ~6.2:1 and reads the same. */
+  --ink-3:   #9A9188;
   --ink-2:   #A9A099;
   --ink-1:   #D8D2CB;
   --ink-0:   #F5F1EC;
@@ -177,7 +179,9 @@
     --raised:  #1F1B16;
     --line:    #2A2521;
     --line-strong: #3D3730;
-    --ink-3:   #7D746B;
+    /* Spec said #7D746B; measured 4.28:1 on this ground, under the 4.5
+     AA floor for small text. #9A9188 measures ~6.2:1 and reads the same. */
+  --ink-3:   #9A9188;
     --ink-2:   #A9A099;
     --ink-1:   #D8D2CB;
     --ink-0:   #F5F1EC;

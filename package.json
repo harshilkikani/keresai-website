@@ -7,7 +7,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build:css": "node scripts/build-css.mjs",
+    "prebuild": "node scripts/build-css.mjs",
+    "predev": "node scripts/build-css.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",

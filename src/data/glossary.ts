@@ -27,7 +27,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['AI virtual receptionist', 'AI phone agent'],
     category: 'AI Receptionist',
     targetKeyword: 'what is an ai receptionist',
-    title: 'What Is an AI Receptionist? Definition & How It Works | Keres AI',
+    title: 'What Is an AI Receptionist? Definition | Keres AI',
     description:
       'An AI receptionist answers business calls 24/7, qualifies callers, and books appointments automatically. Learn how it works, how it differs from an answering service, and what it costs.',
     definition:
@@ -63,7 +63,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['automated answering service', 'virtual answering service'],
     category: 'AI Receptionist',
     targetKeyword: 'what is an ai answering service',
-    title: 'What Is an AI Answering Service? Definition & Benefits | Keres AI',
+    title: 'What Is an AI Answering Service? Definition | Keres',
     description:
       'An AI answering service answers and handles business calls automatically at a flat rate — booking appointments and capturing leads 24/7 instead of just taking messages.',
     definition:
@@ -92,7 +92,7 @@ export const glossary: GlossaryTerm[] = [
     term: 'Virtual Receptionist',
     category: 'AI Receptionist',
     targetKeyword: 'what is a virtual receptionist',
-    title: 'What Is a Virtual Receptionist? Definition + AI Options | Keres AI',
+    title: 'What Is a Virtual Receptionist? Definition | Keres',
     description:
       'A virtual receptionist answers and manages business calls remotely. Learn the difference between human virtual receptionists and AI receptionists, and which fits your business.',
     definition:
@@ -116,7 +116,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['missed call automation'],
     category: 'AI Receptionist',
     targetKeyword: 'what is missed call text back',
-    title: 'What Is Missed-Call Text-Back? How It Recovers Lost Leads | Keres AI',
+    title: 'What Is Missed-Call Text-Back? Definition | Keres',
     description:
       'Missed-call text-back automatically sends a text to any caller you miss, so the lead never goes cold. Learn how it works and why it recovers revenue.',
     definition:
@@ -140,7 +140,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['overflow answering', 'call spillover'],
     category: 'AI Receptionist',
     targetKeyword: 'what is call overflow handling',
-    title: 'What Is Call Overflow Handling? Definition & Examples | Keres AI',
+    title: 'What Is Call Overflow Handling? Definition | Keres',
     description:
       'Call overflow handling routes calls your team can’t answer to a backup that picks up instantly. Learn how AI overflow keeps every caller from hitting voicemail.',
     definition:
@@ -187,7 +187,7 @@ export const glossary: GlossaryTerm[] = [
     term: 'Lead Qualification',
     category: 'AI Receptionist',
     targetKeyword: 'what is lead qualification',
-    title: 'What Is Lead Qualification? Definition & How AI Does It | Keres AI',
+    title: 'What Is Lead Qualification? Definition | Keres AI',
     description:
       'Lead qualification is the process of determining whether a prospect is a good fit. Learn how AI qualifies leads on every call so your team only talks to real opportunities.',
     definition:
@@ -211,7 +211,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['AI sales development rep', 'AI outbound agent'],
     category: 'AI SDR & Outbound',
     targetKeyword: 'what is an ai sdr',
-    title: 'What Is an AI SDR? Definition & How It Books Meetings | Keres AI',
+    title: 'What Is an AI SDR? Definition & How It Works | Keres',
     description:
       'An AI SDR automates outbound sales development — building and sending personalized email sequences, handling replies, and booking meetings without hiring a human rep.',
     definition:
@@ -241,7 +241,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['cold emailing', 'outbound email'],
     category: 'AI SDR & Outbound',
     targetKeyword: 'what is cold email outreach',
-    title: 'What Is Cold Email Outreach? Definition & Best Practices | Keres AI',
+    title: 'What Is Cold Email Outreach? Definition | Keres AI',
     description:
       'Cold email outreach is sending unsolicited but relevant emails to prospects to start a sales conversation. Learn how to do it without landing in spam.',
     definition:
@@ -288,7 +288,7 @@ export const glossary: GlossaryTerm[] = [
     term: 'Email Deliverability',
     category: 'Email Deliverability',
     targetKeyword: 'what is email deliverability',
-    title: 'What Is Email Deliverability? How to Reach the Inbox | Keres AI',
+    title: 'What Is Email Deliverability? Definition | Keres AI',
     description:
       'Email deliverability is whether your emails reach the inbox instead of spam. Learn the factors that control it — authentication, reputation, and warmup.',
     definition:
@@ -318,7 +318,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['SPF record'],
     category: 'Email Deliverability',
     targetKeyword: 'what is an spf record',
-    title: 'What Is an SPF Record? Email Authentication Explained | Keres AI',
+    title: 'What Is an SPF Record? Email Authentication | Keres',
     description:
       'SPF (Sender Policy Framework) is a DNS record that lists which servers may send email for your domain. Learn how it works and why it matters for deliverability.',
     definition:
@@ -342,7 +342,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['DKIM signature'],
     category: 'Email Deliverability',
     targetKeyword: 'what is dkim',
-    title: 'What Is DKIM? DomainKeys Identified Mail Explained | Keres AI',
+    title: 'What Is DKIM? Email Authentication Explained | Keres',
     description:
       'DKIM adds a cryptographic signature to your emails so receivers can verify they weren’t altered and really came from your domain. Learn how it works.',
     definition:
@@ -366,7 +366,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['DMARC policy', 'Domain-based Message Authentication'],
     category: 'Email Deliverability',
     targetKeyword: 'what is dmarc',
-    title: 'What Is DMARC? Email Authentication Policy Explained | Keres AI',
+    title: 'What Is DMARC? Email Authentication Policy | Keres',
     description:
       'DMARC tells receiving servers what to do when an email fails SPF and DKIM, and reports who is sending as your domain. Learn how it protects your domain and inbox placement.',
     definition:
@@ -437,7 +437,7 @@ export const glossary: GlossaryTerm[] = [
     term: 'Missed-Call Recovery',
     category: 'AI Receptionist',
     targetKeyword: 'what is missed call recovery',
-    title: 'What Is Missed-Call Recovery? How to Win Back Lost Calls | Keres AI',
+    title: 'What Is Missed-Call Recovery? Definition | Keres AI',
     description:
       'Missed-call recovery is the practice of recapturing leads from calls you didn’t answer. Learn how AI answering and text-back turn missed calls into booked jobs.',
     definition:
@@ -579,7 +579,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['outbound prospecting'],
     category: 'AI SDR & Outbound',
     targetKeyword: 'what is outbound sales',
-    title: 'What Is Outbound Sales? Definition & How AI Scales It | Keres AI',
+    title: 'What Is Outbound Sales? Definition | Keres AI',
     description:
       'Outbound sales is proactively reaching prospects who haven’t contacted you — by email, phone, or social. Learn how an AI SDR scales outbound and books meetings.',
     definition:
@@ -674,7 +674,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['after-hours answering service', 'after-hours call answering'],
     category: 'AI Receptionist',
     targetKeyword: 'what is after-hours answering',
-    title: 'What Is After-Hours Answering? Definition & Best Options | Keres AI',
+    title: 'What Is After-Hours Answering? Definition | Keres',
     description:
       'After-hours answering handles calls that come in when your office is closed — booking appointments and capturing leads 24/7 so no after-hours caller is lost.',
     definition:
@@ -705,7 +705,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['emergency call dispatch', 'dispatch automation'],
     category: 'AI Receptionist',
     targetKeyword: 'what is emergency dispatch',
-    title: 'What Is Emergency Dispatch? How AI Handles Urgent Calls | Keres AI',
+    title: 'What Is Emergency Dispatch? Definition | Keres AI',
     description:
       'Emergency dispatch routes urgent calls — HVAC no-cools, burst pipes, storm damage, roadside rescues — to your on-call crew instantly. Learn how AI automates it.',
     definition:
@@ -765,7 +765,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['law firm intake', 'client intake for lawyers'],
     category: 'AI Receptionist',
     targetKeyword: 'what is legal intake',
-    title: 'What Is Legal Intake? How AI Handles It for Law Firms | Keres AI',
+    title: 'What Is Legal Intake? Definition for Law Firms | Keres',
     description:
       'Legal intake is the process of qualifying and onboarding new legal clients — capturing case details, running conflict checks, and booking consultations. Learn how AI automates it.',
     definition:
@@ -826,7 +826,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['speed to lead', 'lead follow-up time'],
     category: 'AI Receptionist',
     targetKeyword: 'what is lead response time',
-    title: 'What Is Lead Response Time? Why Speed to Lead Wins | Keres AI',
+    title: 'What Is Lead Response Time? Definition | Keres AI',
     description:
       'Lead response time is how quickly you contact a new lead after they reach out. Research consistently shows the first business to respond wins the job — learn how AI closes the gap.',
     definition:
@@ -856,7 +856,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['AI front desk', 'automated front desk'],
     category: 'AI Receptionist',
     targetKeyword: 'what is front desk automation',
-    title: 'What Is Front Desk Automation? AI That Runs Your Front Desk | Keres AI',
+    title: 'What Is Front Desk Automation? Definition | Keres',
     description:
       'Front desk automation uses AI to handle calls, book appointments, qualify leads, and answer questions automatically — replacing or supplementing human receptionists.',
     definition:

@@ -4,6 +4,7 @@ const year = new Date().getFullYear();
 const found = plans.find((p) => p.slug === 'found')!;
 ---
 <footer role="contentinfo">
+  <h2 class="visually-hidden">Site footer</h2>
   <div class="footer-grid">
     <div class="footer-brand">
       <a href="/" class="logo" aria-label="Keres AI">
@@ -26,7 +27,7 @@ const found = plans.find((p) => p.slug === 'found')!;
     </div>
 
     <div class="footer-col">
-      <h4>Agents</h4>
+      <h3>Agents</h3>
       <ul>
         {agents.map((a) => (
           <li><a href={`/agents/${a.slug}`}>{a.name} &mdash; {a.title}</a></li>
@@ -37,7 +38,7 @@ const found = plans.find((p) => p.slug === 'found')!;
     </div>
 
     <div class="footer-col">
-      <h4>Industries</h4>
+      <h3>Industries</h3>
       <ul>
         <li><a href="/industries/law-firms">Law firms</a></li>
         <li><a href="/industries/home-services">Home services</a></li>
@@ -48,7 +49,7 @@ const found = plans.find((p) => p.slug === 'found')!;
     </div>
 
     <div class="footer-col">
-      <h4>Services</h4>
+      <h3>Services</h3>
       <ul>
         <li><a href="/services">All services</a></li>
         <li><a href="/services/found">Found &mdash; {found.from}</a></li>
@@ -60,7 +61,7 @@ const found = plans.find((p) => p.slug === 'found')!;
     </div>
 
     <div class="footer-col">
-      <h4>Company</h4>
+      <h3>Company</h3>
       <ul>
         <li><a href="/about">About</a></li>
         <li><a href="/trust">Security</a></li>
@@ -72,7 +73,7 @@ const found = plans.find((p) => p.slug === 'found')!;
     </div>
 
     <div class="footer-col">
-      <h4>Legal</h4>
+      <h3>Legal</h3>
       <ul>
         <li><a href="/legal/privacy.html">Privacy policy</a></li>
         <li><a href="/legal/terms.html">Terms of service</a></li>

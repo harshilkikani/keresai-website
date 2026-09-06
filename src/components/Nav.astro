@@ -93,7 +93,7 @@ const agentLinks = agents.map((a) => ({
 
       <a href="/demo" class="nav-demo-link desktop-only" data-event="demo_click">Book a demo</a>
 
-      <a href={PHONE.href} class="nav-phone" data-event="tel_click">
+      <a href={PHONE.href} class="nav-phone" data-event="tel_click" aria-label={`Call Keres AI on ${PHONE.display}`}>
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 5.2 2 2 0 0 1 6 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
         </svg>

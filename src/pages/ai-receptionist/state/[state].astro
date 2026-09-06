@@ -58,7 +58,7 @@ const serviceSchema = {
 
 const webpage = webPageSchema({
   path,
-  name: `AI Receptionist in ${s.stateFull} — Answer Every Call 24/7 | Keres AI`,
+  name: `AI Receptionist in ${s.stateFull} | Keres AI`,
   description: `Keres AI is a 24/7 AI receptionist for ${s.stateFull} businesses. Answer every call, book appointments, and never miss a lead — statewide.`,
   speakableSelectors: ['.answer-block', '.faq-a', '.lead'],
 });
@@ -73,7 +73,7 @@ const professionalVerticals = industries.filter((i) =>
 const otherStates = states.filter((x) => x.slug !== s.slug);
 ---
 <Layout
-  title={`AI Receptionist in ${s.stateFull} — Answer Every Call 24/7 | Keres AI`}
+  title={`AI Receptionist in ${s.stateFull} | Keres AI`}
   description={`Keres AI is a 24/7 AI receptionist for ${s.stateFull} businesses. Answer every call, book appointments, and never miss a lead — statewide. Book a demo.`}
   path={path}
 >

@@ -44,7 +44,7 @@ export const comparisons: Comparison[] = [
     competitor: 'Instantly',
     category: 'Cold email sending',
     pillar: 'outbound',
-    title: 'The Best Instantly Alternative — AI That Books Meetings | Keres AI',
+    title: 'The Best Instantly Alternative — Books Meetings | Keres',
     description:
       'Searching for an Instantly alternative? Keres AI adds AI personalization, reply handling, and meeting booking on top of deliverability and sending. See the comparison.',
     h1Accent: 'Instantly',
@@ -69,7 +69,7 @@ export const comparisons: Comparison[] = [
     competitor: 'Smartlead',
     category: 'Cold email infrastructure',
     pillar: 'outbound',
-    title: 'The Best Smartlead Alternative — Done-For-You AI SDR | Keres AI',
+    title: 'The Best Smartlead Alternative — AI SDR | Keres',
     description:
       'Need a Smartlead alternative? Keres AI is a done-for-you AI SDR — sending, deliverability, AI personalization, reply handling, and booked meetings in one platform.',
     h1Accent: 'Smartlead',
@@ -94,7 +94,7 @@ export const comparisons: Comparison[] = [
     competitor: 'Smith.ai',
     category: 'Virtual receptionist & answering service',
     pillar: 'inbound',
-    title: 'The Best Smith.ai Alternative — Flat-Rate AI Receptionist | Keres AI',
+    title: 'The Best Smith.ai Alternative — Flat Rate | Keres',
     description:
       'Looking for a Smith.ai alternative? Keres AI answers every call 24/7, books appointments, and runs on flat-rate pricing — no per-call fees. See the full comparison.',
     h1Accent: 'Smith.ai',
@@ -144,7 +144,7 @@ export const comparisons: Comparison[] = [
     competitor: 'Goodcall',
     category: 'AI phone agent',
     pillar: 'inbound',
-    title: 'The Best Goodcall Alternative — Done-For-You AI Receptionist | Keres AI',
+    title: 'The Best Goodcall Alternative — Done For You | Keres',
     description:
       'Need a Goodcall alternative? Keres AI is a done-for-you AI receptionist — we build your call flows, integrate your stack, and book appointments, not just answer.',
     h1Accent: 'Goodcall',
@@ -169,7 +169,7 @@ export const comparisons: Comparison[] = [
     competitor: 'Rosie',
     category: 'AI answering service',
     pillar: 'inbound',
-    title: 'The Best Rosie Alternative — AI Receptionist That Books | Keres AI',
+    title: 'The Best Rosie Alternative — Books the Job | Keres',
     description:
       'Comparing Rosie alternatives? Keres AI answers every call 24/7, books appointments live, integrates with your CRM and field-service tools, and adds AI outbound.',
     h1Accent: 'Rosie',
@@ -241,7 +241,7 @@ export const comparisons: Comparison[] = [
     competitor: 'Numa',
     category: 'AI phone agent for small business',
     pillar: 'inbound',
-    title: 'The Best Numa Alternative — AI Receptionist That Books | Keres AI',
+    title: 'The Best Numa Alternative — Books the Job | Keres',
     description:
       'Looking for a Numa alternative? Keres AI answers every call in two rings, qualifies leads, and books appointments live on your calendar — purpose-built for service businesses.',
     h1Accent: 'Numa',
@@ -265,7 +265,7 @@ export const comparisons: Comparison[] = [
     competitor: 'OpenPhone',
     category: 'Business phone system',
     pillar: 'inbound',
-    title: 'The Best OpenPhone Alternative for Service Businesses | Keres AI',
+    title: 'The Best OpenPhone Alternative | Keres AI',
     description:
       'Looking for an OpenPhone alternative? Keres AI is a done-for-you AI receptionist that answers every call 24/7 and books appointments — not just a shared phone inbox.',
     h1Accent: 'OpenPhone',

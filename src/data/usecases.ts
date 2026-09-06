@@ -20,7 +20,7 @@ export const usecases: UseCase[] = [
     slug: 'after-hours-answering',
     name: 'After-hours answering',
     targetKeyword: 'after hours answering service',
-    title: 'After-Hours Answering Service — Never Miss a Night Call | Keres AI',
+    title: 'After-Hours Answering Service | Keres AI',
     description:
       'Keres answers every call after hours, on weekends, and on holidays — booking appointments and flagging emergencies so you never lose a lead to voicemail at 9 PM.',
     h1: 'Answer every call <span class="accent">after hours</span>',
@@ -50,7 +50,7 @@ export const usecases: UseCase[] = [
     slug: 'overflow-call-handling',
     name: 'Overflow call handling',
     targetKeyword: 'overflow call handling service',
-    title: 'Overflow Call Handling — Catch Every Spillover Call | Keres AI',
+    title: 'Overflow Call Handling — Catch Every Call | Keres',
     description:
       'Keres picks up the calls your team can’t — busy lines, peak season, marketing spikes — answering instantly and booking the job instead of sending callers to voicemail.',
     h1: 'Never drop an <span class="accent">overflow call</span>',
@@ -110,7 +110,7 @@ export const usecases: UseCase[] = [
     slug: 'lead-capture',
     name: 'Lead capture & qualification',
     targetKeyword: '24/7 lead capture',
-    title: 'Never Miss a Lead — 24/7 Lead Capture & Qualification | Keres AI',
+    title: '24/7 Lead Capture & Qualification | Keres AI',
     description:
       'Keres captures and qualifies every inbound lead 24/7 — asking the right questions, scoring fit, and routing real opportunities to your team while filtering the noise.',
     h1: 'Capture and qualify <span class="accent">every lead</span>',
@@ -140,7 +140,7 @@ export const usecases: UseCase[] = [
     slug: 'reduce-staffing-costs',
     name: 'Reduce staffing costs',
     targetKeyword: 'reduce front desk staffing costs',
-    title: 'Reduce Front-Desk Staffing Costs With an AI Receptionist | Keres AI',
+    title: 'Reduce Front-Desk Staffing Costs | Keres AI',
     description:
       'Cover the phones 24/7 without hiring. Keres answers, qualifies, and books at a flat monthly rate — far less than a full-time receptionist or a per-minute answering service.',
     h1: 'Cover the phones <span class="accent">without hiring</span>',
@@ -170,7 +170,7 @@ export const usecases: UseCase[] = [
     slug: 'spam-call-screening',
     name: 'Spam-call screening',
     targetKeyword: 'spam call screening for business',
-    title: 'Spam-Call Screening — Stop Wasting Time on Junk Calls | Keres AI',
+    title: 'Spam-Call Screening — Stop Junk Calls | Keres AI',
     description:
       'Keres screens inbound calls so your team only handles real customers — filtering robocalls, solicitors, and spam while booking genuine leads 24/7.',
     h1: 'Screen out <span class="accent">spam and robocalls</span>',

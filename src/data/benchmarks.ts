@@ -105,7 +105,7 @@ export const benchmarks: Benchmark[] = [
     category: 'Pricing',
     pillar: 'pricing',
     eyebrow: 'Pricing · Study',
-    title: 'AI Receptionist Cost Study 2026 — What Coverage Costs | Keres AI',
+    title: 'AI Receptionist Cost Study 2026 | Keres AI',
     description:
       'A 2026 cost study comparing an AI receptionist to a full-time front-desk hire and a per-minute answering service — by coverage, predictability, and cost per booked call.',
     h1: 'AI receptionist',

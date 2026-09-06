@@ -97,9 +97,9 @@ const faqs = [
       </p>
     </div>
 
-    <div class="plan-row" role="list">
+    <ul class="plan-row">
       {plans.map((plan) => (
-        <article class:list={['plan-card', plan.flag && 'plan-card--featured']} role="listitem">
+        <li class:list={['plan-card', plan.flag && 'plan-card--featured']}>
           {plan.flag && <span class="plan-card__flag">{plan.flag}</span>}
           <h2 class="plan-card__name">{plan.name}</h2>
           <p class="plan-card__price" data-figure>{plan.from}</p>
@@ -114,9 +114,9 @@ const faqs = [
           <Button href="/demo" variant={plan.flag ? 'primary' : 'outline'} event="demo_click" wide>
             Get your quote
           </Button>
-        </article>
+        </li>
       ))}
-    </div>
+    </ul>
 
     <p class="plan-row__foot">
       Prices shown are starting points, not caps or averages. Custom is the only plan
