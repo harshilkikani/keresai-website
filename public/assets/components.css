@@ -661,7 +661,7 @@ html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] {
    section leads the page pays for it. Pages that open with breadcrumbs
    already carry their own offset, so this only fires where a k-section
    is genuinely first. */
-main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--space-6), 6vw, var(--space-9))); }
+main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--space-6), 4.5vw, var(--space-8))); }
 .k-hero { padding-bottom: var(--section); }
 .k-hero__grid {
   display: grid;
@@ -1497,7 +1497,7 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
 }
 .lp-wrap--narrow { max-width: var(--container-narrow); }
 
-.lp-hero { padding-block: clamp(var(--space-7), 7vw, var(--space-10)); background: var(--ground); }
+.lp-hero { padding-block: clamp(var(--space-6), 4.5vw, var(--space-8)) clamp(var(--space-7), 7vw, var(--space-10)); background: var(--ground); }
 .lp-hero__grid {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
@@ -1514,7 +1514,7 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
 }
 .lp-hero .k-lede { margin-top: var(--space-5); max-width: 52ch; }
 .lp-hero__ctas {
-  margin-top: var(--space-7);
+  margin-top: var(--space-5);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1610,30 +1610,45 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
 
 @media (max-width: 900px) {
   .lp-hero__grid, .lp-split { grid-template-columns: minmax(0, 1fr); }
-  /* The form comes first on a phone: it is the conversion. */
-  .lp-hero__grid .lp-form-card { order: -1; }
+  /* Eyebrow, headline and the call button stay above the form: on a
+     phone the tel: link is one tap and the form is four fields, and
+     the measured position of the call button was 1,352px down the
+     page when the card came first. */
+  .lp-hero__grid > div:first-child { display: contents; }
+  .lp-hero__grid .lp-eyebrow   { order: 1; }
+  .lp-hero__grid .k-display    { order: 2; }
+  .lp-hero__grid .lp-hero__ctas{ order: 3; }
+  .lp-hero__grid .lp-form-card { order: 4; margin-top: var(--space-6); }
+  .lp-hero__grid .k-lede       { order: 5; margin-top: var(--space-6); }
+  .lp-hero__grid .k-hero__facts{ order: 6; }
 }
 @media (max-width: 520px) {
   .lp-hero__ctas .btn-k--primary,
   .lp-close .btn-k--primary { width: 100%; justify-content: center; }
 }
 
-/* ─── Hero at 390px ───────────────────────────────────────
-   The headline and lede this page needs are long, and at 390px
-   they pushed the primary CTA under the fold. Rather than cut
-   prescribed copy or shrink the display size below its token,
-   the CTA row moves up under the headline on narrow screens —
-   the lede and the facts follow it. One primary action stays
-   visible without scrolling, which is the rule that matters. */
+/* ─── Hero order ──────────────────────────────────────────
+   The headlines these pages carry run to six and seven lines,
+   and with the lede between them and the buttons the primary
+   CTA fell under the fold at 1440x900, 1280x800 and 390x844
+   alike (measured, not assumed).
+
+   Two ways out: shrink the display type below its token, or
+   move the action up. The type is the design, so the action
+   moves: eyebrow → headline → CTA → lede → facts. Reading
+   order stays sensible and one primary action is visible
+   without scrolling at every size, which is the rule.
+
+   Applies at all widths so a headline getting one line longer
+   can never quietly push the button off screen again. */
 .k-hero__copy { display: flex; flex-direction: column; }
+.k-hero__copy > .k-eyebrow     { order: 1; }
+.k-hero__copy > .k-display     { order: 2; }
+.k-hero__copy > .k-hero__ctas  { order: 3; margin-top: var(--space-5); }
+.k-hero__copy > .k-lede        { order: 4; margin-top: var(--space-6); max-width: 56ch; }
+.k-hero__copy > .k-hero__facts { order: 5; }
 
 @media (max-width: 700px) {
-  .k-hero__copy > .k-eyebrow    { order: 1; }
-  .k-hero__copy > .k-display    { order: 2; }
-  .k-hero__copy > .k-hero__ctas { order: 3; margin-top: var(--space-6); }
-  .k-hero__copy > .k-lede       { order: 4; margin-top: var(--space-6); }
-  .k-hero__copy > .k-hero__facts{ order: 5; }
-
   main > .k-section:first-child { padding-top: calc(var(--nav-h) + var(--space-5)); }
   .k-hero__copy .k-display { margin-top: var(--space-3); }
 }
@@ -1723,3 +1738,10 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
 @media (max-width: 420px) {
   .footer-grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* A hero that follows breadcrumbs was paying for the nav offset twice:
+   .breadcrumbs already carries 100px of top padding to clear the fixed
+   header, and then .k-section added its own 120px on top. That stacked
+   220px of air above the eyebrow and pushed the CTA under the fold on
+   1280x800 laptops. */
+.breadcrumbs + .k-hero { padding-top: var(--space-6); }

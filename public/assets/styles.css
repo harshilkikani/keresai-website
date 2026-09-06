@@ -1060,7 +1060,9 @@ footer[role="contentinfo"] {
   max-width: var(--container); margin: 56px auto 0;
   padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08);
   display: flex; justify-content: space-between; align-items: center; gap: 20px;
-  font-size: 13px; color: rgba(255,255,255,0.4); flex-wrap: wrap;
+  /* rgba(255,255,255,0.4) composited to #6E6D6B on the footer ground —
+     3.8:1 at 13px, under AA. The shared muted token measures 5.0:1. */
+  font-size: 13px; color: var(--text-on-dark-muted); flex-wrap: wrap;
 }
 
 /* ─── Chatbot ──────────────────────────────────────── */
