@@ -1,0 +1,414 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Section from '../components/Section.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import Testimonial from '../components/Testimonial.astro';
+import CallTranscript from '../components/CallTranscript.astro';
+import DailyBrief from '../components/DailyBrief.astro';
+import {
+  organizationSchema,
+  softwareApplicationSchema,
+  websiteSchema,
+  faqSchema,
+} from '../data/schema';
+import { leaks } from '../data/leaks';
+import { agents, plans, PHONE } from '../data/site';
+
+const found = plans.find((p) => p.slug === 'found')!;
+
+// The four vertical hubs. Vocabulary here is the vertical's own —
+// consult / job / chair time / showing — never "customers".
+const industries = [
+  {
+    name: 'Law firms',
+    href: '/industries/law-firms',
+    line: 'Intake at 9 PM on a Sunday, conflict details captured, consult on the calendar before you open.',
+  },
+  {
+    name: 'Home services',
+    href: '/industries/home-services',
+    line: 'Emergency jobs triaged, dispatch windows given, estimates chased until they close.',
+  },
+  {
+    name: 'Dental & med spa',
+    href: '/industries/dental-med-spa',
+    line: 'Chair time filled from the cancellation list, recall rebooked, no-shows headed off the night before.',
+  },
+  {
+    name: 'Real estate',
+    href: '/industries/real-estate',
+    line: 'Listing calls answered on a Saturday, buyers qualified, showings booked without you in the car.',
+  },
+];
+
+// FAQ must answer cost, setup time, human handoff and contract terms.
+const faqs = [
+  {
+    q: 'How much does it cost?',
+    a: 'Found starts at $249/month, or $499/month for law firms. Answer, Convert and Grow each publish a starting price and are then quoted to your call volume, locations and integrations. There is no per-minute or per-call billing — a storm week and a quiet week cost the same. <a href="/pricing">See every plan and its floor</a>.',
+  },
+  {
+    q: 'How long does setup take?',
+    a: 'Most accounts are live within five business days. We map your call flows, connect your number, calendar and CRM, train the agent on your business, and test it with you before it answers a real call.',
+  },
+  {
+    q: 'What happens when a caller needs a person?',
+    a: 'The agent hands off. You set the rules — an emergency, a named client, anyone who asks for a human — and the call transfers to your on-call number while the agent texts you the context it already collected. Nothing is repeated back to the caller twice.',
+  },
+  {
+    q: 'Is there a contract?',
+    a: 'No. Every plan is month-to-month with no setup fee, and you can cancel anytime.',
+  },
+  {
+    q: 'Does it sound like a robot?',
+    a: 'It sounds like a competent front desk. It answers in two rings, uses your vocabulary — consult, job, chair time, showing — and it says "let me get someone" rather than guessing when it does not know. You can hear examples on the <a href="/hear-it">sample calls page</a> before you buy.',
+  },
+  {
+    q: 'What if I only want the phone answered?',
+    a: 'Then you want Answer, and you can stop there. Found is the visibility layer underneath, Convert adds follow-up, and Grow adds reactivation and outbound. You add a stage when the one below it is working, not before.',
+  },
+];
+---
+<Layout
+  title="AI Receptionist That Answers in Two Rings | Keres AI"
+  description="Keres answers every call in two rings, day or night, books the job on your calendar, and texts you what happened. Then it follows up, wins back old customers, and fills the pipeline. Plans from $249/month."
+  path="/"
+>
+  <Schema slot="head" graph={[organizationSchema, softwareApplicationSchema, websiteSchema, faqSchema(faqs)]} />
+
+  <!-- ── HERO ───────────────────────────────────────────── -->
+  <Section spacing="standard" labelledby="hero-title" class="k-hero">
+    <div class="k-hero__grid">
+      <div class="k-hero__copy">
+        <Eyebrow>For firms that live on the phone</Eyebrow>
+        <h1 id="hero-title" class="k-display">
+          The call you didn&rsquo;t answer just called someone else.
+        </h1>
+        <p class="k-lede">
+          Keres answers in two rings &mdash; nights, weekends, and while your hands are
+          full &mdash; then books the job, writes it to your CRM, and texts you what happened.
+        </p>
+        <div class="k-hero__ctas">
+          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          <Button href="/demo" variant="ghost" event="demo_click">Book a demo</Button>
+        </div>
+        <ul class="k-hero__facts">
+          <li><span class="k-hero__fact-k">Answers in</span><span class="k-hero__fact-v" data-figure>2 rings</span></li>
+          <li><span class="k-hero__fact-k">Live in</span><span class="k-hero__fact-v" data-figure>5 business days</span></li>
+          <li><span class="k-hero__fact-k">Plans from</span><span class="k-hero__fact-v" data-figure>$249/mo</span></li>
+        </ul>
+      </div>
+      <div class="k-hero__mock">
+        <CallTranscript vertical="default" />
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── THE SEVEN LEAKS ────────────────────────────────── -->
+  <Section tone="raised" spacing="major" labelledby="leaks-title" id="leaks">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Where it goes</Eyebrow>
+        <h2 id="leaks-title" class="k-h2">Seven places the money leaks out.</h2>
+        <p class="k-lede k-measure">
+          Almost nobody loses a customer in one dramatic moment. It happens in seven ordinary
+          ones, and every one of them is a task nobody in a five-person firm has time to do.
+          Each stage below names what plugs it.
+        </p>
+      </div>
+      <ol class="k-leaks">
+        {leaks.map((leak) => (
+          <li class="k-leak">
+            <span class="k-leak__n" data-figure>{leak.n}</span>
+            <div class="k-leak__body">
+              <h3 class="k-leak__title">{leak.title}</h3>
+              <p class="k-leak__text">{leak.body}</p>
+            </div>
+            <a class="k-leak__fix" href={leak.href}>
+              <span class="k-leak__fix-k">Plugged by</span>
+              <span class="k-leak__fix-v">{leak.fix}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <!-- ── THE FOUR AGENTS ────────────────────────────────── -->
+  <Section spacing="major" labelledby="agents-title" id="agents">
+    <div class="k-split k-split--top">
+      <div class="k-split__aside">
+        <Eyebrow>The workforce</Eyebrow>
+        <h2 id="agents-title" class="k-h2">Four agents. One phone number.</h2>
+        <p class="k-lede">
+          They are not four products you bolt together. They are one system that answers the
+          call, remembers it, and keeps working it after everyone has gone home.
+        </p>
+        <Button href="/services" variant="ghost">See how they work together</Button>
+      </div>
+      <ul class="k-agents">
+        {agents.map((agent) => (
+          <li class="k-agent">
+            <a class="k-agent__link" href={`/agents/${agent.slug}`}>
+              <h3 class="k-agent__name">{agent.name}</h3>
+              <p class="k-agent__leak">{agent.leak}</p>
+              <p class="k-agent__sum">{agent.summary}</p>
+              <span class="k-agent__go" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- ── FOUND ──────────────────────────────────────────── -->
+  <Section tone="inverse" spacing="standard" labelledby="found-title" id="found">
+    <div class="k-found">
+      <div class="k-found__copy">
+        <Eyebrow>Before the phone can ring</Eyebrow>
+        <h2 id="found-title" class="k-h2">An agent cannot answer a call you never got.</h2>
+        <p class="k-lede">
+          Found is the visibility layer under everything else: a conversion website that is
+          actually maintained, your Google Business Profile worked weekly, reviews asked for
+          on a schedule, listings kept straight, and the AI answers that now sit above the
+          blue links.
+        </p>
+        <ul class="k-found__list">
+          {found.includes.map((item) => <li>{item}</li>)}
+        </ul>
+        <div class="k-found__foot">
+          <p class="k-found__price">
+            <span class="k-found__from" data-figure>{found.from}</span>
+            <span class="k-found__per">/month &middot; {found.fromNote}</span>
+          </p>
+          <Button href="/services/found" variant="primary">What Found includes</Button>
+        </div>
+      </div>
+      <div class="k-found__mock">
+        <figure class="k-shot">
+          <picture>
+            <source srcset="/assets/img/operator-portal.webp" type="image/webp" />
+            <img
+              src="/assets/img/operator-portal.jpg"
+              width="1280" height="720" loading="lazy" decoding="async"
+              alt="The Keres operator console: a caller conversation on the left, answered calls and follow-ups on the right, and this month's inquiries, active showings and bookings along the bottom."
+            />
+          </picture>
+          <figcaption class="k-mock__caption">
+            The console you get with every plan. Screenshot uses example data.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── OWNER DAILY BRIEF ──────────────────────────────── -->
+  <Section tone="raised" spacing="major" labelledby="brief-title" id="brief">
+    <div class="k-split k-split--reverse">
+      <div class="k-split__aside">
+        <Eyebrow>Owner Daily Brief</Eyebrow>
+        <h2 id="brief-title" class="k-h2">One text at 6 AM. Not a dashboard you will never open.</h2>
+        <p class="k-lede">
+          Every morning you get what happened overnight and the one thing that needs a
+          person. Not a login, not a weekly report, not a notification you turn off in
+          week three &mdash; one message you read at a red light.
+        </p>
+        <p class="k-body k-measure">
+          Green is money that stayed. Amber is the single item waiting on you. If there is
+          nothing waiting on you, there is no amber line.
+        </p>
+      </div>
+      <div class="k-split__mock">
+        <DailyBrief vertical="default" />
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── INDUSTRIES ─────────────────────────────────────── -->
+  <Section spacing="standard" labelledby="ind-title" id="industries">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Who it is for</Eyebrow>
+        <h2 id="ind-title" class="k-h2">It uses your words, not &ldquo;customer.&rdquo;</h2>
+        <p class="k-lede k-measure">
+          A conflict check is not an intake form and chair time is not an appointment. The
+          agent is trained on the vocabulary and the questions your vertical actually asks.
+        </p>
+      </div>
+      <ul class="k-inds">
+        {industries.map((ind) => (
+          <li class="k-ind">
+            <a class="k-ind__link" href={ind.href}>
+              <h3 class="k-ind__name">{ind.name}</h3>
+              <p class="k-ind__line">{ind.line}</p>
+              <span class="k-ind__go" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="k-inds__foot">
+        Nine more specific pages &mdash; HVAC, plumbing, roofing, septic, towing, dentists,
+        med spas, real estate and professional intake &mdash; live under
+        <a href="/industries">all industries</a>.
+      </p>
+    </div>
+  </Section>
+
+  <!-- ── OUTBOUND CONSOLE (below the fold, lazy) ────────── -->
+  <Section tone="raised" spacing="standard" labelledby="out-title">
+    <div class="k-split">
+      <div class="k-split__aside">
+        <Eyebrow>Outbound Agent</Eyebrow>
+        <h2 id="out-title" class="k-h2">When referrals go quiet, this is the second source.</h2>
+        <p class="k-lede">
+          Cold email with the deliverability work actually done underneath it &mdash; SPF, DKIM
+          and DMARC configured, inboxes warmed, volume ramped, lists cleaned. Sending is the
+          easy half; landing is the half that gets skipped.
+        </p>
+        <Button href="/agents/outbound" variant="ghost">How outbound works</Button>
+      </div>
+      <div class="k-split__mock">
+        <figure class="k-shot">
+          <video
+            class="k-shot__video"
+            src="/assets/video/outbound-console.mp4"
+            poster="/assets/img/outbound-console.jpg"
+            preload="none" playsinline muted loop controls
+            width="1280" height="590"
+            aria-label="The outbound console: a lead library with per-contact deliverability status and campaign build."
+          ></video>
+          <figcaption class="k-mock__caption">
+            The outbound console. Recording uses example prospect data.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── CALCULATOR ─────────────────────────────────────── -->
+  <Section spacing="major" labelledby="roi-title" id="roi">
+    <Eyebrow>Missed-call calculator</Eyebrow>
+    <h2 id="roi-title" class="k-h2">Put your own numbers in.</h2>
+    <p class="k-lede k-measure">
+      Four inputs and the arithmetic shown in full, because a number you cannot check is
+      not worth having. <a href="/tools/missed-call-calculator">Open the full calculator</a>.
+    </p>
+
+    <div class="roi-shell" data-vertical="home-services">
+      <div class="roi-vert-row">
+        <button type="button" class="roi-vert-btn" data-vert="real-estate">Real estate</button>
+        <button type="button" class="roi-vert-btn active" data-vert="home-services">Home services</button>
+        <button type="button" class="roi-vert-btn" data-vert="med-spa">Dental &amp; med spa</button>
+        <button type="button" class="roi-vert-btn" data-vert="professional">Law firms</button>
+      </div>
+      <div class="roi-grid">
+        <div class="roi-inputs">
+          <label class="roi-field"><span class="roi-field-label">Monthly leads</span><input type="number" id="roi-leads" min="0" value="250"></label>
+          <label class="roi-field"><span class="roi-field-label">Answer rate %</span><input type="number" id="roi-answer" min="0" max="100" value="60"></label>
+          <label class="roi-field"><span class="roi-field-label">Avg ticket value</span><div class="roi-field-prefix"><span>$</span><input type="number" id="roi-job" min="0" value="680"></div></label>
+          <label class="roi-field"><span class="roi-field-label">After-hours lead %</span><input type="number" id="roi-afterhours" min="0" max="100" value="35"></label>
+        </div>
+        <div class="roi-output">
+          <div class="roi-headline-label">You&rsquo;re losing</div>
+          <div class="roi-headline-value"><span id="roi-lost-mo">$0</span><span class="roi-per">/mo</span></div>
+          <div class="roi-headline-year">&asymp; <span id="roi-lost-yr">$0</span> / year</div>
+          <div class="roi-math">
+            <div class="roi-math-row"><span>Missed leads / mo</span><span id="roi-missed">0</span></div>
+            <div class="roi-math-row muted"><span id="roi-missed-calc">= 250 × (100% − 60%)</span><span></span></div>
+            <div class="roi-math-row"><span>Would-have-closed jobs</span><span id="roi-jobs">0</span></div>
+            <div class="roi-math-row muted"><span id="roi-close-calc">= missed × 25% close rate</span><span></span></div>
+            <div class="roi-math-row"><span>Lost revenue</span><span id="roi-lost-mo-2">$0</span></div>
+            <div class="roi-math-row muted"><span id="roi-job-calc">= jobs × $680 avg ticket</span><span></span></div>
+            <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">0</span></div>
+            <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
+          </div>
+          <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href="/demo" data-event="demo_click">Book a demo with these numbers</a>
+          <div class="roi-note" id="roi-note">Close rate (25%) is the typical answered-lead close rate for home services. Swap in your own number if you track it.</div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── PROOF ──────────────────────────────────────────── -->
+  <Section tone="raised" spacing="standard" labelledby="proof-title" id="proof">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Proof</Eyebrow>
+        <h2 id="proof-title" class="k-h2">In their words, or not at all.</h2>
+        <p class="k-lede k-measure">
+          There are no invented numbers on this site. The slots below stay visible until a
+          real customer says a real thing on the record.
+        </p>
+      </div>
+      <div class="k-quotes">
+        <Testimonial proves="calls answered after hours turning into booked work" vertical="Home services" />
+        <Testimonial proves="consults booked from intake calls that used to hit voicemail" vertical="Law firms" />
+        <Testimonial proves="chair time recovered from cancellations and recall" vertical="Dental / med spa" />
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── THREE-STEP START ───────────────────────────────── -->
+  <Section spacing="standard" labelledby="start-title" id="start">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Getting started</Eyebrow>
+        <h2 id="start-title" class="k-h2">Three steps, about five business days.</h2>
+      </div>
+      <ol class="k-steps">
+        <li class="k-step">
+          <span class="k-step__n" data-figure>01</span>
+          <h3 class="k-step__title">We listen to how you answer now</h3>
+          <p class="k-step__text">A short call to map what actually happens when the phone rings, who it goes to, and what has to be asked before anything gets booked.</p>
+        </li>
+        <li class="k-step">
+          <span class="k-step__n" data-figure>02</span>
+          <h3 class="k-step__title">We connect and train</h3>
+          <p class="k-step__text">Your number, calendar and CRM go in. The agent learns your services, your hours, your prices and the handoff rules for when it should get a person.</p>
+        </li>
+        <li class="k-step">
+          <span class="k-step__n" data-figure>03</span>
+          <h3 class="k-step__title">You call it before anyone else does</h3>
+          <p class="k-step__text">You test it yourself, on your own number, until it answers the way you would. Then it goes live and the Daily Brief starts the next morning.</p>
+        </li>
+      </ol>
+    </div>
+  </Section>
+
+  <!-- ── FAQ ────────────────────────────────────────────── -->
+  <Section tone="raised" spacing="standard" labelledby="faq-title" id="faq">
+    <Eyebrow>Questions</Eyebrow>
+    <h2 id="faq-title" class="k-h2">The questions everyone asks first.</h2>
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary class="faq-q">{f.q}</summary>
+          <p class="faq-a" set:html={f.a} />
+        </details>
+      ))}
+    </div>
+  </Section>
+
+  <!-- ── CLOSE ──────────────────────────────────────────── -->
+  <Section tone="inverse" spacing="standard" labelledby="close-title">
+    <div class="k-close">
+      <h2 id="close-title" class="k-h2">Call the number and listen to it answer.</h2>
+      <p class="k-lede">
+        It is the same agent your customers would get. Ask it something awkward &mdash; that
+        is the point of the exercise.
+      </p>
+      <div class="k-close__ctas">
+        <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+        <Button href="/demo" variant="ghost" event="demo_click">Book a demo instead</Button>
+      </div>
+    </div>
+  </Section>
+
+  <script slot="scripts" src="/assets/roi.js?v=3" is:inline></script>
+</Layout>

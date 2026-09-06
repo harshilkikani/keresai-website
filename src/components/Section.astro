@@ -1,0 +1,39 @@
+---
+/**
+ * Vertical rhythm and ground tone for every band on the page.
+ *
+ * spacing: 'standard' → 120px desktop / 72px mobile
+ *          'major'    → 160px, for a genuine change of subject
+ * tone:    ground | raised | surface | inverse
+ * width:   default (1200) | wide (1360) | narrow (880)
+ *
+ * Layout inside a section is the caller's business, but the 12-column
+ * grid is available as .k-grid so compositions stay on one system.
+ */
+export interface Props {
+  id?: string;
+  tone?: 'ground' | 'raised' | 'surface' | 'inverse';
+  spacing?: 'standard' | 'major' | 'flush';
+  width?: 'default' | 'wide' | 'narrow';
+  labelledby?: string;
+  class?: string;
+}
+
+const {
+  id,
+  tone = 'ground',
+  spacing = 'standard',
+  width = 'default',
+  labelledby,
+  class: extraClass = '',
+} = Astro.props;
+---
+<section
+  id={id}
+  class:list={['k-section', `k-section--${tone}`, `k-section--${spacing}`, extraClass]}
+  aria-labelledby={labelledby}
+>
+  <div class:list={['k-container', width !== 'default' && `k-container--${width}`]}>
+    <slot />
+  </div>
+</section>

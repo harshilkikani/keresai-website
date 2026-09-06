@@ -1,0 +1,154 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { PHONE } from '../data/site';
+
+export interface Props {
+  title: string;
+  description: string;
+  /** Path only, e.g. "/agents/inbound". Combined with site origin for canonical + OG url. */
+  path: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  noindex?: boolean;
+  /**
+   * Ad landing pages (/lp/*) render with no nav and no footer links —
+   * the only things to click are the form, the phone, and the demo.
+   * Setting bare also loads the tracking layer.
+   */
+  bare?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  ogType = 'website',
+  ogImage = '/assets/img/og-image.png',
+  noindex = false,
+  bare = false,
+} = Astro.props;
+
+const origin = 'https://www.keresai.com';
+const canonical = origin + path;
+const ogImageAbs = ogImage.startsWith('http') ? ogImage : origin + ogImage;
+
+// ── Analytics + verification ──────────────────────────────
+// GoatCounter: free, privacy-friendly, cookieless (no consent banner needed).
+// Claim the free code at https://www.goatcounter.com/signup (use "keresai").
+// Set to '' to disable. CSP already allows gc.zgo.at + the count endpoint.
+const GOATCOUNTER_CODE = 'keresai';
+const goatcounterEndpoint = GOATCOUNTER_CODE ? `https://${GOATCOUNTER_CODE}.goatcounter.com/count` : '';
+// Search-engine verification. Prefer DNS TXT verification (no CSP impact);
+// paste a token here only if you verify via the HTML meta-tag method.
+// GSC: Search Console → Settings → Ownership → HTML tag (content value only).
+// Bing: Bing Webmaster Tools → verify → Meta tag (the content value only).
+const GSC_VERIFICATION = '';
+const BING_VERIFICATION = '';
+---
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light dark" />
+
+<!--
+  default-src stays 'none'. Only the directives the ad stack actually
+  needs are opened up:
+    script-src  — gtag.js (GA4 + Google Ads) and fbevents.js
+    connect-src — the beacon endpoints those two POST to
+    frame-src   — Google Ads conversion frames and the Meta pixel iframe
+  img-src is already 'self' data: https:, which covers every tracking
+  pixel, so it needs no change.
+  Note there is deliberately NO 'unsafe-inline' in script-src: the GA4
+  and Meta bootstraps live in /assets/tracking.js so the policy stays
+  tight. Never inline a tag snippet — it will be blocked silently.
+-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://gc.zgo.at https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://calendly.com https://keresai.goatcounter.com https://dns.google https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://connect.facebook.net https://graph.facebook.com; frame-src https://calendly.com https://td.doubleclick.net https://www.googletagmanager.com https://www.facebook.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+
+{GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
+{BING_VERIFICATION && <meta name="msvalidate.01" content={BING_VERIFICATION} />}
+{goatcounterEndpoint && <script data-goatcounter={goatcounterEndpoint} async src="https://gc.zgo.at/count.js" is:inline></script>}
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content="Keres AI" />
+{noindex
+  ? <meta name="robots" content="noindex, nofollow" />
+  : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
+<meta name="theme-color" content="#E85D04" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+<link rel="canonical" href={canonical} />
+<link rel="alternate" type="application/rss+xml" title="Keres AI — Resources & Guides" href="/rss.xml" />
+
+<!-- US English market. Multilingual UI is client-side only, so we do not advertise phantom localized URLs. -->
+<link rel="alternate" hreflang="en" href={canonical} />
+<link rel="alternate" hreflang="x-default" href={canonical} />
+
+<link rel="icon" type="image/png" href="/assets/img/KeresLogo.png" />
+<link rel="apple-touch-icon" href="/assets/img/KeresLogo.png" />
+<link rel="mask-icon" href="/assets/img/KeresLogo.png" color="#E85D04" />
+
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageAbs} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Keres AI — AI Receptionist & AI SDR platform" />
+<meta property="og:site_name" content="Keres AI" />
+<meta property="og:locale" content="en_US" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@keresai" />
+<meta name="twitter:creator" content="@keresai" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageAbs} />
+
+<link rel="preconnect" href="https://formspree.io" crossorigin />
+<link rel="preconnect" href="https://calendly.com" crossorigin />
+<!-- Self-hosted fonts (latin subset). No third-party font CDN → faster LCP, no extra DNS/TLS. -->
+<link rel="preload" href="/assets/fonts/6NU58FyLNQOQZAnv9ZwNjucMHVn85Ni7emAe9lKqZTnbB-gzTK0K1ChjeveQ.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/fonts/rP2Hp2ywxg089UriCZOIHQ.woff2" as="font" type="font/woff2" crossorigin />
+<!-- Cascade order matters: tokens define every variable the next three read. -->
+<link rel="stylesheet" href="/assets/fonts.css?v=1" />
+<link rel="stylesheet" href="/assets/tokens.css?v=1" />
+<link rel="stylesheet" href="/assets/styles.css?v=23" />
+<link rel="stylesheet" href="/assets/pages.css?v=4" />
+<link rel="stylesheet" href="/assets/components.css?v=9" />
+
+<!-- Page-specific structured data + head extras -->
+<slot name="head" />
+</head>
+
+<body class:list={[bare && 'is-bare']}>
+<a href="#main" class="skip-link">Skip to main content</a>
+{!bare && <Nav />}
+<main id="main">
+  <slot />
+</main>
+{!bare && <Footer />}
+
+{/* Sticky mobile bar: Call first, Book second. Suppressed only where the
+    page IS the conversion (demo/contact) — a bare LP still gets it. */}
+{path !== '/demo' && path !== '/contact' && (
+  <div class="sticky-bar" role="region" aria-label="Contact Keres">
+    <a href={PHONE.href} class="sticky-bar__call" data-event="tel_click">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 5.2 2 2 0 0 1 6 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <span>Call {PHONE.display}</span>
+    </a>
+    <a href="/demo" class="sticky-bar__demo" data-event="demo_click">Book a demo</a>
+  </div>
+)}
+<script src="/assets/app.js?v=12" is:inline></script>
+<script src="/assets/motion.js?v=1" is:inline></script>
+{bare && <script src="/assets/tracking.js?v=1" is:inline></script>}
+<slot name="scripts" />
+</body>
+</html>

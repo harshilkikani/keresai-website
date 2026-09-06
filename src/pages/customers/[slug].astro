@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { organizationSchema, breadcrumbSchema } from '../../data/schema';
+import { caseStudies } from '../../data/caseStudies';
+
+export function getStaticPaths() {
+  return caseStudies.map((cs) => ({ params: { slug: cs.slug }, props: { cs } }));
+}
+
+const { cs } = Astro.props;
+const ORIGIN = 'https://www.keresai.com';
+const path = `/customers/${cs.slug}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Customers', path: '/customers' },
+  { name: cs.client, path },
+];
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${ORIGIN}${path}#article`,
+  headline: cs.headline,
+  description: cs.summary,
+  url: ORIGIN + path,
+  ...(cs.date ? { datePublished: cs.date } : {}),
+  author: { '@type': 'Organization', name: 'Keres AI', url: ORIGIN },
+  publisher: { '@id': `${ORIGIN}/#organization` },
+  isPartOf: { '@id': `${ORIGIN}/#website` },
+  inLanguage: 'en-US',
+};
+---
+<Layout title={`${cs.headline} — Case Study | Keres AI`} description={cs.summary} path={path} ogType="article">
+  <Schema slot="head" graph={[articleSchema, breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">{cs.industry} · Case study</span>
+    <h1>{cs.headline}</h1>
+    <p class="lead">{cs.summary}</p>
+  </header>
+
+  <section class="page-section container">
+    <div class="feature-grid">
+      {cs.results.map((r) => (
+        <div class="feature-card" style="text-align:center">
+          <div style="font-family:var(--serif);font-size:40px;font-weight:300;color:var(--orange);line-height:1">{r.value}</div>
+          <p>{r.metric}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>The challenge</h2>
+      <p>{cs.challenge}</p>
+      <h2>The solution</h2>
+      <p>{cs.solution}</p>
+    </div>
+  </section>
+
+  {cs.quote && (
+    <section class="page-section container container-narrow">
+      <blockquote style="font-family:var(--serif);font-size:22px;line-height:1.5;border-left:4px solid var(--orange);padding-left:20px;margin:0">
+        “{cs.quote.text}”
+        <footer style="font-size:14px;color:var(--text-dim);margin-top:12px;font-family:var(--sans)">— {cs.quote.author}</footer>
+      </blockquote>
+    </section>
+  )}
+
+  <CtaBand heading="Want results like these?" sub="Book a free 30-minute demo and see Keres answer and book a call live." />
+</Layout>

@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema } from '../data/schema';
+
+const path = '/ai-sdr';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'AI SDR', path }];
+const faqs = [
+  { q: 'What is an AI SDR?', a: 'An AI SDR (sales development representative) is software that runs your outbound sales motion automatically. It builds and sends personalized cold-email sequences, manages deliverability and follow-up, handles replies, and books interested prospects onto your calendar — the work a human SDR does, without the headcount.' },
+  { q: 'How is Keres different from hiring a human SDR?', a: 'A human SDR costs $60k–$90k a year fully loaded, ramps for months, and sends maybe 100–200 emails a day. Keres runs continuously, scales sending across warmed inboxes, never forgets a follow-up, and books replies straight to your calendar — at a fraction of the cost.' },
+  { q: 'Does the AI SDR handle email deliverability?', a: 'Yes. Deliverability is built in — SPF, DKIM, DMARC, inbox warmup, sending-volume ramp, and list hygiene — so your outbound reaches the primary inbox instead of spam. See the <a href="/email-deliverability">email deliverability</a> page.' },
+  { q: 'Can it personalize emails at scale?', a: 'Yes. Keres researches each prospect and writes personalized opening lines and angles, so cold emails read like they were written for one person — across thousands of contacts.' },
+  { q: 'What happens when someone replies?', a: 'The AI reads the reply, responds in context, handles objections and scheduling, and books the meeting on your calendar — then hands a warm, qualified meeting to your closer.' },
+  { q: 'How fast can I launch outbound?', a: 'Most accounts are live within five business days, including domain and inbox setup and warmup kickoff. Month-to-month, cancel anytime.' },
+];
+---
+<Layout
+  title="AI SDR — Outbound That Books Meetings | Keres AI"
+  description="Keres AI is an AI SDR that runs personalized outbound email, lands in the inbox, and books qualified meetings on your calendar — without hiring a sales rep. Book a demo."
+  path={path}
+>
+  <Schema slot="head" graph={[
+    serviceSchema({ name: 'AI SDR', serviceType: 'Sales Automation', description: 'AI SDR that runs personalized outbound email, manages deliverability, and books qualified meetings automatically.', path }),
+    faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema,
+  ]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">AI SDR</span>
+    <h1>Outbound that <span class="accent">books meetings</span> — on autopilot</h1>
+    <p class="lead">Keres is an AI sales development rep. It writes personalized cold email, lands in the inbox, follows up, handles replies, and books qualified meetings on your calendar — without adding headcount.</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/apollo-alternative" class="btn btn-outline">Compare to Apollo</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block">
+      <p><strong>An AI SDR</strong> is software that runs your outbound sales development end to end: it builds targeted prospect lists, writes and sends personalized cold-email sequences, manages deliverability and follow-up, responds to replies, and books interested prospects onto your calendar — doing the job of a sales development rep without the salary, ramp time, or daily send limits.</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title" style="margin-bottom:8px">Target → personalize → land → book</h2>
+    <div class="feature-grid">
+      <div class="feature-card"><h3>Targeted lists</h3><p>Builds and enriches prospect lists that match your ideal customer profile.</p></div>
+      <div class="feature-card"><h3>Personalized at scale</h3><p>Researches each prospect and writes openers that read one-to-one — across thousands of contacts.</p></div>
+      <div class="feature-card"><h3>Deliverability built in</h3><p>SPF, DKIM, DMARC, inbox warmup, and volume ramp so you land in the primary inbox. <a href="/email-deliverability">Learn more</a>.</p></div>
+      <div class="feature-card"><h3>Books the meeting</h3><p>Reads replies, handles scheduling, and drops qualified meetings on your calendar.</p></div>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>AI SDR vs. hiring a sales rep</h2>
+      <p>A fully loaded human SDR runs $60k–$90k a year, takes months to ramp, and sends a few hundred emails a day on a good week. An AI SDR works continuously, scales across warmed inboxes, never drops a follow-up, and costs a fraction of a single hire. You keep your closers doing what they do best — closing the meetings Keres books.</p>
+      <p>Compare Keres to the tools you already know: <a href="/apollo-alternative">Apollo alternative</a>, <a href="/instantly-alternative">Instantly alternative</a>, <a href="/smartlead-alternative">Smartlead alternative</a>.</p>
+      <p>New to the terms? Learn <a href="/glossary/ai-sdr">what an AI SDR is</a>, <a href="/glossary/cold-email-outreach">cold email outreach</a>, <a href="/glossary/email-sequence">email sequences</a>, and <a href="/glossary/email-deliverability">email deliverability</a>. Check your domain with the free <a href="/tools/deliverability-checker">deliverability checker</a>.</p>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} title="AI SDR FAQ" />
+  <CtaBand heading="Put outbound on autopilot" sub="Book a demo and see how Keres books qualified meetings without a single new hire." />
+</Layout>

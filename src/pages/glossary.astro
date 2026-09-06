@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, breadcrumbSchema } from '../data/schema';
+import { glossary, glossaryCategories } from '../data/glossary';
+
+const path = '/glossary';
+const ORIGIN = 'https://www.keresai.com';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Glossary', path }];
+
+const termSet = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  '@id': `${ORIGIN}/glossary#termset`,
+  name: 'Keres AI Glossary',
+  description:
+    'Definitions of AI receptionist, AI SDR, and email deliverability terms for businesses that live on the phone.',
+  url: `${ORIGIN}/glossary`,
+  hasDefinedTerm: glossary.map((t) => ({
+    '@type': 'DefinedTerm',
+    name: t.term,
+    url: `${ORIGIN}/glossary/${t.slug}`,
+  })),
+};
+---
+<Layout
+  title="Glossary — AI Receptionist, AI SDR & Deliverability Terms | Keres AI"
+  description="Plain-English definitions of AI receptionist, AI SDR, appointment automation, and email deliverability terms — SPF, DKIM, DMARC, inbox warmup, and more."
+  path={path}
+>
+  <Schema slot="head" graph={[breadcrumbSchema(crumbs), termSet, organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Glossary</span>
+    <h1>The <span class="accent">Keres AI glossary</span></h1>
+    <p class="lead">Clear, plain-English definitions of the terms behind AI receptionists, AI outbound, and email deliverability — so you can make a confident decision.</p>
+  </header>
+
+  {glossaryCategories.map((cat) => (
+    <section class="page-section container">
+      <div class="section-label">{cat}</div>
+      <div class="feature-grid">
+        {glossary.filter((t) => t.category === cat).map((t) => (
+          <a class="feature-card" href={`/glossary/${t.slug}`} style="text-decoration:none; display:block;">
+            <h3>{t.term}</h3>
+            <p>{t.definition.replace(/<[^>]+>/g, '').slice(0, 150)}…</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <CtaBand heading="Ready to see it in action?" sub="Book a free 30-minute demo and watch Keres answer a call and book an appointment live." />
+</Layout>

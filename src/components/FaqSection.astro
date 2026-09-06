@@ -1,0 +1,38 @@
+---
+/**
+ * Shared FAQ band. Rebuilt on the Section/Eyebrow primitives so every
+ * page that already imports it inherits the left-aligned token styling
+ * rather than the old centered `.section-title` treatment.
+ *
+ * `tone` lets a page alternate the band against the section above it.
+ */
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+
+export interface Props {
+  faqs: { q: string; a: string }[];
+  title?: string;
+  eyebrow?: string;
+  tone?: 'ground' | 'raised' | 'surface';
+  id?: string;
+}
+const {
+  faqs,
+  title = 'Frequently asked questions',
+  eyebrow = 'Questions',
+  tone = 'raised',
+  id = 'faq',
+} = Astro.props;
+---
+<Section id={id} tone={tone} labelledby="faq-title">
+  <Eyebrow>{eyebrow}</Eyebrow>
+  <h2 id="faq-title" class="k-h2">{title}</h2>
+  <div class="faq-list">
+    {faqs.map((f) => (
+      <details class="faq-item">
+        <summary class="faq-q">{f.q}</summary>
+        <p class="faq-a" set:html={f.a} />
+      </details>
+    ))}
+  </div>
+</Section>

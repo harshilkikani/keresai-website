@@ -1,0 +1,68 @@
+import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
+
+// Canonical production origin. Drives sitemap + canonical URLs.
+// Per-page-type crawl priority. Higher = more important for crawlers.
+function priorityFor(url) {
+  const p = new URL(url).pathname.replace(/\.html$/, '');
+  if (p === '' || p === '/') return 1.0;
+  if (['/ai-receptionist', '/ai-sdr', '/email-deliverability', '/pricing', '/demo'].includes(p)) return 0.9;
+  if ([
+    '/glossary', '/integrations', '/use-cases', '/tools', '/blog', '/industries',
+    '/ai-answering-service', '/24-7-ai-receptionist', '/compare',
+    '/ai-receptionist/home-services', '/missed-call-statistics', '/benchmarks',
+  ].includes(p)) return 0.8;
+  // State hubs sit above individual city pages in the geographic hierarchy.
+  if (/^\/ai-receptionist\/state\//.test(p)) return 0.75;
+  // Industry pages, city pages, geo×vertical pages, benchmarks, comparisons,
+  // use-case, integration, glossary, and tool pages.
+  if (
+    /^\/(ai-receptionist-for-|ai-receptionist\/|integrations\/|use-cases\/|glossary\/|tools\/|benchmarks\/)/.test(p) ||
+    /-alternative$/.test(p)
+  ) return 0.7;
+  if (/^\/guides\//.test(p)) return 0.6;
+  return 0.5; // about, contact, customers, etc.
+}
+
+export default defineConfig({
+  site: 'https://www.keresai.com',
+  trailingSlash: 'never',
+  // Prefetch same-origin links on hover for near-instant navigation.
+  prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
+  integrations: [
+    sitemap({
+      // Legal pages and the resources.html redirect stay out of the sitemap.
+      // Guides are emitted by src/pages/guides/[slug].astro but kept at their
+      // historical .html URLs, so we exclude the auto (extensionless) routes
+      // and list the canonical .html URLs via customPages below.
+      filter: (page) =>
+        !page.includes('/legal/') &&
+        !page.includes('/resources.html') &&
+        // The old /missed-call-calculator path is now a 301 redirect to
+        // /tools/missed-call-calculator — keep the redirect out of the sitemap.
+        // Anchored so the canonical /tools/ URL is not matched.
+        !/^https:\/\/www\.keresai\.com\/missed-call-calculator(\.html)?$/.test(page) &&
+        // Keep the historical .html guide URLs (added via customPages); drop the
+        // auto-discovered extensionless /guides/* routes that would 404 on Pages.
+        !(page.includes('/guides/') && !page.endsWith('.html')),
+      changefreq: 'weekly',
+      lastmod: new Date(),
+      serialize: (item) => ({ ...item, priority: priorityFor(item.url) }),
+      // Guides keep their historical .html URLs; list them explicitly.
+      customPages: [
+        'https://www.keresai.com/guides/septic-automation-playbook.html',
+        'https://www.keresai.com/guides/customer-intake-automation.html',
+        'https://www.keresai.com/guides/roofing-growth-through-ai.html',
+        'https://www.keresai.com/guides/hvac-scaling-checklist.html',
+        'https://www.keresai.com/guides/towing-operations-automation.html',
+        'https://www.keresai.com/guides/measuring-automation-roi.html',
+        'https://www.keresai.com/guides/integrating-ai-into-your-stack.html',
+        'https://www.keresai.com/guides/roofing-case-study-15-hours.html',
+      ],
+    }),
+  ],
+  build: {
+    // Emit /ai-receptionist.html style files so GitHub Pages serves clean URLs.
+    format: 'file',
+  },
+});

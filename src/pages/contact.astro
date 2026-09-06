@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { organizationSchema, breadcrumbSchema } from '../data/schema';
+
+const path = '/contact';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path }];
+---
+<Layout
+  title="Contact Keres AI — Talk to Sales"
+  description="Get in touch with Keres AI. Ask a question or book a demo of the AI receptionist and AI SDR platform. We respond within 24 hours."
+  path={path}
+>
+  <Schema slot="head" graph={[breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Contact</span>
+    <h1>Let's <span class="accent">connect</span></h1>
+    <p class="lead">Have a question, or want to see Keres answer a live call? Send a message below, email <a href="mailto:ops@keresai.com">ops@keresai.com</a>, or <a href="/demo">book a demo</a> directly.</p>
+  </header>
+
+  <section class="page-section container container-narrow">
+    <div id="form-success" class="form-status-ok" style="display:none" tabindex="-1">
+      <div class="form-status-ok-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="form-status-ok-title">Message sent successfully!</div>
+      <div class="form-status-ok-msg">We'll get back to you within 24 hours.</div>
+    </div>
+    <div id="form-error" class="form-status-err" style="display:none" role="alert">Something went wrong. Please try again or email us directly.</div>
+    <form id="contact-form" action="https://formspree.io/f/mojywlnn" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="New enquiry from Keres AI website">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-5000px">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="fname">Full Name <span class="req">*</span></label>
+          <input type="text" id="fname" name="name" class="form-input" required autocomplete="name" placeholder="Jane Doe">
+          <div class="field-error" id="fname-err" aria-live="polite"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="femail">Email <span class="req">*</span></label>
+          <input type="email" id="femail" name="email" class="form-input" required autocomplete="email" placeholder="jane@company.com">
+          <div class="field-error" id="femail-err" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="fcompany">Company</label>
+          <input type="text" id="fcompany" name="company" class="form-input" autocomplete="organization" placeholder="Acme Inc.">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="findustry">Industry</label>
+          <select id="findustry" name="industry" class="form-input">
+            <option value="">Select your industry</option>
+            <option value="real-estate">Real Estate</option>
+            <option value="home-services">Home Services</option>
+            <option value="med-spa">Med Spas &amp; Dental</option>
+            <option value="professional">Professional Intake</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="fmessage">Message <span class="req">*</span></label>
+        <textarea id="fmessage" name="message" class="form-input" required placeholder="How can we help?"></textarea>
+        <div class="field-error" id="fmessage-err" aria-live="polite"></div>
+      </div>
+      <button type="submit" class="btn btn-primary form-submit" id="form-btn">Send Message</button>
+    </form>
+  </section>
+</Layout>

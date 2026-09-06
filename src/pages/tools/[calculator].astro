@@ -1,0 +1,93 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema } from '../../data/schema';
+import { calculators } from '../../data/calculators';
+
+export function getStaticPaths() {
+  return calculators.map((c) => ({ params: { calculator: c.slug }, props: { c } }));
+}
+
+const { c } = Astro.props;
+const path = `/tools/${c.slug}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Tools', path: '/tools' },
+  { name: c.h1.replace(/^What (is|are) /, '').replace(/\?$/, ''), path },
+];
+
+const webpage = webPageSchema({
+  path,
+  name: c.title,
+  description: c.description,
+  speakableSelectors: ['.answer-block', '.faq-a'],
+});
+---
+<Layout title={c.title} description={c.description} path={path}>
+  <Schema slot="head" graph={[faqSchema(c.faqs), breadcrumbSchema(crumbs), webpage, organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">{c.eyebrow}</span>
+    <h1>{c.h1} <span class="accent">{c.h1Accent}</span></h1>
+    <p class="lead">{c.lead}</p>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
+      <p itemprop="text" set:html={c.answer} />
+    </div>
+  </section>
+
+  <section class="page-section container container-narrow">
+    <div class="calc-shell" data-calc-kind={c.kind} data-calc-close={c.closeRate}>
+      <div class="roi-grid">
+        <div class="roi-inputs">
+          {c.fields.map((f) => (
+            <label class="roi-field">
+              <span class="roi-field-label">{f.label}</span>
+              {f.prefix ? (
+                <div class="roi-field-prefix">
+                  <span>{f.prefix}</span>
+                  <input type="number" data-calc-field={f.id} value={f.default} min={f.min} max={f.max} />
+                </div>
+              ) : (
+                <input type="number" data-calc-field={f.id} value={f.default} min={f.min} max={f.max} />
+              )}
+            </label>
+          ))}
+        </div>
+        <div class="roi-output">
+          <div class="roi-headline-label">{c.resultLabel}</div>
+          <div class="roi-headline-value"><span data-calc-out="primary">$0</span><span class="roi-per">{c.perLabel}</span></div>
+          <div class="roi-headline-year">≈ <span data-calc-out="secondary">$0</span> {c.secondaryLabel}</div>
+          <div class="roi-math" data-calc-steps></div>
+          <a class="btn btn-primary" data-calc-cta href="/demo">Book a demo with these numbers →</a>
+          <div class="roi-note">{c.note}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqSection faqs={c.faqs} title="Calculator FAQ" />
+
+  <section class="page-section container">
+    <div class="section-label">Related</div>
+    <h2 class="section-title" style="margin-bottom:8px">Keep going</h2>
+    <p class="prose">
+      {c.related.map((r, i) => (<>{i > 0 ? ' · ' : ''}<a href={r.href}>{r.label}</a></>))}
+      {' · '}<a href="/tools">All free tools</a>
+    </p>
+  </section>
+
+  <CtaBand
+    heading="Turn these numbers into booked jobs"
+    sub="Book a free 30-minute demo and watch Keres answer, qualify, and book a call in under sixty seconds."
+  />
+
+  <script slot="scripts" src="/assets/calc.js?v=1" is:inline></script>
+</Layout>

@@ -1,0 +1,155 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import Section from '../components/Section.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import Testimonial from '../components/Testimonial.astro';
+import { organizationSchema, softwareApplicationSchema, faqSchema, breadcrumbSchema } from '../data/schema';
+import { plans, PHONE } from '../data/site';
+
+const path = '/pricing';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Pricing', path }];
+
+// FAQs must answer cost, setup time, human handoff, and contract terms.
+const faqs = [
+  {
+    q: 'How much does Keres cost?',
+    a: 'Found starts at $249/month, or $499/month for law firms. Answer, Convert and Grow each publish a starting price and are then quoted to your call volume, locations and integrations. Custom is the only plan without a published floor, because multi-location and high-volume operations vary too much to price on a page.',
+  },
+  {
+    q: 'How long does setup take?',
+    a: 'Most accounts are live within five business days. We map your call flows, connect your number, calendar and CRM, train the agent on your business, and test it with you before it answers a real call.',
+  },
+  {
+    q: 'What happens when a caller needs a human?',
+    a: 'The agent hands off. You configure the rules — an emergency, a named client, a request for a person — and the call transfers to your on-call number while the agent texts the owner the context it already collected. Nothing is lost in the handoff.',
+  },
+  {
+    q: 'Is there a contract?',
+    a: 'No. Every plan is month-to-month and you can cancel anytime. There is no setup fee and no per-minute billing.',
+  },
+  {
+    q: 'Can I start with just one agent?',
+    a: 'Yes. Found is the floor everyone starts on. From there you add the Inbound Agent (Answer), follow-up (Convert), or reactivation and outbound (Grow). Your quote scales to what you actually run.',
+  },
+  {
+    q: 'Do you charge per minute or per call?',
+    a: 'No. One flat monthly rate covers unlimited simultaneous calls. A heat wave, a storm surge, or a Monday morning rush does not change your bill.',
+  },
+];
+---
+<Layout
+  title="Pricing — Plans From $249/Month | Keres AI"
+  description="Keres pricing starts at $249/month for Found, $499 for law firms. Answer, Convert and Grow publish a starting price and are quoted to your call volume. Month-to-month."
+  path={path}
+>
+  <Schema slot="head" graph={[softwareApplicationSchema, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <Section spacing="standard" labelledby="pricing-title">
+    <div class="k-grid">
+      <div class="k-col-7">
+        <Eyebrow>Pricing</Eyebrow>
+        <h1 id="pricing-title" class="k-display">Every plan starts with a number.</h1>
+        <p class="k-lede">
+          You should not have to book a call to find out whether you can afford this.
+          Every plan below publishes what it starts at. The quote on top of that floor
+          depends on your call volume, your locations and what you integrate with —
+          so we scope it on a 30-minute call and you get one flat monthly rate.
+        </p>
+        <div class="price-hero-ctas">
+          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          <Button href="/demo" variant="ghost" event="demo_click">Get an exact quote</Button>
+        </div>
+      </div>
+      <div class="k-col-5">
+        <div class="price-facts">
+          <div class="price-fact">
+            <span class="price-fact__k">Billing</span>
+            <span class="price-fact__v">Flat monthly. No per-minute charges.</span>
+          </div>
+          <div class="price-fact">
+            <span class="price-fact__k">Contract</span>
+            <span class="price-fact__v">Month-to-month. Cancel anytime.</span>
+          </div>
+          <div class="price-fact">
+            <span class="price-fact__k">Setup</span>
+            <span class="price-fact__v">Included. Live in five business days.</span>
+          </div>
+          <div class="price-fact">
+            <span class="price-fact__k">Call volume</span>
+            <span class="price-fact__v">Unlimited simultaneous calls.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="raised" spacing="standard" width="wide">
+    <div class="answer-block k-measure" style="margin-bottom:32px">
+      <p>
+        <strong>Keres starts at $249/month.</strong> That is Found — the visibility layer
+        that gets you showing up and chosen. Adding agents that answer, follow up and
+        reactivate moves you up the columns below. Most accounts cover the cost in a
+        handful of recovered jobs.
+        <a href="/tools/missed-call-calculator">See what your missed calls cost →</a>
+      </p>
+    </div>
+
+    <div class="plan-row" role="list">
+      {plans.map((plan) => (
+        <article class:list={['plan-card', plan.featured && 'plan-card--featured']} role="listitem">
+          {plan.featured && <span class="plan-card__flag">Most chosen</span>}
+          <h2 class="plan-card__name">{plan.name}</h2>
+          <p class="plan-card__price" data-figure>{plan.from}</p>
+          <p class="plan-card__quoted">
+            {plan.slug === 'custom' ? 'Scoped on a call' : 'Quoted to your volume'}
+          </p>
+          {plan.fromNote && <p class="plan-card__note">{plan.fromNote}</p>}
+          <p class="plan-card__summary">{plan.summary}</p>
+          <ul class="plan-card__list">
+            {plan.includes.map((item) => <li>{item}</li>)}
+          </ul>
+          <Button
+            href="/demo"
+            variant={plan.featured ? 'primary' : 'outline'}
+            event="demo_click"
+            wide
+          >
+            Get a quote
+          </Button>
+        </article>
+      ))}
+    </div>
+
+    <p class="plan-row__foot">
+      Prices shown are starting points, not caps or averages. Custom is the only plan
+      without a published number — multi-location and high-volume operations are scoped
+      individually. Prefer to talk it through?
+      <a href={PHONE.href} data-event="tel_click">Call {PHONE.display}</a>.
+    </p>
+  </Section>
+
+  <Section spacing="standard">
+    <div class="k-grid">
+      <div class="k-col-5">
+        <Eyebrow>Proof</Eyebrow>
+        <h2 class="k-h2">What it replaces</h2>
+        <p class="k-lede">
+          The comparison that matters is not against other software. It is against a
+          part-time front desk, an answering service billing you by the minute, and
+          the jobs that went to whoever picked up first.
+        </p>
+      </div>
+      <div class="k-col-7">
+        <Testimonial proves="the monthly cost paid for itself in recovered jobs" />
+      </div>
+    </div>
+  </Section>
+
+  <FaqSection faqs={faqs} title="Pricing FAQ" />
+</Layout>

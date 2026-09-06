@@ -1,0 +1,33 @@
+---
+/**
+ * A figure with its proof attached.
+ *
+ * `source` is required by policy, not by TypeScript: every number on
+ * this site has to say where it came from. A Stat rendered without a
+ * source shows a visible [Proof needed] marker rather than quietly
+ * publishing an unsourced claim — the marker is the reminder.
+ *
+ * Never invent traction numbers. If the figure is not yet real, pass
+ * value="[X]" and it will render as a placeholder.
+ */
+export interface Props {
+  value: string;
+  label: string;
+  source?: string;
+  sourceHref?: string;
+}
+
+const { value, label, source, sourceHref } = Astro.props;
+const isPlaceholder = /\[.*\]/.test(value);
+---
+<div class:list={['k-stat', isPlaceholder && 'k-stat--placeholder']}>
+  <div class="k-stat__value" data-figure>{value}</div>
+  <div class="k-stat__label">{label}</div>
+  {source ? (
+    sourceHref
+      ? <a class="k-stat__source" href={sourceHref}>{source}</a>
+      : <p class="k-stat__source">{source}</p>
+  ) : (
+    <p class="k-stat__source k-stat__source--missing">[Proof needed]</p>
+  )}
+</div>

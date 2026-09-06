@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, breadcrumbSchema } from '../data/schema';
+import { calculators } from '../data/calculators';
+
+const path = '/tools';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Tools', path }];
+
+const baseTools = [
+  {
+    href: '/tools/deliverability-checker',
+    cat: 'Email deliverability',
+    title: 'Email Deliverability Checker',
+    desc: 'Check your domain’s SPF, DKIM, DMARC, and MX records in seconds and see what’s keeping your email out of the inbox.',
+  },
+  {
+    href: '/tools/spam-score-checker',
+    cat: 'Email deliverability',
+    title: 'Email Spam-Score Checker',
+    desc: 'Paste a subject and body to score spam-filter risk and get specific fixes — runs entirely in your browser.',
+  },
+  {
+    href: '/tools/missed-call-calculator',
+    cat: 'Revenue',
+    title: 'Missed-Call Revenue Calculator',
+    desc: 'Enter your call volume and average job value to see how much revenue you lose to unanswered calls every month and year.',
+  },
+  {
+    href: '/tools/staffing-savings-estimator',
+    cat: 'Cost',
+    title: 'Front-Desk Staffing Cost Estimator',
+    desc: 'See the fully-loaded annual cost of phone coverage and how many hours of the week your team still can’t answer.',
+  },
+];
+
+// Vertical + response-time calculators from data
+const verticalTools = calculators.map((c) => ({
+  href: `/tools/${c.slug}`,
+  cat: c.eyebrow.split(' · ')[0],
+  title: c.title.split(' — ')[0],
+  desc: c.lead,
+}));
+
+const tools = [...baseTools, ...verticalTools];
+---
+<Layout
+  title="Free Tools — Missed-Call Calculator & More | Keres AI"
+  description="Free tools for businesses that live on the phone: check your email deliverability (SPF, DKIM, DMARC) and calculate the revenue you lose to missed calls."
+  path={path}
+>
+  <Schema slot="head" graph={[breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Free Tools</span>
+    <h1>Free <span class="accent">tools</span></h1>
+    <p class="lead">No signup, no catch. Quick utilities for service businesses that live on the phone.</p>
+  </header>
+
+  <section class="page-section container">
+    <div class="feature-grid">
+      {tools.map((t) => (
+        <a class="feature-card" href={t.href} style="text-decoration:none; display:block;">
+          <div class="plan" style="font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px">{t.cat}</div>
+          <h3>{t.title}</h3>
+          <p>{t.desc}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand heading="Ready to stop losing leads?" sub="Book a free 30-minute demo and see Keres answer a call and book an appointment live." />
+</Layout>

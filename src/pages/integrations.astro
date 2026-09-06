@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, breadcrumbSchema } from '../data/schema';
+import { integrations, integrationCategories } from '../data/integrations';
+
+const path = '/integrations';
+const ORIGIN = 'https://www.keresai.com';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Integrations', path }];
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Keres AI integrations',
+  itemListElement: integrations.map((i, idx) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    name: `Keres AI + ${i.name}`,
+    url: `${ORIGIN}/integrations/${i.slug}`,
+  })),
+};
+---
+<Layout
+  title="Integrations — Connect Keres AI to Your Stack | Keres AI"
+  description="Keres AI connects to ServiceTitan, Jobber, Housecall Pro, HubSpot, Twilio, RingCentral, Google Calendar, Outlook, Zapier, and Make — plus webhooks for everything else."
+  path={path}
+>
+  <Schema slot="head" graph={[breadcrumbSchema(crumbs), itemList, organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Integrations</span>
+    <h1>Plugs into <span class="accent">your stack</span></h1>
+    <p class="lead">Keres connects to the calendars, CRMs, phone systems, and field-service platforms you already run on — most one-off integrations go live during onboarding.</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+    </div>
+  </header>
+
+  {integrationCategories.map((cat) => (
+    <section class="page-section container">
+      <div class="section-label">{cat}</div>
+      <div class="feature-grid">
+        {integrations.filter((i) => i.category === cat).map((i) => (
+          <a class="feature-card" href={`/integrations/${i.slug}`} style="text-decoration:none; display:block;">
+            <h3>Keres AI + {i.name}</h3>
+            <p>{i.intro.slice(0, 130)}…</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <section class="page-section container">
+    <div class="prose">
+      <p>Don’t see your stack? Keres speaks generic webhooks and CSV out of the box, so most one-off integrations go live during onboarding. <a href="/demo">Book a demo</a> and tell us what you run on.</p>
+    </div>
+  </section>
+
+  <CtaBand heading="Connect Keres to your tools" sub="Book a free 30-minute demo and we’ll map the integration to your exact stack." />
+</Layout>

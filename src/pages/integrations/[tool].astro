@@ -1,0 +1,91 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema } from '../../data/schema';
+import { integrations } from '../../data/integrations';
+
+export function getStaticPaths() {
+  return integrations.map((i) => ({ params: { tool: i.slug }, props: { i } }));
+}
+
+const { i } = Astro.props;
+const path = `/integrations/${i.slug}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Integrations', path: '/integrations' },
+  { name: i.name, path },
+];
+const related = i.related
+  .map((slug) => integrations.find((g) => g.slug === slug))
+  .filter((g): g is NonNullable<typeof g> => Boolean(g));
+---
+<Layout title={i.title} description={i.description} path={path}>
+  <Schema slot="head" graph={[
+    serviceSchema({
+      name: `Keres AI + ${i.name} integration`,
+      serviceType: 'AI Receptionist & AI SDR integration',
+      description: i.description,
+      path,
+    }),
+    faqSchema(i.faqs),
+    breadcrumbSchema(crumbs),
+    organizationSchema,
+  ]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">{i.category} · Integration</span>
+    <h1>Keres AI + <span class="accent">{i.name}</span></h1>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/integrations" class="btn btn-outline">All integrations</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block">
+      <p>{i.intro}</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="section-label">What it does</div>
+    <h2 class="section-title" style="margin-bottom:8px">With {i.name} connected, Keres can</h2>
+    <div class="feature-grid">
+      {i.does.map((d) => (
+        <div class="feature-card"><h3>{d}</h3></div>
+      ))}
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>What syncs with {i.name}</h2>
+      <ul>
+        {i.syncs.map((s) => <li>{s}</li>)}
+      </ul>
+      <p>Setup is done for you — we connect {i.name} during onboarding and most accounts are live within five business days. Pair it with the <a href="/ai-receptionist">AI receptionist</a> for inbound and the <a href="/ai-sdr">AI SDR</a> for outbound.</p>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="page-section container">
+      <div class="section-label">Related integrations</div>
+      <div class="feature-grid">
+        {related.map((r) => (
+          <a class="feature-card" href={`/integrations/${r.slug}`} style="text-decoration:none; display:block;">
+            <h3>Keres AI + {r.name}</h3>
+            <p>{r.intro.slice(0, 110)}…</p>
+          </a>
+        ))}
+      </div>
+      <p class="prose" style="margin-top:18px"><a href="/integrations">← See all integrations</a></p>
+    </section>
+  )}
+
+  <FaqSection faqs={i.faqs} title={`Keres AI + ${i.name} — FAQ`} />
+  <CtaBand heading={`Connect Keres to ${i.name}`} sub="Book a free 30-minute demo and we’ll wire it to your exact setup." />
+</Layout>

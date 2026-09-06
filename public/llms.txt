@@ -1,0 +1,84 @@
+# Keres AI
+
+> Keres AI is an AI receptionist and AI SDR platform for businesses that live on the phone. It answers every inbound call 24/7 in two rings, qualifies leads, and books appointments automatically, and runs AI-powered outbound email that lands in the inbox and books qualified meetings.
+
+Keres AI replaces missed calls, voicemail, and slow follow-up with an always-on front desk and sales team. It is used by home-services contractors (HVAC, plumbing, roofing, septic, towing), dental and med-spa practices, real estate teams, and professional-services firms.
+
+Key facts:
+- Answers every call within two rings, 24/7 (nights, weekends, holidays).
+- Books and reschedules appointments on Google Calendar, Outlook, or field-service software.
+- AI SDR runs personalized outbound email with deliverability (SPF, DKIM, DMARC, inbox warmup) built in.
+- Integrations: Twilio, Google Calendar, Outlook, HubSpot, Zapier, Make, ServiceTitan, Jobber, Housecall Pro, FieldEdge, Service Fusion, RingCentral.
+- Setup: most accounts live within five business days. Month-to-month, cancel anytime.
+- Contact: ops@keresai.com
+- Full reference (definitions, FAQs, descriptions): https://www.keresai.com/llms-full.txt
+
+## Core pages
+- [Home](https://www.keresai.com/): AI receptionist and AI SDR platform overview.
+- [AI Receptionist](https://www.keresai.com/ai-receptionist): Answer and book every call 24/7.
+- [AI Answering Service](https://www.keresai.com/ai-answering-service): Flat-rate AI answering that books jobs.
+- [24/7 AI Receptionist](https://www.keresai.com/24-7-ai-receptionist): Round-the-clock call coverage.
+- [AI SDR](https://www.keresai.com/ai-sdr): Outbound email that books meetings.
+- [Email Deliverability](https://www.keresai.com/email-deliverability): Land in the inbox, not spam.
+- [Pricing](https://www.keresai.com/pricing): Plans and pricing.
+- [Book a Demo](https://www.keresai.com/demo): Schedule a live demo.
+
+## Industry pages
+- [Industries index](https://www.keresai.com/industries)
+- [AI Receptionist for HVAC](https://www.keresai.com/ai-receptionist-for-hvac)
+- [AI Receptionist for Plumbers](https://www.keresai.com/ai-receptionist-for-plumbers)
+- [AI Receptionist for Dentists](https://www.keresai.com/ai-receptionist-for-dentists)
+- [AI Receptionist for Real Estate](https://www.keresai.com/ai-receptionist-for-real-estate)
+- [AI Receptionist for Med Spas](https://www.keresai.com/ai-receptionist-for-med-spas)
+- [AI Receptionist for Professional/Legal Intake](https://www.keresai.com/ai-receptionist-for-professional-intake)
+
+## City pages (AI receptionist by metro)
+- Houston, Phoenix, Dallas, Atlanta, Chicago, Miami, Los Angeles, Charlotte, Tampa, Denver, Las Vegas, Austin — e.g. https://www.keresai.com/ai-receptionist/houston
+
+## Comparisons
+Outbound / AI SDR:
+- [Apollo Alternative](https://www.keresai.com/apollo-alternative)
+- [Instantly Alternative](https://www.keresai.com/instantly-alternative)
+- [Smartlead Alternative](https://www.keresai.com/smartlead-alternative)
+AI receptionist / answering service:
+- [Smith.ai Alternative](https://www.keresai.com/smith-ai-alternative)
+- [Ruby Alternative](https://www.keresai.com/ruby-alternative)
+- [Goodcall Alternative](https://www.keresai.com/goodcall-alternative)
+- [Rosie Alternative](https://www.keresai.com/rosie-alternative)
+- [Dialpad Alternative](https://www.keresai.com/dialpad-alternative)
+
+## Use cases
+- [Use cases index](https://www.keresai.com/use-cases): What Keres solves for phone-driven businesses.
+- [After-hours answering](https://www.keresai.com/use-cases/after-hours-answering) · [Overflow call handling](https://www.keresai.com/use-cases/overflow-call-handling) · [AI appointment booking](https://www.keresai.com/use-cases/appointment-booking)
+- [24/7 lead capture](https://www.keresai.com/use-cases/lead-capture) · [Reduce staffing costs](https://www.keresai.com/use-cases/reduce-staffing-costs) · [Spam-call screening](https://www.keresai.com/use-cases/spam-call-screening)
+
+## Integrations
+- [Integrations index](https://www.keresai.com/integrations): Calendars, CRMs, phone systems, and field-service platforms.
+- [ServiceTitan](https://www.keresai.com/integrations/servicetitan) · [Jobber](https://www.keresai.com/integrations/jobber) · [Housecall Pro](https://www.keresai.com/integrations/housecall-pro)
+- [HubSpot](https://www.keresai.com/integrations/hubspot) · [Twilio](https://www.keresai.com/integrations/twilio) · [RingCentral](https://www.keresai.com/integrations/ringcentral)
+- [Google Calendar](https://www.keresai.com/integrations/google-calendar) · [Outlook](https://www.keresai.com/integrations/outlook) · [Zapier](https://www.keresai.com/integrations/zapier) · [Make](https://www.keresai.com/integrations/make)
+
+## Tools
+- [Free tools index](https://www.keresai.com/tools)
+- [Email Deliverability Checker](https://www.keresai.com/tools/deliverability-checker): Check SPF, DKIM, DMARC, and MX for any domain.
+- [Email Spam-Score Checker](https://www.keresai.com/tools/spam-score-checker): Score email content for spam-filter risk.
+- [Missed Call Revenue Calculator](https://www.keresai.com/missed-call-calculator)
+- [Front-Desk Staffing Cost Estimator](https://www.keresai.com/tools/staffing-savings-estimator)
+
+## Glossary (definitions)
+- [Glossary index](https://www.keresai.com/glossary): Definitions of AI receptionist, AI SDR, and deliverability terms.
+- [What is an AI receptionist?](https://www.keresai.com/glossary/ai-receptionist)
+- [What is an AI answering service?](https://www.keresai.com/glossary/ai-answering-service)
+- [What is an AI SDR?](https://www.keresai.com/glossary/ai-sdr)
+- [What is email deliverability?](https://www.keresai.com/glossary/email-deliverability)
+- [What is an SPF record?](https://www.keresai.com/glossary/spf)
+- [What is DKIM?](https://www.keresai.com/glossary/dkim)
+- [What is DMARC?](https://www.keresai.com/glossary/dmarc)
+- [What is inbox warmup?](https://www.keresai.com/glossary/inbox-warmup)
+
+## Trust & customers
+- [Trust & Security](https://www.keresai.com/trust): Data handling, SOC 2-aligned workflows, DPAs, HIPAA-aligned options.
+- [Customer results & case studies](https://www.keresai.com/customers)
+
+## Resources
+- [Guides & Playbooks](https://www.keresai.com/blog)

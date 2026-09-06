@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, breadcrumbSchema, webPageSchema } from '../data/schema';
+import { comparisons } from '../data/comparisons';
+
+const path = '/compare';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Compare', path }];
+
+const inboundComparisons = comparisons.filter((c) => c.pillar === 'inbound');
+const outboundComparisons = comparisons.filter((c) => c.pillar === 'outbound');
+
+const webpage = webPageSchema({
+  path,
+  name: 'Keres AI Comparisons — AI Receptionist & AI SDR Alternatives | Keres AI',
+  description: 'Compare Keres AI to Smith.ai, Ruby, Goodcall, Rosie, Apollo, Instantly, and more. Side-by-side feature comparisons for AI receptionist and AI SDR alternatives.',
+  speakableSelectors: ['.answer-block', '.lead'],
+});
+
+// ItemList of all comparisons for AI crawlers to index
+const compareListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Keres AI — All Competitor Comparisons',
+  description: 'Complete list of Keres AI vs. competitor comparisons for AI receptionist and AI SDR alternatives.',
+  itemListElement: comparisons.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: `Keres AI vs. ${c.competitor}`,
+    url: `https://www.keresai.com/${c.slug}`,
+    description: c.description,
+  })),
+};
+---
+<Layout
+  title="Keres AI Comparisons — AI Receptionist & AI SDR Alternatives"
+  description="Compare Keres AI to Smith.ai, Ruby, Goodcall, Rosie, Apollo, Instantly, and more. See the full feature comparison for AI receptionist and AI SDR alternatives."
+  path={path}
+>
+  <Schema slot="head" graph={[compareListSchema, webpage, breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">Comparisons</span>
+    <h1>How Keres compares to <span class="accent">every alternative</span></h1>
+    <p class="lead">Researching AI receptionist or AI SDR options? We've built honest, feature-by-feature comparisons so you can see exactly how Keres stacks up — without the sales call first.</p>
+    <div class="hero-ctas">
+      <a href="/demo" class="btn btn-primary">Book a Demo</a>
+      <a href="/pricing" class="btn btn-outline">See pricing</a>
+    </div>
+  </header>
+
+  <!-- DIRECT ANSWER BLOCK -->
+  <section class="page-section container">
+    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
+      <p itemprop="text">Keres AI is an AI receptionist and AI SDR platform for service businesses. Compared to answering services like Smith.ai and Ruby, Keres uses AI instead of human operators — delivering flat-rate pricing, unlimited simultaneous calls, and live calendar booking. Compared to outbound tools like Apollo and Instantly, Keres goes beyond infrastructure to run the full outbound motion and book meetings for you.</p>
+    </div>
+  </section>
+
+  <!-- AI RECEPTIONIST COMPARISONS -->
+  <section class="page-section container">
+    <div class="section-label">AI Receptionist & Answering Service Alternatives</div>
+    <h2 class="section-title" style="margin-bottom:8px">Replacing your answering service?</h2>
+    <p class="prose" style="margin-bottom:var(--space-4)">Human answering services charge per minute, take messages instead of booking, and have limited overnight coverage. Keres answers with AI — flat rate, unlimited calls, live booking 24/7.</p>
+    <div class="feature-grid">
+      {inboundComparisons.map((c) => (
+        <a class="feature-card" href={`/${c.slug}`} style="text-decoration:none;display:block">
+          <div class="service-cat" style="margin-bottom:4px">{c.category}</div>
+          <h3>Keres vs. {c.competitor}</h3>
+          <p>{c.intro.slice(0, 130)}…</p>
+          <span class="inline-cta-link" style="margin-top:8px;display:inline-block">See full comparison →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- AI SDR COMPARISONS -->
+  <section class="page-section container">
+    <div class="section-label">AI SDR & Outbound Alternatives</div>
+    <h2 class="section-title" style="margin-bottom:8px">Replacing your outbound tool?</h2>
+    <p class="prose" style="margin-bottom:var(--space-4)">Outbound tools give you infrastructure to run yourself — sequences, warmup, sending. Keres runs the full motion: personalization, replies, and meetings booked to your calendar. Done for you.</p>
+    <div class="feature-grid">
+      {outboundComparisons.map((c) => (
+        <a class="feature-card" href={`/${c.slug}`} style="text-decoration:none;display:block">
+          <div class="service-cat" style="margin-bottom:4px">{c.category}</div>
+          <h3>Keres vs. {c.competitor}</h3>
+          <p>{c.intro.slice(0, 130)}…</p>
+          <span class="inline-cta-link" style="margin-top:8px;display:inline-block">See full comparison →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- THE KERES DIFFERENCE -->
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Why the comparison matters</h2>
+      <p>The most important thing to compare isn't a feature matrix — it's the model. Answering services charge per minute and take messages; Keres answers with AI and books the job during the call. Outbound tools require you to run sequences; Keres runs the whole motion and books the meetings for you.</p>
+      <p>Both products follow the same principle: <strong>you should get outcomes, not tooling</strong>. Book a demo to see either product running live against your use case.</p>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="See Keres vs. your current tool"
+    sub="Book a 30-minute demo. Tell us what you're using now and we'll show you the difference live."
+  />
+</Layout>

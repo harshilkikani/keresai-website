@@ -1,0 +1,88 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { organizationSchema, breadcrumbSchema } from '../../data/schema';
+import { guides } from '../../data/guides';
+
+// Guide bodies are static HTML partials loaded at build time.
+const bodies = import.meta.glob('../../data/guide-bodies/*.html', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
+
+export function getStaticPaths() {
+  return guides.map((g) => ({ params: { slug: g.slug }, props: { g } }));
+}
+
+const { g } = Astro.props;
+const ORIGIN = 'https://www.keresai.com';
+// Keep the historical .html URL exactly so already-indexed links never break.
+const path = `/guides/${g.slug}.html`;
+const url = ORIGIN + path;
+const body = bodies[`../../data/guide-bodies/${g.slug}.html`] ?? '';
+const headline = g.titleHtml.replace(/<[^>]+>/g, '').trim();
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Resources', path: '/blog' },
+  { name: g.listTitle, path },
+];
+const related = guides.filter((o) => o.slug !== g.slug).sort((a, b) => a.order - b.order).slice(0, 3);
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${url}#article`,
+  headline,
+  description: g.description,
+  image: `${ORIGIN}/assets/img/og-image.png`,
+  url,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  author: { '@type': 'Organization', name: 'Keres AI', url: ORIGIN },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Keres AI',
+    logo: { '@type': 'ImageObject', url: `${ORIGIN}/assets/img/KeresLogo.png` },
+  },
+  isPartOf: { '@id': `${ORIGIN}/#website` },
+  inLanguage: 'en-US',
+};
+---
+<Layout title={g.metaTitle} description={g.description} path={path} ogType="article">
+  <link slot="head" rel="stylesheet" href="/assets/guide.css?v=5" />
+  <Schema slot="head" graph={[articleSchema, breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <article class="guide-wrap">
+    <header class="guide-hero">
+      <span class="guide-category">{g.category}</span>
+      <h1 class="guide-title" set:html={g.titleHtml} />
+      {g.readTime && (
+        <div class="guide-meta">
+          <span>{g.readTime}</span>
+          <span>For operators</span>
+        </div>
+      )}
+    </header>
+
+    <section class="guide-body" set:html={body} />
+  </article>
+
+  <section class="page-section container">
+    <div class="section-label">Keep reading</div>
+    <div class="feature-grid">
+      {related.map((r) => (
+        <a class="feature-card" href={`/guides/${r.slug}.html`} style="text-decoration:none; display:block;">
+          <div class="plan" style="font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px">{r.category}</div>
+          <h3>{r.listTitle}</h3>
+          <p>{r.listDesc}</p>
+        </a>
+      ))}
+    </div>
+    <p class="prose" style="margin-top:18px"><a href="/blog">← All resources & guides</a></p>
+  </section>
+
+  <CtaBand heading="Want this built for your business?" sub="Book a free 30-minute demo and see Keres answer a call and book an appointment live." />
+</Layout>

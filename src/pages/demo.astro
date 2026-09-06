@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { organizationSchema, breadcrumbSchema } from '../data/schema';
+
+const path = '/demo';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Book a Demo', path }];
+---
+<Layout
+  title="Book a Demo — See Keres AI Answer a Live Call | Keres AI"
+  description="Book a free 30-minute demo. See the Keres AI receptionist answer a live call and book an appointment, and how the AI SDR books outbound meetings. No pressure."
+  path={path}
+>
+  <Schema slot="head" graph={[breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Book a Demo</span>
+    <h1>See Keres <span class="accent">answer a live call</span></h1>
+    <p class="lead">A free 30-minute walkthrough. We’ll show the AI receptionist answer, qualify, and book an appointment in under sixty seconds — and how the AI SDR books outbound meetings. No pitch deck, no pressure.</p>
+    <ul class="hero-meta" aria-label="What to expect" style="margin-top:24px">
+      <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Live call demo</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Pricing for your volume</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Live in five business days</span></li>
+    </ul>
+  </header>
+
+  <section id="contact" class="page-section container">
+    <div class="contact-grid">
+      <div>
+        <div class="contact-col-title">Send a message</div>
+        <div class="contact-col-sub">We respond within 24 hours.</div>
+        <div id="form-success" class="form-status-ok" style="display:none" tabindex="-1">
+          <div class="form-status-ok-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="form-status-ok-title">Message sent successfully!</div>
+          <div class="form-status-ok-msg">We'll get back to you within 24 hours.</div>
+        </div>
+        <div id="form-error" class="form-status-err" style="display:none" role="alert">Something went wrong. Please try again or email us directly.</div>
+        <form id="contact-form" action="https://formspree.io/f/mojywlnn" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="New demo request from Keres AI website">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-5000px">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fname">Full Name <span class="req">*</span></label>
+              <input type="text" id="fname" name="name" class="form-input" required autocomplete="name" placeholder="Jane Doe">
+              <div class="field-error" id="fname-err" aria-live="polite"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="femail">Email <span class="req">*</span></label>
+              <input type="email" id="femail" name="email" class="form-input" required autocomplete="email" placeholder="jane@company.com">
+              <div class="field-error" id="femail-err" aria-live="polite"></div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fcompany">Company</label>
+              <input type="text" id="fcompany" name="company" class="form-input" autocomplete="organization" placeholder="Acme Inc.">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="findustry">Industry</label>
+              <select id="findustry" name="industry" class="form-input">
+                <option value="">Select your industry</option>
+                <option value="real-estate">Real Estate</option>
+                <option value="home-services">Home Services</option>
+                <option value="med-spa">Med Spas &amp; Dental</option>
+                <option value="professional">Professional Intake</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fmessage">What do you want to automate? <span class="req">*</span></label>
+            <textarea id="fmessage" name="message" class="form-input" required placeholder="Tell us about your call volume and outbound goals..."></textarea>
+            <div class="field-error" id="fmessage-err" aria-live="polite"></div>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit" id="form-btn">Request Demo</button>
+        </form>
+      </div>
+      <div>
+        <div class="contact-col-title">Book a time now</div>
+        <div class="contact-col-sub">Pick a slot for a free 30-minute demo.</div>
+        <div class="cal-wrapper">
+          <div class="cal-header">
+            <button class="cal-nav" id="calPrev" type="button" aria-label="Previous month"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <span class="cal-month" id="calMonth" aria-live="polite">April 2026</span>
+            <button class="cal-nav" id="calNext" type="button" aria-label="Next month"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+          <div class="cal-grid">
+            <div class="cal-weekdays" id="calWeekdays" aria-hidden="true"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+            <div class="cal-days" id="calDays" role="grid" aria-label="Select a date"></div>
+          </div>
+          <div class="cal-info" id="calInfo">Select a date to open booking.</div>
+        </div>
+        <p style="font-size:12.5px;color:var(--text-dim);margin-top:14px;line-height:1.6">Click a date to open our Calendly booking page and pick a time that works for you.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

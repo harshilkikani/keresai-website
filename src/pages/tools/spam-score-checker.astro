@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema } from '../../data/schema';
+
+const path = '/tools/spam-score-checker';
+const ORIGIN = 'https://www.keresai.com';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Tools', path: '/tools' },
+  { name: 'Spam-Score Checker', path },
+];
+const faqs = [
+  { q: 'What is an email spam score?', a: 'A spam score estimates how likely a message is to be filtered as spam based on its content — trigger words, formatting, links, and tone. This tool analyzes your subject and body and flags the patterns that hurt placement.' },
+  { q: 'Does a good spam score guarantee the inbox?', a: 'No. Content is only part of deliverability — authentication (SPF, DKIM, DMARC), sender reputation, and warmup matter just as much. Use this alongside the deliverability checker for a full picture.' },
+  { q: 'How do I lower my spam score?', a: 'Remove trigger phrases and ALL-CAPS, cut exclamation marks and extra links, keep the subject 30–50 characters, and write in plain, specific, personalized language instead of promotional copy.' },
+  { q: 'Is my email content sent anywhere?', a: 'No. This checker runs entirely in your browser — nothing you paste is uploaded or stored.' },
+];
+const webApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Email Spam-Score Checker',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: ORIGIN + path,
+  description: 'Free tool that scores email subject and body content for spam-filter risk and suggests fixes.',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  provider: { '@id': `${ORIGIN}/#organization` },
+};
+---
+<Layout
+  title="Free Email Spam-Score Checker — Test Before You Send | Keres AI"
+  description="Free email spam-score checker. Paste your subject and body to score spam-filter risk and get specific fixes — runs entirely in your browser, nothing is uploaded."
+  path={path}
+>
+  <Schema slot="head" graph={[webApp, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <header class="page-hero container">
+    <span class="eyebrow">Free tool</span>
+    <h1>Will your email <span class="accent">land in spam?</span></h1>
+    <p class="lead">Paste your subject and body. We’ll score the content for spam-filter risk and tell you exactly what to fix — all in your browser, nothing uploaded.</p>
+  </header>
+
+  <section class="page-section container container-narrow">
+    <div class="answer-block">
+      <p>An <strong>email spam score</strong> estimates how likely your message is to be filtered, based on content signals — trigger words, ALL-CAPS, excessive links and punctuation, and promotional tone. This checker analyzes your copy and returns a score out of 100 with specific, fixable issues.</p>
+    </div>
+
+    <div class="dc-tool">
+      <div class="ss-field">
+        <label for="ss-subject">Subject line</label>
+        <input type="text" id="ss-subject" placeholder="Quick question about your scheduling" autocomplete="off" />
+      </div>
+      <div class="ss-field">
+        <label for="ss-body">Email body</label>
+        <textarea id="ss-body" placeholder="Paste your email body here…"></textarea>
+      </div>
+      <button type="button" id="ss-run" class="btn btn-primary">Score my email</button>
+      <div id="ss-results" class="ss-results" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} title="Spam-score checker FAQ" />
+  <CtaBand heading="Want deliverability handled end to end?" sub="Keres manages authentication, warmup, and sending so your outbound reaches the inbox. Book a demo." />
+
+  <script slot="scripts" src="/assets/spam-checker.js?v=1" is:inline></script>
+</Layout>

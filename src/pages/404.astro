@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="Page Not Found | Keres AI"
+  description="The page you're looking for doesn't exist."
+  path="/404"
+  noindex={true}
+>
+  <header class="page-hero container" style="text-align:center">
+    <span class="eyebrow">404</span>
+    <h1 style="margin-inline:auto">This page took a <span class="accent">wrong turn</span></h1>
+    <p class="lead" style="margin-inline:auto">The page you're looking for doesn't exist. But every call still gets answered.</p>
+    <div class="hero-ctas" style="justify-content:center">
+      <a href="/" class="btn btn-primary">Back to home</a>
+      <a href="/ai-receptionist" class="btn btn-outline">See the AI receptionist</a>
+    </div>
+  </header>
+</Layout>
