@@ -1,15 +1,17 @@
 ---
 /**
  * A call as it actually runs: turn timing down the left, the agent's
- * side in the accent, and the outcome strip showing what got written
- * to the calendar and the CRM before the call ended.
+ * side labelled with its name and carried in the accent, and an
+ * outcome strip showing what was written to the calendar and the CRM
+ * before the call ended.
  *
- * This is the site's hero imagery. There are no stock photos — the
- * product is the picture. It is also explicitly labelled an example
- * so nobody reads it as a recorded customer call.
+ * This is the site's hero imagery — there are no stock photos. It is
+ * explicitly labelled an example so nobody reads it as a recording of
+ * a real customer's call.
  */
 import MockFrame from './MockFrame.astro';
 import { transcripts, type Vertical } from '../data/mocks';
+import { agentBySlug } from '../data/site';
 
 export interface Props {
   vertical?: Vertical;
@@ -20,14 +22,19 @@ export interface Props {
 
 const { vertical = 'default', caption = true, class: extraClass = '' } = Astro.props;
 const t = transcripts[vertical] ?? transcripts.default;
+const remi = agentBySlug('inbound');
 ---
 <figure class:list={['k-call-fig', extraClass]}>
   <MockFrame label={t.label} status={`${t.when} · ${t.duration}`} device="panel" class="k-call">
-    <ol class="k-call__turns">
+    <div class="k-call__from">
+      <span class="k-call__num" data-figure>{t.from}</span>
+      <span class="k-call__city">{t.city}</span>
+    </div>
+    <ol class="k-call__turns" data-reveal data-reveal-stagger="120">
       {t.turns.map((turn) => (
-        <li class:list={['k-call__turn', `k-call__turn--${turn.who}`]}>
+        <li class:list={['k-call__turn', `k-call__turn--${turn.who}`]} data-reveal-child>
           <span class="k-call__t" data-figure>{turn.t}</span>
-          <span class="k-call__who">{turn.who === 'agent' ? 'Agent' : 'Caller'}</span>
+          <span class="k-call__who">{turn.who === 'remi' ? remi.name : 'Caller'}</span>
           <p class="k-call__text">{turn.text}</p>
         </li>
       ))}

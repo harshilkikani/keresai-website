@@ -16,6 +16,10 @@
     "home-services": { leads: 250, answer: 60, job: 680,  ah: 35, close: 0.25, label: "Home-services" },
     "med-spa":       { leads: 180, answer: 70, job: 350,  ah: 20, close: 0.50, label: "Med-spa" },
     "professional":  { leads: 80,  answer: 50, job: 3500, ah: 30, close: 0.15, label: "Professional-services" },
+    // Law firms get their own key so the label reads "law-firm" rather than
+    // "professional-services". Same close rate: qualified consult → engaged client.
+    "legal":         { leads: 80,  answer: 50, job: 3500, ah: 45, close: 0.15, label: "Law-firm" },
+    "dental":        { leads: 180, answer: 70, job: 350,  ah: 20, close: 0.50, label: "Dental / med-spa" },
   };
 
   const fmt = (n) => "$" + Math.round(n).toLocaleString("en-US");
@@ -86,6 +90,8 @@
     document.querySelectorAll(".roi-vert-btn").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.vert === v);
     });
+    const sel = $("roi-vert");
+    if (sel && sel.value !== v) sel.value = v;
     recompute();
   }
 
@@ -98,6 +104,14 @@
     document.querySelectorAll(".roi-vert-btn").forEach((btn) => {
       btn.addEventListener("click", () => applyVertical(btn.dataset.vert));
     });
+    // Industry dropdown. Selecting one loads that vertical's non-zero
+    // defaults so the calculator is never showing $0 on arrival.
+    const sel = $("roi-vert");
+    if (sel) {
+      sel.addEventListener("change", () => applyVertical(sel.value));
+      const shell = document.querySelector(".roi-shell");
+      if (shell && shell.dataset.vertical) sel.value = shell.dataset.vertical;
+    }
 
     const cta = $("roi-cta");
     if (cta) {

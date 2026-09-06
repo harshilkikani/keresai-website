@@ -17,6 +17,12 @@ export interface Props {
    * Setting bare also loads the tracking layer.
    */
   bare?: boolean;
+  /**
+   * Fires this conversion event on load via app.js. Used by the
+   * tracked thank-you page, where the conversion is confirmed by
+   * arriving rather than by a click.
+   */
+  conversion?: string;
 }
 
 const {
@@ -27,6 +33,7 @@ const {
   ogImage = '/assets/img/og-image.png',
   noindex = false,
   bare = false,
+  conversion,
 } = Astro.props;
 
 const origin = 'https://www.keresai.com';
@@ -119,15 +126,32 @@ const BING_VERIFICATION = '';
 <link rel="stylesheet" href="/assets/tokens.css?v=1" />
 <link rel="stylesheet" href="/assets/styles.css?v=23" />
 <link rel="stylesheet" href="/assets/pages.css?v=4" />
-<link rel="stylesheet" href="/assets/components.css?v=9" />
+<link rel="stylesheet" href="/assets/components.css?v=15" />
 
 <!-- Page-specific structured data + head extras -->
 <slot name="head" />
 </head>
 
-<body class:list={[bare && 'is-bare']}>
+<body class:list={[bare && 'is-bare']} data-conversion={conversion}>
 <a href="#main" class="skip-link">Skip to main content</a>
 {!bare && <Nav />}
+{/* Ad landing pages get a logo and a phone number and nothing else —
+    no nav, no menu, nothing to click but the conversion action. */}
+{bare && (
+  <header class="lp-bar" role="banner">
+    <div class="lp-bar__inner">
+      <a href="/" class="logo" aria-label="Keres AI">
+        <img src="/assets/img/KeresLogo.png" alt="Keres AI" class="logo-img" width="120" height="32" />
+      </a>
+      <a href={PHONE.href} class="nav-phone" data-event="tel_click">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 5.2 2 2 0 0 1 6 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+        </svg>
+        <span class="nav-phone__num">{PHONE.display}</span>
+      </a>
+    </div>
+  </header>
+)}
 <main id="main">
   <slot />
 </main>
@@ -146,8 +170,8 @@ const BING_VERIFICATION = '';
     <a href="/demo" class="sticky-bar__demo" data-event="demo_click">Book a demo</a>
   </div>
 )}
-<script src="/assets/app.js?v=12" is:inline></script>
-<script src="/assets/motion.js?v=1" is:inline></script>
+<script src="/assets/app.js?v=14" is:inline></script>
+<script src="/assets/motion.js?v=2" is:inline></script>
 {bare && <script src="/assets/tracking.js?v=1" is:inline></script>}
 <slot name="scripts" />
 </body>

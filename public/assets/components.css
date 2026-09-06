@@ -463,6 +463,19 @@ html[data-motion] [data-reveal]:not(.is-in) {
   opacity: 0;
   transform: translateY(8px);
 }
+/* A container that staggers children does not itself fade — otherwise the
+   two animations compound and the whole block dims before it resolves. */
+html[data-motion] [data-reveal]:has([data-reveal-child]):not(.is-in) {
+  opacity: 1;
+  transform: none;
+}
+html[data-motion] [data-reveal-child] {
+  transition: opacity var(--t-slow), transform var(--t-slow);
+}
+html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] {
+  opacity: 0;
+  transform: translateY(8px);
+}
 
 /* ── Product mocks: call transcript ────────────────────────
    The transcript is the hero image on this site. Turn timing
@@ -505,7 +518,7 @@ html[data-motion] [data-reveal]:not(.is-in) {
   text-transform: uppercase;
   color: var(--ink-3);
 }
-.k-call__turn--agent .k-call__who { color: var(--accent); }
+.k-call__turn--remi .k-call__who { color: var(--accent); }
 .k-call__text {
   grid-column: 2;
   margin: 3px 0 0;
@@ -515,7 +528,7 @@ html[data-motion] [data-reveal]:not(.is-in) {
   max-width: 48ch;
   text-wrap: pretty;
 }
-.k-call__turn--agent .k-call__text { color: var(--ink-0); }
+.k-call__turn--remi .k-call__text { color: var(--ink-0); }
 
 .k-call__outcome {
   margin: var(--space-5) 0 0;
@@ -976,4 +989,619 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
 @media (max-width: 520px) {
   .price-hero-ctas { gap: var(--space-4); }
   .price-hero-ctas .btn-k--primary { width: 100%; justify-content: center; }
+}
+
+/* =============================================================
+   Named agents, the team list, logos, and the calculator control
+============================================================= */
+
+/* ─── Call transcript: caller line ────────────────────────── */
+.k-call__from {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-4);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+.k-call__num { font-family: var(--mono); font-size: var(--text-0); color: var(--ink-0); }
+.k-call__city {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ─── Daily Brief: attribution line ───────────────────────── */
+.k-brief__source {
+  margin: var(--space-3) 0 0;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+  font-size: var(--text--1);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.k-brief__action { margin-top: var(--space-3); }
+
+/* ─── Leak list: the fix line ─────────────────────────────── */
+.k-leak__fixtext {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text--1);
+  line-height: 1.55;
+  color: var(--ink-1);
+  max-width: 58ch;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--accent-bright);
+}
+
+/* ─── Hero: a fact that is still a placeholder ────────────── */
+.k-hero__fact-v--todo {
+  font-family: var(--mono);
+  font-size: var(--text-0);
+  color: var(--ink-3);
+  background: var(--raised);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  padding: 1px var(--space-2);
+}
+
+/* ─── Meet the team ───────────────────────────────────────
+   A column of rows, not four cards: the name and title on the
+   left, what it actually does on the right. */
+.k-team {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.k-member {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: var(--space-5) clamp(var(--space-6), 5vw, var(--space-9));
+  padding-block: var(--space-7);
+  border-bottom: 1px solid var(--line);
+}
+.k-member__name {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--text-3);
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  line-height: 1.05;
+  color: var(--ink-0);
+}
+.k-member__title {
+  margin: var(--space-2) 0 0;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.k-member__job {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-0);
+  line-height: 1.5;
+  color: var(--ink-1);
+}
+.k-member__go {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-size: var(--text--1);
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+}
+.k-member__go svg { inline-size: 16px; block-size: 16px; transition: transform var(--t-fast); }
+.k-member__go:hover svg { transform: translateX(3px); }
+.k-member__bullets { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-4); }
+.k-member__bullets li {
+  position: relative;
+  padding-left: var(--space-5);
+  font-size: var(--text-0);
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 62ch;
+}
+.k-member__bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.62em;
+  inline-size: 10px; block-size: 2px;
+  background: var(--accent-bright);
+}
+
+@media (max-width: 860px) {
+  .k-member { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); padding-block: var(--space-6); }
+}
+
+/* ─── Integration logos ───────────────────────────────────
+   A static row. No carousel, no scroll animation. */
+.k-logos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.k-logo a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: 100%;
+  padding: var(--space-5);
+  background: var(--surface);
+  text-decoration: none;
+  transition: background var(--t-fast);
+}
+.k-logo a:hover { background: var(--accent-wash); }
+.k-logo__mark {
+  inline-size: 32px;
+  block-size: 32px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--logo) 12%, transparent);
+  color: var(--logo);
+}
+.k-logo__mark svg { inline-size: 18px; block-size: 18px; }
+.k-logo__name { font-size: var(--text--1); font-weight: 500; color: var(--ink-1); }
+.k-logos__foot {
+  margin: var(--space-5) 0 0;
+  font-size: var(--text--1);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+.k-logos__foot a { color: var(--accent); }
+
+@media (max-width: 760px) { .k-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 400px) { .k-logos { grid-template-columns: minmax(0, 1fr); } }
+
+/* ─── Calculator: industry dropdown ───────────────────────── */
+.roi-vert-row { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.roi-vert-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.roi-vert-select {
+  min-height: var(--tap);
+  padding: var(--space-2) var(--space-8) var(--space-2) var(--space-4);
+  font: inherit;
+  font-size: var(--text-0);
+  color: var(--ink-0);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B625A' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-3) center;
+  background-size: 16px;
+}
+
+/* ─── Three-step CTA row ──────────────────────────────────── */
+.k-start__ctas {
+  margin-top: var(--space-8);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+}
+@media (max-width: 520px) {
+  .k-start__ctas .btn-k--primary { width: 100%; justify-content: center; }
+}
+
+/* ─── Nav dropdowns ───────────────────────────────────────
+   <details>/<summary>: works with no JS, keyboard-operable for
+   free. app.js only adds click-outside and Escape-to-close. */
+.nav-drop { position: relative; }
+.nav-drop > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.nav-drop > summary::-webkit-details-marker { display: none; }
+.nav-drop > summary::after {
+  content: '';
+  inline-size: 8px;
+  block-size: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--t-fast);
+}
+.nav-drop[open] > summary::after { transform: translateY(1px) rotate(-135deg); }
+
+.nav-drop__panel {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 120;
+  min-inline-size: 236px;
+  padding: var(--space-2);
+  display: grid;
+  gap: 1px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+}
+/* A hit-bridge so the pointer can cross the gap without closing. */
+.nav-drop__panel::before {
+  content: '';
+  position: absolute;
+  inset: -14px 0 100% 0;
+}
+.nav-drop__panel a {
+  display: grid;
+  gap: 1px;
+  padding: var(--space-3) var(--space-4);
+  min-height: var(--tap);
+  align-content: center;
+  border-radius: var(--radius);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--t-fast);
+}
+.nav-drop__panel a:hover { background: var(--accent-wash); }
+.nav-drop__panel--plain a { font-size: var(--text--1); color: var(--ink-1); }
+.nav-drop__name { font-size: var(--text-0); font-weight: 500; color: var(--ink-0); }
+.nav-drop__sub {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Dropdowns are a desktop affordance; the mobile menu lists everything. */
+@media (max-width: 1023px) {
+  .nav-drop__panel { display: none; }
+}
+
+/* ─── Mobile menu groups ──────────────────────────────────── */
+.mobile-menu__group {
+  margin: var(--space-5) 0 var(--space-1);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.mobile-menu a.mobile-menu__sub { font-size: var(--text-0); padding-left: var(--space-4); }
+
+/* ─── Footer address line ─────────────────────────────────── */
+.footer-address {
+  margin: var(--space-7) 0 0;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-dark);
+  font-family: var(--mono);
+  font-size: var(--text--1);
+  line-height: 1.6;
+  color: var(--text-on-dark-muted);
+}
+.footer-address a { color: var(--text-on-dark); text-decoration: none; }
+.footer-address a:hover { color: var(--accent-bright); }
+
+/* ─── What changes the quote ──────────────────────────────── */
+.k-factors { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.k-factor {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: baseline;
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+.k-factor__n { font-family: var(--mono); font-size: var(--text--1); color: var(--ink-3); }
+.k-factor__t { font-size: var(--text-1); line-height: 1.4; color: var(--ink-0); }
+
+/* ─── Services: stage map and service lists ───────────────── */
+.k-stagemap { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.k-stagemap a {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  gap: var(--space-3);
+  align-items: baseline;
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  transition: background var(--t-fast), padding-inline var(--t);
+}
+.k-stagemap a:hover { background: var(--accent-wash); padding-inline: var(--space-2); }
+.k-stagemap__n { font-family: var(--mono); font-size: var(--text--1); color: var(--ink-3); }
+.k-stagemap__name { font-size: var(--text-0); font-weight: 500; color: var(--ink-0); }
+.k-stagemap__by {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.k-svc { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.k-svc__item { padding-block: var(--space-5); border-bottom: 1px solid var(--line); }
+.k-svc__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+}
+.k-svc__name {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--text-1);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-0);
+}
+.k-svc__plan {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 3px var(--space-3);
+}
+.k-svc__plan--addon { color: var(--accent); border-color: var(--accent); }
+.k-svc__desc {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-0);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 66ch;
+}
+.k-svc--plain { border-top: 0; }
+.k-svc--plain .k-svc__item { padding-block: var(--space-4); }
+
+/* ─── What we refer out ───────────────────────────────────── */
+.k-refer {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3) var(--space-6);
+}
+.k-refer li {
+  position: relative;
+  padding-left: var(--space-5);
+  font-size: var(--text-0);
+  color: var(--ink-2);
+}
+.k-refer li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.62em;
+  inline-size: 10px; block-size: 1px;
+  background: var(--line-strong);
+}
+
+/* ─── Industry hubs ───────────────────────────────────────── */
+.k-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-6);
+}
+.k-flow { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.k-flow__step {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: var(--space-5);
+  border-bottom: 1px solid var(--line);
+}
+.k-flow__n { font-family: var(--mono); font-size: var(--text--1); color: var(--ink-3); padding-top: 4px; }
+.k-flow__name {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--text-1);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-0);
+}
+.k-flow__text { margin: var(--space-2) 0 0; font-size: var(--text-0); line-height: 1.6; color: var(--ink-2); max-width: 62ch; }
+
+.k-quotes--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 900px) { .k-quotes--two { grid-template-columns: minmax(0, 1fr); } }
+
+.k-close--wide { max-width: 62ch; }
+.k-close .k-body { margin-top: var(--space-4); }
+.k-close .k-body a { color: var(--accent); }
+
+.k-childlinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.k-childlinks a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  height: 100%;
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface);
+  font-size: var(--text--1);
+  color: var(--ink-1);
+  text-decoration: none;
+  transition: background var(--t-fast);
+}
+.k-childlinks a:hover { background: var(--accent-wash); color: var(--accent); }
+.k-childlinks svg { inline-size: 16px; block-size: 16px; flex: none; }
+
+/* =============================================================
+   Ad landing pages (/lp/*) and the tracked thank-you page
+   No nav, no footer links, nothing to click but the conversion.
+============================================================= */
+.lp-bar {
+  border-bottom: 1px solid var(--line);
+  background: var(--ground);
+}
+.lp-bar__inner {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: var(--space-4) var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.lp-wrap {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.lp-wrap--narrow { max-width: var(--container-narrow); }
+
+.lp-hero { padding-block: clamp(var(--space-7), 7vw, var(--space-10)); background: var(--ground); }
+.lp-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(var(--space-7), 5vw, var(--space-9));
+  align-items: start;
+}
+.lp-eyebrow {
+  margin: 0 0 var(--space-4);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.lp-hero .k-lede { margin-top: var(--space-5); max-width: 52ch; }
+.lp-hero__ctas {
+  margin-top: var(--space-7);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+}
+.lp-hero__note { margin: 0; font-size: var(--text--1); color: var(--ink-2); }
+
+/* ─── The form: four fields, nothing else ─────────────────── */
+.lp-form-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: clamp(var(--space-5), 3vw, var(--space-7));
+}
+.lp-form__title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--text-2);
+  font-weight: 600;
+  letter-spacing: -0.014em;
+  color: var(--ink-0);
+}
+.lp-form__sub { margin: var(--space-2) 0 var(--space-5); font-size: var(--text--1); color: var(--ink-2); }
+.lp-form { display: grid; gap: var(--space-4); }
+.lp-form__trap { position: absolute; left: -5000px; }
+.lp-field { display: grid; gap: var(--space-2); }
+.lp-field > span {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.lp-field input,
+.lp-field select {
+  min-height: var(--tap);
+  padding: var(--space-3) var(--space-4);
+  font: inherit;
+  font-size: var(--text-0);
+  color: var(--ink-0);
+  background: var(--ground);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+}
+.lp-field input:focus-visible,
+.lp-field select:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 2px;
+}
+.lp-form__fine { margin: 0; font-size: var(--text--1); color: var(--ink-3); text-align: center; }
+
+/* ─── Bands ───────────────────────────────────────────────── */
+.lp-band { padding-block: clamp(var(--space-8), 7vw, var(--space-10)); background: var(--ground); }
+.lp-band--alt { background: var(--raised); }
+.lp-band .k-h2 { margin-bottom: var(--space-6); }
+.lp-split {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  gap: clamp(var(--space-6), 5vw, var(--space-9));
+  align-items: start;
+}
+.lp-integrations {
+  margin: var(--space-7) 0 0;
+  font-family: var(--mono);
+  font-size: var(--text--1);
+  color: var(--ink-2);
+}
+.lp-band .roi-shell { margin-top: var(--space-6); max-width: 920px; }
+.lp-band .faq-list { margin-top: var(--space-5); }
+
+.lp-close {
+  padding-block: clamp(var(--space-8), 7vw, var(--space-10));
+  background: #0D0B09;
+  --ground: #0D0B09;
+  --ink-0: #F5F1EC;
+  --ink-2: #A9A099;
+  --accent: #F2711C;
+  --accent-hover: #FF8534;
+  --accent-ink: #17110B;
+  color: var(--ink-2);
+}
+.lp-close .k-lede { margin-block: var(--space-4) var(--space-7); }
+
+.lp-foot {
+  padding-block: var(--space-6);
+  background: var(--ground);
+  border-top: 1px solid var(--line);
+  font-size: var(--text--1);
+  color: var(--ink-3);
+}
+.lp-foot a { color: var(--ink-2); }
+
+@media (max-width: 900px) {
+  .lp-hero__grid, .lp-split { grid-template-columns: minmax(0, 1fr); }
+  /* The form comes first on a phone: it is the conversion. */
+  .lp-hero__grid .lp-form-card { order: -1; }
+}
+@media (max-width: 520px) {
+  .lp-hero__ctas .btn-k--primary,
+  .lp-close .btn-k--primary { width: 100%; justify-content: center; }
 }

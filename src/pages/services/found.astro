@@ -1,0 +1,229 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import Section from '../../components/Section.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Button from '../../components/Button.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import DailyBrief from '../../components/DailyBrief.astro';
+import { organizationSchema, breadcrumbSchema, faqSchema, serviceSchema } from '../../data/schema';
+import { foundServices, plans, PHONE } from '../../data/site';
+
+const path = '/services/found';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+  { name: 'Found', path },
+];
+const found = plans.find((p) => p.slug === 'found')!;
+
+const faqs = [
+  {
+    q: 'Is there a contract?',
+    a: 'No. Found is month-to-month like every other plan, and there is no build fee at the base tier — design, hosting and the care plan are all inside the monthly price.',
+  },
+  {
+    q: 'Who owns the website?',
+    a: 'You do. The domain stays in your name, the content is yours, and if you leave we hand over an export rather than holding the site hostage. That is the difference between a care plan and a lease.',
+  },
+  {
+    q: 'Can I keep my current website?',
+    a: 'Yes. Plenty of firms take the care plan, Google Business Profile management, reviews and listings and leave their existing site alone. The price comes down when we are not building and hosting a site for you.',
+  },
+  {
+    q: 'How much does Found cost?',
+    a: 'From $249/month, or from $499/month for law firms — legal is more competitive, the listings ecosystem is different, and the review compliance rules are stricter. The quote depends on how many locations you run and whether you add AI search visibility or Local Services Ads.',
+  },
+  {
+    q: 'How long until it shows results?',
+    a: 'Google Business Profile changes tend to move within two to six weeks; listings and citations take a full cycle to propagate. Reviews start the week we switch on the request flow, because those depend on your job volume rather than on an algorithm.',
+  },
+  {
+    q: 'Do you run Google Ads too?',
+    a: 'No. We set up and answer Local Services Ads, because Google ranks those on how fast you answer and Remi answers in two rings. Paid search management is a partner referral — we will introduce you, and we do not take a cut.',
+  },
+];
+
+const serviceNodes = foundServices.map((s) =>
+  serviceSchema({
+    name: s.name,
+    serviceType: 'Local Search Visibility',
+    description: s.desc,
+    path,
+    audience: 'Local service businesses and professional practices',
+  })
+);
+---
+<Layout
+  title="Websites, Google Profile & Reviews From $249/mo | Keres"
+  description="A conversion website, a managed Google Business Profile, automated reviews and AI-search visibility — from $249/month, $499 for law firms, all wired to Remi who answers the calls they generate."
+  path={path}
+>
+  <Schema slot="head" graph={[organizationSchema, breadcrumbSchema(crumbs), faqSchema(faqs), ...serviceNodes]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <Section spacing="standard" labelledby="found-title">
+    <div class="k-grid">
+      <div class="k-col-7">
+        <Eyebrow>Found &mdash; stage zero</Eyebrow>
+        <h1 id="found-title" class="k-display">Be found. Then be answered.</h1>
+        <p class="k-lede">
+          A conversion-built website, a managed Google Business Profile, automated reviews, and
+          visibility in AI search &mdash; from {found.from.replace('from ', '')} a month, all wired to Remi,
+          who answers the calls they generate.
+        </p>
+        <div class="price-hero-ctas">
+          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          <Button href="/demo" variant="ghost" event="demo_click">Get your quote</Button>
+        </div>
+      </div>
+      <div class="k-col-5">
+        <div class="price-facts">
+          <div class="price-fact">
+            <span class="price-fact__k">From</span>
+            <span class="price-fact__v" data-figure>$249/month</span>
+          </div>
+          <div class="price-fact">
+            <span class="price-fact__k">Law firms</span>
+            <span class="price-fact__v" data-figure>from $499/month</span>
+          </div>
+          <div class="price-fact">
+            <span class="price-fact__k">Build fee</span>
+            <span class="price-fact__v">None at the base tier.</span>
+          </div>
+          <div class="price-fact">
+            <span class="price-fact__k">Contract</span>
+            <span class="price-fact__v">Month-to-month.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="raised" spacing="major" labelledby="whats-in-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>What&rsquo;s in it</Eyebrow>
+        <h2 id="whats-in-title" class="k-h2">Eight things, fixed in scope.</h2>
+        <p class="k-lede k-measure">
+          Found is everything that has to be true before your phone can ring: a site that
+          converts, a profile that ranks, reviews that keep arriving, listings that agree with
+          each other, and content written to be quoted by AI search. Two of the eight are
+          add-ons, and they are marked.
+        </p>
+      </div>
+      <ul class="k-svc">
+        {foundServices.map((s) => (
+          <li class="k-svc__item">
+            <div class="k-svc__head">
+              <h3 class="k-svc__name">{s.name}</h3>
+              {s.addOn && <span class="k-svc__plan k-svc__plan--addon">Add-on</span>}
+            </div>
+            <p class="k-svc__desc">{s.desc}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <Section tone="inverse" spacing="standard" labelledby="price-title">
+    <div class="k-found">
+      <div class="k-found__copy">
+        <Eyebrow>Pricing</Eyebrow>
+        <h2 id="price-title" class="k-h2">From $249 a month. Law firms from $499.</h2>
+        <p class="k-lede">
+          One flat monthly fee covering design, hosting, the care plan, your Google Business
+          Profile, reviews and listings. What moves the number: how many locations you run,
+          whether you need the site built or just cared for, and whether you add AI search
+          visibility or Local Services Ads.
+        </p>
+        <div class="k-found__foot">
+          <p class="k-found__price">
+            <span class="k-found__from" data-figure>from $249</span>
+            <span class="k-found__per">/month &middot; quoted to your volume</span>
+          </p>
+          <Button href="/demo" variant="primary" event="demo_click">Get your quote</Button>
+          <Button href={PHONE.href} variant="ghost" event="tel_click">Or call {PHONE.display}</Button>
+        </div>
+      </div>
+      <div class="k-found__mock">
+        <figure class="k-shot">
+          <picture>
+            <source srcset="/assets/img/operator-portal.webp" type="image/webp" />
+            <img
+              src="/assets/img/operator-portal.jpg"
+              width="1280" height="720" loading="lazy" decoding="async"
+              alt="The Keres console: a caller conversation on the left, answered calls and follow-ups on the right, and this month's enquiries, active jobs and bookings along the bottom."
+            />
+          </picture>
+          <figcaption class="k-mock__caption">
+            Every Found account gets the same console and the same Daily Brief. Screenshot uses example data.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </Section>
+
+  <Section spacing="major" labelledby="why-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Why us and not an agency</Eyebrow>
+        <h2 id="why-title" class="k-h2">We don&rsquo;t sell traffic. We sell answered calls.</h2>
+      </div>
+      <ol class="k-steps">
+        <li class="k-step">
+          <span class="k-step__n" data-figure>01</span>
+          <h3 class="k-step__title">Traffic isn&rsquo;t the deliverable</h3>
+          <p class="k-step__text">An agency reports sessions and impressions. The call that came out of those sessions still rang out at 6pm. Found and Remi are sold together because visibility nobody answers is a cost, not a channel.</p>
+        </li>
+        <li class="k-step">
+          <span class="k-step__n" data-figure>02</span>
+          <h3 class="k-step__title">Fixed scope, so the price doesn&rsquo;t drift</h3>
+          <p class="k-step__text">Every item on this page has a defined scope and a flat monthly fee. No hourly overage, no "additional strategy" line, and no annual re-negotiation you have to brace for.</p>
+        </li>
+        <li class="k-step">
+          <span class="k-step__n" data-figure>03</span>
+          <h3 class="k-step__title">Your brief says which source produced the booking</h3>
+          <p class="k-step__text">Call tracking runs a number per channel, so the morning text can tell you four of six bookings came from your Google Business Profile. That is the only report that settles the argument.</p>
+        </li>
+      </ol>
+    </div>
+  </Section>
+
+  <Section tone="raised" spacing="standard" labelledby="proof-title">
+    <div class="k-split k-split--top">
+      <div class="k-split__aside">
+        <Eyebrow>Proof</Eyebrow>
+        <h2 id="proof-title" class="k-h2">In their words.</h2>
+        <p class="k-lede">
+          No invented numbers and no stock-photo customers. This slot stays visible until a
+          real firm says a real thing on the record.
+        </p>
+      </div>
+      <div class="k-split__mock">
+        <Testimonial proves="Found producing calls that Remi then answered and booked" />
+      </div>
+    </div>
+  </Section>
+
+  <Section spacing="standard" labelledby="brief-title">
+    <div class="k-split k-split--reverse">
+      <div class="k-split__aside">
+        <Eyebrow>Owner Daily Brief</Eyebrow>
+        <h2 id="brief-title" class="k-h2">You don&rsquo;t log into a dashboard.</h2>
+        <p class="k-lede">
+          Found reports arrive the way everything else does: one text each morning, with the
+          source line telling you where the bookings actually came from.
+        </p>
+      </div>
+      <div class="k-split__mock">
+        <DailyBrief vertical="default" />
+      </div>
+    </div>
+  </Section>
+
+  <FaqSection faqs={faqs} title="Found FAQ" tone="raised" />
+</Layout>

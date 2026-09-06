@@ -6,7 +6,13 @@ import sitemap from '@astrojs/sitemap';
 function priorityFor(url) {
   const p = new URL(url).pathname.replace(/\.html$/, '');
   if (p === '' || p === '/') return 1.0;
-  if (['/ai-receptionist', '/ai-sdr', '/email-deliverability', '/pricing', '/demo'].includes(p)) return 0.9;
+  if ([
+    '/ai-receptionist', '/ai-sdr', '/email-deliverability', '/pricing', '/demo',
+    '/services', '/services/found',
+    '/agents/inbound', '/agents/follow-up', '/agents/reactivation', '/agents/outbound',
+  ].includes(p)) return 0.9;
+  // Industry hubs sit above the nine narrower industry pages beneath them.
+  if (/^\/industries\//.test(p)) return 0.85;
   if ([
     '/glossary', '/integrations', '/use-cases', '/tools', '/blog', '/industries',
     '/ai-answering-service', '/24-7-ai-receptionist', '/compare',
@@ -38,6 +44,9 @@ export default defineConfig({
       filter: (page) =>
         !page.includes('/legal/') &&
         !page.includes('/resources.html') &&
+        // Ad landing pages are noindex and must never enter the sitemap.
+        !page.includes('/lp/') &&
+        !/\/thank-you(\.html)?$/.test(page) &&
         // The old /missed-call-calculator path is now a 301 redirect to
         // /tools/missed-call-calculator — keep the redirect out of the sitemap.
         // Anchored so the canonical /tools/ URL is not matched.
@@ -61,6 +70,22 @@ export default defineConfig({
       ],
     }),
   ],
+  // GitHub Pages has no server redirects, so Astro emits a meta-refresh page
+  // at each source path. That is slower than a 301 and passes link equity less
+  // cleanly, which is why we keep URLs rather than move them wherever we can.
+  //
+  // Only redirects whose TARGET already builds belong here: in static mode the
+  // redirect REPLACES the page at the source path, so pointing one at a route
+  // that does not exist yet turns a live page into a dead end.
+  //
+  // Deferred to Phase 2, when their targets are built:
+  //   /ai-receptionist   → /agents/inbound
+  //   /ai-sdr            → /agents/outbound
+  //   /email-deliverability → /agents/outbound
+  //   /{competitor}-alternative → /compare/{competitor}
+  redirects: {
+    '/for-hvac': '/industries/home-services',
+  },
   build: {
     // Emit /ai-receptionist.html style files so GitHub Pages serves clean URLs.
     format: 'file',

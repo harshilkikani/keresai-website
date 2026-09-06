@@ -1,0 +1,190 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import CallTranscript from '../../components/CallTranscript.astro';
+import { landingPages } from '../../data/lp';
+import { PHONE } from '../../data/site';
+
+export function getStaticPaths() {
+  return landingPages.map((lp) => ({ params: { lp: lp.slug }, props: { lp } }));
+}
+
+const { lp } = Astro.props;
+const path = `/lp/${lp.slug}`;
+
+// Formspree redirects here on success; /thank-you fires the conversion.
+// PLACEHOLDER — a dedicated Formspree endpoint per landing page would
+// keep ad attribution clean. This reuses the site's contact endpoint.
+const FORM_ACTION = 'https://formspree.io/f/mojywlnn';
+---
+<Layout title={lp.title} description={lp.description} path={path} noindex bare>
+  <!-- ── ABOVE THE FOLD: one call, one form ─────────────── -->
+  <section class="lp-hero" aria-labelledby="lp-title">
+    <div class="lp-wrap lp-hero__grid">
+      <div>
+        <p class="lp-eyebrow">New Jersey · Law firms</p>
+        <h1 id="lp-title" class="k-display">{lp.h1}</h1>
+        <p class="k-lede">{lp.sub}</p>
+
+        <div class="lp-hero__ctas">
+          <Button href={PHONE.href} variant="primary" event="tel_click">
+            Call {PHONE.display} now
+          </Button>
+          <p class="lp-hero__note">You&rsquo;ll be talking to Remi.</p>
+        </div>
+
+        <ul class="k-hero__facts" aria-label="At a glance">
+          <li><span class="k-hero__fact-k">Answers in</span><span class="k-hero__fact-v" data-figure>2 rings</span></li>
+          <li><span class="k-hero__fact-k">Live in</span><span class="k-hero__fact-v" data-figure>5 days</span></li>
+          <li><span class="k-hero__fact-k">Contract</span><span class="k-hero__fact-v">None</span></li>
+        </ul>
+      </div>
+
+      <div class="lp-form-card">
+        <h2 class="lp-form__title">Get your quote</h2>
+        <p class="lp-form__sub">Four fields. We call you back the same business day.</p>
+        <form
+          action={FORM_ACTION}
+          method="POST"
+          class="lp-form"
+          data-event="form_submit"
+        >
+          <input type="hidden" name="_subject" value={`New /lp/${lp.slug} enquiry`} />
+          <input type="hidden" name="_next" value="https://www.keresai.com/thank-you" />
+          <input type="hidden" name="landing_page" value={lp.slug} />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="lp-form__trap" />
+
+          <label class="lp-field">
+            <span>Your name</span>
+            <input type="text" name="name" required autocomplete="name" />
+          </label>
+          <label class="lp-field">
+            <span>Firm</span>
+            <input type="text" name="firm" required autocomplete="organization" />
+          </label>
+          <label class="lp-field">
+            <span>Phone</span>
+            <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" />
+          </label>
+          <label class="lp-field">
+            <span>{lp.formFieldLabel}</span>
+            <select name="practice_area" required>
+              <option value="">Select one</option>
+              {lp.formOptions.map((o) => <option value={o}>{o}</option>)}
+            </select>
+          </label>
+
+          <button type="submit" class="btn-k btn-k--primary btn-k--wide">Get my quote</button>
+          <p class="lp-form__fine">No contract. Live in five business days.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT HAPPENS ON THE CALL ───────────────────────── -->
+  <section class="lp-band" aria-labelledby="lp-how">
+    <div class="lp-wrap">
+      <h2 id="lp-how" class="k-h2">What happens when your phone rings at 2 a.m.</h2>
+      <div class="lp-split">
+        <ol class="k-flow">
+          {lp.bullets.map((b, i) => (
+            <li class="k-flow__step">
+              <span class="k-flow__n" data-figure>{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3 class="k-flow__name">{b.head}</h3>
+                <p class="k-flow__text">{b.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div class="lp-split__mock">
+          <CallTranscript vertical="law-firms" caption={false} />
+        </div>
+      </div>
+      <p class="lp-integrations">{lp.integrations}</p>
+    </div>
+  </section>
+
+  <!-- ── CALCULATOR ─────────────────────────────────────── -->
+  <section class="lp-band lp-band--alt" aria-labelledby="lp-calc">
+    <div class="lp-wrap">
+      <h2 id="lp-calc" class="k-h2">What the missed calls are costing you.</h2>
+      <p class="k-lede k-measure">
+        Preset to typical {lp.calcLabel} figures. Change any of them &mdash; the arithmetic is shown
+        in full underneath.
+      </p>
+      <div class="roi-shell" data-vertical={lp.calcPreset}>
+        <div class="roi-grid">
+          <div class="roi-inputs">
+            <label class="roi-field"><span class="roi-field-label">Monthly new-client calls</span><input type="number" id="roi-leads" min="0" value="80"></label>
+            <label class="roi-field"><span class="roi-field-label">Answer rate %</span><input type="number" id="roi-answer" min="0" max="100" value="50"></label>
+            <label class="roi-field"><span class="roi-field-label">Avg case value</span><div class="roi-field-prefix"><span>$</span><input type="number" id="roi-job" min="0" value="3500"></div></label>
+            <label class="roi-field"><span class="roi-field-label">After-hours call %</span><input type="number" id="roi-afterhours" min="0" max="100" value="45"></label>
+          </div>
+          <div class="roi-output">
+            <div class="roi-headline-label">You&rsquo;re losing</div>
+            <div class="roi-headline-value"><span id="roi-lost-mo">$0</span><span class="roi-per">/mo</span></div>
+            <div class="roi-headline-year">&asymp; <span id="roi-lost-yr">$0</span> / year</div>
+            <div class="roi-math">
+              <div class="roi-math-row"><span>Missed calls / mo</span><span id="roi-missed">0</span></div>
+              <div class="roi-math-row muted"><span id="roi-missed-calc"></span><span></span></div>
+              <div class="roi-math-row"><span>Would-have-signed matters</span><span id="roi-jobs">0</span></div>
+              <div class="roi-math-row muted"><span id="roi-close-calc"></span><span></span></div>
+              <div class="roi-math-row"><span>Lost case value</span><span id="roi-lost-mo-2">$0</span></div>
+              <div class="roi-math-row muted"><span id="roi-job-calc"></span><span></span></div>
+              <div class="roi-math-row"><span>After-hours calls / mo</span><span id="roi-ah">0</span></div>
+              <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
+            </div>
+            <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href={PHONE.href} data-event="tel_click">Call {PHONE.display}</a>
+            <div class="roi-note" id="roi-note"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROOF ──────────────────────────────────────────── -->
+  <section class="lp-band" aria-labelledby="lp-proof">
+    <div class="lp-wrap">
+      <h2 id="lp-proof" class="k-h2">In their words, or not at all.</h2>
+      <div class="k-quotes k-quotes--two">
+        {lp.testimonials.map((t) => <Testimonial proves={t.proves} vertical="New Jersey law firms" />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ────────────────────────────────────────────── -->
+  <section class="lp-band lp-band--alt" aria-labelledby="lp-faq">
+    <div class="lp-wrap lp-wrap--narrow">
+      <h2 id="lp-faq" class="k-h2">Three questions everyone asks.</h2>
+      <div class="faq-list">
+        {lp.faqs.map((f) => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <p class="faq-a" set:html={f.a} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── REPEAT CTA ─────────────────────────────────────── -->
+  <section class="lp-close" aria-labelledby="lp-close-title">
+    <div class="lp-wrap lp-wrap--narrow">
+      <h2 id="lp-close-title" class="k-h2">Call it now and hear what your clients would hear.</h2>
+      <p class="k-lede">
+        Ask it something awkward. That is the point of the exercise.
+      </p>
+      <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+    </div>
+  </section>
+
+  <footer class="lp-foot">
+    <div class="lp-wrap">
+      <p>&copy; {new Date().getFullYear()} Keres AI · <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a></p>
+    </div>
+  </footer>
+
+  <script slot="scripts" src="/assets/roi.js?v=4" is:inline></script>
+</Layout>

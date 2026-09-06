@@ -128,6 +128,72 @@
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   });
 
+  /* ─── Conversion events ────────────────────────────────
+     Every CTA on the site carries data-event. This is the only
+     place that reads it, so a new button is tracked by adding an
+     attribute rather than by wiring a listener.
+
+     window.keresTrack only exists on /lp/* pages, where
+     tracking.js is loaded. Everywhere else this is a no-op, which
+     is why the check is on the function and not on the page. */
+  document.addEventListener('DOMContentLoaded', () => {
+    const fire = (name, params) => {
+      if (typeof window.keresTrack === 'function') window.keresTrack(name, params || {});
+    };
+
+    document.addEventListener('click', (e) => {
+      const el = e.target.closest('[data-event]');
+      if (!el) return;
+      fire(el.dataset.event, {
+        page_path: window.location.pathname,
+        link_text: (el.textContent || '').trim().slice(0, 80),
+      });
+    });
+
+    // Form submits: the LP form and the contact form both post away,
+    // so fire on submit rather than waiting for a response.
+    document.querySelectorAll('form[data-event]').forEach((form) => {
+      form.addEventListener('submit', () => {
+        fire(form.dataset.event, { page_path: window.location.pathname });
+      });
+    });
+
+    // A demo booked is confirmed by the thank-you page, not by the click.
+    if (document.body.dataset.conversion) {
+      fire(document.body.dataset.conversion, { page_path: window.location.pathname });
+    }
+  });
+
+  /* ─── Nav dropdowns ────────────────────────────────────
+     The <details> elements work on their own. This only adds the
+     two behaviours markup cannot express: close when the pointer
+     goes elsewhere, and close on Escape. */
+  document.addEventListener('DOMContentLoaded', () => {
+    const drops = Array.prototype.slice.call(document.querySelectorAll('.nav-drop'));
+    if (!drops.length) return;
+
+    const closeAll = (except) => {
+      drops.forEach((d) => { if (d !== except) d.open = false; });
+    };
+
+    drops.forEach((d) => {
+      d.addEventListener('toggle', () => { if (d.open) closeAll(d); });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-drop')) closeAll(null);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      const open = drops.filter((d) => d.open);
+      if (!open.length) return;
+      open.forEach((d) => { d.open = false; });
+      const summary = open[0].querySelector('summary');
+      if (summary) summary.focus();
+    });
+  });
+
   /* ─── Calendar + Calendly launcher ─────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
     const elDays  = document.getElementById('calDays');

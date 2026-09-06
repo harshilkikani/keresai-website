@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import { PHONE } from '../data/site';
+
+// The tracked destination for every ad form. Arriving here IS the
+// conversion — Layout stamps data-conversion on <body> and app.js
+// fires it through window.keresTrack, so GA4, Google Ads and Meta all
+// see one Lead event from one place.
+const path = '/thank-you';
+---
+<Layout
+  title="Thanks — we'll call you back today | Keres AI"
+  description="Your request is in. We call back the same business day."
+  path={path}
+  noindex
+  bare
+  conversion="form_submit"
+>
+  <section class="lp-hero" aria-labelledby="ty-title">
+    <div class="lp-wrap lp-wrap--narrow">
+      <p class="lp-eyebrow">Got it</p>
+      <h1 id="ty-title" class="k-display">Thanks. We&rsquo;ll call you back today.</h1>
+      <p class="k-lede">
+        Someone from Keres will call the number you gave us the same business day. If it is
+        faster for you, call us instead and you will be talking to Remi &mdash; the same agent
+        that would answer your firm&rsquo;s phone.
+      </p>
+      <div class="lp-hero__ctas">
+        <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+      </div>
+      <ul class="k-hero__facts" aria-label="What happens next">
+        <li><span class="k-hero__fact-k">Callback</span><span class="k-hero__fact-v">Same business day</span></li>
+        <li><span class="k-hero__fact-k">Setup call</span><span class="k-hero__fact-v" data-figure>20 minutes</span></li>
+        <li><span class="k-hero__fact-k">Live in</span><span class="k-hero__fact-v" data-figure>5 business days</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="lp-foot">
+    <div class="lp-wrap">
+      <p>&copy; {new Date().getFullYear()} Keres AI · <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a></p>
+    </div>
+  </footer>
+</Layout>

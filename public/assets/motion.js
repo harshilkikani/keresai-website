@@ -28,8 +28,10 @@
       // Children stagger; a lone element reveals immediately.
       var kids = el.querySelectorAll('[data-reveal-child]');
       if (kids.length) {
+        // 120ms for the hero transcript, 100ms for the Daily Brief bubbles.
+        var step = parseInt(el.getAttribute('data-reveal-stagger'), 10) || 100;
         Array.prototype.forEach.call(kids, function (kid, i) {
-          kid.style.transitionDelay = (i * 100) + 'ms';
+          kid.style.transitionDelay = (i * step) + 'ms';
         });
       }
       el.classList.add('is-in');

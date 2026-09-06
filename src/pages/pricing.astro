@@ -8,42 +8,46 @@ import Eyebrow from '../components/Eyebrow.astro';
 import Button from '../components/Button.astro';
 import Testimonial from '../components/Testimonial.astro';
 import { organizationSchema, softwareApplicationSchema, faqSchema, breadcrumbSchema } from '../data/schema';
-import { plans, PHONE } from '../data/site';
+import { plans, quoteFactors, planTerms, BUNDLE_DISCOUNT, PHONE } from '../data/site';
 
 const path = '/pricing';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Pricing', path }];
 
-// FAQs must answer cost, setup time, human handoff, and contract terms.
+// FAQ answers the objections that actually decide the sale, with numbers.
 const faqs = [
   {
     q: 'How much does Keres cost?',
     a: 'Found starts at $249/month, or $499/month for law firms. Answer, Convert and Grow each publish a starting price and are then quoted to your call volume, locations and integrations. Custom is the only plan without a published floor, because multi-location and high-volume operations vary too much to price on a page.',
   },
   {
+    q: 'Is there a contract?',
+    a: 'No. Every plan is month-to-month and you can cancel any month. There is no minimum term and no cancellation fee.',
+  },
+  {
+    q: 'Is there a setup fee?',
+    a: 'Not on the Found base tier — design, hosting and care are in the monthly fee. Custom agent builds, integration work and migrations are quoted separately, in writing, before anything starts.',
+  },
+  {
+    q: 'How does usage billing work?',
+    a: 'Each plan includes a monthly pool of agent minutes sized to your volume. Past that pool you pay per minute at your quoted rate. There is no per-call charge and no surcharge for simultaneous calls, so a storm week does not produce a surprise invoice.',
+  },
+  {
+    q: 'Can I switch plans later?',
+    a: 'Any month, in either direction. Most firms start on Answer, move to Convert once the phone is handled, and add Grow when they want the old database worked.',
+  },
+  {
     q: 'How long does setup take?',
-    a: 'Most accounts are live within five business days. We map your call flows, connect your number, calendar and CRM, train the agent on your business, and test it with you before it answers a real call.',
+    a: 'Five business days for most accounts. A 20-minute call to map how you answer now, then we write your intake script, connect your number, calendar and CRM, and you test it yourself before it takes a real call.',
   },
   {
     q: 'What happens when a caller needs a human?',
-    a: 'The agent hands off. You configure the rules — an emergency, a named client, a request for a person — and the call transfers to your on-call number while the agent texts the owner the context it already collected. Nothing is lost in the handoff.',
-  },
-  {
-    q: 'Is there a contract?',
-    a: 'No. Every plan is month-to-month and you can cancel anytime. There is no setup fee and no per-minute billing.',
-  },
-  {
-    q: 'Can I start with just one agent?',
-    a: 'Yes. Found is the floor everyone starts on. From there you add the Inbound Agent (Answer), follow-up (Convert), or reactivation and outbound (Grow). Your quote scales to what you actually run.',
-  },
-  {
-    q: 'Do you charge per minute or per call?',
-    a: 'No. One flat monthly rate covers unlimited simultaneous calls. A heat wave, a storm surge, or a Monday morning rush does not change your bill.',
+    a: 'Remi warm-transfers to your on-call number under rules you set. If nobody picks up, you get a "call me now" alert carrying everything Remi already collected, so the caller never has to repeat themselves.',
   },
 ];
 ---
 <Layout
-  title="Pricing — Plans From $249/Month | Keres AI"
-  description="Keres pricing starts at $249/month for Found, $499 for law firms. Answer, Convert and Grow publish a starting price and are quoted to your call volume. Month-to-month."
+  title="Pricing — Plans From $249/Month, Quoted to You | Keres AI"
+  description="Keres plans start at $249/month for Found, $499 for law firms, and from $[X]/month for Remi answering your phone in two rings. Month-to-month, live in five business days."
   path={path}
 >
   <Schema slot="head" graph={[softwareApplicationSchema, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
@@ -54,35 +58,28 @@ const faqs = [
     <div class="k-grid">
       <div class="k-col-7">
         <Eyebrow>Pricing</Eyebrow>
-        <h1 id="pricing-title" class="k-display">Every plan starts with a number.</h1>
+        <h1 id="pricing-title" class="k-display">Simple plans. Quoted to your business.</h1>
         <p class="k-lede">
-          You should not have to book a call to find out whether you can afford this.
-          Every plan below publishes what it starts at. The quote on top of that floor
-          depends on your call volume, your locations and what you integrate with —
-          so we scope it on a 30-minute call and you get one flat monthly rate.
+          You should not have to book a call to find out whether you can afford this. Every
+          plan below publishes what it starts at, and the list further down says exactly what
+          moves the number. Then we scope it on a 30-minute call and you get one flat monthly rate.
         </p>
         <div class="price-hero-ctas">
           <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
-          <Button href="/demo" variant="ghost" event="demo_click">Get an exact quote</Button>
+          <Button href="/demo" variant="ghost" event="demo_click">Get your quote</Button>
         </div>
       </div>
       <div class="k-col-5">
         <div class="price-facts">
+          {planTerms.map((term) => (
+            <div class="price-fact">
+              <span class="price-fact__k">{term.k}</span>
+              <span class="price-fact__v">{term.v}</span>
+            </div>
+          ))}
           <div class="price-fact">
-            <span class="price-fact__k">Billing</span>
-            <span class="price-fact__v">Flat monthly. No per-minute charges.</span>
-          </div>
-          <div class="price-fact">
-            <span class="price-fact__k">Contract</span>
-            <span class="price-fact__v">Month-to-month. Cancel anytime.</span>
-          </div>
-          <div class="price-fact">
-            <span class="price-fact__k">Setup</span>
-            <span class="price-fact__v">Included. Live in five business days.</span>
-          </div>
-          <div class="price-fact">
-            <span class="price-fact__k">Call volume</span>
-            <span class="price-fact__v">Unlimited simultaneous calls.</span>
+            <span class="price-fact__k">Simultaneous calls</span>
+            <span class="price-fact__v">Unlimited. No surcharge.</span>
           </div>
         </div>
       </div>
@@ -92,7 +89,7 @@ const faqs = [
   <Section tone="raised" spacing="standard" width="wide">
     <div class="answer-block k-measure" style="margin-bottom:32px">
       <p>
-        <strong>Keres starts at $249/month.</strong> That is Found — the visibility layer
+        <strong>Keres starts at $249/month.</strong> That is Found &mdash; the visibility layer
         that gets you showing up and chosen. Adding agents that answer, follow up and
         reactivate moves you up the columns below. Most accounts cover the cost in a
         handful of recovered jobs.
@@ -102,8 +99,8 @@ const faqs = [
 
     <div class="plan-row" role="list">
       {plans.map((plan) => (
-        <article class:list={['plan-card', plan.featured && 'plan-card--featured']} role="listitem">
-          {plan.featured && <span class="plan-card__flag">Most chosen</span>}
+        <article class:list={['plan-card', plan.flag && 'plan-card--featured']} role="listitem">
+          {plan.flag && <span class="plan-card__flag">{plan.flag}</span>}
           <h2 class="plan-card__name">{plan.name}</h2>
           <p class="plan-card__price" data-figure>{plan.from}</p>
           <p class="plan-card__quoted">
@@ -114,13 +111,8 @@ const faqs = [
           <ul class="plan-card__list">
             {plan.includes.map((item) => <li>{item}</li>)}
           </ul>
-          <Button
-            href="/demo"
-            variant={plan.featured ? 'primary' : 'outline'}
-            event="demo_click"
-            wide
-          >
-            Get a quote
+          <Button href="/demo" variant={plan.flag ? 'primary' : 'outline'} event="demo_click" wide>
+            Get your quote
           </Button>
         </article>
       ))}
@@ -128,13 +120,36 @@ const faqs = [
 
     <p class="plan-row__foot">
       Prices shown are starting points, not caps or averages. Custom is the only plan
-      without a published number — multi-location and high-volume operations are scoped
-      individually. Prefer to talk it through?
-      <a href={PHONE.href} data-event="tel_click">Call {PHONE.display}</a>.
+      without a published number &mdash; multi-location and high-volume operations are scoped
+      individually. Bundle Found with any agent plan and save {BUNDLE_DISCOUNT}%.
+      Prefer to talk it through? <a href={PHONE.href} data-event="tel_click">Call {PHONE.display}</a>.
     </p>
   </Section>
 
-  <Section spacing="standard">
+  <!-- ── WHAT CHANGES THE QUOTE ─────────────────────────── -->
+  <Section spacing="standard" labelledby="quote-title" id="what-changes">
+    <div class="k-split k-split--top">
+      <div class="k-split__aside">
+        <Eyebrow>No surprises</Eyebrow>
+        <h2 id="quote-title" class="k-h2">What changes the quote.</h2>
+        <p class="k-lede">
+          Seven things, and none of them are a secret. If you can answer these on the phone,
+          we can price you on the same call.
+        </p>
+        <Button href="/demo" variant="ghost" event="demo_click">Get your quote</Button>
+      </div>
+      <ol class="k-factors">
+        {quoteFactors.map((f, i) => (
+          <li class="k-factor">
+            <span class="k-factor__n" data-figure>{String(i + 1).padStart(2, '0')}</span>
+            <span class="k-factor__t">{f}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <Section tone="raised" spacing="standard">
     <div class="k-grid">
       <div class="k-col-5">
         <Eyebrow>Proof</Eyebrow>
@@ -146,10 +161,10 @@ const faqs = [
         </p>
       </div>
       <div class="k-col-7">
-        <Testimonial proves="the monthly cost paid for itself in recovered jobs" />
+        <Testimonial proves="the monthly cost paying for itself in recovered jobs" />
       </div>
     </div>
   </Section>
 
-  <FaqSection faqs={faqs} title="Pricing FAQ" />
+  <FaqSection faqs={faqs} title="Pricing FAQ" tone="ground" />
 </Layout>

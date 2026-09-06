@@ -13,23 +13,24 @@ import {
   websiteSchema,
   faqSchema,
 } from '../data/schema';
-import { leaks } from '../data/leaks';
+import { stages, stageLabel } from '../data/leaks';
 import { agents, plans, PHONE } from '../data/site';
 
 const found = plans.find((p) => p.slug === 'found')!;
+const answer = plans.find((p) => p.slug === 'answer')!;
 
-// The four vertical hubs. Vocabulary here is the vertical's own —
-// consult / job / chair time / showing — never "customers".
+// The four vertical hubs. Each line uses that vertical's own vocabulary —
+// consult, job, chair time, showing — never "customers".
 const industries = [
   {
     name: 'Law firms',
     href: '/industries/law-firms',
-    line: 'Intake at 9 PM on a Sunday, conflict details captured, consult on the calendar before you open.',
+    line: 'A new-client call at 2 a.m., screened for conflicts, the matter qualified, the consult on the calendar before you open.',
   },
   {
     name: 'Home services',
     href: '/industries/home-services',
-    line: 'Emergency jobs triaged, dispatch windows given, estimates chased until they close.',
+    line: 'Emergency jobs triaged, a dispatch window given on the call, estimates chased until they close.',
   },
   {
     name: 'Dental & med spa',
@@ -43,37 +44,47 @@ const industries = [
   },
 ];
 
-// FAQ must answer cost, setup time, human handoff and contract terms.
+// Live today vs. rolling out. Naming an integration we do not have yet
+// as though we do is the fastest way to lose a buyer in week two.
+const liveIntegrations = [
+  { name: 'Google Calendar', href: '/integrations/google-calendar', color: '#4285f4', d: 'M6 4h20a2 2 0 0 1 2 2v20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 6v16h20V10H6zm4-8v4M22 2v4' },
+  { name: 'HubSpot', href: '/integrations/hubspot', color: '#ff7a59', d: 'M16 14V6M22 11.5 17.5 16' },
+  { name: 'ServiceTitan', href: '/integrations/servicetitan', color: '#1f7a3e', d: 'M4 24 L11 13 L16 19 L22 9 L28 24 Z' },
+  { name: 'Zapier', href: '/integrations/zapier', color: '#ff4f00', d: 'M16 4v8m0 8v8M4 16h8m8 0h8M7.5 7.5l5.7 5.7m5.6 5.6 5.7 5.7M24.5 7.5l-5.7 5.7m-5.6 5.6L7.5 24.5' },
+];
+
+// FAQ answers the four objections that decide the sale — cost, setup,
+// human handoff, contract — plus the two we get asked most.
 const faqs = [
   {
     q: 'How much does it cost?',
-    a: 'Found starts at $249/month, or $499/month for law firms. Answer, Convert and Grow each publish a starting price and are then quoted to your call volume, locations and integrations. There is no per-minute or per-call billing — a storm week and a quiet week cost the same. <a href="/pricing">See every plan and its floor</a>.',
+    a: `Plans start at $249/month for Found, the visibility layer — $499/month for law firms — and from $[X]/month for Remi on the Answer plan. Every floor is quoted up to your call volume, locations and integrations, and there is no per-call billing. <a href="/pricing">See what changes the quote</a>.`,
+  },
+  {
+    q: 'Do I have to buy the whole team?',
+    a: 'No. Most firms start with one agent at the stage that is leaking hardest — usually Remi answering the phone — and add Theo or June once that is working. You can also buy Found on its own and keep answering calls yourself.',
+  },
+  {
+    q: 'What if a caller needs a human?',
+    a: 'Remi hands off. You set the rules — an emergency, a named client, anyone who asks for a person — and the call warm-transfers to your on-call number. If nobody picks up, you get a "call me now" alert with everything Remi already collected, so the caller never repeats themselves.',
   },
   {
     q: 'How long does setup take?',
-    a: 'Most accounts are live within five business days. We map your call flows, connect your number, calendar and CRM, train the agent on your business, and test it with you before it answers a real call.',
-  },
-  {
-    q: 'What happens when a caller needs a person?',
-    a: 'The agent hands off. You set the rules — an emergency, a named client, anyone who asks for a human — and the call transfers to your on-call number while the agent texts you the context it already collected. Nothing is repeated back to the caller twice.',
+    a: 'Five business days for most accounts. Day one is a 20-minute call to map how you answer now; then we write your intake script, connect your number, calendar and CRM, and you test it yourself before it takes a real call.',
   },
   {
     q: 'Is there a contract?',
-    a: 'No. Every plan is month-to-month with no setup fee, and you can cancel anytime.',
+    a: 'No. Every plan is month-to-month, there is no setup fee on the Found base tier, and you can change plans or cancel any month.',
   },
   {
     q: 'Does it sound like a robot?',
-    a: 'It sounds like a competent front desk. It answers in two rings, uses your vocabulary — consult, job, chair time, showing — and it says "let me get someone" rather than guessing when it does not know. You can hear examples on the <a href="/hear-it">sample calls page</a> before you buy.',
-  },
-  {
-    q: 'What if I only want the phone answered?',
-    a: 'Then you want Answer, and you can stop there. Found is the visibility layer underneath, Convert adds follow-up, and Grow adds reactivation and outbound. You add a stage when the one below it is working, not before.',
+    a: 'It sounds like a competent front desk. Remi answers in two rings, uses your vocabulary — consult, job, chair time, showing — and says "let me get someone for you" rather than guessing when it does not know. You can <a href="/hear-it">hear sample calls</a>, or just call the number at the top of this page.',
   },
 ];
 ---
 <Layout
-  title="AI Receptionist That Answers in Two Rings | Keres AI"
-  description="Keres answers every call in two rings, day or night, books the job on your calendar, and texts you what happened. Then it follows up, wins back old customers, and fills the pipeline. Plans from $249/month."
+  title="AI Receptionist, Follow-Up & Reactivation Agents | Keres AI"
+  description="Remi answers every call in two rings and books the lead. Theo confirms the appointment and chases the estimate. June brings back past customers. Live in five days, from $249/month."
   path="/"
 >
   <Schema slot="head" graph={[organizationSchema, softwareApplicationSchema, websiteSchema, faqSchema(faqs)]} />
@@ -82,22 +93,24 @@ const faqs = [
   <Section spacing="standard" labelledby="hero-title" class="k-hero">
     <div class="k-hero__grid">
       <div class="k-hero__copy">
-        <Eyebrow>For firms that live on the phone</Eyebrow>
+        <Eyebrow>An AI workforce for firms that live on the phone</Eyebrow>
         <h1 id="hero-title" class="k-display">
-          The call you didn&rsquo;t answer just called someone else.
+          Your phone keeps ringing. Our AI answers &mdash; then follows up, books, and brings them back.
         </h1>
         <p class="k-lede">
-          Keres answers in two rings &mdash; nights, weekends, and while your hands are
-          full &mdash; then books the job, writes it to your CRM, and texts you what happened.
+          Keres AI is an AI workforce for businesses whose sales team is whoever picks up the phone.
+          Remi answers in two rings and books the lead; Theo confirms the appointment and chases the
+          quote; June asks for the review and brings back past customers. Live in five days. No contracts.
         </p>
         <div class="k-hero__ctas">
-          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display} &mdash; hear it answer</Button>
           <Button href="/demo" variant="ghost" event="demo_click">Book a demo</Button>
         </div>
-        <ul class="k-hero__facts">
+        <ul class="k-hero__facts" aria-label="At a glance">
           <li><span class="k-hero__fact-k">Answers in</span><span class="k-hero__fact-v" data-figure>2 rings</span></li>
-          <li><span class="k-hero__fact-k">Live in</span><span class="k-hero__fact-v" data-figure>5 business days</span></li>
-          <li><span class="k-hero__fact-k">Plans from</span><span class="k-hero__fact-v" data-figure>$249/mo</span></li>
+          <li><span class="k-hero__fact-k">Live in</span><span class="k-hero__fact-v" data-figure>5 days</span></li>
+          <li><span class="k-hero__fact-k">Answered</span><span class="k-hero__fact-v" data-figure>24/7</span></li>
+          <li><span class="k-hero__fact-k">Firms running it</span><span class="k-hero__fact-v k-hero__fact-v--todo" data-figure>[N]</span></li>
         </ul>
       </div>
       <div class="k-hero__mock">
@@ -106,29 +119,31 @@ const faqs = [
     </div>
   </Section>
 
-  <!-- ── THE SEVEN LEAKS ────────────────────────────────── -->
+  <!-- ── WHERE YOUR PIPELINE LEAKS ──────────────────────── -->
   <Section tone="raised" spacing="major" labelledby="leaks-title" id="leaks">
     <div class="k-band">
       <div class="k-band__head">
-        <Eyebrow>Where it goes</Eyebrow>
-        <h2 id="leaks-title" class="k-h2">Seven places the money leaks out.</h2>
+        <Eyebrow>Where your pipeline leaks</Eyebrow>
+        <h2 id="leaks-title" class="k-h2">One pipeline. Seven places money falls out of it.</h2>
         <p class="k-lede k-measure">
-          Almost nobody loses a customer in one dramatic moment. It happens in seven ordinary
-          ones, and every one of them is a task nobody in a five-person firm has time to do.
-          Each stage below names what plugs it.
+          Get found, capture the lead, qualify it, book it, get them to show, close it, bring them
+          back. Almost nobody loses a customer in one dramatic moment &mdash; it happens at one of these
+          seven stages, and every one of them is a job nobody in a five-person firm has time to do.
+          Start at whichever one is leaking hardest.
         </p>
       </div>
       <ol class="k-leaks">
-        {leaks.map((leak) => (
+        {stages.map((s) => (
           <li class="k-leak">
-            <span class="k-leak__n" data-figure>{leak.n}</span>
+            <span class="k-leak__n" data-figure>{stageLabel(s.n)}</span>
             <div class="k-leak__body">
-              <h3 class="k-leak__title">{leak.title}</h3>
-              <p class="k-leak__text">{leak.body}</p>
+              <h3 class="k-leak__title">{s.name}</h3>
+              <p class="k-leak__text">{s.leak}</p>
+              <p class="k-leak__fixtext">{s.fix}</p>
             </div>
-            <a class="k-leak__fix" href={leak.href}>
-              <span class="k-leak__fix-k">Plugged by</span>
-              <span class="k-leak__fix-v">{leak.fix}</span>
+            <a class="k-leak__fix" href={s.href}>
+              <span class="k-leak__fix-k">Handled by</span>
+              <span class="k-leak__fix-v">{s.by}</span>
             </a>
           </li>
         ))}
@@ -136,107 +151,48 @@ const faqs = [
     </div>
   </Section>
 
-  <!-- ── THE FOUR AGENTS ────────────────────────────────── -->
-  <Section spacing="major" labelledby="agents-title" id="agents">
-    <div class="k-split k-split--top">
-      <div class="k-split__aside">
-        <Eyebrow>The workforce</Eyebrow>
-        <h2 id="agents-title" class="k-h2">Four agents. One phone number.</h2>
-        <p class="k-lede">
-          They are not four products you bolt together. They are one system that answers the
-          call, remembers it, and keeps working it after everyone has gone home.
+  <!-- ── MEET THE TEAM ──────────────────────────────────── -->
+  <Section spacing="major" labelledby="team-title" id="agents">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Meet the team</Eyebrow>
+        <h2 id="team-title" class="k-h2">Four agents. One phone number.</h2>
+        <p class="k-lede k-measure">
+          They are not four products you bolt together. They are one system that answers the call,
+          remembers it, and keeps working it after everyone has gone home. On your line they
+          introduce themselves with whatever name you choose.
         </p>
-        <Button href="/services" variant="ghost">See how they work together</Button>
       </div>
-      <ul class="k-agents">
-        {agents.map((agent) => (
-          <li class="k-agent">
-            <a class="k-agent__link" href={`/agents/${agent.slug}`}>
-              <h3 class="k-agent__name">{agent.name}</h3>
-              <p class="k-agent__leak">{agent.leak}</p>
-              <p class="k-agent__sum">{agent.summary}</p>
-              <span class="k-agent__go" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </a>
+      <ul class="k-team">
+        {agents.map((a) => (
+          <li class="k-member">
+            <div class="k-member__id">
+              <h3 class="k-member__name">{a.name}</h3>
+              <p class="k-member__title">{a.title}</p>
+              <p class="k-member__job">{a.job}</p>
+              <a class="k-member__go" href={`/agents/${a.slug}`}>
+                What {a.name} does
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+            <ul class="k-member__bullets">
+              {a.bullets.map((b) => <li>{b}</li>)}
+            </ul>
           </li>
         ))}
       </ul>
     </div>
   </Section>
 
-  <!-- ── FOUND ──────────────────────────────────────────── -->
-  <Section tone="inverse" spacing="standard" labelledby="found-title" id="found">
-    <div class="k-found">
-      <div class="k-found__copy">
-        <Eyebrow>Before the phone can ring</Eyebrow>
-        <h2 id="found-title" class="k-h2">An agent cannot answer a call you never got.</h2>
-        <p class="k-lede">
-          Found is the visibility layer under everything else: a conversion website that is
-          actually maintained, your Google Business Profile worked weekly, reviews asked for
-          on a schedule, listings kept straight, and the AI answers that now sit above the
-          blue links.
-        </p>
-        <ul class="k-found__list">
-          {found.includes.map((item) => <li>{item}</li>)}
-        </ul>
-        <div class="k-found__foot">
-          <p class="k-found__price">
-            <span class="k-found__from" data-figure>{found.from}</span>
-            <span class="k-found__per">/month &middot; {found.fromNote}</span>
-          </p>
-          <Button href="/services/found" variant="primary">What Found includes</Button>
-        </div>
-      </div>
-      <div class="k-found__mock">
-        <figure class="k-shot">
-          <picture>
-            <source srcset="/assets/img/operator-portal.webp" type="image/webp" />
-            <img
-              src="/assets/img/operator-portal.jpg"
-              width="1280" height="720" loading="lazy" decoding="async"
-              alt="The Keres operator console: a caller conversation on the left, answered calls and follow-ups on the right, and this month's inquiries, active showings and bookings along the bottom."
-            />
-          </picture>
-          <figcaption class="k-mock__caption">
-            The console you get with every plan. Screenshot uses example data.
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </Section>
-
-  <!-- ── OWNER DAILY BRIEF ──────────────────────────────── -->
-  <Section tone="raised" spacing="major" labelledby="brief-title" id="brief">
-    <div class="k-split k-split--reverse">
-      <div class="k-split__aside">
-        <Eyebrow>Owner Daily Brief</Eyebrow>
-        <h2 id="brief-title" class="k-h2">One text at 6 AM. Not a dashboard you will never open.</h2>
-        <p class="k-lede">
-          Every morning you get what happened overnight and the one thing that needs a
-          person. Not a login, not a weekly report, not a notification you turn off in
-          week three &mdash; one message you read at a red light.
-        </p>
-        <p class="k-body k-measure">
-          Green is money that stayed. Amber is the single item waiting on you. If there is
-          nothing waiting on you, there is no amber line.
-        </p>
-      </div>
-      <div class="k-split__mock">
-        <DailyBrief vertical="default" />
-      </div>
-    </div>
-  </Section>
-
   <!-- ── INDUSTRIES ─────────────────────────────────────── -->
-  <Section spacing="standard" labelledby="ind-title" id="industries">
+  <Section tone="raised" spacing="standard" labelledby="ind-title" id="industries">
     <div class="k-band">
       <div class="k-band__head">
         <Eyebrow>Who it is for</Eyebrow>
         <h2 id="ind-title" class="k-h2">It uses your words, not &ldquo;customer.&rdquo;</h2>
         <p class="k-lede k-measure">
-          A conflict check is not an intake form and chair time is not an appointment. The
-          agent is trained on the vocabulary and the questions your vertical actually asks.
+          A conflict check is not an intake form and chair time is not an appointment. Remi is
+          trained on the vocabulary and the questions your vertical actually asks.
         </p>
       </div>
       <ul class="k-inds">
@@ -253,41 +209,63 @@ const faqs = [
         ))}
       </ul>
       <p class="k-inds__foot">
-        Nine more specific pages &mdash; HVAC, plumbing, roofing, septic, towing, dentists,
-        med spas, real estate and professional intake &mdash; live under
-        <a href="/industries">all industries</a>.
+        Nine more specific pages &mdash; HVAC, plumbing, roofing, septic, towing, dentists, med spas,
+        real estate and professional intake &mdash; sit under <a href="/industries">all industries</a>.
       </p>
     </div>
   </Section>
 
-  <!-- ── OUTBOUND CONSOLE (below the fold, lazy) ────────── -->
-  <Section tone="raised" spacing="standard" labelledby="out-title">
-    <div class="k-split">
+  <!-- ── OWNER DAILY BRIEF ──────────────────────────────── -->
+  <Section spacing="major" labelledby="brief-title" id="brief">
+    <div class="k-split k-split--reverse">
       <div class="k-split__aside">
-        <Eyebrow>Outbound Agent</Eyebrow>
-        <h2 id="out-title" class="k-h2">When referrals go quiet, this is the second source.</h2>
+        <Eyebrow>Owner Daily Brief</Eyebrow>
+        <h2 id="brief-title" class="k-h2">You don&rsquo;t log into a dashboard. You get a text.</h2>
         <p class="k-lede">
-          Cold email with the deliverability work actually done underneath it &mdash; SPF, DKIM
-          and DMARC configured, inboxes warmed, volume ramped, lists cleaned. Sending is the
-          easy half; landing is the half that gets skipped.
+          One message every morning: calls answered, leads qualified, appointments booked, no-shows
+          prevented, reviews posted, and which source produced the bookings. Then the single thing
+          that needs a person.
         </p>
-        <Button href="/agents/outbound" variant="ghost">How outbound works</Button>
+        <p class="k-body k-measure">
+          Green is money that stayed. Amber is the one item waiting on you. If nothing is waiting on
+          you, there is no amber line.
+        </p>
       </div>
       <div class="k-split__mock">
-        <figure class="k-shot">
-          <video
-            class="k-shot__video"
-            src="/assets/video/outbound-console.mp4"
-            poster="/assets/img/outbound-console.jpg"
-            preload="none" playsinline muted loop controls
-            width="1280" height="590"
-            aria-label="The outbound console: a lead library with per-contact deliverability status and campaign build."
-          ></video>
-          <figcaption class="k-mock__caption">
-            The outbound console. Recording uses example prospect data.
-          </figcaption>
-        </figure>
+        <DailyBrief vertical="default" />
       </div>
+    </div>
+  </Section>
+
+  <!-- ── INTEGRATIONS ───────────────────────────────────── -->
+  <Section tone="raised" spacing="standard" labelledby="int-title" id="integrations">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Integrations</Eyebrow>
+        <h2 id="int-title" class="k-h2">It books into the calendar you already use.</h2>
+        <p class="k-lede k-measure">
+          A booking that lives only inside our software is not a booking. Remi writes to the tools
+          your team already opens every morning.
+        </p>
+      </div>
+      <ul class="k-logos" aria-label="Connected today">
+        {liveIntegrations.map((t) => (
+          <li class="k-logo">
+            <a href={t.href}>
+              <span class="k-logo__mark" style={`--logo:${t.color}`} aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none"><path d={t.d} stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="k-logo__name">{t.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="k-logos__foot">
+        Connected today. Clio and Lawmatics, Jobber and Housecall Pro, Dentrix and Open Dental, and
+        Follow Up Boss are rolling out &mdash; ask where yours is.
+        Anything else speaks webhooks and CSV out of the box.
+        <a href="/integrations">See all integrations</a>.
+      </p>
     </div>
   </Section>
 
@@ -296,16 +274,20 @@ const faqs = [
     <Eyebrow>Missed-call calculator</Eyebrow>
     <h2 id="roi-title" class="k-h2">Put your own numbers in.</h2>
     <p class="k-lede k-measure">
-      Four inputs and the arithmetic shown in full, because a number you cannot check is
-      not worth having. <a href="/tools/missed-call-calculator">Open the full calculator</a>.
+      Four inputs and the arithmetic shown in full, because a number you cannot check is not worth
+      having. Pick your industry and it loads typical figures to start from.
+      <a href="/tools/missed-call-calculator">Open the full calculator</a>.
     </p>
 
     <div class="roi-shell" data-vertical="home-services">
       <div class="roi-vert-row">
-        <button type="button" class="roi-vert-btn" data-vert="real-estate">Real estate</button>
-        <button type="button" class="roi-vert-btn active" data-vert="home-services">Home services</button>
-        <button type="button" class="roi-vert-btn" data-vert="med-spa">Dental &amp; med spa</button>
-        <button type="button" class="roi-vert-btn" data-vert="professional">Law firms</button>
+        <label class="roi-vert-label" for="roi-vert">Industry</label>
+        <select id="roi-vert" class="roi-vert-select">
+          <option value="home-services">Home services</option>
+          <option value="legal">Law firms</option>
+          <option value="dental">Dental &amp; med spa</option>
+          <option value="real-estate">Real estate</option>
+        </select>
       </div>
       <div class="roi-grid">
         <div class="roi-inputs">
@@ -328,7 +310,7 @@ const faqs = [
             <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">0</span></div>
             <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
           </div>
-          <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href="/demo" data-event="demo_click">Book a demo with these numbers</a>
+          <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href="/demo" data-event="demo_click">Get a quote with these numbers</a>
           <div class="roi-note" id="roi-note">Close rate (25%) is the typical answered-lead close rate for home services. Swap in your own number if you track it.</div>
         </div>
       </div>
@@ -342,42 +324,46 @@ const faqs = [
         <Eyebrow>Proof</Eyebrow>
         <h2 id="proof-title" class="k-h2">In their words, or not at all.</h2>
         <p class="k-lede k-measure">
-          There are no invented numbers on this site. The slots below stay visible until a
-          real customer says a real thing on the record.
+          There are no invented numbers on this site and no stock-photo customers. The slots below
+          stay visible until a real firm says a real thing on the record.
         </p>
       </div>
       <div class="k-quotes">
-        <Testimonial proves="calls answered after hours turning into booked work" vertical="Home services" />
+        <Testimonial proves="after-hours calls turning into booked jobs" vertical="Home services" />
         <Testimonial proves="consults booked from intake calls that used to hit voicemail" vertical="Law firms" />
         <Testimonial proves="chair time recovered from cancellations and recall" vertical="Dental / med spa" />
       </div>
     </div>
   </Section>
 
-  <!-- ── THREE-STEP START ───────────────────────────────── -->
+  <!-- ── HOW IT STARTS ──────────────────────────────────── -->
   <Section spacing="standard" labelledby="start-title" id="start">
     <div class="k-band">
       <div class="k-band__head">
-        <Eyebrow>Getting started</Eyebrow>
-        <h2 id="start-title" class="k-h2">Three steps, about five business days.</h2>
+        <Eyebrow>How it starts</Eyebrow>
+        <h2 id="start-title" class="k-h2">Three steps, five business days.</h2>
       </div>
       <ol class="k-steps">
         <li class="k-step">
           <span class="k-step__n" data-figure>01</span>
-          <h3 class="k-step__title">We listen to how you answer now</h3>
-          <p class="k-step__text">A short call to map what actually happens when the phone rings, who it goes to, and what has to be asked before anything gets booked.</p>
+          <h3 class="k-step__title">Call us, or book 20 minutes</h3>
+          <p class="k-step__text">We map what happens today when your phone rings — who it goes to, what gets asked, and where it stops. Twenty minutes, no deck.</p>
         </li>
         <li class="k-step">
           <span class="k-step__n" data-figure>02</span>
-          <h3 class="k-step__title">We connect and train</h3>
-          <p class="k-step__text">Your number, calendar and CRM go in. The agent learns your services, your hours, your prices and the handoff rules for when it should get a person.</p>
+          <h3 class="k-step__title">We write your intake script and connect your stack</h3>
+          <p class="k-step__text">Your questions, your services, your hours, your prices, your handoff rules. Then your number, calendar and CRM go in.</p>
         </li>
         <li class="k-step">
           <span class="k-step__n" data-figure>03</span>
-          <h3 class="k-step__title">You call it before anyone else does</h3>
-          <p class="k-step__text">You test it yourself, on your own number, until it answers the way you would. Then it goes live and the Daily Brief starts the next morning.</p>
+          <h3 class="k-step__title">Live in five business days</h3>
+          <p class="k-step__text">You call it yourself first and keep tuning until it answers the way you would. Month-to-month from there, and the Daily Brief starts the next morning.</p>
         </li>
       </ol>
+      <div class="k-start__ctas">
+        <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+        <Button href="/demo" variant="ghost" event="demo_click">Book 20 minutes</Button>
+      </div>
     </div>
   </Section>
 
@@ -398,10 +384,10 @@ const faqs = [
   <!-- ── CLOSE ──────────────────────────────────────────── -->
   <Section tone="inverse" spacing="standard" labelledby="close-title">
     <div class="k-close">
-      <h2 id="close-title" class="k-h2">Call the number and listen to it answer.</h2>
+      <h2 id="close-title" class="k-h2">Call the number and listen to Remi answer.</h2>
       <p class="k-lede">
-        It is the same agent your customers would get. Ask it something awkward &mdash; that
-        is the point of the exercise.
+        It is the same agent your callers would get. Ask it something awkward &mdash; that is the point
+        of the exercise. Plans start at {found.from.replace('from ', '')}/month for Found and {answer.from.replace('from ', '')}/month for Remi.
       </p>
       <div class="k-close__ctas">
         <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
@@ -410,5 +396,5 @@ const faqs = [
     </div>
   </Section>
 
-  <script slot="scripts" src="/assets/roi.js?v=3" is:inline></script>
+  <script slot="scripts" src="/assets/roi.js?v=4" is:inline></script>
 </Layout>

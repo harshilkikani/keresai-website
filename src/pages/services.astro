@@ -1,0 +1,189 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Section from '../components/Section.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import DailyBrief from '../components/DailyBrief.astro';
+import { organizationSchema, breadcrumbSchema, serviceSchema } from '../data/schema';
+import { stageBlocks, outboundBlock, customBuilds } from '../data/services';
+import { stageLabel } from '../data/leaks';
+import { plans, partnerReferralOnly, PHONE } from '../data/site';
+
+const path = '/services';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Services', path }];
+const found = plans.find((p) => p.slug === 'found')!;
+
+// One Service node per stage so a crawler can resolve what we actually sell.
+const serviceNodes = stageBlocks.map((b) =>
+  serviceSchema({
+    name: `${b.name} — ${b.services.map((s) => s.name).join(', ')}`,
+    serviceType: b.n === 0 ? 'Local Search Visibility' : 'Business Process Automation',
+    description: b.fix,
+    path: `${path}#stage-${b.n}`,
+    audience: 'Small service firms and professional practices',
+  })
+);
+---
+<Layout
+  title="AI Receptionist, Follow-Up & Visibility Services | Keres"
+  description="Seven stages, from being found to bringing customers back. Remi answers in two rings, Theo chases the estimate, June reactivates the list. Visibility from $249/month."
+  path={path}
+>
+  <Schema slot="head" graph={[organizationSchema, breadcrumbSchema(crumbs), ...serviceNodes]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <Section spacing="standard" labelledby="svc-title">
+    <div class="k-grid">
+      <div class="k-col-7">
+        <Eyebrow>Services</Eyebrow>
+        <h1 id="svc-title" class="k-display">One pipeline. Seven stages. Every one of them covered.</h1>
+        <p class="k-lede">
+          Start at the stage that&rsquo;s leaking. Add the rest when you&rsquo;re ready. Nothing here is
+          open-ended agency work &mdash; every service below is fixed in scope, flat in price, and
+          attached to the stage of your pipeline it exists to plug.
+        </p>
+        <div class="price-hero-ctas">
+          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          <Button href="/pricing" variant="ghost">See plans and floors</Button>
+        </div>
+      </div>
+      <div class="k-col-5">
+        <ol class="k-stagemap" aria-label="The seven stages">
+          {stageBlocks.map((b) => (
+            <li>
+              <a href={`#stage-${b.n}`}>
+                <span class="k-stagemap__n" data-figure>{stageLabel(b.n)}</span>
+                <span class="k-stagemap__name">{b.name}</span>
+                <span class="k-stagemap__by">{b.by}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </Section>
+
+  {stageBlocks.map((b, i) => (
+    <Section
+      id={`stage-${b.n}`}
+      tone={i % 2 === 0 ? 'raised' : 'ground'}
+      spacing="standard"
+      labelledby={`stage-${b.n}-title`}
+    >
+      <div class="k-split k-split--top">
+        <div class="k-split__aside">
+          <Eyebrow>Stage {stageLabel(b.n)}</Eyebrow>
+          <h2 id={`stage-${b.n}-title`} class="k-h2">{b.name}</h2>
+          {/* Direct-answer paragraph: the leak first, then what closes it. */}
+          <p class="k-lede">{b.leak}</p>
+          <p class="k-body k-measure">{b.fix}</p>
+          <Button href={b.ctaHref} variant="ghost">{b.ctaLabel}</Button>
+        </div>
+        <ul class="k-svc">
+          {b.services.map((s) => (
+            <li class="k-svc__item">
+              <div class="k-svc__head">
+                <h3 class="k-svc__name">{s.name}</h3>
+                <span class:list={['k-svc__plan', s.addOn && 'k-svc__plan--addon']}>
+                  {s.addOn ? `${s.plan} add-on` : `Included in ${s.plan}`}
+                </span>
+              </div>
+              <p class="k-svc__desc">{s.desc}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Section>
+  ))}
+
+  <!-- ── SOL — outside the seven ────────────────────────── -->
+  <Section tone="raised" spacing="standard" labelledby="outbound-title" id="stage-outbound">
+    <div class="k-split k-split--top">
+      <div class="k-split__aside">
+        <Eyebrow>Beyond the seven</Eyebrow>
+        <h2 id="outbound-title" class="k-h2">Net-new pipeline</h2>
+        <p class="k-lede">{outboundBlock.leak}</p>
+        <p class="k-body k-measure">
+          Sol creates demand rather than plugging a leak, which is why we sell it last. Most
+          local firms get more out of June working the list they already have.
+        </p>
+        <Button href={outboundBlock.ctaHref} variant="ghost">{outboundBlock.ctaLabel}</Button>
+      </div>
+      <ul class="k-svc">
+        {outboundBlock.services.map((s) => (
+          <li class="k-svc__item">
+            <div class="k-svc__head">
+              <h3 class="k-svc__name">{s.name}</h3>
+              <span class="k-svc__plan">Included in {s.plan}</span>
+            </div>
+            <p class="k-svc__desc">{s.desc}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- ── DAILY BRIEF — cross-cutting ────────────────────── -->
+  <Section spacing="standard" labelledby="brief-title">
+    <div class="k-split k-split--reverse">
+      <div class="k-split__aside">
+        <Eyebrow>Across every stage</Eyebrow>
+        <h2 id="brief-title" class="k-h2">The Owner Daily Brief.</h2>
+        <p class="k-lede">
+          Whichever stages you buy, you get one text each morning telling you what happened
+          and the single thing that needs a person. You do not log into a dashboard.
+        </p>
+      </div>
+      <div class="k-split__mock">
+        <DailyBrief vertical="default" />
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── CUSTOM BUILDS ──────────────────────────────────── -->
+  <Section tone="inverse" spacing="standard" labelledby="custom-title" id="custom">
+    <div class="k-split k-split--top">
+      <div class="k-split__aside">
+        <Eyebrow>Custom builds</Eyebrow>
+        <h2 id="custom-title" class="k-h2">When the columns don&rsquo;t fit.</h2>
+        <p class="k-lede">
+          Multi-location routing, multilingual intake on one number, a specialized practice
+          flow, an internal dispatch or collections agent. We build these on the same platform
+          the four agents run on, quote them in writing before anything starts, and they land
+          on the Custom plan.
+        </p>
+        <Button href="/demo" variant="primary" event="demo_click">Scope a custom build</Button>
+      </div>
+      <div>
+        <ul class="k-svc k-svc--plain">
+          {customBuilds.map((c) => <li class="k-svc__item"><p class="k-svc__desc">{c}</p></li>)}
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── WHAT WE DO NOT SELL ────────────────────────────── -->
+  <Section spacing="standard" labelledby="refer-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>What we refer out</Eyebrow>
+        <h2 id="refer-title" class="k-h2">Things we don&rsquo;t sell you.</h2>
+        <p class="k-lede k-measure">
+          We are not an agency, and the list below is where agencies make their margin. When
+          you need one of these we will introduce you to someone who does it properly, and we
+          do not take a cut for the introduction.
+        </p>
+      </div>
+      <ul class="k-refer">
+        {partnerReferralOnly.map((r) => <li>{r}</li>)}
+      </ul>
+      <p class="k-inds__foot">
+        Want the visibility layer without an agency retainer?
+        <a href="/services/found">Found starts at {found.from.replace('from ', '')}/month</a>.
+      </p>
+    </div>
+  </Section>
+</Layout>

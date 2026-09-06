@@ -1,12 +1,13 @@
 ---
 /**
- * The Owner Daily Brief — one SMS at 6 AM telling the owner what the
- * agents did overnight and the single thing that needs a human.
+ * The Owner Daily Brief — one SMS each morning telling the owner what
+ * the agents did overnight, which source produced the bookings, and
+ * the single thing that needs a person.
  *
  * Semantic green and amber exist on this site for exactly this mock
  * (tokens.css). Do not borrow them for anything else.
  *
- * Required on every product page (§4.6 of the project brief).
+ * Shown or mentioned on every product page.
  */
 import MockFrame from './MockFrame.astro';
 import { briefs, type Vertical } from '../data/mocks';
@@ -23,16 +24,17 @@ const b = briefs[vertical] ?? briefs.default;
 <figure class:list={['k-brief-fig', extraClass]}>
   <MockFrame label="Owner Daily Brief" status={b.when} device="phone" class="k-brief">
     <p class="k-brief__from">Keres</p>
-    <div class="k-brief__bubble">
+    <div class="k-brief__bubble" data-reveal>
       <p class="k-brief__head">{b.heading}</p>
       <ul class="k-brief__lines">
         {b.lines.map((l) => (
-          <li class:list={['k-brief__line', `is-${l.tone}`]}>
+          <li class:list={['k-brief__line', `is-${l.tone}`]} data-reveal-child>
             <span class="k-brief__n" data-figure>{l.n}</span>
             <span class="k-brief__t">{l.text}</span>
           </li>
         ))}
       </ul>
+      <p class="k-brief__source">{b.source}</p>
       <p class="k-brief__action">{b.action}</p>
     </div>
     <p class="k-brief__reply">Reply STOP to pause · Reply CALL to be connected</p>

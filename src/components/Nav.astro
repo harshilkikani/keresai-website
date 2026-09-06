@@ -1,16 +1,38 @@
 ---
-import { PHONE } from '../data/site';
+import { PHONE, agents } from '../data/site';
 
-// Plain titles, matching the catalog. "AI receptionist" and "AI SDR"
-// survive in H1s and meta descriptions where searchers use them, but
-// the navigation calls the products what we call them.
-const links = [
-  { href: '/services', label: 'Services' },
-  { href: '/services/found', label: 'Found' },
-  { href: '/industries', label: 'Industries' },
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/blog', label: 'Resources' },
+/**
+ * The phone number is the nav's button — the demo is the product, but
+ * the fastest proof is hearing the agent answer. "Book a demo" is a
+ * quiet text link beside it.
+ *
+ * Dropdowns are <details>/<summary>: they work with no JavaScript, are
+ * keyboard-operable for free, and app.js only adds click-outside and
+ * Escape-to-close on top.
+ */
+const industryLinks = [
+  { href: '/industries/law-firms', label: 'Law firms' },
+  { href: '/industries/home-services', label: 'Home services' },
+  { href: '/industries/dental-med-spa', label: 'Dental & med spa' },
+  { href: '/industries/real-estate', label: 'Real estate' },
+  { href: '/industries', label: 'All industries' },
 ];
+
+const resourceLinks = [
+  { href: '/blog', label: 'Guides' },
+  { href: '/benchmarks', label: 'Benchmarks' },
+  { href: '/hear-it', label: 'Hear it — sample calls' },
+  { href: '/tools', label: 'Free tools' },
+  { href: '/compare', label: 'Compare' },
+  { href: '/integrations', label: 'Integrations' },
+  { href: '/glossary', label: 'Glossary' },
+];
+
+const agentLinks = agents.map((a) => ({
+  href: `/agents/${a.slug}`,
+  label: a.name,
+  sub: a.title,
+}));
 ---
 <header class="nav" role="banner">
   <div class="nav-inner">
@@ -20,7 +42,41 @@ const links = [
 
     <nav aria-label="Primary">
       <ul class="nav-links">
-        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        <li><a href="/services">Services</a></li>
+
+        <li>
+          <details class="nav-drop">
+            <summary>Agents</summary>
+            <div class="nav-drop__panel">
+              {agentLinks.map((l) => (
+                <a href={l.href}>
+                  <span class="nav-drop__name">{l.label}</span>
+                  <span class="nav-drop__sub">{l.sub}</span>
+                </a>
+              ))}
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <details class="nav-drop">
+            <summary>Industries</summary>
+            <div class="nav-drop__panel nav-drop__panel--plain">
+              {industryLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+            </div>
+          </details>
+        </li>
+
+        <li><a href="/pricing">Pricing</a></li>
+
+        <li>
+          <details class="nav-drop">
+            <summary>Resources</summary>
+            <div class="nav-drop__panel nav-drop__panel--plain">
+              {resourceLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+            </div>
+          </details>
+        </li>
       </ul>
     </nav>
 
@@ -35,7 +91,6 @@ const links = [
         </svg>
       </button>
 
-      {/* Demo is now the quiet action; the phone is the button. */}
       <a href="/demo" class="nav-demo-link desktop-only" data-event="demo_click">Book a demo</a>
 
       <a href={PHONE.href} class="nav-phone" data-event="tel_click">
@@ -53,7 +108,14 @@ const links = [
 </header>
 
 <div id="mobile-menu" class="mobile-menu" data-open="false" aria-label="Mobile navigation">
-  {links.map((l) => <a href={l.href}>{l.label}</a>)}
+  <a href="/services">Services</a>
+  <p class="mobile-menu__group">Agents</p>
+  {agentLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label} &mdash; {l.sub}</a>)}
+  <p class="mobile-menu__group">Industries</p>
+  {industryLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
+  <a href="/pricing">Pricing</a>
+  <p class="mobile-menu__group">Resources</p>
+  {resourceLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
   <a href="/about">About</a>
   <a href="/contact">Contact</a>
   <div class="mobile-cta">

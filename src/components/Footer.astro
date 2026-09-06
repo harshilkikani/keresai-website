@@ -1,6 +1,7 @@
 ---
-import { PHONE, EMAIL } from '../data/site';
+import { PHONE, EMAIL, ADDRESS, agents, plans } from '../data/site';
 const year = new Date().getFullYear();
+const found = plans.find((p) => p.slug === 'found')!;
 ---
 <footer role="contentinfo">
   <div class="footer-grid">
@@ -8,7 +9,10 @@ const year = new Date().getFullYear();
       <a href="/" class="logo" aria-label="Keres AI">
         <img src="/assets/img/KeresLogo.png" alt="Keres AI" class="logo-img" width="120" height="32" />
       </a>
-      <p>An AI workforce for firms whose sales team is whoever picks up the phone. Every call answered, every follow-up sent, every old customer worked.</p>
+      <p>
+        An AI workforce for businesses whose sales team is whoever picks up the phone.
+        Every call answered, every follow-up sent, every past customer worked.
+      </p>
       <div class="footer-contact">
         <a href={PHONE.href} class="footer-phone" data-event="tel_click">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 5.2 2 2 0 0 1 6 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -20,27 +24,18 @@ const year = new Date().getFullYear();
         </a>
       </div>
     </div>
+
     <div class="footer-col">
       <h4>Agents</h4>
       <ul>
-        <li><a href="/agents/inbound">Inbound Agent</a></li>
-        <li><a href="/agents/follow-up">Follow-Up Agent</a></li>
-        <li><a href="/agents/reactivation">Reactivation Agent</a></li>
-        <li><a href="/agents/outbound">Outbound Agent</a></li>
-        <li><a href="/services">All services</a></li>
+        {agents.map((a) => (
+          <li><a href={`/agents/${a.slug}`}>{a.name} &mdash; {a.title}</a></li>
+        ))}
         <li><a href="/use-cases">Use cases</a></li>
+        <li><a href="/hear-it">Hear it</a></li>
       </ul>
     </div>
-    <div class="footer-col">
-      <h4>Found</h4>
-      <ul>
-        <li><a href="/services/found">Found — from $249</a></li>
-        <li><a href="/integrations">Integrations</a></li>
-        <li><a href="/tools">Free tools</a></li>
-        <li><a href="/tools/missed-call-calculator">Missed call calculator</a></li>
-        <li><a href="/benchmarks">Benchmarks</a></li>
-      </ul>
-    </div>
+
     <div class="footer-col">
       <h4>Industries</h4>
       <ul>
@@ -51,29 +46,49 @@ const year = new Date().getFullYear();
         <li><a href="/industries">All industries</a></li>
       </ul>
     </div>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/services">All services</a></li>
+        <li><a href="/services/found">Found &mdash; {found.from}</a></li>
+        <li><a href="/services#custom">Custom builds</a></li>
+        <li><a href="/integrations">Integrations</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/tools">Free tools</a></li>
+      </ul>
+    </div>
+
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
         <li><a href="/about">About</a></li>
-        <li><a href="/pricing">Pricing</a></li>
-        <li><a href="/customers">Customers</a></li>
-        <li><a href="/blog">Resources</a></li>
-        <li><a href="/glossary">Glossary</a></li>
+        <li><a href="/trust">Security</a></li>
         <li><a href="/compare">Compare</a></li>
+        <li><a href="/partners">Partners</a></li>
         <li><a href="/contact">Contact</a></li>
         <li><a href="/demo">Book a demo</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h4>Legal</h4>
       <ul>
-        <li><a href="/trust">Trust &amp; security</a></li>
         <li><a href="/legal/privacy.html">Privacy policy</a></li>
         <li><a href="/legal/terms.html">Terms of service</a></li>
-        <li><a href="/legal/security.html">Security</a></li>
+        <li><a href="/legal/security.html">Security policy</a></li>
+        <li><a href="/glossary">Glossary</a></li>
       </ul>
     </div>
   </div>
+
+  {/* PLACEHOLDER — ADDRESS.line in src/data/site.ts carries [City, State]
+      until a real address is published. */}
+  <p class="footer-address">
+    {ADDRESS.line} · <a href={`mailto:${EMAIL}`}>{EMAIL}</a> ·
+    <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a>
+  </p>
+
   <div class="footer-bottom">
     <div>&copy; {year} Keres AI. All rights reserved.</div>
     <div>Never miss another lead.</div>
