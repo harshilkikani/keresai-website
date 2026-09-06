@@ -665,7 +665,7 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
   display: grid;
   grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
   gap: clamp(var(--space-7), 6vw, var(--space-9));
-  align-items: center;
+  align-items: start;
 }
 .k-hero__copy .k-display { margin-top: var(--space-4); }
 .k-hero__copy .k-lede { margin-top: var(--space-5); max-width: 48ch; }
@@ -1216,7 +1216,17 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
   cursor: pointer;
   list-style: none;
   user-select: none;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding: 6px 2px;
+  transition: color var(--t-fast);
 }
+.nav-drop > summary:hover,
+.nav-drop[open] > summary { color: var(--ink-0); }
 .nav-drop > summary::-webkit-details-marker { display: none; }
 .nav-drop > summary::after {
   content: '';
@@ -1604,4 +1614,45 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
 @media (max-width: 520px) {
   .lp-hero__ctas .btn-k--primary,
   .lp-close .btn-k--primary { width: 100%; justify-content: center; }
+}
+
+/* ─── Hero at 390px ───────────────────────────────────────
+   The headline and lede this page needs are long, and at 390px
+   they pushed the primary CTA under the fold. Rather than cut
+   prescribed copy or shrink the display size below its token,
+   the CTA row moves up under the headline on narrow screens —
+   the lede and the facts follow it. One primary action stays
+   visible without scrolling, which is the rule that matters. */
+.k-hero__copy { display: flex; flex-direction: column; }
+
+@media (max-width: 700px) {
+  .k-hero__copy > .k-eyebrow    { order: 1; }
+  .k-hero__copy > .k-display    { order: 2; }
+  .k-hero__copy > .k-hero__ctas { order: 3; margin-top: var(--space-6); }
+  .k-hero__copy > .k-lede       { order: 4; margin-top: var(--space-6); }
+  .k-hero__copy > .k-hero__facts{ order: 5; }
+
+  main > .k-section:first-child { padding-top: calc(var(--nav-h) + var(--space-5)); }
+  .k-hero__copy .k-display { margin-top: var(--space-3); }
+}
+
+/* The CTA keeps its full label on desktop; at 390px the qualifier is
+   dropped so the button stays on one line and inside the tap target. */
+@media (max-width: 600px) { .btn-k__extra { display: none; } }
+
+/* Capability bullets on agent pages sit in the full content column
+   rather than beside a heading, so they get a wider two-up grid. */
+.k-member__bullets--wide {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-4) var(--space-8);
+}
+
+/* A visible slot for audio that does not exist yet, matching the
+   [Testimonial] treatment: the gap stays on the page until it is filled. */
+.k-audio-slot {
+  margin-top: var(--space-6);
+  padding: var(--space-5);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--raised);
 }

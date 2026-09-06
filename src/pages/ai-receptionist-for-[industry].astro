@@ -295,7 +295,7 @@ const peerIndustries = industries.filter((i) => i.slug !== ind.slug).slice(0, 5)
     <div class="prose">
       <p>Also serves: {peerIndustries.map((i, idx) => (
         <>{idx > 0 ? ' · ' : ''}<a href={`/ai-receptionist-for-${i.slug}`}>{i.short}</a></>
-      ))}. See <a href="/ai-receptionist">all AI receptionist features</a> or add the <a href="/ai-sdr">AI SDR</a> for outbound.</p>
+      ))}. See <a href="/agents/inbound">all AI receptionist features</a> or add the <a href="/agents/outbound">AI SDR</a> for outbound.</p>
     </div>
   </section>
 

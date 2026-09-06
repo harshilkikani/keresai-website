@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Section from '../components/Section.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import CallTranscript from '../components/CallTranscript.astro';
+import { organizationSchema, breadcrumbSchema, faqSchema } from '../data/schema';
+import { hubs } from '../data/hubs';
+import { PHONE } from '../data/site';
+
+const path = '/hear-it';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Hear it', path }];
+
+const faqs = [
+  {
+    q: 'Can I just call and hear it myself?',
+    a: `Yes, and that is the better test. Call ${PHONE.display} and you will be speaking to Remi. Ask it something awkward — an unusual request, a question it should not answer, a demand for a human — and see what it does.`,
+  },
+  {
+    q: 'Are these real customer calls?',
+    a: 'The transcripts below are examples, and they say so. We will not publish a customer call without written permission, and when we do it will be labelled as a recording with the firm named.',
+  },
+  {
+    q: 'Does it tell callers it is an assistant?',
+    a: 'If they ask, yes. Remi does not claim to be a person, and in states where disclosure is required it discloses up front. You control the exact wording.',
+  },
+];
+---
+<Layout
+  title="Hear It — Sample AI Receptionist Calls | Keres AI"
+  description="Example calls per vertical, showing how Remi answers in two rings, qualifies the lead and books the appointment. Or call the number and hear it yourself."
+  path={path}
+>
+  <Schema slot="head" graph={[organizationSchema, breadcrumbSchema(crumbs), faqSchema(faqs)]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <Section spacing="standard" labelledby="hear-title">
+    <div class="k-grid">
+      <div class="k-col-7">
+        <Eyebrow>Hear it</Eyebrow>
+        <h1 id="hear-title" class="k-display">The fastest demo is the phone number.</h1>
+        <p class="k-lede">
+          Call it. You will be talking to Remi, the same Inbound Agent that would answer your
+          firm&rsquo;s phone. The transcripts below show how a call goes in four different
+          verticals &mdash; audio recordings go here as customers give us permission to publish them.
+        </p>
+        <div class="price-hero-ctas">
+          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          <Button href="/demo" variant="ghost" event="demo_click">Book a demo</Button>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  {hubs.map((hub, i) => (
+    <Section tone={i % 2 === 0 ? 'raised' : 'ground'} spacing="standard" labelledby={`hear-${hub.slug}`}>
+      <div class="k-split k-split--top">
+        <div class="k-split__aside">
+          <Eyebrow>{hub.name}</Eyebrow>
+          <h2 id={`hear-${hub.slug}`} class="k-h2">{hub.name} intake</h2>
+          <p class="k-lede">{hub.problemAnswer}</p>
+          {/* PLACEHOLDER — audio goes here once a customer gives permission
+              to publish a recording. Until then the slot stays visible. */}
+          <div class="k-audio-slot" data-slot="recording">
+            <span class="k-quote__tag">[Recording]</span>
+            <p class="k-quote__need">
+              Needed: a real {hub.name.toLowerCase()} call, published with the firm&rsquo;s written
+              permission. The transcript beside this is an example, not a recording.
+            </p>
+          </div>
+          <Button href={`/industries/${hub.slug}`} variant="ghost">{hub.name} in detail</Button>
+        </div>
+        <div class="k-split__mock">
+          <CallTranscript vertical={hub.vertical} caption={false} />
+        </div>
+      </div>
+    </Section>
+  ))}
+
+  <Section tone="inverse" spacing="standard" labelledby="hear-cta">
+    <div class="k-close">
+      <h2 id="hear-cta" class="k-h2">Ask it something awkward.</h2>
+      <p class="k-lede">
+        That is the point of the exercise. Try to confuse it, ask for a human, ask something it
+        should refuse. What it does then is what your callers will get.
+      </p>
+      <div class="k-close__ctas">
+        <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+        <Button href="/demo" variant="ghost" event="demo_click">Book a demo instead</Button>
+      </div>
+    </div>
+  </Section>
+</Layout>

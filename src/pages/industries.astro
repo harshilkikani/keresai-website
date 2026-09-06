@@ -3,8 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Section from '../components/Section.astro';
+import Eyebrow from '../components/Eyebrow.astro';
 import { organizationSchema, breadcrumbSchema } from '../data/schema';
 import { industries } from '../data/industries';
+import { hubs } from '../data/hubs';
 
 const path = '/industries';
 const ORIGIN = 'https://www.keresai.com';
@@ -14,12 +17,20 @@ const itemList = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Industries Keres AI serves',
-  itemListElement: industries.map((ind, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    name: ind.name,
-    url: `${ORIGIN}/ai-receptionist-for-${ind.slug}`,
-  })),
+  itemListElement: [
+    ...hubs.map((h, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: h.name,
+      url: `${ORIGIN}/industries/${h.slug}`,
+    })),
+    ...industries.map((ind, i) => ({
+      '@type': 'ListItem',
+      position: hubs.length + i + 1,
+      name: ind.name,
+      url: `${ORIGIN}/ai-receptionist-for-${ind.slug}`,
+    })),
+  ],
 };
 ---
 <Layout
@@ -39,7 +50,34 @@ const itemList = {
     </div>
   </header>
 
+  <Section spacing="standard" labelledby="hubs-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Start here</Eyebrow>
+        <h2 id="hubs-title" class="k-h2">Four verticals we build for.</h2>
+        <p class="k-lede k-measure">
+          Each one has its own intake script, its own vocabulary and its own integrations.
+          The more specific pages underneath sit beneath these.
+        </p>
+      </div>
+      <ul class="k-inds">
+        {hubs.map((h) => (
+          <li class="k-ind">
+            <a class="k-ind__link" href={`/industries/${h.slug}`}>
+              <h3 class="k-ind__name">{h.name}</h3>
+              <p class="k-ind__line">{h.sub.split('. ')[0]}.</p>
+              <span class="k-ind__go" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
   <section class="page-section container">
+    <h2 class="k-h2" style="margin-bottom:28px">Specific industries</h2>
     <div class="feature-grid">
       {industries.map((ind) => (
         <a class="feature-card" href={`/ai-receptionist-for-${ind.slug}`} style="text-decoration:none; display:block;">

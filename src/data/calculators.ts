@@ -188,7 +188,7 @@ export const calculators: Calculator[] = [
     faqs: [
       { q: 'Why does lead response time matter so much?', a: 'Studies of lead response time consistently find that contacting a lead within five minutes makes it many times more likely to qualify than waiting 30 minutes, and the first business to respond usually wins the job. See <a href="/glossary/lead-response-time">lead response time</a>.' },
       { q: 'How is the recoverable revenue calculated?', a: 'The model compares the deals you would close responding in under five minutes against your current capture at your stated response time, using a stepped relative-conversion factor and a base close rate. It is illustrative — treat it as directional context.' },
-      { q: 'How can I respond to every lead in under five minutes?', a: 'An <a href="/ai-receptionist">AI receptionist</a> answers every call in two rings, 24/7, so your effective response time is seconds — for every lead, including after hours and overflow.' },
+      { q: 'How can I respond to every lead in under five minutes?', a: 'An <a href="/agents/inbound">AI receptionist</a> answers every call in two rings, 24/7, so your effective response time is seconds — for every lead, including after hours and overflow.' },
     ],
     related: [
       { label: 'Lead response time', href: '/glossary/lead-response-time' },

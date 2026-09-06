@@ -7,8 +7,7 @@ function priorityFor(url) {
   const p = new URL(url).pathname.replace(/\.html$/, '');
   if (p === '' || p === '/') return 1.0;
   if ([
-    '/ai-receptionist', '/ai-sdr', '/email-deliverability', '/pricing', '/demo',
-    '/services', '/services/found',
+    '/pricing', '/demo', '/services', '/services/found', '/hear-it',
     '/agents/inbound', '/agents/follow-up', '/agents/reactivation', '/agents/outbound',
   ].includes(p)) return 0.9;
   // Industry hubs sit above the nine narrower industry pages beneath them.
@@ -47,6 +46,10 @@ export default defineConfig({
         // Ad landing pages are noindex and must never enter the sitemap.
         !page.includes('/lp/') &&
         !/\/thank-you(\.html)?$/.test(page) &&
+        // Redirect stubs. These emit a meta-refresh page at the old URL;
+        // listing them would ask crawlers to index a page whose only job
+        // is to send them somewhere else.
+        !/\/(ai-receptionist|ai-sdr|email-deliverability|deliverability|for-hvac)(\.html)?$/.test(page) &&
         // The old /missed-call-calculator path is now a 301 redirect to
         // /tools/missed-call-calculator — keep the redirect out of the sitemap.
         // Anchored so the canonical /tools/ URL is not matched.
@@ -78,13 +81,18 @@ export default defineConfig({
   // redirect REPLACES the page at the source path, so pointing one at a route
   // that does not exist yet turns a live page into a dead end.
   //
-  // Deferred to Phase 2, when their targets are built:
-  //   /ai-receptionist   → /agents/inbound
-  //   /ai-sdr            → /agents/outbound
-  //   /email-deliverability → /agents/outbound
-  //   /{competitor}-alternative → /compare/{competitor}
+  // Still deferred: /{competitor}-alternative → /compare/{competitor},
+  // which needs the /compare/* routes built first.
   redirects: {
     '/for-hvac': '/industries/home-services',
+    // The pillar pages moved onto the named agents. "AI receptionist" and
+    // "AI SDR" survive in the H1s and meta descriptions of their targets,
+    // which is where searchers actually need those words.
+    '/ai-receptionist': '/agents/inbound',
+    '/ai-sdr': '/agents/outbound',
+    '/email-deliverability': '/agents/outbound',
+    // Never published, but named in the brief and cheap to honour.
+    '/deliverability': '/agents/outbound',
   },
   build: {
     // Emit /ai-receptionist.html style files so GitHub Pages serves clean URLs.

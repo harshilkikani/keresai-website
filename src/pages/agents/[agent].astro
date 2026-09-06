@@ -1,0 +1,229 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import Section from '../../components/Section.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Button from '../../components/Button.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import CallTranscript from '../../components/CallTranscript.astro';
+import DailyBrief from '../../components/DailyBrief.astro';
+import { organizationSchema, breadcrumbSchema, faqSchema, serviceSchema } from '../../data/schema';
+import { agentPages } from '../../data/agentPages';
+import { agents, agentBySlug, plans, planBySlug, PHONE } from '../../data/site';
+import { hubs } from '../../data/hubs';
+
+export function getStaticPaths() {
+  return agentPages.map((page) => ({ params: { agent: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const agent = agentBySlug(page.slug);
+const plan = planBySlug(agent.includedIn.toLowerCase());
+const path = `/agents/${page.slug}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Agents', path: '/services' },
+  { name: agent.name, path },
+];
+const others = agents.filter((a) => a.slug !== page.slug);
+---
+<Layout title={page.seoTitle} description={page.description} path={path}>
+  <Schema
+    slot="head"
+    graph={[
+      organizationSchema,
+      breadcrumbSchema(crumbs),
+      faqSchema(page.faqs),
+      serviceSchema({
+        name: `${agent.name} — ${agent.title}`,
+        serviceType: agent.title,
+        description: page.description,
+        path,
+        audience: 'Small service firms and professional practices',
+      }),
+    ]}
+  />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <!-- ── HERO ───────────────────────────────────────────── -->
+  <Section spacing="standard" labelledby="agent-title" class="k-hero">
+    <div class="k-hero__grid">
+      <div class="k-hero__copy">
+        <Eyebrow>{agent.title}</Eyebrow>
+        <h1 id="agent-title" class="k-display">{page.h1}</h1>
+        <p class="k-lede">{page.sub}</p>
+        <div class="k-hero__ctas">
+          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          <Button href="/demo" variant="ghost" event="demo_click">Book a demo</Button>
+        </div>
+        <ul class="k-hero__facts" aria-label="At a glance">
+          <li><span class="k-hero__fact-k">Stage</span><span class="k-hero__fact-v">{agent.stage}</span></li>
+          <li><span class="k-hero__fact-k">First in</span><span class="k-hero__fact-v">{plan.name}</span></li>
+          <li><span class="k-hero__fact-k">From</span><span class="k-hero__fact-v" data-figure>{plan.from.replace('from ', '')}/mo</span></li>
+        </ul>
+      </div>
+      <div class="k-hero__mock">
+        <CallTranscript vertical={page.heroVertical} />
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── THE FLOW ───────────────────────────────────────── -->
+  <Section tone="raised" spacing="major" labelledby="flow-title" id="how-it-works">
+    <div class="k-split k-split--top">
+      <div class="k-split__aside">
+        <Eyebrow>Step by step</Eyebrow>
+        <h2 id="flow-title" class="k-h2">{page.flowH2}</h2>
+        <p class="k-lede">{page.flowLede}</p>
+        <Button href="/demo" variant="ghost" event="demo_click">See it on your own numbers</Button>
+      </div>
+      <ol class="k-flow">
+        {page.flow.map((f, i) => (
+          <li class="k-flow__step">
+            <span class="k-flow__n" data-figure>{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 class="k-flow__name">{f.label}</h3>
+              <p class="k-flow__text">{f.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <!-- ── CAPABILITY BLOCKS ──────────────────────────────── -->
+  {page.blocks.map((b, i) => (
+    <Section
+      id={b.id}
+      tone={i % 2 === 0 ? 'ground' : 'raised'}
+      spacing="standard"
+      labelledby={`block-${i}`}
+    >
+      <div class="k-band">
+        <div class="k-band__head">
+          <h2 id={`block-${i}`} class="k-h2">{b.h2}</h2>
+          {/* Direct-answer paragraph: complete and quotable on its own. */}
+          <p class="k-lede k-measure">{b.answer}</p>
+        </div>
+        {b.bullets && (
+          <ul class="k-member__bullets k-member__bullets--wide">
+            {b.bullets.map((x) => <li>{x}</li>)}
+          </ul>
+        )}
+      </div>
+    </Section>
+  ))}
+
+  <!-- ── PRODUCT RECORDING (below the fold, preload="none") ─ -->
+  {page.media && (
+    <Section spacing="standard" labelledby="media-title">
+      <div class="k-split k-split--top">
+        <div class="k-split__aside">
+          <Eyebrow>See it</Eyebrow>
+          <h2 id="media-title" class="k-h2">{page.media.label}</h2>
+          <p class="k-lede">
+            Nothing above the fold on this site loads a video. This one waits until you press
+            play, so the page is fast on a phone between jobs.
+          </p>
+        </div>
+        <div class="k-split__mock">
+          <figure class="k-shot">
+            <video
+              class="k-shot__video"
+              src={page.media.src}
+              poster={page.media.poster}
+              preload="none" playsinline muted loop controls
+              width={page.media.w} height={page.media.h}
+              aria-label={page.media.label}
+            ></video>
+            <figcaption class="k-mock__caption">{page.media.caption}</figcaption>
+          </figure>
+        </div>
+      </div>
+    </Section>
+  )}
+
+  <!-- ── OWNER DAILY BRIEF ──────────────────────────────── -->
+  <Section tone="raised" spacing="standard" labelledby="brief-title">
+    <div class="k-split k-split--reverse">
+      <div class="k-split__aside">
+        <Eyebrow>Owner Daily Brief</Eyebrow>
+        <h2 id="brief-title" class="k-h2">You don&rsquo;t log into a dashboard. You get a text.</h2>
+        <p class="k-lede">
+          Whatever {agent.name} did overnight shows up in one message each morning, alongside
+          which source produced the bookings and the single thing that needs a person.
+        </p>
+      </div>
+      <div class="k-split__mock">
+        <DailyBrief vertical={page.heroVertical} />
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── INDUSTRIES: every agent page links to all four ──── -->
+  <Section spacing="standard" labelledby="ind-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>By industry</Eyebrow>
+        <h2 id="ind-title" class="k-h2">{agent.name} in your vocabulary.</h2>
+        <p class="k-lede k-measure">
+          The script, the questions and the integrations change by vertical. These are the four
+          we build for.
+        </p>
+      </div>
+      <ul class="k-inds">
+        {hubs.map((h) => (
+          <li class="k-ind">
+            <a class="k-ind__link" href={`/industries/${h.slug}`}>
+              <h3 class="k-ind__name">{h.name}</h3>
+              <p class="k-ind__line">{h.sub.split('. ')[0]}.</p>
+              <span class="k-ind__go" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- ── PROOF ──────────────────────────────────────────── -->
+  <Section tone="raised" spacing="standard" labelledby="proof-title">
+    <div class="k-split k-split--top">
+      <div class="k-split__aside">
+        <Eyebrow>Proof</Eyebrow>
+        <h2 id="proof-title" class="k-h2">In their words.</h2>
+        <p class="k-lede">
+          No invented numbers. This slot stays visible until a real customer says a real thing
+          on the record.
+        </p>
+      </div>
+      <div class="k-split__mock">
+        <Testimonial proves={page.testimonialProves} />
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── PLAN + THE OTHER AGENTS ────────────────────────── -->
+  <Section tone="inverse" spacing="standard" labelledby="plan-title">
+    <div class="k-close k-close--wide">
+      <Eyebrow>Pricing</Eyebrow>
+      <h2 id="plan-title" class="k-h2">{plan.name}, {plan.from.replace('from ', 'from ')} a month.</h2>
+      <p class="k-lede">{page.planLine} Quoted to your volume, month-to-month, live in five business days.</p>
+      <p class="k-body">
+        Also on the team: {others.map((o) => o.name).join(', ')}.
+        <a href="/services">See how the four work together</a>, or
+        <a href="/pricing">what changes the quote</a>.
+      </p>
+      <div class="k-close__ctas">
+        <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+        <Button href="/pricing" variant="ghost">See pricing</Button>
+      </div>
+    </div>
+  </Section>
+
+  <FaqSection faqs={page.faqs} title={`${agent.name} FAQ`} tone="ground" />
+</Layout>
