@@ -4,6 +4,8 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Section from '../components/Section.astro';
+import Eyebrow from '../components/Eyebrow.astro';
 import {
   organizationSchema,
   faqSchema,
@@ -40,9 +42,27 @@ const cityVerticalLinks = geoVerticals
   .filter((g) => g.industrySlug === ind.slug)
   .map((g) => ({ ...g, city: cities.find((c) => c.slug === g.citySlug)! }));
 
+// Each of the nine narrower pages sits beneath one of the four hubs.
+// professional-intake is the exception: law firms were split out to
+// their own hub, so what is left (financial, consulting) climbs to the
+// industries index rather than to a hub that no longer describes it.
+const HUB = {
+  hvac: 'home-services', plumbers: 'home-services', roofing: 'home-services',
+  towing: 'home-services', septic: 'home-services',
+  dentists: 'dental-med-spa', 'med-spas': 'dental-med-spa',
+  'real-estate': 'real-estate',
+};
+const HUB_NAME = {
+  'home-services': 'Home services',
+  'dental-med-spa': 'Dental & med spa',
+  'real-estate': 'Real estate',
+};
+const hubSlug = HUB[ind.slug];
+
 const crumbs = [
   { name: 'Home', path: '/' },
-  { name: 'AI Receptionist', path: '/ai-receptionist' },
+  { name: 'Industries', path: '/industries' },
+  ...(hubSlug ? [{ name: HUB_NAME[hubSlug], path: `/industries/${hubSlug}` }] : []),
   { name: `For ${ind.short}`, path },
 ];
 
@@ -185,14 +205,18 @@ const peerIndustries = industries.filter((i) => i.slug !== ind.slug).slice(0, 5)
     <p class="prose" style="margin-bottom:var(--space-3)">This is the Keres operator portal — the AI answers the call, qualifies the caller, and books the appointment in under sixty seconds.</p>
     <video
       src="/assets/video/ai-receptionist.mp4"
-      preload="metadata"
+      poster="/assets/img/operator-portal.jpg"
+      preload="none"
       playsinline
       muted
       loop
       controls
+      width="1280"
+      height="720"
       aria-label={`Keres AI receptionist demo for ${ind.shortLower}`}
-      style="width:100%;max-width:720px;border-radius:var(--radius-lg);border:1px solid var(--border)"
+      style="width:100%;max-width:720px;height:auto;border-radius:var(--radius-lg);border:1px solid var(--border)"
     ></video>
+    <p class="k-mock__caption">Recording uses example data. Nothing on this page loads a video until you press play.</p>
   </section>
 
   <!-- MEDIUM CTA — calculator before hard demo ask -->
@@ -298,6 +322,44 @@ const peerIndustries = industries.filter((i) => i.slug !== ind.slug).slice(0, 5)
       ))}. See <a href="/agents/inbound">all AI receptionist features</a> or add the <a href="/agents/outbound">AI SDR</a> for outbound.</p>
     </div>
   </section>
+
+  {/* Required internal links: the agents, Found, pricing, and the hub
+      this page sits beneath. Without these the nine narrower pages are
+      leaves with nowhere to go. */}
+  <Section tone="raised" spacing="standard" labelledby="ind-next">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Where to next</Eyebrow>
+        <h2 id="ind-next" class="k-h2">The rest of the pipeline.</h2>
+        <p class="k-lede k-measure">
+          Answering the call is one stage of seven. Plans start at $249/month for visibility
+          and are quoted to your call volume from there.
+        </p>
+      </div>
+      <ul class="k-childlinks">
+        {hubSlug && (
+          <li><a href={`/industries/${hubSlug}`}>{HUB_NAME[hubSlug]} — the full vertical page
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></li>
+        )}
+        <li><a href="/agents/inbound">Remi — answers and books the call
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a></li>
+        <li><a href="/agents/follow-up">Theo — reminders and estimate follow-up
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a></li>
+        <li><a href="/agents/reactivation">June — win back past customers
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a></li>
+        <li><a href="/services/found">Found — get found in the first place, from $249/mo
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a></li>
+        <li><a href="/pricing">Pricing — every plan and what changes the quote
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a></li>
+      </ul>
+    </div>
+  </Section>
 
   <FaqSection faqs={ind.faqs} title={`AI receptionist for ${ind.shortLower} — FAQ`} />
 

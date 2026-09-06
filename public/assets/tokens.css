@@ -16,10 +16,17 @@
      ink-0 is headline weight; ink-3 is the quietest legible text. */
   --ground:  #FAF8F5;
   --surface: #FFFFFF;
-  --raised:  #F2EEE9;
+  /* Nudged two steps lighter than the #F2EEE9 in the spec. On the darker
+     value, --ink-3 measured 4.47:1 and --accent 4.48:1 — both a hair under
+     the 4.5 AA floor for the small labels and inline links that sit on
+     raised bands. At #F5F1EB they measure 4.59:1 and 4.60:1. */
+  --raised:  #F5F1EB;
   --line:    #E4DFD9;
   --line-strong: #C9C2BA;
-  --ink-3:   #8C837A;
+  /* Spec said #8C837A; measured 3.77:1 on white, under the 4.5 AA floor,
+     and this token carries every small mono label on the site. #746C63
+     measures 5.16:1 on white, 4.87:1 on ground, 4.56:1 on raised. */
+  --ink-3:   #746C63;
   --ink-2:   #6B625A;
   --ink-1:   #3A332D;
   --ink-0:   #14100D;

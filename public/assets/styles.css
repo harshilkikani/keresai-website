@@ -1004,8 +1004,20 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
    Scoped to the site footer. A bare `footer` selector also caught
    the <footer> inside the hero call mock and painted it black. */
 footer[role="contentinfo"] {
-  background: var(--ink-0); color: var(--text-on-dark-muted);
+  /* Fixed dark in BOTH themes. This used to read background: var(--ink-0),
+     which is near-white in dark mode — the footer rendered white text on a
+     white ground and was completely unreadable. The footer is a dark band
+     by design, so it declares dark values rather than inheriting flipping
+     ones. */
+  background: #0D0B09;
+  color: rgba(245, 241, 236, 0.72);
   padding: 72px var(--gutter) 32px;
+  --line: rgba(245, 241, 236, 0.10);
+  --border: rgba(245, 241, 236, 0.10);
+  --border-dark: rgba(245, 241, 236, 0.10);
+  --accent: #F2711C;
+  --accent-bright: #F2711C;
+  --orange: #F2711C;
 }
 .footer-grid {
   max-width: var(--container); margin: 0 auto;
