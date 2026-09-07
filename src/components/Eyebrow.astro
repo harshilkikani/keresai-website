@@ -1,12 +1,21 @@
 ---
-/** Small mono label above a heading. Rule + text, never centered. */
+/**
+ * Small mono label above a heading. Rule + text, never centered.
+ *
+ * `n` prefixes a section number ("01") — the homepage numbers its
+ * sections sequentially with this, while the pipeline stages keep their
+ * own 00–06 sequence inside their section.
+ */
 export interface Props {
   rule?: boolean;
+  n?: string | number;
   class?: string;
 }
-const { rule = true, class: extraClass = '' } = Astro.props;
+const { rule = true, n, class: extraClass = '' } = Astro.props;
+const num = n === undefined ? null : String(n).padStart(2, '0');
 ---
 <p class:list={['k-eyebrow', extraClass]}>
   {rule && <span class="k-eyebrow__rule" aria-hidden="true"></span>}
+  {num && <span class="k-eyebrow__n" data-figure>{num}</span>}
   <span><slot /></span>
 </p>

@@ -96,8 +96,7 @@ const faqs = [
     <div class="doors">
       <article class="door" data-reveal>
         <div class="door__head">
-          <span class="k-stagenum" aria-hidden="true">00</span>
-          <Eyebrow>Be Found</Eyebrow>
+          <Eyebrow n={1}>Be Found</Eyebrow>
           <h3 class="door__title">Show up where the search happens.</h3>
           <p class="door__text">
             A website built to convert, a Google Business Profile worked every week, reviews that
@@ -114,8 +113,7 @@ const faqs = [
 
       <article class="door" data-reveal>
         <div class="door__head">
-          <span class="k-stagenum" aria-hidden="true">01</span>
-          <Eyebrow>Be Answered</Eyebrow>
+          <Eyebrow n={2}>Be Answered</Eyebrow>
           <h3 class="door__title">Every call answered in two rings and booked.</h3>
           <p class="door__text">
             Remi, your Inbound Agent, picks up day or night, runs your intake script, offers real
@@ -134,7 +132,7 @@ const faqs = [
   <!-- ── THE SEVEN LEAKS — sticky pipeline ──────────────── -->
   <Section spacing="major" labelledby="leaks-title" id="leaks">
     <div class="k-band__head">
-      <Eyebrow>Where your pipeline leaks</Eyebrow>
+      <Eyebrow n={3}>Where your pipeline leaks</Eyebrow>
       <h2 id="leaks-title" class="k-h2">One pipeline. Seven places money falls out of it.</h2>
       <p class="k-lede k-measure">
         Get found, capture the lead, qualify it, book it, get them to show, close it, bring them
@@ -176,7 +174,7 @@ const faqs = [
   <!-- ── THE FOUR AGENTS ────────────────────────────────── -->
   <Section tone="raised" spacing="major" labelledby="team-title" id="agents">
     <div class="k-band__head">
-      <Eyebrow>Be Answered &mdash; the team</Eyebrow>
+      <Eyebrow n={4}>Be Answered &mdash; the team</Eyebrow>
       <h2 id="team-title" class="k-h2">Three agents. One phone number.</h2>
       <p class="k-lede k-measure">
         One system that answers the call, remembers it, and keeps working it after everyone has
@@ -187,7 +185,6 @@ const faqs = [
       {phoneAgents.map((a, i) => (
         <li class:list={['trow', i % 2 === 1 && 'trow--flip']} data-reveal>
           <div class="trow__copy">
-            <span class="k-stagenum" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <p class="k-eyebrow"><span class="k-eyebrow__rule" aria-hidden="true"></span><span>{a.title}</span></p>
             <h3 class="trow__name">{a.name}</h3>
             <p class="trow__job">{a.job}</p>
@@ -211,8 +208,7 @@ const faqs = [
   <Section spacing="major" labelledby="found-title" id="found">
     <div class="k-split k-split--top">
       <div class="k-split__aside">
-        <span class="k-stagenum" aria-hidden="true">00</span>
-        <Eyebrow>Be Found &mdash; what&rsquo;s in it</Eyebrow>
+        <Eyebrow n={5}>Be Found &mdash; what&rsquo;s in it</Eyebrow>
         <h2 id="found-title" class="k-h2">What Found includes.</h2>
         <p class="k-lede">
           Everything that has to be true before your phone can ring. Eight things, fixed in scope,
@@ -244,7 +240,7 @@ const faqs = [
   <Section tone="inverse" spacing="major" labelledby="brief-title" id="brief">
     <div class="k-split k-split--reverse">
       <div class="k-split__aside">
-        <Eyebrow>Owner Daily Brief</Eyebrow>
+        <Eyebrow n={6}>Owner Daily Brief</Eyebrow>
         <h2 id="brief-title" class="k-h2">You don&rsquo;t log into a dashboard. You get a text.</h2>
         <p class="k-lede">
           One message every morning: calls answered, leads qualified, appointments booked, no-shows
@@ -266,7 +262,7 @@ const faqs = [
   <Section spacing="standard" labelledby="ind-title" id="industries">
     <div class="k-band">
       <div class="k-band__head">
-        <Eyebrow>Who it is for</Eyebrow>
+        <Eyebrow n={7}>Who it is for</Eyebrow>
         <h2 id="ind-title" class="k-h2">It uses your words, not &ldquo;customer.&rdquo;</h2>
         <p class="k-lede k-measure">
           A conflict check is not an intake form and chair time is not an appointment. Remi is
@@ -297,7 +293,7 @@ const faqs = [
   <Section tone="raised" spacing="standard" labelledby="int-title" id="integrations">
     <div class="k-band">
       <div class="k-band__head">
-        <Eyebrow>Integrations</Eyebrow>
+        <Eyebrow n={8}>Integrations</Eyebrow>
         <h2 id="int-title" class="k-h2">It books into the calendar you already use.</h2>
         <p class="k-lede k-measure">
           A booking that lives only inside our software is not a booking. Remi writes to the tools
@@ -326,7 +322,7 @@ const faqs = [
 
   <!-- ── CALCULATOR ─────────────────────────────────────── -->
   <Section spacing="major" labelledby="roi-title" id="roi">
-    <Eyebrow>Missed-call calculator</Eyebrow>
+    <Eyebrow n={9}>Missed-call calculator</Eyebrow>
     <h2 id="roi-title" class="k-h2">Put your own numbers in.</h2>
     <p class="k-lede k-measure">
       Four inputs and the arithmetic shown in full, because a number you cannot check is not worth
@@ -375,7 +371,7 @@ const faqs = [
   <Section tone="raised" spacing="standard" labelledby="proof-title" id="proof">
     <div class="k-band">
       <div class="k-band__head">
-        <Eyebrow>Proof</Eyebrow>
+        <Eyebrow n={10}>Proof</Eyebrow>
         <h2 id="proof-title" class="k-h2">In their words, or not at all.</h2>
         <p class="k-lede k-measure">
           There are no invented numbers on this site and no stock-photo customers. The slots below
@@ -394,7 +390,7 @@ const faqs = [
   <Section spacing="standard" labelledby="start-title" id="start">
     <div class="k-band">
       <div class="k-band__head">
-        <Eyebrow>How it starts</Eyebrow>
+        <Eyebrow n={11}>How it starts</Eyebrow>
         <h2 id="start-title" class="k-h2">Three steps, five business days.</h2>
       </div>
       <ol class="k-steps" data-reveal>
@@ -423,7 +419,7 @@ const faqs = [
 
   <!-- ── FAQ ────────────────────────────────────────────── -->
   <Section tone="raised" spacing="standard" labelledby="faq-title" id="faq">
-    <Eyebrow>Questions</Eyebrow>
+    <Eyebrow n={12}>Questions</Eyebrow>
     <h2 id="faq-title" class="k-h2">The questions everyone asks first.</h2>
     <div class="faq-list">
       {faqs.map((f) => (
