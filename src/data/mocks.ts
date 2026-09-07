@@ -40,7 +40,7 @@ export interface Transcript {
 
 export const transcripts: Record<Vertical, Transcript> = {
   default: {
-    label: 'Remi — example call',
+    label: 'Example call — Remi',
     duration: '0:48',
     when: 'Tue 8:12 PM',
     from: '(555) 014-2207',
@@ -62,7 +62,7 @@ export const transcripts: Record<Vertical, Transcript> = {
   },
 
   'law-firms': {
-    label: 'Remi — example intake call',
+    label: 'Example intake call — Remi',
     duration: '1:12',
     when: 'Sun 9:41 PM',
     from: '(555) 013-8890',
@@ -86,7 +86,7 @@ export const transcripts: Record<Vertical, Transcript> = {
   },
 
   'home-services': {
-    label: 'Remi — example emergency call',
+    label: 'Example emergency call — Remi',
     duration: '0:54',
     when: 'Fri 6:04 AM',
     from: '(555) 012-4416',
@@ -108,7 +108,7 @@ export const transcripts: Record<Vertical, Transcript> = {
   },
 
   'dental-med-spa': {
-    label: 'Remi — example patient call',
+    label: 'Example patient call — Remi',
     duration: '0:51',
     when: 'Mon 7:22 AM',
     from: '(555) 011-6035',
@@ -130,7 +130,7 @@ export const transcripts: Record<Vertical, Transcript> = {
   },
 
   'real-estate': {
-    label: 'Remi — example buyer call',
+    label: 'Example buyer call — Remi',
     duration: '0:57',
     when: 'Sat 11:38 AM',
     from: '(555) 010-3374',
@@ -332,7 +332,7 @@ export const siteMock: SiteMock = {
   phone: '(555) 010-4400',
   services: ['AC repair', 'Furnace repair', 'Maintenance plans', 'New installs'],
   review: { text: 'Called at 9pm, tech was here by 8am.', by: 'Example review' },
-  badges: ['Licensed & insured', 'Answered in 2 rings'],
+  badges: ['Example site', 'Licensed & insured', 'Answered in 2 rings'],
 };
 
 export interface ListingMock {
@@ -383,7 +383,7 @@ export interface AgentMock {
 export const agentMocks: AgentMock[] = [
   {
     slug: 'inbound',
-    label: 'Remi · example call',
+    label: 'Example · Remi call',
     kind: 'transcript',
     bubbles: [
       { who: 'them', t: '0:04', text: 'Do you have anyone who can come out tonight?' },
@@ -395,7 +395,7 @@ export const agentMocks: AgentMock[] = [
   },
   {
     slug: 'follow-up',
-    label: 'Theo · reminder thread',
+    label: 'Example · Theo reminder thread',
     kind: 'sms',
     bubbles: [
       { who: 'agent', t: 'Yesterday 4:02 PM', text: 'Hi Dana — reminder that your furnace tune-up is tomorrow, 8–10 AM. Reply C to confirm or R to reschedule.' },
@@ -406,7 +406,7 @@ export const agentMocks: AgentMock[] = [
   },
   {
     slug: 'reactivation',
-    label: 'June · reactivation',
+    label: 'Example · June reactivation',
     kind: 'sms',
     bubbles: [
       { who: 'agent', t: 'Tue 10:10 AM', text: 'Hi Marcus, it is June from Northline. We serviced your furnace two winters ago — want us to fit a tune-up in before the cold hits? Reply YES and I will hold a slot.' },
@@ -417,7 +417,7 @@ export const agentMocks: AgentMock[] = [
   },
   {
     slug: 'outbound',
-    label: 'Sol · replies inbox',
+    label: 'Example · Sol replies inbox',
     kind: 'inbox',
     inbox: [
       { from: 'Priya S.', subject: 'Re: After-hours coverage for the practice', preview: 'Tuesday 10am works — send the invite.', t: '9:41 AM', booked: true },
