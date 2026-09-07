@@ -24,6 +24,14 @@ export const goWebsitePages: GoWebsitePage[] = [
     vertical: 'local service firms',
     industry: '',
   },
+  {
+    slug: 'home-services',
+    path: '/go/website/home-services',
+    title: 'HVAC & Plumbing Website That Books the Job | Keres AI',
+    description: 'A website built for HVAC and plumbing companies: click-to-call, booking wired in, your Google listing managed every week. $249/month, no build fee, live in five days.',
+    vertical: 'HVAC and plumbing companies',
+    industry: 'home-services',
+  },
 ];
 
 export const goWebsiteBySlug = (slug: string) => goWebsitePages.find((g) => g.slug === slug);
