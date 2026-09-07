@@ -189,6 +189,20 @@
     }
   });
 
+  /* ─── Analytics on client-side navigations ───────────────
+     count.js counts the first page itself. With the ClientRouter the
+     document is swapped on navigation and count.js never re-runs, so
+     every later page is counted here. The first astro:page-load fires
+     for the initial page and is skipped to avoid a double count.
+     GoatCounter ignores localhost, so this is only observable live. */
+  let firstPageLoad = true;
+  bindOnce(document, 'gc-page-load', 'astro:page-load', () => {
+    if (firstPageLoad) { firstPageLoad = false; return; }
+    const gc = window.goatcounter;
+    if (!gc || typeof gc.count !== 'function') return;
+    gc.count({ path: location.pathname + location.search + location.hash, title: document.title });
+  });
+
   /* ─── Nav dropdowns ────────────────────────────────────
      The <details> elements work on their own. This only adds the
      two behaviours markup cannot express: close when the pointer
