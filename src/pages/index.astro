@@ -20,6 +20,11 @@ import {
 import { stages } from '../data/leaks';
 import { agents, plans, foundServices, PHONE } from '../data/site';
 
+// The homepage story is the phone line: Remi answers, Theo keeps it booked,
+// June brings them back. Sol is email outbound and is sold last, so he stays
+// on /agents/outbound and in the footer but not in this row.
+const phoneAgents = agents.filter((a) => a.slug !== 'outbound');
+
 const found = plans.find((p) => p.slug === 'found')!;
 const answer = plans.find((p) => p.slug === 'answer')!;
 
@@ -172,14 +177,14 @@ const faqs = [
   <Section tone="raised" spacing="major" labelledby="team-title" id="agents">
     <div class="k-band__head">
       <Eyebrow>Be Answered &mdash; the team</Eyebrow>
-      <h2 id="team-title" class="k-h2">Four agents. One phone number.</h2>
+      <h2 id="team-title" class="k-h2">Three agents. One phone number.</h2>
       <p class="k-lede k-measure">
         One system that answers the call, remembers it, and keeps working it after everyone has
         gone home. On your line they introduce themselves with whatever name you choose.
       </p>
     </div>
     <ol class="team">
-      {agents.map((a, i) => (
+      {phoneAgents.map((a, i) => (
         <li class:list={['trow', i % 2 === 1 && 'trow--flip']} data-reveal>
           <div class="trow__copy">
             <span class="k-stagenum" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
