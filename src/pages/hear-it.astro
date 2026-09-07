@@ -16,7 +16,7 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Hear it', path }];
 const faqs = [
   {
     q: 'Can I just call and hear it myself?',
-    a: `Yes, and that is the better test. Call ${PHONE.display} and you will be speaking to Remi. Ask it something awkward — an unusual request, a question it should not answer, a demand for a human — and see what it does.`,
+    a: `${PHONE ? `Yes, and that is the better test. Call ${PHONE.display} and you will be speaking to Remi.` : `Yes, and that is the better test — book a quote call and we will put Remi on the line with you.`} Ask it something awkward — an unusual request, a question it should not answer, a demand for a human — and see what it does.`,
   },
   {
     q: 'Are these real customer calls?',
@@ -48,7 +48,7 @@ const faqs = [
           verticals &mdash; audio recordings go here as customers give us permission to publish them.
         </p>
         <div class="price-hero-ctas">
-          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
           <Button href="/demo" variant="ghost" event="demo_click">Book a demo</Button>
         </div>
       </div>
@@ -88,7 +88,7 @@ const faqs = [
         should refuse. What it does then is what your callers will get.
       </p>
       <div class="k-close__ctas">
-        <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+        {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
         <Button href="/demo" variant="ghost" event="demo_click">Book a demo instead</Button>
       </div>
     </div>

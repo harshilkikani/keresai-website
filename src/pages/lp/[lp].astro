@@ -5,6 +5,7 @@ import Testimonial from '../../components/Testimonial.astro';
 import CallTranscript from '../../components/CallTranscript.astro';
 import { landingPages } from '../../data/lp';
 import { PHONE } from '../../data/site';
+import { business, has } from '../../config/business';
 
 export function getStaticPaths() {
   return landingPages.map((lp) => ({ params: { lp: lp.slug }, props: { lp } }));
@@ -28,9 +29,9 @@ const FORM_ACTION = 'https://formspree.io/f/mojywlnn';
         <p class="k-lede">{lp.sub}</p>
 
         <div class="lp-hero__ctas">
-          <Button href={PHONE.href} variant="primary" event="tel_click">
+          {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">
             Call {PHONE.display} now
-          </Button>
+          </Button>}
           <p class="lp-hero__note">You&rsquo;ll be talking to Remi.</p>
         </div>
 
@@ -136,7 +137,7 @@ const FORM_ACTION = 'https://formspree.io/f/mojywlnn';
               <div class="roi-math-row"><span>After-hours calls / mo</span><span id="roi-ah">0</span></div>
               <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
             </div>
-            <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href={PHONE.href} data-event="tel_click">Call {PHONE.display}</a>
+            <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href={PHONE ? PHONE.href : '#lead'} data-event={PHONE ? 'tel_click' : 'demo_click'}>{PHONE ? `Call ${PHONE.display}` : 'Get a quote'}</a>
             <div class="roi-note" id="roi-note"></div>
           </div>
         </div>
@@ -145,14 +146,16 @@ const FORM_ACTION = 'https://formspree.io/f/mojywlnn';
   </section>
 
   <!-- ── PROOF ──────────────────────────────────────────── -->
-  <section class="lp-band" aria-labelledby="lp-proof">
-    <div class="lp-wrap">
-      <h2 id="lp-proof" class="k-h2">In their words, or not at all.</h2>
-      <div class="k-quotes k-quotes--two">
-        {lp.testimonials.map((t) => <Testimonial proves={t.proves} vertical="New Jersey law firms" />)}
+  {has.testimonials && (
+    <section class="lp-band" aria-labelledby="lp-proof">
+      <div class="lp-wrap">
+        <h2 id="lp-proof" class="k-h2">In their words, or not at all.</h2>
+        <div class="k-quotes k-quotes--two">
+          {business.testimonials.map((t) => <Testimonial {...t} />)}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- ── FAQ ────────────────────────────────────────────── -->
   <section class="lp-band lp-band--alt" aria-labelledby="lp-faq">
@@ -176,13 +179,13 @@ const FORM_ACTION = 'https://formspree.io/f/mojywlnn';
       <p class="k-lede">
         Ask it something awkward. That is the point of the exercise.
       </p>
-      <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+      {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
     </div>
   </section>
 
   <footer class="lp-foot">
     <div class="lp-wrap">
-      <p>&copy; {new Date().getFullYear()} Keres AI · <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a></p>
+      <p>&copy; {new Date().getFullYear()} Keres AI{PHONE && <> · <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a></>}</p>
     </div>
   </footer>
 

@@ -46,11 +46,11 @@ export const organizationSchema = {
   ],
   // The line Keres itself answers. Sourced from src/data/site.ts so the
   // header, sticky bar, footer and this node can never drift apart.
-  telephone: PHONE.e164,
+  ...(PHONE ? { telephone: PHONE.e164 } : {}),
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'sales',
-    telephone: PHONE.e164,
+    ...(PHONE ? { telephone: PHONE.e164 } : {}),
     url: `${ORIGIN}/demo`,
     email: 'ops@keresai.com',
     availableLanguage: 'English',

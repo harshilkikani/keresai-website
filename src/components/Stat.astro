@@ -18,16 +18,12 @@ export interface Props {
 }
 
 const { value, label, source, sourceHref } = Astro.props;
-const isPlaceholder = /\[.*\]/.test(value);
+const isPlaceholder = /\[.*\]/.test(value) || !source;
 ---
-<div class:list={['k-stat', isPlaceholder && 'k-stat--placeholder']}>
+{!isPlaceholder && <div class:list={['k-stat', isPlaceholder && 'k-stat--placeholder']}>
   <div class="k-stat__value" data-figure>{value}</div>
   <div class="k-stat__label">{label}</div>
-  {source ? (
-    sourceHref
-      ? <a class="k-stat__source" href={sourceHref}>{source}</a>
-      : <p class="k-stat__source">{source}</p>
-  ) : (
-    <p class="k-stat__source k-stat__source--missing">[Proof needed]</p>
-  )}
-</div>
+  {sourceHref
+    ? <a class="k-stat__source" href={sourceHref}>{source}</a>
+    : <p class="k-stat__source">{source}</p>}
+</div>}

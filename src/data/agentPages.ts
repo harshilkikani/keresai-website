@@ -1,3 +1,4 @@
+import { priceSentence } from '../config/business';
 // The four agent pages. Section content lives here so the template
 // stays one file and no two pages can describe the same capability
 // two different ways.
@@ -116,7 +117,7 @@ export const agentPages: AgentPage[] = [
     testimonialProves: 'after-hours calls being answered, qualified and booked',
     faqs: [
       { q: 'Does it sound like a robot?', a: 'It sounds like a competent front desk. It answers in two rings, uses your vocabulary, and says "let me get someone for you" instead of guessing. Call the number at the top of this page and judge it yourself — that is the fastest demo there is.' },
-      { q: 'What does it cost?', a: 'The Answer plan starts at $[X]/month, quoted to your call volume, locations and integrations. There is no per-call charge and no surcharge for simultaneous calls. Found — the visibility layer — starts separately at $249/month.' },
+      { q: 'What does it cost?', a: `${priceSentence('The Answer plan', 'answer', 'your call volume, locations and integrations')} There is no per-call charge and no surcharge for simultaneous calls. Found — the visibility layer — starts separately at $249/month.` },
       { q: 'How long does setup take?', a: 'Five business days. Twenty minutes on how you answer today, then we write your intake script, connect your number, calendar and CRM, and you call it yourself until it answers the way you would.' },
       { q: 'What if a caller needs a human?', a: 'Remi warm-transfers under rules you set, and falls back to a "call me now" alert with the intake attached if the transfer is not picked up.' },
       { q: 'Can it handle several calls at once?', a: 'Yes, unlimited simultaneous calls at no surcharge. That is the whole point during a storm week or a Monday morning rush — your bill does not move because your call volume did.' },
@@ -195,7 +196,7 @@ export const agentPages: AgentPage[] = [
     testimonialProves: 'no-shows falling and estimates closing after a follow-up nobody had time to make',
     faqs: [
       { q: 'Will it annoy my customers?', a: 'The cadence is yours, everything is opt-out in one word, and Theo stops the moment somebody answers. Three touches on an estimate over a week is the schedule most firms would run themselves if they had the time.' },
-      { q: 'What does it cost?', a: 'Theo starts on the Convert plan from $[X]/month, quoted to your appointment volume and integrations. Estimate and post-consult follow-up come with Grow.' },
+      { q: 'What does it cost?', a: `${priceSentence('Theo on the Convert plan', 'convert', 'your appointment volume and integrations')} Estimate and post-consult follow-up come with Grow.` },
       { q: 'How long does setup take?', a: 'Five business days, and usually less if Remi is already answering — your appointment types and cadences are the only new things to configure.' },
       { q: 'What if someone replies with a real question?', a: 'It goes to a person. Theo handles scheduling and confirmation; anything that turns into a negotiation or a technical question is handed to you with the thread attached.' },
       { q: 'Do I need Remi first?', a: 'No, but it is the usual order. Theo works on appointments booked any way at all, including ones your front desk books by hand.' },
@@ -260,7 +261,7 @@ export const agentPages: AgentPage[] = [
     testimonialProves: 'revenue coming back from a customer list nobody had worked in a year',
     faqs: [
       { q: 'Is this just mass texting my customers?', a: 'No. Each campaign targets a segment you approve, with a reason that applies to that segment, and every reply is handled as a conversation. You see the list and the message before anything sends.' },
-      { q: 'What does it cost?', a: 'June comes with the Grow plan from $[X]/month. Individual reactivation campaigns can also be quoted on their own if you want to try one before committing.' },
+      { q: 'What does it cost?', a: `${priceSentence('June on the Grow plan', 'grow', 'your list size and campaign volume')} Individual reactivation campaigns can also be quoted on their own if you want to try one before committing.` },
       { q: 'How long does setup take?', a: 'Five business days for the plan. A single campaign is usually live inside a week of us getting access to the list.' },
       { q: 'What happens when someone replies?', a: 'Interested people are qualified and booked. Anyone who says no is marked in your CRM and not contacted again by that campaign. Anything that needs a person comes to you with the thread.' },
       { q: 'Will it damage my reputation?', a: 'It is designed not to. Unhappy customers are routed to the owner privately instead of toward a public review, opt-outs are honoured in one word, and June never contacts a bought or scraped list.' },

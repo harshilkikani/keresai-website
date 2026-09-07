@@ -1,4 +1,5 @@
 ---
+import { business, has } from '../../config/business';
 import Layout from '../../layouts/Layout.astro';
 import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
@@ -76,7 +77,7 @@ const serviceNodes = foundServices.map((s) =>
           who answers the calls they generate.
         </p>
         <div class="price-hero-ctas">
-          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
           <Button href="/demo" variant="ghost" event="demo_click">Get your quote</Button>
         </div>
       </div>
@@ -146,7 +147,7 @@ const serviceNodes = foundServices.map((s) =>
             <span class="k-found__per">/month &middot; quoted to your volume</span>
           </p>
           <Button href="/demo" variant="primary" event="demo_click">Get your quote</Button>
-          <Button href={PHONE.href} variant="ghost" event="tel_click">Or call {PHONE.display}</Button>
+          {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Or call {PHONE.display}</Button>}
         </div>
       </div>
       <div class="k-found__mock">
@@ -193,21 +194,23 @@ const serviceNodes = foundServices.map((s) =>
     </div>
   </Section>
 
-  <Section tone="raised" spacing="standard" labelledby="proof-title">
-    <div class="k-split k-split--top">
-      <div class="k-split__aside">
-        <Eyebrow>Proof</Eyebrow>
-        <h2 id="proof-title" class="k-h2">In their words.</h2>
-        <p class="k-lede">
-          No invented numbers and no stock-photo customers. This slot stays visible until a
-          real firm says a real thing on the record.
-        </p>
+  {has.testimonials && (
+    <Section tone="raised" spacing="standard" labelledby="proof-title">
+      <div class="k-split k-split--top">
+        <div class="k-split__aside">
+          <Eyebrow>Proof</Eyebrow>
+          <h2 id="proof-title" class="k-h2">In their words.</h2>
+          <p class="k-lede">
+            No invented numbers and no stock-photo customers. This slot stays visible until a
+            real firm says a real thing on the record.
+          </p>
+        </div>
+        <div class="k-split__mock">
+          {business.testimonials.map((t) => <Testimonial {...t} />)}
+        </div>
       </div>
-      <div class="k-split__mock">
-        <Testimonial proves="Found producing calls that Remi then answered and booked" />
-      </div>
-    </div>
-  </Section>
+    </Section>
+  )}
 
   <Section spacing="standard" labelledby="brief-title">
     <div class="k-split k-split--reverse">

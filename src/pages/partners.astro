@@ -1,4 +1,5 @@
 ---
+import { business } from '../config/business';
 import Layout from '../layouts/Layout.astro';
 import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
@@ -15,7 +16,7 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Partners', path }];
 const faqs = [
   {
     q: 'What does the partner margin look like?',
-    a: 'PLACEHOLDER — the referral fee and reseller margin are [X]. Email ops@keresai.com and we will send the current terms in writing before you introduce anyone.',
+    a: business.partnerReferralTerms || 'Email ops@keresai.com and we will send the current referral fee and reseller margin in writing before you introduce anyone.',
   },
   {
     q: 'Who owns the client relationship?',
@@ -52,7 +53,7 @@ const faqs = [
         </p>
         <div class="price-hero-ctas">
           <Button href={`mailto:${EMAIL}?subject=Partner%20enquiry`} variant="primary">Email {EMAIL}</Button>
-          <Button href={PHONE.href} variant="ghost" event="tel_click">Or call {PHONE.display}</Button>
+          {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Or call {PHONE.display}</Button>}
         </div>
       </div>
       <div class="k-col-5">
@@ -63,7 +64,7 @@ const faqs = [
           </div>
           <div class="price-fact">
             <span class="price-fact__k">Margin</span>
-            <span class="price-fact__v">[X] — sent in writing.</span>
+            <span class="price-fact__v">{business.partnerReferralTerms || 'Sent in writing on request.'}</span>
           </div>
           <div class="price-fact">
             <span class="price-fact__k">Go live</span>
@@ -102,7 +103,7 @@ const faqs = [
         <li class="k-step">
           <span class="k-step__n" data-figure>03</span>
           <h3 class="k-step__title">Bundle</h3>
-          <p class="k-step__text">Found plus an agent plan carries a {BUNDLE_DISCOUNT}% bundle discount, which is usually what makes the numbers work when you are already selling the client a website.</p>
+          <p class="k-step__text">Found plus an agent plan carries {BUNDLE_DISCOUNT ? `a ${BUNDLE_DISCOUNT}% bundle discount` : 'a bundle discount'}, which is usually what makes the numbers work when you are already selling the client a website.</p>
         </li>
       </ol>
     </div>
@@ -134,7 +135,7 @@ const faqs = [
       </p>
       <div class="k-close__ctas">
         <Button href={`mailto:${EMAIL}?subject=Partner%20enquiry`} variant="primary">Email {EMAIL}</Button>
-        <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>
+        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>}
       </div>
     </div>
   </Section>

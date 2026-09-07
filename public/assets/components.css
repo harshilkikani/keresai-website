@@ -225,21 +225,6 @@ a.k-stat__source { text-decoration: underline; text-underline-offset: 2px; }
 .k-quote__author { font-weight: 600; color: var(--ink-1); }
 .k-quote__meta { color: var(--ink-3); }
 
-/* The empty state stays visible on purpose — see Testimonial.astro. */
-.k-quote--slot {
-  border-left-color: var(--warn);
-  background: var(--warn-wash);
-  padding: var(--space-5);
-  border-radius: var(--radius);
-}
-.k-quote__tag {
-  font-family: var(--mono);
-  font-size: var(--text--1);
-  font-weight: 500;
-  color: var(--warn);
-  letter-spacing: 0.04em;
-}
-.k-quote__need { margin-top: var(--space-2); font-size: var(--text--1); color: var(--ink-2); max-width: 46ch; }
 
 /* ─── Mock frame ──────────────────────────────────────────── */
 .k-mock {
@@ -1664,7 +1649,7 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(24px, 4vw
 }
 
 /* A visible slot for audio that does not exist yet, matching the
-   [Testimonial] treatment: the gap stays on the page until it is filled. */
+   testimonial-slot treatment: the gap stays on the page until it is filled. */
 .k-audio-slot {
   margin-top: var(--space-6);
   padding: var(--space-5);

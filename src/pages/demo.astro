@@ -20,7 +20,7 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Book a Demo', path }];
     <span class="eyebrow">Book a Demo</span>
     <h1>See Keres <span class="accent">answer a live call</span></h1>
     <p class="lead">A free 30-minute walkthrough. We’ll show Remi answer, qualify and book an appointment in under sixty seconds, then how Theo and June keep working the lead afterwards. No pitch deck, no pressure.</p>
-    <p class="lead" style="margin-top:12px">Or just call <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a> — you’ll be talking to Remi, the same agent that would answer your phone.</p>
+    {PHONE && (<p class="lead" style="margin-top:12px">Or just call <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a> — you’ll be talking to Remi, the same agent that would answer your phone.</p>)}
     <ul class="hero-meta" aria-label="What to expect" style="margin-top:24px">
       <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Live call demo</span></li>
       <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Pricing for your volume</span></li>

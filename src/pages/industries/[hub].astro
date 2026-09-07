@@ -1,4 +1,5 @@
 ---
+import { business, has } from '../../config/business';
 import Layout from '../../layouts/Layout.astro';
 import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
@@ -54,7 +55,7 @@ const answer = plans.find((p) => p.slug === 'answer')!;
         <h1 id="hub-title" class="k-display">{hub.h1}</h1>
         <p class="k-lede">{hub.sub}</p>
         <div class="k-hero__ctas">
-          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
           <Button href="/demo" variant="ghost" event="demo_click">Book a demo</Button>
         </div>
         <ul class="k-hero__facts" aria-label="At a glance">
@@ -256,21 +257,23 @@ const answer = plans.find((p) => p.slug === 'answer')!;
   )}
 
   <!-- ── PROOF ──────────────────────────────────────────── -->
-  <Section tone="raised" spacing="standard" labelledby="proof-title">
-    <div class="k-band">
-      <div class="k-band__head">
-        <Eyebrow>Proof</Eyebrow>
-        <h2 id="proof-title" class="k-h2">In their words, or not at all.</h2>
-        <p class="k-lede k-measure">
-          Two slots, both waiting on a real {hub.name.toLowerCase()} customer to say a real thing
-          on the record. Nothing here is invented in the meantime.
-        </p>
+  {has.testimonials && (
+    <Section tone="raised" spacing="standard" labelledby="proof-title">
+      <div class="k-band">
+        <div class="k-band__head">
+          <Eyebrow>Proof</Eyebrow>
+          <h2 id="proof-title" class="k-h2">In their words, or not at all.</h2>
+          <p class="k-lede k-measure">
+            Two slots, both waiting on a real {hub.name.toLowerCase()} customer to say a real thing
+            on the record. Nothing here is invented in the meantime.
+          </p>
+        </div>
+        <div class="k-quotes k-quotes--two">
+          {business.testimonials.map((t) => <Testimonial {...t} />)}
+        </div>
       </div>
-      <div class="k-quotes k-quotes--two">
-        {hub.testimonials.map((t) => <Testimonial proves={t.proves} vertical={hub.name} />)}
-      </div>
-    </div>
-  </Section>
+    </Section>
+  )}
 
   <!-- ── DEEPER PAGES ───────────────────────────────────── -->
   <Section spacing="standard" labelledby="more-title">

@@ -27,7 +27,7 @@ const path = '/thank-you';
         that would answer your firm&rsquo;s phone.
       </p>
       <div class="lp-hero__ctas">
-        <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+        {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
       </div>
       <ul class="k-hero__facts" aria-label="What happens next">
         <li><span class="k-hero__fact-k">Callback</span><span class="k-hero__fact-v">Same business day</span></li>
@@ -39,7 +39,7 @@ const path = '/thank-you';
 
   <footer class="lp-foot">
     <div class="lp-wrap">
-      <p>&copy; {new Date().getFullYear()} Keres AI · <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a></p>
+      <p>&copy; {new Date().getFullYear()} Keres AI{PHONE && <> · <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a></>}</p>
     </div>
   </footer>
 </Layout>

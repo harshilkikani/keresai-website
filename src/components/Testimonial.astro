@@ -1,44 +1,29 @@
 ---
 /**
- * A single named testimonial — or, when there is no real quote yet, a
- * visible [Testimonial] slot.
- *
- * The empty state is deliberate and must stay visible. The old
- * Testimonials component hid itself when the data was empty, which
- * let unsupported claims ship with nothing beside them. A visible
- * slot is the reminder that the proof is still owed.
- *
- * Never fabricate a quote, name, company or rating.
+ * A single named testimonial. Renders nothing when there is no real quote:
+ * no bracket, no slot. Pages hide their proof section entirely when
+ * business.testimonials is empty (see src/config/business.ts).
  */
 export interface Props {
   quote?: string;
   author?: string;
   role?: string;
   company?: string;
-  /** What this quote is proving, shown inside the empty slot. */
+  firmType?: string;
+  city?: string;
   proves?: string;
   vertical?: string;
 }
-
-const { quote, author, company, role, proves, vertical } = Astro.props;
-const hasQuote = Boolean(quote && author && company);
+const { quote, author, role, company, firmType, city } = Astro.props;
+const hasQuote = Boolean(quote && author && (company || firmType));
+const meta = [role, company || firmType, city].filter(Boolean).join(', ');
 ---
-{hasQuote ? (
+{hasQuote && (
   <figure class="k-quote">
     <blockquote class="k-quote__text">{quote}</blockquote>
     <figcaption class="k-quote__by">
       <span class="k-quote__author">{author}</span>
-      <span class="k-quote__meta">{[role, company].filter(Boolean).join(', ')}</span>
+      <span class="k-quote__meta">{meta}</span>
     </figcaption>
-  </figure>
-) : (
-  <figure class="k-quote k-quote--slot" data-slot="testimonial">
-    <span class="k-quote__tag">[Testimonial]</span>
-    <p class="k-quote__need">
-      {proves
-        ? `Needed: a named customer quote proving ${proves}.`
-        : 'Needed: a named customer quote for this claim.'}
-      {vertical && ` Vertical: ${vertical}.`}
-    </p>
   </figure>
 )}

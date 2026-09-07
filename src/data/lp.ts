@@ -1,3 +1,4 @@
+import { priceSentence } from '../config/business';
 // Ad landing pages → /lp/{slug}.
 //
 // These are not search pages. They are noindex, kept out of the
@@ -75,7 +76,7 @@ export const landingPages: LandingPage[] = [
     faqs: [
       {
         q: 'What does it cost?',
-        a: 'Remi starts at $[X]/month on the Answer plan, quoted to your call volume, practice areas and integrations. Found — the website, Google Business Profile, reviews and listings layer — starts at $499/month for firms. Month-to-month, no setup fee on the Found base tier.',
+        a: `${priceSentence('Remi on the Answer plan', 'answer', 'your call volume, practice areas and integrations')} Found — the website, Google Business Profile, reviews and listings layer — starts at $499/month for firms. Month-to-month, no setup fee on the Found base tier.`,
       },
       {
         q: 'How long does setup take?',

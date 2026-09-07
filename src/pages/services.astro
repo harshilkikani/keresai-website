@@ -46,7 +46,7 @@ const serviceNodes = stageBlocks.map((b) =>
           attached to the stage of your pipeline it exists to plug.
         </p>
         <div class="price-hero-ctas">
-          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
           <Button href="/pricing" variant="ghost">See plans and floors</Button>
         </div>
       </div>

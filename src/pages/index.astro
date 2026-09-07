@@ -1,4 +1,5 @@
 ---
+import { business, has, priceFrom } from '../config/business';
 import Layout from '../layouts/Layout.astro';
 import Schema from '../components/Schema.astro';
 import Section from '../components/Section.astro';
@@ -27,6 +28,7 @@ const phoneAgents = agents.filter((a) => a.slug !== 'outbound');
 
 const found = plans.find((p) => p.slug === 'found')!;
 const answer = plans.find((p) => p.slug === 'answer')!;
+const answerFloor = priceFrom('answer'); // '' until business.ts has it
 
 const industries = [
   { name: 'Law firms', href: '/industries/law-firms', line: 'A new-client call at 2 a.m., screened for conflicts, the matter qualified, the consult on the calendar before you open.' },
@@ -43,7 +45,7 @@ const liveIntegrations = [
 ];
 
 const faqs = [
-  { q: 'How much does it cost?', a: `Found — the website, Google listing, reviews and listings layer — starts at $249/month, $499/month for law firms. Remi on the Answer plan starts at $[X]/month. Every floor is quoted up to your call volume, locations and integrations, and there is no per-call billing. <a href="/pricing">See what changes the quote</a>.` },
+  { q: 'How much does it cost?', a: `Found — the website, Google listing, reviews and listings layer — starts at $249/month, $499/month for law firms. Remi on the Answer plan ${answerFloor ? `starts at ${answerFloor.slice(5)}/month` : 'is quoted to your call volume'}. Every floor is quoted up to your call volume, locations and integrations, and there is no per-call billing. <a href="/pricing">See what changes the quote</a>.` },
   { q: 'Do I have to buy the whole team?', a: 'No. Most firms start at one door — Found if nobody can find them, Remi if the phone is the leak — and add the next stage once that one is working. You can also buy Found on its own and keep answering calls yourself.' },
   { q: 'What if a caller needs a human?', a: 'Remi hands off. You set the rules — an emergency, a named client, anyone who asks for a person — and the call warm-transfers to your on-call number. If nobody picks up, you get a "call me now" alert with everything Remi already collected, so the caller never repeats themselves.' },
   { q: 'How long does setup take?', a: 'Five business days for most accounts. Day one is a 20-minute call to map how you answer now; then we write your intake script, connect your number, calendar and CRM, and you test it yourself before it takes a real call.' },
@@ -71,7 +73,7 @@ const faqs = [
         </h1>
         <div class="k-hero__ctas">
           <Button href="/demo" variant="primary" event="demo_click">Get a quote</Button>
-          <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>
+          {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>}
         </div>
         <p class="k-lede">
           A conversion-built website and a managed Google listing so the search three streets
@@ -118,7 +120,7 @@ const faqs = [
           <p class="door__text">
             Remi, your Inbound Agent, picks up day or night, runs your intake script, offers real
             availability and writes the appointment to your calendar and CRM before the caller
-            hangs up. From {answer.from.replace('from ', '')} a month.
+            hangs up.{answer.from && ` From ${answer.from.replace('from ', '')} a month.`}
           </p>
           <Button href="/agents/inbound" variant="ghost">What Remi does</Button>
         </div>
@@ -367,24 +369,22 @@ const faqs = [
     </div>
   </Section>
 
-  <!-- ── PROOF ──────────────────────────────────────────── -->
-  <Section tone="raised" spacing="standard" labelledby="proof-title" id="proof">
-    <div class="k-band">
-      <div class="k-band__head">
-        <Eyebrow n={10}>Proof</Eyebrow>
-        <h2 id="proof-title" class="k-h2">In their words, or not at all.</h2>
-        <p class="k-lede k-measure">
-          There are no invented numbers on this site and no stock-photo customers. The slots below
-          stay visible until a real firm says a real thing on the record.
-        </p>
+  <!-- ── PROOF — only with real testimonials ────────────── -->
+  {has.testimonials && (
+    <Section tone="raised" spacing="standard" labelledby="proof-title" id="proof">
+      <div class="k-band">
+        <div class="k-band__head">
+          <Eyebrow n={10}>Proof</Eyebrow>
+          <h2 id="proof-title" class="k-h2">In their words, or not at all.</h2>
+        </div>
+        <div class="k-quotes" data-reveal>
+          {business.testimonials.map((t) => (
+            <div data-reveal-child><Testimonial {...t} /></div>
+          ))}
+        </div>
       </div>
-      <div class="k-quotes" data-reveal>
-        <div data-reveal-child><Testimonial proves="after-hours calls turning into booked jobs" vertical="Home services" /></div>
-        <div data-reveal-child><Testimonial proves="consults booked from intake calls that used to hit voicemail" vertical="Law firms" /></div>
-        <div data-reveal-child><Testimonial proves="chair time recovered from cancellations and recall" vertical="Dental / med spa" /></div>
-      </div>
-    </div>
-  </Section>
+    </Section>
+  )}
 
   <!-- ── HOW IT STARTS ──────────────────────────────────── -->
   <Section spacing="standard" labelledby="start-title" id="start">
@@ -412,7 +412,7 @@ const faqs = [
       </ol>
       <div class="k-start__ctas">
         <Button href="/demo" variant="primary" event="demo_click">Get a quote</Button>
-        <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>
+        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>}
       </div>
     </div>
   </Section>
@@ -437,11 +437,11 @@ const faqs = [
       <h2 id="close-title" class="k-h2">Call the number and listen to Remi answer.</h2>
       <p class="k-lede">
         It is the same agent your callers would get. Ask it something awkward &mdash; that is the point
-        of the exercise. Found from {found.from.replace('from ', '')}/month; Remi from {answer.from.replace('from ', '')}/month.
+        of the exercise. Found from {found.from.replace('from ', '')}/month{answer.from && `; Remi from ${answer.from.replace('from ', '')}/month`}.
       </p>
       <div class="k-close__ctas">
         <Button href="/demo" variant="primary" event="demo_click">Get a quote</Button>
-        <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>
+        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>}
       </div>
     </div>
   </Section>

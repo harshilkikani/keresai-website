@@ -3,18 +3,10 @@
 // nav, sticky bar, footer, pricing, the product mocks, llms.txt and
 // organizationSchema all read from this file.
 
-/**
- * The line Keres itself answers.
- *
- * PLACEHOLDER — replace all three values when the line is provisioned.
- * `href` must be the E.164 form (tel:+15551234567), `display` the human
- * form ((555) 123-4567), `e164` what schema.org wants.
- */
-export const PHONE = {
-  display: '[YOUR NUMBER]',
-  href: 'tel:[YOUR NUMBER]',
-  e164: '[YOUR NUMBER]',
-};
+import { business, PHONE as CONFIG_PHONE, ADDRESS_LINE, priceFrom } from '../config/business';
+
+/** The line Keres itself answers — from src/config/business.ts, or null until it is set. */
+export const PHONE = CONFIG_PHONE;
 
 export const EMAIL = 'ops@keresai.com';
 export const ORIGIN = 'https://www.keresai.com';
@@ -26,16 +18,15 @@ export const ORIGIN = 'https://www.keresai.com';
  * that Google penalises).
  */
 export const ADDRESS = {
-  city: '[City]',
-  state: '[State]',
-  /** Rendered verbatim in the footer. */
-  line: 'Keres AI · [City, State]',
-  /** Flip to true only when a real street address is published. */
+  city: business.city,
+  state: business.state,
+  /** "City, ST" for the footer, or '' — the footer omits it when empty. */
+  line: ADDRESS_LINE,
   isPublic: false,
 };
 
 /** PLACEHOLDER — the Found + agent bundle discount. */
-export const BUNDLE_DISCOUNT = '[N]';
+export const BUNDLE_DISCOUNT = business.bundleDiscountPercent; // '' → the bundle sentence is omitted
 
 // ─────────────────────────────────────────────────────────────
 // The agents
@@ -199,7 +190,8 @@ export const partnerReferralOnly = [
 // beneath it. Custom is the only column without a number, and that is
 // the one permitted exception.
 //
-// PLACEHOLDER — the Answer, Convert and Grow floors are [X] until a
+// The Answer, Convert and Grow floors come from src/config/business.ts;
+// an empty floor renders as no "from" line, never as a bracket, and the
 // human supplies them. Never invent one. Found's floors are real.
 // ─────────────────────────────────────────────────────────────
 
@@ -232,7 +224,7 @@ export const plans: Plan[] = [
   {
     slug: 'answer',
     name: 'Answer',
-    from: 'from $[X]',
+    from: priceFrom('answer'),
     summary: 'Every call answered in two rings and booked before it hangs up.',
     includes: [
       'Remi — answering, 24/7',
@@ -245,7 +237,7 @@ export const plans: Plan[] = [
   {
     slug: 'convert',
     name: 'Convert',
-    from: 'from $[X]',
+    from: priceFrom('convert'),
     flag: 'Most popular',
     summary: 'Answered, then actually kept. The stages where bookings quietly disappear.',
     includes: [
@@ -259,7 +251,7 @@ export const plans: Plan[] = [
   {
     slug: 'grow',
     name: 'Grow',
-    from: 'from $[X]',
+    from: priceFrom('grow'),
     summary: 'Work the database you already paid for, and find out what is actually producing.',
     includes: [
       'Everything in Convert',

@@ -1,4 +1,5 @@
 ---
+import { business, has, priceFrom } from '../config/business';
 import Layout from '../layouts/Layout.astro';
 import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
@@ -47,7 +48,7 @@ const faqs = [
 ---
 <Layout
   title="Pricing — Plans From $249/Month, Quoted to You | Keres AI"
-  description="Keres plans start at $249/month for Found, $499 for law firms, and from $[X]/month for Remi answering your phone in two rings. Month-to-month, live in five business days."
+  description={`Keres plans start at $249/month for Found, $499 for law firms, ${priceFrom('answer') ? `and ${priceFrom('answer')}/month for Remi answering your phone in two rings` : 'with Remi quoted to your call volume'}. Month-to-month, live in five business days.`}
   path={path}
 >
   <Schema slot="head" graph={[softwareApplicationSchema, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
@@ -65,7 +66,7 @@ const faqs = [
           moves the number. Then we scope it on a 30-minute call and you get one flat monthly rate.
         </p>
         <div class="price-hero-ctas">
-          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
           <Button href="/demo" variant="ghost" event="demo_click">Get your quote</Button>
         </div>
       </div>
@@ -102,7 +103,7 @@ const faqs = [
         <li class:list={['plan-card', plan.flag && 'plan-card--featured']}>
           {plan.flag && <span class="plan-card__flag">{plan.flag}</span>}
           <h2 class="plan-card__name">{plan.name}</h2>
-          <p class="plan-card__price" data-figure>{plan.from}</p>
+          {plan.from && <p class="plan-card__price" data-figure>{plan.from}</p>}
           <p class="plan-card__quoted">
             {plan.slug === 'custom' ? 'Scoped on a call' : 'Quoted to your volume'}
           </p>
@@ -121,8 +122,8 @@ const faqs = [
     <p class="plan-row__foot">
       Prices shown are starting points, not caps or averages. Custom is the only plan
       without a published number &mdash; multi-location and high-volume operations are scoped
-      individually. Bundle Found with any agent plan and save {BUNDLE_DISCOUNT}%.
-      Prefer to talk it through? <a href={PHONE.href} data-event="tel_click">Call {PHONE.display}</a>.
+      individually. {BUNDLE_DISCOUNT && <>Bundle Found with any agent plan and save {BUNDLE_DISCOUNT}%.</>}
+      {PHONE && <>Prefer to talk it through? <a href={PHONE.href} data-event="tel_click">Call {PHONE.display}</a>.</>}
     </p>
   </Section>
 
@@ -161,7 +162,7 @@ const faqs = [
         </p>
       </div>
       <div class="k-col-7">
-        <Testimonial proves="the monthly cost paying for itself in recovered jobs" />
+        {business.testimonials.map((t) => <Testimonial {...t} />)}
       </div>
     </div>
   </Section>

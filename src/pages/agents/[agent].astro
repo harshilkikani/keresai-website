@@ -1,4 +1,5 @@
 ---
+import { business, has } from '../../config/business';
 import Layout from '../../layouts/Layout.astro';
 import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
@@ -56,7 +57,7 @@ const others = agents.filter((a) => a.slug !== page.slug);
         <h1 id="agent-title" class="k-display">{page.h1}</h1>
         <p class="k-lede">{page.sub}</p>
         <div class="k-hero__ctas">
-          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
           <Button href="/demo" variant="ghost" event="demo_click">Book a demo</Button>
         </div>
         <ul class="k-hero__facts" aria-label="At a glance">
@@ -191,21 +192,23 @@ const others = agents.filter((a) => a.slug !== page.slug);
   </Section>
 
   <!-- ── PROOF ──────────────────────────────────────────── -->
-  <Section tone="raised" spacing="standard" labelledby="proof-title">
-    <div class="k-split k-split--top">
-      <div class="k-split__aside">
-        <Eyebrow>Proof</Eyebrow>
-        <h2 id="proof-title" class="k-h2">In their words.</h2>
-        <p class="k-lede">
-          No invented numbers. This slot stays visible until a real customer says a real thing
-          on the record.
-        </p>
+  {has.testimonials && (
+    <Section tone="raised" spacing="standard" labelledby="proof-title">
+      <div class="k-split k-split--top">
+        <div class="k-split__aside">
+          <Eyebrow>Proof</Eyebrow>
+          <h2 id="proof-title" class="k-h2">In their words.</h2>
+          <p class="k-lede">
+            No invented numbers. This slot stays visible until a real customer says a real thing
+            on the record.
+          </p>
+        </div>
+        <div class="k-split__mock">
+          {business.testimonials.map((t) => <Testimonial {...t} />)}
+        </div>
       </div>
-      <div class="k-split__mock">
-        <Testimonial proves={page.testimonialProves} />
-      </div>
-    </div>
-  </Section>
+    </Section>
+  )}
 
   <!-- ── PLAN + THE OTHER AGENTS ────────────────────────── -->
   <Section tone="inverse" spacing="standard" labelledby="plan-title">
@@ -219,7 +222,7 @@ const others = agents.filter((a) => a.slug !== page.slug);
         <a href="/pricing">what changes the quote</a>.
       </p>
       <div class="k-close__ctas">
-        <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+        {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
         <Button href="/pricing" variant="ghost">See pricing</Button>
       </div>
     </div>
