@@ -2371,3 +2371,8 @@ footer[role="contentinfo"] .footer-grid { padding-block: clamp(56px, 7vw, 96px) 
 .footer--go { padding-bottom: var(--space-6) !important; }
 .footer--go .footer-address:first-child { padding-top: 0; border-top: 0; font-family: var(--sans); font-size: var(--text-0); color: var(--text-on-dark); }
 .footer--go .footer-address + .footer-address { margin-top: var(--space-4); }
+
+/* ─── Sticky bar hierarchy: Get a quote is the filled one ─────── */
+.sticky-bar__demo--primary { background: var(--accent) !important; color: var(--accent-ink) !important; border-color: var(--accent) !important; }
+.sticky-bar__call--secondary { background: var(--surface) !important; color: var(--ink-0) !important; border: 1px solid var(--line-strong) !important; }
+.sticky-bar--single .sticky-bar__demo--primary { flex: 1 1 100%; }
