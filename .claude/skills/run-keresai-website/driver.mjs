@@ -410,7 +410,8 @@ const commands = {
         const el = page.locator(`#${id}`).first();
         if (!(await el.count())) { console.log(`MISSING #${id} @${vp.width}`); continue; }
         await el.scrollIntoViewIfNeeded();
-        await page.waitForTimeout(700);
+        // Reveal staggers run up to ~900ms (4 children × 90ms + 500ms); wait them out.
+        await page.waitForTimeout(1400);
         const h = Math.round((await el.boundingBox())?.height || 0);
         const file = `${OUT}/${label}-${slugOf(p)}-${id}-${vp.name}${SUF}.png`;
         await el.screenshot({ path: file });
