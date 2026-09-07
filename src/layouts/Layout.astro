@@ -85,7 +85,9 @@ const BING_VERIFICATION = '';
   default-src stays 'none'. Only the directives the ad stack actually
   needs are opened up:
     script-src  — gtag.js (GA4 + Google Ads) and fbevents.js
-    connect-src — the beacon endpoints those two POST to
+    connect-src — the beacon endpoints those two POST to, including the
+                  Google Ads conversion (ccm/rmkt) collectors
+    script-src  — plus gstatic.com for the website-call-conversion loader
     frame-src   — Google Ads conversion frames and the Meta pixel iframe
   img-src is already 'self' data: https:, which covers every tracking
   pixel, so it needs no change.
@@ -93,7 +95,7 @@ const BING_VERIFICATION = '';
   and Meta bootstraps live in /assets/tracking.js so the policy stays
   tight. Never inline a tag snippet — it will be blocked silently.
 -->
-<meta http-equiv="Content-Security-Policy" content={`default-src 'none'; script-src 'self' ${motionHash} https://gc.zgo.at https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://calendly.com https://keresai.goatcounter.com https://dns.google https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://connect.facebook.net https://graph.facebook.com; frame-src https://calendly.com https://td.doubleclick.net https://www.googletagmanager.com https://www.facebook.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';`} />
+<meta http-equiv="Content-Security-Policy" content={`default-src 'none'; script-src 'self' ${motionHash} https://gc.zgo.at https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net https://www.gstatic.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://calendly.com https://keresai.goatcounter.com https://dns.google https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://connect.facebook.net https://graph.facebook.com https://www.google.com https://ad.doubleclick.net https://pagead2.googlesyndication.com https://www.facebook.com; frame-src https://calendly.com https://td.doubleclick.net https://www.google.com https://www.googletagmanager.com https://www.facebook.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';`} />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
