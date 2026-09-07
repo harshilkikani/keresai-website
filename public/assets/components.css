@@ -29,10 +29,8 @@
   --ink-2: #A9A099;
   --ink-1: #D8D2CB;
   --ink-0: #F5F1EC;
-  --accent:       #F2711C;
-  --accent-hover: #FF8534;
-  --accent-ink:   #17110B;
-  --accent-wash:  rgba(242, 113, 28, 0.12);
+  /* No accent override: the inverse band renders the same rust as the
+     rest of the page. Its ink is white, so the fill still passes AA. */
   --good: #34D399;
   --warn: #FBBF24;
   color: var(--ink-2);
@@ -118,7 +116,7 @@
 .k-eyebrow__rule {
   inline-size: 28px;
   block-size: 1px;
-  background: var(--accent-bright);
+  background: var(--accent);
   flex: none;
 }
 
@@ -176,7 +174,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 summary:focus-visible {
-  outline: 2px solid var(--accent-bright);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
   transition: none;
@@ -211,7 +209,7 @@ a.k-stat__source { text-decoration: underline; text-underline-offset: 2px; }
 
 /* ─── Testimonial ─────────────────────────────────────────── */
 .k-quote {
-  border-left: 2px solid var(--accent-bright);
+  border-left: 2px solid var(--accent);
   padding-left: var(--space-5);
 }
 .k-quote__text {
@@ -440,7 +438,7 @@ html { overflow-x: clip; }
 }
 .plan-card__list li::before {
   content: ''; position: absolute; left: 0; top: 0.55em;
-  inline-size: 10px; block-size: 1px; background: var(--accent-bright);
+  inline-size: 10px; block-size: 1px; background: var(--accent);
 }
 .plan-card .btn-k { margin-top: auto; }
 .plan-row__foot { margin-top: var(--space-6); font-size: var(--text--1); color: var(--ink-2); max-width: var(--measure); }
@@ -1037,7 +1035,7 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
   color: var(--ink-1);
   max-width: 58ch;
   padding-left: var(--space-4);
-  border-left: 2px solid var(--accent-bright);
+  border-left: 2px solid var(--accent);
 }
 
 /* ─── Hero: a fact that is still a placeholder ────────────── */
@@ -1116,7 +1114,7 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
   position: absolute;
   left: 0; top: 0.62em;
   inline-size: 10px; block-size: 2px;
-  background: var(--accent-bright);
+  background: var(--accent);
 }
 
 @media (max-width: 860px) {
@@ -1313,7 +1311,7 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
   color: var(--text-on-dark-muted);
 }
 .footer-address a { color: var(--text-on-dark); text-decoration: none; }
-.footer-address a:hover { color: var(--accent-bright); }
+.footer-address a:hover { color: var(--accent); }
 
 /* ─── What changes the quote ──────────────────────────────── */
 .k-factors { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
@@ -1564,7 +1562,7 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
 }
 .lp-field input:focus-visible,
 .lp-field select:focus-visible {
-  outline: 2px solid var(--accent-bright);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 .lp-form__fine { margin: 0; font-size: var(--text--1); color: var(--ink-3); text-align: center; }
@@ -1594,8 +1592,6 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
   --ground: #0D0B09;
   --ink-0: #F5F1EC;
   --ink-2: #A9A099;
-  --accent: #F2711C;
-  --accent-hover: #FF8534;
   --accent-ink: #17110B;
   color: var(--ink-2);
 }
@@ -1903,7 +1899,7 @@ html[data-motion] [data-hero].is-live .k-type::after {
   top: 0.12em;
   inline-size: 2px;
   block-size: 1em;
-  background: var(--accent-bright);
+  background: var(--accent);
   opacity: 0;
   animation: kCaret 0.5s steps(2, end) 1 forwards;
   animation-delay: calc(var(--i) * 120ms + 40ms);
@@ -1927,7 +1923,7 @@ html[data-motion] [data-hero].is-live [data-owner]   { animation: kPop 0.5s cubi
   gap: var(--space-4);
   padding: var(--space-3) var(--space-4);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--accent-bright);
+  border-left: 3px solid var(--accent);
   border-radius: var(--radius-lg);
   background: var(--ground);
 }
@@ -2155,7 +2151,7 @@ html[data-motion] .pipe__stage {
 html[data-motion] .pipe__stage.is-active { opacity: 1; transform: none; pointer-events: auto; }
 .pipe__name { margin: 0; font-family: var(--serif); font-size: var(--text-3); font-weight: 600; letter-spacing: -0.018em; line-height: 1.08; color: var(--ink-0); }
 .pipe__leak { margin: var(--space-4) 0 0; font-size: var(--text-1); line-height: 1.5; color: var(--ink-1); max-width: 52ch; text-wrap: pretty; }
-.pipe__fix { margin: var(--space-4) 0 0; padding-left: var(--space-4); border-left: 2px solid var(--accent-bright); font-size: var(--text-0); line-height: 1.6; color: var(--ink-2); max-width: 54ch; }
+.pipe__fix { margin: var(--space-4) 0 0; padding-left: var(--space-4); border-left: 2px solid var(--accent); font-size: var(--text-0); line-height: 1.6; color: var(--ink-2); max-width: 54ch; }
 .pipe__by { display: inline-flex; align-items: center; gap: var(--space-2); margin-top: var(--space-5); font-size: var(--text--1); font-weight: 500; color: var(--accent); text-decoration: none; }
 .pipe__by svg { inline-size: 16px; block-size: 16px; transition: transform var(--t-fast); }
 .pipe__by:hover svg { transform: translateX(3px); }
@@ -2328,7 +2324,7 @@ html[data-motion] .is-in [data-pop] { animation: kPop 0.5s cubic-bezier(0.34, 1.
   position: absolute;
   inset: -3px;
   border-radius: inherit;
-  border: 2px solid var(--accent-bright);
+  border: 2px solid var(--accent);
   opacity: 0;
   pointer-events: none;
   animation: kRing 6s ease-out infinite;

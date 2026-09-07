@@ -31,15 +31,14 @@
   --ink-1:   #3A332D;
   --ink-0:   #14100D;
 
-  /* ─── Accent — CTAs only ────────────────────────────────
-     Two roles, and the split is deliberate:
-       --accent        carries text. 5.18:1 on white → WCAG AA.
-       --accent-bright is the brand orange at full chroma. It is
-                       3.5:1 on white, so it must NEVER carry text.
-                       Focus rings, rules, and small marks only. */
+  /* ─── Accent — one rust, everywhere ────────────────────
+     A single token. Rules, focus rings, borders, fills and accent
+     text all use --accent; nothing on the site renders a second
+     orange. (The dark palette below gives this same token its
+     dark-ground value — rust at 3.8:1 on #0D0B09 fails AA as text.)
+     --accent-hover is derived from it and only appears on hover. */
   --accent:        #C2410C;
-  --accent-hover:  #9A3412;
-  --accent-bright: #E85D04;
+  --accent-hover:  color-mix(in srgb, #C2410C 82%, #14100D);
   --accent-ink:    #FFFFFF;
   --accent-wash:   rgba(194, 65, 12, 0.07);
 
@@ -124,7 +123,7 @@
      Mapping them here re-skins ~1,900 lines of existing CSS
      without touching it. Prefer the names above in new code. */
   --orange: var(--accent);
-  --orange-light: var(--accent-bright);
+  --orange-light: var(--accent);
   --orange-dark: var(--accent-hover);
   --bg: var(--ground);
   --bg-alt: var(--raised);
@@ -160,7 +159,7 @@
      brand, and contrast runs the other way — the bright orange
      clears AA against #0D0B09, so it becomes the fill here. */
   --accent:       #F2711C;
-  --accent-hover: #FF8534;
+  --accent-hover: color-mix(in srgb, #F2711C 85%, #FFFFFF);
   --accent-ink:   #17110B;
   --accent-wash:  rgba(242, 113, 28, 0.12);
 
@@ -194,7 +193,7 @@
     --ink-0:   #F5F1EC;
 
     --accent:       #F2711C;
-    --accent-hover: #FF8534;
+    --accent-hover: color-mix(in srgb, #F2711C 85%, #FFFFFF);
     --accent-ink:   #17110B;
     --accent-wash:  rgba(242, 113, 28, 0.12);
 

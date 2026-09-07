@@ -1015,9 +1015,7 @@ footer[role="contentinfo"] {
   --line: rgba(245, 241, 236, 0.10);
   --border: rgba(245, 241, 236, 0.10);
   --border-dark: rgba(245, 241, 236, 0.10);
-  --accent: #F2711C;
-  --accent-bright: #F2711C;
-  --orange: #F2711C;
+  /* accent: inherited — one rust token site-wide */
 }
 .footer-grid {
   max-width: var(--container); margin: 0 auto;
