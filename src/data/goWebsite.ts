@@ -40,6 +40,14 @@ export const goWebsitePages: GoWebsitePage[] = [
     vertical: 'law firms',
     industry: 'law',
   },
+  {
+    slug: 'dental',
+    path: '/go/website/dental',
+    title: 'Dental Practice Website That Books the Chair | Keres AI',
+    description: 'A website built for dental practices: click-to-call, booking wired in, your Google listing managed every week. $249/month, no build fee, live in five days.',
+    vertical: 'dental practices',
+    industry: 'dental',
+  },
 ];
 
 export const goWebsiteBySlug = (slug: string) => goWebsitePages.find((g) => g.slug === slug);
