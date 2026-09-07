@@ -103,47 +103,64 @@
     });
   }
 
-  /* ── 3. Sticky pipeline ────────────────────────────────── */
+  /* ── 3. Pipeline: scroll progress → active stage ───────── */
   function pipeline(scope) {
-    var svg = scope.querySelector('[data-pipeline]');
-    if (!svg) return;
-    var copies = scope.querySelectorAll('[data-stage-copy]');
-    var line = svg.querySelector('[data-draw]');
-    if (!copies.length || !line) return;
+    var track = scope.querySelector('[data-pipe]');
+    if (!track) return;
+    var panel = track.querySelector('.pipe__panel');
+    var stages = track.querySelectorAll('[data-stage-copy]');
+    var dots = track.querySelectorAll('[data-dot]');
+    var svg = track.querySelector('[data-pipeline]');
+    var line = svg && svg.querySelector('[data-draw]');
+    var N = stages.length;
+    if (!panel || N < 2) return;
 
-    var total = parseFloat(line.getAttribute('y2')) - parseFloat(line.getAttribute('y1'));
-    line.style.strokeDasharray = total;
-    line.style.strokeDashoffset = total;
-    svg.setAttribute('data-active', '-1');
+    var total = line ? parseFloat(line.getAttribute('y2')) - parseFloat(line.getAttribute('y1')) : 0;
+    if (line) { line.style.strokeDasharray = total; line.style.strokeDashoffset = total; }
+    var navH = parseFloat(getComputedStyle(root).getPropertyValue('--nav-h')) || 68;
+    var step = 0, top = 0, current = -1;
 
-    var stageIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var n = parseInt(e.target.getAttribute('data-stage-copy'), 10);
-        var cur = parseInt(svg.getAttribute('data-active'), 10);
-        if (n > cur) svg.setAttribute('data-active', String(n));
-        e.target.classList.add('is-active');
-      });
-    }, { rootMargin: '-40% 0px -45% 0px', threshold: 0 });
-    Array.prototype.forEach.call(copies, function (c) { stageIO.observe(c); });
-
-    // Connector draws with scroll progress through the copy column.
-    var col = copies[0].parentElement;
-    var ticking = false;
-    function draw() {
-      ticking = false;
-      var r = col.getBoundingClientRect();
-      var vh = window.innerHeight;
-      var progress = (vh * 0.5 - r.top) / (r.height - vh * 0.2);
-      progress = Math.max(0, Math.min(1, progress));
-      line.style.strokeDashoffset = String(total * (1 - progress));
+    function layout() {
+      // ~22vh of scrolling per stage (two or three wheel notches), clamped;
+      // the track is the pinned panel plus six of those steps, which keeps
+      // the section under 2,400px at 1440x900.
+      step = Math.max(180, Math.min(260, Math.round(window.innerHeight * 0.22)));
+      top = navH + (window.innerWidth < 900 ? 12 : 24);
+      track.style.setProperty('--track', (panel.offsetHeight + (N - 1) * step) + 'px');
     }
-    window.addEventListener('scroll', function () {
+    function update() {
+      var r = track.getBoundingClientRect();
+      var progress = (top - r.top) / ((N - 1) * step);
+      progress = Math.max(0, Math.min(1, progress));
+      if (line) line.style.strokeDashoffset = String(total * (1 - progress));
+      var active = Math.round(progress * (N - 1));
+      if (active === current) return;
+      current = active;
+      if (svg) svg.setAttribute('data-active', String(active));
+      Array.prototype.forEach.call(stages, function (s, i) { s.classList.toggle('is-active', i === active); });
+      Array.prototype.forEach.call(dots, function (d, i) {
+        d.classList.toggle('is-on', i <= active);
+        d.classList.toggle('is-current', i === active);
+      });
+    }
+    // One set of window listeners, replaced on each client-side navigation
+    // so a previous page's pipeline never keeps a dead track alive.
+    if (window.__kPipe) {
+      window.removeEventListener('scroll', window.__kPipe.scroll);
+      window.removeEventListener('resize', window.__kPipe.resize);
+    }
+    var ticking = false;
+    var onScroll = function () {
       if (ticking) return;
       ticking = true;
-      requestAnimationFrame(draw);
-    }, { passive: true });
-    draw();
+      requestAnimationFrame(function () { ticking = false; update(); });
+    };
+    var onResize = function () { layout(); update(); };
+    window.__kPipe = { scroll: onScroll, resize: onResize };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
+    layout();
+    update();
   }
 
   /* ── 2. Tilt toward the cursor, spring back on leave ───── */

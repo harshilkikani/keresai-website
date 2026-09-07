@@ -2120,24 +2120,37 @@ html[data-motion] [data-hero].is-live [data-owner]   { animation: kPop 0.5s cubi
 .listing__btn { font-size: var(--text--1); font-weight: 500; color: var(--ink-1); border: 1px solid var(--line-strong); border-radius: 100px; padding: 6px 14px; }
 .listing__btn--primary { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
 
-/* ─── Sticky pipeline ─────────────────────────────────────── */
-.pipe {
+/* ─── Pipeline: one pinned panel, stages swap in place ───────
+   Resting / no-JS / reduced-motion state: the seven stages stack as a
+   plain list beside the rail. With motion, the panel pins under the nav,
+   all seven stages occupy one grid cell, and motion.js turns scroll
+   progress through the track into the active stage, the lit nodes and
+   the drawn connector. The track height is the panel plus six steps of
+   ~30vh, so the whole section stays under 2,400px at 1440. */
+.pipe { margin-top: var(--space-8); }
+.pipe__panel {
   display: grid;
   grid-template-columns: 300px minmax(0, 1fr);
   gap: clamp(var(--space-7), 6vw, var(--space-10));
   align-items: start;
-  margin-top: var(--space-8);
 }
-.pipe__stick { position: sticky; top: calc(var(--nav-h) + 48px); }
 .pipe__copy { list-style: none; padding: 0; margin: 0; }
-.pipe__stage {
-  min-height: 46vh;
-  padding-block: var(--space-7);
-  border-top: 1px solid var(--line);
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+.pipe__stage { padding-block: var(--space-6); border-top: 1px solid var(--line); }
+.pipe__dots { display: none; }
+
+html[data-motion] .pipe { height: var(--track, auto); }
+html[data-motion] .pipe__panel { position: sticky; top: calc(var(--nav-h) + 24px); }
+html[data-motion] .pipe__copy { display: grid; }
+html[data-motion] .pipe__stage {
+  grid-area: 1 / 1;
+  border-top: 0;
+  padding-block: 0;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1), transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
-html[data-motion] .pipe__stage { opacity: 0.38; transform: translateY(6px); }
-html[data-motion] .pipe__stage.is-active { opacity: 1; transform: none; }
+html[data-motion] .pipe__stage.is-active { opacity: 1; transform: none; pointer-events: auto; }
 .pipe__name { margin: 0; font-family: var(--serif); font-size: var(--text-3); font-weight: 600; letter-spacing: -0.018em; line-height: 1.08; color: var(--ink-0); }
 .pipe__leak { margin: var(--space-4) 0 0; font-size: var(--text-1); line-height: 1.5; color: var(--ink-1); max-width: 52ch; text-wrap: pretty; }
 .pipe__fix { margin: var(--space-4) 0 0; padding-left: var(--space-4); border-left: 2px solid var(--accent-bright); font-size: var(--text-0); line-height: 1.6; color: var(--ink-2); max-width: 54ch; }
@@ -2169,11 +2182,25 @@ html[data-motion] .pipe__stage.is-active { opacity: 1; transform: none; }
 .pd[data-active="6"] .pd__node:nth-child(-n+9)  .pd__n { fill: var(--accent-ink); }
 
 @media (max-width: 900px) {
-  .pipe { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
-  .pipe__stick { position: static; }
-  .pd { max-width: 300px; }
-  .pipe__stage { min-height: 0; }
-  html[data-motion] .pipe__stage { opacity: 1; transform: none; }
+  .pipe__panel { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+  html[data-motion] .pipe__panel { top: calc(var(--nav-h) + 12px); }
+  /* The vertical rail does not fit beside copy on a phone: a row of numbered
+     pills stands in, the current one carrying its stage name. */
+  .pipe__rail .pd { display: none; }
+  html[data-motion] .pipe__dots { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+  .pipe__dot {
+    display: inline-flex; align-items: center; gap: 6px;
+    min-height: 32px; padding: 4px 10px;
+    border: 1px solid var(--line); border-radius: 100px;
+    font: 500 0.68rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-3);
+    transition: color var(--t-fast), border-color var(--t-fast), background-color var(--t-fast);
+  }
+  .pipe__dot.is-on { border-color: var(--accent); color: var(--accent); }
+  .pipe__dot.is-current { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .pipe__dot-name { display: none; }
+  .pipe__dot.is-current .pipe__dot-name { display: inline; }
+  .pipe__stage .k-stagenum--lg { display: none; }
 }
 
 /* ─── The team: alternating 7/5 rows with mini-mocks ──────── */

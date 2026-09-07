@@ -137,24 +137,34 @@ const faqs = [
         seven stages, and every one of them is a job nobody in a five-person firm has time to do.
       </p>
     </div>
-    <div class="pipe">
-      <div class="pipe__stick">
-        <PipelineDiagram />
+    <div class="pipe" data-pipe>
+      <div class="pipe__panel">
+        <div class="pipe__rail">
+          <PipelineDiagram />
+          <ol class="pipe__dots" aria-hidden="true">
+            {stages.map((s) => (
+              <li class="pipe__dot" data-dot={s.n}>
+                <span class="pipe__dot-n">{String(s.n).padStart(2, '0')}</span>
+                <span class="pipe__dot-name">{s.name}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <ol class="pipe__copy">
+          {stages.map((s) => (
+            <li class="pipe__stage" data-stage-copy={s.n}>
+              <span class="k-stagenum k-stagenum--lg" aria-hidden="true">{String(s.n).padStart(2, '0')}</span>
+              <h3 class="pipe__name">{s.name}</h3>
+              <p class="pipe__leak">{s.leak}</p>
+              <p class="pipe__fix">{s.fix}</p>
+              <a class="pipe__by" href={s.href}>
+                Handled by {s.by}
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </li>
+          ))}
+        </ol>
       </div>
-      <ol class="pipe__copy">
-        {stages.map((s) => (
-          <li class="pipe__stage" data-stage-copy={s.n}>
-            <span class="k-stagenum k-stagenum--lg" aria-hidden="true">{String(s.n).padStart(2, '0')}</span>
-            <h3 class="pipe__name">{s.name}</h3>
-            <p class="pipe__leak">{s.leak}</p>
-            <p class="pipe__fix">{s.fix}</p>
-            <a class="pipe__by" href={s.href}>
-              Handled by {s.by}
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </li>
-        ))}
-      </ol>
     </div>
   </Section>
 
