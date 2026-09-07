@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Section from '../components/Section.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { organizationSchema } from '../data/schema';
+import { PHONE } from '../data/site';
+---
+<Layout
+  title="Get a Quote in 20 Minutes | Keres AI"
+  description="Five questions, then a 20-minute call with your quote already worked out. Month-to-month, live in five business days."
+  path="/quote"
+>
+  <Schema slot="head" graph={[organizationSchema]} />
+  <Section spacing="standard" labelledby="quote-title" id="quote-hero" class="k-hero k-hero--v2 k-hero--go">
+    <div class="k-hero__grid">
+      <div class="k-hero__copy">
+        <Eyebrow>Get a quote</Eyebrow>
+        <h1 id="quote-title" class="k-display">Five questions. Then a 20-minute call with the number ready.</h1>
+        <p class="k-lede">
+          Tell us who you are and what happens to your calls today. We come to the call with a
+          quote worked out for your volume{PHONE && <>, or you can skip the form and call {PHONE.display}</>}.
+        </p>
+      </div>
+    </div>
+  </Section>
+  <Section spacing="flush" labelledby="quote-title" id="quote-form">
+    <QuoteForm variant="page" id="quote" />
+  </Section>
+  <script slot="scripts" src="/assets/quote.js?v=1" defer is:inline></script>
+</Layout>

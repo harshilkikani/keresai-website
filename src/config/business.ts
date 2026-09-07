@@ -26,6 +26,12 @@ export const business = {
   city: '',
   state: '',
   email: 'ops@keresai.com',
+  // Where the quote form posts. Formspree delivers to email and can forward
+  // to a CRM webhook from its dashboard; swap in your own endpoint (same
+  // multipart POST, 2xx on success) when you have one.
+  formEndpoint: 'https://formspree.io/f/mojywlnn',
+  // The booking embed shown after a successful quote submit.
+  bookingUrl: 'https://calendly.com/ops-keresai/30min',
   // Optional. Sentences that need these are omitted when they are empty.
   bundleDiscountPercent: '',
   partnerReferralTerms: '',

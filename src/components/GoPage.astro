@@ -11,12 +11,14 @@ import Button from './Button.astro';
 import SiteOnPhone from './SiteOnPhone.astro';
 import GoogleListing from './GoogleListing.astro';
 import AgentMock from './AgentMock.astro';
+import QuoteForm from './QuoteForm.astro';
 import { PHONE } from '../data/site';
 import { goSteps, type GoPage } from '../data/go';
 
 export interface Props { page: GoPage }
 const { page } = Astro.props;
-const quoteHref = '/demo';
+// Every Get a quote on a /go page lands on the form embedded below.
+const quoteHref = '#quote';
 ---
 <Section spacing="standard" labelledby="go-title" id="hero" class="k-hero k-hero--v2 k-hero--go">
   <div class="k-hero__light" aria-hidden="true"></div>
@@ -125,6 +127,12 @@ const quoteHref = '/demo';
       ))}
     </ol>
   </div>
+</Section>
+
+<Section tone="raised" spacing="standard" labelledby="quote-title" id="quote-band">
+  <Eyebrow n={5}>Get a quote</Eyebrow>
+  <h2 id="quote-title" class="k-h2">Five questions. Then a 20-minute call with the number ready.</h2>
+  <QuoteForm variant="embed" id="quote" />
 </Section>
 
 <Section tone="inverse" spacing="standard" labelledby="close-title" id="close">

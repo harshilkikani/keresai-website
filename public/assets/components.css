@@ -2376,3 +2376,39 @@ footer[role="contentinfo"] .footer-grid { padding-block: clamp(56px, 7vw, 96px) 
 .sticky-bar__demo--primary { background: var(--accent) !important; color: var(--accent-ink) !important; border-color: var(--accent) !important; }
 .sticky-bar__call--secondary { background: var(--surface) !important; color: var(--ink-0) !important; border: 1px solid var(--line-strong) !important; }
 .sticky-bar--single .sticky-bar__demo--primary { flex: 1 1 100%; }
+
+/* ─── Quote form ─────────────────────────────────────────────
+   Two fieldsets, one visible at a time. Same inputs, buttons and
+   type as the rest of the site; the confirmation renders in place. */
+.qf { max-width: 560px; }
+.qf--page { margin-inline: auto; padding-block: 0 var(--section); }
+.qf--embed { margin-top: var(--space-7); }
+.qf__hp { position: absolute; left: -5000px; }
+.qf__steps { list-style: none; padding: 0; margin: 0 0 var(--space-5); display: flex; gap: var(--space-4); }
+.qf__stepdot { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.qf__stepdot span { display: inline-grid; place-items: center; inline-size: 22px; block-size: 22px; border-radius: 50%; border: 1px solid var(--line-strong); }
+.qf__stepdot.is-current { color: var(--ink-0); }
+.qf__stepdot.is-current span, .qf__stepdot.is-done span { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.qf__step { border: 0; padding: 0; margin: 0; min-width: 0; }
+.qf__legend { font-family: var(--serif); font-size: var(--text-2); font-weight: 600; letter-spacing: -0.014em; color: var(--ink-0); margin-bottom: var(--space-5); }
+.qf__field { margin-bottom: var(--space-4); }
+.qf__label { display: block; font-size: var(--text--1); font-weight: 500; color: var(--ink-1); margin-bottom: var(--space-2); }
+.qf__input {
+  width: 100%; min-height: var(--tap); padding: 10px 14px;
+  font: inherit; font-size: var(--text-0); color: var(--ink-0);
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+.qf__input:focus-visible { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); }
+.qf__input[aria-invalid="true"] { border-color: var(--accent); }
+select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B625A' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; padding-right: 40px; }
+.qf__error { margin: var(--space-1) 0 0; min-height: 1.2em; font-size: var(--text--1); color: var(--accent); }
+.qf__error--form { margin-top: var(--space-3); }
+.qf__actions { display: flex; gap: var(--space-4); align-items: center; justify-content: space-between; margin-top: var(--space-2); }
+.qf__done-title { font-family: var(--serif); font-size: var(--text-3); font-weight: 600; letter-spacing: -0.016em; color: var(--ink-0); margin: 0; }
+.qf__done-text { margin: var(--space-3) 0 var(--space-5); font-size: var(--text-0); line-height: 1.6; color: var(--ink-2); }
+.qf__booking { border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface); }
+.qf__done-call { margin: var(--space-4) 0 0; font-size: var(--text-0); color: var(--ink-1); }
+.qf__done-call a { color: var(--accent); }
+/* Embedded in /go: the form sits in a raised band with the same head rhythm. */
+.k-section .qf--embed { margin-top: var(--space-6); }

@@ -1,0 +1,99 @@
+---
+/**
+ * Two-step quote form. Step 1: business, mobile, industry. Step 2: calls a
+ * month, what happens to calls now. Inline validation, honeypot + timestamp,
+ * no CAPTCHA. On success the confirmation renders in place: the booking
+ * embed loads only then, plus "Or call … now" when a line is configured.
+ *
+ * Behaviour lives in /assets/quote.js (external, so the CSP stays hashed
+ * inline scripts only). The endpoint comes from src/config/business.ts.
+ */
+import { PHONE } from '../data/site';
+import { business } from '../config/business';
+
+export interface Props {
+  /** Where the form sits: 'page' on /quote, 'embed' inside /go. */
+  variant?: 'page' | 'embed';
+  id?: string;
+}
+const { variant = 'page', id = 'quote' } = Astro.props;
+const industries = [
+  ['home-services', 'Home services (HVAC, plumbing, roofing…)'],
+  ['law', 'Law firm'],
+  ['dental', 'Dental or med spa'],
+  ['real-estate', 'Real estate'],
+  ['other', 'Something else'],
+];
+const volumes = [['under-50', 'Under 50'], ['50-150', '50 – 150'], ['150-400', '150 – 400'], ['400-plus', 'More than 400'], ['not-sure', 'Not sure']];
+const handling = [['someone-answers', 'Someone on the team answers'], ['voicemail', 'They go to voicemail'], ['answering-service', 'An answering service takes them'], ['rings-out', 'They ring out']];
+---
+<div class:list={['qf', `qf--${variant}`]} id={id} data-quote-form data-endpoint={business.formEndpoint} data-booking={business.bookingUrl}>
+  <form class="qf__form" novalidate data-qf-form>
+    <input type="hidden" name="_subject" value="Quote request from keresai.com" />
+    <input type="hidden" name="_ts" value="" data-qf-ts />
+    {/* Honeypot: real browsers never fill this; quote.js also rejects it. */}
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="qf__hp" />
+
+    <ol class="qf__steps" aria-label="Progress">
+      <li class="qf__stepdot is-current" data-qf-dot="1"><span data-figure>1</span> About you</li>
+      <li class="qf__stepdot" data-qf-dot="2"><span data-figure>2</span> Your calls</li>
+    </ol>
+
+    <fieldset class="qf__step" data-qf-step="1">
+      <legend class="qf__legend">Where should the quote go?</legend>
+      <div class="qf__field">
+        <label class="qf__label" for={`${id}-business`}>Business name</label>
+        <input class="qf__input" id={`${id}-business`} name="business" type="text" required autocomplete="organization" />
+        <p class="qf__error" data-qf-error="business"></p>
+      </div>
+      <div class="qf__field">
+        <label class="qf__label" for={`${id}-phone`}>Mobile number</label>
+        <input class="qf__input" id={`${id}-phone`} name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="(555) 123-4567" />
+        <p class="qf__error" data-qf-error="phone"></p>
+      </div>
+      <div class="qf__field">
+        <label class="qf__label" for={`${id}-industry`}>Industry</label>
+        <select class="qf__input" id={`${id}-industry`} name="industry" required>
+          <option value="">Choose one</option>
+          {industries.map(([v, l]) => <option value={v}>{l}</option>)}
+        </select>
+        <p class="qf__error" data-qf-error="industry"></p>
+      </div>
+      <button type="button" class="btn-k btn-k--primary btn-k--wide" data-qf-next>Next</button>
+    </fieldset>
+
+    <fieldset class="qf__step" data-qf-step="2" hidden>
+      <legend class="qf__legend">Two questions about your calls</legend>
+      <div class="qf__field">
+        <label class="qf__label" for={`${id}-volume`}>Roughly how many calls a month?</label>
+        <select class="qf__input" id={`${id}-volume`} name="volume" required>
+          <option value="">Choose one</option>
+          {volumes.map(([v, l]) => <option value={v}>{l}</option>)}
+        </select>
+        <p class="qf__error" data-qf-error="volume"></p>
+      </div>
+      <div class="qf__field">
+        <label class="qf__label" for={`${id}-handling`}>What happens to calls now?</label>
+        <select class="qf__input" id={`${id}-handling`} name="handling" required>
+          <option value="">Choose one</option>
+          {handling.map(([v, l]) => <option value={v}>{l}</option>)}
+        </select>
+        <p class="qf__error" data-qf-error="handling"></p>
+      </div>
+      <div class="qf__actions">
+        <button type="button" class="btn-k btn-k--ghost" data-qf-back>Back</button>
+        <button type="submit" class="btn-k btn-k--primary" data-qf-submit>See my quote</button>
+      </div>
+      <p class="qf__error qf__error--form" data-qf-error="form" role="alert"></p>
+    </fieldset>
+  </form>
+
+  <div class="qf__done" data-qf-done hidden>
+    <h3 class="qf__done-title">Got it. Pick a 20-minute slot.</h3>
+    <p class="qf__done-text">We will come to the call with your quote worked out from what you just told us.</p>
+    <div class="qf__booking" data-qf-booking aria-label="Available call slots"></div>
+    {PHONE && (
+      <p class="qf__done-call">Or call <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a> now.</p>
+    )}
+  </div>
+</div>
