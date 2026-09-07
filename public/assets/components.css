@@ -2369,3 +2369,11 @@ footer[role="contentinfo"] .footer-grid { padding-block: clamp(56px, 7vw, 96px) 
   footer[role="contentinfo"] .footer-grid { grid-template-columns: 1fr 1fr !important; gap: var(--space-6) var(--space-5) !important; }
   footer[role="contentinfo"] .footer-brand { grid-column: 1 / -1; }
 }
+
+/* ─── Item 8: the long hero eyebrow ──────────────────────────
+   Seventy-odd characters of uppercase mono wrap to three lines on a
+   phone. The rule stays on the first line; wrapped lines hang under
+   the text, not under the rule. */
+.k-eyebrow--long { align-items: flex-start; max-width: 60ch; }
+.k-eyebrow--long .k-eyebrow__rule { margin-top: 0.55em; flex: none; }
+.k-eyebrow--long > span:last-child { line-height: 1.5; }
