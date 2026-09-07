@@ -32,6 +32,14 @@ export const goWebsitePages: GoWebsitePage[] = [
     vertical: 'HVAC and plumbing companies',
     industry: 'home-services',
   },
+  {
+    slug: 'law',
+    path: '/go/website/law',
+    title: 'Law Firm Website That Books the Consult | Keres AI',
+    description: 'A website built for law firms: click-to-call, consult booking wired in, your Google listing managed every week. Law-firm plans from $499/month, no build fee, live in five days.',
+    vertical: 'law firms',
+    industry: 'law',
+  },
 ];
 
 export const goWebsiteBySlug = (slug: string) => goWebsitePages.find((g) => g.slug === slug);
