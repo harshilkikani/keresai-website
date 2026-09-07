@@ -1,0 +1,17 @@
+---
+/** Ad-landing nav: logo, Call, Get a quote. No dropdowns, nothing else to click. */
+import { PHONE } from '../data/site';
+---
+<header class="nav nav--go" role="banner" transition:persist="nav-bar">
+  <div class="nav-inner">
+    <a href="/" class="logo" aria-label="Keres AI. Home">
+      <img src="/assets/img/KeresLogo.webp" srcset="/assets/img/KeresLogo.webp 1x, /assets/img/KeresLogo@2x.webp 2x" alt="Keres AI" class="logo-img" width="120" height="32" />
+    </a>
+    <div class="nav-actions">
+      {PHONE && (
+        <a href={PHONE.href} class="nav-demo-link" data-event="tel_click">Call {PHONE.display}</a>
+      )}
+      <a href="/demo" class="btn-k btn-k--primary" data-event="demo_click">Get a quote</a>
+    </div>
+  </div>
+</header>

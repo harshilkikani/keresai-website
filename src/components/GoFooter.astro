@@ -1,0 +1,12 @@
+---
+/** Ad-landing footer: the one-liner, contact line, privacy and terms. No link grid. */
+import { PHONE, EMAIL, ADDRESS } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer role="contentinfo" id="footer" class="footer--go">
+  <p class="footer-address">An AI workforce for businesses whose sales team is whoever picks up the phone.</p>
+  <p class="footer-address">
+    &copy; {year} Keres AI{ADDRESS.line && ` · ${ADDRESS.line}`} · <a href={`mailto:${EMAIL}`}>{EMAIL}</a>{PHONE && <> · <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a></>}
+    · <a href="/legal/privacy.html">Privacy Policy</a> · <a href="/legal/terms.html">Terms</a>
+  </p>
+</footer>

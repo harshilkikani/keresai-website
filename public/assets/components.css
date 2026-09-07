@@ -2362,3 +2362,12 @@ footer[role="contentinfo"] .footer-grid { padding-block: clamp(56px, 7vw, 96px) 
 .k-eyebrow--long { align-items: flex-start; max-width: 60ch; }
 .k-eyebrow--long .k-eyebrow__rule { margin-top: 0.55em; flex: none; }
 .k-eyebrow--long > span:last-child { line-height: 1.5; }
+
+/* ─── /go chrome: same nav and footer classes, less of them ──── */
+.nav--go .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+.nav--go .nav-actions .btn-k { min-height: 40px; padding-block: 8px; }
+.k-hero--go .k-hero__grid { grid-template-columns: minmax(0, 1fr); }
+.k-hero--go .k-hero__copy { max-width: 64ch; }
+.footer--go { padding-bottom: var(--space-6) !important; }
+.footer--go .footer-address:first-child { padding-top: 0; border-top: 0; font-family: var(--sans); font-size: var(--text-0); color: var(--text-on-dark); }
+.footer--go .footer-address + .footer-address { margin-top: var(--space-4); }

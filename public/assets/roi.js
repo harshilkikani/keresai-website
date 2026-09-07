@@ -107,11 +107,14 @@
     // Industry dropdown. Selecting one loads that vertical's non-zero
     // defaults so the calculator is never showing $0 on arrival.
     const sel = $("roi-vert");
+    const shell = document.querySelector(".roi-shell");
     if (sel) {
       sel.addEventListener("change", () => applyVertical(sel.value));
-      const shell = document.querySelector(".roi-shell");
       if (shell && shell.dataset.vertical) sel.value = shell.dataset.vertical;
     }
+    // A page can preset a vertical (the /go landings do): load its
+    // defaults into the inputs, not just its close rate.
+    if (shell && shell.dataset.preset === "true" && shell.dataset.vertical) applyVertical(shell.dataset.vertical);
 
     const cta = $("roi-cta");
     if (cta) {

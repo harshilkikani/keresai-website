@@ -42,6 +42,8 @@ export default defineConfig({
       // and list the canonical .html URLs via customPages below.
       filter: (page) =>
         !page.includes('/legal/') &&
+        // /go and /go/* are noindex ad landings — never in the sitemap.
+        !/\/go(\.html|\/|$)/.test(page) &&
         !page.includes('/resources.html') &&
         // Ad landing pages are noindex and must never enter the sitemap.
         !page.includes('/lp/') &&
