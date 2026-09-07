@@ -15,13 +15,11 @@ const l = listingMock;
 <figure class="k-listing-fig">
   <div class="listing" data-tilt>
     <div class="listing__head">
-      <div>
-        <p class="listing__name">{l.name}</p>
-        <p class="listing__cat">{l.category} · {l.area}</p>
-      </div>
-      <span class="listing__badge">Google</span>
+      <p class="listing__name">{l.name}</p>
+      <p class="listing__cat">{l.category} · {l.area}</p>
     </div>
     <div class="listing__rating">
+      <span class="listing__badge">Google</span>
       <span class="listing__num" data-figure>{l.rating}</span>
       <span class="listing__stars" aria-hidden="true">
         {[1,2,3,4,5].map(() => (

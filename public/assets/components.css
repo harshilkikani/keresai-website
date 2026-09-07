@@ -1961,7 +1961,11 @@ html[data-motion] [data-hero].is-live [data-owner]   { animation: kPop 0.5s cubi
 .door {
   display: flex;
   flex-direction: column;
-  gap: var(--space-7);
+  /* Text block, then the mock, 48px apart on desktop and 32px on a phone.
+     The mock is not pushed to the bottom: the grid row still stretches
+     both cards to one height, and the Found card's phone frame grows to
+     fill that height (see .door__mocks--found), so neither card pads out. */
+  gap: clamp(32px, 3.3vw, 48px);
   padding: clamp(var(--space-6), 3.5vw, var(--space-8));
   background: var(--surface);
   border: 1px solid var(--line);
@@ -1983,19 +1987,26 @@ html[data-motion] [data-hero].is-live [data-owner]   { animation: kPop 0.5s cubi
   text-wrap: balance;
 }
 .door__text { margin: var(--space-4) 0 var(--space-5); font-size: var(--text-0); line-height: 1.6; color: var(--ink-2); max-width: 52ch; }
-.door__mocks { margin-top: auto; }
-.door__mocks--found {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: var(--space-5);
-  align-items: end;
-}
+.door__mocks { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+/* Phone above listing, not side by side: at real phone proportions the
+   stack (270px phone + listing card) lands within ~15px of the transcript
+   in the other door, so the grid row is equal-height without either card
+   padding out. The phone keeps its aspect ratio. */
+.door__mocks--found { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); justify-items: start; }
+.door__mocks--found .ph { max-width: 270px; margin-inline: 0; }
+.door__mocks--found .k-listing-fig { width: 100%; max-width: 380px; }
+/* The transcript device takes the remaining height; its outcome strip sits
+   at the bottom so any slack reads as air above it, not as a padded box. */
+.door__mocks .k-call-fig { flex: 1 1 auto; display: flex; flex-direction: column; }
+.door__mocks .k-device { flex: 1 1 auto; display: flex; flex-direction: column; }
+.door__mocks .k-device__body { flex: 1 1 auto; display: flex; flex-direction: column; }
+.door__mocks .k-call__outcome { margin-top: auto; padding-top: var(--space-5); }
 .door .k-device { box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 24px 50px -24px rgba(20, 16, 13, 0.22); }
 @media (max-width: 1100px) {
   .doors { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 560px) {
-  .door__mocks--found { grid-template-columns: minmax(0, 1fr); }
+  .door__mocks--found .ph { max-width: 260px; }
 }
 
 /* ─── Phone frame ─────────────────────────────────────────── */
@@ -2091,8 +2102,9 @@ html[data-motion] [data-hero].is-live [data-owner]   { animation: kPop 0.5s cubi
   transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.listing__head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-3); }
-.listing__name { margin: 0; font-size: var(--text-1); font-weight: 600; letter-spacing: -0.01em; color: var(--ink-0); }
+.listing__head { display: block; }
+.listing__name { margin: 0; font-size: var(--text-0); font-weight: 600; letter-spacing: -0.01em; color: var(--ink-0); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.listing__rating .listing__badge { margin-left: auto; }
 .listing__cat { margin: 2px 0 0; font-size: var(--text--1); color: var(--ink-2); }
 .listing__badge { font: 500 0.66rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); border: 1px solid var(--line); border-radius: 100px; padding: 3px 8px; white-space: nowrap; }
 .listing__rating { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-4); }
