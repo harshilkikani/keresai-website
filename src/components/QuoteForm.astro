@@ -15,8 +15,10 @@ export interface Props {
   /** Where the form sits: 'page' on /quote, 'embed' inside /go. */
   variant?: 'page' | 'embed';
   id?: string;
+  /** Pre-selects the industry (e.g. from a /go route). */
+  industry?: string;
 }
-const { variant = 'page', id = 'quote' } = Astro.props;
+const { variant = 'page', id = 'quote', industry = '' } = Astro.props;
 const industries = [
   ['home-services', 'Home services (HVAC, plumbing, roofing…)'],
   ['law', 'Law firm'],
@@ -55,7 +57,7 @@ const handling = [['someone-answers', 'Someone on the team answers'], ['voicemai
         <label class="qf__label" for={`${id}-industry`}>Industry</label>
         <select class="qf__input" id={`${id}-industry`} name="industry" required>
           <option value="">Choose one</option>
-          {industries.map(([v, l]) => <option value={v}>{l}</option>)}
+          {industries.map(([v, l]) => <option value={v} selected={v === industry}>{l}</option>)}
         </select>
         <p class="qf__error" data-qf-error="industry"></p>
       </div>

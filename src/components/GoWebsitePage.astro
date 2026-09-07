@@ -1,0 +1,94 @@
+---
+/**
+ * The Found landing: hero with the site + listing mocks side by side,
+ * the eight Found items as a plain two-column list, a three-column price
+ * comparison (no competitor names), the quote form pre-set to the route's
+ * industry, one line about answering, and a close. /go chrome throughout.
+ */
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+import SiteOnPhone from './SiteOnPhone.astro';
+import GoogleListing from './GoogleListing.astro';
+import QuoteForm from './QuoteForm.astro';
+import { PHONE, foundServices } from '../data/site';
+import type { GoWebsitePage } from '../data/goWebsite';
+
+export interface Props { page: GoWebsitePage }
+const { page } = Astro.props;
+
+const compare = [
+  { who: 'Local agency', cost: '$3,000–$8,000 to build', then: 'plus hosting, and changes billed by the hour', time: 'Six to twelve weeks' },
+  { who: 'DIY builder', cost: 'Your evenings', then: 'a template that looks like everyone else’s', time: 'It still doesn’t ring' },
+  { who: 'Keres Found', cost: '$249/mo, no build fee', then: 'Google listing managed every week', time: 'Live in five days', us: true },
+];
+---
+<Section spacing="standard" labelledby="gw-title" id="hero" class="k-hero k-hero--v2 gw-hero">
+  <div class="k-hero__light" aria-hidden="true"></div>
+  <div class="k-hero__grid">
+    <div class="k-hero__copy">
+      <Eyebrow>Found &mdash; the website and the listing</Eyebrow>
+      <h1 id="gw-title" class="k-display" data-words>
+        <span class="w">A</span> <span class="w">website</span> <span class="w">that</span> <span class="w">books</span> <span class="w">the</span> <span class="w">job.</span>
+        <span class="w">Live</span> <span class="w">in</span> <span class="w">five</span> <span class="w">days.</span>
+      </h1>
+      <div class="k-hero__ctas">
+        <Button href="#quote" variant="primary" event="demo_click">See my quote</Button>
+        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>}
+      </div>
+      <p class="k-lede">
+        Built for {page.vertical}, click-to-call, booking wired in, your Google listing managed
+        every week. $249/mo. No build fee. Month-to-month.
+      </p>
+    </div>
+    <div class="k-hero__mock gw-hero__mocks">
+      <SiteOnPhone />
+      <GoogleListing />
+    </div>
+  </div>
+</Section>
+
+<Section tone="raised" spacing="standard" labelledby="gw-get" id="what-you-get">
+  <Eyebrow n={1}>What you get</Eyebrow>
+  <h2 id="gw-get" class="k-h2">Eight things, one flat fee.</h2>
+  <ul class="gw-list">
+    {foundServices.map((s) => (
+      <li class="gw-list__item">
+        <span class="gw-list__name">{s.name}</span>
+        {s.addOn && <span class="k-svc__plan k-svc__plan--addon">Add-on</span>}
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<Section spacing="standard" labelledby="gw-compare" id="compare">
+  <Eyebrow n={2}>What it costs</Eyebrow>
+  <h2 id="gw-compare" class="k-h2">Three ways to get a site that rings.</h2>
+  <div class="gw-compare" role="table" aria-labelledby="gw-compare">
+    {compare.map((c) => (
+      <div class:list={['gw-compare__col', c.us && 'gw-compare__col--us']} role="row">
+        <p class="gw-compare__who" role="cell">{c.who}</p>
+        <p class="gw-compare__cost" role="cell" data-figure>{c.cost}</p>
+        <p class="gw-compare__then" role="cell">{c.then}</p>
+        <p class="gw-compare__time" role="cell">{c.time}</p>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<Section tone="raised" spacing="standard" labelledby="quote-title" id="quote-band">
+  <h2 id="quote-title" class="k-eyebrow"><span class="k-eyebrow__rule" aria-hidden="true"></span><span class="k-eyebrow__n" data-figure>03</span><span>Get a quote &mdash; five questions, then a 20-minute call with the number ready</span></h2>
+  <QuoteForm variant="embed" id="quote" industry={page.industry} />
+  <p class="gw-remi">Every Found site comes with Remi-ready booking. Add answering any time.</p>
+</Section>
+
+<Section tone="inverse" spacing="standard" labelledby="close-title" id="close">
+  <div class="k-close">
+    <h2 id="close-title" class="k-h2">Call us or book 20 minutes.</h2>
+    <p class="k-lede">Twenty minutes, no deck.</p>
+    <div class="k-close__ctas">
+      <Button href="#quote" variant="primary" event="demo_click">See my quote</Button>
+      {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>}
+    </div>
+  </div>
+</Section>

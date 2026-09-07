@@ -2412,3 +2412,31 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 .qf__done-call a { color: var(--accent); }
 /* Embedded in /go: the form sits in a raised band with the same head rhythm. */
 .k-section .qf--embed { margin-top: var(--space-6); }
+
+/* ─── /go/website (Found landing) ───────────────────────────── */
+/* Hero mocks side by side; the phone keeps real proportions. Stacks under 560px. */
+.gw-hero__mocks { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: var(--space-5); align-items: end; }
+.gw-hero__mocks .ph { max-width: 240px; margin-inline: 0; }
+.gw-hero__mocks .k-mock__caption { display: none; }
+@media (max-width: 560px) {
+  .gw-hero__mocks { grid-template-columns: minmax(0, 1fr); justify-items: start; }
+  .gw-hero__mocks .ph { max-width: 220px; }
+}
+/* What you get: a two-column list, one line each, no cards. */
+.gw-list { list-style: none; padding: 0; margin: var(--space-6) 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--space-7); border-top: 1px solid var(--line); }
+.gw-list__item { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 52px; padding-block: var(--space-3); border-bottom: 1px solid var(--line); font-size: var(--text-0); color: var(--ink-0); white-space: nowrap; overflow: hidden; }
+.gw-list__name { overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 480px) { .gw-list { grid-template-columns: minmax(0, 1fr); } }
+/* Three columns, hairlines, no boxes. Ours is the marked one. */
+.gw-compare { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6); margin-top: var(--space-6); border-top: 1px solid var(--line); }
+.gw-compare__col { padding-top: var(--space-5); }
+.gw-compare__col--us { border-top: 2px solid var(--accent); margin-top: -1px; }
+.gw-compare__who { margin: 0; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3); }
+.gw-compare__col--us .gw-compare__who { color: var(--accent); }
+.gw-compare__cost { margin: var(--space-3) 0 0; font-family: var(--serif); font-size: var(--text-2); font-weight: 600; letter-spacing: -0.014em; line-height: 1.15; color: var(--ink-0); }
+.gw-compare__then { margin: var(--space-3) 0 0; font-size: var(--text--1); line-height: 1.5; color: var(--ink-2); }
+.gw-compare__time { margin: var(--space-3) 0 0; font-size: var(--text-0); font-weight: 500; color: var(--ink-1); }
+.gw-compare__col--us .gw-compare__time { color: var(--accent); }
+@media (max-width: 720px) { .gw-compare { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); } .gw-compare__col + .gw-compare__col { border-top: 1px solid var(--line); } .gw-compare__col--us { border-top-width: 2px; } }
+/* The one line about answering. */
+.gw-remi { margin: var(--space-5) 0 0; font-size: var(--text--1); color: var(--ink-2); max-width: 560px; }
