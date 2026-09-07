@@ -3,7 +3,7 @@ import { PHONE, EMAIL, ADDRESS, agents, plans } from '../data/site';
 const year = new Date().getFullYear();
 const found = plans.find((p) => p.slug === 'found')!;
 ---
-<footer role="contentinfo">
+<footer role="contentinfo" id="footer">
   <h2 class="visually-hidden">Site footer</h2>
   <div class="footer-grid">
     <div class="footer-brand">
@@ -68,7 +68,7 @@ const found = plans.find((p) => p.slug === 'found')!;
         <li><a href="/compare">Compare</a></li>
         <li><a href="/partners">Partners</a></li>
         <li><a href="/contact">Contact</a></li>
-        <li><a href="/demo">Book a demo</a></li>
+        <li><a href="/demo">Get a quote</a></li>
       </ul>
     </div>
 

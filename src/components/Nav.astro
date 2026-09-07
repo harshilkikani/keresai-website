@@ -52,7 +52,7 @@ const resourceLinks = [
       <ul class="nav-links">
         <li>
           <details class="nav-drop">
-            <summary>Be Found</summary>
+            <summary>Get found</summary>
             <div class="nav-drop__panel nav-drop__panel--two">
               {foundLinks.map((l) => (
                 <a href={l.href}>
@@ -70,7 +70,7 @@ const resourceLinks = [
 
         <li>
           <details class="nav-drop">
-            <summary>Be Answered</summary>
+            <summary>Get answered</summary>
             <div class="nav-drop__panel">
               {agentLinks.map((l) => (
                 <a href={l.href}>
@@ -136,10 +136,10 @@ const resourceLinks = [
 </header>
 
 <div id="mobile-menu" class="mobile-menu" data-open="false" aria-label="Mobile navigation" transition:persist="nav-menu">
-  <p class="mobile-menu__group">Be Found</p>
+  <p class="mobile-menu__group">Get found</p>
   <a href="/services/found" class="mobile-menu__sub">Everything in Found &mdash; from $249</a>
   {foundLinks.slice(0, 4).map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
-  <p class="mobile-menu__group">Be Answered</p>
+  <p class="mobile-menu__group">Get answered</p>
   {agentLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label} &mdash; {l.sub}</a>)}
   <a href="/services" class="mobile-menu__sub">All seven stages</a>
   <p class="mobile-menu__group">Industries</p>

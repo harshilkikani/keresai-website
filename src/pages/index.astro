@@ -59,7 +59,7 @@ const faqs = [
   <Schema slot="head" graph={[organizationSchema, softwareApplicationSchema, websiteSchema, faqSchema(faqs)]} />
 
   <!-- ── HERO ───────────────────────────────────────────── -->
-  <Section spacing="standard" labelledby="hero-title" class="k-hero k-hero--v2">
+  <Section spacing="standard" labelledby="hero-title" id="hero" class="k-hero k-hero--v2">
     <div class="k-hero__light" aria-hidden="true"></div>
     <div class="k-hero__grid">
       <div class="k-hero__copy">
@@ -70,8 +70,8 @@ const faqs = [
           <span class="w accent">Get</span> <span class="w accent">booked.</span>
         </h1>
         <div class="k-hero__ctas">
-          <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}<span class="btn-k__extra"> &mdash; hear it answer</span></Button>
-          <Button href="/demo" variant="ghost" event="demo_click">Get a quote</Button>
+          <Button href="/demo" variant="primary" event="demo_click">Get a quote</Button>
+          <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>
         </div>
         <p class="k-lede">
           A conversion-built website and a managed Google listing so the search three streets
@@ -411,8 +411,8 @@ const faqs = [
         </li>
       </ol>
       <div class="k-start__ctas">
-        <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
-        <Button href="/demo" variant="ghost" event="demo_click">Get a quote</Button>
+        <Button href="/demo" variant="primary" event="demo_click">Get a quote</Button>
+        <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>
       </div>
     </div>
   </Section>
@@ -440,8 +440,8 @@ const faqs = [
         of the exercise. Found from {found.from.replace('from ', '')}/month; Remi from {answer.from.replace('from ', '')}/month.
       </p>
       <div class="k-close__ctas">
-        <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
-        <Button href="/demo" variant="ghost" event="demo_click">Get a quote instead</Button>
+        <Button href="/demo" variant="primary" event="demo_click">Get a quote</Button>
+        <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>
       </div>
     </div>
   </Section>
