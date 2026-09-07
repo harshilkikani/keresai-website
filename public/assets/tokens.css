@@ -85,7 +85,9 @@
   /* Section rhythm: 120px standard, 160px at major transitions,
      72px on mobile. Set here, consumed by .section. */
   --section:       clamp(72px, 10vw, 120px);
-  --section-major: clamp(88px, 13vw, 160px);
+  /* Capped site-wide at 120px on desktop and 72px on a phone. A "major"
+     section keeps the name but not the extra 40px it used to add. */
+  --section-major: var(--section);
 
   /* ─── Grid ──────────────────────────────────────────────  */
   --container: 1200px;

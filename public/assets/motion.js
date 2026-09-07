@@ -124,7 +124,7 @@
       // ~22vh of scrolling per stage (two or three wheel notches), clamped;
       // the track is the pinned panel plus six of those steps, which keeps
       // the section under 2,400px at 1440x900.
-      step = Math.max(180, Math.min(260, Math.round(window.innerHeight * 0.22)));
+      step = Math.max(160, Math.min(240, Math.round(window.innerHeight * 0.19)));
       top = navH + (window.innerWidth < 900 ? 12 : 24);
       track.style.setProperty('--track', (panel.offsetHeight + (N - 1) * step) + 'px');
     }

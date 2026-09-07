@@ -621,7 +621,7 @@ html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] {
 .k-body { font-size: var(--text-0); line-height: 1.6; color: var(--ink-2); }
 
 /* ─── Band: a heading block with content under it ─────────── */
-.k-band__head { max-width: 62ch; margin-bottom: var(--space-8); }
+.k-band__head { max-width: 62ch; margin-bottom: var(--space-7); }
 .k-band__head .k-h2 { margin-top: var(--space-3); }
 .k-band__head .k-lede { margin-top: var(--space-4); }
 
@@ -661,7 +661,7 @@ html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] {
    section leads the page pays for it. Pages that open with breadcrumbs
    already carry their own offset, so this only fires where a k-section
    is genuinely first. */
-main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--space-6), 4.5vw, var(--space-8))); }
+main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(24px, 4vw, 52px)); }
 .k-hero { padding-bottom: var(--section); }
 .k-hero__grid {
   display: grid;
@@ -957,6 +957,7 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(var(--spa
 @media (max-width: 760px) { .k-steps { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); } }
 
 /* ─── Close ───────────────────────────────────────────────── */
+#close.k-section { padding-block: clamp(56px, 7vw, 96px) clamp(48px, 6vw, 72px); }
 .k-close { max-width: 44ch; }
 .k-close .k-lede { margin-top: var(--space-4); }
 .k-close__ctas { margin-top: var(--space-7); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-5); }
@@ -2202,7 +2203,7 @@ html[data-motion] .pipe__stage.is-active { opacity: 1; transform: none; pointer-
 }
 
 /* ─── The team: alternating 7/5 rows with mini-mocks ──────── */
-.team { list-style: none; padding: 0; margin: var(--space-8) 0 0; display: grid; gap: clamp(var(--space-8), 8vw, var(--space-10)); }
+.team { list-style: none; padding: 0; margin: var(--space-7) 0 0; display: grid; gap: var(--space-8); }
 .trow {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
@@ -2354,4 +2355,17 @@ html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] { transform: tra
   .pipe__stage { opacity: 1 !important; transform: none !important; }
   .pd__fill { transform: scale(1) !important; }
   [data-tilt] { transform: none !important; }
+}
+
+/* ─── Item 7: density inside the 120/72 cap ─────────────────── */
+@media (min-width: 1100px) {
+  .k-svc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-7); row-gap: 0; }
+}
+/* Footer: was 72px + up to 120px of top padding above the link grid. One
+   band inside the cap; two columns on a phone instead of six stacked. */
+footer[role="contentinfo"] { padding-top: 0 !important; }
+footer[role="contentinfo"] .footer-grid { padding-block: clamp(56px, 7vw, 96px) clamp(40px, 5vw, 64px) !important; }
+@media (max-width: 640px) {
+  footer[role="contentinfo"] .footer-grid { grid-template-columns: 1fr 1fr !important; gap: var(--space-6) var(--space-5) !important; }
+  footer[role="contentinfo"] .footer-brand { grid-column: 1 / -1; }
 }
