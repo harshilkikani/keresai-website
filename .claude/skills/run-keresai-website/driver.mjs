@@ -21,6 +21,10 @@
 //   lh <path...> [--port N]     Lighthouse mobile summary (needs network for npx)
 //   dark <path> [id]            dark-mode screenshot, optionally scrolled to #id
 //   fonts [path]                which faces loaded; is the h1/lede a webfont or fallback?
+//   sections [path]             top + height of every main section at 390 and 1440
+//   region <label> <path> <id..> screenshot just those #ids at 390 and 1440
+//   compare <a.png> <b.png> <out>  before | after side by side (ffmpeg)
+// COLOR=dark makes shot/console/sections render the dark theme (files get a -dark suffix).
 //
 // Agent tooling, not product code: it is allowed to be plain.
 
@@ -32,6 +36,9 @@ import { fileURLToPath } from 'node:url';
 
 const BASE = process.env.BASE || 'http://localhost:4321';
 const OUT = process.env.OUT || '/tmp/keres-shots';
+// COLOR=dark renders every capture in the dark theme and suffixes filenames.
+const SCHEME = process.env.COLOR === 'dark' ? 'dark' : 'light';
+const SUF = SCHEME === 'dark' ? '-dark' : '';
 // fileURLToPath, not URL.pathname: this repo's folder has a space in its
 // name, and .pathname leaves it percent-encoded (%20), so every fs call
 // under ROOT would miss.
@@ -103,11 +110,11 @@ const commands = {
       for (const dsf of [2, 1]) {
         const ctx = await browser.newContext({
           viewport: { width: vp.width, height: vp.height }, deviceScaleFactor: dsf,
-          isMobile: vp.mobile, hasTouch: vp.mobile, colorScheme: 'light',
+          isMobile: vp.mobile, hasTouch: vp.mobile, colorScheme: SCHEME,
         });
         const page = await ctx.newPage();
         for (const p of paths) {
-          const slug = slugOf(p);
+          const slug = slugOf(p) + SUF;
           const res = await page.goto(BASE + p, { waitUntil: 'networkidle', timeout: 30000 });
           if (!res || res.status() >= 400) { console.log(`FAIL ${BASE + p} → ${res ? res.status() : 'no response'}`); continue; }
           // The hero orchestration runs ~2.2s; let it settle before the fold shot.
@@ -170,7 +177,7 @@ const commands = {
     const paths = rest.length ? rest : ['/'];
     const browser = await launch();
     for (const vp of VIEWPORTS) {
-      const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, isMobile: vp.mobile, hasTouch: vp.mobile, colorScheme: 'light' });
+      const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, isMobile: vp.mobile, hasTouch: vp.mobile, colorScheme: SCHEME });
       const page = await ctx.newPage();
       const logs = [];
       page.on('console', (m) => { if (['error', 'warning'].includes(m.type())) logs.push(`${m.type()}: ${m.text().slice(0, 160)}`); });
@@ -184,6 +191,7 @@ const commands = {
           router: !!document.querySelector('script[src*="_astro"]'),
           counts: [...document.querySelectorAll('[data-count]')].map((e) => e.textContent.trim()).join(' | '),
           tiltTargets: document.querySelectorAll('[data-tilt]').length,
+          overflowX: document.documentElement.scrollWidth > window.innerWidth,
         }));
         console.log(`--- ${p} @${vp.width} ---`);
         console.log('state:', JSON.stringify(state));
@@ -358,6 +366,70 @@ const commands = {
       for (const k of c.performance.auditRefs) { const x = a[k.id]; if (x?.details?.overallSavingsMs > 60) console.log('   opportunity:', k.id, '~' + Math.round(x.details.overallSavingsMs) + 'ms'); }
       console.log('   json →', file);
     }
+  },
+
+  async sections() {
+    const p = rest[0] || '/';
+    const browser = await launch();
+    for (const vp of VIEWPORTS) {
+      const page = await (await browser.newContext({ viewport: { width: vp.width, height: vp.height }, isMobile: vp.mobile, hasTouch: vp.mobile, colorScheme: SCHEME })).newPage();
+      await page.goto(BASE + p, { waitUntil: 'networkidle' });
+      await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 900) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 30)); } window.scrollTo(0, 0); });
+      await page.waitForTimeout(400);
+      const rows = await page.evaluate(() => {
+        const out = [];
+        for (const el of document.querySelectorAll('main > section, main > div.k-section, footer')) {
+          const r = el.getBoundingClientRect();
+          const label = el.id || (el.getAttribute('aria-labelledby') ? (document.getElementById(el.getAttribute('aria-labelledby'))?.textContent || '').trim().slice(0, 34) : el.tagName.toLowerCase());
+          out.push({ label, top: Math.round(r.top + scrollY), h: Math.round(r.height) });
+        }
+        return { rows: out, total: document.documentElement.scrollHeight };
+      });
+      console.log(`--- ${p} @${vp.width}  total ${rows.total}px ---`);
+      for (const r of rows.rows) console.log(`  ${String(r.top).padStart(6)}  ${String(r.h).padStart(5)}px  ${r.label}`);
+      await page.context().close();
+    }
+    await browser.close();
+  },
+
+  async region() {
+    // Screenshot one element (by id) at 390 and 1440 — the affected region of
+    // a change, without re-walking the whole page.
+    const [label, p, ...ids] = rest;
+    if (!label || !p || !ids.length) { console.error('usage: region <label> <path> <id...>'); process.exit(1); }
+    const browser = await launch();
+    for (const vp of VIEWPORTS) {
+      const page = await (await browser.newContext({ viewport: { width: vp.width, height: vp.height }, isMobile: vp.mobile, hasTouch: vp.mobile, colorScheme: SCHEME, deviceScaleFactor: 1 })).newPage();
+      await page.goto(BASE + p, { waitUntil: 'networkidle' });
+      await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 900) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 30)); } window.scrollTo(0, 0); });
+      await page.waitForTimeout(2600);
+      // The fixed nav and sticky bar would be stitched into any crop taller
+      // than the viewport; hide them for region captures.
+      await page.addStyleTag({ content: '.nav, .sticky-bar { visibility: hidden !important; }' });
+      for (const id of ids) {
+        const el = page.locator(`#${id}`).first();
+        if (!(await el.count())) { console.log(`MISSING #${id} @${vp.width}`); continue; }
+        await el.scrollIntoViewIfNeeded();
+        await page.waitForTimeout(700);
+        const h = Math.round((await el.boundingBox())?.height || 0);
+        const file = `${OUT}/${label}-${slugOf(p)}-${id}-${vp.name}${SUF}.png`;
+        await el.screenshot({ path: file });
+        console.log(`  #${id.padEnd(12)} @${vp.name}  ${String(h).padStart(5)}px  → ${file}`);
+      }
+      await page.context().close();
+    }
+    await browser.close();
+  },
+
+  async compare() {
+    // Side-by-side before/after: pads both to the taller height, then hstacks.
+    const [a, b, out] = rest;
+    if (!a || !b || !out) { console.error('usage: compare <before.png> <after.png> <out.png>'); process.exit(1); }
+    const dim = (f) => execSync(`ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 "${f}"`).toString().trim().split(',').map(Number);
+    const [aw, ah] = dim(a), [bw, bh] = dim(b);
+    const H = Math.max(ah, bh);
+    execSync(`ffmpeg -v error -i "${a}" -i "${b}" -filter_complex "[0:v]pad=${aw + 24}:${H}:0:0:color=#8a8a8a[l];[1:v]pad=${bw}:${H}:0:0:color=#8a8a8a[r];[l][r]hstack=inputs=2" -y "${out}"`);
+    console.log(`${aw}x${ah} | ${bw}x${bh} → ${out}`);
   },
 
   async fonts() {
