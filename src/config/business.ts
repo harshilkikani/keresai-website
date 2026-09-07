@@ -32,6 +32,17 @@ export const business = {
   formEndpoint: 'https://formspree.io/f/mojywlnn',
   // The booking embed shown after a successful quote submit.
   bookingUrl: 'https://calendly.com/ops-keresai/30min',
+  // Conversion tracking. Empty → no tag loads at all (see tracking.js).
+  tracking: {
+    ga4: '',           // 'G-XXXXXXXXXX'
+    googleAds: '',     // 'AW-XXXXXXXXX'
+    metaPixel: '',     // '1234567890123456'
+    labels: {          // Google Ads conversion labels (the part after AW-…/)
+      form_submit: '',
+      tel_click: '',
+      phone: '',       // the website-call conversion (number swap, calls ≥30s)
+    },
+  },
   // Optional. Sentences that need these are omitted when they are empty.
   bundleDiscountPercent: '',
   partnerReferralTerms: '',

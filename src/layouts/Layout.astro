@@ -8,6 +8,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { PHONE } from '../data/site';
 import { CSS_HASH } from '../data/cssHash';
+import { business } from '../config/business';
 
 export interface Props {
   title: string;
@@ -50,6 +51,11 @@ const origin = 'https://www.keresai.com';
 // motion.js is inlined so it can stamp html[data-motion] before first
 // paint without costing a render-blocking request. The CSP forbids
 // 'unsafe-inline', so the policy carries this script's SHA-256 instead.
+// Conversion-tracking config for /assets/tracking.js. Rendered as a JSON
+// block (never executed, so the CSP is untouched); empty ids load nothing.
+const trackingCfg = JSON.stringify({ ...business.tracking, phoneDisplay: business.phoneDisplay });
+const trackingOn = !!(business.tracking.ga4 || business.tracking.googleAds || business.tracking.metaPixel);
+
 const motionSrc = readFileSync(new URL('../../public/assets/motion.js', import.meta.url), 'utf8');
 const motionHash = "'sha256-" + createHash('sha256').update(motionSrc).digest('base64') + "'";
 const canonical = origin + path;
@@ -204,7 +210,8 @@ const BING_VERIFICATION = '';
   </div>
 )}
 <script src="/assets/app.js?v=16" defer is:inline></script>
-{bare && <script src="/assets/tracking.js?v=1" defer is:inline></script>}
+{trackingOn && <script type="application/json" id="keres-tracking" set:html={trackingCfg}></script>}
+{trackingOn && <script src="/assets/tracking.js?v=2" defer is:inline></script>}
 <slot name="scripts" />
 </body>
 </html>

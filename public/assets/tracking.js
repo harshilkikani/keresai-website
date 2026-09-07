@@ -1,144 +1,112 @@
 /* =============================================================
-   Keres AI — ad conversion tracking
-   Loaded ONLY on /lp/* pages (Layout passes bare). GoatCounter
-   still handles cookieless pageviews everywhere else.
+   Keres AI — conversion tracking
+   External file: the CSP allows 'self' plus the Google and Meta
+   hosts, and no unsafe-inline. IDs come from the JSON block Layout
+   renders from src/config/business.ts (#keres-tracking). With no
+   IDs nothing loads — a half-configured tag reports phantom
+   conversions, which is worse than none.
 
-   The CSP has no 'unsafe-inline' in script-src, so the gtag and
-   Meta bootstraps live here rather than as inline snippets. The
-   domains they call are already allowed in script-src, connect-src
-   and img-src — see the CSP comment in src/layouts/Layout.astro.
+   Load order: nothing before first paint. The tag scripts are
+   injected after the window load event, in an idle callback, so
+   they cannot sit on the LCP path.
 
-   PLACEHOLDERS — nothing loads until these are filled in. That is
-   deliberate: a half-configured tag reports phantom conversions,
-   which is worse than no tag at all. Fill in, then verify each one
-   firing in the network tab before spending on ads.
+   Events:
+     tel: click            → Google Ads conversion + Meta Contact
+     keres:lead (form ok)  → Google Ads conversion + Meta Lead
+     astro:page-load       → GA4 page_view on client-side navigations
+   Every Meta event carries an eventID so a server-side CAPI event
+   with the same id deduplicates. The form POST carries the same id
+   as _event_id.
 ============================================================= */
 (function () {
   'use strict';
 
-  var IDS = {
-    ga4: '',            // 'G-XXXXXXXXXX'
-    googleAds: '',      // 'AW-XXXXXXXXX'
-    metaPixel: '',      // '1234567890123456'
+  var cfgEl = document.getElementById('keres-tracking');
+  if (!cfgEl) return;
+  var cfg;
+  try { cfg = JSON.parse(cfgEl.textContent || '{}'); } catch (e) { return; }
+  var GA4 = cfg.ga4 || '', AW = cfg.googleAds || '', PIXEL = cfg.metaPixel || '';
+  var LABELS = cfg.labels || {};
+  if (!GA4 && !AW && !PIXEL) return;
+
+  var uuid = function () {
+    return (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+      : 'k-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
   };
+  function add(src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
 
-  /* Google Ads conversion labels, one per action.
-     Format: 'AW-XXXXXXXXX/AbC-D_efGhIjKlMnOp'. */
-  var ADS_LABELS = {
-    form_submit: '',
-    tel_click: '',
-    demo_booked: '',
-    call_30s: '',
-  };
+  var loaded = false;
+  function load() {
+    if (loaded) return; loaded = true;
 
-  var loaded = { google: false, meta: false };
+    if (GA4 || AW) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      gtag('js', new Date());
+      if (GA4) gtag('config', GA4, { send_page_view: true });
+      if (AW) {
+        gtag('config', AW);
+        // Website call conversions: Google swaps the displayed number for a
+        // forwarding number for ad visitors and counts calls over 30s.
+        if (LABELS.phone && cfg.phoneDisplay) {
+          gtag('config', AW + '/' + LABELS.phone, { phone_conversion_number: cfg.phoneDisplay });
+        }
+      }
+      add('https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA4 || AW));
+    }
 
-  function inject(src) {
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = src;
-    document.head.appendChild(s);
-  }
-
-  /* ── Google: GA4 + Google Ads share one gtag.js ─────────── */
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { window.dataLayer.push(arguments); }
-  window.gtag = gtag;
-
-  if (IDS.ga4 || IDS.googleAds) {
-    inject('https://www.googletagmanager.com/gtag/js?id=' + (IDS.ga4 || IDS.googleAds));
-    gtag('js', new Date());
-    if (IDS.ga4) gtag('config', IDS.ga4);
-    if (IDS.googleAds) gtag('config', IDS.googleAds);
-    loaded.google = true;
-  }
-
-  /* ── Meta pixel ─────────────────────────────────────────── */
-  if (IDS.metaPixel) {
-    /* eslint-disable */
-    (function (f, b, e, v, n, t, s) {
-      if (f.fbq) return; n = f.fbq = function () {
-        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-      };
-      if (!f._fbq) f._fbq = n;
+    if (PIXEL) {
+      // The standard fbevents bootstrap, without the inline snippet.
+      var n = window.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+      if (!window._fbq) window._fbq = n;
       n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
-      t = b.createElement(e); t.async = true; t.src = v;
-      s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
-    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-    /* eslint-enable */
-    window.fbq('init', IDS.metaPixel);
-    window.fbq('track', 'PageView');
-    loaded.meta = true;
+      add('https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', PIXEL);
+      fbq('track', 'PageView');
+    }
   }
 
-  /* ── One function every conversion goes through ──────────
-     app.js calls this; nothing else needs to know which tags
-     are configured. Unconfigured tags are skipped silently so
-     the site behaves identically before and after setup. */
-  var META_EVENTS = {
-    form_submit: 'Lead',
-    tel_click: 'Contact',
-    demo_booked: 'Schedule',
-    call_30s: 'Contact',
-  };
+  function afterFirstPaint(fn) {
+    var go = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 1); })(fn); };
+    if (document.readyState === 'complete') go();
+    else window.addEventListener('load', go, { once: true });
+  }
+  afterFirstPaint(load);
 
-  window.keresTrack = function (name, params) {
-    params = params || {};
-
-    if (loaded.google) {
-      gtag('event', name, params);
-      var label = ADS_LABELS[name];
-      if (label) gtag('event', 'conversion', { send_to: label });
-    }
-
-    if (loaded.meta && META_EVENTS[name]) {
-      window.fbq('track', META_EVENTS[name], params);
-    }
-
-    /* Always available for debugging: window.keresTrack.log */
-    window.keresTrack.log.push({ name: name, params: params, at: Date.now() });
-  };
-  window.keresTrack.log = [];
-
-  /* ── Call tracking: calls of 30 seconds or more ──────────
-     HOOK, NOT AN IMPLEMENTATION. A tel: click is not a call —
-     only the call-tracking provider knows the duration, so the
-     30-second conversion has to come back from them.
-
-     To wire it up:
-       1. Provision a tracking number per channel (GBP, LSA,
-          site, ads) with your call-tracking provider.
-       2. Point its webhook at a small endpoint you control.
-       3. On a completed call with duration >= 30s, have that
-          endpoint fire the server-side conversion to Google Ads
-          (via the Conversions API / offline conversion import)
-          and Meta (via the Conversions API), using the GCLID or
-          FBCLID captured below.
-       4. Nothing client-side can do step 3 honestly — a browser
-          has already navigated away by the time the call ends.
-
-     What this file CAN do is capture and persist the click IDs so
-     the server-side conversion can be attributed back to the ad
-     that produced it. */
-  try {
-    var qs = new URLSearchParams(window.location.search);
-    ['gclid', 'fbclid', 'wbraid', 'gbraid', 'utm_source', 'utm_campaign'].forEach(function (k) {
-      var v = qs.get(k);
-      if (v) window.localStorage.setItem('keres_' + k, v);
-    });
-  } catch (e) {
-    /* Private browsing or blocked storage — attribution degrades, nothing breaks. */
+  function adsConversion(label, extra) {
+    if (!AW || !LABELS[label] || !window.gtag) return;
+    gtag('event', 'conversion', Object.assign({ send_to: AW + '/' + LABELS[label] }, extra || {}));
+  }
+  function meta(name, id, params) {
+    if (!PIXEL || !window.fbq) return;
+    fbq('track', name, params || {}, { eventID: id });
   }
 
-  /* Exposed so a call-tracking snippet can read what to attribute to. */
-  window.keresAttribution = function () {
-    var out = {};
-    try {
-      ['gclid', 'fbclid', 'wbraid', 'gbraid', 'utm_source', 'utm_campaign'].forEach(function (k) {
-        var v = window.localStorage.getItem('keres_' + k);
-        if (v) out[k] = v;
-      });
-    } catch (e) { /* no storage, no attribution */ }
-    return out;
-  };
+  // tel: click → Google Ads conversion + Meta Contact
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="tel:"]');
+    if (!a) return;
+    var id = uuid();
+    a.setAttribute('data-event-id', id);
+    adsConversion('tel_click', { event_id: id });
+    meta('Contact', id, { content_name: 'tel_click' });
+    if (GA4 && window.gtag) gtag('event', 'tel_click', { event_id: id });
+  }, true);
+
+  // form success → Google Ads conversion + Meta Lead (same id as the POST)
+  document.addEventListener('keres:lead', function (e) {
+    var d = (e && e.detail) || {};
+    var id = d.eventId || uuid();
+    adsConversion('form_submit', { event_id: id });
+    meta('Lead', id, { content_name: d.form || 'form' });
+    if (GA4 && window.gtag) gtag('event', 'generate_lead', { event_id: id, form: d.form || 'form' });
+  });
+
+  // GA4 page views on client-side navigations (first load is config's own).
+  var first = true;
+  document.addEventListener('astro:page-load', function () {
+    if (first) { first = false; return; }
+    if (GA4 && window.gtag) gtag('event', 'page_view', { page_location: location.href, page_title: document.title });
+    if (PIXEL && window.fbq) fbq('track', 'PageView');
+  });
 })();

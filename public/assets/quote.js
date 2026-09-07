@@ -23,6 +23,7 @@
       var ts = form.querySelector('[data-qf-ts]');
       var done = root.querySelector('[data-qf-done]');
       var rendered = Date.now();
+      var eventId = '';
       ts.value = String(rendered);
 
       function err(name, msg) {
@@ -71,6 +72,10 @@
         err('form', '');
         var data = new FormData(form);
         data.append('page', location.pathname);
+        // One id for this lead: sent with the POST for server-side CAPI, and
+        // handed to tracking.js for the browser-side Lead event.
+        eventId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'k-' + Date.now().toString(36);
+        data.append('_event_id', eventId);
         var endpoint = root.getAttribute('data-endpoint');
         var t0 = Date.now();
         fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
@@ -89,7 +94,7 @@
         form.hidden = true;
         done.hidden = false;
         root.classList.add('is-done');
-        document.dispatchEvent(new CustomEvent('keres:lead', { detail: { form: 'quote', page: location.pathname } }));
+        document.dispatchEvent(new CustomEvent('keres:lead', { detail: { form: 'quote', page: location.pathname, eventId: eventId } }));
         loadBooking();
         done.querySelector('h3').setAttribute('tabindex', '-1');
         done.querySelector('h3').focus();

@@ -368,6 +368,7 @@
         if (!res.ok) throw new Error('server');
         form.style.display = 'none';
         okEl.style.display = 'block';
+          document.dispatchEvent(new CustomEvent('keres:lead', { detail: { form: form.id || 'contact', page: location.pathname } }));
         okEl.focus?.();
       } catch {
         erEl.style.display = 'block';
