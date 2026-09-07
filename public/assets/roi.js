@@ -130,4 +130,6 @@
   } else {
     init();
   }
+  // The calculator's inputs are replaced on client-side navigation.
+  document.addEventListener("astro:after-swap", init);
 })();

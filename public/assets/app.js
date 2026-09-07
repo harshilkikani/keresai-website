@@ -9,6 +9,31 @@
   const CALENDLY_URL = 'https://calendly.com/ops-keresai/30min';
   const THEME_KEY = 'keres.theme';
 
+  /* ── Lifecycle ───────────────────────────────────────────
+     With Astro's ClientRouter the document is swapped on navigation
+     and DOMContentLoaded never fires again, so every init runs through
+     ready(): once on load and again after each swap. Listeners on
+     document/window are bound once (bindOnce) so they never stack;
+     listeners on persisted nav elements are guarded per element. */
+  const ready = (fn) => {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, { once: true });
+    else fn();
+    document.addEventListener('astro:after-swap', fn);
+  };
+  const bound = new Set();
+  const bindOnce = (target, key, type, fn, opts) => {
+    if (bound.has(key)) return;
+    bound.add(key);
+    target.addEventListener(type, fn, opts);
+  };
+  const first = (el, key) => {
+    if (!el) return false;
+    el.__k = el.__k || {};
+    if (el.__k[key]) return false;
+    el.__k[key] = true;
+    return true;
+  };
+
   /* ─── Theme ─────────────────────────────────────────── */
   function getTheme() {
     return localStorage.getItem(THEME_KEY)
@@ -24,20 +49,20 @@
       btn.querySelector('.icon-moon').style.display = theme === 'dark' ? 'none' : 'block';
     }
   }
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     applyTheme(getTheme());
     const btn = document.getElementById('theme-toggle');
-    btn && btn.addEventListener('click', () => {
+    first(btn, 'theme') && btn.addEventListener('click', () => {
       const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       applyTheme(next);
     });
   });
 
   /* ─── Mobile nav (hamburger) ────────────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     const btn  = document.getElementById('hamburger');
     const menu = document.getElementById('mobile-menu');
-    if (!btn || !menu) return;
+    if (!btn || !menu || !first(btn, 'menu')) return;
 
     function setOpen(open) {
       btn.setAttribute('aria-expanded', open);
@@ -46,12 +71,12 @@
     }
     btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
-    window.addEventListener('resize', () => { if (window.innerWidth > 768) setOpen(false); });
+    bindOnce(document, 'L1', 'keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+    bindOnce(window, 'L2', 'resize', () => { if (window.innerWidth > 768) setOpen(false); });
   });
 
   /* ─── Nav compact-on-scroll ─────────────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     const nav = document.querySelector('.nav');
     if (!nav) return;
     let ticking = false;
@@ -60,7 +85,7 @@
       ticking = false;
     };
     update();
-    window.addEventListener('scroll', () => {
+    bindOnce(window, 'L3', 'scroll', () => {
       if (!ticking) {
         requestAnimationFrame(update);
         ticking = true;
@@ -69,7 +94,7 @@
   });
 
   /* ─── Scroll-spy (IntersectionObserver-based) ──────── */
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     const sections = document.querySelectorAll('section[id]');
     const links    = document.querySelectorAll('.nav-links a[href^="#"]');
     if (!links.length || !sections.length || !('IntersectionObserver' in window)) return;
@@ -97,7 +122,7 @@
   });
 
   /* ─── Resource page filter pills ───────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     const pills = document.querySelectorAll('.cat-pill');
     const cards = document.querySelectorAll('.res-card[data-category]');
     if (!pills.length || !cards.length) return;
@@ -115,7 +140,7 @@
   });
 
   /* ─── Reveal-on-scroll ─────────────────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     if (!('IntersectionObserver' in window)) {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
       return;
@@ -136,12 +161,12 @@
      window.keresTrack only exists on /lp/* pages, where
      tracking.js is loaded. Everywhere else this is a no-op, which
      is why the check is on the function and not on the page. */
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     const fire = (name, params) => {
       if (typeof window.keresTrack === 'function') window.keresTrack(name, params || {});
     };
 
-    document.addEventListener('click', (e) => {
+    bindOnce(document, 'L4', 'click', (e) => {
       const el = e.target.closest('[data-event]');
       if (!el) return;
       fire(el.dataset.event, {
@@ -168,7 +193,7 @@
      The <details> elements work on their own. This only adds the
      two behaviours markup cannot express: close when the pointer
      goes elsewhere, and close on Escape. */
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     const drops = Array.prototype.slice.call(document.querySelectorAll('.nav-drop'));
     if (!drops.length) return;
 
@@ -177,14 +202,14 @@
     };
 
     drops.forEach((d) => {
-      d.addEventListener('toggle', () => { if (d.open) closeAll(d); });
+      if (first(d, 'drop')) d.addEventListener('toggle', () => { if (d.open) closeAll(d); });
     });
 
-    document.addEventListener('click', (e) => {
+    bindOnce(document, 'L5', 'click', (e) => {
       if (!e.target.closest('.nav-drop')) closeAll(null);
     });
 
-    document.addEventListener('keydown', (e) => {
+    bindOnce(document, 'L6', 'keydown', (e) => {
       if (e.key !== 'Escape') return;
       const open = drops.filter((d) => d.open);
       if (!open.length) return;
@@ -195,7 +220,7 @@
   });
 
   /* ─── Calendar + Calendly launcher ─────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     const elDays  = document.getElementById('calDays');
     const elMonth = document.getElementById('calMonth');
     const elInfo  = document.getElementById('calInfo');
@@ -279,11 +304,11 @@
     });
 
     render();
-    document.addEventListener('langchange', render);
+    bindOnce(document, 'L7', 'langchange', render);
   });
 
   /* ─── Contact form (Formspree) ─────────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     const form = document.getElementById('contact-form');
     if (!form) return;
     const btn  = document.getElementById('form-btn');
@@ -348,7 +373,7 @@
   });
 
   /* ─── Dynamic year ─────────────────────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
+  ready(() => {
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
   });

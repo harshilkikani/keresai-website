@@ -39,7 +39,8 @@ for (const vp of VIEWPORTS) {
         console.log(`FAIL ${url} → ${res ? res.status() : 'no response'}`);
         continue;
       }
-      await page.waitForTimeout(400);
+      // The hero orchestration runs ~2.2s; let it settle before the fold shot.
+      await page.waitForTimeout(2600);
       if (dsf === 2) {
         await page.screenshot({ path: `${OUT}/${label}-${slug}-${vp.name}-fold.png` });
         const h = await page.evaluate(() => document.documentElement.scrollHeight);

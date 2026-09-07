@@ -1,0 +1,12 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ channel: 'chrome' });
+const c = await b.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: 'dark', deviceScaleFactor: 1 });
+const p = await c.newPage();
+await p.goto('http://localhost:4321/', { waitUntil: 'networkidle' });
+await p.waitForTimeout(2600);
+await p.screenshot({ path: '/private/tmp/keres-shots/v2-dark-hero.png' });
+const y = await p.evaluate(() => { const el = document.getElementById('brief'); window.scrollTo(0, el.offsetTop - 40); return el.offsetTop; });
+await p.waitForTimeout(1400);
+await p.screenshot({ path: '/private/tmp/keres-shots/v2-dark-brief.png' });
+console.log('dark shots taken, brief at', y);
+await b.close();

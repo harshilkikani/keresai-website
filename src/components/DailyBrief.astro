@@ -1,15 +1,16 @@
 ---
 /**
- * The Owner Daily Brief — one SMS each morning telling the owner what
- * the agents did overnight, which source produced the bookings, and
- * the single thing that needs a person.
+ * The Owner Daily Brief as the owner actually receives it: an SMS thread
+ * on a phone, three bubbles with timestamps, the counts as pills.
  *
- * Semantic green and amber exist on this site for exactly this mock
- * (tokens.css). Do not borrow them for anything else.
+ * Green pills are money that stayed; the single amber bubble is the one
+ * thing waiting on a person. These are the only two places on the site
+ * that use the semantic colours (tokens.css). The "review posted" pill
+ * is last in DOM order and carries data-pop so it lands with a scale.
  *
  * Shown or mentioned on every product page.
  */
-import MockFrame from './MockFrame.astro';
+import PhoneFrame from './PhoneFrame.astro';
 import { briefs, type Vertical } from '../data/mocks';
 
 export interface Props {
@@ -20,25 +21,49 @@ export interface Props {
 
 const { vertical = 'default', caption = true, class: extraClass = '' } = Astro.props;
 const b = briefs[vertical] ?? briefs.default;
+const pills = b.lines.filter((l) => l.tone !== 'warn');
+const warn = b.lines.find((l) => l.tone === 'warn');
+// The review pill lands last, with the pop.
+const ordered = [...pills.filter((p) => !/review/i.test(p.text)), ...pills.filter((p) => /review/i.test(p.text))];
 ---
 <figure class:list={['k-brief-fig', extraClass]}>
-  <MockFrame label="Owner Daily Brief" status={b.when} device="phone" class="k-brief">
-    <p class="k-brief__from">Keres</p>
-    <div class="k-brief__bubble" data-reveal>
-      <p class="k-brief__head">{b.heading}</p>
-      <ul class="k-brief__lines">
-        {b.lines.map((l) => (
-          <li class:list={['k-brief__line', `is-${l.tone}`]} data-reveal-child>
-            <span class="k-brief__n" data-figure>{l.n}</span>
-            <span class="k-brief__t">{l.text}</span>
-          </li>
-        ))}
-      </ul>
-      <p class="k-brief__source">{b.source}</p>
-      <p class="k-brief__action">{b.action}</p>
+  <PhoneFrame time="6:00" class="k-brief" screen="dark">
+    <header class="sms__head">
+      <span class="sms__avatar" aria-hidden="true">K</span>
+      <span class="sms__name">Keres</span>
+      <span class="sms__sub">Owner Daily Brief</span>
+    </header>
+    <ol class="sms sms--brief" data-reveal data-reveal-stagger="90">
+      <li class="sms__msg sms__msg--agent" data-reveal-child>
+        <span class="sms__t" data-figure>{b.when}</span>
+        <div class="sms__bubble">
+          <p class="sms__lead">{b.heading}</p>
+          <ul class="pills">
+            {ordered.map((l) => (
+              <li class:list={['pill', `pill--${l.tone}`]} data-reveal-child data-pop={/review/i.test(l.text) ? '' : undefined}>
+                <span class="pill__n" data-figure>{l.n}</span> {l.text}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </li>
+      <li class="sms__msg sms__msg--agent" data-reveal-child>
+        <span class="sms__t" data-figure>6:00 AM</span>
+        <p class="sms__bubble">{b.source}</p>
+      </li>
+      <li class="sms__msg sms__msg--agent sms__msg--warn" data-reveal-child>
+        <span class="sms__t" data-figure>6:01 AM</span>
+        <p class="sms__bubble">
+          {warn && <span class="pill pill--warn pill--inline"><span class="pill__n" data-figure>{warn.n}</span> {warn.text}</span>}
+          {b.action}
+        </p>
+      </li>
+    </ol>
+    <div class="sms__reply" aria-hidden="true">
+      <span>Reply CALL to be connected</span>
+      <span class="sms__send"></span>
     </div>
-    <p class="k-brief__reply">Reply STOP to pause · Reply CALL to be connected</p>
-  </MockFrame>
+  </PhoneFrame>
   {caption && (
     <figcaption class="k-mock__caption">Example brief. Your numbers are your own.</figcaption>
   )}

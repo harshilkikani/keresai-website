@@ -1,43 +1,202 @@
 /* =============================================================
    Keres AI — motion
-   Five motions exist on this site. This file owns two of them:
-     2. scroll reveal
-     5. Daily Brief SMS stagger (same mechanism, longer delay)
-   Hero orchestration (1) is CSS-driven. Hover (3) and focus (4)
-   are CSS-only. Nothing else animates.
+   Loaded in <head>, blocking, on purpose: it stamps html[data-motion]
+   before first paint so choreographed elements start hidden instead of
+   flashing. Everything here is transform/opacity, IntersectionObserver-
+   gated, and resolves to final state under prefers-reduced-motion.
 
-   The resting state of every revealed element is VISIBLE. The
-   hidden state is only ever applied after this script confirms it
-   may animate, so a failed script or reduced-motion preference
-   leaves finished content on screen rather than a blank page.
+   Motion system:
+     1. Hero orchestration on load  — CSS keyframes, this file just
+                                       flips .is-live once.
+     2. Two-door tilt               — pointer-driven, desktop only.
+     3. Sticky pipeline             — nodes light, connector draws.
+     4. Scroll reveals              — 12px rise + fade, 60ms stagger.
+     5. Count-up numbers            — once, in view.
+     6. Buttons / phone pulse       — CSS only.
+     7. Daily Brief bubbles         — reveal machinery, 90ms, pop last.
+     8. View transitions            — Astro ClientRouter, CSS crossfade.
+     9. Cursor light in the hero    — desktop only.
 ============================================================= */
 (function () {
   'use strict';
 
+  var doc = document;
+  var root = doc.documentElement;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var targets = document.querySelectorAll('[data-reveal]');
-  if (reduced || !targets.length || !('IntersectionObserver' in window)) return;
+  var fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+  var desktop = function () { return window.innerWidth >= 1024 && fine; };
 
-  // Opting in here is what switches on the hidden pre-state in CSS.
-  document.documentElement.setAttribute('data-motion', '');
+  if (reduced || !('IntersectionObserver' in window)) return;
+  var stamp = function () { root.setAttribute('data-motion', ''); };
+  stamp();
 
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      var el = entry.target;
-      // Children stagger; a lone element reveals immediately.
-      var kids = el.querySelectorAll('[data-reveal-child]');
-      if (kids.length) {
-        // 120ms for the hero transcript, 100ms for the Daily Brief bubbles.
-        var step = parseInt(el.getAttribute('data-reveal-stagger'), 10) || 100;
-        Array.prototype.forEach.call(kids, function (kid, i) {
-          kid.style.transitionDelay = (i * step) + 'ms';
+  var easeOutQuint = function (t) { return 1 - Math.pow(1 - t, 5); };
+
+  /* ── 1. Hero orchestration ─────────────────────────────── */
+  function hero(scope) {
+    var fig = scope.querySelector('[data-hero]');
+    var h1 = scope.querySelector('[data-words]');
+    if (h1) h1.classList.add('is-live');
+    if (fig) {
+      // Let the H1 words start first (6 × 40ms), then the transcript.
+      setTimeout(function () { fig.classList.add('is-live'); }, 260);
+    }
+  }
+
+  /* ── 4 + 7. Scroll reveals (children stagger) ───────────── */
+  var revealIO;
+  function reveals(scope) {
+    if (!revealIO) {
+      revealIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          var kids = el.querySelectorAll('[data-reveal-child]');
+          var step = parseInt(el.getAttribute('data-reveal-stagger'), 10) || 60;
+          Array.prototype.forEach.call(kids, function (kid, i) {
+            kid.style.transitionDelay = (i * step) + 'ms';
+            kid.style.setProperty('--d', (i * step) + 'ms');
+          });
+          el.classList.add('is-in');
+          revealIO.unobserve(el);
         });
-      }
-      el.classList.add('is-in');
-      observer.unobserve(el);
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    }
+    Array.prototype.forEach.call(scope.querySelectorAll('[data-reveal]:not(.is-in)'), function (el) {
+      revealIO.observe(el);
     });
-  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+  }
 
-  Array.prototype.forEach.call(targets, function (el) { observer.observe(el); });
+  /* ── 5. Count-up numbers ───────────────────────────────── */
+  var countIO;
+  function counts(scope) {
+    if (!countIO) {
+      countIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          countIO.unobserve(el);
+          var raw = (el.textContent || '').trim();
+          var m = raw.match(/^([^0-9]*)([0-9][0-9,]*)(.*)$/);
+          if (!m) return;
+          var target = parseInt(m[2].replace(/,/g, ''), 10);
+          if (!isFinite(target)) return;
+          var prefix = m[1], suffix = m[3];
+          var useCommas = m[2].indexOf(',') !== -1 || target >= 1000;
+          var start = null, dur = Math.min(1100, 400 + target * 2);
+          el.style.minWidth = el.getBoundingClientRect().width + 'px';
+          function frame(ts) {
+            if (start === null) start = ts;
+            var p = Math.min(1, (ts - start) / dur);
+            var v = Math.round(target * easeOutQuint(p));
+            el.textContent = prefix + (useCommas ? v.toLocaleString('en-US') : String(v)) + suffix;
+            if (p < 1) requestAnimationFrame(frame);
+            else el.style.minWidth = '';
+          }
+          requestAnimationFrame(frame);
+        });
+      }, { threshold: 0.6 });
+    }
+    Array.prototype.forEach.call(scope.querySelectorAll('[data-count]:not([data-counted])'), function (el) {
+      el.setAttribute('data-counted', '');
+      countIO.observe(el);
+    });
+  }
+
+  /* ── 3. Sticky pipeline ────────────────────────────────── */
+  function pipeline(scope) {
+    var svg = scope.querySelector('[data-pipeline]');
+    if (!svg) return;
+    var copies = scope.querySelectorAll('[data-stage-copy]');
+    var line = svg.querySelector('[data-draw]');
+    if (!copies.length || !line) return;
+
+    var total = parseFloat(line.getAttribute('y2')) - parseFloat(line.getAttribute('y1'));
+    line.style.strokeDasharray = total;
+    line.style.strokeDashoffset = total;
+    svg.setAttribute('data-active', '-1');
+
+    var stageIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var n = parseInt(e.target.getAttribute('data-stage-copy'), 10);
+        var cur = parseInt(svg.getAttribute('data-active'), 10);
+        if (n > cur) svg.setAttribute('data-active', String(n));
+        e.target.classList.add('is-active');
+      });
+    }, { rootMargin: '-40% 0px -45% 0px', threshold: 0 });
+    Array.prototype.forEach.call(copies, function (c) { stageIO.observe(c); });
+
+    // Connector draws with scroll progress through the copy column.
+    var col = copies[0].parentElement;
+    var ticking = false;
+    function draw() {
+      ticking = false;
+      var r = col.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var progress = (vh * 0.5 - r.top) / (r.height - vh * 0.2);
+      progress = Math.max(0, Math.min(1, progress));
+      line.style.strokeDashoffset = String(total * (1 - progress));
+    }
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(draw);
+    }, { passive: true });
+    draw();
+  }
+
+  /* ── 2. Tilt toward the cursor, spring back on leave ───── */
+  function tilt(scope) {
+    if (!desktop()) return;
+    Array.prototype.forEach.call(scope.querySelectorAll('[data-tilt]'), function (el) {
+      if (el.__tilt) return;
+      el.__tilt = true;
+      var MAX = 4;
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        el.style.setProperty('--rx', (-y * MAX).toFixed(2) + 'deg');
+        el.style.setProperty('--ry', (x * MAX).toFixed(2) + 'deg');
+        el.classList.add('is-tilting');
+      });
+      el.addEventListener('pointerleave', function () {
+        el.style.setProperty('--rx', '0deg');
+        el.style.setProperty('--ry', '0deg');
+        el.classList.remove('is-tilting');
+      });
+    });
+  }
+
+  /* ── 9. Cursor light in the hero only ──────────────────── */
+  function light(scope) {
+    if (!desktop()) return;
+    var h = scope.querySelector('.k-hero--v2');
+    if (!h || h.__light) return;
+    h.__light = true;
+    h.addEventListener('pointermove', function (e) {
+      var r = h.getBoundingClientRect();
+      h.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      h.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      h.classList.add('has-light');
+    });
+    h.addEventListener('pointerleave', function () { h.classList.remove('has-light'); });
+  }
+
+  function init() {
+    stamp();
+    var scope = doc.body;
+    hero(scope);
+    reveals(scope);
+    counts(scope);
+    pipeline(scope);
+    tilt(scope);
+    light(scope);
+  }
+
+  // Runs on the first load and again after every client-side navigation.
+  if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+  doc.addEventListener('astro:after-swap', init);
 })();

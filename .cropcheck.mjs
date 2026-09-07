@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ channel: 'chrome' });
+const c = await b.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light' });
+const p = await c.newPage();
+await p.goto('http://localhost:4321/', { waitUntil: 'networkidle' });
+await p.waitForTimeout(2800);
+const el = await p.$('[data-hero] .k-device');
+await el.screenshot({ path: '/private/tmp/keres-shots/v2-transcript-crop.png' });
+const lines = await p.evaluate(() => [...document.querySelectorAll('[data-hero] .k-call__text')].map(t => Math.round(t.getBoundingClientRect().height / 24)));
+console.log('turn line counts:', lines.join(', '));
+await b.close();

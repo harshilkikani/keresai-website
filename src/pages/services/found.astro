@@ -117,7 +117,7 @@ const serviceNodes = foundServices.map((s) =>
       </div>
       <ul class="k-svc">
         {foundServices.map((s) => (
-          <li class="k-svc__item">
+          <li class="k-svc__item" id={s.name.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}>
             <div class="k-svc__head">
               <h3 class="k-svc__name">{s.name}</h3>
               {s.addOn && <span class="k-svc__plan k-svc__plan--addon">Add-on</span>}

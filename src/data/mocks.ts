@@ -304,3 +304,135 @@ export const bookings: Record<Vertical, Booking> = {
     writtenTo: 'Follow Up Boss',
   },
 };
+
+// ─────────────────────────────────────────────────────────────
+// Be Found — the site-on-a-phone mock and the Google listing card
+//
+// Both are EXAMPLES of what a Found account looks like for a
+// fictional HVAC company. The star rating and review count are the
+// example business's, not Keres's — the components label them as
+// such. Never swap in a real firm's numbers here.
+// ─────────────────────────────────────────────────────────────
+
+export interface SiteMock {
+  /** The fictional business on the template. */
+  name: string;
+  tagline: string;
+  /** The click-to-call bar text. */
+  phone: string;
+  services: string[];
+  /** One review line in the site's reviews strip. */
+  review: { text: string; by: string };
+  badges: string[];
+}
+
+export const siteMock: SiteMock = {
+  name: 'Northline Heating & Air',
+  tagline: 'Same-day repair. Answered 24/7.',
+  phone: '(555) 010-4400',
+  services: ['AC repair', 'Furnace repair', 'Maintenance plans', 'New installs'],
+  review: { text: 'Called at 9pm, tech was here by 8am.', by: 'Example review' },
+  badges: ['Licensed & insured', 'Answered in 2 rings'],
+};
+
+export interface ListingMock {
+  name: string;
+  category: string;
+  rating: string;
+  reviews: string;
+  hours: string;
+  phone: string;
+  area: string;
+  /** The "Open 24 hours" line comes from Remi answering the line. */
+  note: string;
+}
+
+export const listingMock: ListingMock = {
+  name: 'Northline Heating & Air',
+  category: 'HVAC contractor',
+  rating: '4.9',
+  reviews: '212',
+  hours: 'Open 24 hours',
+  phone: '(555) 010-4400',
+  area: 'Serves the metro area',
+  note: 'Example listing',
+};
+
+// ─────────────────────────────────────────────────────────────
+// Agent mini-mocks — one small product moment per agent
+// ─────────────────────────────────────────────────────────────
+
+export interface Bubble {
+  who: 'agent' | 'them';
+  t: string;
+  text: string;
+}
+
+export interface AgentMock {
+  slug: string;
+  label: string;
+  kind: 'transcript' | 'sms' | 'inbox';
+  /** Transcript excerpt or SMS thread. */
+  bubbles?: Bubble[];
+  /** For Sol: a small inbox listing with one reply highlighted. */
+  inbox?: { from: string; subject: string; preview: string; t: string; booked?: boolean }[];
+  /** One-line outcome under the mock. */
+  outcome: string;
+}
+
+export const agentMocks: AgentMock[] = [
+  {
+    slug: 'inbound',
+    label: 'Remi · example call',
+    kind: 'transcript',
+    bubbles: [
+      { who: 'them', t: '0:04', text: 'Do you have anyone who can come out tonight?' },
+      { who: 'agent', t: '0:09', text: 'Yes. What is the service address, and is anyone in the home without heat?' },
+      { who: 'them', t: '0:16', text: '412 Miller Road. It is 54 degrees in here.' },
+      { who: 'agent', t: '0:21', text: 'That is an emergency dispatch. A tech can be there between 8 and 10 tonight — shall I book it?' },
+    ],
+    outcome: 'Emergency job created · dispatch window sent · owner paged',
+  },
+  {
+    slug: 'follow-up',
+    label: 'Theo · reminder thread',
+    kind: 'sms',
+    bubbles: [
+      { who: 'agent', t: 'Yesterday 4:02 PM', text: 'Hi Dana — reminder that your furnace tune-up is tomorrow, 8–10 AM. Reply C to confirm or R to reschedule.' },
+      { who: 'them', t: 'Yesterday 4:15 PM', text: 'C' },
+      { who: 'agent', t: 'Yesterday 4:15 PM', text: 'Confirmed. We will text when the tech is on the way.' },
+    ],
+    outcome: 'Confirmed · no-show risk cleared · tech notified',
+  },
+  {
+    slug: 'reactivation',
+    label: 'June · reactivation',
+    kind: 'sms',
+    bubbles: [
+      { who: 'agent', t: 'Tue 10:10 AM', text: 'Hi Marcus, it is June from Northline. We serviced your furnace two winters ago — want us to fit a tune-up in before the cold hits? Reply YES and I will hold a slot.' },
+      { who: 'them', t: 'Tue 11:48 AM', text: 'Yes, Thursday if you can' },
+      { who: 'agent', t: 'Tue 11:48 AM', text: 'Thursday 1–3 PM is yours. Confirmation on its way.' },
+    ],
+    outcome: 'Past customer rebooked · written to the CRM',
+  },
+  {
+    slug: 'outbound',
+    label: 'Sol · replies inbox',
+    kind: 'inbox',
+    inbox: [
+      { from: 'Priya S.', subject: 'Re: After-hours coverage for the practice', preview: 'Tuesday 10am works — send the invite.', t: '9:41 AM', booked: true },
+      { from: 'Daniel E.', subject: 'Re: Intake coverage', preview: 'Not right now, maybe Q1.', t: '8:55 AM' },
+      { from: 'Alana R.', subject: 'Re: Missed calls at the firm', preview: 'Can you send pricing first?', t: 'Yesterday' },
+    ],
+    outcome: 'Meeting booked · Tue 10:00 AM · disqualified replies marked',
+  },
+];
+
+// ─────────────────────────────────────────────────────────────
+// Hero orchestration tail — the two events after the transcript
+// ─────────────────────────────────────────────────────────────
+
+export const heroTail = {
+  booking: { day: 'Wed', date: '18', time: '8:00–10:00 AM', what: 'Service call · 412 Miller Rd', where: 'Google Calendar' },
+  ownerText: { t: '8:13 PM', text: 'Remi: Booked Wed 8–10 AM for (555) 014-2207 — no heat, 412 Miller Rd. Details are in the CRM.' },
+};

@@ -1,15 +1,29 @@
 ---
-import { PHONE, agents } from '../data/site';
+import { PHONE, agents, foundServices } from '../data/site';
 
 /**
- * The phone number is the nav's button — the demo is the product, but
- * the fastest proof is hearing the agent answer. "Book a demo" is a
- * quiet text link beside it.
+ * Two doors, then the rest. "Be Found" opens onto the Found services;
+ * "Be Answered" onto the four agents. The phone number is the button —
+ * hearing Remi answer is the fastest demo there is — and "Get a quote"
+ * is the quiet text link beside it.
  *
- * Dropdowns are <details>/<summary>: they work with no JavaScript, are
- * keyboard-operable for free, and app.js only adds click-outside and
- * Escape-to-close on top.
+ * Dropdowns are <details>/<summary>: no JavaScript required, keyboard-
+ * operable for free. app.js adds click-outside and Escape on top.
  */
+const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+const foundLinks = foundServices.map((s) => ({
+  href: `/services/found#${slug(s.name)}`,
+  label: s.name,
+  sub: s.addOn ? 'Add-on' : 'Included',
+}));
+
+const agentLinks = agents.map((a) => ({
+  href: `/agents/${a.slug}`,
+  label: a.name,
+  sub: a.title,
+}));
+
 const industryLinks = [
   { href: '/industries/law-firms', label: 'Law firms' },
   { href: '/industries/home-services', label: 'Home services' },
@@ -27,26 +41,36 @@ const resourceLinks = [
   { href: '/integrations', label: 'Integrations' },
   { href: '/glossary', label: 'Glossary' },
 ];
-
-const agentLinks = agents.map((a) => ({
-  href: `/agents/${a.slug}`,
-  label: a.name,
-  sub: a.title,
-}));
 ---
-<header class="nav" role="banner">
+<header class="nav" role="banner" transition:persist="nav-bar">
   <div class="nav-inner">
     <a href="/" class="logo" aria-label="Keres AI. Home">
-      <img src="/assets/img/KeresLogo.png" alt="Keres AI" class="logo-img" width="120" height="32" />
+      <img src="/assets/img/KeresLogo.webp" srcset="/assets/img/KeresLogo.webp 1x, /assets/img/KeresLogo@2x.webp 2x" alt="Keres AI" class="logo-img" width="120" height="32" />
     </a>
 
     <nav aria-label="Primary">
       <ul class="nav-links">
-        <li><a href="/services">Services</a></li>
+        <li>
+          <details class="nav-drop">
+            <summary>Be Found</summary>
+            <div class="nav-drop__panel nav-drop__panel--two">
+              {foundLinks.map((l) => (
+                <a href={l.href}>
+                  <span class="nav-drop__name">{l.label}</span>
+                  <span class="nav-drop__sub">{l.sub}</span>
+                </a>
+              ))}
+              <a href="/services/found" class="nav-drop__all">
+                <span class="nav-drop__name">Everything in Found</span>
+                <span class="nav-drop__sub">from $249 / month</span>
+              </a>
+            </div>
+          </details>
+        </li>
 
         <li>
           <details class="nav-drop">
-            <summary>Agents</summary>
+            <summary>Be Answered</summary>
             <div class="nav-drop__panel">
               {agentLinks.map((l) => (
                 <a href={l.href}>
@@ -54,6 +78,10 @@ const agentLinks = agents.map((a) => ({
                   <span class="nav-drop__sub">{l.sub}</span>
                 </a>
               ))}
+              <a href="/services" class="nav-drop__all">
+                <span class="nav-drop__name">All seven stages</span>
+                <span class="nav-drop__sub">How the four work together</span>
+              </a>
             </div>
           </details>
         </li>
@@ -91,7 +119,7 @@ const agentLinks = agents.map((a) => ({
         </svg>
       </button>
 
-      <a href="/demo" class="nav-demo-link desktop-only" data-event="demo_click">Book a demo</a>
+      <a href="/demo" class="nav-demo-link desktop-only" data-event="demo_click">Get a quote</a>
 
       <a href={PHONE.href} class="nav-phone" data-event="tel_click" aria-label={`Call Keres AI on ${PHONE.display}`}>
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -107,10 +135,13 @@ const agentLinks = agents.map((a) => ({
   </div>
 </header>
 
-<div id="mobile-menu" class="mobile-menu" data-open="false" aria-label="Mobile navigation">
-  <a href="/services">Services</a>
-  <p class="mobile-menu__group">Agents</p>
+<div id="mobile-menu" class="mobile-menu" data-open="false" aria-label="Mobile navigation" transition:persist="nav-menu">
+  <p class="mobile-menu__group">Be Found</p>
+  <a href="/services/found" class="mobile-menu__sub">Everything in Found &mdash; from $249</a>
+  {foundLinks.slice(0, 4).map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
+  <p class="mobile-menu__group">Be Answered</p>
   {agentLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label} &mdash; {l.sub}</a>)}
+  <a href="/services" class="mobile-menu__sub">All seven stages</a>
   <p class="mobile-menu__group">Industries</p>
   {industryLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
   <a href="/pricing">Pricing</a>
@@ -120,6 +151,6 @@ const agentLinks = agents.map((a) => ({
   <a href="/contact">Contact</a>
   <div class="mobile-cta">
     <a href={PHONE.href} class="btn-k btn-k--primary btn-k--wide" data-event="tel_click">Call {PHONE.display}</a>
-    <a href="/demo" class="btn-k btn-k--outline btn-k--wide" data-event="demo_click">Book a demo</a>
+    <a href="/demo" class="btn-k btn-k--outline btn-k--wide" data-event="demo_click">Get a quote</a>
   </div>
 </div>
