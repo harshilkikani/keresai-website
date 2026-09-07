@@ -13,6 +13,8 @@ export interface GoWebsitePage {
   vertical: string;
   /** Pre-selects the quote form's industry. '' = no preselect. */
   industry: '' | 'home-services' | 'law' | 'dental';
+  /** The Found floor for this vertical, as printed. Law firms are from $499. */
+  price: string;
 }
 
 export const goWebsitePages: GoWebsitePage[] = [
@@ -23,6 +25,7 @@ export const goWebsitePages: GoWebsitePage[] = [
     description: 'A conversion website with click-to-call and booking wired in, and your Google listing managed every week. $249/month, no build fee, month-to-month, live in five days.',
     vertical: 'local service firms',
     industry: '',
+    price: '$249',
   },
   {
     slug: 'home-services',
@@ -31,6 +34,7 @@ export const goWebsitePages: GoWebsitePage[] = [
     description: 'A website built for HVAC and plumbing companies: click-to-call, booking wired in, your Google listing managed every week. $249/month, no build fee, live in five days.',
     vertical: 'HVAC and plumbing companies',
     industry: 'home-services',
+    price: '$249',
   },
   {
     slug: 'law',
@@ -39,6 +43,7 @@ export const goWebsitePages: GoWebsitePage[] = [
     description: 'A website built for law firms: click-to-call, consult booking wired in, your Google listing managed every week. Law-firm plans from $499/month, no build fee, live in five days.',
     vertical: 'law firms',
     industry: 'law',
+    price: '$499',
   },
   {
     slug: 'dental',
@@ -47,6 +52,7 @@ export const goWebsitePages: GoWebsitePage[] = [
     description: 'A website built for dental practices: click-to-call, booking wired in, your Google listing managed every week. $249/month, no build fee, live in five days.',
     vertical: 'dental practices',
     industry: 'dental',
+    price: '$249',
   },
 ];
 

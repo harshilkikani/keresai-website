@@ -2421,6 +2421,7 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 @media (max-width: 560px) {
   .gw-hero__mocks { grid-template-columns: minmax(0, 1fr); justify-items: start; }
   .gw-hero__mocks .ph { max-width: 220px; }
+  .gw-hero__mocks .ph__notch { inline-size: 56px; }
 }
 /* What you get: a two-column list, one line each, no cards. */
 .gw-list { list-style: none; padding: 0; margin: var(--space-6) 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--space-7); border-top: 1px solid var(--line); }
