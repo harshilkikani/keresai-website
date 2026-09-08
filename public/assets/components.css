@@ -1820,6 +1820,11 @@ html[data-motion] [data-words].is-live .w:nth-child(3) { animation-delay: 80ms; 
 html[data-motion] [data-words].is-live .w:nth-child(4) { animation-delay: 120ms; }
 html[data-motion] [data-words].is-live .w:nth-child(5) { animation-delay: 160ms; }
 html[data-motion] [data-words].is-live .w:nth-child(6) { animation-delay: 200ms; }
+html[data-motion] [data-words].is-live .w:nth-child(7) { animation-delay: 240ms; }
+html[data-motion] [data-words].is-live .w:nth-child(8) { animation-delay: 280ms; }
+html[data-motion] [data-words].is-live .w:nth-child(9) { animation-delay: 320ms; }
+html[data-motion] [data-words].is-live .w:nth-child(10) { animation-delay: 360ms; }
+html[data-motion] [data-words].is-live .w:nth-child(n+11) { animation-delay: 400ms; }
 @keyframes kWord { to { transform: none; } }
 
 /* ─── The device frame (call transcript) ──────────────────── */
@@ -2441,3 +2446,10 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 @media (max-width: 720px) { .gw-compare { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); } .gw-compare__col + .gw-compare__col { border-top: 1px solid var(--line); } .gw-compare__col--us { border-top-width: 2px; } }
 /* The one line about answering. */
 .gw-remi { margin: var(--space-5) 0 0; font-size: var(--text--1); color: var(--ink-2); max-width: 560px; }
+
+/* ─── Language switcher ─────────────────────────────────────── */
+.lang-switch { display: inline-flex; align-items: center; gap: 2px; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.lang-switch a, .lang-switch span { padding: 6px 7px; border-radius: var(--radius); color: var(--ink-3); text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+.lang-switch a:hover { color: var(--ink-0); background: var(--accent-wash); }
+.lang-switch [aria-current="true"] { color: var(--ink-0); font-weight: 500; }
+.mobile-menu .lang-switch { margin-top: var(--space-5); }

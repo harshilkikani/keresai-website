@@ -8,8 +8,14 @@
  * that moves. Labelled an example: the business is fictional.
  */
 import PhoneFrame from './PhoneFrame.astro';
-import { siteMock } from '../data/mocks';
-const s = siteMock;
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+import { siteMockFor, siteMockTextFor } from '../i18n/data';
+export interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const s = siteMockFor(locale);
+const x = siteMockTextFor(locale);
+const m = t(locale).mocks;
 ---
 <figure class="k-site-fig">
   <PhoneFrame time="9:41" class="k-site" screen="light">
@@ -17,13 +23,13 @@ const s = siteMock;
       <div class="site__page">
         <header class="site__bar">
           <span class="site__logo">{s.name}</span>
-          <span class="site__call">Call</span>
+          <span class="site__call">{m.call}</span>
         </header>
         <div class="site__hero">
-          <p class="site__eyebrow">HVAC · Licensed & insured</p>
+          <p class="site__eyebrow">{x.eyebrow}</p>
           <p class="site__h1">{s.tagline}</p>
-          <p class="site__sub">Furnace out? AC dead? A real person books you in two rings, day or night.</p>
-          <span class="site__cta">Book a visit</span>
+          <p class="site__sub">{x.sub}</p>
+          <span class="site__cta">{m.bookAVisit}</span>
         </div>
         <ul class="site__services">
           {s.services.map((x) => <li>{x}</li>)}
@@ -43,9 +49,9 @@ const s = siteMock;
       </div>
       <div class="site__sticky">
         <span class="site__sticky-phone" data-figure>{s.phone}</span>
-        <span class="site__sticky-btn">Call now</span>
+        <span class="site__sticky-btn">{m.callNow}</span>
       </div>
     </div>
   </PhoneFrame>
-  <figcaption class="k-mock__caption">The conversion template Found ships. Example business.</figcaption>
+  <figcaption class="k-mock__caption">{m.siteCaption}</figcaption>
 </figure>

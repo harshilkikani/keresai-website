@@ -52,19 +52,20 @@
     $("roi-lost-mo-2").textContent = fmt(lostMo);
     $("roi-lost-yr").textContent = fmt(lostYr);
     $("roi-missed").textContent = Math.round(missed).toLocaleString();
-    $("roi-missed-calc").textContent = `= ${s.leads} × (100% − ${s.answer}%)`;
+    const shell = document.querySelector(".roi-shell");
+    const tpl = (k, d) => (shell && shell.getAttribute("data-tpl-" + k)) || d;
+    const fill = (str, map) => str.replace(/\{(\w+)\}/g, (_, k) => (map[k] != null ? map[k] : ""));
+    $("roi-missed-calc").textContent = fill(tpl("missed", "= {leads} × (100% − {answer}%)"), { leads: s.leads, answer: s.answer });
     $("roi-jobs").textContent = Math.round(jobs).toLocaleString();
-    $("roi-job-calc").textContent = `= jobs × ${fmt(s.job)} avg ticket`;
+    $("roi-job-calc").textContent = fill(tpl("job", "= jobs × {ticket} avg ticket"), { ticket: fmt(s.job) });
     $("roi-ah").textContent = Math.round(ah).toLocaleString();
 
     const closeEl = $("roi-close-calc");
-    if (closeEl) closeEl.textContent = `= missed × ${pct(s.close)} close rate`;
+    if (closeEl) closeEl.textContent = fill(tpl("close", "= missed × {rate} close rate"), { rate: pct(s.close) });
     const noteEl = $("roi-note");
     if (noteEl) {
-      const labelNice = (DEFAULTS[s.vertical]?.label || "Home-services").toLowerCase();
-      noteEl.textContent =
-        `Close rate (${pct(s.close)}) is the typical answered-lead close rate for ${labelNice}. ` +
-        `Swap in your own number if you track it.`;
+      const labelNice = tpl("label-" + s.vertical, (DEFAULTS[s.vertical]?.label || "Home-services").toLowerCase());
+      noteEl.textContent = fill(tpl("note", "Close rate ({rate}) is the typical answered-lead close rate for {vertical}. Swap in your own number if you track it."), { rate: pct(s.close), vertical: labelNice });
     }
 
     const label = DEFAULTS[s.vertical]?.label || "Home-services";

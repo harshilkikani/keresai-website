@@ -1,0 +1,44 @@
+---
+/** The missed-call calculator. Markup here, arithmetic in /assets/roi.js,
+ *  which reads its generated strings from the data-tpl-* attributes. */
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+export interface Props { locale?: Locale; vertical?: string; preset?: boolean; ctaHref: string; noteId?: string }
+const { locale = 'en', vertical = 'home-services', preset = false, ctaHref } = Astro.props;
+const c = t(locale).calc;
+const labelAttrs = Object.fromEntries(Object.entries(c.labels).map(([k, v]) => [`data-tpl-label-${k}`, v]));
+---
+<div class="roi-shell" data-vertical={vertical} data-preset={preset ? 'true' : undefined}
+  data-tpl-note={c.note} data-tpl-missed={c.tplMissed} data-tpl-close={c.tplClose} data-tpl-job={c.tplJob} {...labelAttrs}>
+  <div class="roi-vert-row">
+    <label class="roi-vert-label" for="roi-vert">{c.industry}</label>
+    <select id="roi-vert" class="roi-vert-select">
+      {c.options.map(([v, lbl]) => <option value={v} selected={v === vertical}>{lbl}</option>)}
+    </select>
+  </div>
+  <div class="roi-grid">
+    <div class="roi-inputs">
+      <label class="roi-field"><span class="roi-field-label">{c.leads}</span><input type="number" id="roi-leads" min="0" value="250"></label>
+      <label class="roi-field"><span class="roi-field-label">{c.answer}</span><input type="number" id="roi-answer" min="0" max="100" value="60"></label>
+      <label class="roi-field"><span class="roi-field-label">{c.ticket}</span><div class="roi-field-prefix"><span>$</span><input type="number" id="roi-job" min="0" value="680"></div></label>
+      <label class="roi-field"><span class="roi-field-label">{c.afterHours}</span><input type="number" id="roi-afterhours" min="0" max="100" value="35"></label>
+    </div>
+    <div class="roi-output">
+      <div class="roi-headline-label">{c.losing}</div>
+      <div class="roi-headline-value"><span id="roi-lost-mo" data-count-live>$0</span><span class="roi-per">{c.perMo}</span></div>
+      <div class="roi-headline-year">&asymp; <span id="roi-lost-yr">$0</span> {c.perYear}</div>
+      <div class="roi-math">
+        <div class="roi-math-row"><span>{c.missed}</span><span id="roi-missed">0</span></div>
+        <div class="roi-math-row muted"><span id="roi-missed-calc"></span><span></span></div>
+        <div class="roi-math-row"><span>{c.jobs}</span><span id="roi-jobs">0</span></div>
+        <div class="roi-math-row muted"><span id="roi-close-calc"></span><span></span></div>
+        <div class="roi-math-row"><span>{c.lost}</span><span id="roi-lost-mo-2">$0</span></div>
+        <div class="roi-math-row muted"><span id="roi-job-calc"></span><span></span></div>
+        <div class="roi-math-row"><span>{c.ah}</span><span id="roi-ah">0</span></div>
+        <div class="roi-math-row muted"><span>{c.ahNote}</span><span></span></div>
+      </div>
+      <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href={ctaHref} data-event="demo_click">{c.cta}</a>
+      <div class="roi-note" id="roi-note"></div>
+    </div>
+  </div>
+</div>

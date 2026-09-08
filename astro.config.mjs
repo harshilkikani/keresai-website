@@ -31,6 +31,8 @@ function priorityFor(url) {
 
 export default defineConfig({
   site: 'https://www.keresai.com',
+  // English at /, Spanish at /es/…; only pages with a twin under src/pages/es exist in Spanish.
+  i18n: { defaultLocale: 'en', locales: ['en', 'es'], routing: { prefixDefaultLocale: false } },
   trailingSlash: 'never',
   // Prefetch same-origin links on hover for near-instant navigation.
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },

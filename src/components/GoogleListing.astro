@@ -9,8 +9,13 @@
  * The rating and review count belong to the fictional example business
  * and are labelled as such. They are not Keres traction.
  */
-import { listingMock } from '../data/mocks';
-const l = listingMock;
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+import { listingMockFor } from '../i18n/data';
+export interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const l = listingMockFor(locale);
+const m = t(locale).mocks;
 ---
 <figure class="k-listing-fig">
   <div class="listing" data-tilt>
@@ -19,7 +24,7 @@ const l = listingMock;
       <p class="listing__cat">{l.category} · {l.area}</p>
     </div>
     <div class="listing__rating">
-      <span class="listing__badge">Example · Google</span>
+      <span class="listing__badge">{m.exampleGoogle}</span>
       <span class="listing__num" data-figure>{l.rating}</span>
       <span class="listing__stars" aria-hidden="true">
         {[1,2,3,4,5].map(() => (
@@ -29,14 +34,14 @@ const l = listingMock;
       <span class="listing__reviews" data-figure>({l.reviews})</span>
     </div>
     <dl class="listing__facts">
-      <div><dt>Hours</dt><dd><span class="listing__dot" aria-hidden="true"></span>{l.hours}</dd></div>
-      <div><dt>Phone</dt><dd data-figure>{l.phone}</dd></div>
+      <div><dt>{m.hours}</dt><dd><span class="listing__dot" aria-hidden="true"></span>{l.hours}</dd></div>
+      <div><dt>{m.phone}</dt><dd data-figure>{l.phone}</dd></div>
     </dl>
     <div class="listing__actions">
-      <span class="listing__btn listing__btn--primary">Call</span>
-      <span class="listing__btn">Directions</span>
-      <span class="listing__btn">Website</span>
+      <span class="listing__btn listing__btn--primary">{m.call}</span>
+      <span class="listing__btn">{m.directions}</span>
+      <span class="listing__btn">{m.website}</span>
     </div>
   </div>
-  <figcaption class="k-mock__caption">{l.note}. The stars are the example business’s, not ours.</figcaption>
+  <figcaption class="k-mock__caption">{l.note}. {m.listingCaption}</figcaption>
 </figure>

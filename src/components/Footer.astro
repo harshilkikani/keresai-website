@@ -1,18 +1,26 @@
 ---
-import { PHONE, EMAIL, ADDRESS, agents, plans } from '../data/site';
+import { PHONE, EMAIL, ADDRESS, plans } from '../data/site';
+import { type Locale, l } from '../i18n';
+import { t } from '../i18n/ui';
+import { agentsFor } from '../i18n/data';
+export interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const ui = t(locale);
+const agents = agentsFor(locale);
 const year = new Date().getFullYear();
 const found = plans.find((p) => p.slug === 'found')!;
+const foundFrom = found.from.replace(/^from /, `${ui.mocks.from} `);
 ---
 <footer role="contentinfo" id="footer">
-  <h2 class="visually-hidden">Site footer</h2>
+  <h2 class="visually-hidden">{ui.footer.heading}</h2>
   <div class="footer-grid">
     <div class="footer-brand">
-      <a href="/" class="logo" aria-label="Keres AI">
+      <a href={l(locale, '/')} class="logo" aria-label="Keres AI">
         <img src="/assets/img/KeresLogo.webp" srcset="/assets/img/KeresLogo.webp 1x, /assets/img/KeresLogo@2x.webp 2x" alt="Keres AI" class="logo-img" width="120" height="32" />
       </a>
       <p>
-        An AI workforce for businesses whose sales team is whoever picks up the phone.
-        Every call answered, every follow-up sent, every past customer worked.
+        {ui.footer.oneLiner}
+        {ui.footer.tagline}
       </p>
       <div class="footer-contact">
         {PHONE && (
@@ -29,58 +37,54 @@ const found = plans.find((p) => p.slug === 'found')!;
     </div>
 
     <div class="footer-col">
-      <h3>Agents</h3>
+      <h3>{ui.footer.agents}</h3>
       <ul>
         {agents.map((a) => (
           <li><a href={`/agents/${a.slug}`}>{a.name} &mdash; {a.title}</a></li>
         ))}
-        <li><a href="/use-cases">Use cases</a></li>
-        <li><a href="/hear-it">Hear it</a></li>
+        <li><a href="/use-cases">{ui.footer.useCases}</a></li>
+        <li><a href="/hear-it">{ui.footer.hearIt}</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h3>Industries</h3>
+      <h3>{ui.footer.industries}</h3>
       <ul>
-        <li><a href="/industries/law-firms">Law firms</a></li>
-        <li><a href="/industries/home-services">Home services</a></li>
-        <li><a href="/industries/dental-med-spa">Dental &amp; med spa</a></li>
-        <li><a href="/industries/real-estate">Real estate</a></li>
-        <li><a href="/industries">All industries</a></li>
+        {ui.nav.industryLinks.map(([href, label]) => <li><a href={href}>{label}</a></li>)}
       </ul>
     </div>
 
     <div class="footer-col">
-      <h3>Services</h3>
+      <h3>{ui.footer.services}</h3>
       <ul>
-        <li><a href="/services">All services</a></li>
-        <li><a href="/services/found">Found &mdash; {found.from}</a></li>
-        <li><a href="/services#custom">Custom builds</a></li>
-        <li><a href="/integrations">Integrations</a></li>
-        <li><a href="/pricing">Pricing</a></li>
-        <li><a href="/tools">Free tools</a></li>
+        <li><a href="/services">{ui.footer.allServices}</a></li>
+        <li><a href="/services/found">Found &mdash; {foundFrom}</a></li>
+        <li><a href="/services#custom">{ui.footer.customBuilds}</a></li>
+        <li><a href="/integrations">{ui.footer.integrations}</a></li>
+        <li><a href="/pricing">{ui.footer.pricing}</a></li>
+        <li><a href="/tools">{ui.footer.freeTools}</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h3>Company</h3>
+      <h3>{ui.footer.company}</h3>
       <ul>
-        <li><a href="/about">About</a></li>
-        <li><a href="/trust">Security</a></li>
-        <li><a href="/compare">Compare</a></li>
-        <li><a href="/partners">Partners</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/demo">Get a quote</a></li>
+        <li><a href="/about">{ui.footer.about}</a></li>
+        <li><a href="/trust">{ui.footer.security}</a></li>
+        <li><a href="/compare">{ui.footer.compare}</a></li>
+        <li><a href="/partners">{ui.footer.partners}</a></li>
+        <li><a href="/contact">{ui.footer.contact}</a></li>
+        <li><a href={l(locale, '/quote')}>{ui.footer.getAQuote}</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h3>Legal</h3>
+      <h3>{ui.footer.legal}</h3>
       <ul>
-        <li><a href="/legal/privacy.html">Privacy policy</a></li>
-        <li><a href="/legal/terms.html">Terms of service</a></li>
-        <li><a href="/legal/security.html">Security policy</a></li>
-        <li><a href="/glossary">Glossary</a></li>
+        <li><a href="/legal/privacy.html">{ui.footer.privacy}</a></li>
+        <li><a href="/legal/terms.html">{ui.footer.terms}</a></li>
+        <li><a href="/legal/security.html">{ui.footer.securityPolicy}</a></li>
+        <li><a href="/glossary">{ui.footer.glossary}</a></li>
       </ul>
     </div>
   </div>
@@ -90,7 +94,7 @@ const found = plans.find((p) => p.slug === 'found')!;
   </p>
 
   <div class="footer-bottom">
-    <div>&copy; {year} Keres AI. All rights reserved.</div>
-    <div>Never miss another lead.</div>
+    <div>&copy; {year} Keres AI. {ui.footer.rights}</div>
+    <div>{ui.footer.never}</div>
   </div>
 </footer>

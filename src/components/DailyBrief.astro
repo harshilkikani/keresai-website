@@ -11,27 +11,33 @@
  * Shown or mentioned on every product page.
  */
 import PhoneFrame from './PhoneFrame.astro';
-import { briefs, type Vertical } from '../data/mocks';
+import type { Vertical } from '../data/mocks';
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+import { briefsFor } from '../i18n/data';
 
 export interface Props {
   vertical?: Vertical;
   caption?: boolean;
   class?: string;
+  locale?: Locale;
 }
 
-const { vertical = 'default', caption = true, class: extraClass = '' } = Astro.props;
+const { vertical = 'default', caption = true, class: extraClass = '', locale = 'en' } = Astro.props;
+const briefs = briefsFor(locale);
+const m = t(locale).mocks;
 const b = briefs[vertical] ?? briefs.default;
 const pills = b.lines.filter((l) => l.tone !== 'warn');
 const warn = b.lines.find((l) => l.tone === 'warn');
 // The review pill lands last, with the pop.
-const ordered = [...pills.filter((p) => !/review/i.test(p.text)), ...pills.filter((p) => /review/i.test(p.text))];
+const ordered = [...pills.filter((p) => !/review|reseña/i.test(p.text)), ...pills.filter((p) => /review|reseña/i.test(p.text))];
 ---
 <figure class:list={['k-brief-fig', extraClass]}>
   <PhoneFrame time="6:00" class="k-brief" screen="dark">
     <header class="sms__head">
       <span class="sms__avatar" aria-hidden="true">K</span>
-      <span class="sms__name">Keres</span>
-      <span class="sms__sub">Owner Daily Brief · Example</span>
+      <span class="sms__name">{m.keres}</span>
+      <span class="sms__sub">{m.briefHeader}</span>
     </header>
     <ol class="sms sms--brief" data-reveal data-reveal-stagger="90">
       <li class="sms__msg sms__msg--agent" data-reveal-child>
@@ -40,7 +46,7 @@ const ordered = [...pills.filter((p) => !/review/i.test(p.text)), ...pills.filte
           <p class="sms__lead">{b.heading}</p>
           <ul class="pills">
             {ordered.map((l) => (
-              <li class:list={['pill', `pill--${l.tone}`]} data-reveal-child data-pop={/review/i.test(l.text) ? '' : undefined}>
+              <li class:list={['pill', `pill--${l.tone}`]} data-reveal-child data-pop={/review|reseña/i.test(l.text) ? '' : undefined}>
                 <span class="pill__n" data-figure>{l.n}</span> {l.text}
               </li>
             ))}
@@ -60,11 +66,11 @@ const ordered = [...pills.filter((p) => !/review/i.test(p.text)), ...pills.filte
       </li>
     </ol>
     <div class="sms__reply" aria-hidden="true">
-      <span>Reply CALL to be connected</span>
+      <span>{m.reply}</span>
       <span class="sms__send"></span>
     </div>
   </PhoneFrame>
   {caption && (
-    <figcaption class="k-mock__caption">Example brief. Your numbers are your own.</figcaption>
+    <figcaption class="k-mock__caption">{m.exampleBrief}</figcaption>
   )}
 </figure>

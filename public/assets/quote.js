@@ -24,6 +24,8 @@
       var done = root.querySelector('[data-qf-done]');
       var rendered = Date.now();
       var eventId = '';
+      // Messages come from the markup so translated pages stay translated.
+      var M = function (k, d) { return root.getAttribute('data-msg-' + k) || d; };
       ts.value = String(rendered);
 
       function err(name, msg) {
@@ -37,8 +39,8 @@
         Array.prototype.forEach.call(stepEl.querySelectorAll('[required]'), function (f) {
           var v = (f.value || '').trim();
           var msg = '';
-          if (!v) msg = 'Needed for the quote.';
-          else if (f.type === 'tel' && v.replace(/\D/g, '').length < 10) msg = 'Enter a number we can text — ten digits.';
+          if (!v) msg = M('required', 'Needed for the quote.');
+          else if (f.type === 'tel' && v.replace(/\D/g, '').length < 10) msg = M('phone', 'Enter a number we can text — ten digits.');
           err(f.name, msg);
           if (msg && ok) { ok = false; f.focus(); }
         });
@@ -66,9 +68,9 @@
         if (!validate(steps[1])) return;
         var hp = form.elements._gotcha;
         var tooFast = Date.now() - rendered < MIN_MS;
-        if ((hp && hp.value) || tooFast) { err('form', 'That was quick — try again in a moment.'); return; }
+        if ((hp && hp.value) || tooFast) { err('form', M('fast', 'That was quick — try again in a moment.')); return; }
         var btn = form.querySelector('[data-qf-submit]');
-        btn.disabled = true; btn.textContent = 'Sending…';
+        btn.disabled = true; btn.textContent = M('sending', 'Sending…');
         err('form', '');
         var data = new FormData(form);
         data.append('page', location.pathname);
@@ -85,8 +87,8 @@
             success();
           })
           .catch(function () {
-            btn.disabled = false; btn.textContent = 'See my quote';
-            err('form', 'That did not send. Try again, or email ops@keresai.com.');
+            btn.disabled = false; btn.textContent = M('submit', 'See my quote');
+            err('form', M('failed', 'That did not send. Try again, or email ops@keresai.com.'));
           });
       });
 

@@ -7,9 +7,13 @@
  * Resting state is fully lit, so with no JS or reduced motion the
  * diagram is simply a complete diagram.
  */
-import { stages } from '../data/leaks';
-export interface Props { class?: string }
-const { class: extraClass = '' } = Astro.props;
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+import { stagesFor } from '../i18n/data';
+export interface Props { class?: string; locale?: Locale }
+const { class: extraClass = '', locale = 'en' } = Astro.props;
+const stages = stagesFor(locale);
+const aria = t(locale).mocks.pipelineAria;
 const GAP = 78;
 const X = 28;
 const H = GAP * (stages.length - 1) + 56;
@@ -19,7 +23,7 @@ const H = GAP * (stages.length - 1) + 56;
   viewBox={`0 0 300 ${H}`}
   width="300" height={H}
   role="img"
-  aria-label="The seven pipeline stages: be found, capture, qualify, book, show, convert, come back"
+  aria-label={aria}
   data-pipeline
   data-active="6"
 >

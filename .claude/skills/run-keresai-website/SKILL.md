@@ -44,8 +44,12 @@ install used to drop it and the harness with it).
 ## Build
 
 ```bash
-npm run build
+KERES_ALLOW_MISSING=1 npm run build
 ```
+
+`src/config/business.ts` throws at build while any required key (phone,
+prices, city, state) is empty; `KERES_ALLOW_MISSING=1` lets the build finish
+with those elements omitted. Drop the variable once the config is filled in.
 
 `prebuild` runs `scripts/build-css.mjs`, which concatenates and minifies the
 five source stylesheets into `public/assets/site.css` and writes its hash to
@@ -140,6 +144,12 @@ above; the deploy workflow (`.github/workflows/deploy.yml`) only runs
   ("Executable doesn't exist at …/chromium_headless_shell-1243") until
   `npx playwright install chromium-headless-shell`. The driver tries system
   Chrome first for this reason.
+- **Spanish lives under `/es`** (`/es`, `/es/quote`, `/es/go…`), built from
+  the same components with a `locale` prop and dictionaries in `src/i18n/`.
+  Drive them like any route: `node $D console /es /es/go/website`.
+- **Three headless Chromes at once produce "preloaded using link preload but
+  not used" font warnings** that never appear in a single run. Re-run the
+  page alone before treating it as real.
 - **GoatCounter warns on localhost** ("not counting because of: localhost");
   `console` filters it. Anything else in that list is real.
 

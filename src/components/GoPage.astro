@@ -12,11 +12,17 @@ import SiteOnPhone from './SiteOnPhone.astro';
 import GoogleListing from './GoogleListing.astro';
 import AgentMock from './AgentMock.astro';
 import QuoteForm from './QuoteForm.astro';
+import Calculator from './Calculator.astro';
 import { PHONE } from '../data/site';
-import { goSteps, type GoPage } from '../data/go';
+import type { GoPage } from '../data/go';
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+import { goStepsFor } from '../i18n/data';
 
-export interface Props { page: GoPage }
-const { page } = Astro.props;
+export interface Props { page: GoPage; locale?: Locale }
+const { page, locale = 'en' } = Astro.props;
+const g = t(locale).go;
+const goSteps = goStepsFor(locale);
 // Every Get a quote on a /go page lands on the form embedded below.
 const quoteHref = '#quote';
 ---
@@ -24,16 +30,16 @@ const quoteHref = '#quote';
   <div class="k-hero__light" aria-hidden="true"></div>
   <div class="k-hero__grid">
     <div class="k-hero__copy">
-      <Eyebrow class="k-eyebrow--long">An AI workforce for businesses whose sales team is whoever picks up the phone</Eyebrow>
+      <Eyebrow class="k-eyebrow--long">{g.eyebrowLong}</Eyebrow>
       <h1 id="go-title" class="k-display k-display--xl" data-words>
         {page.h1.split(' ').map((w, i, all) => <><span class="w">{w}</span>{i < all.length - 1 ? ' ' : ''}</>)}
       </h1>
       <div class="k-hero__ctas">
-        <Button href={quoteHref} variant="primary" event="demo_click">Get a quote</Button>
-        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>}
+        <Button href={quoteHref} variant="primary" event="demo_click">{g.getAQuote}</Button>
+        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{t(locale).nav.call} {PHONE.display}</Button>}
       </div>
       <p class="k-lede">{page.lede}</p>
-      <ul class="k-hero__facts" aria-label="At a glance">
+      <ul class="k-hero__facts" aria-label={g.atAGlance}>
         {page.facts.map((f) => (
           <li><span class="k-hero__fact-k">{f.k}</span><span class="k-hero__fact-v" data-figure>{f.v}</span></li>
         ))}
@@ -43,79 +49,44 @@ const quoteHref = '#quote';
 </Section>
 
 <Section spacing="flush" labelledby="doors-title" id="doors" class="k-doors-section">
-  <h2 id="doors-title" class="visually-hidden">Two ways in: get found, get answered</h2>
+  <h2 id="doors-title" class="visually-hidden">{g.twoDoors}</h2>
   <div class="doors">
     <article class="door" data-reveal>
       <div class="door__head">
-        <Eyebrow n={1}>Get found</Eyebrow>
+        <Eyebrow n={1}>{g.getFound}</Eyebrow>
         <h3 class="door__title">{page.found.title}</h3>
         <p class="door__text">{page.found.text}</p>
       </div>
       <div class="door__mocks door__mocks--found">
-        <SiteOnPhone />
-        <GoogleListing />
+        <SiteOnPhone locale={locale} />
+        <GoogleListing locale={locale} />
       </div>
     </article>
     <article class="door" data-reveal>
       <div class="door__head">
-        <Eyebrow n={2}>Get answered</Eyebrow>
+        <Eyebrow n={2}>{g.getAnswered}</Eyebrow>
         <h3 class="door__title">{page.answered.title}</h3>
         <p class="door__text">{page.answered.text}</p>
       </div>
       <div class="door__mocks">
-        <AgentMock slug="inbound" />
+        <AgentMock slug="inbound" locale={locale} />
       </div>
     </article>
   </div>
 </Section>
 
 <Section spacing="standard" labelledby="roi-title" id="roi">
-  <Eyebrow n={3}>Missed-call calculator</Eyebrow>
-  <h2 id="roi-title" class="k-h2">Put your own numbers in.</h2>
-  <p class="k-lede k-measure">Four inputs and the arithmetic shown in full. The figures start at typical values for your industry.</p>
-  <div class="roi-shell" data-vertical={page.calc} data-preset="true">
-    <div class="roi-vert-row">
-      <label class="roi-vert-label" for="roi-vert">Industry</label>
-      <select id="roi-vert" class="roi-vert-select">
-        <option value="home-services">Home services</option>
-        <option value="legal">Law firms</option>
-        <option value="dental">Dental &amp; med spa</option>
-        <option value="real-estate">Real estate</option>
-      </select>
-    </div>
-    <div class="roi-grid">
-      <div class="roi-inputs">
-        <label class="roi-field"><span class="roi-field-label">Monthly leads</span><input type="number" id="roi-leads" min="0" value="250"></label>
-        <label class="roi-field"><span class="roi-field-label">Answer rate %</span><input type="number" id="roi-answer" min="0" max="100" value="60"></label>
-        <label class="roi-field"><span class="roi-field-label">Avg ticket value</span><div class="roi-field-prefix"><span>$</span><input type="number" id="roi-job" min="0" value="680"></div></label>
-        <label class="roi-field"><span class="roi-field-label">After-hours lead %</span><input type="number" id="roi-afterhours" min="0" max="100" value="35"></label>
-      </div>
-      <div class="roi-output">
-        <div class="roi-headline-label">You&rsquo;re losing</div>
-        <div class="roi-headline-value"><span id="roi-lost-mo">$0</span><span class="roi-per">/mo</span></div>
-        <div class="roi-headline-year">&asymp; <span id="roi-lost-yr">$0</span> / year</div>
-        <div class="roi-math">
-          <div class="roi-math-row"><span>Missed leads / mo</span><span id="roi-missed">0</span></div>
-          <div class="roi-math-row muted"><span id="roi-missed-calc">= 250 × (100% − 60%)</span><span></span></div>
-          <div class="roi-math-row"><span>Would-have-closed jobs</span><span id="roi-jobs">0</span></div>
-          <div class="roi-math-row muted"><span id="roi-close-calc">= missed × 25% close rate</span><span></span></div>
-          <div class="roi-math-row"><span>Lost revenue</span><span id="roi-lost-mo-2">$0</span></div>
-          <div class="roi-math-row muted"><span id="roi-job-calc">= jobs × $680 avg ticket</span><span></span></div>
-          <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">0</span></div>
-          <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
-        </div>
-        <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href={quoteHref} data-event="demo_click">Get a quote with these numbers</a>
-        <div class="roi-note" id="roi-note">Close rate is the typical answered-lead close rate for your industry. Swap in your own number if you track it.</div>
-      </div>
-    </div>
-  </div>
+  <Eyebrow n={3}>{g.calcEyebrow}</Eyebrow>
+  <h2 id="roi-title" class="k-h2">{g.calcH2}</h2>
+  <p class="k-lede k-measure">{g.calcLede}</p>
+  <Calculator locale={locale} vertical={page.calc} preset ctaHref={quoteHref} />
 </Section>
 
 <Section tone="raised" spacing="standard" labelledby="start-title" id="start">
   <div class="k-band">
     <div class="k-band__head">
-      <Eyebrow n={4}>How it starts</Eyebrow>
-      <h2 id="start-title" class="k-h2">Three steps, five business days.</h2>
+      <Eyebrow n={4}>{g.startEyebrow}</Eyebrow>
+      <h2 id="start-title" class="k-h2">{g.startH2}</h2>
     </div>
     <ol class="k-steps" data-reveal>
       {goSteps.map((s) => (
@@ -131,16 +102,16 @@ const quoteHref = '#quote';
 
 <Section tone="raised" spacing="standard" labelledby="quote-title" id="quote-band">
   {/* The form's own legend carries the heading; a second H2 here only added height on a phone. */}
-  <h2 id="quote-title" class="k-eyebrow"><span class="k-eyebrow__rule" aria-hidden="true"></span><span class="k-eyebrow__n" data-figure>05</span><span>Get a quote &mdash; five questions, then a 20-minute call with the number ready</span></h2>
-  <QuoteForm variant="embed" id="quote" />
+  <h2 id="quote-title" class="k-eyebrow"><span class="k-eyebrow__rule" aria-hidden="true"></span><span class="k-eyebrow__n" data-figure>05</span><span>{g.quoteBand}</span></h2>
+  <QuoteForm variant="embed" id="quote" locale={locale} />
 </Section>
 
 <Section tone="inverse" spacing="standard" labelledby="close-title" id="close">
   <div class="k-close">
     <h2 id="close-title" class="k-h2">{page.close.h2}</h2>
     <div class="k-close__ctas">
-      <Button href={quoteHref} variant="primary" event="demo_click">Get a quote</Button>
-      {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>}
+      <Button href={quoteHref} variant="primary" event="demo_click">{g.getAQuote}</Button>
+      {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{t(locale).nav.call} {PHONE.display}</Button>}
     </div>
   </div>
 </Section>

@@ -12,17 +12,24 @@
  *
  * Labelled an example so nobody reads it as a customer recording.
  */
-import { transcripts, heroTail, type Vertical } from '../data/mocks';
+import type { Vertical } from '../data/mocks';
 import { agentBySlug } from '../data/site';
+import { type Locale, l } from '../i18n';
+import { t as tt } from '../i18n/ui';
+import { transcriptsFor, heroTailFor } from '../i18n/data';
 
 export interface Props {
   vertical?: Vertical;
   caption?: boolean;
   hero?: boolean;
   class?: string;
+  locale?: Locale;
 }
 
-const { vertical = 'default', caption = true, hero = false, class: extraClass = '' } = Astro.props;
+const { vertical = 'default', caption = true, hero = false, class: extraClass = '', locale = 'en' } = Astro.props;
+const transcripts = transcriptsFor(locale);
+const heroTail = heroTailFor(locale);
+const m = tt(locale).mocks;
 const t = transcripts[vertical] ?? transcripts.default;
 const remi = agentBySlug('inbound');
 ---
@@ -42,7 +49,7 @@ const remi = agentBySlug('inbound');
         {t.turns.map((turn, i) => (
           <li class:list={['k-call__turn', `k-call__turn--${turn.who}`]} style={`--i:${i}`}>
             <span class="k-call__t" data-figure>{turn.t}</span>
-            <span class="k-call__who">{turn.who === 'remi' ? remi.name : 'Caller'}</span>
+            <span class="k-call__who">{turn.who === 'remi' ? remi.name : m.caller}</span>
             <p class="k-call__text"><span class="k-type">{turn.text}</span></p>
           </li>
         ))}
@@ -65,12 +72,12 @@ const remi = agentBySlug('inbound');
             <div class="k-booking__meta">
               <span class="k-booking__time" data-figure>{heroTail.booking.time}</span>
               <span class="k-booking__what">{heroTail.booking.what}</span>
-              <span class="k-booking__where">Written to {heroTail.booking.where}</span>
+              <span class="k-booking__where">{m.writtenTo} {heroTail.booking.where}</span>
             </div>
             <svg class="k-booking__check" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="k-owner" data-owner>
-            <span class="k-owner__t" data-figure>Owner · {heroTail.ownerText.t}</span>
+            <span class="k-owner__t" data-figure>{m.owner} · {heroTail.ownerText.t}</span>
             <p class="k-owner__bubble">{heroTail.ownerText.text}</p>
           </div>
         </div>
@@ -79,7 +86,7 @@ const remi = agentBySlug('inbound');
   </div>
   {caption && (
     <figcaption class="k-mock__caption">
-      Example call, not a customer recording. Real recordings live on <a href="/hear-it">Hear it</a>.
+      {m.exampleCall} <a href="/hear-it">{m.hearIt}</a>.
     </figcaption>
   )}
 </figure>

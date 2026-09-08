@@ -5,11 +5,14 @@
  * replies inbox for Sol. Same device chrome as everything else.
  */
 import MockFrame from './MockFrame.astro';
-import { agentMocks } from '../data/mocks';
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+import { agentMocksFor } from '../i18n/data';
 
-export interface Props { slug: string }
-const { slug } = Astro.props;
-const m = agentMocks.find((x) => x.slug === slug)!;
+export interface Props { slug: string; locale?: Locale }
+const { slug, locale = 'en' } = Astro.props;
+const ui = t(locale).mocks;
+const m = agentMocksFor(locale).find((x) => x.slug === slug)!;
 ---
 <figure class="k-amock">
   <MockFrame label={m.label} device="panel" class="k-amock__frame">
@@ -18,7 +21,7 @@ const m = agentMocks.find((x) => x.slug === slug)!;
         {m.bubbles!.map((b) => (
           <li class:list={['k-call__turn', b.who === 'agent' ? 'k-call__turn--remi' : 'k-call__turn--caller']} data-reveal-child>
             <span class="k-call__t" data-figure>{b.t}</span>
-            <span class="k-call__who">{b.who === 'agent' ? 'Remi' : 'Caller'}</span>
+            <span class="k-call__who">{b.who === 'agent' ? 'Remi' : ui.caller}</span>
             <p class="k-call__text">{b.text}</p>
           </li>
         ))}

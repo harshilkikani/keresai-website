@@ -1,50 +1,30 @@
 ---
-import { PHONE, agents, foundServices } from '../data/site';
+import { PHONE } from '../data/site';
+import { type Locale, counterpart, l } from '../i18n';
+import { t } from '../i18n/ui';
+import { agentsFor, foundServicesFor, foundAnchor } from '../i18n/data';
 
 /**
- * Two doors, then the rest. "Be Found" opens onto the Found services;
- * "Be Answered" onto the four agents. The phone number is the button —
+ * Two doors, then the rest. "Get found" opens onto the Found services;
+ * "Get answered" onto the four agents. The phone number is the button —
  * hearing Remi answer is the fastest demo there is — and "Get a quote"
- * is the quiet text link beside it.
+ * is the quiet text link beside it. EN / ES switcher on the right.
  *
  * Dropdowns are <details>/<summary>: no JavaScript required, keyboard-
  * operable for free. app.js adds click-outside and Escape on top.
  */
-const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-
-const foundLinks = foundServices.map((s) => ({
-  href: `/services/found#${slug(s.name)}`,
-  label: s.name,
-  sub: s.addOn ? 'Add-on' : 'Included',
-}));
-
-const agentLinks = agents.map((a) => ({
-  href: `/agents/${a.slug}`,
-  label: a.name,
-  sub: a.title,
-}));
-
-const industryLinks = [
-  { href: '/industries/law-firms', label: 'Law firms' },
-  { href: '/industries/home-services', label: 'Home services' },
-  { href: '/industries/dental-med-spa', label: 'Dental & med spa' },
-  { href: '/industries/real-estate', label: 'Real estate' },
-  { href: '/industries', label: 'All industries' },
-];
-
-const resourceLinks = [
-  { href: '/blog', label: 'Guides' },
-  { href: '/benchmarks', label: 'Benchmarks' },
-  { href: '/hear-it', label: 'Hear it — sample calls' },
-  { href: '/tools', label: 'Free tools' },
-  { href: '/compare', label: 'Compare' },
-  { href: '/integrations', label: 'Integrations' },
-  { href: '/glossary', label: 'Glossary' },
-];
+export interface Props { locale?: Locale; path?: string }
+const { locale = 'en', path = Astro.url.pathname } = Astro.props;
+const ui = t(locale);
+const other = counterpart(locale, path);
+const foundLinks = foundServicesFor(locale).map((s, i) => ({ href: `/services/found#${foundAnchor(i)}`, label: s.name, sub: s.addOn ? ui.nav.addOn : ui.nav.included }));
+const agentLinks = agentsFor(locale).map((a) => ({ href: `/agents/${a.slug}`, label: a.name, sub: a.title }));
+const industryLinks = ui.nav.industryLinks.map(([href, label]) => ({ href, label }));
+const resourceLinks = ui.nav.resourceLinks.map(([href, label]) => ({ href, label }));
 ---
-<header class="nav" role="banner" transition:persist="nav-bar">
+<header class="nav" role="banner" transition:persist={`nav-bar-${locale}`}>
   <div class="nav-inner">
-    <a href="/" class="logo" aria-label="Keres AI. Home">
+    <a href={l(locale, '/')} class="logo" aria-label={ui.nav.home}>
       <img src="/assets/img/KeresLogo.webp" srcset="/assets/img/KeresLogo.webp 1x, /assets/img/KeresLogo@2x.webp 2x" alt="Keres AI" class="logo-img" width="120" height="32" />
     </a>
 
@@ -52,7 +32,7 @@ const resourceLinks = [
       <ul class="nav-links">
         <li>
           <details class="nav-drop">
-            <summary>Get found</summary>
+            <summary>{ui.nav.getFound}</summary>
             <div class="nav-drop__panel nav-drop__panel--two">
               {foundLinks.map((l) => (
                 <a href={l.href}>
@@ -61,8 +41,8 @@ const resourceLinks = [
                 </a>
               ))}
               <a href="/services/found" class="nav-drop__all">
-                <span class="nav-drop__name">Everything in Found</span>
-                <span class="nav-drop__sub">from $249 / month</span>
+                <span class="nav-drop__name">{ui.nav.everythingInFound}</span>
+                <span class="nav-drop__sub">{ui.nav.fromPerMonth}</span>
               </a>
             </div>
           </details>
@@ -70,7 +50,7 @@ const resourceLinks = [
 
         <li>
           <details class="nav-drop">
-            <summary>Get answered</summary>
+            <summary>{ui.nav.getAnswered}</summary>
             <div class="nav-drop__panel">
               {agentLinks.map((l) => (
                 <a href={l.href}>
@@ -79,8 +59,8 @@ const resourceLinks = [
                 </a>
               ))}
               <a href="/services" class="nav-drop__all">
-                <span class="nav-drop__name">All seven stages</span>
-                <span class="nav-drop__sub">How the four work together</span>
+                <span class="nav-drop__name">{ui.nav.allSevenStages}</span>
+                <span class="nav-drop__sub">{ui.nav.howTheFourWork}</span>
               </a>
             </div>
           </details>
@@ -88,18 +68,18 @@ const resourceLinks = [
 
         <li>
           <details class="nav-drop">
-            <summary>Industries</summary>
+            <summary>{ui.nav.industries}</summary>
             <div class="nav-drop__panel nav-drop__panel--plain">
               {industryLinks.map((l) => <a href={l.href}>{l.label}</a>)}
             </div>
           </details>
         </li>
 
-        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/pricing">{ui.nav.pricing}</a></li>
 
         <li>
           <details class="nav-drop">
-            <summary>Resources</summary>
+            <summary>{ui.nav.resources}</summary>
             <div class="nav-drop__panel nav-drop__panel--plain">
               {resourceLinks.map((l) => <a href={l.href}>{l.label}</a>)}
             </div>
@@ -109,7 +89,7 @@ const resourceLinks = [
     </nav>
 
     <div class="nav-actions">
-      <button id="theme-toggle" class="icon-btn" type="button" aria-pressed="false" aria-label="Toggle dark mode">
+      <button id="theme-toggle" class="icon-btn" type="button" aria-pressed="false" aria-label={ui.nav.toggleDark}>
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display:none">
           <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/>
           <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -119,10 +99,14 @@ const resourceLinks = [
         </svg>
       </button>
 
-      <a href="/demo" class="nav-demo-link desktop-only" data-event="demo_click">Get a quote</a>
+      <div class="lang-switch desktop-only" aria-label={ui.nav.language}>
+        {locale === 'en' ? <span aria-current="true">EN</span> : <a href={other.href} hreflang="en" lang="en">EN</a>}
+        {locale === 'es' ? <span aria-current="true">ES</span> : <a href={other.href} hreflang="es" lang="es">ES</a>}
+      </div>
+      <a href={l(locale, '/quote')} class="nav-demo-link desktop-only" data-event="demo_click">{ui.nav.getAQuote}</a>
 
       {PHONE && (
-      <a href={PHONE.href} class="nav-phone" data-event="tel_click" aria-label={`Call Keres AI on ${PHONE.display}`}>
+      <a href={PHONE.href} class="nav-phone" data-event="tel_click" aria-label={`${ui.nav.call} ${PHONE.display}`}>
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 5.2 2 2 0 0 1 6 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
         </svg>
@@ -130,29 +114,33 @@ const resourceLinks = [
       </a>
       )}
 
-      <button id="hamburger" class="hamburger" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
+      <button id="hamburger" class="hamburger" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label={ui.nav.openMenu}>
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
-<div id="mobile-menu" class="mobile-menu" data-open="false" aria-label="Mobile navigation" transition:persist="nav-menu">
-  <p class="mobile-menu__group">Get found</p>
-  <a href="/services/found" class="mobile-menu__sub">Everything in Found &mdash; from $249</a>
+<div id="mobile-menu" class="mobile-menu" data-open="false" aria-label={ui.nav.mobileNav} transition:persist={`nav-menu-${locale}`}>
+  <p class="mobile-menu__group">{ui.nav.getFound}</p>
+  <a href="/services/found" class="mobile-menu__sub">{ui.nav.everythingInFound} &mdash; {ui.nav.fromPerMonth}</a>
   {foundLinks.slice(0, 4).map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
-  <p class="mobile-menu__group">Get answered</p>
+  <p class="mobile-menu__group">{ui.nav.getAnswered}</p>
   {agentLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label} &mdash; {l.sub}</a>)}
-  <a href="/services" class="mobile-menu__sub">All seven stages</a>
-  <p class="mobile-menu__group">Industries</p>
+  <a href="/services" class="mobile-menu__sub">{ui.nav.allSevenStages}</a>
+  <p class="mobile-menu__group">{ui.nav.industries}</p>
   {industryLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
-  <a href="/pricing">Pricing</a>
-  <p class="mobile-menu__group">Resources</p>
+  <a href="/pricing">{ui.nav.pricing}</a>
+  <p class="mobile-menu__group">{ui.nav.resources}</p>
   {resourceLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
-  <a href="/about">About</a>
-  <a href="/contact">Contact</a>
+  <a href="/about">{ui.nav.about}</a>
+  <a href="/contact">{ui.nav.contact}</a>
+  <div class="lang-switch" aria-label={ui.nav.language}>
+    {locale === 'en' ? <span aria-current="true">EN</span> : <a href={other.href} hreflang="en" lang="en">EN</a>}
+    {locale === 'es' ? <span aria-current="true">ES</span> : <a href={other.href} hreflang="es" lang="es">ES</a>}
+  </div>
   <div class="mobile-cta">
-    <a href="/demo" class="btn-k btn-k--primary btn-k--wide" data-event="demo_click">Get a quote</a>
-    {PHONE && <a href={PHONE.href} class="btn-k btn-k--outline btn-k--wide" data-event="tel_click">Call {PHONE.display}</a>}
+    <a href={l(locale, '/quote')} class="btn-k btn-k--primary btn-k--wide" data-event="demo_click">{ui.nav.getAQuote}</a>
+    {PHONE && <a href={PHONE.href} class="btn-k btn-k--outline btn-k--wide" data-event="tel_click">{ui.nav.call} {PHONE.display}</a>}
   </div>
 </div>
