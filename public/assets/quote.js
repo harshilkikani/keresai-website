@@ -210,12 +210,15 @@
       // it finds when it loads (and throws on one without data-url), so the
       // div carries both; hosts mounted after the script is loaded are
       // initialised by hand, and never twice.
+      // data-resize / resize: Calendly then sizes the iframe to its content
+      // instead of scrolling inside a fixed box that looks cut off.
       var div = document.createElement('div');
       div.className = 'calendly-inline-widget';
       div.setAttribute('data-url', full);
-      div.style.minHeight = '660px'; div.style.width = '100%';
+      div.setAttribute('data-resize', 'true');
+      div.style.minHeight = '480px'; div.style.width = '100%';
       host.appendChild(div);
-      withCalendly(function () { if (!div.querySelector('iframe')) window.Calendly.initInlineWidget({ url: full, parentElement: div }); });
+      withCalendly(function () { if (!div.querySelector('iframe')) window.Calendly.initInlineWidget({ url: full, parentElement: div, resize: true }); });
     } else {
       var f = document.createElement('iframe');
       f.src = url; f.title = host.getAttribute('aria-label') || 'Pick a time'; f.loading = 'lazy';

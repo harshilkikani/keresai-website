@@ -2612,8 +2612,8 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 .book__title { margin: 0 0 var(--space-2); font-family: var(--serif); font-size: var(--text-2); font-weight: 600; letter-spacing: -0.012em; line-height: 1.15; color: var(--ink-0); }
 .book__lede { margin: 0 0 var(--space-4); font-size: var(--text-0); line-height: 1.5; color: var(--ink-2); }
 .book__host { min-height: 48px; }
-.book__host.is-loaded { min-height: 660px; }
-.book__host .calendly-inline-widget { border-radius: var(--radius-lg); overflow: hidden; }
+.book__host.is-loaded { min-height: 480px; }
+.book__host .calendly-inline-widget { border-radius: var(--radius-lg); overflow: visible; }
 .sticky-bar__call--book { justify-content: center; }
 
 /* phones: the calendar card is one slim row until tapped */
@@ -2629,5 +2629,5 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
   .book__lede { display: none; }
   .book__host { flex: 0 0 auto; min-height: 0; }
   .book__host .btn-k--wide { width: auto; padding-inline: 14px; }
-  .book__host.is-loaded { flex-basis: 100%; min-height: 660px; }
+  .book__host.is-loaded { flex-basis: 100%; min-height: 480px; }
 }
