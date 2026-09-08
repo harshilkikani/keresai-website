@@ -59,12 +59,20 @@ export const business = {
       form_submit: '',
       tel_click: '',
       phone: '',       // the website-call conversion (number swap, calls ≥30s)
+      booking: '',     // a meeting booked in the Calendly embed after the form
       // Optional Spanish-page labels so Google Ads can count Spanish leads apart.
       // Empty → the base label above is used on /es too.
       form_submit_es: '',
       tel_click_es: '',
       phone_es: '',
+      booking_es: '',
     },
+    // Enhanced conversions (Google) and advanced matching (Meta): a SHA-256
+    // hash of the submitted mobile number rides with the Lead and Schedule
+    // events so the platforms can match the lead to the click. Turn on only
+    // after accepting Google's customer-data terms in the Ads account; the
+    // privacy policy already discloses it.
+    enhancedConversions: false,
   },
   // Optional. Sentences that need these are omitted when they are empty.
   bundleDiscountPercent: '',

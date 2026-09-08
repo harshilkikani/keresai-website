@@ -13,6 +13,44 @@
 
   var MIN_MS = 3000;
 
+  // Attribution: the click ids and campaign tags that brought the visitor,
+  // kept for the session so a lead sent from a later page still carries
+  // them. Ads platforms match on gclid/fbclid; the CRM reads the utm_* set.
+  var ATTR_KEYS = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  function attribution() {
+    var store = {};
+    try { store = JSON.parse(sessionStorage.getItem('keres:attr') || '{}'); } catch (e) {}
+    var q = new URLSearchParams(location.search), fresh = false;
+    ATTR_KEYS.forEach(function (k) { var v = q.get(k); if (v) { store[k] = v.slice(0, 200); fresh = true; } });
+    if (!store.landing_page || fresh) {
+      store.landing_page = (location.pathname + location.search).slice(0, 500);
+      var ref = document.referrer || '';
+      if (ref && ref.indexOf(location.origin) !== 0) store.referrer = ref.slice(0, 300);
+    }
+    try { sessionStorage.setItem('keres:attr', JSON.stringify(store)); } catch (e) {}
+    return store;
+  }
+
+  // Digits only → E.164 (US default), for enhanced conversions / advanced matching.
+  function e164(v) {
+    var d = String(v || '').replace(/\D/g, '');
+    if (d.length === 10) return '+1' + d;
+    if (d.length === 11 && d.charAt(0) === '1') return '+' + d;
+    return d ? '+' + d : '';
+  }
+
+  // Calendly posts a message to the parent when the invitee books. That is
+  // the "call booked" conversion; tracking.js turns it into an Ads
+  // conversion + Meta Schedule event.
+  if (!window.__keresCalendly) {
+    window.__keresCalendly = true;
+    window.addEventListener('message', function (e) {
+      if (e.origin !== 'https://calendly.com' || !e.data || e.data.event !== 'calendly.event_scheduled') return;
+      var root = document.querySelector('[data-quote-form].is-done');
+      document.dispatchEvent(new CustomEvent('keres:booking', { detail: { form: 'quote', page: location.pathname, leadEventId: (root && root.__eventId) || '', phone: (root && root.__phone) || '' } }));
+    });
+  }
+
   function init() {
     Array.prototype.forEach.call(document.querySelectorAll('[data-quote-form]'), function (root) {
       if (root.__qf) return;
@@ -27,6 +65,7 @@
       // Messages come from the markup so translated pages stay translated.
       var M = function (k, d) { return root.getAttribute('data-msg-' + k) || d; };
       ts.value = String(rendered);
+      attribution();
 
       function err(name, msg) {
         var el = root.querySelector('[data-qf-error="' + name + '"]');
@@ -78,6 +117,8 @@
         // handed to tracking.js for the browser-side Lead event.
         eventId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'k-' + Date.now().toString(36);
         data.append('_event_id', eventId);
+        var attr = attribution();
+        Object.keys(attr).forEach(function (k) { data.append(k, attr[k]); });
         var endpoint = root.getAttribute('data-endpoint');
         var t0 = Date.now();
         fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
@@ -98,7 +139,9 @@
         form.hidden = true;
         done.hidden = false;
         root.classList.add('is-done');
-        document.dispatchEvent(new CustomEvent('keres:lead', { detail: { form: 'quote', page: location.pathname, eventId: eventId } }));
+        root.__eventId = eventId;
+        root.__phone = e164(form.elements.phone && form.elements.phone.value);
+        document.dispatchEvent(new CustomEvent('keres:lead', { detail: { form: 'quote', page: location.pathname, eventId: eventId, phone: root.__phone } }));
         callback();
         loadBooking();
         done.querySelector('h3').setAttribute('tabindex', '-1');

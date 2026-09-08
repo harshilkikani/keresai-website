@@ -13,6 +13,7 @@
    Events:
      tel: click            → Google Ads conversion + Meta Contact
      keres:lead (form ok)  → Google Ads conversion + Meta Lead
+     keres:booking         → Google Ads conversion + Meta Schedule (Calendly booked)
      astro:page-load       → GA4 page_view on client-side navigations
    Every Meta event carries an eventID so a server-side CAPI event
    with the same id deduplicates. The form POST carries the same id
@@ -56,7 +57,7 @@
       gtag('js', new Date());
       if (GA4) gtag('config', GA4, Object.assign({ send_page_view: true }, langParams()));
       if (AW) {
-        gtag('config', AW);
+        gtag('config', AW, cfg.enhancedConversions ? { allow_enhanced_conversions: true } : {});
         // Website call conversions: Google swaps the displayed number for a
         // forwarding number for ad visitors and counts calls over 30s.
         if (labelFor('phone') && cfg.phoneDisplay) {
@@ -89,6 +90,14 @@
     if (!AW || !label || !window.gtag) return;
     gtag('event', 'conversion', Object.assign({ send_to: AW + '/' + label }, langParams(), extra || {}));
   }
+  // Enhanced conversions / advanced matching: hand the platforms the phone
+  // number (E.164); gtag and fbevents hash it (SHA-256) before it leaves the
+  // browser. Off unless business.tracking.enhancedConversions is true.
+  function identify(phone) {
+    if (!cfg.enhancedConversions || !phone) return;
+    if ((GA4 || AW) && window.gtag) gtag('set', 'user_data', { phone_number: phone });
+    if (PIXEL && window.fbq) fbq('init', PIXEL, { ph: phone.replace(/\D/g, '') });
+  }
   function meta(name, id, params) {
     if (!PIXEL || !window.fbq) return;
     fbq('track', name, Object.assign({ language: LANG() }, params || {}), { eventID: id });
@@ -109,9 +118,20 @@
   document.addEventListener('keres:lead', function (e) {
     var d = (e && e.detail) || {};
     var id = d.eventId || uuid();
+    identify(d.phone);
     adsConversion('form_submit', { event_id: id });
     meta('Lead', id, { content_name: d.form || 'form' });
     if (GA4 && window.gtag) gtag('event', 'generate_lead', Object.assign({ event_id: id, form: d.form || 'form' }, langParams()));
+  });
+
+  // Calendly booking after the form → Google Ads conversion + Meta Schedule
+  document.addEventListener('keres:booking', function (e) {
+    var d = (e && e.detail) || {};
+    var id = uuid();
+    identify(d.phone);
+    adsConversion('booking', { event_id: id, lead_event_id: d.leadEventId || '' });
+    meta('Schedule', id, { content_name: d.form || 'quote' });
+    if (GA4 && window.gtag) gtag('event', 'book_call', Object.assign({ event_id: id, lead_event_id: d.leadEventId || '' }, langParams()));
   });
 
   // GA4 page views on client-side navigations (first load is config's own).
