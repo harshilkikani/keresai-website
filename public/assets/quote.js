@@ -88,7 +88,9 @@
           })
           .catch(function () {
             btn.disabled = false; btn.textContent = M('submit', 'See my quote');
-            err('form', M('failed', 'That did not send. Try again, or email ops@keresai.com.'));
+            err('form', M('failed', 'That did not send. Try again.'));
+            var fb = root.querySelector('[data-qf-fallback]');
+            if (fb) fb.hidden = false;
           });
       });
 

@@ -8,7 +8,7 @@ import { business, PHONE as CONFIG_PHONE, ADDRESS_LINE, priceFrom } from '../con
 /** The line Keres itself answers — from src/config/business.ts, or null until it is set. */
 export const PHONE = CONFIG_PHONE;
 
-export const EMAIL = 'ops@keresai.com';
+export const EMAIL = business.contactEmail;
 export const ORIGIN = 'https://www.keresai.com';
 
 /**

@@ -25,10 +25,14 @@ export const business = {
   growFromPrice: '',
   city: '',
   state: '',
-  email: 'ops@keresai.com',
+  // The one address the site shows: footer, form fallback and confirmation,
+  // contact page, schema.org, llms.txt. Nothing else may hard-code an email.
+  contactEmail: 'ops@keresai.com',
   // Where the quote form posts. Formspree delivers to email and can forward
   // to a CRM webhook from its dashboard; swap in your own endpoint (same
   // multipart POST, 2xx on success) when you have one.
+  // Formspree dashboard: set the notification address AND the reply-to to
+  // contactEmail above, so a reply to a lead email comes back to ops.
   formEndpoint: 'https://formspree.io/f/mojywlnn',
   // The booking embed shown after a successful quote submit.
   bookingUrl: 'https://calendly.com/ops-keresai/30min',

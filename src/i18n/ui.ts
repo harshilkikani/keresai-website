@@ -34,7 +34,7 @@ export const ui = {
       back: 'Back', submit: 'See my quote', sending: 'Sending…',
       doneTitle: 'Got it. Pick a 20-minute slot.', doneText: 'We will come to the call with your quote worked out from what you just told us.',
       orCall: 'Or call', now: 'now.', slots: 'Available call slots', progress: 'Progress',
-      msgRequired: 'Needed for the quote.', msgPhone: 'Enter a number we can text — ten digits.', msgFast: 'That was quick — try again in a moment.', msgFailed: 'That did not send. Try again, or email ops@keresai.com.',
+      msgRequired: 'Needed for the quote.', msgPhone: 'Enter a number we can text — ten digits.', msgFast: 'That was quick — try again in a moment.', msgFailed: 'That did not send. Try again.', fallback: 'If the form fails, email', doneContact: 'Questions before the call? Email', honeypot: 'Leave this field empty',
       subject: 'Quote request from keresai.com',
     },
     quotePage: {
@@ -99,7 +99,7 @@ export const ui = {
       back: 'Atrás', submit: 'Ver mi cotización', sending: 'Enviando…',
       doneTitle: 'Listo. Elige un espacio de 20 minutos.', doneText: 'Llegaremos a la llamada con tu cotización ya calculada con lo que nos acabas de contar.',
       orCall: 'O llama al', now: 'ahora.', slots: 'Horarios disponibles', progress: 'Progreso',
-      msgRequired: 'Lo necesitamos para la cotización.', msgPhone: 'Escribe un número al que podamos enviar mensajes: diez dígitos.', msgFast: 'Eso fue rápido. Inténtalo de nuevo en un momento.', msgFailed: 'No se envió. Inténtalo de nuevo o escribe a ops@keresai.com.',
+      msgRequired: 'Lo necesitamos para la cotización.', msgPhone: 'Escribe un número al que podamos enviar mensajes: diez dígitos.', msgFast: 'Eso fue rápido. Inténtalo de nuevo en un momento.', msgFailed: 'No se envió. Inténtalo de nuevo.', fallback: 'Si el formulario falla, escríbenos a', doneContact: '¿Preguntas antes de la llamada? Escríbenos a', honeypot: 'Deja este campo vacío',
       subject: 'Solicitud de cotización desde keresai.com (ES)',
     },
     quotePage: {

@@ -23,6 +23,7 @@ export interface Props {
 }
 const { variant = 'page', id = 'quote', industry = '', locale = 'en' } = Astro.props;
 const f = t(locale).form;
+const email = business.contactEmail;
 ---
 <div class:list={['qf', `qf--${variant}`]} id={id} data-quote-form data-endpoint={business.formEndpoint} data-booking={business.bookingUrl}
   data-msg-required={f.msgRequired} data-msg-phone={f.msgPhone} data-msg-fast={f.msgFast} data-msg-failed={f.msgFailed} data-msg-sending={f.sending} data-msg-submit={f.submit}>
@@ -30,7 +31,7 @@ const f = t(locale).form;
     <input type="hidden" name="_subject" value={f.subject} />
     <input type="hidden" name="_lang" value={locale} />
     <input type="hidden" name="_ts" value="" data-qf-ts />
-    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="qf__hp" />
+    <label class="qf__hp" aria-hidden="true"><span>{f.honeypot}</span><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
 
     <ol class="qf__steps" aria-label={f.progress}>
       <li class="qf__stepdot is-current" data-qf-dot="1"><span data-figure>1</span> {f.step1}</li>
@@ -83,6 +84,7 @@ const f = t(locale).form;
         <button type="submit" class="btn-k btn-k--primary" data-qf-submit>{f.submit}</button>
       </div>
       <p class="qf__error qf__error--form" data-qf-error="form" role="alert"></p>
+      <p class="qf__fallback" data-qf-fallback hidden>{f.fallback} <a href={`mailto:${email}`}>{email}</a></p>
     </fieldset>
   </form>
 
@@ -93,5 +95,6 @@ const f = t(locale).form;
     {PHONE && (
       <p class="qf__done-call">{f.orCall} <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a> {f.now}</p>
     )}
+    <p class="qf__done-contact">{f.doneContact} <a href={`mailto:${email}`}>{email}</a></p>
   </div>
 </div>

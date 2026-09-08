@@ -1,3 +1,4 @@
+import { business } from '../config/business';
 // Centralized JSON-LD building blocks. Keep entity identity consistent everywhere.
 import { PHONE } from './site';
 
@@ -20,7 +21,7 @@ export const organizationSchema = {
   foundingDate: '2024',
   slogan: 'Never miss another lead.',
   areaServed: { '@type': 'Country', name: 'United States' },
-  email: 'ops@keresai.com',
+  email: business.contactEmail,
   // knowsAbout uses DefinedTerm @id nodes so knowledge graphs resolve entity
   // relationships between the org and the glossary definitions on this site.
   knowsAbout: [
@@ -52,7 +53,7 @@ export const organizationSchema = {
     contactType: 'sales',
     ...(PHONE ? { telephone: PHONE.e164 } : {}),
     url: `${ORIGIN}/demo`,
-    email: 'ops@keresai.com',
+    email: business.contactEmail,
     availableLanguage: 'English',
     hoursAvailable: {
       '@type': 'OpeningHoursSpecification',

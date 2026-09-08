@@ -2389,6 +2389,9 @@ footer[role="contentinfo"] .footer-grid { padding-block: clamp(56px, 7vw, 96px) 
 .qf--page { margin-inline: auto; padding-block: 0 var(--section); }
 .qf--embed { margin-top: var(--space-7); }
 .qf__hp { position: absolute; left: -5000px; }
+.qf__fallback { margin: var(--space-2) 0 0; font-size: var(--text--1); color: var(--ink-2); }
+.qf__fallback a, .qf__done-contact a { color: var(--accent); }
+.qf__done-contact { margin: var(--space-3) 0 0; font-size: var(--text--1); color: var(--ink-2); }
 .qf__steps { list-style: none; padding: 0; margin: 0 0 var(--space-5); display: flex; gap: var(--space-4); }
 .qf__stepdot { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
 .qf__stepdot span { display: inline-grid; place-items: center; inline-size: 22px; block-size: 22px; border-radius: 50%; border: 1px solid var(--line-strong); }
