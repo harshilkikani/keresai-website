@@ -10,6 +10,18 @@ export const custom = {
     h1: 'A worker for the job nobody on your team has time for.',
     lede: 'We build AI agents that do one recurring job in your business, report to you in a text every morning, and cost less than the hour a week you’d spend doing it badly. We run three of them on our own company.',
     scope: 'Scope a build', call: 'Call',
+    cases: {
+      eyebrow: 'Three we run on ourselves', h2: 'Not demos. Our own agents, doing their job today.',
+      lede: 'Each one started as the one-page scope you’ll get. The numbers inside the mocks show the shape of the work, not results.',
+      label: 'Runs on Keres today', example: 'Example',
+      items: [
+        { title: 'Google listing agent', job: 'Audits the Business Profile, writes the weekly posts, replies to every review, keeps a 25-point rank grid around the office and drafts outreach to the prospects it finds nearby.' },
+        { title: 'Sol, outbound', job: 'Checks SPF, DKIM and DMARC before a single send, warms the domain for weeks, then runs the sequence and books the reply into the calendar.' },
+        { title: 'Owner Daily Brief', job: 'Reads the day’s calls, bookings, reviews and ad spend and sends one text at 7 am: what happened, and the one thing that needs a person.' },
+      ],
+      listing: { head: 'Listing agent · this week', gridNote: 'Rank for “hvac repair” at 25 points around the office', log: [['Audit', 'Hours, categories and photos checked'], ['Posts', '2 drafted for the week'], ['Replies', '3 reviews answered, awaiting your OK'], ['Outreach', '4 nearby prospects drafted']] },
+      outbound: { head: 'Sol · before the first send', checks: [['SPF', 'pass'], ['DKIM', 'pass'], ['DMARC', 'p=quarantine']], warm: 'Warm-up', warmNote: 'Day 12 of 28 · 34 sends a day', paused: 'The sequence starts when warm-up completes.' },
+    },
   },
   es: {
     title: 'Agentes de IA a medida para una tarea recurrente | Keres AI',
@@ -18,6 +30,18 @@ export const custom = {
     h1: 'Un trabajador para la tarea que nadie en tu equipo tiene tiempo de hacer.',
     lede: 'Construimos agentes de IA que hacen una sola tarea recurrente en tu negocio, te reportan cada mañana por mensaje de texto y cuestan menos que la hora a la semana que pasarías haciéndola mal. Nosotros usamos tres en nuestra propia empresa.',
     scope: 'Cotizar mi agente', call: 'Llamar al',
+    cases: {
+      eyebrow: 'Tres que usamos nosotros', h2: 'No son demos. Nuestros propios agentes, trabajando hoy.',
+      lede: 'Cada uno empezó como el documento de una página que tú también vas a recibir. Los números dentro de los ejemplos muestran la forma del trabajo, no resultados.',
+      label: 'Funciona en Keres hoy', example: 'Ejemplo',
+      items: [
+        { title: 'Agente de ficha de Google', job: 'Audita el Perfil de Negocio, escribe las publicaciones semanales, responde cada reseña, mantiene una cuadrícula de ranking de 25 puntos alrededor de la oficina y redacta mensajes para los prospectos que encuentra cerca.' },
+        { title: 'Sol, salida', job: 'Verifica SPF, DKIM y DMARC antes de un solo envío, calienta el dominio durante semanas y luego corre la secuencia y agenda la respuesta en el calendario.' },
+        { title: 'Resumen diario del dueño', job: 'Lee las llamadas, citas, reseñas y gasto en anuncios del día y envía un solo mensaje a las 7 am: qué pasó y lo único que necesita a una persona.' },
+      ],
+      listing: { head: 'Agente de ficha · esta semana', gridNote: 'Ranking para “reparación de aire acondicionado” en 25 puntos alrededor de la oficina', log: [['Auditoría', 'Horario, categorías y fotos revisados'], ['Publicaciones', '2 redactadas para la semana'], ['Respuestas', '3 reseñas contestadas, esperan tu OK'], ['Prospección', '4 prospectos cercanos redactados']] },
+      outbound: { head: 'Sol · antes del primer envío', checks: [['SPF', 'pasa'], ['DKIM', 'pasa'], ['DMARC', 'p=quarantine']], warm: 'Calentamiento', warmNote: 'Día 12 de 28 · 34 envíos al día', paused: 'La secuencia empieza cuando termina el calentamiento.' },
+    },
   },
 } as const;
 

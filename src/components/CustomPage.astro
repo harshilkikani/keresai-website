@@ -3,6 +3,9 @@
 import Section from './Section.astro';
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
+import DailyBrief from './DailyBrief.astro';
+import ListingAgentMock from './ListingAgentMock.astro';
+import OutboundMock from './OutboundMock.astro';
 import { PHONE } from '../data/site';
 import type { Locale } from '../i18n';
 import { customCopy } from '../i18n/custom';
@@ -28,4 +31,27 @@ const h1Words = c.h1.split(' ');
       <p class="k-lede">{c.lede}</p>
     </div>
   </div>
+</Section>
+
+<!-- ── THREE WE RUN ON OURSELVES ──────────────────────── -->
+<Section tone="raised" spacing="major" labelledby="cases-title" id="cases">
+  <div class="k-band__head">
+    <Eyebrow n={1}>{c.cases.eyebrow}</Eyebrow>
+    <h2 id="cases-title" class="k-h2">{c.cases.h2}</h2>
+    <p class="k-lede k-measure">{c.cases.lede}</p>
+  </div>
+  <ul class="cases" data-reveal>
+    {c.cases.items.map((it, i) => (
+      <li class="case" data-reveal-child>
+        <span class="case__label">{c.cases.label}</span>
+        <h3 class="case__title">{it.title}</h3>
+        <p class="case__job">{it.job}</p>
+        <div class="case__mock">
+          {i === 0 && <ListingAgentMock locale={locale} />}
+          {i === 1 && <OutboundMock locale={locale} />}
+          {i === 2 && <DailyBrief vertical="default" locale={locale} caption={false} />}
+        </div>
+      </li>
+    ))}
+  </ul>
 </Section>

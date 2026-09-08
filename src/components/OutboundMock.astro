@@ -1,0 +1,22 @@
+---
+/** Sol before the first send: the three DNS checks and the warm-up ramp. Example numbers. */
+import type { Locale } from '../i18n';
+import { customCopy } from '../i18n/custom';
+export interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const c = customCopy(locale).cases;
+const m = c.outbound;
+const days = 28, today = 12;
+const ramp = Array.from({ length: days }, (_, i) => Math.round(8 + (i / (days - 1)) * 72));
+---
+<figure class="amock" aria-label={m.head}>
+  <div class="amock__head"><span>{m.head}</span><span class="amock__badge">{c.example}</span></div>
+  <ul class="dlv">
+    {m.checks.map(([k, v]) => <li><span class="dlv__k">{k}</span><span class="dlv__v">{v}</span></li>)}
+  </ul>
+  <div class="amock__row"><span class="alog__k">{m.warm}</span><span class="amock__note amock__note--inline">{m.warmNote}</span></div>
+  <div class="warm" role="img" aria-label={m.warmNote}>
+    {ramp.map((h, i) => <span class:list={[i < today - 1 && 'is-done', i === today - 1 && 'is-today']} style={`block-size:${h}%`}></span>)}
+  </div>
+  <p class="amock__note">{m.paused}</p>
+</figure>
