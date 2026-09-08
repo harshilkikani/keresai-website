@@ -1,0 +1,41 @@
+---
+/**
+ * The seven stages as one inline SVG: nodes 00–06 on a connector line.
+ * It pins beside the leak copy and lights up as each stage scrolls past
+ * (motion.js sets data-active and the connector's stroke-dashoffset).
+ *
+ * Resting state is fully lit, so with no JS or reduced motion the
+ * diagram is simply a complete diagram.
+ */
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+import { stagesFor } from '../i18n/data';
+export interface Props { class?: string; locale?: Locale }
+const { class: extraClass = '', locale = 'en' } = Astro.props;
+const stages = stagesFor(locale);
+const aria = t(locale).mocks.pipelineAria;
+const GAP = 78;
+const X = 28;
+const H = GAP * (stages.length - 1) + 56;
+---
+<svg
+  class:list={['pd', extraClass]}
+  viewBox={`0 0 300 ${H}`}
+  width="300" height={H}
+  role="img"
+  aria-label={aria}
+  data-pipeline
+  data-active="6"
+>
+  <line class="pd__rail" x1={X} y1="28" x2={X} y2={H - 28} />
+  <line class="pd__line" x1={X} y1="28" x2={X} y2={H - 28} data-draw />
+  {stages.map((s, i) => (
+    <g class="pd__node" data-stage={s.n} transform={`translate(${X} ${28 + i * GAP})`}>
+      <circle class="pd__ring" r="18" />
+      <circle class="pd__fill" r="18" />
+      <text class="pd__n" text-anchor="middle" dy="0.35em">{String(s.n).padStart(2, '0')}</text>
+      <text class="pd__label" x="34" dy="0.35em">{s.name}</text>
+      <text class="pd__by" x="34" dy="1.75em">{s.by}</text>
+    </g>
+  ))}
+</svg>

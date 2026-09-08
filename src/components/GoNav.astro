@@ -1,0 +1,36 @@
+---
+/** Ad-landing nav: logo, theme toggle, EN/ES, Call, Get a quote. No dropdowns. */
+import { PHONE } from '../data/site';
+import { type Locale, counterpart } from '../i18n';
+import { t } from '../i18n/ui';
+export interface Props { locale?: Locale; path?: string }
+const { locale = 'en', path = Astro.url.pathname } = Astro.props;
+const ui = t(locale);
+const other = counterpart(locale, path);
+---
+<header class="nav nav--go" role="banner" transition:persist={`go-nav-${locale}`}>
+  <div class="nav-inner">
+    <a href={locale === 'es' ? '/es' : '/'} class="logo" aria-label={ui.nav.home}>
+      <img src="/assets/img/KeresLogo.webp" srcset="/assets/img/KeresLogo.webp 1x, /assets/img/KeresLogo@2x.webp 2x" alt="Keres AI" class="logo-img" width="120" height="32" />
+    </a>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="icon-btn" type="button" aria-pressed="false" aria-label={ui.nav.toggleDark}>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display:none">
+          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="lang-switch" aria-label={ui.nav.language}>
+        {locale === 'en' ? <span aria-current="true">EN</span> : <a href={other.href} hreflang="en" lang="en">EN</a>}
+        {locale === 'es' ? <span aria-current="true">ES</span> : <a href={other.href} hreflang="es" lang="es">ES</a>}
+      </div>
+      {PHONE && (
+        <a href={PHONE.href} class="nav-demo-link" data-event="tel_click">{ui.nav.call} {PHONE.display}</a>
+      )}
+      <a href="#quote" class="btn-k btn-k--primary" data-event="demo_click">{ui.nav.getAQuote}</a>
+    </div>
+  </div>
+</header>

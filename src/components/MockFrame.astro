@@ -1,0 +1,32 @@
+---
+/**
+ * Chrome around a product mock. The mocks are the site's imagery —
+ * there are no stock photos — so the frame stays quiet: a hairline,
+ * a soft lift, and a label bar that says what you are looking at.
+ *
+ * `device` narrows the frame to a phone width for SMS-shaped mocks.
+ */
+export interface Props {
+  label?: string;
+  status?: string;
+  device?: 'phone' | 'panel';
+  class?: string;
+}
+
+const { label, status, device = 'panel', class: extraClass = '' } = Astro.props;
+---
+<div class:list={['k-mock', `k-mock--${device}`, extraClass]}>
+  {(label || status) && (
+    <header class="k-mock__bar">
+      {label && <span class="k-mock__label">{label}</span>}
+      {status && (
+        <span class="k-mock__status">
+          <span class="k-mock__dot" aria-hidden="true"></span>{status}
+        </span>
+      )}
+    </header>
+  )}
+  <div class="k-mock__body">
+    <slot />
+  </div>
+</div>

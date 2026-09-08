@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import PricingPage from '../../components/PricingPage.astro';
+import { organizationSchema, softwareApplicationSchema, faqSchema, breadcrumbSchema } from '../../data/schema';
+import { pricingCopy, pricingFaqs } from '../../i18n/pricing';
+const p = pricingCopy('es');
+const crumbs = [{ name: p.crumbs[0], path: 'es' === 'es' ? '/es' : '/' }, { name: p.crumbs[1], path: '/es/pricing' }];
+---
+<Layout title={p.title} description={p.description} path="/es/pricing" locale="es">
+  <Schema slot="head" graph={[softwareApplicationSchema, faqSchema(pricingFaqs('es')), breadcrumbSchema(crumbs), organizationSchema]} />
+  <PricingPage locale="es" />
+</Layout>

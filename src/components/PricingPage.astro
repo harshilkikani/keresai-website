@@ -1,0 +1,128 @@
+---
+/** /pricing in either language: one row per worker, a bundle row, Custom as a scoped row. */
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import Testimonial from './Testimonial.astro';
+import FaqSection from './FaqSection.astro';
+import { business, priceAmount } from '../config/business';
+import { PHONE, BUNDLE_DISCOUNT } from '../data/site';
+import { type Locale, l } from '../i18n';
+import { pricingCopy, pricingFaqs } from '../i18n/pricing';
+import { workersFor } from '../i18n/data';
+
+export interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const p = pricingCopy(locale);
+const workers = workersFor(locale);
+const fill = (s: string, map: Record<string, string>) => s.replace(/\{(\w+)\}/g, (_, k) => map[k] ?? '');
+const crumbs = [{ name: p.crumbs[0], path: locale === 'es' ? '/es' : '/' }, { name: p.crumbs[1], path: locale === 'es' ? '/es/pricing' : '/pricing' }];
+const bundle = priceAmount('bundle');
+const build = priceAmount('customBuild');
+const run = priceAmount('customRun');
+const quote = l(locale, '/quote');
+---
+<Breadcrumbs crumbs={crumbs} />
+
+<Section spacing="standard" labelledby="pricing-title" id="pricing-hero">
+  <div class="k-grid">
+    <div class="k-col-7">
+      <Eyebrow>{p.eyebrow}</Eyebrow>
+      <h1 id="pricing-title" class="k-display">{p.h1}</h1>
+      <p class="k-lede">{p.lede}</p>
+      <div class="price-hero-ctas">
+        {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">{p.call} {PHONE.display}</Button>}
+        <Button href={quote} variant={PHONE ? 'ghost' : 'primary'} event="demo_click">{p.quote}</Button>
+      </div>
+    </div>
+    <div class="k-col-5">
+      <div class="price-facts">
+        {p.terms.map(([k, v]) => (
+          <div class="price-fact"><span class="price-fact__k">{k}</span><span class="price-fact__v">{v}</span></div>
+        ))}
+        <div class="price-fact"><span class="price-fact__k">{p.simultaneous[0]}</span><span class="price-fact__v">{p.simultaneous[1]}</span></div>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<Section tone="raised" spacing="standard" width="wide" labelledby="workers-title" id="workers">
+  <div class="k-band__head">
+    <Eyebrow>{p.tableEyebrow}</Eyebrow>
+    <h2 id="workers-title" class="k-h2">{p.tableH2}</h2>
+    <p class="k-lede k-measure">{p.tableLede}</p>
+  </div>
+  <div class="wtable" role="table" aria-labelledby="workers-title">
+    <div class="wtable__head" role="row">
+      {p.cols.map((c) => <span role="columnheader">{c}</span>)}
+    </div>
+    {workers.filter((w) => w.slug !== 'custom').map((w) => { const price = priceAmount(w.priceKey); return (
+      <div class:list={['wtable__row', w.slug === 'inbound' && 'wtable__row--lead']} role="row">
+        <div class="wtable__cell wtable__name" role="cell"><h3>{w.name}</h3></div>
+        <div class="wtable__cell wtable__job" role="cell" data-label={p.cols[1]}>{w.job}</div>
+        <div class="wtable__cell wtable__price" role="cell" data-label={p.cols[2]}>
+          {price ? <><span class="wtable__from">{p.from} </span><strong data-figure>{price}</strong><span class="wtable__per">{p.perMo}</span></> : <span class="wtable__quoted">{p.quoted}</span>}
+        </div>
+        <div class="wtable__cell wtable__inc" role="cell" data-label={p.cols[3]}><ul>{w.includes.map((i) => <li>{i}</li>)}</ul></div>
+        <div class="wtable__cell wtable__act" role="cell"><Button href={w.href} variant={w.slug === 'inbound' ? 'primary' : 'outline'} wide>{fill(p.hire, { name: w.name, a: w.person ? 'a ' : '' })}</Button></div>
+      </div>
+    ); })}
+    <div class="wtable__row wtable__row--bundle" role="row">
+      <div class="wtable__cell wtable__name" role="cell"><h3>{p.bundle.name}</h3></div>
+      <div class="wtable__cell wtable__job" role="cell" data-label={p.cols[1]}>{p.bundle.job}</div>
+      <div class="wtable__cell wtable__price" role="cell" data-label={p.cols[2]}>
+        {bundle ? <><span class="wtable__from">{p.from} </span><strong data-figure>{bundle}</strong><span class="wtable__per">{p.perMo}</span></> : <span class="wtable__quoted">{p.quoted}</span>}
+      </div>
+      <div class="wtable__cell wtable__inc" role="cell" data-label={p.cols[3]}><ul>{p.bundle.includes.map((i) => <li>{i}</li>)}</ul></div>
+      <div class="wtable__cell wtable__act" role="cell"><Button href={quote} variant="primary" event="demo_click" wide>{p.hireAll}</Button></div>
+    </div>
+    {workers.filter((w) => w.slug === 'custom').map((w) => (
+      <div class="wtable__row wtable__row--custom" role="row">
+        <div class="wtable__cell wtable__name" role="cell"><h3>{w.name}</h3></div>
+        <div class="wtable__cell wtable__job" role="cell" data-label={p.cols[1]}>{w.job}</div>
+        <div class="wtable__cell wtable__price" role="cell" data-label={p.cols[2]}>
+          <span class="wtable__quoted">{p.scoped}</span>
+          {(build || run) && <span class="wtable__sub">{build && <>{p.build} {p.from} <strong data-figure>{build}</strong></>}{build && run && ' · '}{run && <>{p.run} {p.from} <strong data-figure>{run}</strong>{p.perMo}</>}</span>}
+        </div>
+        <div class="wtable__cell wtable__inc" role="cell" data-label={p.cols[3]}><ul>{w.includes.map((i) => <li>{i}</li>)}</ul></div>
+        <div class="wtable__cell wtable__act" role="cell"><Button href={l(locale, '/custom')} variant="outline" wide>{p.scope}</Button></div>
+      </div>
+    ))}
+  </div>
+  <p class="plan-row__foot">
+    {p.tableFoot} {BUNDLE_DISCOUNT && <>{fill(p.discount, { pct: BUNDLE_DISCOUNT })} </>}
+    {PHONE && <>{p.prefer} <a href={PHONE.href} data-event="tel_click">{p.call} {PHONE.display}</a>.</>}
+  </p>
+</Section>
+
+<Section spacing="standard" labelledby="quote-title" id="what-changes">
+  <div class="k-split k-split--top">
+    <div class="k-split__aside">
+      <Eyebrow>{p.factorsEyebrow}</Eyebrow>
+      <h2 id="quote-title" class="k-h2">{p.factorsH2}</h2>
+      <p class="k-lede">{p.factorsLede}</p>
+      <Button href={quote} variant="ghost" event="demo_click">{p.quote}</Button>
+    </div>
+    <ol class="k-factors">
+      {p.factors.map((f, i) => (
+        <li class="k-factor"><span class="k-factor__n" data-figure>{String(i + 1).padStart(2, '0')}</span><span class="k-factor__t">{f}</span></li>
+      ))}
+    </ol>
+  </div>
+</Section>
+
+<Section tone="raised" spacing="standard" labelledby="proof-title" id="proof">
+  <div class="k-grid">
+    <div class="k-col-5">
+      <Eyebrow>{p.proofEyebrow}</Eyebrow>
+      <h2 id="proof-title" class="k-h2">{p.proofH2}</h2>
+      <p class="k-lede">{p.proofLede}</p>
+    </div>
+    <div class="k-col-7">
+      {business.testimonials.map((t) => <Testimonial {...t} />)}
+    </div>
+  </div>
+</Section>
+
+<FaqSection faqs={pricingFaqs(locale)} title={p.faqTitle} tone="ground" />

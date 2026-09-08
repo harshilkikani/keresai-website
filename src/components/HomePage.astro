@@ -1,0 +1,336 @@
+---
+/**
+ * The homepage in either language. Prose comes from src/i18n/home.ts,
+ * data (stages, agents, Found items, mocks) from the locale accessors.
+ */
+import { business, has, priceAmount } from '../config/business';
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+import Testimonial from './Testimonial.astro';
+import CallTranscript from './CallTranscript.astro';
+import DailyBrief from './DailyBrief.astro';
+import SiteOnPhone from './SiteOnPhone.astro';
+import GoogleListing from './GoogleListing.astro';
+import PipelineDiagram from './PipelineDiagram.astro';
+import AgentMock from './AgentMock.astro';
+import OutboundMock from './OutboundMock.astro';
+import ScopeCard from './ScopeCard.astro';
+import ShiftBoard from './ShiftBoard.astro';
+import Calculator from './Calculator.astro';
+import LeadBand from './LeadBand.astro';
+import { plans, PHONE } from '../data/site';
+import { type Locale, l } from '../i18n';
+import { t } from '../i18n/ui';
+import { homeCopy, faqsFor } from '../i18n/home';
+import { stagesFor, agentsFor, foundServicesFor, workersFor } from '../i18n/data';
+
+export interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const c = homeCopy(locale);
+// Honesty gate: Spanish pages must not show Remi answering in Spanish until business.remiSpanish is true.
+const gate = locale === 'es' && !has.remiSpanish;
+const gateLine = t(locale).remiGate;
+const stages = stagesFor(locale);
+const phoneAgents = agentsFor(locale).filter((a) => a.slug !== 'outbound');
+const foundServices = foundServicesFor(locale);
+const found = plans.find((p) => p.slug === 'found')!;
+const answer = plans.find((p) => p.slug === 'answer')!;
+const quote = '#lead'; // the lead band is on this page
+const bundle = priceAmount('bundle');
+const foundPrice = priceAmount('found');
+const b = t(locale).booking;
+const workers = workersFor(locale);
+const fill = (s: string, map: Record<string, string>) => s.replace(/\{(\w+)\}/g, (_, k) => map[k] ?? '');
+const m = t(locale).mocks;
+/** "from $249" → "desde $249" in Spanish; the amount itself is never touched. */
+const fromWord = (s: string) => s.replace(/^from /, `${m.from} `);
+const lawNote = (() => { const amt = (found.fromNote || '').match(/\$[\d,]+/)?.[0]; return amt ? `${m.lawFirms} ${m.from} ${amt}` : ''; })();
+
+const liveIntegrations = [
+  { name: 'Google Calendar', href: '/integrations/google-calendar', color: '#4285f4', d: 'M6 4h20a2 2 0 0 1 2 2v20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 6v16h20V10H6zm4-8v4M22 2v4' },
+  { name: 'HubSpot', href: '/integrations/hubspot', color: '#ff7a59', d: 'M16 14V6M22 11.5 17.5 16' },
+  { name: 'ServiceTitan', href: '/integrations/servicetitan', color: '#1f7a3e', d: 'M4 24 L11 13 L16 19 L22 9 L28 24 Z' },
+  { name: 'Zapier', href: '/integrations/zapier', color: '#ff4f00', d: 'M16 4v8m0 8v8M4 16h8m8 0h8M7.5 7.5l5.7 5.7m5.6 5.6 5.7 5.7M24.5 7.5l-5.7 5.7m-5.6 5.6L7.5 24.5' },
+];
+const faqs = faqsFor(locale);
+const h1Groups = c.h1;
+---
+<!-- ── HERO ───────────────────────────────────────────── -->
+<Section spacing="standard" labelledby="hero-title" id="hero" class="k-hero k-hero--v2">
+  <div class="k-hero__light" aria-hidden="true"></div>
+  <div class="k-hero__grid">
+    <div class="k-hero__copy">
+      <Eyebrow class="k-eyebrow--long">{c.eyebrow}</Eyebrow>
+      <h1 id="hero-title" class="k-display k-display--xl" data-words>
+        {h1Groups.map((group, gi) => (
+          <>{group.map((w, wi) => <><span class:list={['w', gi === h1Groups.length - 1 && 'accent']}>{w}</span>{wi < group.length - 1 ? ' ' : ''}</>)}{gi < h1Groups.length - 1 ? ' ' : ''}</>
+        ))}
+      </h1>
+      <div class="k-hero__ctas">
+        <Button href={quote} variant="primary" event="demo_click">{c.getAQuote}</Button>
+        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{c.call} {PHONE.display} {c.hearRemi}</Button>}
+      </div>
+      <p class="k-lede">{fill(c.lede, { bundle: bundle ? fill(c.ledeBundle, { price: bundle }) : '' })}</p>
+      {gate && gateLine && <p class="k-hero__note" data-gate>{gateLine}</p>}
+      <ul class="k-hero__facts" aria-label={c.atAGlance}>
+        {c.facts.map(([k, n, suffix]) => (
+          <li><span class="k-hero__fact-k">{k}</span><span class="k-hero__fact-v"><span data-count>{n}</span>{suffix}</span></li>
+        ))}
+        {bundle && <li><span class="k-hero__fact-k">{c.factBundle[0]}</span><span class="k-hero__fact-v">$<span data-count>{bundle.replace('$', '')}</span>{c.factBundle[1]}</span></li>}
+      </ul>
+    </div>
+    <div class="k-hero__mock" data-depth data-tilt>
+      <ShiftBoard locale={locale} gate={gate} />
+    </div>
+  </div>
+</Section>
+
+<!-- ── THE ROSTER ─────────────────────────────────────── -->
+<Section spacing="major" labelledby="roster-title" id="roster">
+  <div class="k-band__head">
+    <Eyebrow n={1}>{c.roster.eyebrow}</Eyebrow>
+    <h2 id="roster-title" class="k-h2">{c.roster.h2}</h2>
+  </div>
+  <ul class="roster" data-reveal>
+    {workers.map((w) => { const price = priceAmount(w.priceKey); return (
+      <li class="roster__card" data-reveal-child>
+        <h3 class="roster__name">{w.name}</h3>
+        <p class="roster__job">{w.job}</p>
+        <div class="roster__mock">
+          {w.mock === 'site' && <SiteOnPhone locale={locale} caption={false} />}
+          {w.mock === 'listing' && <GoogleListing locale={locale} />}
+          {w.mock === 'inbound' && (gate ? <SiteOnPhone locale={locale} caption={false} /> : <AgentMock slug="inbound" locale={locale} />)}
+          {w.mock === 'follow-up' && <AgentMock slug="follow-up" locale={locale} />}
+          {w.mock === 'reactivation' && <AgentMock slug="reactivation" locale={locale} />}
+          {w.mock === 'outbound' && <OutboundMock locale={locale} />}
+          {w.mock === 'scope' && <ScopeCard locale={locale} />}
+        </div>
+        {price && <p class="roster__price"><span class="roster__from">{c.roster.from} </span>{price}<span class="roster__per">{c.roster.perMo}</span></p>}
+        <Button href={w.href} variant={w.slug === 'inbound' ? 'primary' : 'outline'} wide>{fill(c.roster.hire, { name: w.name, a: w.person ? 'a ' : '' })}</Button>
+      </li>
+    ); })}
+  </ul>
+  <p class="roster__foot">{c.roster.foot}{bundle && fill(c.roster.footBundle, { price: bundle })}</p>
+</Section>
+
+<!-- ── GET A QUOTE OR BOOK A CALL ─────────────────────── -->
+<Section tone="raised" spacing="major" labelledby="lead-title" id="lead">
+  <div class="k-band__head">
+    <Eyebrow n={2}>{b.eyebrow}</Eyebrow>
+    <h2 id="lead-title" class="k-h2">{b.h2}</h2>
+    <p class="k-lede k-measure">{b.lede}</p>
+  </div>
+  <LeadBand locale={locale} id="quote" />
+</Section>
+
+<!-- ── THE SEVEN LEAKS — pinned pipeline ──────────────── -->
+<Section spacing="major" labelledby="leaks-title" id="leaks">
+  <div class="k-band__head">
+    <Eyebrow n={3}>{c.leaks.eyebrow}</Eyebrow>
+    <h2 id="leaks-title" class="k-h2">{c.leaks.h2}</h2>
+    <p class="k-lede k-measure">{c.leaks.lede}</p>
+  </div>
+  <div class="pipe" data-pipe>
+    <div class="pipe__panel">
+      <div class="pipe__rail">
+        <PipelineDiagram locale={locale} />
+        <ol class="pipe__dots" aria-hidden="true">
+          {stages.map((s) => (
+            <li class="pipe__dot" data-dot={s.n}><span class="pipe__dot-n">{String(s.n).padStart(2, '0')}</span><span class="pipe__dot-name">{s.name}</span></li>
+          ))}
+        </ol>
+      </div>
+      <ol class="pipe__copy">
+        {stages.map((s) => (
+          <li class="pipe__stage" data-stage-copy={s.n}>
+            <span class="k-stagenum k-stagenum--lg" aria-hidden="true">{String(s.n).padStart(2, '0')}</span>
+            <h3 class="pipe__name">{s.name}</h3>
+            <p class="pipe__leak">{s.leak}</p>
+            <p class="pipe__fix">{s.fix}</p>
+            <a class="pipe__by" href={s.href}>
+              {c.leaks.handledBy} {s.by}
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</Section>
+
+<!-- ── WHAT FOUND INCLUDES ────────────────────────────── -->
+<Section spacing="major" labelledby="found-title" id="found">
+  <div class="k-split k-split--top">
+    <div class="k-split__aside">
+      <Eyebrow n={4}>{c.found.eyebrow}</Eyebrow>
+      <h2 id="found-title" class="k-h2">{c.found.h2}</h2>
+      <p class="k-lede">{fill(c.found.lede, { price: foundPrice ? fill(c.found.priceClause, { from: `${m.from} ${foundPrice}` }) : '' })}</p>
+      {foundPrice && (
+        <div class="k-found__foot">
+          <p class="k-found__price">
+            <span class="k-found__from">{c.found.from}<span data-count>{foundPrice.replace('$', '')}</span></span>
+            <span class="k-found__per">{c.found.per}</span>
+          </p>
+        </div>
+      )}
+      <Button href="/services/found" variant="primary">{c.found.cta}</Button>
+      <div class="k-found__mocks" data-reveal>
+        <SiteOnPhone locale={locale} caption={false} />
+        <GoogleListing locale={locale} />
+      </div>
+    </div>
+    <ul class="k-svc k-svc--two" data-reveal>
+      {foundServices.map((s) => (
+        <li class="k-svc__item" data-reveal-child>
+          <div class="k-svc__head">
+            <h3 class="k-svc__name">{s.name}</h3>
+            {s.addOn && <span class="k-svc__plan k-svc__plan--addon">{c.found.addOn}</span>}
+          </div>
+          <p class="k-svc__desc">{s.brief}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>
+
+<!-- ── OWNER DAILY BRIEF ──────────────────────────────── -->
+<Section tone="inverse" spacing="major" labelledby="brief-title" id="brief">
+  <div class="k-split k-split--reverse">
+    <div class="k-split__aside">
+      <Eyebrow n={5}>{c.brief.eyebrow}</Eyebrow>
+      <h2 id="brief-title" class="k-h2">{c.brief.h2}</h2>
+      <p class="k-lede">{c.brief.lede}</p>
+      <p class="k-body k-measure">{c.brief.body}</p>
+    </div>
+    <div class="k-split__mock"><DailyBrief vertical="default" locale={locale} /></div>
+  </div>
+</Section>
+
+<!-- ── INDUSTRIES ─────────────────────────────────────── -->
+<Section spacing="standard" labelledby="ind-title" id="industries">
+  <div class="k-band">
+    <div class="k-band__head">
+      <Eyebrow n={6}>{c.industries.eyebrow}</Eyebrow>
+      <h2 id="ind-title" class="k-h2">{c.industries.h2}</h2>
+      <p class="k-lede k-measure">{c.industries.lede}</p>
+    </div>
+    <ul class="k-inds" data-reveal>
+      {c.industries.items.map(([href, name, line]) => (
+        <li class="k-ind" data-reveal-child>
+          <a class="k-ind__link" href={href}>
+            <h3 class="k-ind__name">{name}</h3>
+            <p class="k-ind__line">{line}</p>
+            <span class="k-ind__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="k-inds__foot">{c.industries.foot} <a href="/industries">{c.industries.footLink}</a>.</p>
+  </div>
+</Section>
+
+<!-- ── INTEGRATIONS ───────────────────────────────────── -->
+<Section tone="raised" spacing="standard" labelledby="int-title" id="integrations">
+  <div class="k-band">
+    <div class="k-band__head">
+      <Eyebrow n={7}>{c.integrations.eyebrow}</Eyebrow>
+      <h2 id="int-title" class="k-h2">{c.integrations.h2}</h2>
+      <p class="k-lede k-measure">{c.integrations.lede}</p>
+    </div>
+    <ul class="k-logos" aria-label={c.integrations.aria} data-reveal>
+      {liveIntegrations.map((t) => (
+        <li class="k-logo" data-reveal-child>
+          <a href={t.href}>
+            <span class="k-logo__mark" style={`--logo:${t.color}`} aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d={t.d} stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="k-logo__name">{t.name}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="k-logos__foot">{c.integrations.foot} <a href="/integrations">{c.integrations.footLink}</a>.</p>
+  </div>
+</Section>
+
+<!-- ── CALCULATOR ─────────────────────────────────────── -->
+<Section spacing="major" labelledby="roi-title" id="roi">
+  <Eyebrow n={8}>{c.calc.eyebrow}</Eyebrow>
+  <h2 id="roi-title" class="k-h2">{c.calc.h2}</h2>
+  <p class="k-lede k-measure">{c.calc.lede} <a href="/tools/missed-call-calculator">{c.calc.link}</a>.</p>
+  <Calculator locale={locale} vertical="home-services" ctaHref={quote} />
+</Section>
+
+<!-- ── CUSTOM AGENTS, ONE BAND ────────────────────────── -->
+<Section spacing="standard" labelledby="custom-teaser-title" id="custom-teaser">
+  <div class="k-teaser" data-reveal>
+    <div>
+      <Eyebrow n={9}>{c.customTeaser.eyebrow}</Eyebrow>
+      <h2 id="custom-teaser-title" class="k-h2">{c.customTeaser.h2}</h2>
+    </div>
+    <div class="k-teaser__body">
+      <p class="k-lede">{c.customTeaser.text}</p>
+      <Button href={l(locale, '/custom')} variant="ghost">{c.customTeaser.cta}</Button>
+    </div>
+  </div>
+</Section>
+
+<!-- ── PROOF — only with real testimonials ────────────── -->
+{has.testimonials && (
+  <Section tone="raised" spacing="standard" labelledby="proof-title" id="proof">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow n={10}>{c.proof.eyebrow}</Eyebrow>
+        <h2 id="proof-title" class="k-h2">{c.proof.h2}</h2>
+      </div>
+      <div class="k-quotes" data-reveal>
+        {business.testimonials.map((t) => (<div data-reveal-child><Testimonial {...t} /></div>))}
+      </div>
+    </div>
+  </Section>
+)}
+
+<!-- ── HOW IT STARTS ──────────────────────────────────── -->
+<Section spacing="standard" labelledby="start-title" id="start">
+  <div class="k-band">
+    <div class="k-band__head">
+      <Eyebrow n={11}>{c.start.eyebrow}</Eyebrow>
+      <h2 id="start-title" class="k-h2">{c.start.h2}</h2>
+    </div>
+    <ol class="k-steps" data-reveal>
+      {c.start.steps.map(([title, text], i) => (
+        <li class="k-step" data-reveal-child>
+          <span class="k-step__n" data-figure>{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="k-step__title">{title}</h3>
+          <p class="k-step__text">{text}</p>
+        </li>
+      ))}
+    </ol>
+    <div class="k-start__ctas">
+      <Button href={quote} variant="primary" event="demo_click">{c.getAQuote}</Button>
+      {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{c.call} {PHONE.display}</Button>}
+    </div>
+  </div>
+</Section>
+
+<!-- ── FAQ ────────────────────────────────────────────── -->
+<Section tone="raised" spacing="standard" labelledby="faq-title" id="faq">
+  <Eyebrow n={12}>{c.faq.eyebrow}</Eyebrow>
+  <h2 id="faq-title" class="k-h2">{c.faq.h2}</h2>
+  <div class="faq-list">
+    {faqs.map((f) => (
+      <details class="faq-item"><summary class="faq-q">{f.q}</summary><p class="faq-a" set:html={f.a} /></details>
+    ))}
+  </div>
+</Section>
+
+<!-- ── CLOSE ──────────────────────────────────────────── -->
+<Section tone="inverse" spacing="standard" labelledby="close-title" id="close">
+  <div class="k-close">
+    <h2 id="close-title" class="k-h2">{c.close.h2}</h2>
+    <p class="k-lede">{fill(c.close.lede, { found: found.from.replace('from ', '') })}{answer.from && fill(c.close.remi, { price: answer.from.replace('from ', '') })}.</p>
+    <div class="k-close__ctas">
+      <Button href={quote} variant="primary" event="demo_click">{c.getAQuote}</Button>
+      {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{c.call} {PHONE.display}</Button>}
+    </div>
+  </div>
+</Section>

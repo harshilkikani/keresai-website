@@ -7,11 +7,20 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build:css": "node scripts/build-css.mjs",
+    "prebuild": "node scripts/build-css.mjs",
+    "predev": "node scripts/build-css.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.2.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

@@ -1,0 +1,22 @@
+---
+/**
+ * The booking calendar, visible on the page (not only after a form submit).
+ * quote.js mounts Calendly into [data-booking-inline]: on desktop as it
+ * scrolls near, on phones when the button is tapped, so page height and
+ * Lighthouse stay honest. Without JS the button is a link to the event.
+ */
+import { business, has } from '../config/business';
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+export interface Props { locale?: Locale; id?: string; title?: boolean }
+const { locale = 'en', id = 'book', title = true } = Astro.props;
+const b = t(locale).booking;
+const url = locale === 'es' && has.calendlyEs ? business.calendlyEs : business.bookingUrl;
+---
+<div class="book" id={id}>
+  {title && <p class="book__title">{b.calTitle}</p>}
+  {title && <p class="book__lede">{b.calLede}</p>}
+  <div class="book__host" data-booking-inline data-url={url} lang={locale} aria-label={b.slots}>
+    <a class="btn-k btn-k--outline btn-k--wide" href={url} target="_blank" rel="noopener" data-booking-open data-event="book_click">{b.open}</a>
+  </div>
+</div>

@@ -16,6 +16,10 @@
     "home-services": { leads: 250, answer: 60, job: 680,  ah: 35, close: 0.25, label: "Home-services" },
     "med-spa":       { leads: 180, answer: 70, job: 350,  ah: 20, close: 0.50, label: "Med-spa" },
     "professional":  { leads: 80,  answer: 50, job: 3500, ah: 30, close: 0.15, label: "Professional-services" },
+    // Law firms get their own key so the label reads "law-firm" rather than
+    // "professional-services". Same close rate: qualified consult → engaged client.
+    "legal":         { leads: 80,  answer: 50, job: 3500, ah: 45, close: 0.15, label: "Law-firm" },
+    "dental":        { leads: 180, answer: 70, job: 350,  ah: 20, close: 0.50, label: "Dental / med-spa" },
   };
 
   const fmt = (n) => "$" + Math.round(n).toLocaleString("en-US");
@@ -48,19 +52,20 @@
     $("roi-lost-mo-2").textContent = fmt(lostMo);
     $("roi-lost-yr").textContent = fmt(lostYr);
     $("roi-missed").textContent = Math.round(missed).toLocaleString();
-    $("roi-missed-calc").textContent = `= ${s.leads} × (100% − ${s.answer}%)`;
+    const shell = document.querySelector(".roi-shell");
+    const tpl = (k, d) => (shell && shell.getAttribute("data-tpl-" + k)) || d;
+    const fill = (str, map) => str.replace(/\{(\w+)\}/g, (_, k) => (map[k] != null ? map[k] : ""));
+    $("roi-missed-calc").textContent = fill(tpl("missed", "= {leads} × (100% − {answer}%)"), { leads: s.leads, answer: s.answer });
     $("roi-jobs").textContent = Math.round(jobs).toLocaleString();
-    $("roi-job-calc").textContent = `= jobs × ${fmt(s.job)} avg ticket`;
+    $("roi-job-calc").textContent = fill(tpl("job", "= jobs × {ticket} avg ticket"), { ticket: fmt(s.job) });
     $("roi-ah").textContent = Math.round(ah).toLocaleString();
 
     const closeEl = $("roi-close-calc");
-    if (closeEl) closeEl.textContent = `= missed × ${pct(s.close)} close rate`;
+    if (closeEl) closeEl.textContent = fill(tpl("close", "= missed × {rate} close rate"), { rate: pct(s.close) });
     const noteEl = $("roi-note");
     if (noteEl) {
-      const labelNice = (DEFAULTS[s.vertical]?.label || "Home-services").toLowerCase();
-      noteEl.textContent =
-        `Close rate (${pct(s.close)}) is the typical answered-lead close rate for ${labelNice}. ` +
-        `Swap in your own number if you track it.`;
+      const labelNice = tpl("label-" + s.vertical, (DEFAULTS[s.vertical]?.label || "Home-services").toLowerCase());
+      noteEl.textContent = fill(tpl("note", "Close rate ({rate}) is the typical answered-lead close rate for {vertical}. Swap in your own number if you track it."), { rate: pct(s.close), vertical: labelNice });
     }
 
     const label = DEFAULTS[s.vertical]?.label || "Home-services";
@@ -70,7 +75,9 @@
       `Missed-call calc says we're leaving ~${fmt(lostMo)}/mo on the table — let's talk.`;
     const cta = $("roi-cta");
     if (cta) {
-      cta.href = `/demo?prefill=${encodeURIComponent(msg)}`;
+      // Keep the CTA's own destination (/quote, or /es/quote on Spanish pages) and add the prefill.
+      if (!cta.dataset.base) cta.dataset.base = (cta.getAttribute('href') || '/quote').split('?')[0];
+      cta.href = `${cta.dataset.base}?prefill=${encodeURIComponent(msg)}`;
       cta.dataset.prefill = msg;
     }
   }
@@ -86,6 +93,8 @@
     document.querySelectorAll(".roi-vert-btn").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.vert === v);
     });
+    const sel = $("roi-vert");
+    if (sel && sel.value !== v) sel.value = v;
     recompute();
   }
 
@@ -98,6 +107,17 @@
     document.querySelectorAll(".roi-vert-btn").forEach((btn) => {
       btn.addEventListener("click", () => applyVertical(btn.dataset.vert));
     });
+    // Industry dropdown. Selecting one loads that vertical's non-zero
+    // defaults so the calculator is never showing $0 on arrival.
+    const sel = $("roi-vert");
+    const shell = document.querySelector(".roi-shell");
+    if (sel) {
+      sel.addEventListener("change", () => applyVertical(sel.value));
+      if (shell && shell.dataset.vertical) sel.value = shell.dataset.vertical;
+    }
+    // A page can preset a vertical (the /go landings do): load its
+    // defaults into the inputs, not just its close rate.
+    if (shell && shell.dataset.preset === "true" && shell.dataset.vertical) applyVertical(shell.dataset.vertical);
 
     const cta = $("roi-cta");
     if (cta) {
@@ -116,4 +136,6 @@
   } else {
     init();
   }
+  // The calculator's inputs are replaced on client-side navigation.
+  document.addEventListener("astro:after-swap", init);
 })();

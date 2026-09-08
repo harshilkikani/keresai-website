@@ -1,0 +1,110 @@
+---
+/**
+ * The Found landing: hero with the site + listing mocks side by side,
+ * the eight Found items as a plain two-column list, a three-column price
+ * comparison (no competitor names), the quote form pre-set to the route's
+ * industry, one line about answering, and a close. /go chrome throughout.
+ */
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+import SiteOnPhone from './SiteOnPhone.astro';
+import GoogleListing from './GoogleListing.astro';
+import LeadBand from './LeadBand.astro';
+import { PHONE } from '../data/site';
+import { has } from '../config/business';
+import type { GoWebsitePage } from '../data/goWebsite';
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+import { foundServicesFor } from '../i18n/data';
+import { goWebsiteText as esText } from '../i18n/data.es';
+
+export interface Props { page: GoWebsitePage; locale?: Locale }
+const { page, locale = 'en' } = Astro.props;
+const ui = t(locale);
+const gate = locale === 'es' && !has.remiSpanish;
+const gateLine = ui.remiGate;
+const foundServices = foundServicesFor(locale);
+const enText = {
+  eyebrow: 'Found — the website and the listing', h1: [['A', 'website', 'that', 'books', 'the', 'job.'], ['Live', 'in', 'five', 'days.']],
+  lede: 'Built for {vertical}, click-to-call, booking wired in, your Google listing managed every week. {price}/mo. No build fee. Month-to-month.',
+  seeMyQuote: 'See my quote', getEyebrow: 'What you get', getH2: 'Eight things, one flat fee.', addOn: 'Add-on',
+  compareEyebrow: 'What it costs', compareH2: 'Three ways to get a site that rings.',
+  compare: [
+    { who: 'Local agency', cost: '$3,000–$8,000 to build', then: 'plus hosting, and changes billed by the hour', time: 'Six to twelve weeks' },
+    { who: 'DIY builder', cost: 'Your evenings', then: 'a template that looks like everyone else’s', time: 'It still doesn’t ring' },
+    { who: 'Keres Found', cost: '{price}/mo, no build fee', then: 'Google listing managed every week', time: 'Live in five days', us: true },
+  ],
+  remi: 'Every Found site comes with Remi-ready booking. Add answering any time.',
+  closeH2: 'Call us or book 20 minutes.', closeLede: 'Twenty minutes, no deck.',
+};
+const x = locale === 'es' ? esText : enText;
+const fill = (str: string, map: Record<string, string>) => str.replace(/\{(\w+)\}/g, (_, k) => map[k] ?? '');
+
+---
+<Section spacing="standard" labelledby="gw-title" id="hero" class="k-hero k-hero--v2 gw-hero">
+  <div class="k-hero__light" aria-hidden="true"></div>
+  <div class="k-hero__grid">
+    <div class="k-hero__copy">
+      <Eyebrow>{x.eyebrow}</Eyebrow>
+      <h1 id="gw-title" class="k-display" data-words>
+        {x.h1.map((group, gi) => (<>{group.map((w, wi) => <><span class="w">{w}</span>{wi < group.length - 1 ? ' ' : ''}</>)}{gi < x.h1.length - 1 ? ' ' : ''}</>))}
+      </h1>
+      <div class="k-hero__ctas">
+        <Button href="#quote" variant="primary" event="demo_click">{x.seeMyQuote}</Button>
+        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{ui.nav.call} {PHONE.display}</Button>}
+      </div>
+      <p class="k-lede">{fill(x.lede, { vertical: page.vertical, price: page.price })}</p>
+      {gate && gateLine && <p class="k-hero__note" data-gate>{gateLine}</p>}
+    </div>
+    <div class="k-hero__mock gw-hero__mocks">
+      <SiteOnPhone locale={locale} />
+      <GoogleListing locale={locale} />
+    </div>
+  </div>
+</Section>
+
+<Section tone="raised" spacing="standard" labelledby="gw-get" id="what-you-get">
+  <Eyebrow n={1}>{x.getEyebrow}</Eyebrow>
+  <h2 id="gw-get" class="k-h2">{x.getH2}</h2>
+  <ul class="gw-list">
+    {foundServices.map((s) => (
+      <li class="gw-list__item">
+        <span class="gw-list__name">{s.name}</span>
+        {s.addOn && <span class="k-svc__plan k-svc__plan--addon">{x.addOn}</span>}
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<Section spacing="standard" labelledby="gw-compare" id="compare">
+  <Eyebrow n={2}>{x.compareEyebrow}</Eyebrow>
+  <h2 id="gw-compare" class="k-h2">{x.compareH2}</h2>
+  <div class="gw-compare" role="table" aria-labelledby="gw-compare">
+    {x.compare.map((c) => (
+      <div class:list={['gw-compare__col', c.us && 'gw-compare__col--us']} role="row">
+        <p class="gw-compare__who" role="cell">{c.who}</p>
+        <p class="gw-compare__cost" role="cell" data-figure>{fill(c.cost, { price: page.price })}</p>
+        <p class="gw-compare__then" role="cell">{c.then}</p>
+        <p class="gw-compare__time" role="cell">{c.time}</p>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<Section tone="raised" spacing="standard" labelledby="quote-title" id="quote-band">
+  <h2 id="quote-title" class="k-eyebrow"><span class="k-eyebrow__rule" aria-hidden="true"></span><span class="k-eyebrow__n" data-figure>03</span><span>{ui.go.quoteBand}</span></h2>
+  <LeadBand locale={locale} id="quote" industry={page.industry} />
+  <p class="gw-remi">{x.remi}</p>
+</Section>
+
+<Section tone="inverse" spacing="standard" labelledby="close-title" id="close">
+  <div class="k-close">
+    <h2 id="close-title" class="k-h2">{x.closeH2}</h2>
+    <p class="k-lede">{x.closeLede}</p>
+    <div class="k-close__ctas">
+      <Button href="#quote" variant="primary" event="demo_click">{x.seeMyQuote}</Button>
+      {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{ui.nav.call} {PHONE.display}</Button>}
+    </div>
+  </div>
+</Section>

@@ -1,3 +1,4 @@
+import { business } from '../config/business';
 import { glossary } from '../data/glossary';
 import { usecases } from '../data/usecases';
 import { comparisons } from '../data/comparisons';
@@ -29,7 +30,7 @@ export async function GET() {
   push('- Category: AI receptionist & AI SDR platform');
   push('- Founded: 2024');
   push('- Market: United States');
-  push('- Contact: ops@keresai.com');
+  push(`- Contact: ${business.contactEmail}`);
   push('- Slogan: Never miss another lead.');
   push('- Pricing model: Flat monthly subscription — no per-call, per-minute, or per-seat fees');
   push('- Contract: Month-to-month, cancel anytime');
@@ -313,9 +314,9 @@ export async function GET() {
 
   // ── GET STARTED ───────────────────────────────────────────────
   push('## Get started');
-  push(`- Book a demo: ${ORIGIN}/demo`);
+  push(`- Get a quote: ${ORIGIN}/quote`);
   push(`- Pricing: ${ORIGIN}/pricing`);
-  push(`- Contact: ops@keresai.com`);
+  push(`- Contact: ${business.contactEmail}`);
   push(`- All comparisons: ${ORIGIN}/compare`);
   push(`- Home services hub: ${ORIGIN}/ai-receptionist/home-services`);
   push();

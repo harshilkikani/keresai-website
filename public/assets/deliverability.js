@@ -132,7 +132,7 @@
       .then(function (cards) {
         out.innerHTML = '<div class="dc-grid">' + cards.join('') + '</div>' +
           '<p class="dc-foot">Checks run live against public DNS. Want all three set up, monitored, and your inboxes warmed? ' +
-          '<a href="/demo">Book a demo</a> or read <a href="/email-deliverability">how Keres handles deliverability</a>.</p>';
+          '<a href="/quote">Get a quote</a> or read <a href="/email-deliverability">how Keres handles deliverability</a>.</p>';
       })
       .catch(function () {
         out.innerHTML = '<p class="dc-error">Something went wrong querying DNS. Please try again.</p>';

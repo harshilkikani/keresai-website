@@ -1,0 +1,144 @@
+---
+import { business } from '../config/business';
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import Section from '../components/Section.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import { organizationSchema, breadcrumbSchema, faqSchema } from '../data/schema';
+import { partnerReferralOnly, EMAIL, PHONE, BUNDLE_DISCOUNT } from '../data/site';
+
+const path = '/partners';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Partners', path }];
+
+const faqs = [
+  {
+    q: 'What does the partner margin look like?',
+    a: business.partnerReferralTerms || `Email ${EMAIL} and we will send the current referral fee and reseller margin in writing before you introduce anyone.`,
+  },
+  {
+    q: 'Who owns the client relationship?',
+    a: 'You choose. On a referral we take over billing and support and pay you a fee; on a resale you keep the relationship and the invoice, and we sit behind you. Both are month-to-month like every other Keres plan.',
+  },
+  {
+    q: 'Do you compete with me?',
+    a: 'Not on the work you already sell. We do not sell Google Ads or PPC management, video, branding, generic social media or SEO retainers — those are the things we refer out, and you are who we refer them to.',
+  },
+  {
+    q: 'How fast can a client go live?',
+    a: 'Five business days, same as any other account. Twenty minutes on how they answer today, then the intake script, the number, the calendar and the CRM.',
+  },
+];
+---
+<Layout
+  title="Partners — Refer or Resell Keres AI Workers | Keres AI"
+  description="For local agencies and IT shops: refer clients to Keres or resell the agents under your own relationship. We do not sell ads, SEO retainers or social — those stay yours."
+  path={path}
+>
+  <Schema slot="head" graph={[organizationSchema, breadcrumbSchema(crumbs), faqSchema(faqs)]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <Section spacing="standard" labelledby="partners-title">
+    <div class="k-grid">
+      <div class="k-col-7">
+        <Eyebrow>Partners</Eyebrow>
+        <h1 id="partners-title" class="k-display">Your clients keep missing calls. We fix that half.</h1>
+        <p class="k-lede">
+          For local agencies, web shops and IT providers already serving the businesses we build
+          for. You keep the work you are good at; we answer the phones, follow up, and bring
+          past customers back. Refer them or resell us &mdash; both work.
+        </p>
+        <div class="price-hero-ctas">
+          <Button href={`mailto:${EMAIL}?subject=Partner%20enquiry`} variant="primary">Email {EMAIL}</Button>
+          {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Or call {PHONE.display}</Button>}
+        </div>
+      </div>
+      <div class="k-col-5">
+        <div class="price-facts">
+          <div class="price-fact">
+            <span class="price-fact__k">Models</span>
+            <span class="price-fact__v">Referral or resale.</span>
+          </div>
+          <div class="price-fact">
+            <span class="price-fact__k">Margin</span>
+            <span class="price-fact__v">{business.partnerReferralTerms || 'Sent in writing on request.'}</span>
+          </div>
+          <div class="price-fact">
+            <span class="price-fact__k">Go live</span>
+            <span class="price-fact__v">Five business days.</span>
+          </div>
+          <div class="price-fact">
+            <span class="price-fact__k">Contract</span>
+            <span class="price-fact__v">Month-to-month.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="raised" spacing="standard" labelledby="how-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Two ways in</Eyebrow>
+        <h2 id="how-title" class="k-h2">Refer, or resell.</h2>
+        <p class="k-lede k-measure">
+          The difference is who holds the relationship and the invoice. Everything else &mdash; the
+          agents, the onboarding, the five-day go-live &mdash; is identical.
+        </p>
+      </div>
+      <ol class="k-steps">
+        <li class="k-step">
+          <span class="k-step__n" data-figure>01</span>
+          <h3 class="k-step__title">Refer</h3>
+          <p class="k-step__text">You introduce the client. We scope, quote, onboard, bill and support them, and you take a referral fee on the monthly. Lowest effort, and you stay out of the support loop entirely.</p>
+        </li>
+        <li class="k-step">
+          <span class="k-step__n" data-figure>02</span>
+          <h3 class="k-step__title">Resell</h3>
+          <p class="k-step__text">You keep the relationship and the invoice at your own price. We sit behind you, do the build and the tuning, and your client sees your name on the agent. Higher margin, and you own the account.</p>
+        </li>
+        <li class="k-step">
+          <span class="k-step__n" data-figure>03</span>
+          <h3 class="k-step__title">Bundle</h3>
+          <p class="k-step__text">Found plus an agent plan carries {BUNDLE_DISCOUNT ? `a ${BUNDLE_DISCOUNT}% bundle discount` : 'a bundle discount'}, which is usually what makes the numbers work when you are already selling the client a website.</p>
+        </li>
+      </ol>
+    </div>
+  </Section>
+
+  <Section spacing="standard" labelledby="notcompete-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Where we stop</Eyebrow>
+        <h2 id="notcompete-title" class="k-h2">We don&rsquo;t sell what you sell.</h2>
+        <p class="k-lede k-measure">
+          Keres is four agents and a fixed-scope visibility layer. The list below is work we do
+          not take on and actively refer out &mdash; which is the whole reason this partnership is
+          not a conflict.
+        </p>
+      </div>
+      <ul class="k-refer">
+        {partnerReferralOnly.map((r) => <li>{r}</li>)}
+      </ul>
+    </div>
+  </Section>
+
+  <Section tone="inverse" spacing="standard" labelledby="partner-cta">
+    <div class="k-close">
+      <h2 id="partner-cta" class="k-h2">Send one client and see how it goes.</h2>
+      <p class="k-lede">
+        No tier to qualify for and no minimum. Email us and we will send the current terms in
+        writing before you introduce anybody.
+      </p>
+      <div class="k-close__ctas">
+        <Button href={`mailto:${EMAIL}?subject=Partner%20enquiry`} variant="primary">Email {EMAIL}</Button>
+        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">Call {PHONE.display}</Button>}
+      </div>
+    </div>
+  </Section>
+
+  <FaqSection faqs={faqs} title="Partner FAQ" tone="raised" />
+</Layout>

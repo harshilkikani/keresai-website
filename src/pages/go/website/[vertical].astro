@@ -1,0 +1,17 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Schema from '../../../components/Schema.astro';
+import GoWebsitePage from '../../../components/GoWebsitePage.astro';
+import { organizationSchema } from '../../../data/schema';
+import { goWebsitePages, type GoWebsitePage as Page } from '../../../data/goWebsite';
+
+export function getStaticPaths() {
+  return goWebsitePages.filter((g) => g.slug).map((g) => ({ params: { vertical: g.slug }, props: { page: g } }));
+}
+const { page } = Astro.props as { page: Page };
+---
+<Layout title={page.title} description={page.description} path={page.path} go noindex>
+  <Schema slot="head" graph={[organizationSchema]} />
+  <GoWebsitePage page={page} />
+  <script slot="scripts" src="/assets/quote.js?v=4" defer is:inline></script>
+</Layout>

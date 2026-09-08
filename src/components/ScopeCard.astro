@@ -1,0 +1,14 @@
+---
+/** The Custom worker's mini-mock: a scope card. Example values. */
+import type { Locale } from '../i18n';
+import { homeCopy } from '../i18n/home';
+export interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const m = homeCopy(locale).roster.scope;
+---
+<figure class="amock amock--scope" aria-label={m.head}>
+  <div class="amock__head"><span>{m.head}</span><span class="amock__badge">{m.example}</span></div>
+  <dl class="scope">
+    {m.rows.map(([k, v]) => <div class="scope__row"><dt>{k}</dt><dd>{v}</dd></div>)}
+  </dl>
+</figure>

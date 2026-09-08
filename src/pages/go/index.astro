@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import GoPage from '../../components/GoPage.astro';
+import { organizationSchema } from '../../data/schema';
+import { goBySlug } from '../../data/go';
+const page = goBySlug('')!;
+---
+<Layout title={page.title} description={page.description} path={page.path} go noindex>
+  <Schema slot="head" graph={[organizationSchema]} />
+  <GoPage page={page} />
+  <script slot="scripts" src="/assets/roi.js?v=7" defer is:inline></script>
+  <script slot="scripts" src="/assets/quote.js?v=4" defer is:inline></script>
+</Layout>

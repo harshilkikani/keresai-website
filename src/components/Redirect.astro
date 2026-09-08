@@ -1,0 +1,30 @@
+---
+/**
+ * A whole-document redirect stub. GitHub Pages cannot send a 301, so this
+ * is the next best thing: a hashed inline script that carries the query
+ * string and fragment to the destination, a meta refresh for browsers
+ * without script, a canonical on the destination, and noindex so the
+ * stub itself is never listed. Rendered by /demo and /es/demo.
+ */
+import { createHash } from 'node:crypto';
+export interface Props { to: string; lang?: string }
+const { to, lang = 'en' } = Astro.props;
+const js = `location.replace(${JSON.stringify(to)}+location.search+location.hash)`;
+const hash = "'sha256-" + createHash('sha256').update(js).digest('base64') + "'";
+const label = lang === 'es' ? 'Esta página se movió.' : 'This page has moved.';
+const go = lang === 'es' ? 'Continuar' : 'Continue';
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content={`default-src 'none'; script-src 'self' ${hash}; base-uri 'none'; form-action 'none'`} />
+<meta name="robots" content="noindex, nofollow" />
+<script is:inline set:html={js}></script>
+<meta http-equiv="refresh" content={`0;url=${to}`} />
+<link rel="canonical" href={`https://www.keresai.com${to}`} />
+<title>{go} → {to}</title>
+</head>
+<body><p>{label} <a href={to}>{go}</a></p></body>
+</html>

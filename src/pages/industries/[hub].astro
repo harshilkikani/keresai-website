@@ -1,0 +1,298 @@
+---
+import { business, has } from '../../config/business';
+import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import Section from '../../components/Section.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Button from '../../components/Button.astro';
+import Stat from '../../components/Stat.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import CallTranscript from '../../components/CallTranscript.astro';
+import DailyBrief from '../../components/DailyBrief.astro';
+import { organizationSchema, breadcrumbSchema, faqSchema, serviceSchema } from '../../data/schema';
+import { hubs } from '../../data/hubs';
+import { plans, PHONE } from '../../data/site';
+
+export function getStaticPaths() {
+  return hubs.map((hub) => ({ params: { hub: hub.slug }, props: { hub } }));
+}
+
+const { hub } = Astro.props;
+const path = `/industries/${hub.slug}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Industries', path: '/industries' },
+  { name: hub.name, path },
+];
+const answer = plans.find((p) => p.slug === 'answer')!;
+---
+<Layout title={hub.title} description={hub.description} path={path}>
+  <Schema
+    slot="head"
+    graph={[
+      organizationSchema,
+      breadcrumbSchema(crumbs),
+      faqSchema(hub.faqs),
+      serviceSchema({
+        name: `AI receptionist for ${hub.name.toLowerCase()}`,
+        serviceType: 'AI Receptionist',
+        description: hub.description,
+        path,
+        audience: hub.name,
+      }),
+    ]}
+  />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <!-- ── HERO ───────────────────────────────────────────── -->
+  <Section spacing="standard" labelledby="hub-title" class="k-hero">
+    <div class="k-hero__grid">
+      <div class="k-hero__copy">
+        <Eyebrow>{hub.name}</Eyebrow>
+        <h1 id="hub-title" class="k-display">{hub.h1}</h1>
+        <p class="k-lede">{hub.sub}</p>
+        <div class="k-hero__ctas">
+          {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
+          <Button href="/quote" variant="ghost" event="demo_click">Book a demo</Button>
+        </div>
+        <ul class="k-hero__facts" aria-label="At a glance">
+          <li><span class="k-hero__fact-k">Answers in</span><span class="k-hero__fact-v" data-figure>2 rings</span></li>
+          <li><span class="k-hero__fact-k">Live in</span><span class="k-hero__fact-v" data-figure>5 days</span></li>
+          <li><span class="k-hero__fact-k">Visibility from</span><span class="k-hero__fact-v" data-figure>{hub.foundFrom.replace('from ', '')}/mo</span></li>
+        </ul>
+      </div>
+      <div class="k-hero__mock">
+        <CallTranscript vertical={hub.vertical} />
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── THE PROBLEM ────────────────────────────────────── -->
+  <Section tone="raised" spacing="major" labelledby="problem-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>The problem</Eyebrow>
+        <h2 id="problem-title" class="k-h2">{hub.problemH2}</h2>
+        {/* Direct-answer paragraph — a complete, quotable answer first. */}
+        <p class="k-lede k-measure">{hub.problemAnswer}</p>
+      </div>
+      <div class="k-stats">
+        {hub.stats.map((s) => (
+          <Stat value={s.value} label={s.label} source={s.source || undefined} sourceHref={s.sourceHref || undefined} />
+        ))}
+      </div>
+      <p class="k-inds__foot">
+        The full data, with sources: <a href={hub.benchmark.href}>{hub.benchmark.label}</a>.
+      </p>
+    </div>
+  </Section>
+
+  <!-- ── WHAT REMI DOES ON THE CALL ─────────────────────── -->
+  <Section spacing="major" labelledby="flow-title" id="how-a-call-goes">
+    <div class="k-split k-split--top">
+      <div class="k-split__aside">
+        <Eyebrow>On the call</Eyebrow>
+        <h2 id="flow-title" class="k-h2">What Remi does, in order.</h2>
+        <p class="k-lede">
+          Remi, your Inbound Agent, runs the script you would run if you had time to answer
+          every call yourself &mdash; in your vocabulary, in this order, every time.
+        </p>
+        <Button href="/agents/inbound" variant="ghost">Everything Remi does</Button>
+      </div>
+      <ol class="k-flow">
+        {hub.callFlow.map((f, i) => (
+          <li class="k-flow__step">
+            <span class="k-flow__n" data-figure>{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 class="k-flow__name">{f.step}</h3>
+              <p class="k-flow__text">{f.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <!-- ── SEGMENTS ───────────────────────────────────────── -->
+  <Section tone="raised" spacing="standard" labelledby="seg-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>{hub.segmentsH2}</Eyebrow>
+        <h2 id="seg-title" class="k-h2">Trained on what you actually ask.</h2>
+      </div>
+      <ul class="k-svc">
+        {hub.segments.map((s) => (
+          <li class="k-svc__item">
+            <div class="k-svc__head"><h3 class="k-svc__name">{s.name}</h3></div>
+            <p class="k-svc__desc">{s.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- ── THEO AND JUNE ──────────────────────────────────── -->
+  <Section spacing="standard" labelledby="others-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>After the call</Eyebrow>
+        <h2 id="others-title" class="k-h2">Answering is stage one of three.</h2>
+        <p class="k-lede k-measure">
+          Getting the appointment on the calendar is not the same as getting it kept, and the
+          list of people who already chose you is the cheapest pipeline you own.
+        </p>
+      </div>
+      <ul class="k-team">
+        {hub.otherAgents.map((a) => (
+          <li class="k-member">
+            <div class="k-member__id">
+              <h3 class="k-member__name">{a.name}</h3>
+              <p class="k-member__title">{a.title}</p>
+              <a class="k-member__go" href={`/agents/${a.slug}`}>
+                What {a.name} does
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+            <ul class="k-member__bullets"><li>{a.text}</li></ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- ── DAILY BRIEF ────────────────────────────────────── -->
+  <Section tone="raised" spacing="standard" labelledby="brief-title">
+    <div class="k-split k-split--reverse">
+      <div class="k-split__aside">
+        <Eyebrow>Owner Daily Brief</Eyebrow>
+        <h2 id="brief-title" class="k-h2">You don&rsquo;t log into a dashboard. You get a text.</h2>
+        <p class="k-lede">
+          One message each morning with what happened overnight, which source produced the
+          bookings, and the single thing that needs a person.
+        </p>
+      </div>
+      <div class="k-split__mock">
+        <DailyBrief vertical={hub.vertical} />
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── CALCULATOR ─────────────────────────────────────── -->
+  <Section spacing="standard" labelledby="calc-title" id="calculator">
+    <Eyebrow>What it&rsquo;s costing you</Eyebrow>
+    <h2 id="calc-title" class="k-h2">Put your own numbers in.</h2>
+    <p class="k-lede k-measure">
+      Preset to typical {hub.name.toLowerCase()} figures. Change any of them &mdash; the arithmetic is
+      shown in full underneath. <a href="/tools/missed-call-calculator">Open the full calculator</a>.
+    </p>
+    <div class="roi-shell" data-vertical={hub.calcPreset}>
+      <div class="roi-vert-row">
+        <label class="roi-vert-label" for="roi-vert">Industry</label>
+        <select id="roi-vert" class="roi-vert-select">
+          <option value="home-services">Home services</option>
+          <option value="legal">Law firms</option>
+          <option value="dental">Dental &amp; med spa</option>
+          <option value="real-estate">Real estate</option>
+        </select>
+      </div>
+      <div class="roi-grid">
+        <div class="roi-inputs">
+          <label class="roi-field"><span class="roi-field-label">Monthly leads</span><input type="number" id="roi-leads" min="0" value="250"></label>
+          <label class="roi-field"><span class="roi-field-label">Answer rate %</span><input type="number" id="roi-answer" min="0" max="100" value="60"></label>
+          <label class="roi-field"><span class="roi-field-label">Avg ticket value</span><div class="roi-field-prefix"><span>$</span><input type="number" id="roi-job" min="0" value="680"></div></label>
+          <label class="roi-field"><span class="roi-field-label">After-hours lead %</span><input type="number" id="roi-afterhours" min="0" max="100" value="35"></label>
+        </div>
+        <div class="roi-output">
+          <div class="roi-headline-label">You&rsquo;re losing</div>
+          <div class="roi-headline-value"><span id="roi-lost-mo">$0</span><span class="roi-per">/mo</span></div>
+          <div class="roi-headline-year">&asymp; <span id="roi-lost-yr">$0</span> / year</div>
+          <div class="roi-math">
+            <div class="roi-math-row"><span>Missed leads / mo</span><span id="roi-missed">0</span></div>
+            <div class="roi-math-row muted"><span id="roi-missed-calc"></span><span></span></div>
+            <div class="roi-math-row"><span>Would-have-closed jobs</span><span id="roi-jobs">0</span></div>
+            <div class="roi-math-row muted"><span id="roi-close-calc"></span><span></span></div>
+            <div class="roi-math-row"><span>Lost revenue</span><span id="roi-lost-mo-2">$0</span></div>
+            <div class="roi-math-row muted"><span id="roi-job-calc"></span><span></span></div>
+            <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">0</span></div>
+            <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
+          </div>
+          <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href="/quote" data-event="demo_click">Get a quote with these numbers</a>
+          <div class="roi-note" id="roi-note"></div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── FOUND + PRICING ────────────────────────────────── -->
+  <Section tone="inverse" spacing="standard" labelledby="found-title">
+    <div class="k-close k-close--wide">
+      <Eyebrow>Before the phone can ring</Eyebrow>
+      <h2 id="found-title" class="k-h2">Found, {hub.foundFrom} a month.</h2>
+      <p class="k-lede">{hub.foundLine}</p>
+      <p class="k-body">
+        Remi on the Answer plan starts at {answer.from.replace('from ', '')}/month, quoted to your
+        volume. <a href="/pricing">See every plan and what changes the quote</a>.
+      </p>
+      <div class="k-close__ctas">
+        <Button href="/services/found" variant="primary">What Found includes</Button>
+        <Button href="/pricing" variant="ghost">Pricing</Button>
+      </div>
+    </div>
+  </Section>
+
+  {hub.compliance && (
+    <Section spacing="standard" labelledby="compliance-title">
+      <div class="k-band">
+        <div class="k-band__head">
+          <Eyebrow>Compliance</Eyebrow>
+          <h2 id="compliance-title" class="k-h2">The part your risk person asks about.</h2>
+          <p class="k-lede k-measure">{hub.compliance}</p>
+        </div>
+        <Button href="/trust" variant="ghost">Read the security review</Button>
+      </div>
+    </Section>
+  )}
+
+  <!-- ── PROOF ──────────────────────────────────────────── -->
+  {has.testimonials && (
+    <Section tone="raised" spacing="standard" labelledby="proof-title">
+      <div class="k-band">
+        <div class="k-band__head">
+          <Eyebrow>Proof</Eyebrow>
+          <h2 id="proof-title" class="k-h2">In their words, or not at all.</h2>
+          <p class="k-lede k-measure">
+            Two slots, both waiting on a real {hub.name.toLowerCase()} customer to say a real thing
+            on the record. Nothing here is invented in the meantime.
+          </p>
+        </div>
+        <div class="k-quotes k-quotes--two">
+          {business.testimonials.map((t) => <Testimonial {...t} />)}
+        </div>
+      </div>
+    </Section>
+  )}
+
+  <!-- ── DEEPER PAGES ───────────────────────────────────── -->
+  <Section spacing="standard" labelledby="more-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Go deeper</Eyebrow>
+        <h2 id="more-title" class="k-h2">More for {hub.name.toLowerCase()}.</h2>
+      </div>
+      <ul class="k-childlinks">
+        {hub.children.map((c) => (
+          <li><a href={c.href}>{c.label}
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <FaqSection faqs={hub.faqs} title={`${hub.name} FAQ`} tone="raised" />
+
+  <script slot="scripts" src="/assets/roi.js?v=4" defer is:inline></script>
+</Layout>

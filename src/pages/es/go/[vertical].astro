@@ -1,0 +1,18 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Schema from '../../../components/Schema.astro';
+import GoPage from '../../../components/GoPage.astro';
+import { organizationSchema } from '../../../data/schema';
+import { goPagesFor } from '../../../i18n/data';
+import type { GoPage as Go } from '../../../data/go';
+export function getStaticPaths() {
+  return goPagesFor('es').filter((g) => g.slug).map((g) => ({ params: { vertical: g.slug }, props: { page: g } }));
+}
+const { page } = Astro.props as { page: Go };
+---
+<Layout title={page.title} description={page.description} path={page.path} go noindex locale="es">
+  <Schema slot="head" graph={[organizationSchema]} />
+  <GoPage page={page} locale="es" />
+  <script slot="scripts" src="/assets/roi.js?v=7" defer is:inline></script>
+  <script slot="scripts" src="/assets/quote.js?v=4" defer is:inline></script>
+</Layout>

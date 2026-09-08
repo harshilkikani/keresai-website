@@ -28,7 +28,7 @@ export const industries: Industry[] = [
     nameLower: 'HVAC companies',
     short: 'HVAC',
     shortLower: 'HVAC',
-    title: 'AI Receptionist for HVAC — Book More Service Calls | Keres AI',
+    title: 'AI Receptionist for HVAC — Book More Calls | Keres',
     description:
       'Keres AI answers every HVAC call 24/7, books service and install appointments, and flags no-heat/no-cool emergencies to your team. Stop losing jobs to voicemail.',
     intro:
@@ -57,7 +57,7 @@ export const industries: Industry[] = [
     nameLower: 'plumbing companies',
     short: 'Plumbers',
     shortLower: 'plumbers',
-    title: 'AI Receptionist for Plumbers — Never Miss a Service Call | Keres AI',
+    title: 'AI Receptionist for Plumbers — Book Every Call | Keres',
     description:
       'Keres AI answers every plumbing call 24/7, books service appointments, and flags burst pipes and floods to your team instantly. Capture every job, day or night.',
     intro:
@@ -86,7 +86,7 @@ export const industries: Industry[] = [
     nameLower: 'dental practices',
     short: 'Dentists',
     shortLower: 'dentists',
-    title: 'AI Receptionist for Dental Practices — Book More Patients | Keres AI',
+    title: 'AI Receptionist for Dental Practices | Keres AI',
     description:
       'Keres AI answers every patient call, books and reschedules appointments, and handles after-hours intake for dental practices. Stop losing patients to voicemail.',
     intro:
@@ -115,7 +115,7 @@ export const industries: Industry[] = [
     nameLower: 'real estate teams',
     short: 'Real Estate',
     shortLower: 'real estate',
-    title: 'AI Receptionist for Real Estate — Capture Every Lead | Keres AI',
+    title: 'AI Receptionist for Real Estate | Keres AI',
     description:
       'Keres AI answers every buyer and seller call 24/7, books showings, and qualifies leads for agents and brokerages. Never miss an inquiry on a hot listing again.',
     intro:
@@ -144,7 +144,7 @@ export const industries: Industry[] = [
     nameLower: 'med spas and wellness clinics',
     short: 'Med Spas',
     shortLower: 'med spa',
-    title: 'AI Receptionist for Med Spas — Book More Treatments | Keres AI',
+    title: 'AI Receptionist for Med Spas | Keres AI',
     description:
       'Keres AI answers every med spa call 24/7, books treatments and consultations, and handles intake forms — so your front desk never misses a booking, even at peak hours.',
     intro:
@@ -173,7 +173,7 @@ export const industries: Industry[] = [
     nameLower: 'professional services firms',
     short: 'Professional Intake',
     shortLower: 'professional intake',
-    title: 'AI Receptionist for Law Firms & Professional Services | Keres AI',
+    title: 'AI Receptionist for Law Firms | Keres AI',
     description:
       'Keres AI handles new-client intake for law firms, financial advisors, and consultants. Qualify, screen conflicts, and book consultations 24/7 — without missing a high-value lead.',
     intro:
@@ -202,7 +202,7 @@ export const industries: Industry[] = [
     nameLower: 'roofing companies',
     short: 'Roofing',
     shortLower: 'roofing',
-    title: 'AI Receptionist for Roofers — Never Lose a Storm Lead | Keres AI',
+    title: 'AI Receptionist for Roofers — Storm Leads | Keres',
     description:
       'Keres AI answers every roofing call 24/7, books estimates and inspections, and captures storm-season surges the moment they call — before a competitor answers first.',
     intro:
@@ -231,7 +231,7 @@ export const industries: Industry[] = [
     nameLower: 'towing companies',
     short: 'Towing',
     shortLower: 'towing',
-    title: 'AI Receptionist for Towing — 24/7 Dispatch Answering | Keres AI',
+    title: 'AI Receptionist for Towing — 24/7 Dispatch | Keres',
     description:
       'Keres AI answers every towing call 24/7, captures roadside assistance requests, and dispatches your drivers — so no stranded motorist ever calls a competitor.',
     intro:
@@ -260,7 +260,7 @@ export const industries: Industry[] = [
     nameLower: 'septic service companies',
     short: 'Septic',
     shortLower: 'septic',
-    title: 'AI Receptionist for Septic Services — Book Every Pumping Job | Keres AI',
+    title: 'AI Receptionist for Septic Services | Keres AI',
     description:
       'Keres AI answers every septic call 24/7, books pumping and inspection appointments, and dispatches emergency backups instantly. Never lose a job to voicemail.',
     intro:

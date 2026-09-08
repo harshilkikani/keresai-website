@@ -1,0 +1,121 @@
+---
+/**
+ * One ad landing, built from the homepage's own pieces in a shorter order:
+ * hero → two doors → calculator → three steps → close. The hero carries no
+ * mock; the Answered door shows the short transcript excerpt. Together that
+ * keeps the page under 7,000px on a phone.
+ */
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+import SiteOnPhone from './SiteOnPhone.astro';
+import GoogleListing from './GoogleListing.astro';
+import AgentMock from './AgentMock.astro';
+import LeadBand from './LeadBand.astro';
+import Calculator from './Calculator.astro';
+import { PHONE } from '../data/site';
+import { has } from '../config/business';
+import type { GoPage } from '../data/go';
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+import { goStepsFor } from '../i18n/data';
+
+export interface Props { page: GoPage; locale?: Locale }
+const { page, locale = 'en' } = Astro.props;
+const g = t(locale).go;
+const gate = locale === 'es' && !has.remiSpanish;
+const gateLine = t(locale).remiGate;
+const goSteps = goStepsFor(locale);
+// Every Get a quote on a /go page lands on the form embedded below.
+const quoteHref = '#quote';
+---
+<Section spacing="standard" labelledby="go-title" id="hero" class="k-hero k-hero--v2 k-hero--go">
+  <div class="k-hero__light" aria-hidden="true"></div>
+  <div class="k-hero__grid">
+    <div class="k-hero__copy">
+      <Eyebrow class="k-eyebrow--long">{g.eyebrowLong}</Eyebrow>
+      <h1 id="go-title" class="k-display k-display--xl" data-words>
+        {page.h1.split(' ').map((w, i, all) => <><span class="w">{w}</span>{i < all.length - 1 ? ' ' : ''}</>)}
+      </h1>
+      <div class="k-hero__ctas">
+        <Button href={quoteHref} variant="primary" event="demo_click">{g.getAQuote}</Button>
+        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{t(locale).nav.call} {PHONE.display}</Button>}
+      </div>
+      <p class="k-lede">{page.lede}</p>
+      {gate && gateLine && <p class="k-hero__note" data-gate>{gateLine}</p>}
+      <ul class="k-hero__facts" aria-label={g.atAGlance}>
+        {page.facts.map((f) => (
+          <li><span class="k-hero__fact-k">{f.k}</span><span class="k-hero__fact-v" data-figure>{f.v}</span></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</Section>
+
+<Section spacing="flush" labelledby="doors-title" id="doors" class="k-doors-section">
+  <h2 id="doors-title" class="visually-hidden">{g.twoDoors}</h2>
+  <div class="doors">
+    <article class="door" data-reveal>
+      <div class="door__head">
+        <Eyebrow n={1}>{g.getFound}</Eyebrow>
+        <h3 class="door__title">{page.found.title}</h3>
+        <p class="door__text">{page.found.text}</p>
+      </div>
+      <div class="door__mocks door__mocks--found" data-depth data-tilt>
+        <SiteOnPhone locale={locale} />
+        <GoogleListing locale={locale} />
+      </div>
+    </article>
+    <article class="door" data-reveal>
+      <div class="door__head">
+        <Eyebrow n={2}>{g.getAnswered}</Eyebrow>
+        <h3 class="door__title">{page.answered.title}</h3>
+        <p class="door__text">{page.answered.text}</p>
+      </div>
+      <div class="door__mocks" data-depth data-tilt>
+        {gate ? <SiteOnPhone locale={locale} /> : <AgentMock slug="inbound" locale={locale} />}
+      </div>
+    </article>
+  </div>
+</Section>
+
+<Section spacing="standard" labelledby="roi-title" id="roi">
+  <Eyebrow n={3}>{g.calcEyebrow}</Eyebrow>
+  <h2 id="roi-title" class="k-h2">{g.calcH2}</h2>
+  <p class="k-lede k-measure">{g.calcLede}</p>
+  <Calculator locale={locale} vertical={page.calc} preset ctaHref={quoteHref} />
+</Section>
+
+<Section tone="raised" spacing="standard" labelledby="start-title" id="start">
+  <div class="k-band">
+    <div class="k-band__head">
+      <Eyebrow n={4}>{g.startEyebrow}</Eyebrow>
+      <h2 id="start-title" class="k-h2">{g.startH2}</h2>
+    </div>
+    <ol class="k-steps" data-reveal>
+      {goSteps.map((s) => (
+        <li class="k-step" data-reveal-child>
+          <span class="k-step__n" data-figure>{s.n}</span>
+          <h3 class="k-step__title">{s.title}</h3>
+          <p class="k-step__text">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Section>
+
+<Section tone="raised" spacing="standard" labelledby="quote-title" id="quote-band">
+  {/* The form's own legend carries the heading; a second H2 here only added height on a phone. */}
+  <h2 id="quote-title" class="k-eyebrow"><span class="k-eyebrow__rule" aria-hidden="true"></span><span class="k-eyebrow__n" data-figure>05</span><span>{g.quoteBand}</span></h2>
+  <LeadBand locale={locale} id="quote" />
+</Section>
+
+<Section tone="inverse" spacing="standard" labelledby="close-title" id="close">
+  <div class="k-close">
+    <h2 id="close-title" class="k-h2">{page.close.h2}</h2>
+    <div class="k-close__ctas">
+      <Button href={quoteHref} variant="primary" event="demo_click">{g.getAQuote}</Button>
+      {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{t(locale).nav.call} {PHONE.display}</Button>}
+    </div>
+  </div>
+</Section>

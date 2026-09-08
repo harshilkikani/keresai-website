@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import QuotePage from '../components/QuotePage.astro';
+import { organizationSchema } from '../data/schema';
+import { t } from '../i18n/ui';
+const q = t('en').quotePage;
+---
+<Layout title={q.title} description={q.description} path="/quote" locale="en">
+  <Schema slot="head" graph={[organizationSchema]} />
+  <QuotePage locale="en" />
+  <script slot="scripts" src="/assets/quote.js?v=4" defer is:inline></script>
+</Layout>

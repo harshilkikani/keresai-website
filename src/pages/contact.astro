@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { EMAIL } from '../data/site';
 import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { organizationSchema, breadcrumbSchema } from '../data/schema';
@@ -18,7 +19,7 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path }];
   <header class="page-hero container">
     <span class="eyebrow">Contact</span>
     <h1>Let's <span class="accent">connect</span></h1>
-    <p class="lead">Have a question, or want to see Keres answer a live call? Send a message below, email <a href="mailto:ops@keresai.com">ops@keresai.com</a>, or <a href="/demo">book a demo</a> directly.</p>
+    <p class="lead">Have a question, or want to see Keres answer a live call? Send a message below, email <a href={`mailto:${EMAIL}`}>{EMAIL}</a>, or <a href="/quote">book a demo</a> directly.</p>
   </header>
 
   <section class="page-section container container-narrow">

@@ -1,4 +1,7 @@
+import { business } from '../config/business';
 // Centralized JSON-LD building blocks. Keep entity identity consistent everywhere.
+import { PHONE } from './site';
+
 const ORIGIN = 'https://www.keresai.com';
 
 export const organizationSchema = {
@@ -18,7 +21,7 @@ export const organizationSchema = {
   foundingDate: '2024',
   slogan: 'Never miss another lead.',
   areaServed: { '@type': 'Country', name: 'United States' },
-  email: 'ops@keresai.com',
+  email: business.contactEmail,
   // knowsAbout uses DefinedTerm @id nodes so knowledge graphs resolve entity
   // relationships between the org and the glossary definitions on this site.
   knowsAbout: [
@@ -42,12 +45,22 @@ export const organizationSchema = {
   sameAs: [
     'https://calendly.com/ops-keresai/30min',
   ],
+  // The line Keres itself answers. Sourced from src/data/site.ts so the
+  // header, sticky bar, footer and this node can never drift apart.
+  ...(PHONE ? { telephone: PHONE.e164 } : {}),
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'sales',
-    url: `${ORIGIN}/demo`,
-    email: 'ops@keresai.com',
+    ...(PHONE ? { telephone: PHONE.e164 } : {}),
+    url: `${ORIGIN}/quote`,
+    email: business.contactEmail,
     availableLanguage: 'English',
+    hoursAvailable: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '00:00',
+      closes: '23:59',
+    },
   },
 };
 

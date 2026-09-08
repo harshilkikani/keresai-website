@@ -1,0 +1,21 @@
+---
+/** The Google listing agent's week: a 25-point rank grid and its task log. Example numbers. */
+import type { Locale } from '../i18n';
+import { customCopy } from '../i18n/custom';
+export interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const c = customCopy(locale).cases;
+const m = c.listing;
+// 5 × 5 grid, office at the centre. Example ranks, not a customer's.
+const grid = [3, 2, 1, 2, 4, 5, 2, 1, 1, 3, 8, 4, 1, 1, 2, 12, 7, 3, 2, 5, 15, 9, 6, 4, 7];
+---
+<figure class="amock" aria-label={m.head}>
+  <div class="amock__head"><span>{m.head}</span><span class="amock__badge">{c.example}</span></div>
+  <div class="rank" role="img" aria-label={m.gridNote}>
+    {grid.map((n) => <span class:list={['rank__cell', n <= 3 && 'rank__cell--good', n > 3 && n <= 10 && 'rank__cell--warn']} data-figure>{n}</span>)}
+  </div>
+  <p class="amock__note">{m.gridNote}</p>
+  <ul class="alog">
+    {m.log.map(([k, v]) => <li><span class="alog__k">{k}</span><span class="alog__v">{v}</span></li>)}
+  </ul>
+</figure>

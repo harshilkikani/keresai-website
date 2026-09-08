@@ -36,7 +36,7 @@ export const calculators: Calculator[] = [
     kind: 'missed-call',
     closeRate: 0.25,
     eyebrow: 'HVAC · Free tool',
-    title: 'HVAC Missed-Call Calculator — What Are You Losing? | Keres AI',
+    title: 'HVAC Missed-Call Calculator | Keres AI',
     description:
       'Free HVAC missed-call calculator. Enter your monthly call volume, answer rate, and average ticket to see the service revenue lost to unanswered calls every month.',
     h1: 'What are missed HVAC calls',
@@ -69,7 +69,7 @@ export const calculators: Calculator[] = [
     kind: 'missed-call',
     closeRate: 0.3,
     eyebrow: 'Roofing · Free tool',
-    title: 'Roofing Storm-Lead Calculator — Lost Revenue per Surge | Keres AI',
+    title: 'Roofing Storm-Lead Calculator | Keres AI',
     description:
       'Free roofing storm-lead calculator. Enter your storm-season call volume, answer rate, and average job value to see the revenue lost when surge calls go unanswered.',
     h1: 'What are missed storm leads',
@@ -102,7 +102,7 @@ export const calculators: Calculator[] = [
     kind: 'no-show',
     closeRate: 0.25,
     eyebrow: 'Dental · Free tool',
-    title: 'Dental No-Show Calculator — Lost Production per Month | Keres AI',
+    title: 'Dental No-Show Calculator | Keres AI',
     description:
       'Free dental no-show calculator. Enter your monthly appointments, no-show rate, and average production per visit to see the revenue empty chairs cost you.',
     h1: 'What are no-shows',
@@ -168,7 +168,7 @@ export const calculators: Calculator[] = [
     kind: 'response-time',
     closeRate: 0.25,
     eyebrow: 'All industries · Free tool',
-    title: 'Lead Response Time Calculator — Revenue You Can Recover | Keres AI',
+    title: 'Lead Response Time Calculator | Keres AI',
     description:
       'Free lead response time calculator. See how much revenue you can recover by responding to inbound leads in under five minutes instead of hours.',
     h1: 'What is slow response',
@@ -188,7 +188,7 @@ export const calculators: Calculator[] = [
     faqs: [
       { q: 'Why does lead response time matter so much?', a: 'Studies of lead response time consistently find that contacting a lead within five minutes makes it many times more likely to qualify than waiting 30 minutes, and the first business to respond usually wins the job. See <a href="/glossary/lead-response-time">lead response time</a>.' },
       { q: 'How is the recoverable revenue calculated?', a: 'The model compares the deals you would close responding in under five minutes against your current capture at your stated response time, using a stepped relative-conversion factor and a base close rate. It is illustrative — treat it as directional context.' },
-      { q: 'How can I respond to every lead in under five minutes?', a: 'An <a href="/ai-receptionist">AI receptionist</a> answers every call in two rings, 24/7, so your effective response time is seconds — for every lead, including after hours and overflow.' },
+      { q: 'How can I respond to every lead in under five minutes?', a: 'An <a href="/agents/inbound">AI receptionist</a> answers every call in two rings, 24/7, so your effective response time is seconds — for every lead, including after hours and overflow.' },
     ],
     related: [
       { label: 'Lead response time', href: '/glossary/lead-response-time' },

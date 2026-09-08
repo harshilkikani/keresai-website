@@ -1,0 +1,92 @@
+---
+/**
+ * A call as it actually runs, inside a device-like frame: turn timing
+ * down the left, Remi's lines in the accent, and the outcome strip
+ * showing what was written to the calendar and the CRM.
+ *
+ * With `hero` set it also carries the two events that finish the hero
+ * orchestration — the booking sliding onto the calendar and the owner's
+ * text arriving — and every turn gets a type-in span. All of that
+ * resolves to its final state with no JS or reduced motion; motion.js
+ * only adds the choreography.
+ *
+ * Labelled an example so nobody reads it as a customer recording.
+ */
+import type { Vertical } from '../data/mocks';
+import { agentBySlug } from '../data/site';
+import { type Locale, l } from '../i18n';
+import { t as tt } from '../i18n/ui';
+import { transcriptsFor, heroTailFor } from '../i18n/data';
+
+export interface Props {
+  vertical?: Vertical;
+  caption?: boolean;
+  hero?: boolean;
+  class?: string;
+  locale?: Locale;
+}
+
+const { vertical = 'default', caption = true, hero = false, class: extraClass = '', locale = 'en' } = Astro.props;
+const transcripts = transcriptsFor(locale);
+const heroTail = heroTailFor(locale);
+const m = tt(locale).mocks;
+const t = transcripts[vertical] ?? transcripts.default;
+const remi = agentBySlug('inbound');
+---
+<figure class:list={['k-call-fig', hero && 'k-call-fig--hero', extraClass]} data-hero={hero ? '' : undefined}>
+  <div class="k-device" data-tilt={hero ? undefined : ''}>
+    <header class="k-device__bar">
+      <span class="k-device__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="k-device__label">{t.label}</span>
+      <span class="k-device__status"><span class="k-device__dot" aria-hidden="true"></span>{t.when} · {t.duration}</span>
+    </header>
+    <div class="k-device__body">
+      <div class="k-call__from">
+        <span class="k-call__num" data-figure>{t.from}</span>
+        <span class="k-call__city">{t.city}</span>
+      </div>
+      <ol class="k-call__turns" data-turns>
+        {t.turns.map((turn, i) => (
+          <li class:list={['k-call__turn', `k-call__turn--${turn.who}`]} style={`--i:${i}`}>
+            <span class="k-call__t" data-figure>{turn.t}</span>
+            <span class="k-call__who">{turn.who === 'remi' ? remi.name : m.caller}</span>
+            <p class="k-call__text"><span class="k-type">{turn.text}</span></p>
+          </li>
+        ))}
+      </ol>
+      <dl class="k-call__outcome">
+        {t.outcome.map((o) => (
+          <div class="k-call__outcome-item">
+            <dt>{o.k}</dt>
+            <dd>{o.v}</dd>
+          </div>
+        ))}
+      </dl>
+      {hero && (
+        <div class="k-call__tail">
+          <div class="k-booking" data-booking>
+            <div class="k-booking__date">
+              <span class="k-booking__day">{heroTail.booking.day}</span>
+              <span class="k-booking__num" data-figure>{heroTail.booking.date}</span>
+            </div>
+            <div class="k-booking__meta">
+              <span class="k-booking__time" data-figure>{heroTail.booking.time}</span>
+              <span class="k-booking__what">{heroTail.booking.what}</span>
+              <span class="k-booking__where">{m.writtenTo} {heroTail.booking.where}</span>
+            </div>
+            <svg class="k-booking__check" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="k-owner" data-owner>
+            <span class="k-owner__t" data-figure>{m.owner} · {heroTail.ownerText.t}</span>
+            <p class="k-owner__bubble">{heroTail.ownerText.text}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+  {caption && (
+    <figcaption class="k-mock__caption">
+      {m.exampleCall} <a href="/hear-it">{m.hearIt}</a>.
+    </figcaption>
+  )}
+</figure>

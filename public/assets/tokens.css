@@ -1,0 +1,237 @@
+/* =============================================================
+   Keres AI — design tokens
+   The single source of truth for color, type, space and motion.
+   Loaded BEFORE styles.css. Every value the rest of the CSS reads
+   is defined here and nowhere else.
+
+   Palette: one hue-biased neutral system (warm, hue ~40, chroma
+   held under 0.01 so it reads as neutral rather than as "cream"),
+   one accent reserved for CTAs, and semantic green/amber that
+   appear only in the Owner Daily Brief.
+============================================================= */
+
+:root {
+  /* ─── Neutrals (light) ──────────────────────────────────
+     ground → the page. surface → cards and raised panels.
+     ink-0 is headline weight; ink-3 is the quietest legible text. */
+  --ground:  #FAF8F5;
+  --surface: #FFFFFF;
+  /* Nudged two steps lighter than the #F2EEE9 in the spec. On the darker
+     value, --ink-3 measured 4.47:1 and --accent 4.48:1 — both a hair under
+     the 4.5 AA floor for the small labels and inline links that sit on
+     raised bands. At #F5F1EB they measure 4.59:1 and 4.60:1. */
+  --raised:  #F5F1EB;
+  --line:    #E4DFD9;
+  --line-strong: #C9C2BA;
+  /* Spec said #8C837A; measured 3.77:1 on white, under the 4.5 AA floor,
+     and this token carries every small mono label on the site. #746C63
+     measures 5.16:1 on white, 4.87:1 on ground, 4.56:1 on raised. */
+  --ink-3:   #746C63;
+  --ink-2:   #6B625A;
+  --ink-1:   #3A332D;
+  --ink-0:   #14100D;
+
+  /* ─── Accent — one rust, everywhere ────────────────────
+     A single token. Rules, focus rings, borders, fills and accent
+     text all use --accent; nothing on the site renders a second
+     orange. (The dark palette below gives this same token its
+     dark-ground value — rust at 3.8:1 on #0D0B09 fails AA as text.)
+     --accent-hover is derived from it and only appears on hover. */
+  --accent:        #C2410C;
+  --accent-hover:  color-mix(in srgb, #C2410C 82%, #14100D);
+  --accent-ink:    #FFFFFF;
+  --accent-wash:   rgba(194, 65, 12, 0.07);
+
+  /* ─── Semantic — Owner Daily Brief only ────────────────── */
+  --good:      #0F7B4F;
+  --good-wash: rgba(15, 123, 79, 0.10);
+  --warn:      #A16207;
+  --warn-wash: rgba(161, 98, 7, 0.10);
+
+  /* ─── Type ──────────────────────────────────────────────
+     Three faces, all self-hosted latin subsets (CSP is font-src
+     'self' — a font CDN would be blocked). Fallbacks are metric-
+     compatible enough to survive a failed woff2 without reflow. */
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans:  'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --mono:  'DM Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Strict 1.25 scale. Nothing sizes outside these steps. */
+  --text--1: 0.833rem;
+  --text-0:  1.0625rem;
+  --text-1:  1.25rem;
+  --text-2:  1.563rem;
+  --text-3:  1.953rem;
+  --text-4:  2.441rem;
+  --text-5:  3.052rem;
+  --text-6:  3.815rem;
+  --text-display: clamp(2.75rem, 6vw, 4.5rem);
+
+  --measure: 65ch;
+
+  /* ─── Space — 4px rhythm ────────────────────────────────  */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 120px;
+  --space-11: 160px;
+
+  /* Section rhythm: 120px standard, 160px at major transitions,
+     72px on mobile. Set here, consumed by .section. */
+  --section:       clamp(72px, 10vw, 120px);
+  /* Capped site-wide at 120px on desktop and 72px on a phone. A "major"
+     section keeps the name but not the extra 40px it used to add. */
+  --section-major: var(--section);
+
+  /* ─── Grid ──────────────────────────────────────────────  */
+  --container: 1200px;
+  --container-wide: 1360px;
+  --container-narrow: 880px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --columns: 12;
+  --column-gap: clamp(16px, 2vw, 24px);
+
+  --nav-h: 68px;
+  --tap: 44px; /* minimum tap target */
+
+  --radius-sm: 2px;
+  --radius: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 14px;
+
+  /* ─── Elevation ─────────────────────────────────────────  */
+  --shadow-sm: 0 1px 2px rgba(20, 16, 13, 0.04), 0 0 0 1px rgba(20, 16, 13, 0.02);
+  --shadow:    0 1px 2px rgba(20, 16, 13, 0.04), 0 6px 16px -4px rgba(20, 16, 13, 0.06);
+  --shadow-lg: 0 2px 6px rgba(20, 16, 13, 0.05), 0 14px 32px -8px rgba(20, 16, 13, 0.09);
+  --shadow-xl: 0 4px 10px rgba(20, 16, 13, 0.06), 0 24px 60px -12px rgba(20, 16, 13, 0.14);
+  --shadow-accent: 0 2px 6px rgba(194, 65, 12, 0.10), 0 14px 32px -8px rgba(194, 65, 12, 0.18);
+
+  /* ─── Motion ────────────────────────────────────────────
+     Five motions exist on this site and they are listed in the
+     design plan. --t-fast for color/opacity, --t for UI travel,
+     --t-slow for reveals. Nothing else. */
+  --t-fast: 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  --t:      0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  --t-slow: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ─── Legacy aliases ────────────────────────────────────
+     styles.css and pages.css were written against these names.
+     Mapping them here re-skins ~1,900 lines of existing CSS
+     without touching it. Prefer the names above in new code. */
+  --orange: var(--accent);
+  --orange-light: var(--accent);
+  --orange-dark: var(--accent-hover);
+  --bg: var(--ground);
+  --bg-alt: var(--raised);
+  --bg-card: var(--surface);
+  --bg-inverse: var(--ink-0);
+  --text: var(--ink-0);
+  --text-muted: var(--ink-2);
+  --text-dim: var(--ink-3);
+  --text-on-dark: rgba(245, 241, 236, 0.78);
+  --text-on-dark-muted: rgba(245, 241, 236, 0.50);
+  --border: var(--line);
+  --border-strong: var(--line-strong);
+  --border-dark: rgba(245, 241, 236, 0.10);
+}
+
+/* ─── Dark ────────────────────────────────────────────────
+   Only the tokens that change are redefined. Type, space, grid
+   and motion are theme-independent and stay inherited. */
+[data-theme="dark"] {
+  --ground:  #0D0B09;
+  --surface: #16130F;
+  --raised:  #1F1B16;
+  --line:    #2A2521;
+  --line-strong: #3D3730;
+  /* Spec said #7D746B; measured 4.28:1 on this ground, under the 4.5
+     AA floor for small text. #9A9188 measures ~6.2:1 and reads the same. */
+  --ink-3:   #9A9188;
+  --ink-2:   #A9A099;
+  --ink-1:   #D8D2CB;
+  --ink-0:   #F5F1EC;
+
+  /* On a dark ground the AA-safe fill is too dark to read as the
+     brand, and contrast runs the other way — the bright orange
+     clears AA against #0D0B09, so it becomes the fill here. */
+  --accent:       #F2711C;
+  --accent-hover: color-mix(in srgb, #F2711C 85%, #FFFFFF);
+  --accent-ink:   #17110B;
+  --accent-wash:  rgba(242, 113, 28, 0.12);
+
+  --good:      #34D399;
+  --good-wash: rgba(52, 211, 153, 0.12);
+  --warn:      #FBBF24;
+  --warn-wash: rgba(251, 191, 36, 0.12);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.30);
+  --shadow:    0 2px 10px rgba(0, 0, 0, 0.40);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.50);
+  --shadow-xl: 0 18px 56px rgba(0, 0, 0, 0.60);
+  --shadow-accent: 0 2px 6px rgba(242, 113, 28, 0.14), 0 14px 32px -8px rgba(242, 113, 28, 0.22);
+
+  --border-dark: rgba(245, 241, 236, 0.07);
+}
+
+/* System preference, only when the user has not chosen explicitly. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:  #0D0B09;
+    --surface: #16130F;
+    --raised:  #1F1B16;
+    --line:    #2A2521;
+    --line-strong: #3D3730;
+    /* Spec said #7D746B; measured 4.28:1 on this ground, under the 4.5
+     AA floor for small text. #9A9188 measures ~6.2:1 and reads the same. */
+  --ink-3:   #9A9188;
+    --ink-2:   #A9A099;
+    --ink-1:   #D8D2CB;
+    --ink-0:   #F5F1EC;
+
+    --accent:       #F2711C;
+    --accent-hover: color-mix(in srgb, #F2711C 85%, #FFFFFF);
+    --accent-ink:   #17110B;
+    --accent-wash:  rgba(242, 113, 28, 0.12);
+
+    --good:      #34D399;
+    --good-wash: rgba(52, 211, 153, 0.12);
+    --warn:      #FBBF24;
+    --warn-wash: rgba(251, 191, 36, 0.12);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.30);
+    --shadow:    0 2px 10px rgba(0, 0, 0, 0.40);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.50);
+    --shadow-xl: 0 18px 56px rgba(0, 0, 0, 0.60);
+    --shadow-accent: 0 2px 6px rgba(242, 113, 28, 0.14), 0 14px 32px -8px rgba(242, 113, 28, 0.22);
+
+    --border-dark: rgba(245, 241, 236, 0.07);
+  }
+}
+
+/* ─── Figures ─────────────────────────────────────────────
+   Every number on the site is tabular so columns and animated
+   timers do not jitter. Body copy keeps proportional oldstyle. */
+.stat-value, .price-amount, .mock time, .mock-time, [data-figure],
+table td, table th, .tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* ─── Motion policy ───────────────────────────────────────
+   One global switch. Reveals resolve to their finished state
+   rather than being skipped, so nothing stays invisible. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+}

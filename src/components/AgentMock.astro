@@ -1,0 +1,55 @@
+---
+/**
+ * One small product moment per agent, for the team rows on the homepage.
+ * A transcript excerpt for Remi, an SMS thread for Theo and June, a
+ * replies inbox for Sol. Same device chrome as everything else.
+ */
+import MockFrame from './MockFrame.astro';
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+import { agentMocksFor } from '../i18n/data';
+
+export interface Props { slug: string; locale?: Locale }
+const { slug, locale = 'en' } = Astro.props;
+const ui = t(locale).mocks;
+const m = agentMocksFor(locale).find((x) => x.slug === slug)!;
+---
+<figure class="k-amock">
+  <MockFrame label={m.label} device="panel" class="k-amock__frame">
+    {m.kind === 'transcript' && (
+      <ol class="k-call__turns k-call__turns--mini" data-reveal data-reveal-stagger="90">
+        {m.bubbles!.map((b) => (
+          <li class:list={['k-call__turn', b.who === 'agent' ? 'k-call__turn--remi' : 'k-call__turn--caller']} data-reveal-child>
+            <span class="k-call__t" data-figure>{b.t}</span>
+            <span class="k-call__who">{b.who === 'agent' ? 'Remi' : ui.caller}</span>
+            <p class="k-call__text">{b.text}</p>
+          </li>
+        ))}
+      </ol>
+    )}
+    {m.kind === 'sms' && (
+      <ol class="sms" data-reveal data-reveal-stagger="90">
+        {m.bubbles!.map((b) => (
+          <li class:list={['sms__msg', `sms__msg--${b.who}`]} data-reveal-child>
+            <span class="sms__t" data-figure>{b.t}</span>
+            <p class="sms__bubble">{b.text}</p>
+          </li>
+        ))}
+      </ol>
+    )}
+    {m.kind === 'inbox' && (
+      <ul class="inbox" data-reveal data-reveal-stagger="90">
+        {m.inbox!.map((r) => (
+          <li class:list={['inbox__row', r.booked && 'inbox__row--booked']} data-reveal-child>
+            <span class="inbox__from">{r.from}</span>
+            <span class="inbox__subj">{r.subject}</span>
+            <span class="inbox__prev">{r.preview}</span>
+            <span class="inbox__t" data-figure>{r.t}</span>
+            {r.booked && <span class="inbox__tag">Booked</span>}
+          </li>
+        ))}
+      </ul>
+    )}
+    <p class="k-amock__outcome">{m.outcome}</p>
+  </MockFrame>
+</figure>

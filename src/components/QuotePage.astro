@@ -1,0 +1,23 @@
+---
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import LeadBand from './LeadBand.astro';
+import { PHONE } from '../data/site';
+import type { Locale } from '../i18n';
+import { t } from '../i18n/ui';
+export interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const q = t(locale).quotePage;
+---
+<Section spacing="standard" labelledby="quote-title" id="quote-hero" class="k-hero k-hero--v2 k-hero--go">
+  <div class="k-hero__grid">
+    <div class="k-hero__copy">
+      <Eyebrow>{q.eyebrow}</Eyebrow>
+      <h1 id="quote-title" class="k-display">{q.h1}</h1>
+      <p class="k-lede">{q.lede}{PHONE && <>{q.ledeCall} {PHONE.display}</>}.</p>
+    </div>
+  </div>
+</Section>
+<Section spacing="flush" labelledby="quote-title" id="quote-form">
+  <LeadBand locale={locale} id="quote" />
+</Section>

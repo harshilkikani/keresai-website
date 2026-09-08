@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import CustomPage from '../components/CustomPage.astro';
+import { organizationSchema, faqSchema } from '../data/schema';
+import { customCopy, customFaqs } from '../i18n/custom';
+const c = customCopy('en');
+---
+<Layout title={c.title} description={c.description} path="/custom" locale="en">
+  <Schema slot="head" graph={[organizationSchema, faqSchema(customFaqs('en'))]} />
+  <CustomPage locale="en" />
+  <script slot="scripts" src="/assets/quote.js?v=4" defer is:inline></script>
+</Layout>

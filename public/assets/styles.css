@@ -5,95 +5,12 @@
              chatbot, footer, utilities, responsive, motion
 ============================================================= */
 
-/* ─── Design Tokens ─────────────────────────────────────── */
-:root {
-  --orange: #E85D04;
-  --orange-light: #F48C06;
-  --orange-dark: #B84700;
-
-  /* Light theme (default) — warm cream palette, calibrated for restraint. */
-  --bg: #f5f1e8;          /* warm cream — paper, not white */
-  --bg-alt: #ece5d4;       /* deeper warm paper for tonal section breaks */
-  --bg-card: #faf6eb;      /* off-white card surface, slightly warmer than bg */
-  --bg-inverse: #1c1814;
-  --surface: #faf6eb;
-  --text: #1c1814;         /* warm ink, not cool black */
-  --text-muted: #6b655c;   /* warm gray, no longer #555 */
-  --text-dim: #8b857a;     /* warm dim, no longer #666 */
-  --text-on-dark: rgba(245, 241, 232, 0.78);
-  --text-on-dark-muted: rgba(245, 241, 232, 0.50);
-  --border: rgba(28, 24, 20, 0.08);
-  --border-strong: rgba(28, 24, 20, 0.16);
-  --border-dark: rgba(245, 241, 232, 0.10);
-
-  /* Multi-layer shadows for soft, premium card lift.
-     Smaller close shadow grounds the element; longer diffuse shadow
-     adds depth. Far more refined than a single hard drop. */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02);
-  --shadow:    0 1px 2px rgba(0,0,0,0.04), 0 6px 16px -4px rgba(0,0,0,0.06);
-  --shadow-lg: 0 2px 6px rgba(0,0,0,0.05), 0 14px 32px -8px rgba(0,0,0,0.09);
-  --shadow-xl: 0 4px 10px rgba(0,0,0,0.06), 0 24px 60px -12px rgba(0,0,0,0.14);
-  /* Orange-tinted hover shadow for accent moments */
-  --shadow-accent: 0 2px 6px rgba(232,93,4,0.10), 0 14px 32px -8px rgba(232,93,4,0.18);
-
-  --radius-sm: 2px;
-  --radius: 4px;
-  --radius-lg: 8px;
-  --radius-xl: 14px;
-
-  --serif: 'Fraunces', 'Instrument Serif', Georgia, 'Times New Roman', serif;
-  --sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --mono: 'DM Mono', 'SF Mono', Menlo, Consolas, ui-monospace, monospace;
-
-  --container: 1200px;
-  --container-narrow: 880px;
-  --gutter: clamp(20px, 4vw, 48px);
-
-  --nav-h: 68px;
-
-  /* Easings:
-     --t-fast: tiny micro-interactions (color, opacity)
-     --t: card lifts and most UI motion — soft landing (cubic-bezier from
-          mid-motion design language; settles instead of snapping)
-     --t-slow: cross-fade / reveal animations */
-  --t-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-  --t: 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-  --t-slow: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-[data-theme="dark"] {
-  /* Dark theme — warm soft-black, never pure black. */
-  --bg: #110f0c;
-  --bg-alt: #1a1813;
-  --bg-card: #211e18;
-  --bg-inverse: #faf6eb;
-  --surface: #211e18;
-  --text: #ece6d8;
-  --text-muted: #9d9586;
-  --text-dim: #6f6a5f;
-  --border: rgba(245, 241, 232, 0.07);
-  --border-strong: rgba(245, 241, 232, 0.16);
-  --border-dark: rgba(245, 241, 232, 0.07);
-  --shadow: 0 2px 10px rgba(0,0,0,0.4);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
-  --shadow-xl: 0 18px 56px rgba(0,0,0,0.6);
-}
-
-/* Honor system preference when user hasn't chosen */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --bg: #110f0c;
-    --bg-alt: #1a1813;
-    --bg-card: #211e18;
-    --bg-inverse: #faf6eb;
-    --surface: #211e18;
-    --text: #ece6d8;
-    --text-muted: #9d9586;
-    --text-dim: #6f6a5f;
-    --border: rgba(245, 241, 232, 0.07);
-    --border-strong: rgba(245, 241, 232, 0.16);
-  }
-}
+/* ─── Design Tokens ───────────────────────────────────────
+   Moved to /assets/tokens.css, which loads before this file.
+   Do not redefine --bg, --text, --orange or any other token
+   here: tokens.css is the single source of truth, and the
+   legacy names above are aliased there so this stylesheet
+   keeps working unchanged. */
 
 /* ─── Reset ─────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -104,7 +21,7 @@ body {
   line-height: 1.6;
   color: var(--text);
   background: var(--bg);
-  overflow-x: hidden;
+  overflow-x: clip; /* not hidden: hidden turns body into the scroll container for position:sticky */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -1083,10 +1000,22 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
 .cta-band .btn { margin-top: 28px; background: #fff; color: var(--orange); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
 .cta-band .btn:hover { background: #fff; color: var(--orange-dark); transform: translateY(-2px); }
 
-/* ─── Footer ───────────────────────────────────────── */
-footer {
-  background: #0a0a0a; color: rgba(255,255,255,0.55);
+/* ─── Footer ─────────────────────────────────────────
+   Scoped to the site footer. A bare `footer` selector also caught
+   the <footer> inside the hero call mock and painted it black. */
+footer[role="contentinfo"] {
+  /* Fixed dark in BOTH themes. This used to read background: var(--ink-0),
+     which is near-white in dark mode — the footer rendered white text on a
+     white ground and was completely unreadable. The footer is a dark band
+     by design, so it declares dark values rather than inheriting flipping
+     ones. */
+  background: #0D0B09;
+  color: rgba(245, 241, 236, 0.72);
   padding: 72px var(--gutter) 32px;
+  --line: rgba(245, 241, 236, 0.10);
+  --border: rgba(245, 241, 236, 0.10);
+  --border-dark: rgba(245, 241, 236, 0.10);
+  /* accent: inherited — one rust token site-wide */
 }
 .footer-grid {
   max-width: var(--container); margin: 0 auto;
@@ -1096,6 +1025,7 @@ footer {
 .footer-brand .logo { color: #fff; margin-bottom: 16px; }
 .footer-brand .logo span { color: var(--orange); }
 .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+.footer-col h3,
 .footer-col h4 {
   font-family: var(--mono);
   font-size: 12px; font-weight: 500; color: #fff;
@@ -1128,7 +1058,9 @@ footer {
   max-width: var(--container); margin: 56px auto 0;
   padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08);
   display: flex; justify-content: space-between; align-items: center; gap: 20px;
-  font-size: 13px; color: rgba(255,255,255,0.4); flex-wrap: wrap;
+  /* rgba(255,255,255,0.4) composited to #6E6D6B on the footer ground —
+     3.8:1 at 13px, under AA. The shared muted token measures 5.0:1. */
+  font-size: 13px; color: var(--text-on-dark-muted); flex-wrap: wrap;
 }
 
 /* ─── Chatbot ──────────────────────────────────────── */

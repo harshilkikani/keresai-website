@@ -1,15 +1,39 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import GoNav from '../components/GoNav.astro';
+import GoFooter from '../components/GoFooter.astro';
+import { ClientRouter } from 'astro:transitions';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { PHONE } from '../data/site';
+import { CSS_HASH } from '../data/cssHash';
+import { business } from '../config/business';
+import { type Locale, translatedPaths, stripLocale, localePath, ogLocale, l } from '../i18n';
+import { t } from '../i18n/ui';
 
 export interface Props {
   title: string;
   description: string;
-  /** Path only, e.g. "/ai-receptionist". Combined with site origin for canonical + OG url. */
+  /** Path only, e.g. "/agents/inbound". Combined with site origin for canonical + OG url. */
   path: string;
   ogType?: 'website' | 'article';
   ogImage?: string;
   noindex?: boolean;
+  /**
+   * Ad landing pages (/lp/*) render with no nav and no footer links —
+   * the only things to click are the form, the phone, and the demo.
+   * Setting bare also loads the tracking layer.
+   */
+  bare?: boolean;
+  /** Ad landing chrome: logo + Call + Get a quote in the nav, a one-line footer, noindex. */
+  go?: boolean;
+  /**
+   * Fires this conversion event on load via app.js. Used by the
+   * tracked thank-you page, where the conversion is confirmed by
+   * arriving rather than by a click.
+   */
+  conversion?: string;
 }
 
 const {
@@ -19,9 +43,33 @@ const {
   ogType = 'website',
   ogImage = '/assets/img/og-image.png',
   noindex = false,
+  bare = false,
+  go = false,
+  conversion,
+  locale = 'en',
+  quoteHref,
 } = Astro.props;
+const quoteTarget = quoteHref ?? (go ? '#quote' : l(locale, '/quote'));
+const bookTarget = quoteHref || go ? '#book' : l(locale, '/quote') + '#book';
+
+const ui = t(locale);
+const basePath = stripLocale(path);
+const hasTwin = translatedPaths.includes(basePath);
 
 const origin = 'https://www.keresai.com';
+
+// motion.js is inlined so it can stamp html[data-motion] before first
+// paint without costing a render-blocking request. The CSP forbids
+// 'unsafe-inline', so the policy carries this script's SHA-256 instead.
+// Conversion-tracking config for /assets/tracking.js. Rendered as a JSON
+// block (never executed, so the CSP is untouched); empty ids load nothing.
+const trackingCfg = JSON.stringify({ ...business.tracking, phoneDisplay: business.phoneDisplay });
+const trackingOn = !!(business.tracking.ga4 || business.tracking.googleAds || business.tracking.metaPixel);
+// The Remi callback endpoint, when absolute, must be allowed by connect-src.
+const callbackOrigin = (() => { try { return new URL(business.remiCallbackEndpoint).origin; } catch { return ''; } })();
+
+const motionSrc = readFileSync(new URL('../../public/assets/motion.js', import.meta.url), 'utf8');
+const motionHash = "'sha256-" + createHash('sha256').update(motionSrc).digest('base64') + "'";
 const canonical = origin + path;
 const ogImageAbs = ogImage.startsWith('http') ? ogImage : origin + ogImage;
 
@@ -37,39 +85,67 @@ const goatcounterEndpoint = GOATCOUNTER_CODE ? `https://${GOATCOUNTER_CODE}.goat
 // Bing: Bing Webmaster Tools → verify → Meta tag (the content value only).
 const GSC_VERIFICATION = '';
 const BING_VERIFICATION = '';
+// Meta Business Suite → Brand safety → Domains → Meta-tag verification. Required
+// for Aggregated Event Measurement and for ads that link to this domain.
+const META_DOMAIN_VERIFICATION = '';
 ---
 <!DOCTYPE html>
-<html lang="en" prefix="og: https://ogp.me/ns#">
+<html lang={locale} prefix="og: https://ogp.me/ns#">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="light dark" />
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://calendly.com https://keresai.goatcounter.com https://dns.google; frame-src https://calendly.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';" />
+<!--
+  default-src stays 'none'. Only the directives the ad stack actually
+  needs are opened up:
+    script-src  — gtag.js (GA4 + Google Ads) and fbevents.js
+    connect-src — the beacon endpoints those two POST to, including the
+                  Google Ads conversion (ccm/rmkt) collectors
+    script-src  — plus gstatic.com for the website-call-conversion loader
+    frame-src   — Google Ads conversion frames and the Meta pixel iframe
+  img-src is already 'self' data: https:, which covers every tracking
+  pixel, so it needs no change.
+  Note there is deliberately NO 'unsafe-inline' in script-src: the GA4
+  and Meta bootstraps live in /assets/tracking.js so the policy stays
+  tight. Never inline a tag snippet — it will be blocked silently.
+-->
+<meta http-equiv="Content-Security-Policy" content={`default-src 'none'; script-src 'self' ${motionHash} https://gc.zgo.at https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net https://www.gstatic.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; font-src 'self'; img-src 'self' data: https:; connect-src 'self' ${callbackOrigin} https://formspree.io https://calendly.com https://keresai.goatcounter.com https://dns.google https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://connect.facebook.net https://graph.facebook.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://pagead2.googlesyndication.com https://www.facebook.com; frame-src https://calendly.com https://td.doubleclick.net https://www.google.com https://www.googletagmanager.com https://www.facebook.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';`} />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
 {BING_VERIFICATION && <meta name="msvalidate.01" content={BING_VERIFICATION} />}
+{META_DOMAIN_VERIFICATION && <meta name="facebook-domain-verification" content={META_DOMAIN_VERIFICATION} />}
 {goatcounterEndpoint && <script data-goatcounter={goatcounterEndpoint} async src="https://gc.zgo.at/count.js" is:inline></script>}
 
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="author" content="Keres AI" />
-{noindex
+{(noindex || go)
   ? <meta name="robots" content="noindex, nofollow" />
   : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
-<meta name="theme-color" content="#E85D04" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#C2410C" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
 <link rel="canonical" href={canonical} />
 <link rel="alternate" type="application/rss+xml" title="Keres AI — Resources & Guides" href="/rss.xml" />
 
 <!-- US English market. Multilingual UI is client-side only, so we do not advertise phantom localized URLs. -->
-<link rel="alternate" hreflang="en" href={canonical} />
-<link rel="alternate" hreflang="x-default" href={canonical} />
+{hasTwin ? (
+  <>
+    <link rel="alternate" hreflang="en" href={origin + localePath('en', basePath)} />
+    <link rel="alternate" hreflang="es" href={origin + localePath('es', basePath)} />
+    <link rel="alternate" hreflang="x-default" href={origin + localePath('en', basePath)} />
+  </>
+) : (
+  <>
+    <link rel="alternate" hreflang="en" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+  </>
+)}
 
 <link rel="icon" type="image/png" href="/assets/img/KeresLogo.png" />
 <link rel="apple-touch-icon" href="/assets/img/KeresLogo.png" />
-<link rel="mask-icon" href="/assets/img/KeresLogo.png" color="#E85D04" />
+<link rel="mask-icon" href="/assets/img/KeresLogo.png" color="#C2410C" />
 
 <meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonical} />
@@ -80,7 +156,8 @@ const BING_VERIFICATION = '';
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="Keres AI — AI Receptionist & AI SDR platform" />
 <meta property="og:site_name" content="Keres AI" />
-<meta property="og:locale" content="en_US" />
+<meta property="og:locale" content={ogLocale[locale]} />
+{hasTwin && <meta property="og:locale:alternate" content={ogLocale[locale === 'en' ? 'es' : 'en']} />}
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@keresai" />
@@ -92,27 +169,79 @@ const BING_VERIFICATION = '';
 <link rel="preconnect" href="https://formspree.io" crossorigin />
 <link rel="preconnect" href="https://calendly.com" crossorigin />
 <!-- Self-hosted fonts (latin subset). No third-party font CDN → faster LCP, no extra DNS/TLS. -->
-<link rel="preload" href="/assets/fonts/6NU58FyLNQOQZAnv9ZwNjucMHVn85Ni7emAe9lKqZTnbB-gzTK0K1ChjeveQ.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/assets/fonts/rP2Hp2ywxg089UriCZOIHQ.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="/assets/fonts.css?v=1" />
-<link rel="stylesheet" href="/assets/styles.css?v=22" />
-<link rel="stylesheet" href="/assets/pages.css?v=3" />
+<!-- Fraunces Regular (headlines, and the LCP element on most pages) and
+     DM Sans Regular (body). The italic Fraunces was preloaded here by
+     mistake: 80KB of a face the site never renders, downloaded ahead of
+     the upright it does, which is what put LCP a second behind FCP. -->
+<link rel="preload" href="/assets/fonts/fraunces-600.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high" />
+<link rel="preload" href="/assets/fonts/dmsans-400.woff2" as="font" type="font/woff2" crossorigin />
+<!-- One request instead of five. site.css is generated by
+     scripts/build-css.mjs from fonts → tokens → styles → pages →
+     components, in that order; edit those, never site.css. The query
+     is a content hash, so a stale stylesheet cannot be served and no
+     version number has to be bumped by hand. -->
+<link rel="stylesheet" href={`/assets/site.css?v=${CSS_HASH}`} />
+
+<!-- Client-side navigation with a 250ms crossfade (see ::view-transition
+     in components.css). The nav persists across pages. -->
+<ClientRouter fallback="none" />
+
+<!-- motion.js is small and blocks on purpose: it stamps html[data-motion]
+     BEFORE first paint so the hero choreography starts from its hidden
+     state instead of flashing visible, then hiding, then animating. It
+     bails immediately under prefers-reduced-motion. -->
+<script is:inline set:html={motionSrc}></script>
 
 <!-- Page-specific structured data + head extras -->
 <slot name="head" />
 </head>
 
-<body>
-<a href="#main" class="skip-link">Skip to main content</a>
-<Nav />
+<body class:list={[bare && 'is-bare']} data-conversion={conversion}>
+<a href="#main" class="skip-link">{ui.skip}</a>
+{!bare && (go ? <GoNav locale={locale} path={path} /> : <Nav locale={locale} path={path} />)}
+{/* Ad landing pages get a logo and a phone number and nothing else —
+    no nav, no menu, nothing to click but the conversion action. */}
+{bare && (
+  <header class="lp-bar" role="banner">
+    <div class="lp-bar__inner">
+      <a href="/" class="logo" aria-label="Keres AI">
+        <img src="/assets/img/KeresLogo.webp" srcset="/assets/img/KeresLogo.webp 1x, /assets/img/KeresLogo@2x.webp 2x" alt="Keres AI" class="logo-img" width="120" height="32" />
+      </a>
+      {PHONE && (
+        <a href={PHONE.href} class="nav-phone" data-event="tel_click" aria-label={`Call Keres AI on ${PHONE.display}`}>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 5.2 2 2 0 0 1 6 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+          </svg>
+          <span class="nav-phone__num">{PHONE.display}</span>
+        </a>
+      )}
+    </div>
+  </header>
+)}
 <main id="main">
   <slot />
 </main>
-<Footer />
-{path !== '/demo' && path !== '/contact' && (
-  <a href="/demo" class="sticky-cta" aria-label="Book a demo">Book a Demo</a>
+{!bare && (go ? <GoFooter locale={locale} /> : <Footer locale={locale} />)}
+
+{/* Sticky mobile bar: Call first, Book second. Suppressed only where the
+    page IS the conversion (demo/contact) — a bare LP still gets it. */}
+{basePath !== '/demo' && basePath !== '/contact' && basePath !== '/quote' && (
+  <div class="sticky-bar" role="region" aria-label="Contact Keres">
+    <a href={quoteTarget} class="sticky-bar__demo sticky-bar__demo--primary" data-event="demo_click">{ui.sticky.getAQuote}</a>
+    {!PHONE && <a href={bookTarget} class="sticky-bar__call sticky-bar__call--secondary sticky-bar__call--book" data-event="book_click">{ui.booking.stickyBook}</a>}
+    {PHONE && (
+      <a href={PHONE.href} class="sticky-bar__call sticky-bar__call--secondary" data-event="tel_click">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 5.2 2 2 0 0 1 6 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+        <span>{ui.sticky.call} {PHONE.display}</span>
+      </a>
+    )}
+  </div>
 )}
-<script src="/assets/app.js?v=11" is:inline></script>
+<script src="/assets/app.js?v=16" defer is:inline></script>
+{trackingOn && <script type="application/json" id="keres-tracking" set:html={trackingCfg}></script>}
+{trackingOn && <script src="/assets/tracking.js?v=4" defer is:inline></script>}
 <slot name="scripts" />
 </body>
 </html>
