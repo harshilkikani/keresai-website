@@ -2513,3 +2513,16 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 /* six steps: three across, two rows on desktop */
 .k-steps--six { margin-top: var(--space-6); }
 @media (min-width: 1024px) { .k-steps--six { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--space-6); } }
+
+/* ─── /custom: build + run pricing ──────────────────────────── */
+.cprice { display: grid; gap: var(--space-5); margin-top: var(--space-6); }
+@media (min-width: 720px) { .cprice { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.cprice__card { padding: var(--space-5); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); }
+.cprice__title { margin: 0 0 var(--space-3); font: 500 0.7rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.cprice__price { margin: 0 0 var(--space-3); display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; font-family: var(--serif); font-weight: 600; letter-spacing: -0.02em; line-height: 1; color: var(--ink-0); }
+.cprice__from { font-size: var(--text-1); }
+.cprice__n { font-size: clamp(2.2rem, 4vw, 3rem); }
+.cprice__kind { font: 500 0.7rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); flex-basis: 100%; }
+.cprice__price--quoted { font-size: var(--text-1); }
+.cprice__desc { margin: 0; font-size: var(--text-0); line-height: 1.55; color: var(--ink-2); }
+.cprice__note { margin: var(--space-5) 0 0; max-width: 60ch; font-size: var(--text--1); line-height: 1.5; color: var(--ink-2); }

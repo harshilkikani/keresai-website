@@ -33,6 +33,13 @@ export const custom = {
         ['You approve what it publishes', 'Nothing reaches a customer, a listing or an inbox without your yes. Once you trust it, you approve by exception.'],
       ],
     },
+    pricing: {
+      eyebrow: 'What it costs', h2: 'One number to build it. One to run it.',
+      build: { title: 'Build', kind: 'one time', desc: 'Fixed, agreed on the scope before we start. It does not move once the scope is signed.' },
+      run: { title: 'Run', kind: 'per month, month-to-month', desc: 'Covers the running, the model costs, the monitoring and the morning text.' },
+      from: 'from', quoted: 'Quoted on the scope call.',
+      note: 'If the scope changes later, the price changes with it, in writing, before the work.',
+    },
   },
   es: {
     title: 'Agentes de IA a medida para una tarea recurrente | Keres AI',
@@ -63,6 +70,13 @@ export const custom = {
         ['Primera versión en dos semanas', 'Primero corre en modo borrador: prepara todo y lo ves en el mensaje de la mañana antes de que salga algo.'],
         ['Tú apruebas lo que publica', 'Nada llega a un cliente, una ficha o una bandeja de entrada sin tu sí. Cuando ya confías, apruebas por excepción.'],
       ],
+    },
+    pricing: {
+      eyebrow: 'Cuánto cuesta', h2: 'Un número para construirlo. Otro para operarlo.',
+      build: { title: 'Desarrollo', kind: 'pago único', desc: 'Fijo, acordado sobre el alcance antes de empezar. No cambia una vez firmado el alcance.' },
+      run: { title: 'Operación', kind: 'al mes, mes a mes', desc: 'Cubre la operación, el costo de los modelos, el monitoreo y el mensaje de la mañana.' },
+      from: 'desde', quoted: 'Se cotiza en la llamada de alcance.',
+      note: 'Si el alcance cambia después, el precio cambia con él, por escrito y antes del trabajo.',
     },
   },
 } as const;

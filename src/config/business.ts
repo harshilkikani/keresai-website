@@ -23,6 +23,11 @@ export const business = {
   answerFromPrice: '',
   convertFromPrice: '',
   growFromPrice: '',
+  // Custom agents (/custom): the one-time build price and the monthly run
+  // fee, digits only. Both required; the pricing block omits the numbers
+  // only under KERES_ALLOW_MISSING=1.
+  customBuildFrom: '',
+  customRunFrom: '',
   city: '',
   state: '',
   // Does Remi answer calls in Spanish today? true or false — never guessed.
@@ -80,7 +85,7 @@ export const business = {
   testimonials: [] as Testimonial[],
 };
 
-const REQUIRED = ['phone', 'phoneDisplay', 'answerFromPrice', 'convertFromPrice', 'growFromPrice', 'city', 'state', 'remiSpanish'] as const;
+const REQUIRED = ['phone', 'phoneDisplay', 'answerFromPrice', 'convertFromPrice', 'growFromPrice', 'customBuildFrom', 'customRunFrom', 'city', 'state', 'remiSpanish'] as const;
 const unset = (v: unknown) => v === null || v === undefined || String(v).trim() === '';
 export const missing = REQUIRED.filter((k) => unset(business[k]));
 
@@ -99,6 +104,8 @@ export const has = {
   answerPrice: !!business.answerFromPrice.trim(),
   convertPrice: !!business.convertFromPrice.trim(),
   growPrice: !!business.growFromPrice.trim(),
+  customBuild: !!business.customBuildFrom.trim(),
+  customRun: !!business.customRunFrom.trim(),
   address: !!business.city.trim() && !!business.state.trim(),
   testimonials: business.testimonials.length > 0,
   // Only an explicit true lifts the Spanish gate. null (local build under
@@ -114,8 +121,8 @@ export const PHONE = has.phone
   : null;
 
 /** "from $349" or '' — callers omit the sentence when it is empty. */
-export const priceFrom = (key: 'answer' | 'convert' | 'grow'): string => {
-  const v = { answer: business.answerFromPrice, convert: business.convertFromPrice, grow: business.growFromPrice }[key].trim();
+export const priceFrom = (key: 'answer' | 'convert' | 'grow' | 'customBuild' | 'customRun'): string => {
+  const v = { answer: business.answerFromPrice, convert: business.convertFromPrice, grow: business.growFromPrice, customBuild: business.customBuildFrom, customRun: business.customRunFrom }[key].trim();
   return v ? `from $${v}` : '';
 };
 

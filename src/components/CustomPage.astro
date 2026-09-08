@@ -7,6 +7,7 @@ import DailyBrief from './DailyBrief.astro';
 import ListingAgentMock from './ListingAgentMock.astro';
 import OutboundMock from './OutboundMock.astro';
 import { PHONE } from '../data/site';
+import { priceFrom } from '../config/business';
 import type { Locale } from '../i18n';
 import { customCopy } from '../i18n/custom';
 
@@ -14,6 +15,8 @@ export interface Props { locale?: Locale }
 const { locale = 'en' } = Astro.props;
 const c = customCopy(locale);
 const h1Words = c.h1.split(' ');
+const buildPrice = priceFrom('customBuild').replace('from $', '');
+const runPrice = priceFrom('customRun').replace('from $', '');
 ---
 <!-- ── HERO ───────────────────────────────────────────── -->
 <Section spacing="standard" labelledby="custom-title" id="hero" class="k-hero k-hero--v2 k-hero--go">
@@ -71,4 +74,26 @@ const h1Words = c.h1.split(' ');
       </li>
     ))}
   </ol>
+</Section>
+
+<!-- ── WHAT IT COSTS ──────────────────────────────────── -->
+<Section tone="raised" spacing="major" labelledby="pricing-title" id="pricing">
+  <div class="k-band__head">
+    <Eyebrow n={3}>{c.pricing.eyebrow}</Eyebrow>
+    <h2 id="pricing-title" class="k-h2">{c.pricing.h2}</h2>
+  </div>
+  <div class="cprice" data-reveal>
+    {[[c.pricing.build, buildPrice], [c.pricing.run, runPrice]].map(([block, price]) => (
+      <div class="cprice__card" data-reveal-child>
+        <h3 class="cprice__title">{block.title}</h3>
+        {price ? (
+          <p class="cprice__price"><span class="cprice__from">{c.pricing.from} $</span><span class="cprice__n" data-count>{price}</span><span class="cprice__kind">{block.kind}</span></p>
+        ) : (
+          <p class="cprice__price cprice__price--quoted">{c.pricing.quoted}<span class="cprice__kind">{block.kind}</span></p>
+        )}
+        <p class="cprice__desc">{block.desc}</p>
+      </div>
+    ))}
+  </div>
+  <p class="cprice__note">{c.pricing.note}</p>
 </Section>
