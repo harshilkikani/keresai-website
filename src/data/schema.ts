@@ -52,7 +52,7 @@ export const organizationSchema = {
     '@type': 'ContactPoint',
     contactType: 'sales',
     ...(PHONE ? { telephone: PHONE.e164 } : {}),
-    url: `${ORIGIN}/demo`,
+    url: `${ORIGIN}/quote`,
     email: business.contactEmail,
     availableLanguage: 'English',
     hoursAvailable: {

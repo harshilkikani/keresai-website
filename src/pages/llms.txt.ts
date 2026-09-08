@@ -70,7 +70,7 @@ What changes the quote: locations, industry, monthly call volume, integrations, 
 - [Services](${u('/services')}): all seven stages with every service and the plan that includes it.
 - [Found](${u('/services/found')}): websites, Google Business Profile, reviews, listings and AI search from $249/month.
 - [Pricing](${u('/pricing')}): five plans, published floors, and what changes the quote.
-- [Book a demo](${u('/demo')}): schedule a live walkthrough${PHONE ? `, or call ${PHONE.display}` : ''}.
+- [Book a demo](${u('/quote')}): schedule a live walkthrough${PHONE ? `, or call ${PHONE.display}` : ''}.
 - [Hear it](${u('/hear-it')}): recorded sample calls per vertical.
 
 ## Industry hubs

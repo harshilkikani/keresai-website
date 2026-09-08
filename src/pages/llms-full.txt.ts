@@ -314,7 +314,7 @@ export async function GET() {
 
   // ── GET STARTED ───────────────────────────────────────────────
   push('## Get started');
-  push(`- Book a demo: ${ORIGIN}/demo`);
+  push(`- Get a quote: ${ORIGIN}/quote`);
   push(`- Pricing: ${ORIGIN}/pricing`);
   push(`- Contact: ${business.contactEmail}`);
   push(`- All comparisons: ${ORIGIN}/compare`);

@@ -67,7 +67,7 @@ const faqs = [
         </p>
         <div class="price-hero-ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-          <Button href="/demo" variant="ghost" event="demo_click">Get your quote</Button>
+          <Button href="/quote" variant="ghost" event="demo_click">Get your quote</Button>
         </div>
       </div>
       <div class="k-col-5">
@@ -112,7 +112,7 @@ const faqs = [
           <ul class="plan-card__list">
             {plan.includes.map((item) => <li>{item}</li>)}
           </ul>
-          <Button href="/demo" variant={plan.flag ? 'primary' : 'outline'} event="demo_click" wide>
+          <Button href="/quote" variant={plan.flag ? 'primary' : 'outline'} event="demo_click" wide>
             Get your quote
           </Button>
         </li>
@@ -137,7 +137,7 @@ const faqs = [
           Seven things, and none of them are a secret. If you can answer these on the phone,
           we can price you on the same call.
         </p>
-        <Button href="/demo" variant="ghost" event="demo_click">Get your quote</Button>
+        <Button href="/quote" variant="ghost" event="demo_click">Get your quote</Button>
       </div>
       <ol class="k-factors">
         {quoteFactors.map((f, i) => (

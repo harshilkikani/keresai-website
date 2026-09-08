@@ -119,7 +119,7 @@
       '<div class="dc-grid">' + cards + '</div>' +
       '<p class="dc-foot">Content is only half the battle — inbox placement also needs authentication and reputation. ' +
       'Run the <a href="/tools/deliverability-checker">deliverability checker</a> on your domain, or ' +
-      '<a href="/demo">book a demo</a> to have Keres handle deliverability end to end.</p>';
+      '<a href="/quote">get a quote</a> to have Keres handle deliverability end to end.</p>';
   }
 
   document.addEventListener('DOMContentLoaded', function () {

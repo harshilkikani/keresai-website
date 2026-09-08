@@ -115,7 +115,9 @@
     const cta = shell.querySelector("[data-calc-cta]");
     if (cta) {
       const msg = `Hi — I ran the Keres calculator and it looks like we're ${summary}. Let's talk.`;
-      cta.href = `/demo?prefill=${encodeURIComponent(msg)}`;
+      // Keep the CTA's own destination (/quote, or /es/quote on Spanish pages) and add the prefill.
+      if (!cta.dataset.base) cta.dataset.base = (cta.getAttribute('href') || '/quote').split('?')[0];
+      cta.href = `${cta.dataset.base}?prefill=${encodeURIComponent(msg)}`;
       cta.dataset.prefill = msg;
     }
   }

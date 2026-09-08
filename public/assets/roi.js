@@ -75,7 +75,9 @@
       `Missed-call calc says we're leaving ~${fmt(lostMo)}/mo on the table — let's talk.`;
     const cta = $("roi-cta");
     if (cta) {
-      cta.href = `/demo?prefill=${encodeURIComponent(msg)}`;
+      // Keep the CTA's own destination (/quote, or /es/quote on Spanish pages) and add the prefill.
+      if (!cta.dataset.base) cta.dataset.base = (cta.getAttribute('href') || '/quote').split('?')[0];
+      cta.href = `${cta.dataset.base}?prefill=${encodeURIComponent(msg)}`;
       cta.dataset.prefill = msg;
     }
   }

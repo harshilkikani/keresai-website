@@ -58,7 +58,7 @@ const others = agents.filter((a) => a.slug !== page.slug);
         <p class="k-lede">{page.sub}</p>
         <div class="k-hero__ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-          <Button href="/demo" variant="ghost" event="demo_click">Book a demo</Button>
+          <Button href="/quote" variant="ghost" event="demo_click">Book a demo</Button>
         </div>
         <ul class="k-hero__facts" aria-label="At a glance">
           <li><span class="k-hero__fact-k">Stage</span><span class="k-hero__fact-v">{agent.stage}</span></li>
@@ -79,7 +79,7 @@ const others = agents.filter((a) => a.slug !== page.slug);
         <Eyebrow>Step by step</Eyebrow>
         <h2 id="flow-title" class="k-h2">{page.flowH2}</h2>
         <p class="k-lede">{page.flowLede}</p>
-        <Button href="/demo" variant="ghost" event="demo_click">See it on your own numbers</Button>
+        <Button href="/quote" variant="ghost" event="demo_click">See it on your own numbers</Button>
       </div>
       <ol class="k-flow">
         {page.flow.map((f, i) => (

@@ -56,7 +56,7 @@ const answer = plans.find((p) => p.slug === 'answer')!;
         <p class="k-lede">{hub.sub}</p>
         <div class="k-hero__ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-          <Button href="/demo" variant="ghost" event="demo_click">Book a demo</Button>
+          <Button href="/quote" variant="ghost" event="demo_click">Book a demo</Button>
         </div>
         <ul class="k-hero__facts" aria-label="At a glance">
           <li><span class="k-hero__fact-k">Answers in</span><span class="k-hero__fact-v" data-figure>2 rings</span></li>
@@ -219,7 +219,7 @@ const answer = plans.find((p) => p.slug === 'answer')!;
             <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">0</span></div>
             <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
           </div>
-          <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href="/demo" data-event="demo_click">Get a quote with these numbers</a>
+          <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href="/quote" data-event="demo_click">Get a quote with these numbers</a>
           <div class="roi-note" id="roi-note"></div>
         </div>
       </div>
