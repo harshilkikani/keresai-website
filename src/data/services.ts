@@ -67,7 +67,7 @@ const byStage: Record<number, { services: Service[]; ctaHref: string; ctaLabel: 
         name: 'Local Services Ads Setup & Response',
         plan: 'Found',
         addOn: true,
-        desc: 'Verification, listing, and the always-answered guarantee. Google ranks Local Services Ads on how fast you answer and how you are reviewed — Remi answers in two rings.',
+        desc: 'Verification, listing, and answering in two rings. Google ranks Local Services Ads on how fast you answer and how you are reviewed — Remi answers in two rings.',
       },
       {
         name: 'Call Tracking & Attribution',

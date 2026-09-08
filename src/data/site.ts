@@ -170,7 +170,7 @@ export const foundServices: FoundService[] = [
   },
   {
     name: 'Local Services Ads Setup & Response',
-    desc: 'Verification, listing and the always-answered guarantee. Google ranks Local Services Ads on how fast you answer and how you are reviewed — Remi answers in two rings.',
+    desc: 'Verification, listing and answering in two rings. Google ranks Local Services Ads on how fast you answer and how you are reviewed — Remi answers in two rings.',
     brief: 'Verified, listed, and every lead answered in two rings.',
     addOn: true,
   },

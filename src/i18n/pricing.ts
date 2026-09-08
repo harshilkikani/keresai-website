@@ -33,7 +33,7 @@ export const pricing = {
     ],
   },
   es: {
-    title: 'Precios: un precio por trabajador, cotizado a tu negocio | Keres AI',
+    title: 'Precios: un precio por trabajador | Keres AI',
     description: 'Cada trabajador de Keres publica desde cuánto empieza: Found, Remi, Theo, June, Sol y un paquete. Custom se define en una llamada. Mes a mes, en marcha en cinco días hábiles.',
     crumbs: ['Inicio', 'Precios'],
     eyebrow: 'Precios', h1: 'Un precio por trabajador. Cotizado a tu negocio.',
