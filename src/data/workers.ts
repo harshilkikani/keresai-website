@@ -2,7 +2,7 @@
 // homepage, the pricing table and the nav. English; Spanish in i18n/data.es.
 import type { PriceKey } from '../config/business';
 
-export type WorkerMock = 'listing' | 'inbound' | 'follow-up' | 'reactivation' | 'outbound' | 'scope';
+export type WorkerMock = 'site' | 'listing' | 'inbound' | 'follow-up' | 'reactivation' | 'outbound' | 'scope';
 export interface Worker {
   slug: string;
   name: string;
@@ -18,7 +18,7 @@ export interface Worker {
 }
 
 export const workers: Worker[] = [
-  { slug: 'found', name: 'Found', job: 'Gets you found: site, Google listing, reviews', href: '/services/found', priceKey: 'found', person: false, mock: 'listing',
+  { slug: 'found', name: 'Found', job: 'Builds your website, runs your Google listing, gets the reviews', href: '/services/found', priceKey: 'found', person: false, mock: 'site',
     includes: ['Conversion website and care plan', 'Google Business Profile worked every week', 'Reviews after every job', 'Listings that agree with each other'] },
   { slug: 'inbound', name: 'Remi', job: 'Answers every call in two rings and books it', href: '/agents/inbound', priceKey: 'remi', person: true, mock: 'inbound',
     includes: ['Answering, day and night', 'Intake and qualification for your vertical', 'Booking into your calendar and CRM', 'Missed-call text-back in 60 seconds'] },

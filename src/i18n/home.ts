@@ -17,7 +17,7 @@ export const home = {
       head: 'Tonight’s shift · six workers', when: 'Tue 8:12 PM', example: 'Example', foot: 'All of it in one text at 7 am.',
       caption: 'Example shift, not a customer’s. Each row is the job that worker does.',
       rows: [
-        ['found', 'Found', 'Site, listing, reviews', 'Listing post published · 2 review replies drafted for your OK', false],
+        ['found', 'Found', 'Website, listing, reviews', 'Site live · listing post published · 2 review replies for your OK', false],
         ['inbound', 'Remi', 'Answers and books', 'On a call · (555) 014-2207 · no heat, booked Wed 8–10', true],
         ['follow-up', 'Theo', 'Confirms, reminds, chases', 'Tomorrow’s 6 visits confirmed · 1 reschedule handled', false],
         ['reactivation', 'June', 'Brings them back', '4 review requests sent · 1 posted · 2 tune-ups rebooked', false],
@@ -38,7 +38,7 @@ export const home = {
     },
     leaks: { eyebrow: 'Where your pipeline leaks', h2: 'One pipeline. Seven places money falls out of it.', lede: 'Get found, capture the lead, qualify it, book it, get them to show, close it, bring them back. Nobody loses a customer in one dramatic moment — it happens at one of these seven stages, and every one of them is a job nobody in a five-person firm has time to do.', handledBy: 'Worker:' },
     team: { eyebrow: 'Be Answered — the team', h2: 'Three workers. One phone number.', lede: 'One system that answers the call, remembers it, and keeps working it after everyone has gone home. On your line they introduce themselves with whatever name you choose.', what: 'What {name} does' },
-    found: { eyebrow: 'One worker, eight jobs', h2: 'What Found does.', lede: 'Everything that has to be true before your phone rings. Eight jobs, one worker, one monthly fee{price}.', priceClause: ', {from} a month', from: 'from $', per: '/month · quoted to your volume', cta: 'What Found does', addOn: 'Add-on' },
+    found: { eyebrow: 'One worker, eight jobs', h2: 'What Found does.', lede: 'A website built to book the job, a Google listing worked every week, and reviews that keep arriving: everything that has to be true before your phone rings. Eight jobs, one worker, one monthly fee{price}.', priceClause: ', {from} a month', from: 'from $', per: '/month · quoted to your volume', cta: 'What Found does', addOn: 'Add-on' },
     brief: { eyebrow: 'Owner Daily Brief', h2: 'You don’t log into a dashboard. You get a text.', lede: 'Every worker reports to the same text.', body: 'Green is money that stayed. Amber is the one item waiting on you. If nothing is waiting on you, there is no amber line.' },
     industries: {
       eyebrow: 'Who it is for', h2: 'It uses your words, not “customer.”', lede: 'A conflict check is not an intake form and chair time is not an appointment. Remi is trained on the vocabulary and the questions your vertical actually asks.',
@@ -89,7 +89,7 @@ export const home = {
       head: 'Turno de esta noche · seis trabajadores', when: 'Mar 8:12 PM', example: 'Ejemplo', foot: 'Todo en un solo mensaje a las 7 am.',
       caption: 'Turno de ejemplo, no de un cliente. Cada fila es la tarea de ese trabajador.',
       rows: [
-        ['found', 'Found', 'Sitio, ficha, reseñas', 'Publicación en la ficha lista · 2 respuestas a reseñas esperan tu OK', false],
+        ['found', 'Found', 'Sitio web, ficha, reseñas', 'Sitio en línea · publicación en la ficha lista · 2 respuestas a reseñas esperan tu OK', false],
         ['inbound', 'Remi', 'Contesta y agenda', 'En llamada · (555) 014-2207 · sin calefacción, agendado mié 8–10', true],
         ['follow-up', 'Theo', 'Confirma, recuerda, persigue', '6 visitas de mañana confirmadas · 1 cambio de hora resuelto', false],
         ['reactivation', 'June', 'Los trae de vuelta', '4 solicitudes de reseña enviadas · 1 publicada · 2 mantenimientos reagendados', false],
@@ -110,7 +110,7 @@ export const home = {
     },
     leaks: { eyebrow: 'Dónde se fuga tu pipeline', h2: 'Un solo pipeline. Siete lugares por donde se escapa el dinero.', lede: 'Que te encuentren, captar el contacto, calificarlo, agendarlo, que se presente, cerrarlo, que vuelva. Nadie pierde un cliente en un momento dramático: pasa en una de estas siete etapas, y cada una es un trabajo que nadie en un negocio de cinco personas tiene tiempo de hacer.', handledBy: 'Trabajador:' },
     team: { eyebrow: 'Que te contesten: el equipo', h2: 'Tres trabajadores. Un solo número.', lede: 'Un solo sistema que contesta la llamada, la recuerda y la sigue trabajando cuando ya todos se fueron a casa. En tu línea se presentan con el nombre que tú elijas.', what: 'Qué hace {name}' },
-    found: { eyebrow: 'Un trabajador, ocho tareas', h2: 'Qué hace Found.', lede: 'Todo lo que tiene que estar en orden antes de que suene tu teléfono. Ocho tareas, un trabajador, una sola cuota mensual{price}.', priceClause: ', {from} al mes', from: 'desde $', per: '/mes · cotizado a tu volumen', cta: 'Qué hace Found', addOn: 'Adicional' },
+    found: { eyebrow: 'Un trabajador, ocho tareas', h2: 'Qué hace Found.', lede: 'Un sitio web hecho para agendar el trabajo, una ficha de Google trabajada cada semana y reseñas que siguen llegando: todo lo que tiene que estar en orden antes de que suene tu teléfono. Ocho tareas, un trabajador, una sola cuota mensual{price}.', priceClause: ', {from} al mes', from: 'desde $', per: '/mes · cotizado a tu volumen', cta: 'Qué hace Found', addOn: 'Adicional' },
     brief: { eyebrow: 'Resumen diario del dueño', h2: 'No entras a un panel. Recibes un mensaje.', lede: 'Todos los trabajadores reportan al mismo mensaje.', body: 'Verde es dinero que se quedó. Ámbar es lo único que te espera. Si nada te espera, no hay línea ámbar.' },
     industries: {
       eyebrow: 'Para quién es', h2: 'Usa tus palabras, no “cliente”.', lede: 'Una verificación de conflictos no es un formulario de admisión y el tiempo de sillón no es una cita. Remi está entrenado con el vocabulario y las preguntas que tu sector realmente hace.',

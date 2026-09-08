@@ -98,6 +98,7 @@ const h1Groups = c.h1;
         <h3 class="roster__name">{w.name}</h3>
         <p class="roster__job">{w.job}</p>
         <div class="roster__mock">
+          {w.mock === 'site' && <SiteOnPhone locale={locale} caption={false} />}
           {w.mock === 'listing' && <GoogleListing locale={locale} />}
           {w.mock === 'inbound' && (gate ? <SiteOnPhone locale={locale} caption={false} /> : <AgentMock slug="inbound" locale={locale} />)}
           {w.mock === 'follow-up' && <AgentMock slug="follow-up" locale={locale} />}
@@ -174,6 +175,10 @@ const h1Groups = c.h1;
         </div>
       )}
       <Button href="/services/found" variant="primary">{c.found.cta}</Button>
+      <div class="k-found__mocks" data-reveal>
+        <SiteOnPhone locale={locale} caption={false} />
+        <GoogleListing locale={locale} />
+      </div>
     </div>
     <ul class="k-svc k-svc--two" data-reveal>
       {foundServices.map((s) => (
