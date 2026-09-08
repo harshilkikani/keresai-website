@@ -2530,3 +2530,10 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 /* custom-agent form: the free-text job field */
 .qf__textarea { resize: vertical; min-height: 92px; font: inherit; line-height: 1.5; }
 .qf__hint { margin: var(--space-2) 0 0; font-size: var(--text--1); color: var(--ink-3); }
+
+/* homepage: the one-band custom-agents teaser */
+.k-teaser { display: grid; gap: var(--space-5); align-items: start; }
+@media (min-width: 1024px) { .k-teaser { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); column-gap: var(--space-7, 48px); } }
+.k-teaser .k-h2 { margin-bottom: 0; }
+.k-teaser__body { display: grid; gap: var(--space-4); justify-items: start; }
+.k-teaser__body .k-lede { margin: 0; }

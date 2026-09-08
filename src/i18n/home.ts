@@ -32,6 +32,7 @@ export const home = {
       foot: 'Nine more specific pages — HVAC, plumbing, roofing, septic, towing, dentists, med spas, real estate and professional intake — sit under', footLink: 'all industries',
     },
     integrations: { eyebrow: 'Integrations', h2: 'It books into the calendar you already use.', lede: 'A booking that lives only inside our software is not a booking. Remi writes to the tools your team already opens every morning.', aria: 'Connected today', foot: 'Connected today. Clio and Lawmatics, Jobber and Housecall Pro, Dentrix and Open Dental, and Follow Up Boss are rolling out — ask where yours is. Anything else speaks webhooks and CSV out of the box.', footLink: 'See all integrations' },
+    customTeaser: { eyebrow: 'Custom agents', h2: 'Need a job done that isn’t on this page?', text: 'We build one-job agents for the recurring work nobody on your team has time for, and we run three on our own company. Fixed build price, monthly run fee, first version in two weeks.', cta: 'See custom agents' },
     calc: { eyebrow: 'Missed-call calculator', h2: 'Put your own numbers in.', lede: 'Four inputs and the arithmetic shown in full, because a number you cannot check is not worth having. Pick your industry and it loads typical figures to start from.', link: 'Open the full calculator' },
     proof: { eyebrow: 'Proof', h2: 'In their words, or not at all.' },
     start: {
@@ -84,6 +85,7 @@ export const home = {
       foot: 'Nueve páginas más específicas (HVAC, plomería, techos, sépticos, grúas, dentistas, med spas, bienes raíces y admisión profesional) están bajo', footLink: 'todas las industrias',
     },
     integrations: { eyebrow: 'Integraciones', h2: 'Agenda en el calendario que ya usas.', lede: 'Una cita que solo vive dentro de nuestro software no es una cita. Remi escribe en las herramientas que tu equipo ya abre cada mañana.', aria: 'Conectadas hoy', foot: 'Conectadas hoy. Clio y Lawmatics, Jobber y Housecall Pro, Dentrix y Open Dental, y Follow Up Boss están en camino: pregunta por la tuya. Todo lo demás habla webhooks y CSV de fábrica.', footLink: 'Ver todas las integraciones' },
+    customTeaser: { eyebrow: 'Agentes a medida', h2: '¿Necesitas una tarea que no está en esta página?', text: 'Construimos agentes de una sola tarea para el trabajo recurrente que nadie en tu equipo tiene tiempo de hacer, y usamos tres en nuestra propia empresa. Precio fijo de desarrollo, cuota mensual, primera versión en dos semanas.', cta: 'Ver agentes a medida' },
     calc: { eyebrow: 'Calculadora de llamadas perdidas', h2: 'Pon tus propios números.', lede: 'Cuatro datos y la aritmética a la vista, porque un número que no puedes comprobar no vale nada. Elige tu industria y carga cifras típicas para empezar.', link: 'Abrir la calculadora completa' },
     proof: { eyebrow: 'Pruebas', h2: 'Con sus palabras, o nada.' },
     start: {

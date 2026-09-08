@@ -59,7 +59,7 @@ const foundFrom = found.from.replace(/^from /, `${ui.mocks.from} `);
       <ul>
         <li><a href="/services">{ui.footer.allServices}</a></li>
         <li><a href="/services/found">Found &mdash; {foundFrom}</a></li>
-        <li><a href="/services#custom">{ui.footer.customBuilds}</a></li>
+        <li><a href={l(locale, '/custom')}>{ui.footer.customBuilds}</a></li>
         <li><a href="/integrations">{ui.footer.integrations}</a></li>
         <li><a href="/pricing">{ui.footer.pricing}</a></li>
         <li><a href="/tools">{ui.footer.freeTools}</a></li>

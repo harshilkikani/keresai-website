@@ -76,6 +76,7 @@ const resourceLinks = ui.nav.resourceLinks.map(([href, label]) => ({ href, label
         </li>
 
         <li><a href="/pricing">{ui.nav.pricing}</a></li>
+        <li><a href={l(locale, '/custom')}>{ui.nav.custom}</a></li>
 
         <li>
           <details class="nav-drop">
@@ -131,6 +132,7 @@ const resourceLinks = ui.nav.resourceLinks.map(([href, label]) => ({ href, label
   <p class="mobile-menu__group">{ui.nav.industries}</p>
   {industryLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
   <a href="/pricing">{ui.nav.pricing}</a>
+  <a href={l(locale, '/custom')}>{ui.nav.custom}</a>
   <p class="mobile-menu__group">{ui.nav.resources}</p>
   {resourceLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
   <a href="/about">{ui.nav.about}</a>

@@ -6,7 +6,7 @@ export const ui = {
     skip: 'Skip to main content',
     remiGate: '',
     nav: {
-      home: 'Keres AI. Home', getFound: 'Get found', getAnswered: 'Get answered', industries: 'Industries', pricing: 'Pricing', resources: 'Resources',
+      home: 'Keres AI. Home', getFound: 'Get found', getAnswered: 'Get answered', industries: 'Industries', pricing: 'Pricing', custom: 'Custom', resources: 'Resources',
       everythingInFound: 'Everything in Found', fromPerMonth: 'from $249 / month', allSevenStages: 'All seven stages', howTheFourWork: 'How the four work together',
       included: 'Included', addOn: 'Add-on', getAQuote: 'Get a quote', call: 'Call', toggleDark: 'Toggle dark mode', openMenu: 'Open menu', mobileNav: 'Mobile navigation', about: 'About', contact: 'Contact',
       industryLinks: [['/industries/law-firms', 'Law firms'], ['/industries/home-services', 'Home services'], ['/industries/dental-med-spa', 'Dental & med spa'], ['/industries/real-estate', 'Real estate'], ['/industries', 'All industries']],
@@ -73,7 +73,7 @@ export const ui = {
     skip: 'Saltar al contenido principal',
     remiGate: 'Hoy Remi contesta en inglés; la atención en español llega pronto.',
     nav: {
-      home: 'Keres AI. Inicio', getFound: 'Que te encuentren', getAnswered: 'Que te contesten', industries: 'Industrias', pricing: 'Precios', resources: 'Recursos',
+      home: 'Keres AI. Inicio', getFound: 'Que te encuentren', getAnswered: 'Que te contesten', industries: 'Industrias', pricing: 'Precios', custom: 'A medida', resources: 'Recursos',
       everythingInFound: 'Todo lo que incluye Found', fromPerMonth: 'desde $249 / mes', allSevenStages: 'Las siete etapas', howTheFourWork: 'Cómo trabajan los cuatro juntos',
       included: 'Incluido', addOn: 'Adicional', getAQuote: 'Pedir cotización', call: 'Llamar', toggleDark: 'Cambiar modo oscuro', openMenu: 'Abrir menú', mobileNav: 'Navegación móvil', about: 'Nosotros', contact: 'Contacto',
       industryLinks: [['/industries/law-firms', 'Bufetes de abogados'], ['/industries/home-services', 'Servicios para el hogar'], ['/industries/dental-med-spa', 'Dental y med spa'], ['/industries/real-estate', 'Bienes raíces'], ['/industries', 'Todas las industrias']],

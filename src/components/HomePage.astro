@@ -263,12 +263,26 @@ const h1Groups = c.h1;
   <Calculator locale={locale} vertical="home-services" ctaHref={quote} />
 </Section>
 
+<!-- ── CUSTOM AGENTS, ONE BAND ────────────────────────── -->
+<Section spacing="standard" labelledby="custom-teaser-title" id="custom-teaser">
+  <div class="k-teaser" data-reveal>
+    <div>
+      <Eyebrow n={10}>{c.customTeaser.eyebrow}</Eyebrow>
+      <h2 id="custom-teaser-title" class="k-h2">{c.customTeaser.h2}</h2>
+    </div>
+    <div class="k-teaser__body">
+      <p class="k-lede">{c.customTeaser.text}</p>
+      <Button href={l(locale, '/custom')} variant="ghost">{c.customTeaser.cta}</Button>
+    </div>
+  </div>
+</Section>
+
 <!-- ── PROOF — only with real testimonials ────────────── -->
 {has.testimonials && (
   <Section tone="raised" spacing="standard" labelledby="proof-title" id="proof">
     <div class="k-band">
       <div class="k-band__head">
-        <Eyebrow n={10}>{c.proof.eyebrow}</Eyebrow>
+        <Eyebrow n={11}>{c.proof.eyebrow}</Eyebrow>
         <h2 id="proof-title" class="k-h2">{c.proof.h2}</h2>
       </div>
       <div class="k-quotes" data-reveal>
@@ -282,7 +296,7 @@ const h1Groups = c.h1;
 <Section spacing="standard" labelledby="start-title" id="start">
   <div class="k-band">
     <div class="k-band__head">
-      <Eyebrow n={11}>{c.start.eyebrow}</Eyebrow>
+      <Eyebrow n={12}>{c.start.eyebrow}</Eyebrow>
       <h2 id="start-title" class="k-h2">{c.start.h2}</h2>
     </div>
     <ol class="k-steps" data-reveal>
@@ -303,7 +317,7 @@ const h1Groups = c.h1;
 
 <!-- ── FAQ ────────────────────────────────────────────── -->
 <Section tone="raised" spacing="standard" labelledby="faq-title" id="faq">
-  <Eyebrow n={12}>{c.faq.eyebrow}</Eyebrow>
+  <Eyebrow n={13}>{c.faq.eyebrow}</Eyebrow>
   <h2 id="faq-title" class="k-h2">{c.faq.h2}</h2>
   <div class="faq-list">
     {faqs.map((f) => (
