@@ -46,7 +46,7 @@ export const agentPages: AgentPage[] = [
     seoTitle: 'AI Receptionist: Answers in 2 Rings, Books the Lead | Keres',
     description:
       'Remi answers every call in two rings, 24/7 — runs your intake script, qualifies the lead, books into your calendar and CRM, and texts back anything it could not take within 60 seconds.',
-    h1: 'Remi — the Inbound Agent that answers every call in two rings and books the lead.',
+    h1: 'Remi — the Inbound Worker that answers every call in two rings and books the lead.',
     sub:
       'An AI receptionist that does the whole job, not just the greeting: it answers day or night, asks your questions, qualifies the lead, books the appointment while the caller is still on the line, and tells you what happened before you have put your phone down.',
     heroVertical: 'default',
@@ -139,7 +139,7 @@ export const agentPages: AgentPage[] = [
     seoTitle: 'Appointment Reminders & No-Show Prevention | Keres',
     description:
       'Theo confirms every appointment, reminds by text and voice, backfills cancellations from your waitlist, and chases the estimate on day 1, 3 and 7 until you get a yes or a no.',
-    h1: 'Theo — the Follow-Up Agent that makes sure they show and say yes.',
+    h1: 'Theo — the Follow-Up Worker that makes sure they show and say yes.',
     sub:
       'Getting the appointment on the calendar is not the same as getting it kept, and a quote nobody chased is a quote somebody else closed. Theo, your Follow-Up Agent, works the two stages where booked work quietly disappears.',
     heroVertical: 'dental-med-spa',
@@ -209,7 +209,7 @@ export const agentPages: AgentPage[] = [
     seoTitle: 'Database Reactivation & Win-Back Campaigns | Keres',
     description:
       'June reactivates past customers and cold leads in your CRM, revives closed-lost from the last 6–12 months, and asks for the review after every completed job or matter.',
-    h1: 'June — the Reactivation Agent. The cheapest lead you’ll ever get is one you already have.',
+    h1: 'June — the Reactivation Worker. The cheapest lead you’ll ever get is one you already have.',
     sub:
       'Every name in your CRM already chose you once, or nearly did. June, your Reactivation Agent, works that list as conversations rather than blasts — and asks for the review after every job, so the next stranger chooses you too.',
     heroVertical: 'home-services',
@@ -274,7 +274,7 @@ export const agentPages: AgentPage[] = [
     seoTitle: 'AI SDR: Cold Email That Reaches the Inbox | Keres',
     description:
       'Sol runs cold outbound with deliverability set up properly first — SPF, DKIM, DMARC and warm-up — then personalized sequences, replies handled in thread, and meetings booked.',
-    h1: 'Sol — the Outbound Agent. Cold outreach that reaches the inbox and books the meeting.',
+    h1: 'Sol — the Outbound Worker. Cold outreach that reaches the inbox and books the meeting.',
     sub:
       'For firms that need net-new pipeline rather than a better answer to the calls they already get. Sol, your Outbound Agent, does the deliverability work first — because sending is the easy half and landing is the half that gets skipped.',
     heroVertical: 'default',

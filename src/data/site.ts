@@ -44,7 +44,7 @@ export interface Agent {
   name: string;
   /** Product title. Kept in H1s for search. */
   title: string;
-  /** "Remi, your Inbound Agent" — the first-mention form. */
+  /** "Remi, your Inbound Worker" — the first-mention form. */
   intro: string;
   /** What searchers type when they want this. */
   searchTerm: string;
@@ -62,8 +62,8 @@ export const agents: Agent[] = [
   {
     slug: 'inbound',
     name: 'Remi',
-    title: 'Inbound Agent',
-    intro: 'Remi, your Inbound Agent',
+    title: 'Inbound Worker',
+    intro: 'Remi, your Inbound Worker',
     searchTerm: 'AI receptionist',
     stage: 'Capture, qualify and book',
     job: 'Answers every call in two rings and books the lead.',
@@ -77,8 +77,8 @@ export const agents: Agent[] = [
   {
     slug: 'follow-up',
     name: 'Theo',
-    title: 'Follow-Up Agent',
-    intro: 'Theo, your Follow-Up Agent',
+    title: 'Follow-Up Worker',
+    intro: 'Theo, your Follow-Up Worker',
     searchTerm: 'appointment reminders',
     stage: 'Show and convert',
     job: 'Makes sure they show up and say yes.',
@@ -92,8 +92,8 @@ export const agents: Agent[] = [
   {
     slug: 'reactivation',
     name: 'June',
-    title: 'Reactivation Agent',
-    intro: 'June, your Reactivation Agent',
+    title: 'Reactivation Worker',
+    intro: 'June, your Reactivation Worker',
     searchTerm: 'database reactivation',
     stage: 'Come back',
     job: 'Brings back the customers you already paid to win.',
@@ -107,8 +107,8 @@ export const agents: Agent[] = [
   {
     slug: 'outbound',
     name: 'Sol',
-    title: 'Outbound Agent',
-    intro: 'Sol, your Outbound Agent',
+    title: 'Outbound Worker',
+    intro: 'Sol, your Outbound Worker',
     searchTerm: 'AI SDR',
     stage: 'Net-new pipeline',
     job: 'Cold outreach that reaches the inbox and books the meeting.',

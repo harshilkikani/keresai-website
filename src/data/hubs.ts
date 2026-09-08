@@ -109,8 +109,8 @@ export const hubs: Hub[] = [
       { name: 'Immigration', text: 'Status, deadlines, prior filings and language preference, with the option to run intake in the caller’s own language.' },
     ],
     otherAgents: [
-      { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Agent', text: 'Confirms the consultation, reminds the day before, handles the reschedule, and collects documents in advance so the attorney is not chasing a police report an hour before the meeting.' },
-      { slug: 'reactivation', name: 'June', title: 'Reactivation Agent', text: 'Revives closed-lost consultations from the last six to twelve months, and asks for the review after every matter closes — with unhappy clients routed to the partner privately first.' },
+      { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Worker', text: 'Confirms the consultation, reminds the day before, handles the reschedule, and collects documents in advance so the attorney is not chasing a police report an hour before the meeting.' },
+      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Revives closed-lost consultations from the last six to twelve months, and asks for the review after every matter closes — with unhappy clients routed to the partner privately first.' },
     ],
     foundFrom: 'from $499',
     foundLine:
@@ -173,8 +173,8 @@ export const hubs: Hub[] = [
       { name: 'Septic, towing & electrical', text: 'Location, access and urgency captured first, because the dispatch decision is the whole job.' },
     ],
     otherAgents: [
-      { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Agent', text: 'Confirms the window, texts when the tech is on the way, and chases every estimate on day 1, day 3 and day 7 until you have a yes or a no.' },
-      { slug: 'reactivation', name: 'June', title: 'Reactivation Agent', text: 'Runs the tune-up season campaign against your customer list, revives the estimates that went cold, and asks for a review after every completed job.' },
+      { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Worker', text: 'Confirms the window, texts when the tech is on the way, and chases every estimate on day 1, day 3 and day 7 until you have a yes or a no.' },
+      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Runs the tune-up season campaign against your customer list, revives the estimates that went cold, and asks for a review after every completed job.' },
     ],
     foundFrom: 'from $249',
     foundLine:
@@ -236,8 +236,8 @@ export const hubs: Hub[] = [
       { name: 'Multi-location', text: 'One number, routed to the right location, with each site’s availability and each site’s Daily Brief.' },
     ],
     otherAgents: [
-      { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Agent', text: 'Confirms every appointment, reminds on your schedule, handles reschedules in thread, and backfills a cancellation from the waitlist before the chair goes empty.' },
-      { slug: 'reactivation', name: 'June', title: 'Reactivation Agent', text: 'Works the recall list every month, revives patients who lapsed, and asks for the review after treatment — routing anyone unhappy to the practice manager privately.' },
+      { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Worker', text: 'Confirms every appointment, reminds on your schedule, handles reschedules in thread, and backfills a cancellation from the waitlist before the chair goes empty.' },
+      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Works the recall list every month, revives patients who lapsed, and asks for the review after treatment — routing anyone unhappy to the practice manager privately.' },
     ],
     foundFrom: 'from $249',
     foundLine:
@@ -298,8 +298,8 @@ export const hubs: Hub[] = [
       { name: 'Property management', text: 'Maintenance calls triaged, showings booked, and after-hours emergencies escalated to the person on call.' },
     ],
     otherAgents: [
-      { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Agent', text: 'Confirms the showing, reminds the day before, reschedules without phone tag, and follows up after the tour while the house is still fresh in their mind.' },
-      { slug: 'reactivation', name: 'June', title: 'Reactivation Agent', text: 'Works the database of past clients and cold leads, revives buyers who paused their search, and asks for the review after every closing.' },
+      { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Worker', text: 'Confirms the showing, reminds the day before, reschedules without phone tag, and follows up after the tour while the house is still fresh in their mind.' },
+      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Works the database of past clients and cold leads, revives buyers who paused their search, and asks for the review after every closing.' },
     ],
     foundFrom: 'from $249',
     foundLine:

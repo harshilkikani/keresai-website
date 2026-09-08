@@ -4,14 +4,14 @@ import type { Locale } from './index';
 
 export const custom = {
   en: {
-    title: 'Custom AI Agents for One Recurring Job | Keres AI',
+    title: 'Custom AI Workers for One Recurring Job | Keres AI',
     description: 'We build AI agents that do one recurring job in your business and report to you in a text every morning. Fixed build price, monthly run fee, first version in two weeks.',
-    eyebrow: 'Custom agents',
+    eyebrow: 'Custom workers',
     h1: 'A worker for the job nobody on your team has time for.',
     lede: 'We build AI agents that do one recurring job in your business, report to you in a text every morning, and cost less than the hour a week you’d spend doing it badly. We run three of them on our own company.',
     scope: 'Scope a build', call: 'Call',
     cases: {
-      eyebrow: 'Three we run on ourselves', h2: 'Not demos. Our own agents, doing their job today.',
+      eyebrow: 'Three we run on ourselves', h2: 'Not demos. Our own workers, doing their job today.',
       lede: 'Each one started as the one-page scope you’ll get. The numbers inside the mocks show the shape of the work, not results.',
       label: 'Runs on Keres today', example: 'Example',
       items: [
@@ -44,7 +44,7 @@ export const custom = {
     faq: {
       eyebrow: 'Questions', h2: 'What it can and can’t do, and what happens after.',
       items: [
-        ['What can a custom agent do, and what can’t it?', 'It does one recurring job with clear inputs and outputs: reading, sorting, drafting, posting, replying, checking, reporting. It works inside the accounts you give it and the rules in the scope. It can’t make the judgment calls the scope doesn’t cover, and it isn’t a replacement for a person who has to be accountable to a customer. When it isn’t sure, it stops and puts the item in your morning text.'],
+        ['What can a custom worker do, and what can’t it?', 'It does one recurring job with clear inputs and outputs: reading, sorting, drafting, posting, replying, checking, reporting. It works inside the accounts you give it and the rules in the scope. It can’t make the judgment calls the scope doesn’t cover, and it isn’t a replacement for a person who has to be accountable to a customer. When it isn’t sure, it stops and puts the item in your morning text.'],
         ['Who owns it?', 'You do. The scope, the prompts, the instructions and everything it writes are yours, and it works inside your own accounts, not ours. What stays ours is the platform it runs on, which is what the monthly fee pays for.'],
         ['What happens if we stop?', 'Month-to-month means you stop paying and it stops running at the end of that month. Nothing it published comes down, your accounts are untouched, and you keep the scope and the prompts, so anyone could rebuild it.'],
         ['How does approval work?', 'The first version runs in draft mode: it prepares everything, lists it in the 7 am text, and nothing goes out until you reply yes. When you are comfortable, you move a category to approve-by-exception: routine items go out on their own and only the unusual ones wait for you. Any category can go back to draft mode whenever you say.'],
@@ -52,14 +52,14 @@ export const custom = {
     },
   },
   es: {
-    title: 'Agentes de IA a medida para una tarea recurrente | Keres AI',
+    title: 'Trabajadores de IA a medida para una tarea recurrente | Keres AI',
     description: 'Construimos agentes de IA que hacen una sola tarea recurrente en tu negocio y te reportan cada mañana por mensaje de texto. Precio fijo de desarrollo, cuota mensual, primera versión en dos semanas.',
-    eyebrow: 'Agentes a medida',
+    eyebrow: 'Trabajadores a medida',
     h1: 'Un trabajador para la tarea que nadie en tu equipo tiene tiempo de hacer.',
     lede: 'Construimos agentes de IA que hacen una sola tarea recurrente en tu negocio, te reportan cada mañana por mensaje de texto y cuestan menos que la hora a la semana que pasarías haciéndola mal. Nosotros usamos tres en nuestra propia empresa.',
     scope: 'Cotizar mi agente', call: 'Llamar al',
     cases: {
-      eyebrow: 'Tres que usamos nosotros', h2: 'No son demos. Nuestros propios agentes, trabajando hoy.',
+      eyebrow: 'Tres que usamos nosotros', h2: 'No son demos. Nuestros propios trabajadores, trabajando hoy.',
       lede: 'Cada uno empezó como el documento de una página que tú también vas a recibir. Los números dentro de los ejemplos muestran la forma del trabajo, no resultados.',
       label: 'Funciona en Keres hoy', example: 'Ejemplo',
       items: [
@@ -92,7 +92,7 @@ export const custom = {
     faq: {
       eyebrow: 'Preguntas', h2: 'Qué puede y qué no puede hacer, y qué pasa después.',
       items: [
-        ['¿Qué puede hacer un agente a medida y qué no?', 'Hace una tarea recurrente con entradas y salidas claras: leer, clasificar, redactar, publicar, responder, revisar, reportar. Trabaja dentro de las cuentas que le das y con las reglas del alcance. No puede tomar las decisiones que el alcance no cubre, y no reemplaza a una persona que tiene que responder ante un cliente. Cuando no está seguro, se detiene y pone el asunto en tu mensaje de la mañana.'],
+        ['¿Qué puede hacer un trabajador a medida y qué no?', 'Hace una tarea recurrente con entradas y salidas claras: leer, clasificar, redactar, publicar, responder, revisar, reportar. Trabaja dentro de las cuentas que le das y con las reglas del alcance. No puede tomar las decisiones que el alcance no cubre, y no reemplaza a una persona que tiene que responder ante un cliente. Cuando no está seguro, se detiene y pone el asunto en tu mensaje de la mañana.'],
         ['¿De quién es?', 'Tuyo. El alcance, los prompts, las instrucciones y todo lo que escribe son tuyos, y trabaja dentro de tus propias cuentas, no de las nuestras. Lo que sigue siendo nuestro es la plataforma donde corre, que es lo que paga la cuota mensual.'],
         ['¿Qué pasa si lo cancelamos?', 'Mes a mes significa que dejas de pagar y deja de correr al final de ese mes. Nada de lo que publicó se borra, tus cuentas quedan intactas y te quedas con el alcance y los prompts, así que cualquiera podría reconstruirlo.'],
         ['¿Cómo funciona la aprobación?', 'La primera versión corre en modo borrador: prepara todo, lo lista en el mensaje de las 7 am y nada sale hasta que respondes que sí. Cuando te sientas cómodo, pasas una categoría a aprobación por excepción: lo rutinario sale solo y solo lo inusual te espera. Cualquier categoría puede volver a modo borrador cuando tú digas.'],
