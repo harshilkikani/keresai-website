@@ -17,6 +17,7 @@ import AgentMock from './AgentMock.astro';
 import OutboundMock from './OutboundMock.astro';
 import ScopeCard from './ScopeCard.astro';
 import Calculator from './Calculator.astro';
+import LeadBand from './LeadBand.astro';
 import { plans, PHONE } from '../data/site';
 import { type Locale, l } from '../i18n';
 import { t } from '../i18n/ui';
@@ -34,9 +35,10 @@ const phoneAgents = agentsFor(locale).filter((a) => a.slug !== 'outbound');
 const foundServices = foundServicesFor(locale);
 const found = plans.find((p) => p.slug === 'found')!;
 const answer = plans.find((p) => p.slug === 'answer')!;
-const quote = l(locale, '/quote');
+const quote = '#lead'; // the lead band is on this page
 const bundle = priceAmount('bundle');
 const foundPrice = priceAmount('found');
+const b = t(locale).booking;
 const workers = workersFor(locale);
 const fill = (s: string, map: Record<string, string>) => s.replace(/\{(\w+)\}/g, (_, k) => map[k] ?? '');
 const m = t(locale).mocks;
@@ -111,10 +113,20 @@ const h1Groups = c.h1;
   <p class="roster__foot">{c.roster.foot}{bundle && fill(c.roster.footBundle, { price: bundle })}</p>
 </Section>
 
+<!-- ── GET A QUOTE OR BOOK A CALL ─────────────────────── -->
+<Section tone="raised" spacing="major" labelledby="lead-title" id="lead">
+  <div class="k-band__head">
+    <Eyebrow n={2}>{b.eyebrow}</Eyebrow>
+    <h2 id="lead-title" class="k-h2">{b.h2}</h2>
+    <p class="k-lede k-measure">{b.lede}</p>
+  </div>
+  <LeadBand locale={locale} id="quote" />
+</Section>
+
 <!-- ── THE SEVEN LEAKS — pinned pipeline ──────────────── -->
 <Section spacing="major" labelledby="leaks-title" id="leaks">
   <div class="k-band__head">
-    <Eyebrow n={2}>{c.leaks.eyebrow}</Eyebrow>
+    <Eyebrow n={3}>{c.leaks.eyebrow}</Eyebrow>
     <h2 id="leaks-title" class="k-h2">{c.leaks.h2}</h2>
     <p class="k-lede k-measure">{c.leaks.lede}</p>
   </div>
@@ -150,7 +162,7 @@ const h1Groups = c.h1;
 <Section spacing="major" labelledby="found-title" id="found">
   <div class="k-split k-split--top">
     <div class="k-split__aside">
-      <Eyebrow n={3}>{c.found.eyebrow}</Eyebrow>
+      <Eyebrow n={4}>{c.found.eyebrow}</Eyebrow>
       <h2 id="found-title" class="k-h2">{c.found.h2}</h2>
       <p class="k-lede">{fill(c.found.lede, { price: foundPrice ? fill(c.found.priceClause, { from: `${m.from} ${foundPrice}` }) : '' })}</p>
       {foundPrice && (
@@ -181,7 +193,7 @@ const h1Groups = c.h1;
 <Section tone="inverse" spacing="major" labelledby="brief-title" id="brief">
   <div class="k-split k-split--reverse">
     <div class="k-split__aside">
-      <Eyebrow n={4}>{c.brief.eyebrow}</Eyebrow>
+      <Eyebrow n={5}>{c.brief.eyebrow}</Eyebrow>
       <h2 id="brief-title" class="k-h2">{c.brief.h2}</h2>
       <p class="k-lede">{c.brief.lede}</p>
       <p class="k-body k-measure">{c.brief.body}</p>
@@ -194,7 +206,7 @@ const h1Groups = c.h1;
 <Section spacing="standard" labelledby="ind-title" id="industries">
   <div class="k-band">
     <div class="k-band__head">
-      <Eyebrow n={5}>{c.industries.eyebrow}</Eyebrow>
+      <Eyebrow n={6}>{c.industries.eyebrow}</Eyebrow>
       <h2 id="ind-title" class="k-h2">{c.industries.h2}</h2>
       <p class="k-lede k-measure">{c.industries.lede}</p>
     </div>
@@ -217,7 +229,7 @@ const h1Groups = c.h1;
 <Section tone="raised" spacing="standard" labelledby="int-title" id="integrations">
   <div class="k-band">
     <div class="k-band__head">
-      <Eyebrow n={6}>{c.integrations.eyebrow}</Eyebrow>
+      <Eyebrow n={7}>{c.integrations.eyebrow}</Eyebrow>
       <h2 id="int-title" class="k-h2">{c.integrations.h2}</h2>
       <p class="k-lede k-measure">{c.integrations.lede}</p>
     </div>
@@ -237,7 +249,7 @@ const h1Groups = c.h1;
 
 <!-- ── CALCULATOR ─────────────────────────────────────── -->
 <Section spacing="major" labelledby="roi-title" id="roi">
-  <Eyebrow n={7}>{c.calc.eyebrow}</Eyebrow>
+  <Eyebrow n={8}>{c.calc.eyebrow}</Eyebrow>
   <h2 id="roi-title" class="k-h2">{c.calc.h2}</h2>
   <p class="k-lede k-measure">{c.calc.lede} <a href="/tools/missed-call-calculator">{c.calc.link}</a>.</p>
   <Calculator locale={locale} vertical="home-services" ctaHref={quote} />
@@ -247,7 +259,7 @@ const h1Groups = c.h1;
 <Section spacing="standard" labelledby="custom-teaser-title" id="custom-teaser">
   <div class="k-teaser" data-reveal>
     <div>
-      <Eyebrow n={8}>{c.customTeaser.eyebrow}</Eyebrow>
+      <Eyebrow n={9}>{c.customTeaser.eyebrow}</Eyebrow>
       <h2 id="custom-teaser-title" class="k-h2">{c.customTeaser.h2}</h2>
     </div>
     <div class="k-teaser__body">
@@ -262,7 +274,7 @@ const h1Groups = c.h1;
   <Section tone="raised" spacing="standard" labelledby="proof-title" id="proof">
     <div class="k-band">
       <div class="k-band__head">
-        <Eyebrow n={9}>{c.proof.eyebrow}</Eyebrow>
+        <Eyebrow n={10}>{c.proof.eyebrow}</Eyebrow>
         <h2 id="proof-title" class="k-h2">{c.proof.h2}</h2>
       </div>
       <div class="k-quotes" data-reveal>
@@ -276,7 +288,7 @@ const h1Groups = c.h1;
 <Section spacing="standard" labelledby="start-title" id="start">
   <div class="k-band">
     <div class="k-band__head">
-      <Eyebrow n={10}>{c.start.eyebrow}</Eyebrow>
+      <Eyebrow n={11}>{c.start.eyebrow}</Eyebrow>
       <h2 id="start-title" class="k-h2">{c.start.h2}</h2>
     </div>
     <ol class="k-steps" data-reveal>
@@ -297,7 +309,7 @@ const h1Groups = c.h1;
 
 <!-- ── FAQ ────────────────────────────────────────────── -->
 <Section tone="raised" spacing="standard" labelledby="faq-title" id="faq">
-  <Eyebrow n={11}>{c.faq.eyebrow}</Eyebrow>
+  <Eyebrow n={12}>{c.faq.eyebrow}</Eyebrow>
   <h2 id="faq-title" class="k-h2">{c.faq.h2}</h2>
   <div class="faq-list">
     {faqs.map((f) => (

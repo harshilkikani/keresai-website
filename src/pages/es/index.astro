@@ -6,8 +6,9 @@ import { organizationSchema, softwareApplicationSchema, websiteSchema, faqSchema
 import { homeCopy, faqsFor } from '../../i18n/home';
 const c = homeCopy('es');
 ---
-<Layout title={c.title} description={c.description} path="/es" locale="es">
+<Layout title={c.title} description={c.description} path="/es" locale="es" quoteHref="#lead">
   <Schema slot="head" graph={[organizationSchema, softwareApplicationSchema, websiteSchema, faqSchema(faqsFor('es'))]} />
   <HomePage locale="es" />
   <script slot="scripts" src="/assets/roi.js?v=7" defer is:inline></script>
+  <script slot="scripts" src="/assets/quote.js?v=4" defer is:inline></script>
 </Layout>

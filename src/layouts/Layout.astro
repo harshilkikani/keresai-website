@@ -47,7 +47,10 @@ const {
   go = false,
   conversion,
   locale = 'en',
+  quoteHref,
 } = Astro.props;
+const quoteTarget = quoteHref ?? (go ? '#quote' : l(locale, '/quote'));
+const bookTarget = quoteHref || go ? '#book' : l(locale, '/quote') + '#book';
 
 const ui = t(locale);
 const basePath = stripLocale(path);
@@ -223,8 +226,9 @@ const META_DOMAIN_VERIFICATION = '';
 {/* Sticky mobile bar: Call first, Book second. Suppressed only where the
     page IS the conversion (demo/contact) — a bare LP still gets it. */}
 {basePath !== '/demo' && basePath !== '/contact' && basePath !== '/quote' && (
-  <div class:list={['sticky-bar', !PHONE && 'sticky-bar--single']} role="region" aria-label="Contact Keres">
-    <a href={go ? '#quote' : l(locale, '/quote')} class="sticky-bar__demo sticky-bar__demo--primary" data-event="demo_click">{ui.sticky.getAQuote}</a>
+  <div class="sticky-bar" role="region" aria-label="Contact Keres">
+    <a href={quoteTarget} class="sticky-bar__demo sticky-bar__demo--primary" data-event="demo_click">{ui.sticky.getAQuote}</a>
+    {!PHONE && <a href={bookTarget} class="sticky-bar__call sticky-bar__call--secondary sticky-bar__call--book" data-event="book_click">{ui.booking.stickyBook}</a>}
     {PHONE && (
       <a href={PHONE.href} class="sticky-bar__call sticky-bar__call--secondary" data-event="tel_click">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
