@@ -23,9 +23,16 @@ export const business = {
   answerFromPrice: '',
   convertFromPrice: '',
   growFromPrice: '',
-  // Custom agents (/custom): the one-time build price and the monthly run
-  // fee, digits only. Both required; the pricing block omits the numbers
-  // only under KERES_ALLOW_MISSING=1.
+  // Per-worker from-prices, digits only, rendered "from $X/mo" on the
+  // roster, the pricing table, the nav and the hero. All required; under
+  // KERES_ALLOW_MISSING=1 the price line is omitted, never bracketed.
+  foundFrom: '',        // Found: site, Google listing, reviews
+  remiFrom: '',         // Remi: answers and books
+  theoFrom: '',         // Theo: confirms, reminds, chases the estimate
+  juneFrom: '',         // June: brings customers back, asks for the review
+  solFrom: '',          // Sol: outbound email
+  bundleFrom: '',       // all workers together
+  // Custom worker (/custom): the one-time build price and the monthly run fee.
   customBuildFrom: '',
   customRunFrom: '',
   city: '',
@@ -85,7 +92,7 @@ export const business = {
   testimonials: [] as Testimonial[],
 };
 
-const REQUIRED = ['phone', 'phoneDisplay', 'answerFromPrice', 'convertFromPrice', 'growFromPrice', 'customBuildFrom', 'customRunFrom', 'city', 'state', 'remiSpanish'] as const;
+const REQUIRED = ['phone', 'phoneDisplay', 'answerFromPrice', 'convertFromPrice', 'growFromPrice', 'foundFrom', 'remiFrom', 'theoFrom', 'juneFrom', 'solFrom', 'bundleFrom', 'customBuildFrom', 'customRunFrom', 'city', 'state', 'remiSpanish'] as const;
 const unset = (v: unknown) => v === null || v === undefined || String(v).trim() === '';
 export const missing = REQUIRED.filter((k) => unset(business[k]));
 
@@ -106,6 +113,12 @@ export const has = {
   growPrice: !!business.growFromPrice.trim(),
   customBuild: !!business.customBuildFrom.trim(),
   customRun: !!business.customRunFrom.trim(),
+  found: !!business.foundFrom.trim(),
+  remi: !!business.remiFrom.trim(),
+  theo: !!business.theoFrom.trim(),
+  june: !!business.juneFrom.trim(),
+  sol: !!business.solFrom.trim(),
+  bundle: !!business.bundleFrom.trim(),
   address: !!business.city.trim() && !!business.state.trim(),
   testimonials: business.testimonials.length > 0,
   // Only an explicit true lifts the Spanish gate. null (local build under
@@ -121,8 +134,9 @@ export const PHONE = has.phone
   : null;
 
 /** "from $349" or '' — callers omit the sentence when it is empty. */
-export const priceFrom = (key: 'answer' | 'convert' | 'grow' | 'customBuild' | 'customRun'): string => {
-  const v = { answer: business.answerFromPrice, convert: business.convertFromPrice, grow: business.growFromPrice, customBuild: business.customBuildFrom, customRun: business.customRunFrom }[key].trim();
+export type PriceKey = 'answer' | 'convert' | 'grow' | 'found' | 'remi' | 'theo' | 'june' | 'sol' | 'bundle' | 'customBuild' | 'customRun';
+export const priceFrom = (key: PriceKey): string => {
+  const v = { answer: business.answerFromPrice, convert: business.convertFromPrice, grow: business.growFromPrice, found: business.foundFrom, remi: business.remiFrom, theo: business.theoFrom, june: business.juneFrom, sol: business.solFrom, bundle: business.bundleFrom, customBuild: business.customBuildFrom, customRun: business.customRunFrom }[key].trim();
   return v ? `from $${v}` : '';
 };
 
@@ -139,3 +153,6 @@ export const priceSentence = (subject: string, key: 'answer' | 'convert' | 'grow
 };
 
 export const ADDRESS_LINE = has.address ? `${business.city}, ${business.state}` : '';
+
+/** "$249" (no "from") or '' — for sentences that carry their own wording. */
+export const priceAmount = (key: PriceKey): string => priceFrom(key).replace('from ', '');
