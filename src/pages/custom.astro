@@ -9,4 +9,5 @@ const c = customCopy('en');
 <Layout title={c.title} description={c.description} path="/custom" locale="en">
   <Schema slot="head" graph={[organizationSchema]} />
   <CustomPage locale="en" />
+  <script slot="scripts" src="/assets/quote.js?v=3" defer is:inline></script>
 </Layout>

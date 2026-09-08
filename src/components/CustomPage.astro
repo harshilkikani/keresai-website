@@ -4,6 +4,7 @@ import Section from './Section.astro';
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
 import DailyBrief from './DailyBrief.astro';
+import QuoteForm from './QuoteForm.astro';
 import ListingAgentMock from './ListingAgentMock.astro';
 import OutboundMock from './OutboundMock.astro';
 import { PHONE } from '../data/site';
@@ -96,4 +97,13 @@ const runPrice = priceFrom('customRun').replace('from $', '');
     ))}
   </div>
   <p class="cprice__note">{c.pricing.note}</p>
+</Section>
+
+<!-- ── SCOPE A BUILD ──────────────────────────────────── -->
+<Section spacing="major" labelledby="scope-title" id="scope-band">
+  <div class="k-band__head">
+    <Eyebrow n={4}>{c.scopeBand.eyebrow}</Eyebrow>
+    <h2 id="scope-title" class="k-h2">{c.scopeBand.h2}</h2>
+  </div>
+  <QuoteForm variant="embed" id="scope" kind="custom" locale={locale} />
 </Section>

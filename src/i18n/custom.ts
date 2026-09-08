@@ -40,6 +40,7 @@ export const custom = {
       from: 'from', quoted: 'Quoted on the scope call.',
       note: 'If the scope changes later, the price changes with it, in writing, before the work.',
     },
+    scopeBand: { eyebrow: 'Scope a build', h2: 'Tell us the job. We come back with the one-page scope.' },
   },
   es: {
     title: 'Agentes de IA a medida para una tarea recurrente | Keres AI',
@@ -78,6 +79,7 @@ export const custom = {
       from: 'desde', quoted: 'Se cotiza en la llamada de alcance.',
       note: 'Si el alcance cambia después, el precio cambia con él, por escrito y antes del trabajo.',
     },
+    scopeBand: { eyebrow: 'Cotizar mi agente', h2: 'Cuéntanos la tarea. Volvemos con el documento de una página.' },
   },
 } as const;
 

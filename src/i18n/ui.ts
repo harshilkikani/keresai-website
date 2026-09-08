@@ -36,7 +36,8 @@ export const ui = {
       doneTitle: 'Got it. Pick a 20-minute slot.', doneText: 'We will come to the call with your quote worked out from what you just told us.',
       orCall: 'Or call', now: 'now.', slots: 'Available call slots', progress: 'Progress',
       msgRequired: 'Needed for the quote.', msgPhone: 'Enter a number we can text — ten digits.', msgFast: 'That was quick — try again in a moment.', msgFailed: 'That did not send. Try again.', fallback: 'If the form fails, email', doneContact: 'Questions before the call? Email', honeypot: 'Leave this field empty', callback: 'Prefer Remi call you right now?', callbackDone: 'Done. Remi is calling you now.', callbackFail: 'We could not start the call. Try again, or pick a time below.', callbackSending: 'Placing the call…', consent: 'By sending, you agree we may call or text this number about your quote. Reply STOP to any text to opt out.', consentLink: 'Privacy policy',
-      subject: 'Quote request from keresai.com',
+      subject: 'Quote request from keresai.com', subjectCustom: 'Custom agent request from keresai.com',
+      job: 'What should it do?', jobHint: 'One recurring job, in your words. 200 characters.',
     },
     quotePage: {
       title: 'Get a Quote in 20 Minutes | Keres AI',
@@ -102,7 +103,8 @@ export const ui = {
       doneTitle: 'Listo. Elige un espacio de 20 minutos.', doneText: 'Llegaremos a la llamada con tu cotización ya calculada con lo que nos acabas de contar.',
       orCall: 'O llama al', now: 'ahora.', slots: 'Horarios disponibles', progress: 'Progreso',
       msgRequired: 'Lo necesitamos para la cotización.', msgPhone: 'Escribe un número al que podamos enviar mensajes: diez dígitos.', msgFast: 'Eso fue rápido. Inténtalo de nuevo en un momento.', msgFailed: 'No se envió. Inténtalo de nuevo.', fallback: 'Si el formulario falla, escríbenos a', doneContact: '¿Preguntas antes de la llamada? Escríbenos a', honeypot: 'Deja este campo vacío', callback: '¿Prefieres que Remi te llame ahora?', callbackDone: 'Listo. Remi te llama en un momento.', callbackFail: 'No pudimos iniciar la llamada. Inténtalo de nuevo o elige un horario abajo.', callbackSending: 'Iniciando la llamada…', consent: 'Al enviar, aceptas que te llamemos o te enviemos mensajes de texto a este número sobre tu cotización. Responde STOP a cualquier mensaje para darte de baja.', consentLink: 'Política de privacidad',
-      subject: 'Solicitud de cotización desde keresai.com (ES)',
+      subject: 'Solicitud de cotización desde keresai.com (ES)', subjectCustom: 'Solicitud de agente a medida desde keresai.com (ES)',
+      job: '¿Qué debería hacer?', jobHint: 'Una tarea recurrente, con tus palabras. 200 caracteres.',
     },
     quotePage: {
       title: 'Cotización en 20 minutos | Keres AI',

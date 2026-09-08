@@ -2526,3 +2526,7 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 .cprice__price--quoted { font-size: var(--text-1); }
 .cprice__desc { margin: 0; font-size: var(--text-0); line-height: 1.55; color: var(--ink-2); }
 .cprice__note { margin: var(--space-5) 0 0; max-width: 60ch; font-size: var(--text--1); line-height: 1.5; color: var(--ink-2); }
+
+/* custom-agent form: the free-text job field */
+.qf__textarea { resize: vertical; min-height: 92px; font: inherit; line-height: 1.5; }
+.qf__hint { margin: var(--space-2) 0 0; font-size: var(--text--1); color: var(--ink-3); }

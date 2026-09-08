@@ -20,8 +20,10 @@ export interface Props {
   /** Pre-selects the industry (e.g. from a /go route). */
   industry?: string;
   locale?: Locale;
+  /** 'custom' swaps the industry select for "What should it do?" and posts lead_type "Custom agent". */
+  kind?: 'quote' | 'custom';
 }
-const { variant = 'page', id = 'quote', industry = '', locale = 'en' } = Astro.props;
+const { variant = 'page', id = 'quote', industry = '', locale = 'en', kind = 'quote' } = Astro.props;
 const f = t(locale).form;
 const email = business.contactEmail;
 const booking = locale === 'es' && has.calendlyEs ? business.calendlyEs : business.bookingUrl;
@@ -31,7 +33,8 @@ const showCallback = locale === 'es' && has.remiSpanish && has.callback;
   data-msg-required={f.msgRequired} data-msg-phone={f.msgPhone} data-msg-fast={f.msgFast} data-msg-failed={f.msgFailed} data-msg-sending={f.sending} data-msg-submit={f.submit} data-msg-slots={f.slots}
   data-msg-callback-sending={f.callbackSending} data-msg-callback-done={f.callbackDone} data-msg-callback-fail={f.callbackFail}>
   <form class="qf__form" novalidate data-qf-form>
-    <input type="hidden" name="_subject" value={f.subject} />
+    <input type="hidden" name="_subject" value={kind === 'custom' ? f.subjectCustom : f.subject} />
+    <input type="hidden" name="lead_type" value={kind === 'custom' ? 'Custom agent' : 'Quote'} />
     <input type="hidden" name="lang" value={locale} />
     <input type="hidden" name="_ts" value="" data-qf-ts />
     <label class="qf__hp" aria-hidden="true"><span>{f.honeypot}</span><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
@@ -53,14 +56,23 @@ const showCallback = locale === 'es' && has.remiSpanish && has.callback;
         <input class="qf__input" id={`${id}-phone`} name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="(555) 123-4567" />
         <p class="qf__error" data-qf-error="phone"></p>
       </div>
-      <div class="qf__field">
-        <label class="qf__label" for={`${id}-industry`}>{f.industry}</label>
-        <select class="qf__input" id={`${id}-industry`} name="industry" required>
-          <option value="">{f.chooseOne}</option>
-          {f.industries.map(([v, lbl]) => <option value={v} selected={v === industry}>{lbl}</option>)}
-        </select>
-        <p class="qf__error" data-qf-error="industry"></p>
-      </div>
+      {kind === 'custom' ? (
+        <div class="qf__field">
+          <label class="qf__label" for={`${id}-job`}>{f.job}</label>
+          <textarea class="qf__input qf__textarea" id={`${id}-job`} name="job" required maxlength="200" rows="3" aria-describedby={`${id}-job-hint`}></textarea>
+          <p class="qf__hint" id={`${id}-job-hint`}>{f.jobHint}</p>
+          <p class="qf__error" data-qf-error="job"></p>
+        </div>
+      ) : (
+        <div class="qf__field">
+          <label class="qf__label" for={`${id}-industry`}>{f.industry}</label>
+          <select class="qf__input" id={`${id}-industry`} name="industry" required>
+            <option value="">{f.chooseOne}</option>
+            {f.industries.map(([v, lbl]) => <option value={v} selected={v === industry}>{lbl}</option>)}
+          </select>
+          <p class="qf__error" data-qf-error="industry"></p>
+        </div>
+      )}
       <button type="button" class="btn-k btn-k--primary btn-k--wide" data-qf-next>{f.next}</button>
     </fieldset>
 
