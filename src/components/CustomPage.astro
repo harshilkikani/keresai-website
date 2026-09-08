@@ -55,3 +55,20 @@ const h1Words = c.h1.split(' ');
     ))}
   </ul>
 </Section>
+
+<!-- ── HOW IT WORKS ───────────────────────────────────── -->
+<Section spacing="major" labelledby="how-title" id="how">
+  <div class="k-band__head">
+    <Eyebrow n={2}>{c.how.eyebrow}</Eyebrow>
+    <h2 id="how-title" class="k-h2">{c.how.h2}</h2>
+  </div>
+  <ol class="k-steps k-steps--six" data-reveal>
+    {c.how.steps.map(([title, text], i) => (
+      <li class="k-step" data-reveal-child>
+        <span class="k-step__n" data-figure>{String(i + 1).padStart(2, '0')}</span>
+        <h3 class="k-step__title">{title}</h3>
+        <p class="k-step__text">{text}</p>
+      </li>
+    ))}
+  </ol>
+</Section>

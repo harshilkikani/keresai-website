@@ -2509,3 +2509,7 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 .warm span { flex: 1 1 0; background: var(--line); border-radius: 2px 2px 0 0; }
 .warm span.is-done { background: var(--accent); opacity: 0.55; }
 .warm span.is-today { background: var(--ink-0); }
+
+/* six steps: three across, two rows on desktop */
+.k-steps--six { margin-top: var(--space-6); }
+@media (min-width: 1024px) { .k-steps--six { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--space-6); } }

@@ -22,6 +22,17 @@ export const custom = {
       listing: { head: 'Listing agent · this week', gridNote: 'Rank for “hvac repair” at 25 points around the office', log: [['Audit', 'Hours, categories and photos checked'], ['Posts', '2 drafted for the week'], ['Replies', '3 reviews answered, awaiting your OK'], ['Outreach', '4 nearby prospects drafted']] },
       outbound: { head: 'Sol · before the first send', checks: [['SPF', 'pass'], ['DKIM', 'pass'], ['DMARC', 'p=quarantine']], warm: 'Warm-up', warmNote: 'Day 12 of 28 · 34 sends a day', paused: 'The sequence starts when warm-up completes.' },
     },
+    how: {
+      eyebrow: 'How it works', h2: 'Six steps, and you approve everything it publishes.',
+      steps: [
+        ['A 20-minute call', 'You describe the job as you would to a new hire: what comes in, what should go out, what “done” looks like.'],
+        ['A one-page scope', 'Within two business days: the inputs, the outputs, the rules, what it may never do, and what it reports to you.'],
+        ['A fixed build price', 'One number for the build, agreed before we start. It does not move once the scope is signed.'],
+        ['A monthly run fee', 'Covers the running, the model costs, the monitoring, and the changes the job needs as your business changes.'],
+        ['First version in two weeks', 'It runs in draft mode first: it prepares everything and you see it in the morning text before anything goes out.'],
+        ['You approve what it publishes', 'Nothing reaches a customer, a listing or an inbox without your yes. Once you trust it, you approve by exception.'],
+      ],
+    },
   },
   es: {
     title: 'Agentes de IA a medida para una tarea recurrente | Keres AI',
@@ -41,6 +52,17 @@ export const custom = {
       ],
       listing: { head: 'Agente de ficha · esta semana', gridNote: 'Ranking para “reparación de aire acondicionado” en 25 puntos alrededor de la oficina', log: [['Auditoría', 'Horario, categorías y fotos revisados'], ['Publicaciones', '2 redactadas para la semana'], ['Respuestas', '3 reseñas contestadas, esperan tu OK'], ['Prospección', '4 prospectos cercanos redactados']] },
       outbound: { head: 'Sol · antes del primer envío', checks: [['SPF', 'pasa'], ['DKIM', 'pasa'], ['DMARC', 'p=quarantine']], warm: 'Calentamiento', warmNote: 'Día 12 de 28 · 34 envíos al día', paused: 'La secuencia empieza cuando termina el calentamiento.' },
+    },
+    how: {
+      eyebrow: 'Cómo funciona', h2: 'Seis pasos, y tú apruebas todo lo que publica.',
+      steps: [
+        ['Una llamada de 20 minutos', 'Describes la tarea como se la explicarías a alguien nuevo: qué entra, qué debe salir y cómo se ve “terminado”.'],
+        ['Un documento de una página', 'En dos días hábiles: las entradas, las salidas, las reglas, lo que nunca puede hacer y qué te reporta.'],
+        ['Un precio fijo de desarrollo', 'Un solo número por el desarrollo, acordado antes de empezar. No cambia una vez firmado el alcance.'],
+        ['Una cuota mensual', 'Cubre la operación, el costo de los modelos, el monitoreo y los cambios que la tarea necesita cuando tu negocio cambia.'],
+        ['Primera versión en dos semanas', 'Primero corre en modo borrador: prepara todo y lo ves en el mensaje de la mañana antes de que salga algo.'],
+        ['Tú apruebas lo que publica', 'Nada llega a un cliente, una ficha o una bandeja de entrada sin tu sí. Cuando ya confías, apruebas por excepción.'],
+      ],
     },
   },
 } as const;
