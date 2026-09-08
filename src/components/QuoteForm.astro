@@ -29,7 +29,7 @@ const email = business.contactEmail;
   data-msg-required={f.msgRequired} data-msg-phone={f.msgPhone} data-msg-fast={f.msgFast} data-msg-failed={f.msgFailed} data-msg-sending={f.sending} data-msg-submit={f.submit}>
   <form class="qf__form" novalidate data-qf-form>
     <input type="hidden" name="_subject" value={f.subject} />
-    <input type="hidden" name="_lang" value={locale} />
+    <input type="hidden" name="lang" value={locale} />
     <input type="hidden" name="_ts" value="" data-qf-ts />
     <label class="qf__hp" aria-hidden="true"><span>{f.honeypot}</span><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
 
