@@ -82,6 +82,9 @@ const goatcounterEndpoint = GOATCOUNTER_CODE ? `https://${GOATCOUNTER_CODE}.goat
 // Bing: Bing Webmaster Tools → verify → Meta tag (the content value only).
 const GSC_VERIFICATION = '';
 const BING_VERIFICATION = '';
+// Meta Business Suite → Brand safety → Domains → Meta-tag verification. Required
+// for Aggregated Event Measurement and for ads that link to this domain.
+const META_DOMAIN_VERIFICATION = '';
 ---
 <!DOCTYPE html>
 <html lang={locale} prefix="og: https://ogp.me/ns#">
@@ -109,6 +112,7 @@ const BING_VERIFICATION = '';
 
 {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
 {BING_VERIFICATION && <meta name="msvalidate.01" content={BING_VERIFICATION} />}
+{META_DOMAIN_VERIFICATION && <meta name="facebook-domain-verification" content={META_DOMAIN_VERIFICATION} />}
 {goatcounterEndpoint && <script data-goatcounter={goatcounterEndpoint} async src="https://gc.zgo.at/count.js" is:inline></script>}
 
 <title>{title}</title>
