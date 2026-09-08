@@ -2615,3 +2615,19 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 .book__host.is-loaded { min-height: 660px; }
 .book__host .calendly-inline-widget { border-radius: var(--radius-lg); overflow: hidden; }
 .sticky-bar__call--book { justify-content: center; }
+
+/* phones: the calendar card is one slim row until tapped */
+@media (max-width: 1023px) {
+  .book { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: var(--space-3) var(--space-4); }
+  .lead { margin-top: 8px; gap: var(--space-3); }
+  .book { flex-wrap: nowrap; padding: 10px 14px; }
+  .book__host .btn-k { padding-block: 8px; }
+  .book__title { flex: 1 1 0; min-width: 0; margin: 0; font-size: var(--text--1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .book__host .btn-k { white-space: nowrap; }
+  .book__host.is-loaded { flex-basis: 100%; }
+  .book:has(.is-loaded) { flex-wrap: wrap; }
+  .book__lede { display: none; }
+  .book__host { flex: 0 0 auto; min-height: 0; }
+  .book__host .btn-k--wide { width: auto; padding-inline: 14px; }
+  .book__host.is-loaded { flex-basis: 100%; min-height: 660px; }
+}

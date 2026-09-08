@@ -14,7 +14,7 @@ const b = t(locale).booking;
 const url = locale === 'es' && has.calendlyEs ? business.calendlyEs : business.bookingUrl;
 ---
 <div class="book" id={id}>
-  {title && <h3 class="book__title">{b.calTitle}</h3>}
+  {title && <p class="book__title">{b.calTitle}</p>}
   {title && <p class="book__lede">{b.calLede}</p>}
   <div class="book__host" data-booking-inline data-url={url} lang={locale} aria-label={b.slots}>
     <a class="btn-k btn-k--outline btn-k--wide" href={url} target="_blank" rel="noopener" data-booking-open data-event="book_click">{b.open}</a>

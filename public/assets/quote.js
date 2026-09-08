@@ -206,11 +206,16 @@
     host.innerHTML = '';
     if (/calendly\.com/.test(url)) {
       var full = url + (url.indexOf('?') === -1 ? '?' : '&') + 'hide_gdpr_banner=1&hide_event_type_details=1';
+      // Calendly's script auto-mounts every .calendly-inline-widget[data-url]
+      // it finds when it loads (and throws on one without data-url), so the
+      // div carries both; hosts mounted after the script is loaded are
+      // initialised by hand, and never twice.
       var div = document.createElement('div');
       div.className = 'calendly-inline-widget';
+      div.setAttribute('data-url', full);
       div.style.minHeight = '660px'; div.style.width = '100%';
       host.appendChild(div);
-      withCalendly(function () { window.Calendly.initInlineWidget({ url: full, parentElement: div }); });
+      withCalendly(function () { if (!div.querySelector('iframe')) window.Calendly.initInlineWidget({ url: full, parentElement: div }); });
     } else {
       var f = document.createElement('iframe');
       f.src = url; f.title = host.getAttribute('aria-label') || 'Pick a time'; f.loading = 'lazy';
