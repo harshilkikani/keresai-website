@@ -13,6 +13,19 @@ export const home = {
     facts: [['Answers in', '2', ' rings'], ['Live in', '5', ' days']], factBundle: ['Bundles from', '/mo'],
     ledeBundle: ', and starts from {price}/mo', hearRemi: '— hear Remi answer',
     atAGlance: 'At a glance', getAQuote: 'Get a quote', call: 'Call',
+    board: {
+      head: 'Tonight’s shift · six workers', when: 'Tue 8:12 PM', example: 'Example', foot: 'All of it in one text at 7 am.',
+      caption: 'Example shift, not a customer’s. Each row is the job that worker does.',
+      rows: [
+        ['found', 'Found', 'Site, listing, reviews', 'Listing post published · 2 review replies drafted for your OK', false],
+        ['inbound', 'Remi', 'Answers and books', 'On a call · (555) 014-2207 · no heat, booked Wed 8–10', true],
+        ['follow-up', 'Theo', 'Confirms, reminds, chases', 'Tomorrow’s 6 visits confirmed · 1 reschedule handled', false],
+        ['reactivation', 'June', 'Brings them back', '4 review requests sent · 1 posted · 2 tune-ups rebooked', false],
+        ['outbound', 'Sol', 'Finds new customers', 'Warm-up day 12 of 28 · sequence starts after', false],
+        ['custom', 'Custom', 'Your own job', 'Weekly report drafted · waiting for your OK', false],
+      ],
+      remiGated: 'On a call · (555) 014-2207 · answering in English today',
+    },
     roster: {
       eyebrow: 'The roster', h2: 'Six workers. Hire one, hire all.',
       hire: 'Hire {name}', from: 'from', perMo: '/mo', foot: 'Hire one, hire all, add your own.', footBundle: ' Bundles from {price}/mo.',
@@ -72,6 +85,19 @@ export const home = {
     facts: [['Contesta en', '2', ' timbres'], ['En marcha en', '5', ' días']], factBundle: ['Paquetes desde', '/mes'],
     ledeBundle: ', y empieza desde {price}/mes', hearRemi: '— escucha a Remi contestar',
     atAGlance: 'De un vistazo', getAQuote: 'Pedir cotización', call: 'Llamar',
+    board: {
+      head: 'Turno de esta noche · seis trabajadores', when: 'Mar 8:12 PM', example: 'Ejemplo', foot: 'Todo en un solo mensaje a las 7 am.',
+      caption: 'Turno de ejemplo, no de un cliente. Cada fila es la tarea de ese trabajador.',
+      rows: [
+        ['found', 'Found', 'Sitio, ficha, reseñas', 'Publicación en la ficha lista · 2 respuestas a reseñas esperan tu OK', false],
+        ['inbound', 'Remi', 'Contesta y agenda', 'En llamada · (555) 014-2207 · sin calefacción, agendado mié 8–10', true],
+        ['follow-up', 'Theo', 'Confirma, recuerda, persigue', '6 visitas de mañana confirmadas · 1 cambio de hora resuelto', false],
+        ['reactivation', 'June', 'Los trae de vuelta', '4 solicitudes de reseña enviadas · 1 publicada · 2 mantenimientos reagendados', false],
+        ['outbound', 'Sol', 'Consigue clientes nuevos', 'Calentamiento día 12 de 28 · la secuencia empieza después', false],
+        ['custom', 'Custom', 'Tu propia tarea', 'Reporte semanal redactado · espera tu OK', false],
+      ],
+      remiGated: 'En llamada · (555) 014-2207 · hoy contesta en inglés',
+    },
     roster: {
       eyebrow: 'El equipo', h2: 'Seis trabajadores. Contrata uno o contrátalos todos.',
       hire: 'Contratar {a}{name}', from: 'desde', perMo: '/mes', foot: 'Contrata uno, contrátalos todos o agrega el tuyo.', footBundle: ' Paquetes desde {price}/mes.',

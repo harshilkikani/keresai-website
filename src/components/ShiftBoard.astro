@@ -1,0 +1,33 @@
+---
+/**
+ * The hero mock: six workers on shift, one row each, in the same device
+ * chrome as the example call. Rows rise in one after another when the
+ * hero goes live (motion.js flips .is-live on [data-hero]); the live row
+ * pulses. Example values, no customer numbers.
+ */
+import type { Locale } from '../i18n';
+import { homeCopy } from '../i18n/home';
+export interface Props { locale?: Locale; gate?: boolean; hero?: boolean }
+const { locale = 'en', gate = false, hero = true } = Astro.props;
+const b = homeCopy(locale).board;
+---
+<figure class:list={['k-call-fig', hero && 'k-call-fig--hero', 'shift-fig']} data-hero={hero ? '' : undefined}>
+  <div class="k-device shift">
+    <header class="k-device__bar">
+      <span class="k-device__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="k-device__label">{b.head}</span>
+      <span class="k-device__status"><span class="k-device__dot" aria-hidden="true"></span>{b.when} · {b.example}</span>
+    </header>
+    <ol class="shift__rows">
+      {b.rows.map(([slug, name, job, status, live], i) => (
+        <li class:list={['shift__row', live && 'shift__row--live']} style={`--i:${i}`} data-worker={slug}>
+          <span class="shift__avatar" aria-hidden="true">{name.charAt(0)}</span>
+          <span class="shift__who"><b>{name}</b><span>{job}</span></span>
+          <span class="shift__status">{live && <i class="shift__pulse" aria-hidden="true"></i>}{live && gate ? b.remiGated : status}</span>
+        </li>
+      ))}
+    </ol>
+    <p class="shift__foot">{b.foot}</p>
+  </div>
+  <figcaption class="k-mock__caption">{b.caption}</figcaption>
+</figure>

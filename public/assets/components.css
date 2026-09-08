@@ -2626,3 +2626,23 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
   .book__host .btn-k--wide { width: auto; padding-inline: 14px; }
   .book__host.is-loaded { flex-basis: 100%; min-height: 480px; }
 }
+
+/* ─── Hero: the shift board (six workers, one row each) ──────── */
+.shift__rows { list-style: none; margin: 0; padding: 0 var(--space-5); }
+.shift__row { display: grid; grid-template-columns: 34px minmax(0, 1fr); column-gap: 12px; row-gap: 4px; align-items: start; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.shift__row:last-child { border-bottom: 0; }
+.shift__avatar { inline-size: 34px; block-size: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); font: 600 14px var(--serif); }
+.shift__who { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; min-width: 0; }
+.shift__who b { font-weight: 600; font-size: var(--text-0); color: var(--ink-0); }
+.shift__who span { font: 500 0.66rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.shift__status { grid-column: 2; display: flex; align-items: flex-start; gap: 8px; font-size: var(--text--1); line-height: 1.45; color: var(--ink-1); }
+.shift__row--live .shift__status { color: var(--ink-0); }
+.shift__pulse { flex: 0 0 auto; inline-size: 8px; block-size: 8px; margin-top: 6px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 45%, transparent); animation: shift-pulse 1.8s ease-out infinite; }
+@keyframes shift-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 45%, transparent); } 100% { box-shadow: 0 0 0 10px transparent; } }
+.shift__foot { margin: 0; padding: var(--space-4) var(--space-5) var(--space-5); border-top: 1px solid var(--line); font-family: var(--serif); font-size: var(--text-0); font-weight: 600; color: var(--ink-0); }
+html[data-motion] .k-hero [data-hero] .shift__row { opacity: 0; transform: translateY(8px); }
+html[data-motion] .k-hero [data-hero].is-live .shift__row { animation: shift-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; animation-delay: calc(120ms + var(--i) * 110ms); }
+html[data-motion] .k-hero [data-hero] .shift__foot { opacity: 0; }
+html[data-motion] .k-hero [data-hero].is-live .shift__foot { animation: shift-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; animation-delay: 880ms; }
+@keyframes shift-in { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .shift__row, .shift__foot { opacity: 1 !important; transform: none !important; animation: none !important; } .shift__pulse { animation: none; } }
