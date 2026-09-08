@@ -4,6 +4,7 @@ import type { Locale } from './index';
 export const ui = {
   en: {
     skip: 'Skip to main content',
+    remiGate: '',
     nav: {
       home: 'Keres AI. Home', getFound: 'Get found', getAnswered: 'Get answered', industries: 'Industries', pricing: 'Pricing', resources: 'Resources',
       everythingInFound: 'Everything in Found', fromPerMonth: 'from $249 / month', allSevenStages: 'All seven stages', howTheFourWork: 'How the four work together',
@@ -69,6 +70,7 @@ export const ui = {
   },
   es: {
     skip: 'Saltar al contenido principal',
+    remiGate: 'Hoy Remi contesta en inglés; la atención en español llega pronto.',
     nav: {
       home: 'Keres AI. Inicio', getFound: 'Que te encuentren', getAnswered: 'Que te contesten', industries: 'Industrias', pricing: 'Precios', resources: 'Recursos',
       everythingInFound: 'Todo lo que incluye Found', fromPerMonth: 'desde $249 / mes', allSevenStages: 'Las siete etapas', howTheFourWork: 'Cómo trabajan los cuatro juntos',

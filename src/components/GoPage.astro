@@ -14,6 +14,7 @@ import AgentMock from './AgentMock.astro';
 import QuoteForm from './QuoteForm.astro';
 import Calculator from './Calculator.astro';
 import { PHONE } from '../data/site';
+import { has } from '../config/business';
 import type { GoPage } from '../data/go';
 import type { Locale } from '../i18n';
 import { t } from '../i18n/ui';
@@ -22,6 +23,8 @@ import { goStepsFor } from '../i18n/data';
 export interface Props { page: GoPage; locale?: Locale }
 const { page, locale = 'en' } = Astro.props;
 const g = t(locale).go;
+const gate = locale === 'es' && !has.remiSpanish;
+const gateLine = t(locale).remiGate;
 const goSteps = goStepsFor(locale);
 // Every Get a quote on a /go page lands on the form embedded below.
 const quoteHref = '#quote';
@@ -39,6 +42,7 @@ const quoteHref = '#quote';
         {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{t(locale).nav.call} {PHONE.display}</Button>}
       </div>
       <p class="k-lede">{page.lede}</p>
+      {gate && gateLine && <p class="k-hero__note" data-gate>{gateLine}</p>}
       <ul class="k-hero__facts" aria-label={g.atAGlance}>
         {page.facts.map((f) => (
           <li><span class="k-hero__fact-k">{f.k}</span><span class="k-hero__fact-v" data-figure>{f.v}</span></li>
@@ -69,7 +73,7 @@ const quoteHref = '#quote';
         <p class="door__text">{page.answered.text}</p>
       </div>
       <div class="door__mocks">
-        <AgentMock slug="inbound" locale={locale} />
+        {gate ? <SiteOnPhone locale={locale} /> : <AgentMock slug="inbound" locale={locale} />}
       </div>
     </article>
   </div>

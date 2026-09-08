@@ -12,6 +12,7 @@ import SiteOnPhone from './SiteOnPhone.astro';
 import GoogleListing from './GoogleListing.astro';
 import QuoteForm from './QuoteForm.astro';
 import { PHONE } from '../data/site';
+import { has } from '../config/business';
 import type { GoWebsitePage } from '../data/goWebsite';
 import type { Locale } from '../i18n';
 import { t } from '../i18n/ui';
@@ -21,6 +22,8 @@ import { goWebsiteText as esText } from '../i18n/data.es';
 export interface Props { page: GoWebsitePage; locale?: Locale }
 const { page, locale = 'en' } = Astro.props;
 const ui = t(locale);
+const gate = locale === 'es' && !has.remiSpanish;
+const gateLine = ui.remiGate;
 const foundServices = foundServicesFor(locale);
 const enText = {
   eyebrow: 'Found — the website and the listing', h1: [['A', 'website', 'that', 'books', 'the', 'job.'], ['Live', 'in', 'five', 'days.']],
@@ -52,6 +55,7 @@ const fill = (str: string, map: Record<string, string>) => str.replace(/\{(\w+)\
         {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{ui.nav.call} {PHONE.display}</Button>}
       </div>
       <p class="k-lede">{fill(x.lede, { vertical: page.vertical, price: page.price })}</p>
+      {gate && gateLine && <p class="k-hero__note" data-gate>{gateLine}</p>}
     </div>
     <div class="k-hero__mock gw-hero__mocks">
       <SiteOnPhone locale={locale} />

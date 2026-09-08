@@ -25,6 +25,11 @@ export const business = {
   growFromPrice: '',
   city: '',
   state: '',
+  // Does Remi answer calls in Spanish today? true or false — never guessed.
+  // While it is null the build fails naming it. false gates every Spanish
+  // page that shows Remi answering: a one-line disclosure under the hero
+  // lede and the site-on-phone mock in place of the call transcript.
+  remiSpanish: null as boolean | null,
   // The one address the site shows: footer, form fallback and confirmation,
   // contact page, schema.org, llms.txt. Nothing else may hard-code an email.
   contactEmail: 'ops@keresai.com',
@@ -53,8 +58,9 @@ export const business = {
   testimonials: [] as Testimonial[],
 };
 
-const REQUIRED = ['phone', 'phoneDisplay', 'answerFromPrice', 'convertFromPrice', 'growFromPrice', 'city', 'state'] as const;
-export const missing = REQUIRED.filter((k) => !String(business[k] ?? '').trim());
+const REQUIRED = ['phone', 'phoneDisplay', 'answerFromPrice', 'convertFromPrice', 'growFromPrice', 'city', 'state', 'remiSpanish'] as const;
+const unset = (v: unknown) => v === null || v === undefined || String(v).trim() === '';
+export const missing = REQUIRED.filter((k) => unset(business[k]));
 
 // Production builds fail here. KERES_ALLOW_MISSING=1 is for local builds
 // only: the affected elements are omitted from the page — never rendered
@@ -73,6 +79,9 @@ export const has = {
   growPrice: !!business.growFromPrice.trim(),
   address: !!business.city.trim() && !!business.state.trim(),
   testimonials: business.testimonials.length > 0,
+  // Only an explicit true lifts the Spanish gate. null (local build under
+  // KERES_ALLOW_MISSING) renders the gated state: the site never overclaims.
+  remiSpanish: business.remiSpanish === true,
 };
 
 /** tel: link + display, or null when the line is not configured yet. */

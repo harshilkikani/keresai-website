@@ -665,6 +665,8 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(24px, 4vw
   gap: var(--space-5);
 }
 
+.k-hero__note { order: 5; margin: var(--space-3) 0 0; padding-left: 12px; border-left: 2px solid var(--accent); font-size: var(--text--1); line-height: 1.5; color: var(--ink-2); max-width: 48ch; }
+.k-hero__mock .ph { max-width: 300px; margin-inline: auto; }
 .k-hero__facts {
   list-style: none;
   padding: var(--space-5) 0 0;
