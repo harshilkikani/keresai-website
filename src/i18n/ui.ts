@@ -22,7 +22,7 @@ export const ui = {
       about: 'About', security: 'Security', compare: 'Compare', partners: 'Partners', contact: 'Contact', getAQuote: 'Get a quote',
       privacy: 'Privacy policy', terms: 'Terms of service', securityPolicy: 'Security policy', glossary: 'Glossary',
       rights: 'All rights reserved.', never: 'Never miss another lead.',
-      privacyShort: 'Privacy Policy', termsShort: 'Terms',
+      privacyShort: 'Privacy Policy', termsShort: 'Terms', foundShort: 'Get found', customShort: 'Your own job',
     },
     booking: {
       eyebrow: 'Get a quote or book a call', h2: 'Five questions, or pick a time.', lede: 'The form gets you a quote worked out before we talk. The calendar skips the form: pick a 20-minute slot and we call you then.',
@@ -93,7 +93,7 @@ export const ui = {
       about: 'Nosotros', security: 'Seguridad', compare: 'Comparar', partners: 'Socios', contact: 'Contacto', getAQuote: 'Pedir cotización',
       privacy: 'Política de privacidad', terms: 'Términos de servicio', securityPolicy: 'Política de seguridad', glossary: 'Glosario',
       rights: 'Todos los derechos reservados.', never: 'Nunca pierdas otro cliente.',
-      privacyShort: 'Privacidad', termsShort: 'Términos',
+      privacyShort: 'Privacidad', termsShort: 'Términos', foundShort: 'Que te encuentren', customShort: 'Tu propia tarea',
     },
     booking: {
       eyebrow: 'Pide cotización o agenda una llamada', h2: 'Cinco preguntas, o elige un horario.', lede: 'El formulario te da una cotización calculada antes de hablar. El calendario se salta el formulario: elige un espacio de 20 minutos y te llamamos a esa hora.',

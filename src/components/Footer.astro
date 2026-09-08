@@ -1,15 +1,17 @@
 ---
-import { PHONE, EMAIL, ADDRESS, plans } from '../data/site';
+import { PHONE, EMAIL, ADDRESS } from '../data/site';
 import { type Locale, l } from '../i18n';
 import { t } from '../i18n/ui';
-import { agentsFor } from '../i18n/data';
+import { agentsFor, workersFor } from '../i18n/data';
+import { priceAmount } from '../config/business';
 export interface Props { locale?: Locale }
 const { locale = 'en' } = Astro.props;
 const ui = t(locale);
 const agents = agentsFor(locale);
 const year = new Date().getFullYear();
-const found = plans.find((p) => p.slug === 'found')!;
-const foundFrom = found.from.replace(/^from /, `${ui.mocks.from} `);
+const foundPrice = priceAmount('found');
+const workers = workersFor(locale);
+const roleOf = (slug: string) => (agents.find((a) => a.slug === slug)?.title ?? '').replace(/ Worker$/, '').replace(/^Trabajador de /, '');
 ---
 <footer role="contentinfo" id="footer">
   <h2 class="visually-hidden">{ui.footer.heading}</h2>
@@ -39,8 +41,8 @@ const foundFrom = found.from.replace(/^from /, `${ui.mocks.from} `);
     <div class="footer-col">
       <h3>{ui.footer.agents}</h3>
       <ul>
-        {agents.map((a) => (
-          <li><a href={`/agents/${a.slug}`}>{a.name} &mdash; {a.title}</a></li>
+        {workers.map((w) => (
+          <li><a href={w.slug === 'custom' ? l(locale, '/custom') : w.href}>{w.name} &mdash; {w.slug === 'found' ? ui.footer.foundShort : w.slug === 'custom' ? ui.footer.customShort : roleOf(w.slug)}</a></li>
         ))}
         <li><a href="/use-cases">{ui.footer.useCases}</a></li>
         <li><a href="/hear-it">{ui.footer.hearIt}</a></li>
@@ -58,7 +60,7 @@ const foundFrom = found.from.replace(/^from /, `${ui.mocks.from} `);
       <h3>{ui.footer.services}</h3>
       <ul>
         <li><a href="/services">{ui.footer.allServices}</a></li>
-        <li><a href="/services/found">Found &mdash; {foundFrom}</a></li>
+        <li><a href="/services/found">Found{foundPrice && <> &mdash; {ui.mocks.from} {foundPrice}</>}</a></li>
         <li><a href={l(locale, '/custom')}>{ui.footer.customBuilds}</a></li>
         <li><a href="/integrations">{ui.footer.integrations}</a></li>
         <li><a href={l(locale, '/pricing')}>{ui.footer.pricing}</a></li>

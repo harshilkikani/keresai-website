@@ -1290,7 +1290,8 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(24px, 4vw
 
 /* ─── Footer address line ─────────────────────────────────── */
 .footer-address {
-  margin: var(--space-7) 0 0;
+  max-width: var(--container);
+  margin: var(--space-7) auto 0;
   padding-top: var(--space-5);
   border-top: 1px solid var(--border-dark);
   font-family: var(--mono);
@@ -2646,3 +2647,10 @@ html[data-motion] .k-hero [data-hero] .shift__foot { opacity: 0; }
 html[data-motion] .k-hero [data-hero].is-live .shift__foot { animation: shift-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; animation-delay: 880ms; }
 @keyframes shift-in { to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .shift__row, .shift__foot { opacity: 1 !important; transform: none !important; animation: none !important; } .shift__pulse { animation: none; } }
+
+/* homepage Found section: the website and the listing under the copy */
+.k-found__mocks { display: grid; grid-template-columns: minmax(0, 190px) minmax(0, 1fr); gap: var(--space-4); align-items: start; margin-top: var(--space-6); }
+.k-found__mocks .ph { max-width: 190px; margin: 0; }
+.k-found__mocks .k-listing-fig { width: 100%; }
+.k-found__mocks .k-mock__caption { display: none; }
+@media (max-width: 719px) { .k-found__mocks { grid-template-columns: 1fr; justify-items: start; } .k-found__mocks .ph { max-width: 220px; } }
