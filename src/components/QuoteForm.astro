@@ -86,6 +86,7 @@ const showCallback = locale === 'es' && has.remiSpanish && has.callback;
         <button type="button" class="btn-k btn-k--ghost" data-qf-back>{f.back}</button>
         <button type="submit" class="btn-k btn-k--primary" data-qf-submit>{f.submit}</button>
       </div>
+      <p class="qf__consent">{f.consent} <a href="/legal/privacy.html">{f.consentLink}</a>.</p>
       <p class="qf__error qf__error--form" data-qf-error="form" role="alert"></p>
       <p class="qf__fallback" data-qf-fallback hidden>{f.fallback} <a href={`mailto:${email}`}>{email}</a></p>
     </fieldset>

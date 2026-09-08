@@ -2405,6 +2405,8 @@ footer[role="contentinfo"] .footer-grid { padding-block: clamp(56px, 7vw, 96px) 
 .qf__hp { position: absolute; left: -5000px; }
 .qf__fallback { margin: var(--space-2) 0 0; font-size: var(--text--1); color: var(--ink-2); }
 .qf__fallback a, .qf__done-contact a { color: var(--accent); }
+.qf__consent { margin: var(--space-3) 0 0; font-size: var(--text--1); line-height: 1.5; color: var(--ink-2); }
+.qf__consent a { color: var(--ink-1); text-decoration: underline; }
 .qf__callback { margin: 0 0 var(--space-4); }
 .qf__callback-msg { margin: var(--space-2) 0 0; font-size: var(--text--1); color: var(--ink-2); }
 .qf__callback-msg:empty { display: none; }
