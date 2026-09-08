@@ -62,6 +62,8 @@ const origin = 'https://www.keresai.com';
 // block (never executed, so the CSP is untouched); empty ids load nothing.
 const trackingCfg = JSON.stringify({ ...business.tracking, phoneDisplay: business.phoneDisplay });
 const trackingOn = !!(business.tracking.ga4 || business.tracking.googleAds || business.tracking.metaPixel);
+// The Remi callback endpoint, when absolute, must be allowed by connect-src.
+const callbackOrigin = (() => { try { return new URL(business.remiCallbackEndpoint).origin; } catch { return ''; } })();
 
 const motionSrc = readFileSync(new URL('../../public/assets/motion.js', import.meta.url), 'utf8');
 const motionHash = "'sha256-" + createHash('sha256').update(motionSrc).digest('base64') + "'";
@@ -102,7 +104,7 @@ const BING_VERIFICATION = '';
   and Meta bootstraps live in /assets/tracking.js so the policy stays
   tight. Never inline a tag snippet — it will be blocked silently.
 -->
-<meta http-equiv="Content-Security-Policy" content={`default-src 'none'; script-src 'self' ${motionHash} https://gc.zgo.at https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net https://www.gstatic.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://calendly.com https://keresai.goatcounter.com https://dns.google https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://connect.facebook.net https://graph.facebook.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://pagead2.googlesyndication.com https://www.facebook.com; frame-src https://calendly.com https://td.doubleclick.net https://www.google.com https://www.googletagmanager.com https://www.facebook.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';`} />
+<meta http-equiv="Content-Security-Policy" content={`default-src 'none'; script-src 'self' ${motionHash} https://gc.zgo.at https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net https://www.gstatic.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; font-src 'self'; img-src 'self' data: https:; connect-src 'self' ${callbackOrigin} https://formspree.io https://calendly.com https://keresai.goatcounter.com https://dns.google https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://connect.facebook.net https://graph.facebook.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://pagead2.googlesyndication.com https://www.facebook.com; frame-src https://calendly.com https://td.doubleclick.net https://www.google.com https://www.googletagmanager.com https://www.facebook.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';`} />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}

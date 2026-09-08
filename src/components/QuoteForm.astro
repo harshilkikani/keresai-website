@@ -10,7 +10,7 @@
  * Spanish page stays Spanish. The endpoint comes from src/config/business.ts.
  */
 import { PHONE } from '../data/site';
-import { business } from '../config/business';
+import { business, has } from '../config/business';
 import type { Locale } from '../i18n';
 import { t } from '../i18n/ui';
 
@@ -24,9 +24,12 @@ export interface Props {
 const { variant = 'page', id = 'quote', industry = '', locale = 'en' } = Astro.props;
 const f = t(locale).form;
 const email = business.contactEmail;
+const booking = locale === 'es' && has.calendlyEs ? business.calendlyEs : business.bookingUrl;
+const showCallback = locale === 'es' && has.remiSpanish && has.callback;
 ---
-<div class:list={['qf', `qf--${variant}`]} id={id} data-quote-form data-endpoint={business.formEndpoint} data-booking={business.bookingUrl}
-  data-msg-required={f.msgRequired} data-msg-phone={f.msgPhone} data-msg-fast={f.msgFast} data-msg-failed={f.msgFailed} data-msg-sending={f.sending} data-msg-submit={f.submit}>
+<div class:list={['qf', `qf--${variant}`]} id={id} data-quote-form data-endpoint={business.formEndpoint} data-booking={booking} data-lang={locale}
+  data-msg-required={f.msgRequired} data-msg-phone={f.msgPhone} data-msg-fast={f.msgFast} data-msg-failed={f.msgFailed} data-msg-sending={f.sending} data-msg-submit={f.submit} data-msg-slots={f.slots}
+  data-msg-callback-sending={f.callbackSending} data-msg-callback-done={f.callbackDone} data-msg-callback-fail={f.callbackFail}>
   <form class="qf__form" novalidate data-qf-form>
     <input type="hidden" name="_subject" value={f.subject} />
     <input type="hidden" name="lang" value={locale} />
@@ -91,6 +94,12 @@ const email = business.contactEmail;
   <div class="qf__done" data-qf-done hidden>
     <h3 class="qf__done-title">{f.doneTitle}</h3>
     <p class="qf__done-text">{f.doneText}</p>
+    {showCallback && (
+      <div class="qf__callback">
+        <button type="button" class="btn-k btn-k--primary" data-qf-callback data-endpoint={business.remiCallbackEndpoint}>{f.callback}</button>
+        <p class="qf__callback-msg" data-qf-callback-msg role="status" aria-live="polite"></p>
+      </div>
+    )}
     <div class="qf__booking" data-qf-booking aria-label={f.slots}></div>
     {PHONE && (
       <p class="qf__done-call">{f.orCall} <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a> {f.now}</p>

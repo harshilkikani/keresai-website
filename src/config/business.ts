@@ -41,6 +41,15 @@ export const business = {
   formEndpoint: 'https://formspree.io/f/mojywlnn',
   // The booking embed shown after a successful quote submit.
   bookingUrl: 'https://calendly.com/ops-keresai/30min',
+  // Optional. A Calendly event set up in Spanish, shown to /es leads instead
+  // of bookingUrl. Empty → the English event; Calendly renders its own UI in
+  // the visitor's browser language, and the embed is marked lang="es".
+  calendlyEs: '',
+  // Optional. An endpoint that makes Remi call the lead back right now.
+  // Receives a JSON POST {phone, lang, business, page, event_id}; any 2xx
+  // means the call was placed. Empty, or remiSpanish false, → the
+  // "¿Prefieres que Remi te llame ahora?" button is not rendered.
+  remiCallbackEndpoint: '',
   // Conversion tracking. Empty → no tag loads at all (see tracking.js).
   tracking: {
     ga4: '',           // 'G-XXXXXXXXXX'
@@ -50,6 +59,11 @@ export const business = {
       form_submit: '',
       tel_click: '',
       phone: '',       // the website-call conversion (number swap, calls ≥30s)
+      // Optional Spanish-page labels so Google Ads can count Spanish leads apart.
+      // Empty → the base label above is used on /es too.
+      form_submit_es: '',
+      tel_click_es: '',
+      phone_es: '',
     },
   },
   // Optional. Sentences that need these are omitted when they are empty.
@@ -82,6 +96,8 @@ export const has = {
   // Only an explicit true lifts the Spanish gate. null (local build under
   // KERES_ALLOW_MISSING) renders the gated state: the site never overclaims.
   remiSpanish: business.remiSpanish === true,
+  callback: !!business.remiCallbackEndpoint.trim(),
+  calendlyEs: !!business.calendlyEs.trim(),
 };
 
 /** tel: link + display, or null when the line is not configured yet. */

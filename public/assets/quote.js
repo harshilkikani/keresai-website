@@ -99,16 +99,45 @@
         done.hidden = false;
         root.classList.add('is-done');
         document.dispatchEvent(new CustomEvent('keres:lead', { detail: { form: 'quote', page: location.pathname, eventId: eventId } }));
+        callback();
         loadBooking();
         done.querySelector('h3').setAttribute('tabindex', '-1');
         done.querySelector('h3').focus();
       }
 
-      // The booking embed loads only after a successful submit.
+      // "Prefer Remi call you now?" — rendered only when the endpoint is
+      // configured and Remi speaks the page's language. One JSON POST.
+      function callback() {
+        var btn = root.querySelector('[data-qf-callback]');
+        var msg = root.querySelector('[data-qf-callback-msg]');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          var label = btn.textContent;
+          btn.disabled = true; btn.textContent = M('callback-sending', 'Placing the call…');
+          if (msg) msg.textContent = '';
+          fetch(btn.getAttribute('data-endpoint'), {
+            method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ phone: (form.elements.phone && form.elements.phone.value) || '', lang: root.getAttribute('data-lang') || 'en', business: (form.elements.business && form.elements.business.value) || '', page: location.pathname, event_id: eventId }),
+          }).then(function (r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            btn.hidden = true;
+            if (msg) msg.textContent = M('callback-done', 'Done. Remi is calling you now.');
+            document.dispatchEvent(new CustomEvent('keres:callback', { detail: { eventId: eventId } }));
+          }).catch(function () {
+            btn.disabled = false; btn.textContent = label;
+            if (msg) msg.textContent = M('callback-fail', 'We could not start the call. Try again.');
+          });
+        });
+      }
+
+      // The booking embed loads only after a successful submit. The URL is
+      // the Spanish event when one is configured, else the English one; the
+      // host carries lang so assistive tech and Calendly see the language.
       function loadBooking() {
         var url = root.getAttribute('data-booking');
         var host = root.querySelector('[data-qf-booking]');
         if (!url || !host) return;
+        host.setAttribute('lang', root.getAttribute('data-lang') || 'en');
         if (/calendly\.com/.test(url)) {
           host.className += ' calendly-inline-widget';
           host.setAttribute('data-url', url + (url.indexOf('?') === -1 ? '?' : '&') + 'hide_gdpr_banner=1&hide_event_type_details=1');
@@ -119,7 +148,7 @@
           document.head.appendChild(s);
         } else {
           var f = document.createElement('iframe');
-          f.src = url; f.title = 'Pick a time'; f.loading = 'lazy'; f.style.width = '100%'; f.style.minHeight = '640px'; f.style.border = '0';
+          f.src = url; f.title = M('slots', 'Pick a time'); f.loading = 'lazy'; f.style.width = '100%'; f.style.minHeight = '640px'; f.style.border = '0';
           host.appendChild(f);
         }
       }

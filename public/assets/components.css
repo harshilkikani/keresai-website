@@ -2338,6 +2338,7 @@ html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] { transform: tra
 /* ─── Tilt: applied by motion.js on desktop only ──────────── */
 [data-tilt].is-tilting { transition-duration: 0.12s; }
 
+
 /* ─── View transitions: 250ms crossfade ───────────────────── */
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 250ms; }
 
@@ -2393,6 +2394,9 @@ footer[role="contentinfo"] .footer-grid { padding-block: clamp(56px, 7vw, 96px) 
 .qf__hp { position: absolute; left: -5000px; }
 .qf__fallback { margin: var(--space-2) 0 0; font-size: var(--text--1); color: var(--ink-2); }
 .qf__fallback a, .qf__done-contact a { color: var(--accent); }
+.qf__callback { margin: 0 0 var(--space-4); }
+.qf__callback-msg { margin: var(--space-2) 0 0; font-size: var(--text--1); color: var(--ink-2); }
+.qf__callback-msg:empty { display: none; }
 .qf__done-contact { margin: var(--space-3) 0 0; font-size: var(--text--1); color: var(--ink-2); }
 .qf__steps { list-style: none; padding: 0; margin: 0 0 var(--space-5); display: flex; gap: var(--space-4); }
 .qf__stepdot { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
