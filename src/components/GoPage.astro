@@ -61,7 +61,7 @@ const quoteHref = '#quote';
         <h3 class="door__title">{page.found.title}</h3>
         <p class="door__text">{page.found.text}</p>
       </div>
-      <div class="door__mocks door__mocks--found">
+      <div class="door__mocks door__mocks--found" data-depth data-tilt>
         <SiteOnPhone locale={locale} />
         <GoogleListing locale={locale} />
       </div>
@@ -72,7 +72,7 @@ const quoteHref = '#quote';
         <h3 class="door__title">{page.answered.title}</h3>
         <p class="door__text">{page.answered.text}</p>
       </div>
-      <div class="door__mocks">
+      <div class="door__mocks" data-depth data-tilt>
         {gate ? <SiteOnPhone locale={locale} /> : <AgentMock slug="inbound" locale={locale} />}
       </div>
     </article>

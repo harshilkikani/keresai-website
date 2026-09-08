@@ -16,6 +16,8 @@
      7. Daily Brief bubbles         — reveal machinery, 90ms, pop last.
      8. View transitions            — Astro ClientRouter, CSS crossfade.
      9. Cursor light in the hero    — desktop only.
+    10. Depth on hero mocks + doors — parallax ≤12px on scroll, tilt ≤4°
+                                       on pointer; pointer:fine and ≥1024px only.
 ============================================================= */
 (function () {
   'use strict';
@@ -168,6 +170,8 @@
     if (!desktop()) return;
     Array.prototype.forEach.call(scope.querySelectorAll('[data-tilt]'), function (el) {
       if (el.__tilt) return;
+      // A tilting element inside a tilting element would compound past 4°.
+      if (el.parentElement && el.parentElement.closest('[data-tilt]')) return;
       el.__tilt = true;
       var MAX = 4;
       el.addEventListener('pointermove', function (e) {
@@ -184,6 +188,37 @@
         el.classList.remove('is-tilting');
       });
     });
+  }
+
+  /* ── 10. Depth: parallax on scroll, desktop only ───────── */
+  // Each [data-depth] element gets --py between -12px and 12px from its
+  // position in the viewport: level at the centre, lagging below it,
+  // leading above it. One rAF-throttled scroll listener for the page;
+  // the list is rebuilt after every client-side navigation.
+  var depthEls = [], depthBound = false, depthTick = false;
+  function depthUpdate() {
+    depthTick = false;
+    var vh = window.innerHeight;
+    for (var i = 0; i < depthEls.length; i++) {
+      var el = depthEls[i];
+      var r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) continue;
+      var p = ((r.top + r.height / 2) - vh / 2) / (vh / 2);
+      p = Math.max(-1, Math.min(1, p));
+      el.style.setProperty('--py', (p * 12).toFixed(1) + 'px');
+    }
+  }
+  function depth(scope) {
+    if (!desktop()) return;
+    depthEls = Array.prototype.slice.call(scope.querySelectorAll('[data-depth]'));
+    if (!depthEls.length) return;
+    if (!depthBound) {
+      depthBound = true;
+      var onScroll = function () { if (!depthTick) { depthTick = true; requestAnimationFrame(depthUpdate); } };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+    }
+    depthUpdate();
   }
 
   /* ── 9. Cursor light in the hero only ──────────────────── */
@@ -209,6 +244,7 @@
     counts(scope);
     pipeline(scope);
     tilt(scope);
+    depth(scope);
     light(scope);
   }
 

@@ -2337,6 +2337,17 @@ html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] { transform: tra
 
 /* ─── Tilt: applied by motion.js on desktop only ──────────── */
 [data-tilt].is-tilting { transition-duration: 0.12s; }
+/* ─── Item 6: depth on hero mocks and the two doors ─────────── */
+/* motion.js sets --py (parallax, ±12px) and --rx/--ry (tilt, ±4°) only on
+   pointer:fine ≥1024px; without them this is the identity transform.
+   Reveal opacity lives on the parent .door, so the two never fight. */
+[data-depth] {
+  transform: translate3d(0, var(--py, 0px), 0) perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+[data-depth].is-tilting { transition-duration: 0.12s; }
+@media (hover: none), (max-width: 1023px) { [data-depth] { transform: none; transition: none; } }
 
 
 /* ─── View transitions: 250ms crossfade ───────────────────── */
@@ -2347,7 +2358,7 @@ html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] { transform: tra
   .nav-phone::after { animation: none; }
   .pipe__stage { opacity: 1 !important; transform: none !important; }
   .pd__fill { transform: scale(1) !important; }
-  [data-tilt] { transform: none !important; }
+  [data-tilt], [data-depth] { transform: none !important; }
 }
 
 /* ─── Item 7: density inside the 120/72 cap ─────────────────── */

@@ -71,7 +71,7 @@ const h1Groups = c.h1;
         ))}
       </ul>
     </div>
-    <div class="k-hero__mock">
+    <div class="k-hero__mock" data-depth data-tilt>
       {gate ? <SiteOnPhone locale={locale} /> : <CallTranscript vertical="default" hero locale={locale} />}
     </div>
   </div>
@@ -88,7 +88,7 @@ const h1Groups = c.h1;
         <p class="door__text">{fill(c.doors.found.text, { price: found.from.replace('from ', '') })}</p>
         <Button href="/services/found" variant="ghost">{c.doors.found.cta}</Button>
       </div>
-      <div class="door__mocks door__mocks--found">
+      <div class="door__mocks door__mocks--found" data-depth data-tilt>
         <SiteOnPhone locale={locale} />
         <GoogleListing locale={locale} />
       </div>
@@ -100,7 +100,7 @@ const h1Groups = c.h1;
         <p class="door__text">{c.doors.answered.text}{answer.from && fill(c.doors.answered.from, { price: answer.from.replace('from ', '') })}</p>
         <Button href="/agents/inbound" variant="ghost">{c.doors.answered.cta}</Button>
       </div>
-      <div class="door__mocks">
+      <div class="door__mocks" data-depth data-tilt>
         {gate ? <SiteOnPhone locale={locale} /> : <CallTranscript vertical="home-services" caption={false} locale={locale} />}
       </div>
     </article>
