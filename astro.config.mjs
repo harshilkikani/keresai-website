@@ -48,6 +48,8 @@ export default defineConfig({
         !/\/go(\.html|\/|$)/.test(page) &&
         // /demo and /es/demo are redirect stubs to the quote page.
         !/\/demo(\.html|\/|$)/.test(page) &&
+        // /agents/custom and /es/agents/custom are redirect stubs to /custom.
+        !/\/agents\/custom(\.html|$)/.test(page) &&
         !page.includes('/resources.html') &&
         // Ad landing pages are noindex and must never enter the sitemap.
         !page.includes('/lp/') &&
