@@ -79,9 +79,8 @@ const h1Groups = c.h1;
         {bundle && <li><span class="k-hero__fact-k">{c.factBundle[0]}</span><span class="k-hero__fact-v">$<span data-count>{bundle.replace('$', '')}</span>{c.factBundle[1]}</span></li>}
       </ul>
     </div>
-    <div class="k-hero__mock k-hero__mock--two" data-depth data-tilt>
-      <SiteOnPhone locale={locale} caption={false} />
-      {gate ? <GoogleListing locale={locale} /> : <CallTranscript vertical="default" hero locale={locale} />}
+    <div class="k-hero__mock" data-depth data-tilt>
+      {gate ? <SiteOnPhone locale={locale} /> : <CallTranscript vertical="default" hero locale={locale} />}
     </div>
   </div>
 </Section>

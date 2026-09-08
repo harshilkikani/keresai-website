@@ -2538,11 +2538,6 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 .k-teaser__body { display: grid; gap: var(--space-4); justify-items: start; }
 .k-teaser__body .k-lede { margin: 0; }
 
-/* ─── Hero: two-up mock (site-on-phone + example call) ───────── */
-.k-hero__mock--two { display: grid; gap: var(--space-4); align-items: start; justify-items: center; }
-.k-hero__mock--two .ph { max-width: 240px; margin-inline: auto; }
-.k-hero__mock--two .k-call-fig, .k-hero__mock--two .k-listing-fig { width: 100%; }
-@media (min-width: 1024px) { .k-hero__mock--two { grid-template-columns: minmax(0, 200px) minmax(0, 1fr); align-items: stretch; } .k-hero__mock--two .ph { max-width: 200px; } }
 .k-mock__caption--tag { font: 500 0.64rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* ─── The roster: six workers, 3×2 desktop, 2×3 mobile ────────── */
