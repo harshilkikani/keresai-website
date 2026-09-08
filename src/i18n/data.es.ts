@@ -189,3 +189,19 @@ export const goWebsiteText = {
   remi: 'Todo sitio Found viene listo para agendar con Remi. Agrega la contestación cuando quieras.',
   closeH2: 'Llámanos o agenda 20 minutos.', closeLede: 'Veinte minutos, sin presentación.',
 };
+
+import type { Worker } from '../data/workers';
+export const workers: Worker[] = [
+  { slug: 'found', name: 'Found', job: 'Hace que te encuentren: sitio, ficha de Google, reseñas', href: '/services/found', priceKey: 'found', person: false, mock: 'listing',
+    includes: ['Sitio web de conversión y plan de cuidado', 'Perfil de Negocio de Google trabajado cada semana', 'Reseñas después de cada trabajo', 'Directorios que coinciden entre sí'] },
+  { slug: 'inbound', name: 'Remi', job: 'Contesta cada llamada en dos timbres y la agenda', href: '/agents/inbound', priceKey: 'remi', person: true, mock: 'inbound',
+    includes: ['Contestación de día y de noche', 'Admisión y calificación para tu industria', 'Agenda en tu calendario y CRM', 'Mensaje de vuelta en 60 segundos si se pierde la llamada'] },
+  { slug: 'follow-up', name: 'Theo', job: 'Confirma, recuerda y persigue el presupuesto', href: '/agents/follow-up', priceKey: 'theo', person: true, mock: 'follow-up',
+    includes: ['Confirmaciones y recordatorios', 'Prevención de ausencias', 'Seguimiento del presupuesto el día 1, 3 y 7'] },
+  { slug: 'reactivation', name: 'June', job: 'Trae de vuelta a clientes anteriores y pide la reseña', href: '/agents/reactivation', priceKey: 'june', person: true, mock: 'reactivation',
+    includes: ['Solicitud de reseña después de cada trabajo', 'Campañas de reactivación y recuperación', 'Solicitudes de referidos'] },
+  { slug: 'outbound', name: 'Sol', job: 'Sale a conseguir clientes nuevos por correo', href: '/agents/outbound', priceKey: 'sol', person: true, mock: 'outbound',
+    includes: ['SPF, DKIM, DMARC y calentamiento antes de un solo envío', 'Secuencias personalizadas', 'Respuestas atendidas, reuniones agendadas'] },
+  { slug: 'custom', name: 'Custom', job: 'Cualquier tarea que nadie hace aquí. Construimos al trabajador', href: '/custom', priceKey: 'customRun', person: false, mock: 'scope',
+    includes: ['Un documento de alcance de una página', 'Un precio fijo de desarrollo', 'Una cuota mensual', 'Tú apruebas todo lo que publica'] },
+];

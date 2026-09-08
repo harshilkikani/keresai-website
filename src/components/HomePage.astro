@@ -14,12 +14,14 @@ import SiteOnPhone from './SiteOnPhone.astro';
 import GoogleListing from './GoogleListing.astro';
 import PipelineDiagram from './PipelineDiagram.astro';
 import AgentMock from './AgentMock.astro';
+import OutboundMock from './OutboundMock.astro';
+import ScopeCard from './ScopeCard.astro';
 import Calculator from './Calculator.astro';
 import { plans, PHONE } from '../data/site';
 import { type Locale, l } from '../i18n';
 import { t } from '../i18n/ui';
 import { homeCopy, faqsFor } from '../i18n/home';
-import { stagesFor, agentsFor, foundServicesFor } from '../i18n/data';
+import { stagesFor, agentsFor, foundServicesFor, workersFor } from '../i18n/data';
 
 export interface Props { locale?: Locale }
 const { locale = 'en' } = Astro.props;
@@ -34,6 +36,7 @@ const found = plans.find((p) => p.slug === 'found')!;
 const answer = plans.find((p) => p.slug === 'answer')!;
 const quote = l(locale, '/quote');
 const bundle = priceAmount('bundle');
+const workers = workersFor(locale);
 const fill = (s: string, map: Record<string, string>) => s.replace(/\{(\w+)\}/g, (_, k) => map[k] ?? '');
 const m = t(locale).mocks;
 /** "from $249" → "desde $249" in Spanish; the amount itself is never touched. */
@@ -80,40 +83,37 @@ const h1Groups = c.h1;
   </div>
 </Section>
 
-<!-- ── THE TWO DOORS ──────────────────────────────────── -->
-<Section spacing="flush" labelledby="doors-title" id="doors" class="k-doors-section">
-  <h2 id="doors-title" class="visually-hidden">{c.doors.hidden}</h2>
-  <div class="doors">
-    <article class="door" data-reveal>
-      <div class="door__head">
-        <Eyebrow n={1}>{c.doors.found.eyebrow}</Eyebrow>
-        <h3 class="door__title">{c.doors.found.title}</h3>
-        <p class="door__text">{fill(c.doors.found.text, { price: found.from.replace('from ', '') })}</p>
-        <Button href="/services/found" variant="ghost">{c.doors.found.cta}</Button>
-      </div>
-      <div class="door__mocks door__mocks--found" data-depth data-tilt>
-        <SiteOnPhone locale={locale} />
-        <GoogleListing locale={locale} />
-      </div>
-    </article>
-    <article class="door" data-reveal>
-      <div class="door__head">
-        <Eyebrow n={2}>{c.doors.answered.eyebrow}</Eyebrow>
-        <h3 class="door__title">{c.doors.answered.title}</h3>
-        <p class="door__text">{c.doors.answered.text}{answer.from && fill(c.doors.answered.from, { price: answer.from.replace('from ', '') })}</p>
-        <Button href="/agents/inbound" variant="ghost">{c.doors.answered.cta}</Button>
-      </div>
-      <div class="door__mocks" data-depth data-tilt>
-        {gate ? <SiteOnPhone locale={locale} /> : <CallTranscript vertical="home-services" caption={false} locale={locale} />}
-      </div>
-    </article>
+<!-- ── THE ROSTER ─────────────────────────────────────── -->
+<Section spacing="major" labelledby="roster-title" id="roster">
+  <div class="k-band__head">
+    <Eyebrow n={1}>{c.roster.eyebrow}</Eyebrow>
+    <h2 id="roster-title" class="k-h2">{c.roster.h2}</h2>
   </div>
+  <ul class="roster" data-reveal>
+    {workers.map((w) => { const price = priceAmount(w.priceKey); return (
+      <li class="roster__card" data-reveal-child>
+        <h3 class="roster__name">{w.name}</h3>
+        <p class="roster__job">{w.job}</p>
+        <div class="roster__mock">
+          {w.mock === 'listing' && <GoogleListing locale={locale} />}
+          {w.mock === 'inbound' && (gate ? <SiteOnPhone locale={locale} caption={false} /> : <AgentMock slug="inbound" locale={locale} />)}
+          {w.mock === 'follow-up' && <AgentMock slug="follow-up" locale={locale} />}
+          {w.mock === 'reactivation' && <AgentMock slug="reactivation" locale={locale} />}
+          {w.mock === 'outbound' && <OutboundMock locale={locale} />}
+          {w.mock === 'scope' && <ScopeCard locale={locale} />}
+        </div>
+        {price && <p class="roster__price"><span class="roster__from">{c.roster.from} </span>{price}<span class="roster__per">{c.roster.perMo}</span></p>}
+        <Button href={w.href} variant={w.slug === 'inbound' ? 'primary' : 'outline'} wide>{fill(c.roster.hire, { name: w.name, a: w.person ? 'a ' : '' })}</Button>
+      </li>
+    ); })}
+  </ul>
+  <p class="roster__foot">{c.roster.foot}{bundle && fill(c.roster.footBundle, { price: bundle })}</p>
 </Section>
 
 <!-- ── THE SEVEN LEAKS — pinned pipeline ──────────────── -->
 <Section spacing="major" labelledby="leaks-title" id="leaks">
   <div class="k-band__head">
-    <Eyebrow n={3}>{c.leaks.eyebrow}</Eyebrow>
+    <Eyebrow n={2}>{c.leaks.eyebrow}</Eyebrow>
     <h2 id="leaks-title" class="k-h2">{c.leaks.h2}</h2>
     <p class="k-lede k-measure">{c.leaks.lede}</p>
   </div>
@@ -145,37 +145,11 @@ const h1Groups = c.h1;
   </div>
 </Section>
 
-<!-- ── THE THREE AGENTS ───────────────────────────────── -->
-<Section tone="raised" spacing="major" labelledby="team-title" id="agents">
-  <div class="k-band__head">
-    <Eyebrow n={4}>{c.team.eyebrow}</Eyebrow>
-    <h2 id="team-title" class="k-h2">{c.team.h2}</h2>
-    <p class="k-lede k-measure">{c.team.lede}</p>
-  </div>
-  <ol class="team">
-    {phoneAgents.map((a, i) => (
-      <li class:list={['trow', i % 2 === 1 && 'trow--flip']} data-reveal>
-        <div class="trow__copy">
-          <p class="k-eyebrow"><span class="k-eyebrow__rule" aria-hidden="true"></span><span>{a.title}</span></p>
-          <h3 class="trow__name">{a.name}</h3>
-          <p class="trow__job">{a.job}</p>
-          <ul class="k-member__bullets">{a.bullets.map((b) => <li>{b}</li>)}</ul>
-          <a class="k-member__go" href={`/agents/${a.slug}`}>
-            {fill(c.team.what, { name: a.name })}
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-        <div class="trow__mock">{gate && a.slug === 'inbound' ? <SiteOnPhone locale={locale} /> : <AgentMock slug={a.slug} locale={locale} />}</div>
-      </li>
-    ))}
-  </ol>
-</Section>
-
 <!-- ── WHAT FOUND INCLUDES ────────────────────────────── -->
 <Section spacing="major" labelledby="found-title" id="found">
   <div class="k-split k-split--top">
     <div class="k-split__aside">
-      <Eyebrow n={5}>{c.found.eyebrow}</Eyebrow>
+      <Eyebrow n={3}>{c.found.eyebrow}</Eyebrow>
       <h2 id="found-title" class="k-h2">{c.found.h2}</h2>
       <p class="k-lede">{fill(c.found.lede, { from: fromWord(found.from), note: lawNote })}</p>
       <div class="k-found__foot">
@@ -204,7 +178,7 @@ const h1Groups = c.h1;
 <Section tone="inverse" spacing="major" labelledby="brief-title" id="brief">
   <div class="k-split k-split--reverse">
     <div class="k-split__aside">
-      <Eyebrow n={6}>{c.brief.eyebrow}</Eyebrow>
+      <Eyebrow n={4}>{c.brief.eyebrow}</Eyebrow>
       <h2 id="brief-title" class="k-h2">{c.brief.h2}</h2>
       <p class="k-lede">{c.brief.lede}</p>
       <p class="k-body k-measure">{c.brief.body}</p>
@@ -217,7 +191,7 @@ const h1Groups = c.h1;
 <Section spacing="standard" labelledby="ind-title" id="industries">
   <div class="k-band">
     <div class="k-band__head">
-      <Eyebrow n={7}>{c.industries.eyebrow}</Eyebrow>
+      <Eyebrow n={5}>{c.industries.eyebrow}</Eyebrow>
       <h2 id="ind-title" class="k-h2">{c.industries.h2}</h2>
       <p class="k-lede k-measure">{c.industries.lede}</p>
     </div>
@@ -240,7 +214,7 @@ const h1Groups = c.h1;
 <Section tone="raised" spacing="standard" labelledby="int-title" id="integrations">
   <div class="k-band">
     <div class="k-band__head">
-      <Eyebrow n={8}>{c.integrations.eyebrow}</Eyebrow>
+      <Eyebrow n={6}>{c.integrations.eyebrow}</Eyebrow>
       <h2 id="int-title" class="k-h2">{c.integrations.h2}</h2>
       <p class="k-lede k-measure">{c.integrations.lede}</p>
     </div>
@@ -260,7 +234,7 @@ const h1Groups = c.h1;
 
 <!-- ── CALCULATOR ─────────────────────────────────────── -->
 <Section spacing="major" labelledby="roi-title" id="roi">
-  <Eyebrow n={9}>{c.calc.eyebrow}</Eyebrow>
+  <Eyebrow n={7}>{c.calc.eyebrow}</Eyebrow>
   <h2 id="roi-title" class="k-h2">{c.calc.h2}</h2>
   <p class="k-lede k-measure">{c.calc.lede} <a href="/tools/missed-call-calculator">{c.calc.link}</a>.</p>
   <Calculator locale={locale} vertical="home-services" ctaHref={quote} />
@@ -270,7 +244,7 @@ const h1Groups = c.h1;
 <Section spacing="standard" labelledby="custom-teaser-title" id="custom-teaser">
   <div class="k-teaser" data-reveal>
     <div>
-      <Eyebrow n={10}>{c.customTeaser.eyebrow}</Eyebrow>
+      <Eyebrow n={8}>{c.customTeaser.eyebrow}</Eyebrow>
       <h2 id="custom-teaser-title" class="k-h2">{c.customTeaser.h2}</h2>
     </div>
     <div class="k-teaser__body">
@@ -285,7 +259,7 @@ const h1Groups = c.h1;
   <Section tone="raised" spacing="standard" labelledby="proof-title" id="proof">
     <div class="k-band">
       <div class="k-band__head">
-        <Eyebrow n={11}>{c.proof.eyebrow}</Eyebrow>
+        <Eyebrow n={9}>{c.proof.eyebrow}</Eyebrow>
         <h2 id="proof-title" class="k-h2">{c.proof.h2}</h2>
       </div>
       <div class="k-quotes" data-reveal>
@@ -299,7 +273,7 @@ const h1Groups = c.h1;
 <Section spacing="standard" labelledby="start-title" id="start">
   <div class="k-band">
     <div class="k-band__head">
-      <Eyebrow n={12}>{c.start.eyebrow}</Eyebrow>
+      <Eyebrow n={10}>{c.start.eyebrow}</Eyebrow>
       <h2 id="start-title" class="k-h2">{c.start.h2}</h2>
     </div>
     <ol class="k-steps" data-reveal>
@@ -320,7 +294,7 @@ const h1Groups = c.h1;
 
 <!-- ── FAQ ────────────────────────────────────────────── -->
 <Section tone="raised" spacing="standard" labelledby="faq-title" id="faq">
-  <Eyebrow n={13}>{c.faq.eyebrow}</Eyebrow>
+  <Eyebrow n={11}>{c.faq.eyebrow}</Eyebrow>
   <h2 id="faq-title" class="k-h2">{c.faq.h2}</h2>
   <div class="faq-list">
     {faqs.map((f) => (

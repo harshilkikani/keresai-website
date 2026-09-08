@@ -6,6 +6,7 @@ import { agents as agentsEn, foundServices as foundEn } from '../data/site';
 import { transcripts as trEn, briefs as brEn, agentMocks as amEn, siteMock as smEn, listingMock as lmEn, heroTail as htEn } from '../data/mocks';
 import { goPages as goEn, goSteps as goStepsEn } from '../data/go';
 import { goWebsitePages as gwEn } from '../data/goWebsite';
+import { workers as workersEn } from '../data/workers';
 import * as es from './data.es';
 
 const pick = <T,>(locale: Locale, en: T, esV: T): T => (locale === 'es' ? esV : en);
@@ -25,3 +26,4 @@ export const goStepsFor = (l: Locale) => pick(l, goStepsEn, es.goSteps);
 export const goWebsitePagesFor = (l: Locale) => pick(l, gwEn, es.goWebsitePages);
 /** Slug of the English Found service name, used for /services/found#anchors in every language. */
 export const foundAnchor = (i: number) => foundEn[i].name.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+export const workersFor = (l: Locale) => pick(l, workersEn, es.workers);

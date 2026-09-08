@@ -2544,3 +2544,28 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 .k-hero__mock--two .k-call-fig, .k-hero__mock--two .k-listing-fig { width: 100%; }
 @media (min-width: 1024px) { .k-hero__mock--two { grid-template-columns: minmax(0, 200px) minmax(0, 1fr); align-items: stretch; } .k-hero__mock--two .ph { max-width: 200px; } }
 .k-mock__caption--tag { font: 500 0.64rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ─── The roster: six workers, 3×2 desktop, 2×3 mobile ────────── */
+.roster { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+@media (min-width: 1024px) { .roster { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); } }
+.roster__card { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; padding: var(--space-3); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); }
+@media (min-width: 1024px) { .roster__card { padding: var(--space-5); } }
+.roster__name { margin: 0; font-family: var(--serif); font-size: var(--text-1); font-weight: 600; letter-spacing: -0.012em; line-height: 1.1; color: var(--ink-0); }
+@media (min-width: 1024px) { .roster__name { font-size: var(--text-2); } }
+.roster__job { margin: 0; font-size: var(--text--1); line-height: 1.45; color: var(--ink-2); }
+.roster__mock { position: relative; margin-top: var(--space-2); max-height: 190px; overflow: hidden; border-radius: var(--radius-lg); }
+@media (min-width: 1024px) { .roster__mock { max-height: 250px; } }
+.roster__mock::after { content: ''; position: absolute; inset: auto 0 0 0; block-size: 44px; background: linear-gradient(to bottom, transparent, var(--surface)); pointer-events: none; }
+.roster__mock .ph { max-width: 200px; margin-inline: auto; }
+.roster__mock .k-mock__caption, .roster__mock figcaption { display: none; }
+.roster__mock .amock, .roster__mock .listing, .roster__mock .k-agent { margin: 0; }
+.roster__price { margin: auto 0 0; padding-top: var(--space-2); font-family: var(--serif); font-size: var(--text-1); font-weight: 600; line-height: 1; color: var(--ink-0); }
+.roster__from { font-size: var(--text--1); font-family: var(--sans); font-weight: 500; color: var(--ink-2); }
+.roster__per { margin-left: 2px; font: 500 0.66rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.roster__card .btn-k { margin-top: var(--space-2); }
+@media (max-width: 1023px) { .roster__card .btn-k { padding-inline: 8px; font-size: var(--text--1); } }
+.roster__foot { margin: var(--space-5) 0 0; font-size: var(--text-0); color: var(--ink-1); }
+.scope { margin: 0; display: grid; gap: 8px; }
+.scope__row { display: grid; grid-template-columns: 78px 1fr; gap: 8px; align-items: baseline; }
+.scope__row dt { font: 500 0.64rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.scope__row dd { margin: 0; font-size: var(--text--1); line-height: 1.4; color: var(--ink-1); }

@@ -13,6 +13,11 @@ export const home = {
     facts: [['Answers in', '2', ' rings'], ['Live in', '5', ' days']], factBundle: ['Bundles from', '/mo'],
     ledeBundle: ', and starts from {price}/mo', hearRemi: '— hear Remi answer',
     atAGlance: 'At a glance', getAQuote: 'Get a quote', call: 'Call',
+    roster: {
+      eyebrow: 'The roster', h2: 'Six workers. Hire one, hire all.',
+      hire: 'Hire {name}', from: 'from', perMo: '/mo', foot: 'Hire one, hire all, add your own.', footBundle: ' Bundles from {price}/mo.',
+      scope: { head: 'Scope card', example: 'Example', rows: [['Job', 'Reply to every review within an hour'], ['Reports to', 'You, in the 7 am text'], ['Runs', 'Every hour, seven days'], ['Approves', 'You, by exception']] },
+    },
     doors: {
       hidden: 'Two ways in: be found, be answered',
       found: { eyebrow: 'Be Found', title: 'Show up where the search happens.', text: 'A website built to convert, a Google Business Profile worked every week, reviews that keep arriving, listings that agree with each other, and content AI search will quote. Fixed scope, from {price} a month.', cta: 'What Found includes' },
@@ -67,6 +72,11 @@ export const home = {
     facts: [['Contesta en', '2', ' timbres'], ['En marcha en', '5', ' días']], factBundle: ['Paquetes desde', '/mes'],
     ledeBundle: ', y empieza desde {price}/mes', hearRemi: '— escucha a Remi contestar',
     atAGlance: 'De un vistazo', getAQuote: 'Pedir cotización', call: 'Llamar',
+    roster: {
+      eyebrow: 'El equipo', h2: 'Seis trabajadores. Contrata uno o contrátalos todos.',
+      hire: 'Contratar {a}{name}', from: 'desde', perMo: '/mes', foot: 'Contrata uno, contrátalos todos o agrega el tuyo.', footBundle: ' Paquetes desde {price}/mes.',
+      scope: { head: 'Ficha de alcance', example: 'Ejemplo', rows: [['Tarea', 'Responder cada reseña en menos de una hora'], ['Reporta a', 'Ti, en el mensaje de las 7 am'], ['Corre', 'Cada hora, los siete días'], ['Aprueba', 'Tú, por excepción']] },
+    },
     doors: {
       hidden: 'Dos puertas: que te encuentren, que te contesten',
       found: { eyebrow: 'Que te encuentren', title: 'Aparece donde ocurre la búsqueda.', text: 'Un sitio web hecho para convertir, un Perfil de Negocio de Google trabajado cada semana, reseñas que siguen llegando, directorios que coinciden entre sí y contenido que la búsqueda con IA va a citar. Alcance fijo, desde {price} al mes.', cta: 'Qué incluye Found' },
