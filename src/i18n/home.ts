@@ -7,10 +7,11 @@ export const home = {
   en: {
     title: 'Get Found, Get Answered, Get Booked | Keres AI',
     description: 'A conversion website and a managed Google listing so you show up, and Remi answering every call in two rings so the call gets booked. Live in five days, from $249/month.',
-    eyebrow: 'An AI workforce for businesses whose sales team is whoever picks up the phone',
+    eyebrow: 'AI workers for local businesses',
     h1: [['Get', 'found.'], ['Get', 'answered.'], ['Get', 'booked.']],
-    lede: 'A conversion-built website and a managed Google listing so the search three streets away finds you. Then Remi answers the call in two rings and books it — and Theo and June keep it booked and bring it back. Live in five days. Month-to-month.',
-    facts: [['Answers in', '2', ' rings'], ['Live in', '5', ' days'], ['Plans from', '249', '/mo']],
+    lede: 'Hire one, hire all. Each does one job, reports to you in a text every morning{bundle}. Live in five days, month-to-month.',
+    facts: [['Answers in', '2', ' rings'], ['Live in', '5', ' days']], factBundle: ['Bundles from', '/mo'],
+    ledeBundle: ', and starts from {price}/mo', hearRemi: '— hear Remi answer',
     atAGlance: 'At a glance', getAQuote: 'Get a quote', call: 'Call',
     doors: {
       hidden: 'Two ways in: be found, be answered',
@@ -60,10 +61,11 @@ export const home = {
   es: {
     title: 'Que te encuentren, te contesten y te reserven | Keres AI',
     description: 'Un sitio web hecho para convertir y una ficha de Google administrada para que aparezcas, y Remi contestando cada llamada en dos timbres para que se agende. En cinco días, desde $249/mes.',
-    eyebrow: 'Una fuerza de trabajo de IA para negocios donde el equipo de ventas es quien contesta el teléfono',
+    eyebrow: 'Trabajadores de IA para negocios locales',
     h1: [['Que', 'te', 'encuentren.'], ['Que', 'te', 'contesten.'], ['Que', 'te', 'reserven.']],
-    lede: 'Un sitio web hecho para convertir y una ficha de Google administrada, para que la búsqueda a tres cuadras te encuentre. Luego Remi contesta la llamada en dos timbres y la agenda, y Theo y June la mantienen agendada y hacen que vuelvan. En cinco días. Mes a mes.',
-    facts: [['Contesta en', '2', ' timbres'], ['En marcha en', '5', ' días'], ['Planes desde', '249', '/mes']],
+    lede: 'Contrata uno o contrátalos todos. Cada uno hace una sola tarea, te reporta cada mañana por mensaje de texto{bundle}. En marcha en cinco días, mes a mes.',
+    facts: [['Contesta en', '2', ' timbres'], ['En marcha en', '5', ' días']], factBundle: ['Paquetes desde', '/mes'],
+    ledeBundle: ', y empieza desde {price}/mes', hearRemi: '— escucha a Remi contestar',
     atAGlance: 'De un vistazo', getAQuote: 'Pedir cotización', call: 'Llamar',
     doors: {
       hidden: 'Dos puertas: que te encuentren, que te contesten',

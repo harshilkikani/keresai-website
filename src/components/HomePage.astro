@@ -3,7 +3,7 @@
  * The homepage in either language. Prose comes from src/i18n/home.ts,
  * data (stages, agents, Found items, mocks) from the locale accessors.
  */
-import { business, has } from '../config/business';
+import { business, has, priceAmount } from '../config/business';
 import Section from './Section.astro';
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
@@ -33,6 +33,7 @@ const foundServices = foundServicesFor(locale);
 const found = plans.find((p) => p.slug === 'found')!;
 const answer = plans.find((p) => p.slug === 'answer')!;
 const quote = l(locale, '/quote');
+const bundle = priceAmount('bundle');
 const fill = (s: string, map: Record<string, string>) => s.replace(/\{(\w+)\}/g, (_, k) => map[k] ?? '');
 const m = t(locale).mocks;
 /** "from $249" → "desde $249" in Spanish; the amount itself is never touched. */
@@ -61,18 +62,20 @@ const h1Groups = c.h1;
       </h1>
       <div class="k-hero__ctas">
         <Button href={quote} variant="primary" event="demo_click">{c.getAQuote}</Button>
-        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{c.call} {PHONE.display}</Button>}
+        {PHONE && <Button href={PHONE.href} variant="ghost" event="tel_click">{c.call} {PHONE.display} {c.hearRemi}</Button>}
       </div>
-      <p class="k-lede">{c.lede}</p>
+      <p class="k-lede">{fill(c.lede, { bundle: bundle ? fill(c.ledeBundle, { price: bundle }) : '' })}</p>
       {gate && gateLine && <p class="k-hero__note" data-gate>{gateLine}</p>}
       <ul class="k-hero__facts" aria-label={c.atAGlance}>
         {c.facts.map(([k, n, suffix]) => (
-          <li><span class="k-hero__fact-k">{k}</span><span class="k-hero__fact-v">{suffix.startsWith('/') ? '$' : ''}<span data-count>{n}</span>{suffix}</span></li>
+          <li><span class="k-hero__fact-k">{k}</span><span class="k-hero__fact-v"><span data-count>{n}</span>{suffix}</span></li>
         ))}
+        {bundle && <li><span class="k-hero__fact-k">{c.factBundle[0]}</span><span class="k-hero__fact-v">$<span data-count>{bundle.replace('$', '')}</span>{c.factBundle[1]}</span></li>}
       </ul>
     </div>
-    <div class="k-hero__mock" data-depth data-tilt>
-      {gate ? <SiteOnPhone locale={locale} /> : <CallTranscript vertical="default" hero locale={locale} />}
+    <div class="k-hero__mock k-hero__mock--two" data-depth data-tilt>
+      <SiteOnPhone locale={locale} caption={false} />
+      {gate ? <GoogleListing locale={locale} /> : <CallTranscript vertical="default" hero locale={locale} />}
     </div>
   </div>
 </Section>

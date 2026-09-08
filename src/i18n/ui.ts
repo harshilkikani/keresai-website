@@ -66,7 +66,7 @@ export const ui = {
       briefHeader: 'Owner Daily Brief · Example', reply: 'Reply CALL to be connected', keres: 'Keres',
       siteCaption: 'The conversion template Found ships. Example business.', listingCaption: 'The stars are the example business’s, not ours.',
       hours: 'Hours', phone: 'Phone', call: 'Call', directions: 'Directions', website: 'Website', bookAVisit: 'Book a visit', callNow: 'Call now',
-      from: 'from', lawFirms: 'law firms', owner: 'Owner', writtenTo: 'Written to', exampleGoogle: 'Example · Google', pipelineAria: 'The seven pipeline stages',
+      example: 'Example', from: 'from', lawFirms: 'law firms', owner: 'Owner', writtenTo: 'Written to', exampleGoogle: 'Example · Google', pipelineAria: 'The seven pipeline stages',
     },
   },
   es: {
@@ -133,7 +133,7 @@ export const ui = {
       briefHeader: 'Resumen diario del dueño · Ejemplo', reply: 'Responde CALL para que te conecten', keres: 'Keres',
       siteCaption: 'La plantilla de conversión que incluye Found. Negocio de ejemplo.', listingCaption: 'Las estrellas son del negocio de ejemplo, no nuestras.',
       hours: 'Horario', phone: 'Teléfono', call: 'Llamar', directions: 'Cómo llegar', website: 'Sitio web', bookAVisit: 'Agendar visita', callNow: 'Llamar ahora',
-      from: 'desde', lawFirms: 'bufetes de abogados', owner: 'Dueño', writtenTo: 'Guardado en', exampleGoogle: 'Ejemplo · Google', pipelineAria: 'Las siete etapas del pipeline',
+      example: 'Ejemplo', from: 'desde', lawFirms: 'bufetes de abogados', owner: 'Dueño', writtenTo: 'Guardado en', exampleGoogle: 'Ejemplo · Google', pipelineAria: 'Las siete etapas del pipeline',
     },
   },
 } as const;

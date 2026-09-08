@@ -11,8 +11,8 @@ import PhoneFrame from './PhoneFrame.astro';
 import type { Locale } from '../i18n';
 import { t } from '../i18n/ui';
 import { siteMockFor, siteMockTextFor } from '../i18n/data';
-export interface Props { locale?: Locale }
-const { locale = 'en' } = Astro.props;
+export interface Props { locale?: Locale; caption?: boolean }
+const { locale = 'en', caption = true } = Astro.props;
 const s = siteMockFor(locale);
 const x = siteMockTextFor(locale);
 const m = t(locale).mocks;
@@ -53,5 +53,5 @@ const m = t(locale).mocks;
       </div>
     </div>
   </PhoneFrame>
-  <figcaption class="k-mock__caption">{m.siteCaption}</figcaption>
+  {caption ? <figcaption class="k-mock__caption">{m.siteCaption}</figcaption> : <figcaption class="k-mock__caption k-mock__caption--tag">{m.example}</figcaption>}
 </figure>
