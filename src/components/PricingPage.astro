@@ -64,7 +64,7 @@ const quote = l(locale, '/quote');
         <div class="wtable__cell wtable__price" role="cell" data-label={p.cols[2]}>
           {price ? <><span class="wtable__from">{p.from} </span><strong data-figure>{price}</strong><span class="wtable__per">{p.perMo}</span></> : <span class="wtable__quoted">{p.quoted}</span>}
         </div>
-        <ul class="wtable__cell wtable__inc" role="cell" data-label={p.cols[3]}>{w.includes.map((i) => <li>{i}</li>)}</ul>
+        <div class="wtable__cell wtable__inc" role="cell" data-label={p.cols[3]}><ul>{w.includes.map((i) => <li>{i}</li>)}</ul></div>
         <div class="wtable__cell wtable__act" role="cell"><Button href={w.href} variant={w.slug === 'inbound' ? 'primary' : 'outline'} wide>{fill(p.hire, { name: w.name, a: w.person ? 'a ' : '' })}</Button></div>
       </div>
     ); })}
@@ -74,7 +74,7 @@ const quote = l(locale, '/quote');
       <div class="wtable__cell wtable__price" role="cell" data-label={p.cols[2]}>
         {bundle ? <><span class="wtable__from">{p.from} </span><strong data-figure>{bundle}</strong><span class="wtable__per">{p.perMo}</span></> : <span class="wtable__quoted">{p.quoted}</span>}
       </div>
-      <ul class="wtable__cell wtable__inc" role="cell" data-label={p.cols[3]}>{p.bundle.includes.map((i) => <li>{i}</li>)}</ul>
+      <div class="wtable__cell wtable__inc" role="cell" data-label={p.cols[3]}><ul>{p.bundle.includes.map((i) => <li>{i}</li>)}</ul></div>
       <div class="wtable__cell wtable__act" role="cell"><Button href={quote} variant="primary" event="demo_click" wide>{p.hireAll}</Button></div>
     </div>
     {workers.filter((w) => w.slug === 'custom').map((w) => (
@@ -85,7 +85,7 @@ const quote = l(locale, '/quote');
           <span class="wtable__quoted">{p.scoped}</span>
           {(build || run) && <span class="wtable__sub">{build && <>{p.build} {p.from} <strong data-figure>{build}</strong></>}{build && run && ' · '}{run && <>{p.run} {p.from} <strong data-figure>{run}</strong>{p.perMo}</>}</span>}
         </div>
-        <ul class="wtable__cell wtable__inc" role="cell" data-label={p.cols[3]}>{w.includes.map((i) => <li>{i}</li>)}</ul>
+        <div class="wtable__cell wtable__inc" role="cell" data-label={p.cols[3]}><ul>{w.includes.map((i) => <li>{i}</li>)}</ul></div>
         <div class="wtable__cell wtable__act" role="cell"><Button href={l(locale, '/custom')} variant="outline" wide>{p.scope}</Button></div>
       </div>
     ))}

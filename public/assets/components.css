@@ -2589,7 +2589,7 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 .wtable__per { margin-left: 2px; font: 500 0.66rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
 .wtable__quoted { font-family: var(--sans); font-size: var(--text--1); color: var(--ink-2); }
 .wtable__sub { display: block; margin-top: 4px; font-family: var(--sans); font-size: var(--text--1); color: var(--ink-2); }
-.wtable__inc { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: var(--text--1); line-height: 1.45; color: var(--ink-1); }
+.wtable__inc ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: var(--text--1); line-height: 1.45; color: var(--ink-1); }
 .wtable__inc li { padding-left: 14px; position: relative; }
 .wtable__inc li::before { content: ''; position: absolute; left: 0; top: 0.55em; inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--accent); }
 .wtable__act .btn-k { margin: 0; }
