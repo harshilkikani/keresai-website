@@ -107,3 +107,14 @@ const runPrice = priceFrom('customRun').replace('from $', '');
   </div>
   <QuoteForm variant="embed" id="scope" kind="custom" locale={locale} />
 </Section>
+
+<!-- ── FAQ ────────────────────────────────────────────── -->
+<Section tone="raised" spacing="standard" labelledby="faq-title" id="faq">
+  <Eyebrow n={5}>{c.faq.eyebrow}</Eyebrow>
+  <h2 id="faq-title" class="k-h2">{c.faq.h2}</h2>
+  <div class="faq-list">
+    {c.faq.items.map(([q, a]) => (
+      <details class="faq-item"><summary class="faq-q">{q}</summary><p class="faq-a">{a}</p></details>
+    ))}
+  </div>
+</Section>

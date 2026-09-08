@@ -41,6 +41,15 @@ export const custom = {
       note: 'If the scope changes later, the price changes with it, in writing, before the work.',
     },
     scopeBand: { eyebrow: 'Scope a build', h2: 'Tell us the job. We come back with the one-page scope.' },
+    faq: {
+      eyebrow: 'Questions', h2: 'What it can and can’t do, and what happens after.',
+      items: [
+        ['What can a custom agent do, and what can’t it?', 'It does one recurring job with clear inputs and outputs: reading, sorting, drafting, posting, replying, checking, reporting. It works inside the accounts you give it and the rules in the scope. It can’t make the judgment calls the scope doesn’t cover, and it isn’t a replacement for a person who has to be accountable to a customer. When it isn’t sure, it stops and puts the item in your morning text.'],
+        ['Who owns it?', 'You do. The scope, the prompts, the instructions and everything it writes are yours, and it works inside your own accounts, not ours. What stays ours is the platform it runs on, which is what the monthly fee pays for.'],
+        ['What happens if we stop?', 'Month-to-month means you stop paying and it stops running at the end of that month. Nothing it published comes down, your accounts are untouched, and you keep the scope and the prompts, so anyone could rebuild it.'],
+        ['How does approval work?', 'The first version runs in draft mode: it prepares everything, lists it in the 7 am text, and nothing goes out until you reply yes. When you are comfortable, you move a category to approve-by-exception: routine items go out on their own and only the unusual ones wait for you. Any category can go back to draft mode whenever you say.'],
+      ],
+    },
   },
   es: {
     title: 'Agentes de IA a medida para una tarea recurrente | Keres AI',
@@ -80,8 +89,19 @@ export const custom = {
       note: 'Si el alcance cambia después, el precio cambia con él, por escrito y antes del trabajo.',
     },
     scopeBand: { eyebrow: 'Cotizar mi agente', h2: 'Cuéntanos la tarea. Volvemos con el documento de una página.' },
+    faq: {
+      eyebrow: 'Preguntas', h2: 'Qué puede y qué no puede hacer, y qué pasa después.',
+      items: [
+        ['¿Qué puede hacer un agente a medida y qué no?', 'Hace una tarea recurrente con entradas y salidas claras: leer, clasificar, redactar, publicar, responder, revisar, reportar. Trabaja dentro de las cuentas que le das y con las reglas del alcance. No puede tomar las decisiones que el alcance no cubre, y no reemplaza a una persona que tiene que responder ante un cliente. Cuando no está seguro, se detiene y pone el asunto en tu mensaje de la mañana.'],
+        ['¿De quién es?', 'Tuyo. El alcance, los prompts, las instrucciones y todo lo que escribe son tuyos, y trabaja dentro de tus propias cuentas, no de las nuestras. Lo que sigue siendo nuestro es la plataforma donde corre, que es lo que paga la cuota mensual.'],
+        ['¿Qué pasa si lo cancelamos?', 'Mes a mes significa que dejas de pagar y deja de correr al final de ese mes. Nada de lo que publicó se borra, tus cuentas quedan intactas y te quedas con el alcance y los prompts, así que cualquiera podría reconstruirlo.'],
+        ['¿Cómo funciona la aprobación?', 'La primera versión corre en modo borrador: prepara todo, lo lista en el mensaje de las 7 am y nada sale hasta que respondes que sí. Cuando te sientas cómodo, pasas una categoría a aprobación por excepción: lo rutinario sale solo y solo lo inusual te espera. Cualquier categoría puede volver a modo borrador cuando tú digas.'],
+      ],
+    },
   },
 } as const;
 
 export type Custom = typeof custom.en;
 export const customCopy = (locale: Locale): Custom => (custom[locale] as unknown) as Custom;
+/** FAQ items for the page and its FAQPage schema. */
+export const customFaqs = (locale: Locale) => customCopy(locale).faq.items.map(([q, a]) => ({ q, a }));
