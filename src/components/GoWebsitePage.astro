@@ -10,7 +10,7 @@ import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
 import SiteOnPhone from './SiteOnPhone.astro';
 import GoogleListing from './GoogleListing.astro';
-import QuoteForm from './QuoteForm.astro';
+import LeadBand from './LeadBand.astro';
 import { PHONE } from '../data/site';
 import { has } from '../config/business';
 import type { GoWebsitePage } from '../data/goWebsite';
@@ -94,7 +94,7 @@ const fill = (str: string, map: Record<string, string>) => str.replace(/\{(\w+)\
 
 <Section tone="raised" spacing="standard" labelledby="quote-title" id="quote-band">
   <h2 id="quote-title" class="k-eyebrow"><span class="k-eyebrow__rule" aria-hidden="true"></span><span class="k-eyebrow__n" data-figure>03</span><span>{ui.go.quoteBand}</span></h2>
-  <QuoteForm variant="embed" id="quote" industry={page.industry} locale={locale} />
+  <LeadBand locale={locale} id="quote" industry={page.industry} />
   <p class="gw-remi">{x.remi}</p>
 </Section>
 

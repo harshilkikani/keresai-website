@@ -4,7 +4,7 @@ import Section from './Section.astro';
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
 import DailyBrief from './DailyBrief.astro';
-import QuoteForm from './QuoteForm.astro';
+import LeadBand from './LeadBand.astro';
 import ListingAgentMock from './ListingAgentMock.astro';
 import OutboundMock from './OutboundMock.astro';
 import { PHONE } from '../data/site';
@@ -105,7 +105,7 @@ const runPrice = priceFrom('customRun').replace('from $', '');
     <Eyebrow n={4}>{c.scopeBand.eyebrow}</Eyebrow>
     <h2 id="scope-title" class="k-h2">{c.scopeBand.h2}</h2>
   </div>
-  <QuoteForm variant="embed" id="scope" kind="custom" locale={locale} />
+  <LeadBand locale={locale} id="scope" kind="custom" />
 </Section>
 
 <!-- ── FAQ ────────────────────────────────────────────── -->

@@ -11,7 +11,7 @@ import Button from './Button.astro';
 import SiteOnPhone from './SiteOnPhone.astro';
 import GoogleListing from './GoogleListing.astro';
 import AgentMock from './AgentMock.astro';
-import QuoteForm from './QuoteForm.astro';
+import LeadBand from './LeadBand.astro';
 import Calculator from './Calculator.astro';
 import { PHONE } from '../data/site';
 import { has } from '../config/business';
@@ -107,7 +107,7 @@ const quoteHref = '#quote';
 <Section tone="raised" spacing="standard" labelledby="quote-title" id="quote-band">
   {/* The form's own legend carries the heading; a second H2 here only added height on a phone. */}
   <h2 id="quote-title" class="k-eyebrow"><span class="k-eyebrow__rule" aria-hidden="true"></span><span class="k-eyebrow__n" data-figure>05</span><span>{g.quoteBand}</span></h2>
-  <QuoteForm variant="embed" id="quote" locale={locale} />
+  <LeadBand locale={locale} id="quote" />
 </Section>
 
 <Section tone="inverse" spacing="standard" labelledby="close-title" id="close">

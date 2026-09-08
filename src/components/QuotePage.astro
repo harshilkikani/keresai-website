@@ -1,7 +1,7 @@
 ---
 import Section from './Section.astro';
 import Eyebrow from './Eyebrow.astro';
-import QuoteForm from './QuoteForm.astro';
+import LeadBand from './LeadBand.astro';
 import { PHONE } from '../data/site';
 import type { Locale } from '../i18n';
 import { t } from '../i18n/ui';
@@ -19,5 +19,5 @@ const q = t(locale).quotePage;
   </div>
 </Section>
 <Section spacing="flush" labelledby="quote-title" id="quote-form">
-  <QuoteForm variant="page" id="quote" locale={locale} />
+  <LeadBand locale={locale} id="quote" />
 </Section>
