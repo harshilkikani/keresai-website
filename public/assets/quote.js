@@ -173,27 +173,68 @@
         });
       }
 
-      // The booking embed loads only after a successful submit. The URL is
-      // the Spanish event when one is configured, else the English one; the
-      // host carries lang so assistive tech and Calendly see the language.
+      // After a successful submit: use the calendar already on the page when
+      // there is one (load it now, hide the confirmation's own host), else
+      // mount one in the confirmation.
       function loadBooking() {
-        var url = root.getAttribute('data-booking');
+        var inline = document.querySelector('[data-booking-inline]');
         var host = root.querySelector('[data-qf-booking]');
-        if (!url || !host) return;
-        host.setAttribute('lang', root.getAttribute('data-lang') || 'en');
-        if (/calendly\.com/.test(url)) {
-          host.className += ' calendly-inline-widget';
-          host.setAttribute('data-url', url + (url.indexOf('?') === -1 ? '?' : '&') + 'hide_gdpr_banner=1&hide_event_type_details=1');
-          host.style.minHeight = '640px';
-          var s = document.createElement('script');
-          s.src = 'https://assets.calendly.com/assets/external/widget.js';
-          s.async = true;
-          document.head.appendChild(s);
-        } else {
-          var f = document.createElement('iframe');
-          f.src = url; f.title = M('slots', 'Pick a time'); f.loading = 'lazy'; f.style.width = '100%'; f.style.minHeight = '640px'; f.style.border = '0';
-          host.appendChild(f);
-        }
+        if (inline) { mountBooking(inline); if (host) host.hidden = true; return; }
+        if (host) { host.setAttribute('data-url', root.getAttribute('data-booking') || ''); host.setAttribute('lang', root.getAttribute('data-lang') || 'en'); host.setAttribute('aria-label', M('slots', 'Pick a time')); mountBooking(host); }
+      }
+    });
+    inlineBooking();
+  }
+
+  // ── Calendly: one script, loaded on demand, one widget per host ──
+  var calendlyLoading = false, calendlyQueue = [];
+  function withCalendly(cb) {
+    if (window.Calendly && window.Calendly.initInlineWidget) return cb();
+    calendlyQueue.push(cb);
+    if (calendlyLoading) return;
+    calendlyLoading = true;
+    var s = document.createElement('script');
+    s.src = 'https://assets.calendly.com/assets/external/widget.js';
+    s.async = true;
+    s.onload = function () { var q = calendlyQueue; calendlyQueue = []; q.forEach(function (f) { f(); }); };
+    document.head.appendChild(s);
+  }
+  function mountBooking(host) {
+    var url = host.getAttribute('data-url');
+    if (!host || !url || host.getAttribute('data-loaded') !== null) return;
+    host.setAttribute('data-loaded', '');
+    host.innerHTML = '';
+    if (/calendly\.com/.test(url)) {
+      var full = url + (url.indexOf('?') === -1 ? '?' : '&') + 'hide_gdpr_banner=1&hide_event_type_details=1';
+      var div = document.createElement('div');
+      div.className = 'calendly-inline-widget';
+      div.style.minHeight = '660px'; div.style.width = '100%';
+      host.appendChild(div);
+      withCalendly(function () { window.Calendly.initInlineWidget({ url: full, parentElement: div }); });
+    } else {
+      var f = document.createElement('iframe');
+      f.src = url; f.title = host.getAttribute('aria-label') || 'Pick a time'; f.loading = 'lazy';
+      f.style.width = '100%'; f.style.minHeight = '660px'; f.style.border = '0';
+      host.appendChild(f);
+    }
+    host.classList.add('is-loaded');
+  }
+  // Inline calendars on the page: desktop mounts them as they scroll near;
+  // phones mount on tap, so the page keeps its height until someone wants it.
+  function inlineBooking() {
+    var hosts = document.querySelectorAll('[data-booking-inline]:not([data-loaded])');
+    if (!hosts.length) return;
+    var wide = window.matchMedia && window.matchMedia('(min-width: 1024px)').matches;
+    Array.prototype.forEach.call(hosts, function (host) {
+      if (host.__inline) return;
+      host.__inline = true;
+      var open = host.querySelector('[data-booking-open]');
+      if (open) open.addEventListener('click', function (e) { e.preventDefault(); mountBooking(host); });
+      if (wide && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); mountBooking(host); } });
+        }, { rootMargin: '300px 0px' });
+        io.observe(host);
       }
     });
   }

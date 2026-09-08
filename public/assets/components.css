@@ -2603,3 +2603,15 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
   .wtable__row { grid-template-columns: 1fr 1.5fr 0.9fr 1.7fr 0.9fr; gap: var(--space-4); align-items: start; }
   .wtable__row--bundle { padding: var(--space-5); }
 }
+
+/* ─── Lead band: form beside calendar ────────────────────────── */
+.lead { display: grid; gap: var(--space-5); align-items: start; margin-top: var(--space-5); }
+@media (min-width: 1024px) { .lead { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); } }
+.lead .qf { margin: 0; }
+.book { padding: var(--space-5); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); }
+.book__title { margin: 0 0 var(--space-2); font-family: var(--serif); font-size: var(--text-2); font-weight: 600; letter-spacing: -0.012em; line-height: 1.15; color: var(--ink-0); }
+.book__lede { margin: 0 0 var(--space-4); font-size: var(--text-0); line-height: 1.5; color: var(--ink-2); }
+.book__host { min-height: 48px; }
+.book__host.is-loaded { min-height: 660px; }
+.book__host .calendly-inline-widget { border-radius: var(--radius-lg); overflow: hidden; }
+.sticky-bar__call--book { justify-content: center; }

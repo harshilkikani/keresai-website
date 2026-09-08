@@ -24,6 +24,10 @@ export const ui = {
       rights: 'All rights reserved.', never: 'Never miss another lead.',
       privacyShort: 'Privacy Policy', termsShort: 'Terms',
     },
+    booking: {
+      eyebrow: 'Get a quote or book a call', h2: 'Five questions, or pick a time.', lede: 'The form gets you a quote worked out before we talk. The calendar skips the form: pick a 20-minute slot and we call you then.',
+      calTitle: 'Book a 20-minute call', calLede: 'No form. Pick a time and we call you.', open: 'Pick a time', slots: 'Available call slots', stickyBook: 'Book a call',
+    },
     sticky: { getAQuote: 'Get a quote', call: 'Call' },
     form: {
       step1: 'About you', step2: 'Your calls', legend1: 'Where should the quote go?', business: 'Business name', mobile: 'Mobile number', industry: 'Industry', chooseOne: 'Choose one',
@@ -90,6 +94,10 @@ export const ui = {
       privacy: 'Política de privacidad', terms: 'Términos de servicio', securityPolicy: 'Política de seguridad', glossary: 'Glosario',
       rights: 'Todos los derechos reservados.', never: 'Nunca pierdas otro cliente.',
       privacyShort: 'Privacidad', termsShort: 'Términos',
+    },
+    booking: {
+      eyebrow: 'Pide cotización o agenda una llamada', h2: 'Cinco preguntas, o elige un horario.', lede: 'El formulario te da una cotización calculada antes de hablar. El calendario se salta el formulario: elige un espacio de 20 minutos y te llamamos a esa hora.',
+      calTitle: 'Agendar una llamada de 20 minutos', calLede: 'Sin formulario. Elige un horario y te llamamos.', open: 'Elegir un horario', slots: 'Horarios disponibles', stickyBook: 'Agendar llamada',
     },
     sticky: { getAQuote: 'Pedir cotización', call: 'Llamar' },
     form: {

@@ -1,0 +1,12 @@
+---
+/** Form beside calendar: the two ways in, on one screen. */
+import QuoteForm from './QuoteForm.astro';
+import BookingEmbed from './BookingEmbed.astro';
+import type { Locale } from '../i18n';
+export interface Props { locale?: Locale; id?: string; kind?: 'quote' | 'custom'; industry?: string; variant?: 'page' | 'embed' }
+const { locale = 'en', id = 'quote', kind = 'quote', industry = '', variant = 'embed' } = Astro.props;
+---
+<div class="lead">
+  <QuoteForm variant={variant} id={id} kind={kind} industry={industry} locale={locale} />
+  <BookingEmbed locale={locale} id="book" />
+</div>
