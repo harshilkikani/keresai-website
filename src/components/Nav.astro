@@ -2,11 +2,11 @@
 import { PHONE } from '../data/site';
 import { type Locale, counterpart, l } from '../i18n';
 import { t } from '../i18n/ui';
-import { agentsFor, foundServicesFor, foundAnchor } from '../i18n/data';
+import { workersFor } from '../i18n/data';
 
 /**
- * Two doors, then the rest. "Get found" opens onto the Found services;
- * "Get answered" onto the four agents. The phone number is the button —
+ * The roster, then the rest. "Workers" opens onto the six workers;
+ * Found and the four agents stay reachable from it and from the footer. The phone number is the button —
  * hearing Remi answer is the fastest demo there is — and "Get a quote"
  * is the quiet text link beside it. EN / ES switcher on the right.
  *
@@ -17,8 +17,7 @@ export interface Props { locale?: Locale; path?: string }
 const { locale = 'en', path = Astro.url.pathname } = Astro.props;
 const ui = t(locale);
 const other = counterpart(locale, path);
-const foundLinks = foundServicesFor(locale).map((s, i) => ({ href: `/services/found#${foundAnchor(i)}`, label: s.name, sub: s.addOn ? ui.nav.addOn : ui.nav.included }));
-const agentLinks = agentsFor(locale).map((a) => ({ href: `/agents/${a.slug}`, label: a.name, sub: a.title }));
+const workerLinks = workersFor(locale).map((w) => ({ href: w.slug === 'custom' ? l(locale, '/custom') : w.href, label: w.name, sub: w.job }));
 const industryLinks = ui.nav.industryLinks.map(([href, label]) => ({ href, label }));
 const resourceLinks = ui.nav.resourceLinks.map(([href, label]) => ({ href, label }));
 ---
@@ -32,40 +31,21 @@ const resourceLinks = ui.nav.resourceLinks.map(([href, label]) => ({ href, label
       <ul class="nav-links">
         <li>
           <details class="nav-drop">
-            <summary>{ui.nav.getFound}</summary>
+            <summary>{ui.nav.workers}</summary>
             <div class="nav-drop__panel nav-drop__panel--two">
-              {foundLinks.map((l) => (
-                <a href={l.href}>
-                  <span class="nav-drop__name">{l.label}</span>
-                  <span class="nav-drop__sub">{l.sub}</span>
-                </a>
-              ))}
-              <a href="/services/found" class="nav-drop__all">
-                <span class="nav-drop__name">{ui.nav.everythingInFound}</span>
-                <span class="nav-drop__sub">{ui.nav.fromPerMonth}</span>
-              </a>
-            </div>
-          </details>
-        </li>
-
-        <li>
-          <details class="nav-drop">
-            <summary>{ui.nav.getAnswered}</summary>
-            <div class="nav-drop__panel">
-              {agentLinks.map((l) => (
-                <a href={l.href}>
-                  <span class="nav-drop__name">{l.label}</span>
-                  <span class="nav-drop__sub">{l.sub}</span>
+              {workerLinks.map((w) => (
+                <a href={w.href}>
+                  <span class="nav-drop__name">{w.label}</span>
+                  <span class="nav-drop__sub">{w.sub}</span>
                 </a>
               ))}
               <a href="/services" class="nav-drop__all">
-                <span class="nav-drop__name">{ui.nav.allSevenStages}</span>
-                <span class="nav-drop__sub">{ui.nav.howTheFourWork}</span>
+                <span class="nav-drop__name">{ui.nav.allWorkers}</span>
+                <span class="nav-drop__sub">{ui.nav.allWorkersSub}</span>
               </a>
             </div>
           </details>
         </li>
-
         <li>
           <details class="nav-drop">
             <summary>{ui.nav.industries}</summary>
@@ -75,7 +55,7 @@ const resourceLinks = ui.nav.resourceLinks.map(([href, label]) => ({ href, label
           </details>
         </li>
 
-        <li><a href="/pricing">{ui.nav.pricing}</a></li>
+        <li><a href={l(locale, '/pricing')}>{ui.nav.pricing}</a></li>
         <li><a href={l(locale, '/custom')}>{ui.nav.custom}</a></li>
 
         <li>
@@ -123,15 +103,12 @@ const resourceLinks = ui.nav.resourceLinks.map(([href, label]) => ({ href, label
 </header>
 
 <div id="mobile-menu" class="mobile-menu" data-open="false" aria-label={ui.nav.mobileNav} transition:persist={`nav-menu-${locale}`}>
-  <p class="mobile-menu__group">{ui.nav.getFound}</p>
-  <a href="/services/found" class="mobile-menu__sub">{ui.nav.everythingInFound} &mdash; {ui.nav.fromPerMonth}</a>
-  {foundLinks.slice(0, 4).map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
-  <p class="mobile-menu__group">{ui.nav.getAnswered}</p>
-  {agentLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label} &mdash; {l.sub}</a>)}
-  <a href="/services" class="mobile-menu__sub">{ui.nav.allSevenStages}</a>
+  <p class="mobile-menu__group">{ui.nav.workers}</p>
+  {workerLinks.map((w) => <a href={w.href} class="mobile-menu__sub">{w.label} &mdash; {w.sub}</a>)}
+  <a href="/services" class="mobile-menu__sub">{ui.nav.allWorkers}</a>
   <p class="mobile-menu__group">{ui.nav.industries}</p>
   {industryLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
-  <a href="/pricing">{ui.nav.pricing}</a>
+  <a href={l(locale, '/pricing')}>{ui.nav.pricing}</a>
   <a href={l(locale, '/custom')}>{ui.nav.custom}</a>
   <p class="mobile-menu__group">{ui.nav.resources}</p>
   {resourceLinks.map((l) => <a href={l.href} class="mobile-menu__sub">{l.label}</a>)}
