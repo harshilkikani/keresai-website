@@ -30,6 +30,12 @@ jobs:
         run: npm ci
       - name: Build with Astro
         run: npm run build
+        # TEMPORARY, by decision on 2026-09-08: publish with the empty keys in
+        # src/config/business.ts omitted (no phone buttons, no prices, Spanish
+        # gated). Remove this env block once the keys are filled so the guard
+        # protects production again.
+        env:
+          KERES_ALLOW_MISSING: "1"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
