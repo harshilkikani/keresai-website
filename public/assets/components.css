@@ -2575,3 +2575,31 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 @media (min-width: 720px) { .k-svc--two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); } }
 .k-svc--two .k-svc__item { padding-block: var(--space-3); border-top: 1px solid var(--line); border-bottom: 0; }
 .k-svc--two .k-svc__desc { margin-top: 4px; font-size: var(--text--1); line-height: 1.45; }
+
+/* ─── /pricing: one row per worker ──────────────────────────── */
+.wtable { margin-top: var(--space-6); border-top: 2px solid var(--ink-0); }
+.wtable__head { display: none; }
+.wtable__row { display: grid; gap: var(--space-3); padding: var(--space-5) 0; border-bottom: 1px solid var(--line); }
+.wtable__cell { min-width: 0; }
+.wtable__name h3 { margin: 0; font-family: var(--serif); font-size: var(--text-2); font-weight: 600; letter-spacing: -0.012em; line-height: 1.1; color: var(--ink-0); }
+.wtable__job { font-size: var(--text-0); line-height: 1.5; color: var(--ink-1); }
+.wtable__price { font-family: var(--serif); font-size: var(--text-1); line-height: 1.2; color: var(--ink-0); }
+.wtable__price strong { font-weight: 600; }
+.wtable__from { font-family: var(--sans); font-size: var(--text--1); font-weight: 500; color: var(--ink-2); }
+.wtable__per { margin-left: 2px; font: 500 0.66rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.wtable__quoted { font-family: var(--sans); font-size: var(--text--1); color: var(--ink-2); }
+.wtable__sub { display: block; margin-top: 4px; font-family: var(--sans); font-size: var(--text--1); color: var(--ink-2); }
+.wtable__inc { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: var(--text--1); line-height: 1.45; color: var(--ink-1); }
+.wtable__inc li { padding-left: 14px; position: relative; }
+.wtable__inc li::before { content: ''; position: absolute; left: 0; top: 0.55em; inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--accent); }
+.wtable__act .btn-k { margin: 0; }
+.wtable__row--bundle { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-5); margin: var(--space-4) 0; }
+@media (max-width: 1023px) {
+  .wtable__cell[data-label]::before { content: attr(data-label); display: block; margin-bottom: 4px; font: 500 0.64rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+  .wtable__inc[data-label]::before { margin-bottom: 6px; }
+}
+@media (min-width: 1024px) {
+  .wtable__head { display: grid; grid-template-columns: 1fr 1.5fr 0.9fr 1.7fr 0.9fr; gap: var(--space-4); padding: var(--space-3) 0; font: 500 0.66rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--line); }
+  .wtable__row { grid-template-columns: 1fr 1.5fr 0.9fr 1.7fr 0.9fr; gap: var(--space-4); align-items: start; }
+  .wtable__row--bundle { padding: var(--space-5); }
+}

@@ -295,7 +295,7 @@ export const quoteFactors = [
   'Which integrations you need',
   'AI search visibility and Local Services Ads add-ons',
   'How many reviews a month you generate',
-  'Whether you bundle Found with an agent plan',
+  'How many workers you hire together',
 ];
 
 /** True of every plan, stated once and reused as a label/value pair. */

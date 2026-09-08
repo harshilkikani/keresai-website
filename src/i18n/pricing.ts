@@ -1,0 +1,68 @@
+// /pricing and /es/pricing: one row per worker.
+import type { Locale } from './index';
+
+export const pricing = {
+  en: {
+    title: 'Pricing — One Price Per Worker, Quoted to You | Keres AI',
+    description: 'Every Keres worker publishes what it starts at: Found, Remi, Theo, June, Sol, and a bundle. Custom is scoped on a call. Month-to-month, live in five business days.',
+    crumbs: ['Home', 'Pricing'],
+    eyebrow: 'Pricing', h1: 'One price per worker. Quoted to your business.',
+    lede: 'You should not have to book a call to find out whether you can afford this. Every worker below publishes what it starts at, and the list further down says exactly what moves the number. Then we scope it on a 20-minute call and you get one flat monthly rate.',
+    call: 'Call', quote: 'Get your quote', simultaneous: ['Simultaneous calls', 'Unlimited. No surcharge.'],
+    terms: [['Contract', 'Month-to-month. Cancel any month.'], ['Go live', 'Five business days.'], ['Usage', 'Per-minute after your included minutes.']],
+    tableEyebrow: 'The roster', tableH2: 'Hire one, hire all, add your own.',
+    tableLede: 'Each worker does one job and reports to the same morning text. Prices are starting points, quoted to your volume.',
+    cols: ['Worker', 'Job', 'From', 'What hiring it includes', ''],
+    from: 'from', perMo: '/mo', quoted: 'Quoted to your volume', scoped: 'Scoped on a call', build: 'build', run: 'run',
+    hire: 'Hire {name}', scope: 'Scope a build', hireAll: 'Hire them all',
+    bundle: { name: 'All of them', job: 'Every worker, one pipeline, one text', includes: ['Found, Remi, Theo and June together', 'One Daily Brief', 'One invoice'] },
+    tableFoot: 'Prices shown are starting points, not caps or averages. Custom is the only worker without a published number: one recurring job is scoped and priced on a 20-minute call.',
+    discount: 'Hire Found with any other worker and save {pct}%.', prefer: 'Prefer to talk it through?',
+    factorsEyebrow: 'No surprises', factorsH2: 'What changes the quote.', factorsLede: 'Seven things, and none of them are a secret. If you can answer these on the phone, we can price you on the same call.',
+    factors: ['How many locations you run', 'Your industry and how long an intake call takes', 'Monthly call volume', 'Which integrations you need', 'AI search visibility and Local Services Ads add-ons', 'How many reviews a month you generate', 'How many workers you hire together'],
+    proofEyebrow: 'Proof', proofH2: 'What it replaces', proofLede: 'The comparison that matters is not against other software. It is against a part-time front desk, an answering service billing you by the minute, and the jobs that went to whoever picked up first.',
+    faqTitle: 'Pricing FAQ',
+    faqs: [
+      ['How much does Keres cost?', 'Each worker publishes a starting price on this page and is then quoted to your call volume, locations and integrations. Custom is the only one without a published number: it is scoped on a 20-minute call because no two jobs are alike.'],
+      ['Is there a contract?', 'No. Every worker is month-to-month and you can cancel any month. There is no minimum term and no cancellation fee.'],
+      ['Is there a setup fee?', 'Not for the workers on the table: design, hosting, care and onboarding are in the monthly fee. Custom has a fixed build price agreed before the work starts, and integration or migration work is quoted separately, in writing.'],
+      ['How does usage billing work?', 'Each worker that talks includes a monthly pool of minutes sized to your volume. Past that pool you pay per minute at your quoted rate. There is no per-call charge and no surcharge for simultaneous calls, so a storm week does not produce a surprise invoice.'],
+      ['Can I add or drop a worker later?', 'Any month, in either direction. Most businesses start with Remi, add Theo once the phone is handled, and bring in June when they want the old database worked.'],
+      ['How long does setup take?', 'Five business days for most accounts. A 20-minute call to map how you answer now, then we write your intake script, connect your number, calendar and CRM, and you test it yourself before it takes a real call.'],
+      ['What happens when a caller needs a human?', 'Remi warm-transfers to your on-call number under rules you set. If nobody picks up, you get a "call me now" alert carrying everything Remi already collected, so the caller never has to repeat themselves.'],
+    ],
+  },
+  es: {
+    title: 'Precios: un precio por trabajador, cotizado a tu negocio | Keres AI',
+    description: 'Cada trabajador de Keres publica desde cuánto empieza: Found, Remi, Theo, June, Sol y un paquete. Custom se define en una llamada. Mes a mes, en marcha en cinco días hábiles.',
+    crumbs: ['Inicio', 'Precios'],
+    eyebrow: 'Precios', h1: 'Un precio por trabajador. Cotizado a tu negocio.',
+    lede: 'No deberías tener que agendar una llamada para saber si puedes pagarlo. Cada trabajador de abajo publica desde cuánto empieza, y la lista de más abajo dice exactamente qué mueve el número. Luego lo definimos en una llamada de 20 minutos y recibes una sola tarifa mensual fija.',
+    call: 'Llamar al', quote: 'Pedir cotización', simultaneous: ['Llamadas simultáneas', 'Ilimitadas. Sin recargo.'],
+    terms: [['Contrato', 'Mes a mes. Cancela cualquier mes.'], ['En marcha', 'Cinco días hábiles.'], ['Uso', 'Por minuto después de los minutos incluidos.']],
+    tableEyebrow: 'El equipo', tableH2: 'Contrata uno, contrátalos todos o agrega el tuyo.',
+    tableLede: 'Cada trabajador hace una sola tarea y reporta al mismo mensaje de la mañana. Los precios son puntos de partida, cotizados a tu volumen.',
+    cols: ['Trabajador', 'Tarea', 'Desde', 'Qué incluye contratarlo', ''],
+    from: 'desde', perMo: '/mes', quoted: 'Cotizado a tu volumen', scoped: 'Se define en una llamada', build: 'desarrollo', run: 'operación',
+    hire: 'Contratar {a}{name}', scope: 'Cotizar mi agente', hireAll: 'Contratarlos a todos',
+    bundle: { name: 'Todos', job: 'Todos los trabajadores, un pipeline, un mensaje', includes: ['Found, Remi, Theo y June juntos', 'Un solo Resumen diario', 'Una sola factura'] },
+    tableFoot: 'Los precios son puntos de partida, no topes ni promedios. Custom es el único trabajador sin número publicado: una tarea recurrente se define y cotiza en una llamada de 20 minutos.',
+    discount: 'Contrata Found con cualquier otro trabajador y ahorra {pct}%.', prefer: '¿Prefieres hablarlo?',
+    factorsEyebrow: 'Sin sorpresas', factorsH2: 'Qué cambia la cotización.', factorsLede: 'Siete cosas, y ninguna es un secreto. Si puedes responderlas por teléfono, podemos cotizarte en la misma llamada.',
+    factors: ['Cuántas ubicaciones tienes', 'Tu industria y cuánto dura una llamada de admisión', 'Volumen mensual de llamadas', 'Qué integraciones necesitas', 'Adicionales de visibilidad en búsqueda con IA y Local Services Ads', 'Cuántas reseñas generas al mes', 'Cuántos trabajadores contratas juntos'],
+    proofEyebrow: 'Prueba', proofH2: 'Qué reemplaza', proofLede: 'La comparación que importa no es contra otro software. Es contra una recepción de medio tiempo, un servicio de contestación que cobra por minuto y los trabajos que se fueron con quien contestó primero.',
+    faqTitle: 'Preguntas sobre precios',
+    faqs: [
+      ['¿Cuánto cuesta Keres?', 'Cada trabajador publica un precio inicial en esta página y luego se cotiza según tu volumen de llamadas, ubicaciones e integraciones. Custom es el único sin número publicado: se define en una llamada de 20 minutos porque no hay dos tareas iguales.'],
+      ['¿Hay contrato?', 'No. Todos los trabajadores son mes a mes y puedes cancelar cualquier mes. No hay plazo mínimo ni cargo por cancelación.'],
+      ['¿Hay cargo de instalación?', 'No para los trabajadores de la tabla: diseño, hosting, mantenimiento e implementación van en la cuota mensual. Custom tiene un precio fijo de desarrollo acordado antes de empezar, y el trabajo de integración o migración se cotiza aparte, por escrito.'],
+      ['¿Cómo funciona el cobro por uso?', 'Cada trabajador que habla incluye una bolsa mensual de minutos ajustada a tu volumen. Pasada esa bolsa pagas por minuto a tu tarifa cotizada. No hay cargo por llamada ni recargo por llamadas simultáneas, así que una semana de tormenta no produce una factura sorpresa.'],
+      ['¿Puedo agregar o quitar un trabajador después?', 'Cualquier mes, en cualquier dirección. La mayoría empieza con Remi, agrega a Theo cuando el teléfono está resuelto y trae a June cuando quiere trabajar la base de datos vieja.'],
+      ['¿Cuánto tarda la implementación?', 'Cinco días hábiles para la mayoría de las cuentas. Una llamada de 20 minutos para mapear cómo contestas hoy, luego escribimos tu guion de admisión, conectamos tu número, calendario y CRM, y tú mismo lo pruebas antes de que tome una llamada real.'],
+      ['¿Qué pasa cuando quien llama necesita a una persona?', 'Remi transfiere en caliente a tu número de guardia bajo las reglas que tú fijas. Si nadie contesta, recibes una alerta de "llámame ahora" con todo lo que Remi ya recogió, para que quien llama nunca tenga que repetirse.'],
+    ],
+  },
+} as const;
+export type Pricing = typeof pricing.en;
+export const pricingCopy = (locale: Locale): Pricing => (pricing[locale] as unknown) as Pricing;
+export const pricingFaqs = (locale: Locale) => pricingCopy(locale).faqs.map(([q, a]) => ({ q, a }));

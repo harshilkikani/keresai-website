@@ -10,7 +10,7 @@ export const ogLocale: Record<Locale, string> = { en: 'en_US', es: 'es_US' };
 
 /** English paths that have a Spanish twin under /es. */
 export const translatedPaths = [
-  '/', '/quote', '/custom',
+  '/', '/quote', '/custom', '/pricing',
   '/go', '/go/home-services', '/go/law', '/go/dental',
   '/go/website', '/go/website/home-services', '/go/website/law', '/go/website/dental',
 ];
