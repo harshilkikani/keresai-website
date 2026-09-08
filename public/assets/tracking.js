@@ -29,6 +29,17 @@
   var LABELS = cfg.labels || {};
   if (!GA4 && !AW && !PIXEL) return;
 
+  // The page language rides on every event so Spanish campaigns can be
+  // measured apart: GA4 event param, Google Ads conversion param, Meta custom data.
+  var LANG = function () { return document.documentElement.lang || 'en'; };
+  // GA4: `language` is gtag's built-in user-language field (reported as the
+  // Language dimension), `page_language` a custom event parameter to register
+  // as a custom dimension. Google Ads conversion pings drop custom parameters,
+  // so a Spanish page uses the *_es label when one is configured (labels.form_submit_es,
+  // tel_click_es, phone_es) and falls back to the base label otherwise.
+  var langParams = function () { return { language: LANG(), page_language: LANG() }; };
+  var labelFor = function (key) { var l = LANG(); return (l !== 'en' && LABELS[key + '_' + l]) || LABELS[key] || ''; };
+
   var uuid = function () {
     return (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
       : 'k-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
@@ -43,13 +54,13 @@
       window.dataLayer = window.dataLayer || [];
       window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
       gtag('js', new Date());
-      if (GA4) gtag('config', GA4, { send_page_view: true });
+      if (GA4) gtag('config', GA4, Object.assign({ send_page_view: true }, langParams()));
       if (AW) {
         gtag('config', AW);
         // Website call conversions: Google swaps the displayed number for a
         // forwarding number for ad visitors and counts calls over 30s.
-        if (LABELS.phone && cfg.phoneDisplay) {
-          gtag('config', AW + '/' + LABELS.phone, { phone_conversion_number: cfg.phoneDisplay });
+        if (labelFor('phone') && cfg.phoneDisplay) {
+          gtag('config', AW + '/' + labelFor('phone'), { phone_conversion_number: cfg.phoneDisplay });
         }
       }
       add('https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA4 || AW));
@@ -62,7 +73,7 @@
       n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
       add('https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', PIXEL);
-      fbq('track', 'PageView');
+      fbq('track', 'PageView', { language: LANG() });
     }
   }
 
@@ -73,13 +84,14 @@
   }
   afterFirstPaint(load);
 
-  function adsConversion(label, extra) {
-    if (!AW || !LABELS[label] || !window.gtag) return;
-    gtag('event', 'conversion', Object.assign({ send_to: AW + '/' + LABELS[label] }, extra || {}));
+  function adsConversion(key, extra) {
+    var label = labelFor(key);
+    if (!AW || !label || !window.gtag) return;
+    gtag('event', 'conversion', Object.assign({ send_to: AW + '/' + label }, langParams(), extra || {}));
   }
   function meta(name, id, params) {
     if (!PIXEL || !window.fbq) return;
-    fbq('track', name, params || {}, { eventID: id });
+    fbq('track', name, Object.assign({ language: LANG() }, params || {}), { eventID: id });
   }
 
   // tel: click → Google Ads conversion + Meta Contact
@@ -90,7 +102,7 @@
     a.setAttribute('data-event-id', id);
     adsConversion('tel_click', { event_id: id });
     meta('Contact', id, { content_name: 'tel_click' });
-    if (GA4 && window.gtag) gtag('event', 'tel_click', { event_id: id });
+    if (GA4 && window.gtag) gtag('event', 'tel_click', Object.assign({ event_id: id }, langParams()));
   }, true);
 
   // form success → Google Ads conversion + Meta Lead (same id as the POST)
@@ -99,14 +111,14 @@
     var id = d.eventId || uuid();
     adsConversion('form_submit', { event_id: id });
     meta('Lead', id, { content_name: d.form || 'form' });
-    if (GA4 && window.gtag) gtag('event', 'generate_lead', { event_id: id, form: d.form || 'form' });
+    if (GA4 && window.gtag) gtag('event', 'generate_lead', Object.assign({ event_id: id, form: d.form || 'form' }, langParams()));
   });
 
   // GA4 page views on client-side navigations (first load is config's own).
   var first = true;
   document.addEventListener('astro:page-load', function () {
     if (first) { first = false; return; }
-    if (GA4 && window.gtag) gtag('event', 'page_view', { page_location: location.href, page_title: document.title });
-    if (PIXEL && window.fbq) fbq('track', 'PageView');
+    if (GA4 && window.gtag) gtag('event', 'page_view', Object.assign({ page_location: location.href, page_title: document.title }, langParams()));
+    if (PIXEL && window.fbq) fbq('track', 'PageView', { language: LANG() });
   });
 })();
