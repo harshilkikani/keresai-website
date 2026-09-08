@@ -19,7 +19,7 @@ export const guides: Guide[] = [
     listTitle: "The Septic Service Automation Playbook",
     listDesc: "Where AI delivers the highest ROI for septic operators: intake triage, pumping reminders, emergency call handling, and invoice follow-up.",
     metaTitle: "Septic Service Business Automation Playbook | Keres AI",
-    description: "The complete playbook for automating septic service operations. Real tactics for intake scheduling, route planning, invoice delivery, and customer follow-up, written for operators.",
+    description: "The playbook for automating septic operations: intake scheduling, route planning, invoice delivery, and customer follow-up — written for operators.",
     titleHtml: "The Septic Service <span class=\"accent\">Automation</span> Playbook",
     readTime: "12 min read",
     order: 0,
