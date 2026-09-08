@@ -131,6 +131,8 @@ export interface FoundService {
   name: string;
   /** 1–2 lines. Used on /services and /services/found. */
   desc: string;
+  /** One line. Used by the homepage's "What Found does" list. */
+  brief: string;
   addOn?: boolean;
 }
 
@@ -138,36 +140,44 @@ export const foundServices: FoundService[] = [
   {
     name: 'Conversion Website',
     desc: 'Five to eight pages on a template built for your vertical, with click-to-call, a booking widget wired to Remi, chat and SMS embedded, schema markup and a live reviews feed. Flat monthly — design, hosting and care in one fee, no build fee at the base tier.',
+    brief: 'Five to eight pages built for your trade, with click-to-call and booking wired to Remi.',
   },
   {
     name: 'Website Care Plan',
     desc: 'Updates, backups, security, uptime and speed monitoring, small content edits, and a monthly report you can actually read.',
+    brief: 'Updates, backups, security and speed, plus a monthly report you can read.',
   },
   {
     name: 'Google Business Profile Management',
     desc: 'One-time optimization — categories, services, photos, Q&A, verification — then weekly posts, photo updates, Q&A, review responses, spam-listing removal and monthly insights.',
+    brief: 'Set up once, then weekly posts, photos, Q&A and review replies.',
   },
   {
     name: 'Review Generation & Reputation',
     desc: 'An automated review request after every job or matter, owner responses drafted for your approval, negative reviews intercepted before they post, and a monthly rating report.',
+    brief: 'A request after every job, replies drafted for your OK, bad ones intercepted.',
   },
   {
     name: 'Local Listings & Citations',
     desc: 'One consistent name, address and phone across Apple, Bing, Yelp, Nextdoor and Angi, plus Avvo and FindLaw for firms or Healthgrades for practices.',
+    brief: 'One name, address and phone across Apple, Bing, Yelp, Nextdoor and your trade directories.',
   },
   {
     name: 'AI Search Visibility',
     desc: 'Structured data, FAQ and service pages written to be quoted by ChatGPT, Google AI Overviews and Perplexity, entity consistency across your profile, listings and site, and a monthly report on whether you are cited for your service near your city.',
+    brief: 'Pages and data written to be quoted by ChatGPT, AI Overviews and Perplexity.',
     addOn: true,
   },
   {
     name: 'Local Services Ads Setup & Response',
     desc: 'Verification, listing and the always-answered guarantee. Google ranks Local Services Ads on how fast you answer and how you are reviewed — Remi answers in two rings.',
+    brief: 'Verified, listed, and every lead answered in two rings.',
     addOn: true,
   },
   {
     name: 'Call Tracking & Attribution',
     desc: 'A tracking number per channel — Google Business Profile, Local Services Ads, your site, your ads — so the Daily Brief can tell you which source produced which booked appointment.',
+    brief: 'A number per channel, so the Daily Brief knows which source booked the job.',
   },
 ];
 

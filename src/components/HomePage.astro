@@ -36,6 +36,7 @@ const found = plans.find((p) => p.slug === 'found')!;
 const answer = plans.find((p) => p.slug === 'answer')!;
 const quote = l(locale, '/quote');
 const bundle = priceAmount('bundle');
+const foundPrice = priceAmount('found');
 const workers = workersFor(locale);
 const fill = (s: string, map: Record<string, string>) => s.replace(/\{(\w+)\}/g, (_, k) => map[k] ?? '');
 const m = t(locale).mocks;
@@ -151,23 +152,25 @@ const h1Groups = c.h1;
     <div class="k-split__aside">
       <Eyebrow n={3}>{c.found.eyebrow}</Eyebrow>
       <h2 id="found-title" class="k-h2">{c.found.h2}</h2>
-      <p class="k-lede">{fill(c.found.lede, { from: fromWord(found.from), note: lawNote })}</p>
-      <div class="k-found__foot">
-        <p class="k-found__price">
-          <span class="k-found__from">{c.found.from}<span data-count>249</span></span>
-          <span class="k-found__per">{c.found.per}</span>
-        </p>
-      </div>
+      <p class="k-lede">{fill(c.found.lede, { price: foundPrice ? fill(c.found.priceClause, { from: `${m.from} ${foundPrice}` }) : '' })}</p>
+      {foundPrice && (
+        <div class="k-found__foot">
+          <p class="k-found__price">
+            <span class="k-found__from">{c.found.from}<span data-count>{foundPrice.replace('$', '')}</span></span>
+            <span class="k-found__per">{c.found.per}</span>
+          </p>
+        </div>
+      )}
       <Button href="/services/found" variant="primary">{c.found.cta}</Button>
     </div>
-    <ul class="k-svc" data-reveal>
+    <ul class="k-svc k-svc--two" data-reveal>
       {foundServices.map((s) => (
         <li class="k-svc__item" data-reveal-child>
           <div class="k-svc__head">
             <h3 class="k-svc__name">{s.name}</h3>
             {s.addOn && <span class="k-svc__plan k-svc__plan--addon">{c.found.addOn}</span>}
           </div>
-          <p class="k-svc__desc">{s.desc}</p>
+          <p class="k-svc__desc">{s.brief}</p>
         </li>
       ))}
     </ul>

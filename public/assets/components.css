@@ -2569,3 +2569,9 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 .scope__row { display: grid; grid-template-columns: 78px 1fr; gap: 8px; align-items: baseline; }
 .scope__row dt { font: 500 0.64rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
 .scope__row dd { margin: 0; font-size: var(--text--1); line-height: 1.4; color: var(--ink-1); }
+
+/* What Found does: eight jobs, two columns, one line each */
+.k-svc--two { border-top: 0; }
+@media (min-width: 720px) { .k-svc--two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); } }
+.k-svc--two .k-svc__item { padding-block: var(--space-3); border-top: 1px solid var(--line); border-bottom: 0; }
+.k-svc--two .k-svc__desc { margin-top: 4px; font-size: var(--text--1); line-height: 1.45; }
