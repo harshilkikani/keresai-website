@@ -2649,8 +2649,9 @@ html[data-motion] .k-hero [data-hero].is-live .shift__foot { animation: shift-in
 @media (prefers-reduced-motion: reduce) { .shift__row, .shift__foot { opacity: 1 !important; transform: none !important; animation: none !important; } .shift__pulse { animation: none; } }
 
 /* homepage Found section: the website and the listing under the copy */
-.k-found__mocks { display: grid; grid-template-columns: minmax(0, 190px) minmax(0, 1fr); gap: var(--space-4); align-items: start; margin-top: var(--space-6); }
-.k-found__mocks .ph { max-width: 190px; margin: 0; }
-.k-found__mocks .k-listing-fig { width: 100%; }
+/* The phone needs its designed width (270px) or its headline wraps and the
+   screen hides under the phone's own call bar; the listing goes beneath it. */
+.k-found__mocks { display: grid; grid-template-columns: 1fr; gap: var(--space-5); justify-items: start; margin-top: var(--space-6); }
+.k-found__mocks .ph { max-width: 270px; margin: 0; }
+.k-found__mocks .k-listing-fig { width: 100%; max-width: 380px; }
 .k-found__mocks .k-mock__caption { display: none; }
-@media (max-width: 719px) { .k-found__mocks { grid-template-columns: 1fr; justify-items: start; } .k-found__mocks .ph { max-width: 220px; } }
