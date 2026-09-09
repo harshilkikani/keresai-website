@@ -2651,7 +2651,7 @@ html[data-motion] .k-hero [data-hero].is-live .shift__foot { animation: shift-in
 /* homepage Found section: the website and the listing under the copy */
 /* The phone needs its designed width (270px) or its headline wraps and the
    screen hides under the phone's own call bar; the listing goes beneath it. */
-.k-found__mocks { display: grid; grid-template-columns: 1fr; gap: var(--space-5); justify-items: start; margin-top: var(--space-6); }
-.k-found__mocks .ph { max-width: 270px; margin: 0; }
+.k-found__mocks { display: grid; grid-template-columns: 1fr; gap: var(--space-5); margin-top: var(--space-6); }
+.k-found__mocks .ph { width: 100%; max-width: 270px; margin: 0; }
 .k-found__mocks .k-listing-fig { width: 100%; max-width: 380px; }
 .k-found__mocks .k-mock__caption { display: none; }
