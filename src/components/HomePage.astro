@@ -159,10 +159,10 @@ const h1Groups = c.h1;
   </div>
 </Section>
 
-<!-- ── WHAT FOUND INCLUDES ────────────────────────────── -->
+<!-- ── WHAT FOUND DOES ────────────────────────────────── -->
 <Section spacing="major" labelledby="found-title" id="found">
-  <div class="k-split k-split--top">
-    <div class="k-split__aside">
+  <div class="k-found">
+    <div class="k-found__copy">
       <Eyebrow n={4}>{c.found.eyebrow}</Eyebrow>
       <h2 id="found-title" class="k-h2">{c.found.h2}</h2>
       <p class="k-lede">{fill(c.found.lede, { price: foundPrice ? fill(c.found.priceClause, { from: `${m.from} ${foundPrice}` }) : '' })}</p>
@@ -175,23 +175,21 @@ const h1Groups = c.h1;
         </div>
       )}
       <Button href="/services/found" variant="primary">{c.found.cta}</Button>
-      <div class="k-found__mocks" data-reveal>
-        <SiteOnPhone locale={locale} caption={false} />
-        <GoogleListing locale={locale} />
-      </div>
     </div>
-    <ul class="k-svc k-svc--two" data-reveal>
-      {foundServices.map((s) => (
-        <li class="k-svc__item" data-reveal-child>
-          <div class="k-svc__head">
-            <h3 class="k-svc__name">{s.name}</h3>
-            {s.addOn && <span class="k-svc__plan k-svc__plan--addon">{c.found.addOn}</span>}
-          </div>
-          <p class="k-svc__desc">{s.brief}</p>
-        </li>
-      ))}
-    </ul>
+    <div class="k-found__phone" data-reveal><SiteOnPhone locale={locale} caption={false} /></div>
+    <div class="k-found__listing" data-reveal><GoogleListing locale={locale} /></div>
   </div>
+  <ul class="k-svc k-svc--four" data-reveal>
+    {foundServices.map((s) => (
+      <li class="k-svc__item" data-reveal-child>
+        <div class="k-svc__head">
+          <h3 class="k-svc__name">{s.name}</h3>
+          {s.addOn && <span class="k-svc__plan k-svc__plan--addon">{c.found.addOn}</span>}
+        </div>
+        <p class="k-svc__desc">{s.brief}</p>
+      </li>
+    ))}
+  </ul>
 </Section>
 
 <!-- ── OWNER DAILY BRIEF ──────────────────────────────── -->
