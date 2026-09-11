@@ -9,6 +9,8 @@ import { cities, states } from '../data/cities';
 import { geoVerticals } from '../data/geoVerticals';
 import { benchmarks } from '../data/benchmarks';
 import { calculators } from '../data/calculators';
+import { workers } from '../data/workers';
+import { priceAmount } from '../config/business';
 
 const ORIGIN = 'https://www.keresai.com';
 const strip = (s: string) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
@@ -47,11 +49,20 @@ export async function GET() {
   push('- AI SDR runs personalized outbound email with deliverability (SPF, DKIM, DMARC, inbox warmup) built in.');
   push('- Integrations: Twilio, Google Calendar, Outlook, HubSpot, Zapier, Make, ServiceTitan, Jobber, Housecall Pro, FieldEdge, Service Fusion, RingCentral.');
   push('- Industries: HVAC, plumbing, roofing, septic, towing, dental, med spa, real estate, legal and professional intake.');
-  push('- Pricing: Flat monthly subscription — no per-call or per-minute fees. Typically costs far less than a full-time receptionist. See /pricing for current plans.');
+  push('- Sold as six AI workers (Found, Remi, Theo, June, Sol, Custom), each with one job and its own starting price, hired alone or together; every worker reports in one morning text. Live in five business days, month-to-month.');
+  push('- Pricing: one price per worker, published as a starting point and quoted to call volume, locations and integrations. No per-call fees; per-minute after included minutes. See /pricing.');
+  push('- Languages: English and Spanish (the homepage, quote, pricing, custom-worker page and ad landings under /es).');
   push();
 
   // ── PRODUCTS ──────────────────────────────────────────────────
   push('## Products');
+  push();
+  push('### The roster: six AI workers');
+  for (const w of workers) {
+    const price = priceAmount(w.priceKey);
+    push(`- ${w.name} (${ORIGIN}${w.href}): ${w.job}. ${w.slug === 'custom' ? 'Fixed build price and a monthly run fee, scoped on a 20-minute call.' : price ? `From ${price}/month, quoted to your volume.` : 'Starting price quoted to your volume.'} Includes: ${w.includes.join('; ')}.`);
+  }
+  push('- All of them: every worker, one pipeline, one text, one invoice.' + (priceAmount('bundle') ? ` Bundles from ${priceAmount('bundle')}/month.` : ''));
   push();
   push(`### AI Receptionist (${ORIGIN}/ai-receptionist)`);
   push('What it does: Answers every inbound call 24/7 in two rings. Greets callers naturally, qualifies the service request, books the appointment on your calendar, sends your team a summary, and dispatches emergencies by text immediately.');
@@ -89,7 +100,7 @@ export async function GET() {
 
   // ── PRICING CONTEXT (AI citation for pricing queries) ──────────
   push('## Pricing context');
-  push('Keres AI uses flat monthly subscription pricing with no per-call, per-minute, or overtime charges.');
+  push('Keres AI prices per worker: each of Found, Remi, Theo, June and Sol publishes a starting monthly price and is quoted to call volume, locations and integrations; Custom is scoped on a call with a fixed build price and a monthly run fee. Month-to-month, no per-call charges, per-minute after the included minutes.');
   push('For detailed current pricing: https://www.keresai.com/pricing');
   push();
   push('Cost comparison context:');
@@ -314,7 +325,9 @@ export async function GET() {
 
   // ── GET STARTED ───────────────────────────────────────────────
   push('## Get started');
-  push(`- Get a quote: ${ORIGIN}/quote`);
+  push(`- Get a quote: ${ORIGIN}/quote (five questions, then a 20-minute call; the booking calendar is on the same page)`);
+  push(`- Custom worker: ${ORIGIN}/custom`);
+  push(`- Spanish: ${ORIGIN}/es · ${ORIGIN}/es/quote · ${ORIGIN}/es/pricing · ${ORIGIN}/es/custom`);
   push(`- Pricing: ${ORIGIN}/pricing`);
   push(`- Contact: ${business.contactEmail}`);
   push(`- All comparisons: ${ORIGIN}/compare`);

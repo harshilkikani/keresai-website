@@ -7,6 +7,9 @@
 
 import type { APIRoute } from 'astro';
 import { agents, plans, foundServices, PHONE, EMAIL, ORIGIN } from '../data/site';
+import { workers } from '../data/workers';
+import { priceAmount, business } from '../config/business';
+import { translatedPaths } from '../i18n';
 import { stages, stageLabel } from '../data/leaks';
 import { hubs } from '../data/hubs';
 
@@ -14,63 +17,61 @@ const u = (p: string) => `${ORIGIN}${p}`;
 
 export const GET: APIRoute = () => {
   const found = plans.find((p) => p.slug === 'found')!;
+  const priceLine = (key: Parameters<typeof priceAmount>[0], per = '/month') => { const v = priceAmount(key); return v ? `from ${v}${per}` : 'quoted to your volume'; };
 
   const body = `# Keres AI
 
-> Keres AI is an AI workforce for businesses whose sales team is whoever picks up the phone. Four named agents answer the call, follow up, reactivate past customers and run outbound, and a visibility layer called Found gets the firm found in the first place.
+> Keres AI sells AI workers for local businesses. Each worker does one job, reports to the owner in one text every morning, and can be hired alone or together: Found gets you found (website, Google listing, reviews), Remi answers every call in two rings and books it, Theo confirms and reminds, June brings past customers back and asks for the review, Sol finds new customers by email, and Custom is built for any recurring job. Live in five business days, month-to-month, in English and Spanish.
 
-Keres serves law firms, home-services contractors (HVAC, plumbing, roofing, septic, towing), dental practices and med spas, and real-estate teams — the businesses where the next call is the next deal.
+Keres serves law firms, home-services contractors (HVAC, plumbing, roofing, septic, towing), dental practices and med spas, and real-estate teams: the businesses whose sales team is whoever picks up the phone.
 
 Key facts:
-- Every call answered in two rings, 24/7, including nights, weekends and holidays.
-- Live in five business days. Month-to-month, no contract. Per-minute usage after included minutes.
-- Plans: ${plans.map((p) => `${p.name} (${p.from})`).join(', ')}.
-- Found starts at $249/month; law firms from $499/month.
-- Owner Daily Brief: one morning text with calls answered, leads qualified, appointments booked, no-shows prevented, reviews posted, and which source produced the bookings.
+- Six workers, hired one at a time or together. Each publishes a starting price on ${u('/pricing')} and is quoted to call volume, locations and integrations.
+- Every call answered in two rings, 24/7, including nights, weekends and holidays. Unlimited simultaneous calls.
+- Live in five business days. Month-to-month, no contract, no cancellation fee. Per-minute usage after included minutes.
+- Owner Daily Brief: one morning text with calls answered, leads qualified, appointments booked, no-shows prevented, reviews posted, and which source produced the bookings. Every worker reports to the same text.
 - Human escalation is a feature: warm transfer, or a "call me now" alert carrying the intake already collected.
+- Spanish: the homepage, quote page, pricing, custom-worker page and ad landings exist under ${u('/es')}.
 ${PHONE ? `- Phone: ${PHONE.display}\n` : ''}- Contact: ${EMAIL}
 - Full reference (definitions, FAQs, descriptions): ${u('/llms-full.txt')}
 
-## The four agents
-${agents
-  .map(
-    (a) => `- **${a.name} — ${a.title}** (${u(`/agents/${a.slug}`)}): ${a.job} Also searched as "${a.searchTerm}". First included in the ${a.includedIn} plan.
-${a.bullets.map((b) => `  - ${b}`).join('\n')}`
-  )
+## The roster: six workers
+${workers
+  .map((w) => `- **${w.name}** (${u(w.href)}): ${w.job}. ${w.slug === 'custom' ? `Build ${priceLine('customBuild', ' one time')}, run ${priceLine('customRun')}; scoped on a 20-minute call.` : `Price: ${priceLine(w.priceKey)}.`} Includes: ${w.includes.join('; ')}.`)
   .join('\n')}
+- **All of them**: every worker, one pipeline, one text, one invoice. Bundles ${priceLine('bundle')}.
 
-On a customer's own line each agent introduces itself with whatever name that customer configures. Remi, Theo, June and Sol are the product's default names.
+On a customer's own line each worker introduces itself with whatever name that customer configures. Remi, Theo, June and Sol are the product's default names.
+
+## How to buy
+- Get a quote: ${u('/quote')} — five questions, then a 20-minute call with the number ready. Spanish: ${u('/es/quote')}.
+- Book the call directly on the calendar embedded on the same page: ${business.bookingUrl}
+- Custom worker: ${u('/custom')} — one recurring job, one-page scope, fixed build price, monthly run fee, first version in two weeks, you approve everything it publishes.
 
 ## The pipeline — seven stages
 A small firm's revenue is one pipeline, and Keres covers every stage of it. A customer can start at whichever stage leaks most.
 
 ${stages
-  .map((s) => `${stageLabel(s.n)}. **${s.name}** — ${s.leak} Handled by ${s.by}: ${s.fix} (${u(s.href)})`)
+  .map((s) => `${stageLabel(s.n)}. **${s.name}** — ${s.leak} Worker: ${s.by}. ${s.fix} (${u(s.href)})`)
   .join('\n')}
 
-## Found — the visibility layer (${found.from}/month, law firms from $499)
+## Found — one worker, eight jobs (${priceLine('found')})
 ${u('/services/found')}
 
 ${foundServices.map((s) => `- **${s.name}**${s.addOn ? ' (add-on)' : ''}: ${s.desc}`).join('\n')}
 
 Not sold by Keres, referred to partners instead: Google Ads and PPC management, video and photography, bespoke branding, generic social media management, generic SEO retainers.
 
-## Plans
-${plans
-  .map(
-    (p) =>
-      `- **${p.name}** — ${p.from}${p.fromNote ? ` (${p.fromNote})` : ''}, quoted to your volume. ${p.summary} Includes: ${p.includes.join('; ')}.`
-  )
-  .join('\n')}
-
-What changes the quote: locations, industry, monthly call volume, integrations, AI search and Local Services Ads add-ons, review volume, and whether Found is bundled with an agent plan.
+## Pricing
+One price per worker, published as a starting point and quoted to your business. Month-to-month. What changes the quote: locations, industry, monthly call volume, integrations, AI search and Local Services Ads add-ons, review volume, and how many workers you hire together. ${u('/pricing')} (Spanish: ${u('/es/pricing')})
 
 ## Core pages
-- [Home](${u('/')}): the pipeline, the four agents, and what each stage leaks.
-- [Services](${u('/services')}): all seven stages with every service and the plan that includes it.
-- [Found](${u('/services/found')}): websites, Google Business Profile, reviews, listings and AI search from $249/month.
-- [Pricing](${u('/pricing')}): five plans, published floors, and what changes the quote.
-- [Book a demo](${u('/quote')}): schedule a live walkthrough${PHONE ? `, or call ${PHONE.display}` : ''}.
+- [Home](${u('/')}): the roster of six workers, the pipeline, and what each stage leaks.
+- [All workers](${u('/services')}): the seven stages and the worker that handles each.
+- [Found](${u('/services/found')}): website, Google Business Profile, reviews, listings and AI search.
+- [Custom worker](${u('/custom')}): any recurring job, scoped and built for you.
+- [Pricing](${u('/pricing')}): one row per worker and what changes the quote.
+- [Get a quote](${u('/quote')}): the form and the booking calendar${PHONE ? `, or call ${PHONE.display}` : ''}.
 - [Hear it](${u('/hear-it')}): recorded sample calls per vertical.
 
 ## Industry hubs
@@ -118,6 +119,9 @@ Anything else connects by webhook or CSV.
 ## Trust and company
 - [Trust & security](${u('/trust')}): data handling, DPAs, access logging.
 - [About](${u('/about')}) · [Partners](${u('/partners')}) · [Customers](${u('/customers')}) · [Contact](${u('/contact')})
+
+## Spanish (español)
+${translatedPaths.map((p) => `- ${u(p === '/' ? '/es' : '/es' + p)}`).join('\n')}
 
 ## Resources
 - [Guides & playbooks](${u('/blog')})

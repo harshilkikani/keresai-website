@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import Schema from '../components/Schema.astro';
 import HomePage from '../components/HomePage.astro';
-import { organizationSchema, softwareApplicationSchema, websiteSchema, faqSchema } from '../data/schema';
+import { organizationSchema, softwareApplicationSchema, websiteSchema, faqSchema, workerServiceSchemas } from '../data/schema';
 import { homeCopy, faqsFor } from '../i18n/home';
 const c = homeCopy('en');
 ---
 <Layout title={c.title} description={c.description} path="/" locale="en" quoteHref="#lead">
-  <Schema slot="head" graph={[organizationSchema, softwareApplicationSchema, websiteSchema, faqSchema(faqsFor('en'))]} />
+  <Schema slot="head" graph={[organizationSchema, ...workerServiceSchemas, softwareApplicationSchema, websiteSchema, faqSchema(faqsFor('en'))]} />
   <HomePage locale="en" />
   <script slot="scripts" src="/assets/roi.js?v=7" defer is:inline></script>
   <script slot="scripts" src="/assets/quote.js?v=4" defer is:inline></script>

@@ -1,6 +1,8 @@
 import { business } from '../config/business';
 // Centralized JSON-LD building blocks. Keep entity identity consistent everywhere.
 import { PHONE } from './site';
+import { workers } from './workers';
+import { priceAmount } from '../config/business';
 
 const ORIGIN = 'https://www.keresai.com';
 
@@ -17,7 +19,7 @@ export const organizationSchema = {
     height: 400,
   },
   description:
-    'Keres AI is an AI receptionist and AI SDR platform for service businesses. It answers every call 24/7 in two rings, books appointments, qualifies leads, and runs AI-powered outbound email that lands in the inbox — so businesses never miss a lead, day or night.',
+    'Keres AI sells AI workers for local businesses. Each does one job: Found gets you found (website, Google listing, reviews), Remi answers every call in two rings and books it, Theo confirms and reminds, June brings past customers back, Sol finds new customers by email, and Custom is built for any recurring job. Every worker reports in one morning text. Live in five business days, month-to-month, in English and Spanish.',
   foundingDate: '2024',
   slogan: 'Never miss another lead.',
   areaServed: { '@type': 'Country', name: 'United States' },
@@ -54,7 +56,7 @@ export const organizationSchema = {
     ...(PHONE ? { telephone: PHONE.e164 } : {}),
     url: `${ORIGIN}/quote`,
     email: business.contactEmail,
-    availableLanguage: 'English',
+    availableLanguage: ['English', 'Spanish'],
     hoursAvailable: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -62,7 +64,39 @@ export const organizationSchema = {
       closes: '23:59',
     },
   },
+  // The roster as an offer catalog. Prices appear only when the config key is
+  // set; an Offer without a price is valid here because Organization has no
+  // rich-result contract that requires one.
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'AI workers',
+    itemListElement: workers.map((w) => {
+      const price = priceAmount(w.priceKey).replace('$', '');
+      return {
+        '@type': 'Offer',
+        itemOffered: { '@id': `${ORIGIN}${w.href}#service` },
+        url: `${ORIGIN}${w.href}`,
+        availability: 'https://schema.org/InStock',
+        ...(price ? { price, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price, priceCurrency: 'USD', unitText: w.slug === 'custom' ? 'month (run fee; build priced on scope)' : 'month', billingIncrement: 1 } } : {}),
+      };
+    }),
+  },
 };
+
+/** One Service node per worker, referenced by the Organization's offer catalog. */
+export const workerServiceSchemas = workers.map((w) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${ORIGIN}${w.href}#service`,
+  name: `${w.name} — AI worker`,
+  serviceType: w.job,
+  description: `${w.name}: ${w.job}. Includes ${w.includes.join('; ')}.`,
+  url: `${ORIGIN}${w.href}`,
+  provider: { '@id': `${ORIGIN}/#organization` },
+  areaServed: { '@type': 'Country', name: 'United States' },
+  availableLanguage: ['English', 'Spanish'],
+  audience: { '@type': 'Audience', audienceType: 'Local businesses: home services, law firms, dental practices, med spas, real estate' },
+}));
 
 export const softwareApplicationSchema = {
   '@context': 'https://schema.org',
@@ -70,7 +104,7 @@ export const softwareApplicationSchema = {
   '@id': `${ORIGIN}/#software`,
   name: 'Keres AI',
   applicationCategory: 'BusinessApplication',
-  applicationSubCategory: 'AI Receptionist & AI SDR Platform',
+  applicationSubCategory: 'AI workers for local businesses: AI receptionist, follow-up, reactivation, outbound email, local visibility',
   operatingSystem: 'Web',
   url: ORIGIN,
   description:

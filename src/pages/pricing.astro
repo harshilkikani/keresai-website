@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import Schema from '../components/Schema.astro';
 import PricingPage from '../components/PricingPage.astro';
-import { organizationSchema, softwareApplicationSchema, faqSchema, breadcrumbSchema } from '../data/schema';
+import { organizationSchema, softwareApplicationSchema, faqSchema, breadcrumbSchema, workerServiceSchemas } from '../data/schema';
 import { pricingCopy, pricingFaqs } from '../i18n/pricing';
 const p = pricingCopy('en');
 const crumbs = [{ name: p.crumbs[0], path: 'en' === 'es' ? '/es' : '/' }, { name: p.crumbs[1], path: '/pricing' }];
 ---
 <Layout title={p.title} description={p.description} path="/pricing" locale="en">
-  <Schema slot="head" graph={[softwareApplicationSchema, faqSchema(pricingFaqs('en')), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[organizationSchema, ...workerServiceSchemas, softwareApplicationSchema, faqSchema(pricingFaqs('en')), breadcrumbSchema(crumbs)]} />
   <PricingPage locale="en" />
 </Layout>
