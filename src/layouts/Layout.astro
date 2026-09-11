@@ -56,6 +56,39 @@ const ui = t(locale);
 const basePath = stripLocale(path);
 const hasTwin = translatedPaths.includes(basePath);
 
+// Meta descriptions over ~160 characters get cut by search engines mid-word.
+// Keep whole sentences that fit; if the first sentence alone is too long,
+// cut at its last clause break. Pages can still pass a long description.
+const trimDescription = (d: string): string => {
+  const full = d.replace(/\s+/g, ' ').trim();
+  if (full.length <= 160) return full;
+  const sentences = full.match(/[^.!?]+[.!?]+(?:\s|$)/g) ?? [full];
+  let out = '';
+  for (const sentence of sentences) { if ((out + sentence).trim().length > 160) break; out += sentence; }
+  out = out.trim();
+  if (out.length >= 60) return out;
+  const cut = full.slice(0, 156);
+  const i = Math.max(cut.lastIndexOf(', '), cut.lastIndexOf(' — '), cut.lastIndexOf('; '), cut.lastIndexOf(': '));
+  return (i > 60 ? cut.slice(0, i) : cut.slice(0, cut.lastIndexOf(' '))).replace(/[,;:—\s]+$/, '') + '.';
+};
+const seoDescription = trimDescription(description);
+
+// One WebPage node per page: language, site membership, and the link to its
+// translation, so search and AI crawlers see the EN/ES pair as one work.
+const webPageNode = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${origin}${path}#webpage`,
+  url: origin + path,
+  name: title,
+  description: seoDescription,
+  inLanguage: locale === 'es' ? 'es-US' : 'en-US',
+  isPartOf: { '@id': `${origin}/#website` },
+  about: { '@id': `${origin}/#organization` },
+  ...(hasTwin && locale === 'en' ? { workTranslation: { '@id': `${origin}${localePath('es', basePath)}#webpage` } } : {}),
+  ...(hasTwin && locale === 'es' ? { translationOfWork: { '@id': `${origin}${localePath('en', basePath)}#webpage` } } : {}),
+});
+
 const origin = 'https://www.keresai.com';
 
 // motion.js is inlined so it can stamp html[data-motion] before first
@@ -119,7 +152,7 @@ const META_DOMAIN_VERIFICATION = '';
 {goatcounterEndpoint && <script data-goatcounter={goatcounterEndpoint} async src="https://gc.zgo.at/count.js" is:inline></script>}
 
 <title>{title}</title>
-<meta name="description" content={description} />
+<meta name="description" content={seoDescription} />
 <meta name="author" content="Keres AI" />
 {(noindex || go)
   ? <meta name="robots" content="noindex, nofollow" />
@@ -150,7 +183,7 @@ const META_DOMAIN_VERIFICATION = '';
 <meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonical} />
 <meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta property="og:description" content={seoDescription} />
 <meta property="og:image" content={ogImageAbs} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -163,7 +196,7 @@ const META_DOMAIN_VERIFICATION = '';
 <meta name="twitter:site" content="@keresai" />
 <meta name="twitter:creator" content="@keresai" />
 <meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:description" content={seoDescription} />
 <meta name="twitter:image" content={ogImageAbs} />
 
 <link rel="preconnect" href="https://formspree.io" crossorigin />
@@ -194,6 +227,7 @@ const META_DOMAIN_VERIFICATION = '';
 
 <!-- Page-specific structured data + head extras -->
 <slot name="head" />
+<script type="application/ld+json" set:html={webPageNode}></script>
 </head>
 
 <body class:list={[bare && 'is-bare']} data-conversion={conversion}>

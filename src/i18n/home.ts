@@ -5,7 +5,7 @@ import { priceFrom } from '../config/business';
 
 export const home = {
   en: {
-    title: 'Get Found, Get Answered, Get Booked | Keres AI',
+    title: 'AI Receptionist & AI Workers for Local Businesses | Keres AI',
     description: 'A conversion website and a managed Google listing so you show up, and Remi answering every call in two rings so the call gets booked. Live in five days, from $249/month.',
     eyebrow: 'AI workers for local businesses',
     h1: [['Get', 'found.'], ['Get', 'answered.'], ['Get', 'booked.']],
@@ -77,7 +77,7 @@ export const home = {
     close: { h2: 'Call the number and listen to Remi answer.', lede: 'It is the same agent your callers would get. Ask it something awkward — that is the point of the exercise. Found from {found}/month', remi: '; Remi from {price}/month' },
   },
   es: {
-    title: 'Que te encuentren, te contesten y te reserven | Keres AI',
+    title: 'Trabajadores de IA para negocios locales | Keres AI',
     description: 'Un sitio web hecho para convertir y una ficha de Google administrada para que aparezcas, y Remi contestando cada llamada en dos timbres para que se agende. En cinco días, desde $249/mes.',
     eyebrow: 'Trabajadores de IA para negocios locales',
     h1: [['Que', 'te', 'encuentren.'], ['Que', 'te', 'contesten.'], ['Que', 'te', 'reserven.']],
