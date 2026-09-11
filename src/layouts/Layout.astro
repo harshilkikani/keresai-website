@@ -73,21 +73,6 @@ const trimDescription = (d: string): string => {
 };
 const seoDescription = trimDescription(description);
 
-// One WebPage node per page: language, site membership, and the link to its
-// translation, so search and AI crawlers see the EN/ES pair as one work.
-const webPageNode = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': `${origin}${path}#webpage`,
-  url: origin + path,
-  name: title,
-  description: seoDescription,
-  inLanguage: locale === 'es' ? 'es-US' : 'en-US',
-  isPartOf: { '@id': `${origin}/#website` },
-  about: { '@id': `${origin}/#organization` },
-  ...(hasTwin && locale === 'en' ? { workTranslation: { '@id': `${origin}${localePath('es', basePath)}#webpage` } } : {}),
-  ...(hasTwin && locale === 'es' ? { translationOfWork: { '@id': `${origin}${localePath('en', basePath)}#webpage` } } : {}),
-});
 
 const origin = 'https://www.keresai.com';
 
@@ -104,6 +89,21 @@ const callbackOrigin = (() => { try { return new URL(business.remiCallbackEndpoi
 const motionSrc = readFileSync(new URL('../../public/assets/motion.js', import.meta.url), 'utf8');
 const motionHash = "'sha256-" + createHash('sha256').update(motionSrc).digest('base64') + "'";
 const canonical = origin + path;
+// One WebPage node per page: language, site membership, and the link to its
+// translation, so search and AI crawlers see the EN/ES pair as one work.
+const webPageNode = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${origin}${path}#webpage`,
+  url: origin + path,
+  name: title,
+  description: seoDescription,
+  inLanguage: locale === 'es' ? 'es-US' : 'en-US',
+  isPartOf: { '@id': `${origin}/#website` },
+  about: { '@id': `${origin}/#organization` },
+  ...(hasTwin && locale === 'en' ? { workTranslation: { '@id': `${origin}${localePath('es', basePath)}#webpage` } } : {}),
+  ...(hasTwin && locale === 'es' ? { translationOfWork: { '@id': `${origin}${localePath('en', basePath)}#webpage` } } : {}),
+});
 const ogImageAbs = ogImage.startsWith('http') ? ogImage : origin + ogImage;
 
 // ── Analytics + verification ──────────────────────────────
