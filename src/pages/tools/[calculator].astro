@@ -73,6 +73,31 @@ const webpage = webPageSchema({
     </div>
   </section>
 
+  {(c.example || c.formula || c.assumptions || c.nextSteps) && (
+    <section class="page-section container container-narrow">
+      <div class="prose">
+        {c.example && (<><h2>Worked example</h2><p set:html={c.example} /></>)}
+        {c.formula && (<><h2>The formula in words</h2><p set:html={c.formula} /></>)}
+        {c.assumptions && c.assumptions.length > 0 && (
+          <>
+            <h2>Assumptions behind the number</h2>
+            <ul>
+              {c.assumptions.map((a) => (
+                <li>
+                  <span set:html={a.text} />{' '}
+                  {a.source
+                    ? <em>Source: <a href={a.source.url} rel="noopener" target="_blank">{a.source.label}</a></em>
+                    : <em>Keres AI assumption.</em>}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+        {c.nextSteps && (<><h2>What to do with this number</h2><div set:html={c.nextSteps} /></>)}
+      </div>
+    </section>
+  )}
+
   <FaqSection faqs={c.faqs} title="Calculator FAQ" />
 
   <section class="page-section container">
