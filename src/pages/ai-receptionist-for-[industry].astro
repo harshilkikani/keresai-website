@@ -115,6 +115,7 @@ const webpage = webPageSchema({
 
 // Peer industries for the "Also serves" cross-link section (exclude current)
 const peerIndustries = industries.filter((i) => i.slug !== ind.slug).slice(0, 5);
+import { guidesFor } from '../data/guides';
 ---
 <Layout title={ind.title} description={ind.description} path={path}>
   <Schema slot="head" graph={[
@@ -293,8 +294,14 @@ const peerIndustries = industries.filter((i) => i.slug !== ind.slug).slice(0, 5)
         <li><a href="/glossary/appointment-booking-automation">Appointment booking automation</a> — no more phone tag</li>
         <li><a href="/glossary/lead-response-time">Lead response time</a> — why speed to lead wins the job</li>
         <li><a href="/use-cases/after-hours-answering">After-hours answering</a> · <a href="/use-cases/overflow-call-handling">Overflow handling</a> · <a href="/use-cases/lead-capture">Lead capture</a></li>
-        {bench && <li><a href={`/benchmarks/${bench.slug}`}>{bench.h1} {bench.h1Accent}</a> — citable {bench.category} data on answering and conversion</li>}
+        {bench && <li><a href={`/benchmarks/${bench.slug}`}>{bench.h1} {bench.h1Accent}</a> — {bench.category} estimates on answering and conversion</li>}
       </ul>
+      {guidesFor(ind.slug).length > 0 && (
+        <>
+          <h2>Guides for {ind.shortLower} operators</h2>
+          <ul>{guidesFor(ind.slug).map((g) => <li><a href={`/guides/${g.slug}.html`}>{g.listTitle}</a> — {g.listDesc}</li>)}</ul>
+        </>
+      )}
     </div>
   </section>
 

@@ -100,7 +100,7 @@ export const agents: Agent[] = [
     bullets: [
       'Runs reactivation campaigns against past customers and the cold leads already sitting in your CRM.',
       'Revives closed-lost — anyone who said no in the last six to twelve months gets asked again, properly.',
-      'Asks for the review after every completed job or matter, and routes the unhappy ones to you privately first.',
+      'Asks every customer for a review after each completed job or matter, and flags anyone who reports a problem to you so you can fix it.',
     ],
     includedIn: 'Grow',
   },

@@ -110,7 +110,7 @@ export const hubs: Hub[] = [
     ],
     otherAgents: [
       { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Worker', text: 'Confirms the consultation, reminds the day before, handles the reschedule, and collects documents in advance so the attorney is not chasing a police report an hour before the meeting.' },
-      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Revives closed-lost consultations from the last six to twelve months, and asks for the review after every matter closes — with unhappy clients routed to the partner privately first.' },
+      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Revives closed-lost consultations from the last six to twelve months, and asks every client for a review after the matter closes — anyone who reports a problem also reaches the partner directly.' },
     ],
     foundFrom: 'from $499',
     foundLine:
@@ -237,7 +237,7 @@ export const hubs: Hub[] = [
     ],
     otherAgents: [
       { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Worker', text: 'Confirms every appointment, reminds on your schedule, handles reschedules in thread, and backfills a cancellation from the waitlist before the chair goes empty.' },
-      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Works the recall list every month, revives patients who lapsed, and asks for the review after treatment — routing anyone unhappy to the practice manager privately.' },
+      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Works the recall list every month, revives patients who lapsed, and asks every patient for a review after treatment — anyone who reports a problem also reaches the practice manager directly.' },
     ],
     foundFrom: 'from $249',
     foundLine:

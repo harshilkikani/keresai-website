@@ -27,6 +27,7 @@ const crumbs = [
   { name: hub.name, path },
 ];
 const answer = plans.find((p) => p.slug === 'answer')!;
+import { guidesFor } from '../../data/guides';
 ---
 <Layout title={hub.title} description={hub.description} path={path}>
   <Schema
@@ -287,6 +288,11 @@ const answer = plans.find((p) => p.slug === 'answer')!;
       <ul class="k-childlinks">
         {hub.children.map((c) => (
           <li><a href={c.href}>{c.label}
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></li>
+        ))}
+        {guidesFor(hub.slug).map((g) => (
+          <li><a href={`/guides/${g.slug}.html`}>{g.listTitle}
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a></li>
         ))}

@@ -242,7 +242,7 @@ export const agentPages: AgentPage[] = [
       {
         h2: 'Review and referral requests',
         answer:
-          'June asks for the review after every completed job or matter, at the point where the customer is happiest. Anyone who signals they are unhappy is routed privately to the owner first instead of being pushed toward a public review, and the customers who rated you highest are the ones asked for a referral.',
+          'June asks for the review after every completed job or matter, at the point where the customer is happiest. Every customer gets the same review request; anyone who reports a problem also reaches the owner directly, and the customers who rated you highest are the ones asked for a referral.',
         bullets: [
           'An automatic ask after every completed job or matter.',
           'Every customer gets the same review request; anyone who reports a problem also reaches the owner directly.',

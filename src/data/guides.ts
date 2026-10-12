@@ -109,3 +109,19 @@ export const guides: Guide[] = [
     order: 6,
   },
 ];
+
+/** Guides worth linking from a trade or hub page, by industry or hub slug. */
+const GUIDE_MAP: Record<string, string[]> = {
+  hvac: ['hvac-scaling-checklist', 'customer-intake-automation', 'measuring-automation-roi'],
+  plumbers: ['customer-intake-automation', 'integrating-ai-into-your-stack', 'measuring-automation-roi'],
+  roofing: ['roofing-growth-through-ai', 'customer-intake-automation', 'measuring-automation-roi'],
+  septic: ['septic-automation-playbook', 'customer-intake-automation', 'measuring-automation-roi'],
+  towing: ['towing-operations-automation', 'customer-intake-automation', 'integrating-ai-into-your-stack'],
+  'med-spas': ['customer-intake-automation', 'measuring-automation-roi'],
+  'home-services': ['hvac-scaling-checklist', 'roofing-growth-through-ai', 'septic-automation-playbook', 'towing-operations-automation', 'customer-intake-automation'],
+  'law-firms': ['customer-intake-automation', 'measuring-automation-roi'],
+  'dental-med-spa': ['customer-intake-automation', 'measuring-automation-roi'],
+  'real-estate': ['customer-intake-automation', 'measuring-automation-roi'],
+};
+export const guidesFor = (slug: string): Guide[] =>
+  (GUIDE_MAP[slug] ?? []).map((s) => guides.find((g) => g.slug === s)).filter((g): g is Guide => Boolean(g));
