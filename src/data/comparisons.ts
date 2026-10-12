@@ -11,6 +11,12 @@ export interface Comparison {
   intro: string;
   rows: { feature: string; keres: string; them: string }[];
   faqs: { q: string; a: string }[];
+  /**
+   * Turns the page into an honest roundup of alternatives (keys of
+   * answeringVendors), with Keres as one labelled row. The sourced roundup
+   * table replaces the Keres-vs-them feature table on these pages.
+   */
+  roundup?: string[];
 }
 
 export const comparisons: Comparison[] = [
@@ -94,12 +100,11 @@ export const comparisons: Comparison[] = [
     competitor: 'Smith.ai',
     category: 'Virtual receptionist & answering service',
     pillar: 'inbound',
-    title: 'Smith.ai Alternative: AI Receptionist, No Per-Call Fees | Keres AI',
-    description:
-      'Looking for a Smith.ai alternative? Keres AI answers every call 24/7, books appointments, and charges one monthly rate with included minutes — no per-call fees. See the full comparison.',
+    title: 'Smith.ai Alternatives Compared (2026): Prices & Billing | Keres AI',
+    description: 'Eight Smith.ai alternatives side by side: human, AI or hybrid, how each one bills (per call, per minute or per caller), and the lowest published price, plus where Keres AI fits.',
     h1Accent: 'Smith.ai',
-    intro:
-      'Smith.ai pairs human agents with AI and bills per call or conversation, which gets expensive as volume grows. Keres is a fully AI receptionist that answers every call 24/7 on one monthly rate with included minutes and books appointments on your calendar, with outbound email (Sol) available as a separate worker.',
+    intro: 'Smith.ai pairs AI with live receptionists and bills per call. If you are comparing alternatives, the real differences are who answers (a person, AI or both) and how you are billed. Here are the main options with the prices each vendor publishes, and where Keres fits.',
+    roundup: ['Ruby', 'PATLive', 'Abby Connect', 'Goodcall', 'Rosie', 'Dialzara', 'Upfirst', 'My AI Front Desk'],
     rows: [
       { feature: 'Answers 24/7', keres: 'Yes', them: 'Yes' },
       { feature: 'No per-call fees', keres: 'Yes', them: 'No' },
@@ -119,14 +124,13 @@ export const comparisons: Comparison[] = [
     competitor: 'Ruby',
     category: 'Virtual receptionist service',
     pillar: 'inbound',
-    title: 'The Best Ruby Alternative — 24/7 AI Receptionist | Keres AI',
-    description:
-      'Searching for a Ruby Receptionists alternative? Keres AI answers every call 24/7, books appointments automatically, and charges one monthly rate with included minutes.',
+    title: 'Ruby Receptionist Alternatives Compared (2026): Prices | Keres AI',
+    description: 'Eight Ruby Receptionists alternatives side by side: live, AI or hybrid answering, how each one bills, and the lowest published price, plus where Keres AI fits.',
     h1Accent: 'Ruby',
-    intro:
-      'Ruby offers friendly human virtual receptionists, but coverage is tied to staffed hours and minutes you pay for. Keres answers every call 24/7 with AI, books the appointment during the call, on one monthly rate with included minutes — so nights, weekends, and call spikes are covered.',
+    intro: 'Ruby answers calls with live, US-based receptionists on monthly plans with included minutes. If you are weighing alternatives, the choice comes down to people, AI or both, and how you want to be billed. Here are the main options with the prices each vendor publishes, and where Keres fits.',
+    roundup: ['Smith.ai', 'PATLive', 'Abby Connect', 'Goodcall', 'Rosie', 'Dialzara', 'Upfirst', 'My AI Front Desk'],
     rows: [
-      { feature: 'True 24/7 coverage', keres: 'Yes', them: 'Limited' },
+      { feature: 'Answers 24/7', keres: 'Yes', them: 'Yes' },
       { feature: 'Unlimited simultaneous calls', keres: 'Yes', them: 'No' },
       { feature: 'Books & reschedules on your calendar', keres: 'Yes', them: 'Limited' },
       { feature: 'Captures leads to your CRM', keres: 'Yes', them: 'Yes' },
@@ -143,12 +147,11 @@ export const comparisons: Comparison[] = [
     competitor: 'Goodcall',
     category: 'AI phone agent',
     pillar: 'inbound',
-    title: 'The Best Goodcall Alternative — Done For You | Keres',
-    description:
-      'Need a Goodcall alternative? Keres AI is a done-for-you AI receptionist — we build your call flows, integrate your stack, and book appointments, not just answer.',
+    title: 'Goodcall Alternatives Compared (2026): AI Receptionist Prices | Keres AI',
+    description: 'Seven Goodcall alternatives side by side: AI, human or hybrid, how each one bills (per caller, per call or per minute), and the lowest published price, plus where Keres AI fits.',
     h1Accent: 'Goodcall',
-    intro:
-      'Goodcall gives you a self-serve AI phone agent to set up yourself. Keres is the done-for-you version: we map your call flows, connect your calendar and field-service software, tune the AI to your business, and book appointments — so you get outcomes without building it yourself.',
+    intro: 'Goodcall is a self-serve AI phone agent billed by unique caller. If you are comparing alternatives, the differences are setup (do it yourself or done for you), who answers, and how billing works. Here are the main options with the prices each vendor publishes, and where Keres fits.',
+    roundup: ['Smith.ai', 'Rosie', 'Dialzara', 'Upfirst', 'My AI Front Desk', 'Ruby', 'PATLive'],
     rows: [
       { feature: 'AI answers 24/7', keres: 'Yes', them: 'Yes' },
       { feature: 'Done-for-you setup & tuning', keres: 'Yes', them: 'No' },
@@ -168,12 +171,11 @@ export const comparisons: Comparison[] = [
     competitor: 'Rosie',
     category: 'AI answering service',
     pillar: 'inbound',
-    title: 'The Best Rosie Alternative — Books the Job | Keres',
-    description:
-      'Comparing Rosie alternatives? Keres AI answers every call 24/7, books appointments live, integrates with your CRM and field-service tools, and adds AI outbound.',
+    title: 'Rosie Alternatives Compared (2026): AI Answering Prices | Keres AI',
+    description: 'Six Rosie alternatives side by side: AI, human or hybrid, how each one bills, and the lowest published price, plus where Keres AI fits.',
     h1Accent: 'Rosie',
-    intro:
-      'Rosie is a simple AI answering service for small businesses. Keres goes further: deep appointment booking, field-service and CRM integrations, emergency escalation, industry-tuned call flows, and an AI SDR for outbound — a full inbound-and-outbound platform rather than answering alone.',
+    intro: 'Rosie is a low-cost AI answering service on monthly plans with included minutes. If you are comparing alternatives, the differences are price per minute or call, who answers, and how much setup you want to do yourself. Here are the main options with the prices each vendor publishes, and where Keres fits.',
+    roundup: ['Goodcall', 'Dialzara', 'Upfirst', 'My AI Front Desk', 'Smith.ai', 'PATLive'],
     rows: [
       { feature: 'Answers calls 24/7', keres: 'Yes', them: 'Yes' },
       { feature: 'Books & reschedules on your calendar', keres: 'Yes', them: 'Limited' },
@@ -215,12 +217,11 @@ export const comparisons: Comparison[] = [
     competitor: 'AnsweringLegal',
     category: 'Legal answering service',
     pillar: 'inbound',
-    title: 'The Best AnsweringLegal Alternative for Law Firms | Keres AI',
-    description:
-      'AnsweringLegal alternative: Keres AI answers every call 24/7, qualifies intake, screens conflicts, and books consultations — one monthly rate with included minutes.',
+    title: 'AnsweringLegal Alternatives Compared (2026): Prices | Keres AI',
+    description: 'Five AnsweringLegal alternatives for law firms side by side: live, AI or hybrid answering, how each bills, and the lowest published price, plus where Keres AI fits.',
     h1Accent: 'AnsweringLegal',
-    intro:
-      'AnsweringLegal is a human-staffed legal answering service that charges per minute. Keres is an AI-powered legal intake receptionist that answers every call 24/7, screens conflict-of-interest questions, captures case details, and books consultations, on one monthly rate with included minutes.',
+    intro: 'AnsweringLegal answers for law firms only, with US-based receptionists; it does not publish prices. If you are comparing alternatives, the choice is live receptionists, AI, or both, and how you are billed. Here are the main options with the prices each vendor publishes, and where Keres fits.',
+    roundup: ['Smith.ai', 'Ruby', 'PATLive', 'Abby Connect', 'Upfirst'],
     rows: [
       { feature: 'Answers calls 24/7', keres: 'Yes', them: 'Yes' },
       { feature: 'Conflict screening questions', keres: 'Yes', them: 'Limited' },

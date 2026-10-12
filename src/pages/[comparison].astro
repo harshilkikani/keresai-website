@@ -6,6 +6,7 @@ import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { organizationSchema, faqSchema, breadcrumbSchema, itemListSchema, webPageSchema } from '../data/schema';
 import { comparisons } from '../data/comparisons';
+import { answeringVendors, keresRow, VENDORS_CHECKED } from '../data/answeringVendors';
 
 export function getStaticPaths() {
   return comparisons.map((c) => ({ params: { comparison: c.slug }, props: { c } }));
@@ -13,6 +14,22 @@ export function getStaticPaths() {
 
 const { c } = Astro.props;
 const path = `/${c.slug}`;
+// Roundup pages: a sourced table of alternatives, Keres as one labelled row.
+const alternatives = (c.roundup ?? []).map((k) => answeringVendors[k]).filter(Boolean);
+const isRoundup = alternatives.length > 0;
+const byType = (t: string) => alternatives.filter((v) => v.type === t).map((v) => v.name);
+const listNames = (xs: string[]) => xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+const roundupAnswer = isRoundup
+  ? `The main ${c.competitor} alternatives are ${listNames(alternatives.map((v) => v.name))}. ` +
+    [byType('Human').length ? `${listNames(byType('Human'))} ${byType('Human').length > 1 ? 'use' : 'uses'} live receptionists` : '',
+     byType('Hybrid').length ? `${listNames(byType('Hybrid'))} ${byType('Hybrid').length > 1 ? 'mix' : 'mixes'} people and AI` : '',
+     byType('AI').length ? `${listNames(byType('AI'))} ${byType('AI').length > 1 ? 'answer' : 'answers'} with AI` : ''].filter(Boolean).join('; ') +
+    `. They also bill differently: per call, per minute, per caller or with included minutes. Keres AI is an AI receptionist on one monthly rate with included minutes, built for local service businesses.`
+  : '';
+const roundupList = isRoundup ? itemListSchema({
+  name: `${c.competitor} alternatives`,
+  items: [...alternatives, keresRow].map((v) => ({ name: v.name, description: `${v.type}. ${v.billing} ${v.starting}` })),
+}) : null;
 
 const parent =
   c.pillar === 'inbound'
@@ -52,10 +69,12 @@ const relatedComparisons = comparisons
   .filter((x) => x.pillar === c.pillar && x.slug !== c.slug)
   .slice(0, 3);
 ---
-<Layout title={c.title} description={c.description} path={path}>
+<!-- Pages that are not roundups yet are templated, with unsourced claims about
+     competitors: noindex until rewritten. -->
+<Layout title={c.title} description={c.description} path={path} noindexFollow={!isRoundup}>
   <Schema slot="head" graph={[
     faqSchema(c.faqs),
-    comparisonList,
+    isRoundup ? roundupList : comparisonList,
     webpage,
     breadcrumbSchema(crumbs),
     organizationSchema,
@@ -65,7 +84,9 @@ const relatedComparisons = comparisons
 
   <header class="page-hero container">
     <span class="eyebrow">{c.category}</span>
-    <h1>Why teams choose Keres over <span class="accent">{c.h1Accent}</span></h1>
+    {isRoundup
+      ? <h1><span class="accent">{c.h1Accent}</span> alternatives, compared</h1>
+      : <h1>Why teams choose Keres over <span class="accent">{c.h1Accent}</span></h1>}
     <p class="lead">{c.intro}</p>
     <div class="hero-ctas">
       <a href="/quote" class="btn btn-primary">Book a Demo</a>
@@ -77,14 +98,42 @@ const relatedComparisons = comparisons
   <section class="page-section container">
     <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
       <p itemprop="text">
-        {c.pillar === 'inbound'
+        {isRoundup ? roundupAnswer : c.pillar === 'inbound'
           ? `Keres AI is an alternative to ${c.competitor} for businesses that need a done-for-you AI receptionist: it answers every call 24/7, books appointments on your calendar, integrates with field-service software, and charges one monthly rate with included minutes rather than per-call fees.`
           : `Keres AI is an alternative to ${c.competitor} that goes beyond sending and infrastructure: it adds AI personalization at scale, handles replies, and books qualified meetings directly to your calendar — replacing the need for a human SDR to follow through on every sequence.`}
       </p>
     </div>
   </section>
 
+  {isRoundup && (
+    <section class="page-section container" aria-labelledby="roundup-title">
+      <div class="section-label">Side by side</div>
+      <h2 id="roundup-title" class="section-title" style="margin-bottom:8px">{alternatives.length} {c.competitor} alternatives, plus Keres</h2>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th>Option</th><th>Who answers</th><th>How it bills</th><th>Lowest published plan</th><th>Best for</th></tr>
+          </thead>
+          <tbody>
+            <tr class="keres">
+              <td><a href={keresRow.url}>{keresRow.name}</a> <em>(that’s us)</em></td>
+              <td>{keresRow.type}</td><td>{keresRow.billing}</td><td>{keresRow.starting}</td><td>{keresRow.bestFor}</td>
+            </tr>
+            {alternatives.map((v) => (
+              <tr>
+                <td><a href={v.url} rel="noopener nofollow" target="_blank">{v.name}</a></td>
+                <td>{v.type}</td><td>{v.billing}</td><td>{v.starting}</td><td>{v.bestFor}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="prose" style="margin-top:6px">Prices are each vendor’s lowest published plan, taken from its own pricing page on {VENDORS_CHECKED}. They change; check the linked page before you buy. Sources: {alternatives.map((v, i) => (<>{i > 0 ? ' · ' : ''}<a href={v.source} rel="noopener nofollow" target="_blank">{v.name}</a></>))}.</p>
+    </section>
+  )}
+
   <!-- COMPARISON TABLE -->
+  {!isRoundup && (
   <section class="page-section container">
     <div class="section-label">At a glance</div>
     <h2 class="section-title" style="margin-bottom:8px">Keres AI vs. {c.competitor}</h2>
@@ -106,6 +155,7 @@ const relatedComparisons = comparisons
     </div>
     <p class="prose" style="margin-top:6px">Comparison reflects typical product positioning and may change as each product evolves. <a href="/quote">Book a demo</a> to get a current, use-case-specific comparison.</p>
   </section>
+  )}
 
   <!-- MEDIUM CTA — pricing before hard demo ask -->
   <div class="container" style="margin-bottom:var(--space-6)">
@@ -150,7 +200,7 @@ const relatedComparisons = comparisons
   )}
 
   <CtaBand
-    heading={`See why teams pick Keres over ${c.competitor}`}
+    heading={isRoundup ? 'Hear Keres answer a call before you choose' : `See why teams pick Keres over ${c.competitor}`}
     sub={c.pillar === 'inbound'
       ? 'Book a demo and watch Keres answer a call and book an appointment in under sixty seconds.'
       : 'Book a demo and watch Keres book a meeting end to end — targeting, sending, replies, and scheduling.'}

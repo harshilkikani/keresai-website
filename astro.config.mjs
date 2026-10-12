@@ -38,6 +38,8 @@ export default defineConfig({
         // Rolling-out integrations are noindex until they ship. Keep this list in
         // step with status: 'rolling-out' in src/data/integrations.ts.
         !/^https:\/\/www\.keresai\.com\/integrations\/(jobber|housecall-pro|twilio|ringcentral|outlook|make|fieldedge|service-fusion|acuity|slack)$/.test(page) &&
+        // Comparison pages that are not sourced roundups yet are noindex.
+        !/^https:\/\/www\.keresai\.com\/(dialpad|numa|openphone|calendly|apollo|instantly|smartlead)-alternative$/.test(page) &&
         // No published customer stories yet; the page is noindex.
         !/^https:\/\/www\.keresai\.com\/customers(\/|$)/.test(page) &&
         // The old /missed-call-calculator path is now a 301 redirect to
