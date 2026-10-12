@@ -22,11 +22,11 @@ const guides = [...guideData]
   title="Resources & Guides — AI Receptionist Playbooks | Keres AI"
   description="Guides, playbooks, and case studies on AI receptionists, missed-call recovery, appointment automation, and AI outbound for service businesses."
   path={path}
+  pageType="CollectionPage"
 >
   <Schema slot="head" graph={[
     breadcrumbSchema(crumbs),
     organizationSchema,
-    { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Keres AI Resources', url: 'https://www.keresai.com/blog', isPartOf: { '@id': 'https://www.keresai.com/#website' } },
   ]} />
 
   <Breadcrumbs crumbs={crumbs} />

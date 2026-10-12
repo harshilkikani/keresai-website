@@ -1,16 +1,46 @@
 ---
-// Emits one connected JSON-LD @graph per page. Nodes cross-reference each other
-// by @id (e.g. #organization, #website), so a single graph lets search engines
-// and AI crawlers resolve the entity relationships instead of reading each block
-// in isolation.
-// Usage:
-//   <Schema graph={[orgSchema, faqSchema(...)]} />
+// Emits the page's one connected JSON-LD @graph. Nodes cross-reference each
+// other by @id (#organization, #website, #webpage), so a single graph lets
+// search engines and AI crawlers resolve the entity relationships instead of
+// reading each block in isolation.
+//
+// Layout.astro builds the WebSite and WebPage-family nodes in its frontmatter
+// (which always runs before its slots render) and hands them over in
+// Astro.locals. This component adds them, adds the Organization when the page
+// did not, and merges any nodes that share an @id, so every page ends up with
+// exactly one WebPage-family node and every @id it references resolves.
+//
+// Usage (every page on Layout.astro renders one, even with an empty graph):
+//   <Schema slot="head" graph={[organizationSchema, faqSchema(...)]} />
+import { organizationSchema } from '../data/schema';
+
 export interface Props {
   graph: Record<string, unknown>[];
 }
 const { graph } = Astro.props;
+type Node = Record<string, unknown>;
+const fromLayout = ((Astro.locals as { keresGraph?: Node[] }).keresGraph ?? []) as Node[];
+
 // Hoist @context to the graph root; nodes keep their own @id/@type.
-const nodes = graph.map(({ ['@context']: _ctx, ...rest }) => rest);
-const doc = { '@context': 'https://schema.org', '@graph': nodes };
+const strip = ({ ['@context']: _ctx, ...rest }: Node): Node => rest;
+const ordered: Node[] = [];
+const byId = new Map<string, Node>();
+const add = (raw: Node) => {
+  const node = strip(raw);
+  const id = node['@id'] as string | undefined;
+  if (!id) { ordered.push(node); return; }
+  const seen = byId.get(id);
+  if (!seen) { const copy = { ...node }; byId.set(id, copy); ordered.push(copy); return; }
+  // Same entity twice (e.g. a page's speakable extension of the Layout's
+  // WebPage node): merge. The first node's @type wins unless the later one
+  // is more specific than a plain WebPage.
+  const type = seen['@type'] === 'WebPage' && node['@type'] ? node['@type'] : seen['@type'] ?? node['@type'];
+  Object.assign(seen, node, type ? { '@type': type } : {});
+};
+fromLayout.forEach(add);
+graph.forEach(add);
+if (!byId.has(organizationSchema['@id'])) add(organizationSchema);
+
+const doc = { '@context': 'https://schema.org', '@graph': ordered };
 ---
 <script type="application/ld+json" set:html={JSON.stringify(doc)} />

@@ -4,7 +4,7 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, itemListSchema, webPageSchema } from '../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, itemListSchema, webPageSchema, articleSchema, VENDORS_CHECKED_ISO } from '../data/schema';
 import { comparisons, ROUNDUP_SLUGS } from '../data/comparisons';
 import { answeringVendors, keresRow, VENDORS_CHECKED } from '../data/answeringVendors';
 
@@ -60,6 +60,15 @@ const comparisonList = itemListSchema({
   })),
 });
 
+// Roundups are dated: the vendor prices they quote were checked on VENDORS_CHECKED.
+const roundupArticle = isRoundup ? articleSchema({
+  path,
+  headline: c.title.replace(/\s*\|\s*Keres AI$/, ''),
+  description: c.description,
+  datePublished: VENDORS_CHECKED_ISO,
+  dateModified: VENDORS_CHECKED_ISO,
+}) : null;
+
 const webpage = webPageSchema({
   path,
   name: c.title,
@@ -89,6 +98,7 @@ const switchSteps = [
      competitors: noindex until rewritten. -->
 <Layout title={c.title} description={c.description} path={path} noindexFollow={!isRoundup}>
   <Schema slot="head" graph={[
+    ...(roundupArticle ? [roundupArticle] : []),
     faqSchema(c.faqs),
     isRoundup ? roundupList : comparisonList,
     webpage,

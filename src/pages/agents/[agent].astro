@@ -11,7 +11,7 @@ import Testimonial from '../../components/Testimonial.astro';
 import CallTranscript from '../../components/CallTranscript.astro';
 import AgentMock from '../../components/AgentMock.astro';
 import DailyBrief from '../../components/DailyBrief.astro';
-import { organizationSchema, breadcrumbSchema, faqSchema, serviceSchema } from '../../data/schema';
+import { organizationSchema, breadcrumbSchema, faqSchema, workerService, receptionistVideoSchema, outboundVideoSchema } from '../../data/schema';
 import { agentPages } from '../../data/agentPages';
 import { agents, agentBySlug, plans, planBySlug, PHONE } from '../../data/site';
 import { hubs } from '../../data/hubs';
@@ -40,14 +40,12 @@ const others = agents.filter((a) => a.slug !== page.slug);
       organizationSchema,
       breadcrumbSchema(crumbs),
       faqSchema(page.faqs),
-      serviceSchema({
-        name: `${agent.name} — ${agent.title}`,
-        serviceType: agent.title,
-        description: page.description,
-        path,
-        audience: 'Small service firms and professional practices',
-        id: `https://www.keresai.com${path}#service`,
-      }),
+      // The same #service node the Organization's offer catalog and /pricing
+      // carry: one @id, one name, one description (src/data/schema.ts).
+      workerService(page.slug),
+      // The recording embedded below, where one is on the page.
+      ...(page.slug === 'inbound' ? [receptionistVideoSchema] : []),
+      ...(page.slug === 'outbound' ? [outboundVideoSchema] : []),
     ]}
   />
 

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
 import Button from '../components/Button.astro';
 import { PHONE } from '../data/site';
 
@@ -17,6 +18,7 @@ const path = '/thank-you';
   bare
   conversion="form_submit"
 >
+  <Schema slot="head" graph={[]} />
   <section class="lp-hero" aria-labelledby="ty-title">
     <div class="lp-wrap lp-wrap--narrow">
       <p class="lp-eyebrow">Got it</p>

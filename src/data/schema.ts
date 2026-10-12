@@ -2,16 +2,111 @@ import { business } from '../config/business';
 // Centralized JSON-LD building blocks. Keep entity identity consistent everywhere.
 import { PHONE } from './site';
 import { workers } from './workers';
-import { priceAmount } from '../config/business';
+import { glossary } from './glossary';
+import { NOINDEX_GLOSSARY } from '../seo/indexing.mjs';
 
-const ORIGIN = 'https://www.keresai.com';
+/** Glossary terms the Organization claims expertise in (indexable pages only). */
+const KNOWS_ABOUT = [
+  'ai-receptionist', 'ai-answering-service', 'missed-call-text-back', 'appointment-booking-automation',
+  'lead-qualification', 'missed-call-recovery', 'after-hours-answering', 'emergency-dispatch',
+  'google-business-profile', 'review-generation', 'nap-consistency', 'map-pack',
+  'ai-sdr', 'email-deliverability', 'inbox-warmup',
+];
+
+export const ORIGIN = 'https://www.keresai.com';
+const ORG_ID = `${ORIGIN}/#organization`;
+
+/** The one language every worker answers and writes in today. */
+const ENGLISH = { '@type': 'Language', name: 'English', alternateName: 'en' };
+
+/**
+ * Short, stable labels per worker. One @id = one name/serviceType/description,
+ * so every page that emits a worker's #service node spreads the node from
+ * workerServiceSchemas below instead of building its own.
+ */
+const WORKER_SERVICE: Record<string, { serviceType: string; description?: string }> = {
+  found: {
+    serviceType: 'Website and Google Business Profile management',
+    description:
+      'Done-for-you website, Google Business Profile management, review requests and listings for local service businesses, from $249 a month ($499 for law firms), month-to-month.',
+  },
+  inbound: {
+    serviceType: 'AI receptionist',
+    description:
+      'Remi is an AI receptionist that answers every call in two rings, 24/7, and books the appointment into Google Calendar, HubSpot or ServiceTitan (other tools through Zapier). It texts back missed callers within 60 seconds and also handles website chat, text and form enquiries. Answers in English. One monthly rate with included minutes, then per minute; no per-call fees; month-to-month.',
+  },
+  'follow-up': { serviceType: 'Appointment confirmations, reminders and estimate follow-up' },
+  reactivation: { serviceType: 'Customer reactivation and review requests' },
+  outbound: { serviceType: 'Outbound email prospecting' },
+  custom: {
+    serviceType: 'Custom AI automation',
+    description:
+      'A worker built for one recurring job in your business, scoped on a call with a fixed build price and a monthly run fee.',
+  },
+};
+
+const workerServiceName = (w: (typeof workers)[number]) =>
+  `${w.name} — ${WORKER_SERVICE[w.slug]?.serviceType ?? w.job}`;
+
+/** One Service node per worker, referenced by the Organization's offer catalog. */
+export const workerServiceSchemas = workers.map((w) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${ORIGIN}${w.href}#service`,
+  name: workerServiceName(w),
+  serviceType: WORKER_SERVICE[w.slug]?.serviceType ?? w.job,
+  description: WORKER_SERVICE[w.slug]?.description ?? `${w.name}: ${w.job}. Includes ${w.includes.join('; ')}.`,
+  url: `${ORIGIN}${w.href}`,
+  provider: { '@id': ORG_ID },
+  areaServed: { '@type': 'Country', name: 'United States' },
+  // Language lives on the channel, not the Service (Service has no
+  // availableLanguage). Every worker works in English only today.
+  availableChannel: {
+    '@type': 'ServiceChannel',
+    serviceUrl: `${ORIGIN}${w.href}`,
+    availableLanguage: ENGLISH,
+  },
+  audience: { '@type': 'Audience', audienceType: 'Local businesses: home services, law firms, dental practices, med spas, real estate' },
+}));
+
+/** The worker's #service node by slug (inbound, found, custom…). */
+export const workerService = (slug: string) => {
+  const w = workers.find((x) => x.slug === slug);
+  const node = workerServiceSchemas.find((n) => n['@id'] === `${ORIGIN}${w?.href}#service`);
+  if (!node) throw new Error(`No worker service for ${slug}`);
+  return node;
+};
+
+// Offer price notes. Found's from-price comes from business.foundFrom; the law
+// firm tier ($499) is published on /services/found and /pricing.
+const foundFrom = Number(business.foundFrom) || 0;
+const FOUND_LAW_FROM = 499;
+const monthlyFrom = (minPrice: number) => ({
+  '@type': 'UnitPriceSpecification',
+  minPrice,
+  priceCurrency: 'USD',
+  unitCode: 'MON',
+});
+
+const offerFor = (w: (typeof workers)[number]) => {
+  const itemOffered = { '@type': 'Service', '@id': `${ORIGIN}${w.href}#service`, name: workerServiceName(w) };
+  const base = { '@type': 'Offer', name: w.name, itemOffered, url: `${ORIGIN}${w.href}` };
+  if (w.slug === 'found') {
+    return foundFrom ? { ...base, priceSpecification: monthlyFrom(foundFrom) } : base;
+  }
+  if (w.slug === 'inbound') {
+    return { ...base, description: 'Quoted: one monthly rate with included minutes, then per minute.' };
+  }
+  return { ...base, description: 'Quoted to your volume on a call.' };
+};
 
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  '@id': `${ORIGIN}/#organization`,
+  '@id': ORG_ID,
   name: 'Keres AI',
-  url: ORIGIN,
+  // The home page's canonical carries the trailing slash.
+  url: `${ORIGIN}/`,
   logo: {
     '@type': 'ImageObject',
     url: `${ORIGIN}/assets/img/KeresLogo.png`,
@@ -19,7 +114,7 @@ export const organizationSchema = {
     height: 192,
   },
   description:
-    'Keres AI sells AI workers for local businesses. Each does one job: Found gets you found (website, Google listing, reviews), Remi answers every call in two rings and books it, Theo confirms and reminds, June brings past customers back, Sol finds new customers by email, and Custom is built for any recurring job. Every worker reports in one morning text. Live in five business days, month-to-month. Site and sales in English and Spanish; Remi answers in English today.',
+    'Keres AI sells AI workers for local businesses. Each does one job: Found gets you found (website, Google listing, reviews), Remi answers every call in two rings and books it, Theo confirms and reminds, June brings past customers back, Sol finds new customers by email, and Custom is built for any recurring job. Every worker reports in one morning text. Month-to-month; setup timing is agreed on the first call. Site available in English and Spanish; Remi answers calls in English only.',
   // Brand variants and disambiguation: an unrelated keres.ai, the Keras library
   // and Kore.ai show up for the same searches.
   alternateName: ['Keres', 'KeresAI', 'keresai.com'],
@@ -30,24 +125,13 @@ export const organizationSchema = {
   email: business.contactEmail,
   // knowsAbout uses DefinedTerm @id nodes so knowledge graphs resolve entity
   // relationships between the org and the glossary definitions on this site.
-  knowsAbout: [
-    { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/ai-receptionist#term`, name: 'AI Receptionist' },
-    { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/ai-answering-service#term`, name: 'AI Answering Service' },
-    { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/ai-sdr#term`, name: 'AI SDR' },
-    { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/appointment-booking-automation#term`, name: 'Appointment Booking Automation' },
-    { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/lead-qualification#term`, name: 'Lead Qualification' },
-    { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/missed-call-recovery#term`, name: 'Missed-Call Recovery' },
-    { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/cold-email-outreach#term`, name: 'Cold Email Outreach' },
-    { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/email-deliverability#term`, name: 'Email Deliverability' },
-    { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/inbox-warmup#term`, name: 'Inbox Warmup' },
-    { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/emergency-dispatch#term`, name: 'Emergency Dispatch' },
-    { '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/after-hours-answering#term`, name: 'After-Hours Answering' },
-  ],
-  // sameAs lets knowledge graphs (Google KG, Wikidata, AI training corpora) confirm
-  // entity identity across the web. Only list profiles that actually exist and
-  // are operated by Keres — Google de-indexes structured data that references
-  // dead or unrelated profiles. Re-add LinkedIn / X / G2 / Capterra here once
-  // the corresponding accounts are live.
+  // Only indexable glossary pages belong here (never a NOINDEX_GLOSSARY term).
+  knowsAbout: KNOWS_ABOUT.flatMap((slug) => {
+    const t = glossary.find((g) => g.slug === slug);
+    return t && !NOINDEX_GLOSSARY.includes(slug)
+      ? [{ '@type': 'DefinedTerm', '@id': `${ORIGIN}/glossary/${slug}#term`, name: t.term }]
+      : [];
+  }),
   // sameAs is omitted until real identity profiles exist (a booking link is
   // not one). Add LinkedIn / G2 / Capterra / YouTube URLs here when they do.
   // The line Keres itself answers. Sourced from src/data/site.ts so the
@@ -61,79 +145,21 @@ export const organizationSchema = {
     email: business.contactEmail,
     availableLanguage: ['English', 'Spanish'],
   },
-  // The roster as an offer catalog. Prices appear only when the config key is
-  // set; an Offer without a price is valid here because Organization has no
-  // rich-result contract that requires one.
+  // The roster as an offer catalog. Found carries its published from-price;
+  // every other worker is quoted, so its Offer has a description and no price.
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'AI workers',
-    itemListElement: workers.map((w) => {
-      const price = priceAmount(w.priceKey).replace('$', '');
-      return {
+    itemListElement: [
+      ...workers.map(offerFor),
+      {
         '@type': 'Offer',
-        itemOffered: { '@id': `${ORIGIN}${w.href}#service` },
-        url: `${ORIGIN}${w.href}`,
-        ...(price ? { price, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price, priceCurrency: 'USD', unitText: w.slug === 'custom' ? 'month (run fee; build priced on scope)' : 'month', billingIncrement: 1 } } : {}),
-      };
-    }),
-  },
-};
-
-/** One Service node per worker, referenced by the Organization's offer catalog. */
-export const workerServiceSchemas = workers.map((w) => ({
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': `${ORIGIN}${w.href}#service`,
-  name: `${w.name} — AI worker`,
-  serviceType: w.job,
-  description: `${w.name}: ${w.job}. Includes ${w.includes.join('; ')}.`,
-  url: `${ORIGIN}${w.href}`,
-  provider: { '@id': `${ORIGIN}/#organization` },
-  areaServed: { '@type': 'Country', name: 'United States' },
-  // Remi answers in English until business.remiSpanish is true; the other workers write in both.
-  availableLanguage: w.slug === 'inbound' && business.remiSpanish !== true ? ['English'] : ['English', 'Spanish'],
-  audience: { '@type': 'Audience', audienceType: 'Local businesses: home services, law firms, dental practices, med spas, real estate' },
-}));
-
-export const softwareApplicationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  '@id': `${ORIGIN}/#software`,
-  name: 'Keres AI',
-  applicationCategory: 'BusinessApplication',
-  applicationSubCategory: 'AI workers for local businesses: AI receptionist, follow-up, reactivation, outbound email, local visibility',
-  operatingSystem: 'Web',
-  url: ORIGIN,
-  description:
-    'AI workers for local service businesses: Found runs the website, Google Business Profile and reviews; Remi answers every call and books the appointment; Theo, June and Sol handle reminders, reactivation and outbound email.',
-  // Offer intentionally omitted: Keres uses custom B2B quotes, not a public
-  // numeric price. Google's structured-data guidelines reject Offer entries
-  // without a real `price`, so we surface pricing on the /pricing page and
-  // leave the Offer node out rather than emit a fake one.
-  featureList: [
-    '24/7 AI call answering — answers in two rings, every call',
-    'Automated appointment booking on Google Calendar, HubSpot and ServiceTitan',
-    'AI lead qualification and capture with CRM sync',
-    'Emergency escalation by text to on-call team',
-    'AI SDR outbound email with personalization at scale',
-    'Email deliverability optimization — SPF, DKIM, DMARC, inbox warmup',
-    'Spam call screening and filtering',
-    'Done-for-you setup — live in five business days',
-  ],
-  // additionalProperty surfaces key facts for rich product cards and AI retrieval.
-  additionalProperty: [
-    { '@type': 'PropertyValue', name: 'Setup time', value: 'Five business days' },
-    { '@type': 'PropertyValue', name: 'Contract', value: 'Month-to-month, cancel anytime' },
-    { '@type': 'PropertyValue', name: 'Answer speed', value: 'Within two rings, 24/7' },
-    { '@type': 'PropertyValue', name: 'Coverage', value: '24/7 including nights, weekends, and holidays' },
-    { '@type': 'PropertyValue', name: 'Pricing model', value: 'One monthly rate per worker with included minutes; per-minute after that' },
-    { '@type': 'PropertyValue', name: 'Industries served', value: 'HVAC, plumbing, roofing, septic, towing, dental, med spa, real estate, legal intake' },
-  ],
-  provider: { '@id': `${ORIGIN}/#organization` },
-  audience: {
-    '@type': 'Audience',
-    audienceType: 'Service businesses with high inbound call volume',
-    geographicArea: { '@type': 'Country', name: 'United States' },
+        name: 'Found for law firms',
+        itemOffered: { '@type': 'Service', '@id': `${ORIGIN}/services/found#service`, name: workerServiceName(workers.find((w) => w.slug === 'found')!) },
+        url: `${ORIGIN}/services/found`,
+        priceSpecification: monthlyFrom(FOUND_LAW_FROM),
+      },
+    ],
   },
 };
 
@@ -285,7 +311,8 @@ export function howToSchema(opts: {
     '@type': 'HowTo',
     name: opts.name,
     description: opts.description,
-    totalTime: opts.totalTime ?? 'PT5D',
+    // No default: setup timing is agreed on the first call, never assumed.
+    ...(opts.totalTime ? { totalTime: opts.totalTime } : {}),
     step: opts.steps.map((s, i) => ({
       '@type': 'HowToStep',
       position: i + 1,
@@ -336,30 +363,18 @@ export function statisticListSchema(opts: {
   };
 }
 
-// WebPage schema with SpeakableSpecification — marks which CSS selectors contain
-// the authoritative answer text for a page, used by Google AI Overviews and
-// voice-search assistants to extract spoken-answer passages.
-export function webPageSchema(opts: {
-  path: string;
-  name: string;
-  description: string;
-  speakableSelectors?: string[];
-}) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    // Same @id as the WebPage node Layout.astro emits on every page, so the two
-    // merge into one node. Only the speakable extension is added here; name,
-    // url, about and language come from Layout, so they can never disagree.
-    '@id': `${ORIGIN}${opts.path}#webpage`,
-    speakable: {
-      '@type': 'SpeakableSpecification',
-      cssSelector: opts.speakableSelectors ?? ['.answer-block', '.faq-a', '.lead'],
-    },
-  };
-}
+// Shared share image, as an ImageObject, for Article nodes.
+export const OG_IMAGE = {
+  '@type': 'ImageObject',
+  url: `${ORIGIN}/assets/img/og-image.png`,
+  width: 1200,
+  height: 630,
+};
 
-// Article schema — use for guides, playbooks, and blog posts.
+/** The @id of the WebPage-family node Layout.astro emits for `path`. */
+export const webPageId = (path: string) => `${ORIGIN}${path}#webpage`;
+
+// Article schema — use for guides, playbooks, roundups and data pages.
 export function articleSchema(opts: {
   path: string;
   headline: string;
@@ -367,20 +382,63 @@ export function articleSchema(opts: {
   datePublished?: string;
   dateModified?: string;
   readingTime?: string;
+  type?: 'Article' | 'BlogPosting';
 }) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': opts.type ?? 'Article',
     '@id': `${ORIGIN}${opts.path}#article`,
     headline: opts.headline,
     description: opts.description,
+    image: OG_IMAGE,
     url: ORIGIN + opts.path,
-    author: { '@id': `${ORIGIN}/#organization` },
-    publisher: { '@id': `${ORIGIN}/#organization` },
+    mainEntityOfPage: { '@id': webPageId(opts.path) },
+    author: { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
     ...(opts.datePublished ? { datePublished: opts.datePublished } : {}),
     ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
     inLanguage: 'en-US',
     ...(opts.readingTime ? { timeRequired: opts.readingTime } : {}),
     isPartOf: { '@id': `${ORIGIN}/#website` },
+  };
+}
+
+/** ISO date the vendor prices on the roundup pages were last checked (VENDORS_CHECKED). */
+export const VENDORS_CHECKED_ISO = '2026-10-11';
+
+// The product recordings. Upload dates are the dates each file was first
+// committed to the site; durations are from ffprobe.
+export const receptionistVideoSchema = videoObjectSchema({
+  name: 'Keres AI receptionist: example call and operator portal',
+  description: 'An example of Remi answering a call, qualifying the caller and booking the appointment, then the operator portal the owner sees. Demo account, not a customer.',
+  contentUrl: '/assets/video/ai-receptionist.mp4',
+  thumbnailUrl: '/assets/img/operator-portal.webp',
+  uploadDate: '2026-05-25',
+  duration: 'PT7M57S',
+});
+export const outboundVideoSchema = videoObjectSchema({
+  name: 'Keres AI outbound console: lead library and campaign builder',
+  description: 'The lead library and campaign builder behind Sol, the outbound email worker. Recording uses example prospect data.',
+  contentUrl: '/assets/video/outbound-console.mp4',
+  thumbnailUrl: '/assets/img/outbound-console.webp',
+  uploadDate: '2026-09-05',
+  duration: 'PT28S',
+});
+
+// Speakable extension of the page's WebPage node. Same @id as the node Layout
+// emits, so Schema.astro merges the two into one: only `speakable` is added
+// here; type, name, url and language come from Layout and cannot disagree.
+export function webPageSchema(opts: {
+  path: string;
+  name?: string;
+  description?: string;
+  speakableSelectors?: string[];
+}) {
+  return {
+    '@id': webPageId(opts.path),
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: opts.speakableSelectors ?? ['.answer-block', '.faq-a', '.lead'],
+    },
   };
 }

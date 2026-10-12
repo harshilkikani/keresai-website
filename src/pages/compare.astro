@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { organizationSchema, breadcrumbSchema, webPageSchema } from '../data/schema';
+import { organizationSchema, breadcrumbSchema, webPageSchema, articleSchema, VENDORS_CHECKED_ISO } from '../data/schema';
 import { comparisons, ROUNDUP_SLUGS } from '../data/comparisons';
 
 const path = '/compare';
@@ -26,6 +26,15 @@ const webpage = webPageSchema({
   speakableSelectors: ['.answer-block', '.lead'],
 });
 
+// Dated: the vendor prices these comparisons quote were checked on VENDORS_CHECKED.
+const article = articleSchema({
+  path,
+  headline: title.replace(/\s*\|\s*Keres AI$/, ''),
+  description,
+  datePublished: VENDORS_CHECKED_ISO,
+  dateModified: VENDORS_CHECKED_ISO,
+});
+
 const ORIGIN = 'https://www.keresai.com';
 const compareListSchema = {
   '@context': 'https://schema.org',
@@ -37,8 +46,8 @@ const compareListSchema = {
   ].map((item, i) => ({ '@type': 'ListItem', position: i + 1, ...item })),
 };
 ---
-<Layout title={title} description={description} path={path}>
-  <Schema slot="head" graph={[compareListSchema, webpage, breadcrumbSchema(crumbs), organizationSchema]} />
+<Layout title={title} description={description} path={path} pageType="CollectionPage">
+  <Schema slot="head" graph={[article, compareListSchema, webpage, breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 

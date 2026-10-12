@@ -9,7 +9,7 @@ import {
   faqSchema,
   breadcrumbSchema,
   serviceSchema,
-  videoObjectSchema,
+  receptionistVideoSchema,
   webPageSchema,
 } from '../data/schema';
 import { industries, type Industry, type TradeContent } from '../data/industries';
@@ -36,14 +36,7 @@ const crumbs = [
   { name: `For ${ind.short}`, path },
 ];
 
-const video = videoObjectSchema({
-  name: 'Keres AI receptionist: example call and operator portal',
-  description: 'An example of Remi answering a call, qualifying the caller and booking the appointment, then the operator portal the owner sees. Demo account, not a customer.',
-  contentUrl: '/assets/video/ai-receptionist.mp4',
-  thumbnailUrl: '/assets/img/operator-portal.webp',
-  uploadDate: '2026-05-25',
-  duration: 'PT7M57S',
-});
+const video = receptionistVideoSchema; // shared with /agents/inbound (src/data/schema.ts)
 
 const webpage = webPageSchema({
   path,

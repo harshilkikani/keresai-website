@@ -9,7 +9,7 @@ import Eyebrow from '../../components/Eyebrow.astro';
 import Button from '../../components/Button.astro';
 import Testimonial from '../../components/Testimonial.astro';
 import DailyBrief from '../../components/DailyBrief.astro';
-import { organizationSchema, breadcrumbSchema, faqSchema, serviceSchema } from '../../data/schema';
+import { organizationSchema, breadcrumbSchema, faqSchema, workerService } from '../../data/schema';
 import { foundServices, plans, PHONE } from '../../data/site';
 
 const path = '/services/found';
@@ -62,14 +62,7 @@ const faqs = [
 // One Found service (the @id the Organization's offer catalog references),
 // with the eight jobs as its catalog.
 const serviceNodes = [{
-  ...serviceSchema({
-    name: 'Found: website, Google Business Profile and reviews',
-    serviceType: 'Local Search Visibility',
-    description: 'Done-for-you website, Google Business Profile management, review requests and listings for local service businesses, from $249 a month ($499 for law firms), month-to-month.',
-    path,
-    audience: 'Local service businesses and professional practices',
-    id: `https://www.keresai.com${path}#service`,
-  }),
+  ...workerService('found'),
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'What Found includes',

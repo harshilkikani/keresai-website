@@ -13,9 +13,10 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path }];
   title="About Keres AI: Websites & AI Receptionist"
   description="Keres AI builds and runs websites and Google Business Profiles for local service businesses, and answers their calls with Remi, an AI receptionist."
   path={path}
+  pageType="AboutPage"
+  mainEntityId="https://www.keresai.com/#organization"
 >
   <Schema slot="head" graph={[
-    { '@context': 'https://schema.org', '@type': 'AboutPage', '@id': 'https://www.keresai.com/about#webpage', mainEntity: { '@id': 'https://www.keresai.com/#organization' } },
     breadcrumbSchema(crumbs),
     organizationSchema,
   ]} />

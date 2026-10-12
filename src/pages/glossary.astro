@@ -20,6 +20,7 @@ const termSet = {
   url: `${ORIGIN}/glossary`,
   hasDefinedTerm: glossary.map((t) => ({
     '@type': 'DefinedTerm',
+    '@id': `${ORIGIN}/glossary/${t.slug}#term`,
     name: t.term,
     url: `${ORIGIN}/glossary/${t.slug}`,
   })),
@@ -29,6 +30,7 @@ const termSet = {
   title="AI Receptionist & Local Marketing Glossary | Keres AI"
   description="Plain-English definitions of AI receptionist, call-handling and local search terms: Google Business Profile, map pack, reviews, listings and more."
   path={path}
+  pageType="CollectionPage"
 >
   <Schema slot="head" graph={[breadcrumbSchema(crumbs), termSet, organizationSchema]} />
 

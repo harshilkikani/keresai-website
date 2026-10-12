@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Schema from '../../components/Schema.astro';
 import Button from '../../components/Button.astro';
 import Testimonial from '../../components/Testimonial.astro';
 import CallTranscript from '../../components/CallTranscript.astro';
@@ -20,6 +21,7 @@ const path = `/lp/${lp.slug}`;
 const FORM_ACTION = 'https://formspree.io/f/mojywlnn';
 ---
 <Layout title={lp.title} description={lp.description} path={path} noindex bare>
+  <Schema slot="head" graph={[]} />
   <!-- ── ABOVE THE FOLD: one call, one form ─────────────── -->
   <section class="lp-hero" aria-labelledby="lp-title">
     <div class="lp-wrap lp-hero__grid">
@@ -42,7 +44,7 @@ const FORM_ACTION = 'https://formspree.io/f/mojywlnn';
         </ul>
       </div>
 
-      <div class="lp-form-card">
+      <div class="lp-form-card" id="lead">
         <h2 class="lp-form__title">Get your quote</h2>
         <p class="lp-form__sub">Four fields. We call you back the same business day.</p>
         <form

@@ -37,12 +37,13 @@ const blurb = (g: typeof i) => (isLive(g) ? g.intro.slice(0, 110) + '…' : `Rol
 ---
 <Layout title={title} description={description} path={path} noindexFollow={!live}>
   <Schema slot="head" graph={[
-    serviceSchema({
+    // A rolling-out integration is not a service anyone can buy yet.
+    ...(live ? [serviceSchema({
       name: `Keres AI + ${i.name} integration`,
       serviceType: 'AI receptionist integration',
       description,
       path,
-    }),
+    })] : []),
     faqSchema(faqs),
     breadcrumbSchema(crumbs),
     organizationSchema,

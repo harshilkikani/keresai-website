@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import Schema from '../components/Schema.astro';
 import CustomPage from '../components/CustomPage.astro';
-import { organizationSchema, faqSchema, serviceSchema } from '../data/schema';
+import { organizationSchema, faqSchema, workerService } from '../data/schema';
 import { customCopy, customFaqs } from '../i18n/custom';
 const c = customCopy('en');
 ---
 <Layout title={c.title} description={c.description} path="/custom" locale="en">
-  <Schema slot="head" graph={[organizationSchema, faqSchema(customFaqs('en')), serviceSchema({ name: 'Custom AI worker', serviceType: 'Custom AI automation', description: 'A worker built for one recurring job in your business, scoped on a call with a fixed build price and a monthly run fee.', path: '/custom', id: 'https://www.keresai.com/custom#service' })]} />
+  <Schema slot="head" graph={[organizationSchema, faqSchema(customFaqs('en')), workerService('custom')]} />
   <CustomPage locale="en" />
   <script slot="scripts" src="/assets/quote.js?v=4" defer is:inline></script>
 </Layout>

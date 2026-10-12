@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { organizationSchema, breadcrumbSchema } from '../../data/schema';
+import { organizationSchema, breadcrumbSchema, articleSchema as article } from '../../data/schema';
 import { guides } from '../../data/guides';
 
 // Guide bodies are static HTML partials loaded at build time.
@@ -31,22 +31,15 @@ const crumbs = [
 ];
 const related = guides.filter((o) => o.slug !== g.slug).sort((a, b) => a.order - b.order).slice(0, 3);
 
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  '@id': `${url}#article`,
+// mainEntityOfPage points at the #webpage node Layout emits for this path.
+const articleSchema = article({
+  type: 'BlogPosting',
+  path,
   headline,
   description: g.description,
-  image: `${ORIGIN}/assets/img/og-image.png`,
-  url,
-  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   datePublished: g.datePublished,
   dateModified: g.dateModified,
-  author: { '@id': `${ORIGIN}/#organization` },
-  publisher: { '@id': `${ORIGIN}/#organization` },
-  isPartOf: { '@id': `${ORIGIN}/#website` },
-  inLanguage: 'en-US',
-};
+});
 ---
 <Layout title={g.metaTitle} description={g.description} path={path} ogType="article">
   <link slot="head" rel="stylesheet" href="/assets/guide.css?v=5" />

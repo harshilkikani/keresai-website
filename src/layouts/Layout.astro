@@ -10,6 +10,7 @@ import { CSS_HASH } from '../data/cssHash';
 import { business } from '../config/business';
 import { type Locale, translatedPaths, stripLocale, localePath, ogLocale, l } from '../i18n';
 import { t } from '../i18n/ui';
+import { websiteSchema } from '../data/schema';
 
 export interface Props {
   title: string;
@@ -35,6 +36,13 @@ export interface Props {
    * arriving rather than by a click.
    */
   conversion?: string;
+  /**
+   * The schema.org type of this page's one WebPage-family node: AboutPage,
+   * ContactPage, CollectionPage (index/listing pages)… Defaults to WebPage.
+   */
+  pageType?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage' | 'FAQPage' | 'ItemPage';
+  /** @id of the page's main entity (e.g. the Organization on /about). */
+  mainEntityId?: string;
 }
 
 const {
@@ -50,6 +58,8 @@ const {
   conversion,
   locale = 'en',
   quoteHref,
+  pageType = 'WebPage',
+  mainEntityId,
 } = Astro.props;
 const quoteTarget = quoteHref ?? (go ? '#quote' : l(locale, '/quote'));
 const bookTarget = quoteHref || go ? '#book' : l(locale, '/quote') + '#book';
@@ -94,21 +104,30 @@ const callbackOrigin = (() => { try { return new URL(business.remiCallbackEndpoi
 const motionSrc = readFileSync(new URL('../../public/assets/motion.js', import.meta.url), 'utf8');
 const motionHash = "'sha256-" + createHash('sha256').update(motionSrc).digest('base64') + "'";
 const canonical = origin + path;
-// One WebPage node per page: language, site membership, and the link to its
-// translation, so search and AI crawlers see the EN/ES pair as one work.
-const webPageNode = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
+const isNotFound = path === '/404';
+const indexable = !(noindex || go || noindexFollow);
+
+// The page's one WebPage-family node: language, site membership, and the link
+// to its translation, so search and AI crawlers see the EN/ES pair as one
+// work. Schema.astro (rendered in every page's head slot, after this
+// frontmatter has run) emits it in the page's single @graph together with the
+// WebSite node, and merges any page-level extension (speakable) into it.
+const twinNode = (loc: Locale) => ({ '@type': 'WebPage', '@id': `${origin}${localePath(loc, basePath)}#webpage`, url: origin + localePath(loc, basePath) });
+const webPageNode = {
+  '@type': pageType,
   '@id': `${origin}${path}#webpage`,
   url: origin + path,
-  name: title,
+  // The brand suffix belongs to the <title>, not the page's name.
+  name: title.replace(/\s*[|·–—-]\s*Keres(\s+AI)?\s*$/i, ''),
   description: seoDescription,
   inLanguage: locale === 'es' ? 'es-US' : 'en-US',
   isPartOf: { '@id': `${origin}/#website` },
   about: { '@id': `${origin}/#organization` },
-  ...(hasTwin && locale === 'en' ? { workTranslation: { '@id': `${origin}${localePath('es', basePath)}#webpage` } } : {}),
-  ...(hasTwin && locale === 'es' ? { translationOfWork: { '@id': `${origin}${localePath('en', basePath)}#webpage` } } : {}),
-});
+  ...(mainEntityId ? { mainEntity: { '@id': mainEntityId } } : {}),
+  ...(hasTwin && locale === 'en' ? { workTranslation: twinNode('es') } : {}),
+  ...(hasTwin && locale === 'es' ? { translationOfWork: twinNode('en') } : {}),
+};
+(Astro.locals as { keresGraph?: Record<string, unknown>[] }).keresGraph = [websiteSchema, webPageNode];
 const ogImageAbs = ogImage.startsWith('http') ? ogImage : origin + ogImage;
 
 // ── Analytics + verification ──────────────────────────────
@@ -166,11 +185,11 @@ const META_DOMAIN_VERIFICATION = '';
   : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
 <meta name="theme-color" content="#C2410C" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
-<link rel="canonical" href={canonical} />
+{!isNotFound && <link rel="canonical" href={canonical} />}
 <link rel="alternate" type="application/rss+xml" title="Keres AI — Resources & Guides" href="/rss.xml" />
 
-<!-- US English market. Multilingual UI is client-side only, so we do not advertise phantom localized URLs. -->
-{hasTwin ? (
+<!-- hreflang only on indexable pages: a noindex page has no alternates to offer. -->
+{!indexable ? null : hasTwin ? (
   <>
     <link rel="alternate" hreflang="en" href={origin + localePath('en', basePath)} />
     <link rel="alternate" hreflang="es" href={origin + localePath('es', basePath)} />
@@ -188,7 +207,7 @@ const META_DOMAIN_VERIFICATION = '';
 <link rel="mask-icon" href="/assets/img/KeresLogo.png" color="#C2410C" />
 
 <meta property="og:type" content={ogType} />
-<meta property="og:url" content={canonical} />
+{!isNotFound && <meta property="og:url" content={canonical} />}
 <meta property="og:title" content={title} />
 <meta property="og:description" content={seoDescription} />
 <meta property="og:image" content={ogImageAbs} />
@@ -229,10 +248,8 @@ const META_DOMAIN_VERIFICATION = '';
      state instead of flashing visible, then hiding, then animating. It
      bails immediately under prefers-reduced-motion. -->
 <script is:inline set:html={motionSrc}></script>
-
-<!-- Page-specific structured data + head extras -->
+<!-- Page-specific structured data (one @graph, see Schema.astro) + head extras -->
 <slot name="head" />
-<script type="application/ld+json" set:html={webPageNode}></script>
 </head>
 
 <body class:list={[bare && 'is-bare']} data-conversion={conversion}>
