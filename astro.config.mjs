@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { isIndexable, REDIRECTS, ORIGIN } from './src/seo/indexing.mjs';
 
 export default defineConfig({
   site: 'https://www.keresai.com',
@@ -10,51 +11,12 @@ export default defineConfig({
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   integrations: [
     sitemap({
-      // Legal pages and the resources.html redirect stay out of the sitemap.
-      // Guides are emitted by src/pages/guides/[slug].astro but kept at their
-      // historical .html URLs, so we exclude the auto (extensionless) routes
-      // and list the canonical .html URLs via customPages below.
-      filter: (page) =>
-        !page.includes('/legal/') &&
-        // /go and /go/* are noindex ad landings — never in the sitemap.
-        !/\/go(\.html|\/|$)/.test(page) &&
-        // /demo and /es/demo are redirect stubs to the quote page.
-        !/\/demo(\.html|\/|$)/.test(page) &&
-        // /agents/custom and /es/agents/custom are redirect stubs to /custom.
-        !/\/agents\/custom(\.html|$)/.test(page) &&
-        !page.includes('/resources.html') &&
-        // Ad landing pages are noindex and must never enter the sitemap.
-        !page.includes('/lp/') &&
-        !/\/thank-you(\.html)?$/.test(page) &&
-        // Redirect stubs. These emit a meta-refresh page at the old URL;
-        // listing them would ask crawlers to index a page whose only job
-        // is to send them somewhere else.
-        // Anchored to the origin so /glossary/ai-receptionist and friends stay in.
-        !/^https:\/\/www\.keresai\.com\/(ai-receptionist|ai-sdr|email-deliverability|deliverability|for-hvac|ai-receptionist-for-(real-estate|professional-intake|dentists|med-spas))(\.html)?$/.test(page) &&
-        // City, state and city×trade pages are noindex (templated, no local
-        // office behind them), so they stay out of the sitemap too; the old
-        // /ai-receptionist/home-services hub now redirects to /industries/home-services.
-        !/^https:\/\/www\.keresai\.com\/ai-receptionist\/[^/]+(\/[^/]+)?$/.test(page) &&
-        // Rolling-out integrations are noindex until they ship. Keep this list in
-        // step with status: 'rolling-out' in src/data/integrations.ts.
-        !/^https:\/\/www\.keresai\.com\/integrations\/(jobber|housecall-pro|twilio|ringcentral|outlook|make|fieldedge|service-fusion|acuity|slack)$/.test(page) &&
-        // Comparison pages that are not sourced roundups yet are noindex.
-        !/^https:\/\/www\.keresai\.com\/(dialpad|numa|openphone|calendly|apollo|instantly|smartlead)-alternative$/.test(page) &&
-        // Merged use cases (redirect stubs) and the quote form pages (noindex).
-        !/^https:\/\/www\.keresai\.com\/(use-cases\/(after-hours-answering|appointment-booking)|quote|es\/quote)$/.test(page) &&
-        // Thin email/outbound glossary terms are noindex (see glossary/[term].astro).
-        !/^https:\/\/www\.keresai\.com\/glossary\/(dkim|dmarc|spf|email-sequence|email-bounce-rate|email-blacklist|spam-score|reply-rate|cold-email-outreach|outbound-sales|lead-scoring)$/.test(page) &&
-        // No published customer stories yet; the page is noindex.
-        !/^https:\/\/www\.keresai\.com\/customers(\/|$)/.test(page) &&
-        // The cost study moved to /ai-receptionist-cost; the old URL is a redirect stub.
-        !/^https:\/\/www\.keresai\.com\/benchmarks\/ai-receptionist-cost-study(\.html)?$/.test(page) &&
-        // The old /missed-call-calculator path is now a 301 redirect to
-        // /tools/missed-call-calculator — keep the redirect out of the sitemap.
-        // Anchored so the canonical /tools/ URL is not matched.
-        !/^https:\/\/www\.keresai\.com\/missed-call-calculator(\.html)?$/.test(page) &&
-        // Keep the historical .html guide URLs (added via customPages); drop the
-        // auto-discovered extensionless /guides/* routes that would 404 on Pages.
-        !(page.includes('/guides/') && !page.endsWith('.html')),
+      // Everything noindex or a redirect stub stays out of the sitemap. The
+      // rules live in src/seo/indexing.mjs, shared with llms.txt so the two
+      // never advertise different URL sets. Guides are emitted at their
+      // historical .html URLs (customPages below); the auto-discovered
+      // extensionless /guides/* routes are dropped there.
+      filter: (page) => isIndexable(page),
       // No lastmod/changefreq/priority: Google ignores the last two, and a
       // build-time lastmod on every URL tells it nothing changed-wise.
       // Guides keep their historical .html URLs; list them explicitly.
@@ -68,6 +30,23 @@ export default defineConfig({
         'https://www.keresai.com/guides/integrating-ai-into-your-stack.html',
       ],
     }),
+    // The home page's canonical is https://www.keresai.com/ (with the slash).
+    // @astrojs/sitemap strips that slash when it writes the file (whatever
+    // serialize() returns) under trailingSlash 'never', so put it back after
+    // the sitemap is written: sitemap URL == canonical, home included.
+    {
+      name: 'keres:sitemap-home-slash',
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          const { readdir, readFile, writeFile } = await import('node:fs/promises');
+          for (const f of (await readdir(dir)).filter((n) => /^sitemap-\d+\.xml$/.test(n))) {
+            const file = new URL(f, dir);
+            const xml = await readFile(file, 'utf8');
+            await writeFile(file, xml.replace(`<loc>${ORIGIN}</loc>`, `<loc>${ORIGIN}/</loc>`));
+          }
+        },
+      },
+    },
   ],
   // GitHub Pages has no server redirects, so Astro emits a meta-refresh page
   // at each source path. That is slower than a 301 and passes link equity less
@@ -79,28 +58,8 @@ export default defineConfig({
   //
   // Still deferred: /{competitor}-alternative → /compare/{competitor},
   // which needs the /compare/* routes built first.
-  redirects: {
-    '/for-hvac': '/industries/home-services',
-    // The pillar pages moved onto the named agents. "AI receptionist" and
-    // "AI SDR" survive in the H1s and meta descriptions of their targets,
-    // which is where searchers actually need those words.
-    '/ai-receptionist': '/agents/inbound',
-    '/ai-sdr': '/agents/outbound',
-    '/email-deliverability': '/agents/outbound',
-    // Industry pages merged into the hub that targets the same searcher.
-    '/ai-receptionist-for-real-estate': '/industries/real-estate',
-    '/ai-receptionist-for-professional-intake': '/industries/law-firms',
-    '/ai-receptionist-for-dentists': '/industries/dental-med-spa',
-    '/ai-receptionist-for-med-spas': '/industries/dental-med-spa',
-    '/ai-receptionist/home-services': '/industries/home-services',
-    // Use cases merged into the page that targets the same searcher.
-    '/use-cases/after-hours-answering': '/24-7-ai-receptionist',
-    '/use-cases/appointment-booking': '/agents/inbound',
-    // Never published, but named in the brief and cheap to honour.
-    '/deliverability': '/agents/outbound',
-    // The benchmark cost study was rebuilt from published vendor prices.
-    '/benchmarks/ai-receptionist-cost-study': '/ai-receptionist-cost',
-  },
+  // The map lives in src/seo/indexing.mjs so llms.txt can resolve old URLs.
+  redirects: REDIRECTS,
   build: {
     // Emit /ai-receptionist.html style files so GitHub Pages serves clean URLs.
     format: 'file',

@@ -11,6 +11,7 @@ import {
   definedTermSchema,
   webPageSchema,
 } from '../../data/schema';
+import { NOINDEX_GLOSSARY } from '../../seo/indexing.mjs';
 import { glossary } from '../../data/glossary';
 
 export function getStaticPaths() {
@@ -70,8 +71,8 @@ const webpage = webPageSchema({
 });
 // Thin email/outbound definitions that compete with vendor docs on a product
 // (Sol) that is not the focus: noindex until consolidated into one guide.
-// Keep in step with the sitemap filter in astro.config.mjs.
-const THIN_EMAIL_TERMS = ['dkim', 'dmarc', 'spf', 'email-sequence', 'email-bounce-rate', 'email-blacklist', 'spam-score', 'reply-rate', 'cold-email-outreach', 'outbound-sales', 'lead-scoring'];
+// One list (src/seo/indexing.mjs) shared with the sitemap and llms.txt.
+const THIN_EMAIL_TERMS = NOINDEX_GLOSSARY;
 ---
 <Layout title={t.title} description={t.description} path={path} noindexFollow={THIN_EMAIL_TERMS.includes(t.slug)}>
   <Schema slot="head" graph={[
