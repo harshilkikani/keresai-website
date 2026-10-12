@@ -16,8 +16,8 @@ const path = `/${c.slug}`;
 
 const parent =
   c.pillar === 'inbound'
-    ? { name: 'AI Receptionist', path: '/ai-receptionist' }
-    : { name: 'AI SDR', path: '/ai-sdr' };
+    ? { name: 'AI Receptionist', path: '/agents/inbound' }
+    : { name: 'AI SDR', path: '/agents/outbound' };
 
 const crumbs = [
   { name: 'Home', path: '/' },
@@ -27,8 +27,8 @@ const crumbs = [
 
 const secondaryCta =
   c.pillar === 'inbound'
-    ? { href: '/ai-receptionist', label: 'How the AI receptionist works' }
-    : { href: '/ai-sdr', label: 'How the AI SDR works' };
+    ? { href: '/agents/inbound', label: 'How the AI receptionist works' }
+    : { href: '/agents/outbound', label: 'How the AI SDR works' };
 
 // ItemList schema makes the comparison table machine-readable for AI crawlers
 // so they can extract structured comparison data rather than parsing HTML.

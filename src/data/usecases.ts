@@ -44,7 +44,7 @@ export const usecases: UseCase[] = [
       { q: 'Can it handle emergency calls at night?', a: 'Yes. Keres recognizes emergencies, captures the details, books the visit, and texts your on-call team immediately.' },
     ],
     related: ['overflow-call-handling', 'lead-capture', 'reduce-staffing-costs'],
-    cta: { href: '/ai-receptionist', label: 'See the 24/7 AI receptionist' },
+    cta: { href: '/agents/inbound', label: 'See the 24/7 AI receptionist' },
   },
   {
     slug: 'overflow-call-handling',
@@ -74,7 +74,7 @@ export const usecases: UseCase[] = [
       { q: 'Can Keres handle a sudden spike in calls?', a: 'Yes — it answers unlimited simultaneous calls, so a heat wave or viral ad never sends a caller to voicemail.' },
     ],
     related: ['after-hours-answering', 'reduce-staffing-costs', 'lead-capture'],
-    cta: { href: '/ai-receptionist', label: 'Add AI overflow coverage' },
+    cta: { href: '/agents/inbound', label: 'Add AI overflow coverage' },
   },
   {
     slug: 'appointment-booking',
@@ -104,7 +104,7 @@ export const usecases: UseCase[] = [
       { q: 'Does it reduce no-shows?', a: 'Yes — automatic text confirmations and reminders, plus instant rescheduling, meaningfully cut no-shows.' },
     ],
     related: ['lead-capture', 'after-hours-answering', 'overflow-call-handling'],
-    cta: { href: '/ai-receptionist', label: 'Automate your bookings' },
+    cta: { href: '/agents/inbound', label: 'Automate your bookings' },
   },
   {
     slug: 'lead-capture',
@@ -194,7 +194,7 @@ export const usecases: UseCase[] = [
       { q: 'Do real customers still get through?', a: 'Always. Screening filters the noise; genuine callers are qualified, booked, and logged like any other lead.' },
     ],
     related: ['lead-capture', 'after-hours-answering', 'reduce-staffing-costs'],
-    cta: { href: '/ai-receptionist', label: 'See the AI receptionist' },
+    cta: { href: '/agents/inbound', label: 'See the AI receptionist' },
   },
   {
     slug: 'emergency-dispatch',
@@ -284,7 +284,7 @@ export const usecases: UseCase[] = [
       { q: 'Does it help win back lapsed members?', a: 'Yes. Keres re-engages customers whose maintenance plans have lapsed, captures their details, and rebooks the next visit so recurring revenue is recovered.' },
     ],
     related: ['appointment-booking', 'lead-capture', 'after-hours-answering'],
-    cta: { href: '/ai-receptionist', label: 'See the AI receptionist' },
+    cta: { href: '/agents/inbound', label: 'See the AI receptionist' },
   },
   {
     slug: 'financing-follow-up',

@@ -35,17 +35,17 @@ const cleanDefinition = t.definition.replace(/<[^>]+>/g, '');
 // rather than jumping straight to demo — matches where they are in the funnel.
 const softCtaMap: Record<string, { href: string; label: string; context: string }> = {
   'AI Receptionist': {
-    href: t.cta?.href ?? '/ai-receptionist',
+    href: t.cta?.href ?? '/agents/inbound',
     label: 'See how it works for your industry →',
     context: 'See the product behind this concept',
   },
   'AI SDR & Outbound': {
-    href: t.cta?.href ?? '/ai-sdr',
+    href: t.cta?.href ?? '/agents/outbound',
     label: 'See the AI SDR →',
     context: 'See outbound in action',
   },
   'Email Deliverability': {
-    href: t.cta?.href ?? '/email-deliverability',
+    href: t.cta?.href ?? '/agents/outbound',
     label: 'Fix your deliverability →',
     context: 'See deliverability tools',
   },

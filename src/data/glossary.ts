@@ -55,7 +55,7 @@ export const glossary: GlossaryTerm[] = [
       { q: 'Can an AI receptionist book appointments?', a: 'Yes. It checks real-time calendar availability, books and reschedules during the call, and texts the caller a confirmation.' },
       { q: 'Does an AI receptionist sound human?', a: 'Modern AI receptionists use natural-sounding voices, understand interruptions, and hold a real conversation rather than reading a rigid menu.' },
     ],
-    cta: { href: '/ai-receptionist', label: 'See the Keres AI receptionist' },
+    cta: { href: '/agents/inbound', label: 'See the Keres AI receptionist' },
   },
   {
     slug: 'ai-answering-service',
@@ -108,7 +108,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'Is an AI receptionist a type of virtual receptionist?', a: 'Yes — an AI receptionist is a virtual receptionist powered by AI instead of human operators, so it works 24/7 and handles unlimited concurrent calls.' },
     ],
-    cta: { href: '/ai-receptionist', label: 'Compare with Keres AI' },
+    cta: { href: '/agents/inbound', label: 'Compare with Keres AI' },
   },
   {
     slug: 'missed-call-text-back',
@@ -125,14 +125,14 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Why missed calls cost you money',
         body:
-          'Most callers who hit voicemail never leave a message — they dial the next business. Use the <a href="/missed-call-calculator">missed-call revenue calculator</a> to estimate what that costs you each month. A full <a href="/glossary/ai-receptionist">AI receptionist</a> goes one step further by answering the call live instead of texting after the fact.',
+          'Most callers who hit voicemail never leave a message — they dial the next business. Use the <a href="/tools/missed-call-calculator">missed-call revenue calculator</a> to estimate what that costs you each month. A full <a href="/glossary/ai-receptionist">AI receptionist</a> goes one step further by answering the call live instead of texting after the fact.',
       },
     ],
     related: ['ai-receptionist', 'call-overflow', 'lead-qualification'],
     faqs: [
       { q: 'Is missed-call text-back the same as an AI receptionist?', a: 'No — text-back reacts after a call is missed, while an AI receptionist answers the call live and books the appointment in the moment. Many businesses use both.' },
     ],
-    cta: { href: '/missed-call-calculator', label: 'Calculate your missed-call losses' },
+    cta: { href: '/tools/missed-call-calculator', label: 'Calculate your missed-call losses' },
   },
   {
     slug: 'call-overflow',
@@ -156,7 +156,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'How does AI call overflow work?', a: 'Calls your team doesn’t answer within a set number of rings forward to the AI, which picks up instantly, helps the caller, and books or routes as needed.' },
     ],
-    cta: { href: '/ai-receptionist', label: 'Add AI overflow coverage' },
+    cta: { href: '/agents/inbound', label: 'Add AI overflow coverage' },
   },
   {
     slug: 'appointment-booking-automation',
@@ -180,7 +180,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'What calendars does AI appointment booking work with?', a: 'Keres books directly on Google Calendar, HubSpot and ServiceTitan today. Outlook, Jobber and Housecall Pro are rolling out.' },
     ],
-    cta: { href: '/ai-receptionist', label: 'Automate your bookings' },
+    cta: { href: '/agents/inbound', label: 'Automate your bookings' },
   },
   {
     slug: 'lead-qualification',
@@ -203,7 +203,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'Can AI qualify leads as well as a human?', a: 'For structured qualification — capturing budget, timeline, location, and intent against your criteria — AI is consistent and never skips a question, then escalates judgment calls to your team.' },
     ],
-    cta: { href: '/ai-receptionist', label: 'Qualify every caller automatically' },
+    cta: { href: '/agents/inbound', label: 'Qualify every caller automatically' },
   },
   {
     slug: 'ai-sdr',
@@ -233,7 +233,7 @@ export const glossary: GlossaryTerm[] = [
       { q: 'Does an AI SDR replace human salespeople?', a: 'It replaces the repetitive top-of-funnel work — prospecting, sending, follow-up, and booking — so your human closers spend their time in meetings, not in a sequencing tool.' },
       { q: 'How does an AI SDR avoid the spam folder?', a: 'It manages SPF, DKIM, DMARC, inbox warmup, and sending-volume ramp so messages land in the primary inbox.' },
     ],
-    cta: { href: '/ai-sdr', label: 'See the Keres AI SDR' },
+    cta: { href: '/agents/outbound', label: 'See the Keres AI SDR' },
   },
   {
     slug: 'cold-email-outreach',
@@ -257,7 +257,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'Is cold email legal?', a: 'In the US, cold email is legal under CAN-SPAM when you use accurate headers, identify yourself, and offer an easy opt-out. Other regions (e.g. GDPR) have stricter consent rules.' },
     ],
-    cta: { href: '/ai-sdr', label: 'Automate cold outreach' },
+    cta: { href: '/agents/outbound', label: 'Automate cold outreach' },
   },
   {
     slug: 'email-sequence',
@@ -281,7 +281,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'How many emails should a sequence have?', a: 'Most effective B2B sequences run 4–6 touches spaced several days apart, stopping immediately when the prospect responds.' },
     ],
-    cta: { href: '/ai-sdr', label: 'Run AI-personalized sequences' },
+    cta: { href: '/agents/outbound', label: 'Run AI-personalized sequences' },
   },
   {
     slug: 'email-deliverability',
@@ -310,7 +310,7 @@ export const glossary: GlossaryTerm[] = [
       { q: 'Why are my emails going to spam?', a: 'The usual causes are missing or misconfigured SPF/DKIM/DMARC, a cold sending domain with no warmup, poor list hygiene, spammy content, or sending too much volume too fast.' },
       { q: 'What is a good deliverability rate?', a: 'For healthy outbound, you want the large majority of mail landing in the primary inbox; inbox-placement testing matters more than raw "delivered" rates, which include spam-folder delivery.' },
     ],
-    cta: { href: '/email-deliverability', label: 'Fix your deliverability' },
+    cta: { href: '/agents/outbound', label: 'Fix your deliverability' },
   },
   {
     slug: 'spf',
@@ -334,7 +334,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'Is SPF enough on its own?', a: 'No. SPF is necessary but not sufficient — you also need DKIM and DMARC for full authentication and the best deliverability.' },
     ],
-    cta: { href: '/email-deliverability', label: 'Get authentication set up for you' },
+    cta: { href: '/agents/outbound', label: 'Get authentication set up for you' },
   },
   {
     slug: 'dkim',
@@ -358,7 +358,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'What’s the difference between SPF and DKIM?', a: 'SPF authorizes which servers may send for your domain; DKIM cryptographically proves the message wasn’t altered and came from you. DMARC ties them together.' },
     ],
-    cta: { href: '/email-deliverability', label: 'Get DKIM configured for you' },
+    cta: { href: '/agents/outbound', label: 'Get DKIM configured for you' },
   },
   {
     slug: 'dmarc',
@@ -382,7 +382,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'Do I need DMARC to send cold email?', a: 'Increasingly, yes — major providers like Google and Yahoo now require SPF, DKIM, and DMARC for bulk senders, and proper DMARC improves trust and inbox placement.' },
     ],
-    cta: { href: '/email-deliverability', label: 'Get DMARC set up for you' },
+    cta: { href: '/agents/outbound', label: 'Get DMARC set up for you' },
   },
   {
     slug: 'inbox-warmup',
@@ -406,7 +406,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'How long does inbox warmup take?', a: 'Typically two to four weeks to reach safe sending volume, depending on your target volume and how the domain responds — rushing it risks reputation damage.' },
     ],
-    cta: { href: '/email-deliverability', label: 'Let Keres warm your inboxes' },
+    cta: { href: '/agents/outbound', label: 'Let Keres warm your inboxes' },
   },
   {
     slug: 'spam-score',
@@ -430,7 +430,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'What hurts sender reputation the most?', a: 'High bounce rates, spam complaints, sending to stale or purchased lists, and sudden volume spikes from an unwarmed domain.' },
     ],
-    cta: { href: '/email-deliverability', label: 'Protect your sender reputation' },
+    cta: { href: '/agents/outbound', label: 'Protect your sender reputation' },
   },
   {
     slug: 'missed-call-recovery',
@@ -446,7 +446,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Why missed calls cost so much',
         body:
-          'Around 8 in 10 callers won’t leave a voicemail, and after-hours calls are the most likely to be missed and the most likely to be high-intent. Use the <a href="/missed-call-calculator">missed-call calculator</a> to size the leak, then close it with an <a href="/glossary/ai-receptionist">AI receptionist</a> that answers every call.',
+          'Around 8 in 10 callers won’t leave a voicemail, and after-hours calls are the most likely to be missed and the most likely to be high-intent. Use the <a href="/tools/missed-call-calculator">missed-call calculator</a> to size the leak, then close it with an <a href="/glossary/ai-receptionist">AI receptionist</a> that answers every call.',
       },
     ],
     related: ['ai-receptionist', 'missed-call-text-back', 'call-overflow', 'lead-qualification'],
@@ -477,7 +477,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'Is an AI receptionist conversational AI?', a: 'Yes — an AI receptionist is a voice application of conversational AI, built to answer calls, understand intent, and complete tasks like booking.' },
     ],
-    cta: { href: '/ai-receptionist', label: 'Hear conversational AI in action' },
+    cta: { href: '/agents/inbound', label: 'Hear conversational AI in action' },
   },
   {
     slug: 'ivr',
@@ -501,7 +501,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'Is IVR the same as an AI receptionist?', a: 'No. IVR is a menu that routes calls; an AI receptionist holds a natural conversation and completes tasks like booking, rather than just directing the caller.' },
     ],
-    cta: { href: '/ai-receptionist', label: 'Upgrade from IVR to AI' },
+    cta: { href: '/agents/inbound', label: 'Upgrade from IVR to AI' },
   },
   {
     slug: 'call-routing',
@@ -525,7 +525,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'Can AI route calls to the right team?', a: 'Yes — Keres routes by listing, location, agent, or on-call schedule, and escalates emergencies to the right person by text.' },
     ],
-    cta: { href: '/ai-receptionist', label: 'See AI call routing' },
+    cta: { href: '/agents/inbound', label: 'See AI call routing' },
   },
   {
     slug: 'appointment-reminders',
@@ -571,7 +571,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'How is lead scoring different from lead qualification?', a: 'Qualification decides whether a lead is a fit; scoring ranks qualified leads by how likely and how soon they’ll convert, so you prioritize the best ones.' },
     ],
-    cta: { href: '/ai-sdr', label: 'Prioritize your best leads' },
+    cta: { href: '/agents/outbound', label: 'Prioritize your best leads' },
   },
   {
     slug: 'outbound-sales',
@@ -595,7 +595,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'What’s the difference between outbound and inbound sales?', a: 'Outbound means you reach out to prospects first; inbound means they come to you. Outbound gives you control over targeting, which an AI SDR scales efficiently.' },
     ],
-    cta: { href: '/ai-sdr', label: 'Scale outbound with AI' },
+    cta: { href: '/agents/outbound', label: 'Scale outbound with AI' },
   },
   {
     slug: 'reply-rate',
@@ -618,7 +618,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'What is a good cold email reply rate?', a: 'It varies by market and offer, but well-targeted, personalized, well-delivered campaigns aim for meaningfully higher reply rates than generic blasts — quality of targeting and deliverability matter more than volume.' },
     ],
-    cta: { href: '/ai-sdr', label: 'Improve your reply rate' },
+    cta: { href: '/agents/outbound', label: 'Improve your reply rate' },
   },
   {
     slug: 'email-bounce-rate',
@@ -642,7 +642,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'What’s the difference between a hard and soft bounce?', a: 'A hard bounce is a permanent delivery failure (e.g. the address doesn’t exist); a soft bounce is temporary (e.g. a full mailbox). Repeated hard bounces hurt your reputation most.' },
     ],
-    cta: { href: '/email-deliverability', label: 'Keep your lists clean' },
+    cta: { href: '/agents/outbound', label: 'Keep your lists clean' },
   },
   {
     slug: 'email-blacklist',
@@ -666,7 +666,7 @@ export const glossary: GlossaryTerm[] = [
     faqs: [
       { q: 'How do I know if I’m blacklisted?', a: 'Sudden drops in delivery and inbox placement are warning signs; blacklist-monitoring tools can confirm. Prevention — authentication, warmup, and clean lists — matters far more than removal.' },
     ],
-    cta: { href: '/email-deliverability', label: 'Protect your sending reputation' },
+    cta: { href: '/agents/outbound', label: 'Protect your sending reputation' },
   },
   {
     slug: 'after-hours-answering',
@@ -727,7 +727,7 @@ export const glossary: GlossaryTerm[] = [
       { q: 'Can an AI receptionist identify an emergency call?', a: 'Yes. Keres recognizes emergency language — no heat, flooding, gas smell, stranded motorist — and escalates immediately to your on-call crew by text, while keeping the caller engaged.' },
       { q: 'What information does the AI capture for dispatch?', a: 'Address, callback number, nature of the emergency, urgency level, and any other details your dispatch workflow requires — all sent to your team in seconds.' },
     ],
-    cta: { href: '/ai-receptionist', label: 'Set up AI emergency dispatch' },
+    cta: { href: '/agents/inbound', label: 'Set up AI emergency dispatch' },
   },
   {
     slug: 'patient-intake',
@@ -846,9 +846,9 @@ export const glossary: GlossaryTerm[] = [
     related: ['ai-receptionist', 'missed-call-recovery', 'after-hours-answering', 'lead-qualification'],
     faqs: [
       { q: 'What is the ideal lead response time?', a: 'Under one minute for inbound calls and under five minutes for web form leads. An AI receptionist achieves this by answering calls in two rings 24/7 — making response time instant for every call.' },
-      { q: 'How much does slow response time cost?', a: 'Use the <a href="/missed-call-calculator">missed-call calculator</a> to estimate the revenue you lose per month to unanswered or delayed responses.' },
+      { q: 'How much does slow response time cost?', a: 'Use the <a href="/tools/missed-call-calculator">missed-call calculator</a> to estimate the revenue you lose per month to unanswered or delayed responses.' },
     ],
-    cta: { href: '/missed-call-calculator', label: 'Calculate what slow response costs you' },
+    cta: { href: '/tools/missed-call-calculator', label: 'Calculate what slow response costs you' },
   },
   {
     slug: 'front-desk-automation',
@@ -878,7 +878,7 @@ export const glossary: GlossaryTerm[] = [
       { q: 'Does front desk automation replace human receptionists?', a: 'It replaces the routine tasks — answering calls, booking appointments, capturing leads, answering FAQs — and handles them better at scale. Most businesses use it alongside a human team, freeing staff for higher-value work.' },
       { q: 'What is the ROI of front desk automation?', a: 'Use the <a href="/tools/staffing-savings-estimator">staffing savings estimator</a> to calculate how much you could save compared to a full-time or part-time front desk hire.' },
     ],
-    cta: { href: '/ai-receptionist', label: 'Automate your front desk with Keres' },
+    cta: { href: '/agents/inbound', label: 'Automate your front desk with Keres' },
   },
   {
     slug: 'dispatch-automation',

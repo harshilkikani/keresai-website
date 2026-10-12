@@ -193,7 +193,7 @@ export const calculators: Calculator[] = [
     related: [
       { label: 'Lead response time', href: '/glossary/lead-response-time' },
       { label: 'Missed-call statistics', href: '/missed-call-statistics' },
-      { label: 'AI receptionist', href: '/ai-receptionist' },
+      { label: 'AI receptionist', href: '/agents/inbound' },
     ],
   },
 ];
