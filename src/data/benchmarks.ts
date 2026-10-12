@@ -121,7 +121,7 @@ export const benchmarks: Benchmark[] = [
     answer:
       '<strong>Keres AI estimates that dental practices see no-show rates of 10–20%</strong>, and each empty chair can cost $200 or more in lost production. Many no-shows trace back to missed reschedule calls and a front desk too busy to confirm appointments — while new patients who reach voicemail simply book with another practice.',
     stats: [
-      { num: '10–20%', stat: 'typical dental no-show rate', context: 'Keres AI estimate: missed appointments run from one in ten to one in five — a direct hit to daily production when chairs sit empty.' },
+      { num: '10–20%', stat: 'typical dental no-show rate', context: 'Keres AI estimate: missed appointments run from one in ten to one in five, a direct hit to daily production when chairs sit empty.' },
       { num: '$200+', stat: 'estimated cost of a single no-show', context: 'An empty chair is lost production that is hard to recover same-day; across a month, no-shows add up to thousands in missed revenue.' },
       { num: '30%+', stat: 'of calls a busy front desk can miss', context: 'When staff are with patients, new-patient and reschedule calls go to voicemail — and new patients book elsewhere.' },
       { num: '24/7', stat: 'when patients actually research and book', context: 'Many patients call to book or reschedule outside office hours; without coverage, those bookings are lost.' },
