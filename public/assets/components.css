@@ -631,7 +631,7 @@ html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] {
 .k-split--reverse .k-split__mock { display: flex; justify-content: center; }
 /* Keep the caption tied to the mock it describes rather than to the column. */
 .k-split__mock .k-brief-fig,
-.k-split__mock .k-call-fig { display: inline-block; }
+.k-split__mock .k-call-fig { display: block; max-width: 100%; min-width: 0; }
 
 @media (max-width: 900px) {
   .k-split { grid-template-columns: minmax(0, 1fr); gap: var(--space-7); }
@@ -1647,7 +1647,7 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(24px, 4vw
 /* Capability bullets on agent pages sit in the full content column
    rather than beside a heading, so they get a wider two-up grid. */
 .k-member__bullets--wide {
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: var(--space-4) var(--space-8);
 }
 
@@ -1753,11 +1753,9 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(24px, 4vw
 .k-stagenum--lg {
   font-size: var(--text-4);
   letter-spacing: 0.04em;
-  /* Ghost numeral. --line-strong measured 1.67:1; at 39px the floor is
-     3:1, and ink-3 at 72% opacity lands ~3.3:1 while still reading as
-     a quiet mark rather than a heading. */
+  /* Ghost numeral in --ink-3 at full opacity: 72% opacity measured 2.86:1,
+     under the 3:1 floor for large text. */
   color: var(--ink-3);
-  opacity: 0.72;
   line-height: 1;
   margin-bottom: var(--space-4);
 }
@@ -2602,9 +2600,9 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 }
 
 /* ─── Lead band: form beside calendar ────────────────────────── */
-.lead { display: grid; gap: var(--space-5); align-items: start; margin-top: var(--space-5); }
+.lead { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); align-items: start; margin-top: var(--space-5); }
 @media (min-width: 1024px) { .lead { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); } }
-.lead .qf { margin: 0; }
+.lead .qf { margin: 0; min-width: 0; }
 .book { padding: var(--space-5); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); }
 .book__title { margin: 0 0 var(--space-2); font-family: var(--serif); font-size: var(--text-2); font-weight: 600; letter-spacing: -0.012em; line-height: 1.15; color: var(--ink-0); }
 .book__lede { margin: 0 0 var(--space-4); font-size: var(--text-0); line-height: 1.5; color: var(--ink-2); }
@@ -2677,3 +2675,24 @@ html[data-motion] .k-hero [data-hero].is-live .shift__foot { animation: shift-in
 
 /* Section labels promoted to h2 for heading order; keep the label look. */
 h2.section-label { margin: 0 0 14px; line-height: 1.4; }
+
+/* ─── Accessibility fixes (contrast, reflow, focus) ──────────────────── */
+.page-hero .eyebrow { color: var(--accent-text); }
+/* Links in the inverse band: the light-theme rust measured 3.79:1 on its
+   near-black ground; the dark-theme accent clears 6.6:1. */
+.k-section--inverse .k-close .k-body a { color: #F2711C; }
+/* Inactive pipeline stages are transparent; a keyboard user who tabs into
+   one must be able to see where focus is. */
+html[data-motion] .pipe__stage:focus-within { opacity: 1; transform: none; pointer-events: auto; }
+.k-device__bar { flex-wrap: wrap; }
+@media (max-width: 480px) { .soft-cta-card .btn { white-space: normal; flex: 1 1 auto; text-align: center; } }
+.breadcrumbs ol { align-items: baseline; }
+.hamburger { align-content: center; }
+/* Real form labels and nav captions never below 12px. */
+.form-label, .roi-field-label { font-size: max(12.5px, 0.8rem); }
+.qf__stepdot { font-size: 0.78rem; }
+.nav-drop__sub { font-size: max(12px, 0.75rem); }
+/* Small inline links still get a 24px target. */
+.pipe__by, .k-member__go, a.k-stat__source { min-height: 24px; }
+.k-mock__caption a { display: inline-block; padding-block: 4px; }
+main:focus { outline: none; }

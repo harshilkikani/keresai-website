@@ -23,7 +23,7 @@ const other = counterpart(locale, path);
           <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
         </svg>
       </button>
-      <div class="lang-switch" aria-label={ui.nav.language}>
+      <div class="lang-switch" role="group" aria-label={ui.nav.language}>
         {locale === 'en' ? <span aria-current="true">EN</span> : <a href={other.href} hreflang="en" lang="en">EN</a>}
         {locale === 'es' ? <span aria-current="true">ES</span> : <a href={other.href} hreflang="es" lang="es">ES</a>}
       </div>
