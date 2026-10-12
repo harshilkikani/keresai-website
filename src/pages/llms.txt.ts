@@ -79,7 +79,7 @@ ${hubs.map((h) => `- [${h.name}](${u(`/industries/${h.slug}`)}): ${h.sub.split('
 
 More specific industry pages sit beneath these hubs:
 - [HVAC](${u('/ai-receptionist-for-hvac')}) · [Plumbers](${u('/ai-receptionist-for-plumbers')}) · [Roofing](${u('/ai-receptionist-for-roofing')}) · [Septic](${u('/ai-receptionist-for-septic')}) · [Towing](${u('/ai-receptionist-for-towing')})
-- [Dentists](${u('/industries/dental-med-spa')}) · [Med spas](${u('/ai-receptionist-for-med-spas')}) · [Real estate](${u('/industries/real-estate')}) · [Professional intake](${u('/industries/law-firms')})
+- [Dentists](${u('/industries/dental-med-spa')}) · [Real estate](${u('/industries/real-estate')}) · [Professional intake](${u('/industries/law-firms')})
 
 ## City pages (AI receptionist by metro)
 Houston, Phoenix, Dallas, Atlanta, Chicago, Miami, Los Angeles, Charlotte, Tampa, Denver, Las Vegas, Austin — e.g. ${u('/ai-receptionist/houston')}

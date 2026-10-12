@@ -243,7 +243,7 @@ export const hubs: Hub[] = [
     segments: [
       { name: 'General dentistry', text: 'Hygiene recall, emergency chair time, and the new-patient call that came in while both operatories were running.' },
       { name: 'Specialty dental', text: 'Referral intake, longer procedure blocks, and pre-treatment questions answered before the consult.' },
-      { name: 'Med spa', text: 'Treatment qualification, package questions, contraindication screening, and rebooking on the treatment cycle.' },
+      { name: 'Med spa', text: 'Treatment and package questions, consultation booking, and rebooking on the treatment cycle. Clinical history stays with your clinician.' },
       { name: 'Multi-location', text: 'One number, routed to the right location, with each site’s availability and each site’s Daily Brief.' },
     ],
     otherAgents: [
@@ -266,6 +266,9 @@ export const hubs: Hub[] = [
       { proves: 'no-shows falling once every appointment got confirmed' },
     ],
     faqs: [
+      { q: 'Can an AI receptionist book med spa treatments and consultations?', a: 'Yes. Remi answers in two rings, 24/7, asks which treatment or consultation the caller wants, offers real openings from your calendar, books it while the caller is on the line, and texts a confirmation they can reply to for a reschedule or cancellation.' },
+      { q: 'Does Remi collect medical history or pre-treatment intake?', a: 'No. Remi books the treatment and collects only what is needed to book it: name, contact details, the treatment or consultation requested and a preferred time. Clinical history stays with your clinician. Keres is not HIPAA certified and does not sign BAAs, so raise any compliance requirement before you sign.' },
+      { q: 'Will Remi answer calls from my ads and website?', a: 'Yes. Remi answers every call to the number you route to it, whatever ad, listing or page the caller found you on, including evenings and weekends when your front desk is closed.' },
       { q: 'Does it integrate with our practice management system?', a: 'Google Calendar, HubSpot and ServiceTitan are connected today. Dentrix and Open Dental are rolling out — ask where yours is, and in the meantime Remi books to a shared calendar your front desk already watches.' },
       { q: 'Can it answer insurance questions?', a: 'It confirms which plans you accept and flags anything it cannot answer for your front desk. It does not quote coverage or estimate a patient’s out-of-pocket cost — that is a conversation for a person with the plan in front of them.' },
       { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi on the Answer plan', 'answer', 'your call volume, locations and integrations')} Month-to-month.` },
