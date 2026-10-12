@@ -90,15 +90,4 @@ export const guides: Guide[] = [
     readTime: "10 min read",
     order: 6,
   },
-  {
-    slug: "roofing-case-study-15-hours",
-    category: "Case study",
-    listTitle: "Roofing Company Saves 15 Hours/Week",
-    listDesc: "A real client story: how one roofing company reclaimed 15 hours a week with automation.",
-    metaTitle: "Roofing Company Saves 15 Hours Per Week With AI | Keres AI",
-    description: "Real case study: how a mid-size roofing company used lead qualification and scheduling automation to eliminate admin overhead and lift close rate by 22%.",
-    titleHtml: "Roofing Company Saves <span class=\"accent\">15 Hours/Week</span>",
-    readTime: "7 min read",
-    order: 7,
-  },
 ];

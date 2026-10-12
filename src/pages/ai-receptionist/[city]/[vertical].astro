@@ -107,6 +107,7 @@ const sameVerticalOtherCities = geoVerticals.filter((x) => x.verticalSlug === g.
   title={`AI Receptionist for ${vLabel} in ${city.city}, ${city.state} | Keres AI`}
   description={`Keres AI is a 24/7 AI receptionist for ${city.city}, ${city.stateFull} ${industry.nameLower}. Answer every call, book jobs, and never miss a lead — day or night. Book a demo.`}
   path={path}
+  noindexFollow
 >
   <Schema slot="head" graph={[serviceSchema, howto, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 

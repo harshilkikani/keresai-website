@@ -76,6 +76,7 @@ const otherStates = states.filter((x) => x.slug !== s.slug);
   title={`AI Receptionist in ${s.stateFull} | Keres AI`}
   description={`Keres AI is a 24/7 AI receptionist for ${s.stateFull} businesses. Answer every call, book appointments, and never miss a lead — statewide. Book a demo.`}
   path={path}
+  noindexFollow
 >
   <Schema slot="head" graph={[serviceSchema, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
@@ -105,7 +106,7 @@ const otherStates = states.filter((x) => x.slug !== s.slug);
       <ul>
         {s.drivers.map((d) => <li>{d}</li>)}
       </ul>
-      <p>Every unanswered call is a {s.stateFull} customer calling the next business on the list. Keres closes that gap by answering instantly, every time — including the after-hours and surge calls your front desk can't absorb.</p>
+      <p>Every unanswered call is a customer in {s.stateFull} calling the next business on the list. Keres closes that gap by answering instantly, every time — including the after-hours and surge calls your front desk can't absorb.</p>
     </div>
   </section>
 

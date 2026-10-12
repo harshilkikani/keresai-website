@@ -20,6 +20,8 @@ export interface Props {
   ogType?: 'website' | 'article';
   ogImage?: string;
   noindex?: boolean;
+  /** Keep the page out of the index but let crawlers follow its links (thin or templated pages). */
+  noindexFollow?: boolean;
   /**
    * Ad landing pages (/lp/*) render with no nav and no footer links —
    * the only things to click are the form, the phone, and the demo.
@@ -43,6 +45,7 @@ const {
   ogType = 'website',
   ogImage = '/assets/img/og-image.png',
   noindex = false,
+  noindexFollow = false,
   bare = false,
   go = false,
   conversion,
@@ -62,7 +65,8 @@ const hasTwin = translatedPaths.includes(basePath);
 const trimDescription = (d: string): string => {
   const full = d.replace(/\s+/g, ' ').trim();
   if (full.length <= 160) return full;
-  const sentences = full.match(/[^.!?]+[.!?]+(?:\s|$)/g) ?? [full];
+  // A sentence ends at . ! or ? followed by a space or the end, so "Smith.ai" stays whole.
+  const sentences = full.match(/.+?[.!?]+(?=\s|$)\s*/g) ?? [full];
   let out = '';
   for (const sentence of sentences) { if ((out + sentence).trim().length > 160) break; out += sentence; }
   out = out.trim();
@@ -156,6 +160,8 @@ const META_DOMAIN_VERIFICATION = '';
 <meta name="author" content="Keres AI" />
 {(noindex || go)
   ? <meta name="robots" content="noindex, nofollow" />
+  : noindexFollow
+  ? <meta name="robots" content="noindex, follow" />
   : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
 <meta name="theme-color" content="#C2410C" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
