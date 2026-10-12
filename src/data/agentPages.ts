@@ -116,7 +116,7 @@ export const agentPages: AgentPage[] = [
       'Remi is the Answer plan. Add Theo and June on Convert and Grow when the phone is handled.',
     testimonialProves: 'after-hours calls being answered, qualified and booked',
     faqs: [
-      { q: 'Does it sound like a robot?', a: 'It sounds like a competent front desk. It answers in two rings, uses your vocabulary, and says "let me get someone for you" instead of guessing. Call the number at the top of this page and judge it yourself — that is the fastest demo there is.' },
+      { q: 'Does it sound like a robot?', a: 'It sounds like a competent front desk. It answers in two rings, uses your vocabulary, and says "let me get someone for you" instead of guessing. Ask for a live test call when we talk and judge it yourself — that is the fastest demo there is.' },
       { q: 'What does it cost?', a: `${priceSentence('The Answer plan', 'answer', 'your call volume, locations and integrations')} There is no per-call charge and no surcharge for simultaneous calls. Found — the visibility layer — starts separately at $249/month.` },
       { q: 'How long does setup take?', a: 'Five business days. Twenty minutes on how you answer today, then we write your intake script, connect your number, calendar and CRM, and you call it yourself until it answers the way you would.' },
       { q: 'What if a caller needs a human?', a: 'Remi warm-transfers under rules you set, and falls back to a "call me now" alert with the intake attached if the transfer is not picked up.' },
@@ -245,7 +245,7 @@ export const agentPages: AgentPage[] = [
           'June asks for the review after every completed job or matter, at the point where the customer is happiest. Anyone who signals they are unhappy is routed privately to the owner first instead of being pushed toward a public review, and the customers who rated you highest are the ones asked for a referral.',
         bullets: [
           'An automatic ask after every completed job or matter.',
-          'Unhappy customers intercepted and sent to the owner, not to Google.',
+          'Every customer gets the same review request; anyone who reports a problem also reaches the owner directly.',
           'Referral asks aimed at the people who already rated you well.',
           'Owner responses drafted for your approval, never posted unread.',
         ],
@@ -264,7 +264,7 @@ export const agentPages: AgentPage[] = [
       { q: 'What does it cost?', a: `${priceSentence('June on the Grow plan', 'grow', 'your list size and campaign volume')} Individual reactivation campaigns can also be quoted on their own if you want to try one before committing.` },
       { q: 'How long does setup take?', a: 'Five business days for the plan. A single campaign is usually live inside a week of us getting access to the list.' },
       { q: 'What happens when someone replies?', a: 'Interested people are qualified and booked. Anyone who says no is marked in your CRM and not contacted again by that campaign. Anything that needs a person comes to you with the thread.' },
-      { q: 'Will it damage my reputation?', a: 'It is designed not to. Unhappy customers are routed to the owner privately instead of toward a public review, opt-outs are honoured in one word, and June never contacts a bought or scraped list.' },
+      { q: 'Will it damage my reputation?', a: 'It is designed not to. Every customer gets the same review request, anyone who reports a problem reaches the owner directly, opt-outs are honoured in one word, and June never contacts a bought or scraped list.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month.' },
     ],
   },

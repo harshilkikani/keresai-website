@@ -30,7 +30,7 @@ const faqs = [
 ---
 <Layout
   title="Hear It — Sample AI Receptionist Calls | Keres AI"
-  description="Example calls per vertical, showing how Remi answers in two rings, qualifies the lead and books the appointment. Or call the number and hear it yourself."
+  description={`Example calls per vertical, showing how Remi answers in two rings, qualifies the lead and books the appointment. ${PHONE ? 'Or call the number and hear it yourself.' : 'Ask for a live test call on your quote call.'}`}
   path={path}
 >
   <Schema slot="head" graph={[organizationSchema, breadcrumbSchema(crumbs), faqSchema(faqs)]} />
@@ -41,10 +41,9 @@ const faqs = [
     <div class="k-grid">
       <div class="k-col-7">
         <Eyebrow>Hear it</Eyebrow>
-        <h1 id="hear-title" class="k-display">The fastest demo is the phone number.</h1>
+        <h1 id="hear-title" class="k-display">{PHONE ? 'The fastest demo is the phone number.' : 'Hear how Remi handles a call.'}</h1>
         <p class="k-lede">
-          Call it. You will be talking to Remi, the same Inbound Agent that would answer your
-          firm&rsquo;s phone. The transcripts below show how a call goes in four different
+          {PHONE ? 'Call it. You will be talking to Remi, the same Inbound Agent that would answer your firm’s phone.' : 'Remi is the same Inbound Agent that would answer your firm’s phone; ask for a live test call when we talk.'} The transcripts below show how a call goes in four different
           verticals &mdash; audio recordings go here as customers give us permission to publish them.
         </p>
         <div class="price-hero-ctas">

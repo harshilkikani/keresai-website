@@ -233,8 +233,10 @@ const answer = plans.find((p) => p.slug === 'answer')!;
       <h2 id="found-title" class="k-h2">Found, {hub.foundFrom} a month.</h2>
       <p class="k-lede">{hub.foundLine}</p>
       <p class="k-body">
-        Remi on the Answer plan starts at {answer.from.replace('from ', '')}/month, quoted to your
-        volume. <a href="/pricing">See every plan and what changes the quote</a>.
+        {/^from \$\d/.test(answer.from)
+          ? `Remi on the Answer plan starts at ${answer.from.replace('from ', '')}/month, quoted to your volume. `
+          : 'Remi on the Answer plan is quoted to your call volume. '}
+        <a href="/pricing">See every plan and what changes the quote</a>.
       </p>
       <div class="k-close__ctas">
         <Button href="/services/found" variant="primary">What Found includes</Button>

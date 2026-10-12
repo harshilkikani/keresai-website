@@ -149,13 +149,13 @@ export const foundServices: FoundService[] = [
   },
   {
     name: 'Google Business Profile Management',
-    desc: 'One-time optimization — categories, services, photos, Q&A, verification — then weekly posts, photo updates, Q&A, review responses, spam-listing removal and monthly insights.',
-    brief: 'Set up once, then weekly posts, photos, Q&A and review replies.',
+    desc: 'One-time optimization — categories, services, photos, verification — then weekly posts, photo updates, review responses, spam-listing removal and monthly insights.',
+    brief: 'Set up once, then weekly posts, photos and review replies.',
   },
   {
     name: 'Review Generation & Reputation',
-    desc: 'An automated review request after every job or matter, owner responses drafted for your approval, negative reviews intercepted before they post, and a monthly rating report.',
-    brief: 'A request after every job, replies drafted for your OK, bad ones intercepted.',
+    desc: 'An automated review request after every job or matter, owner responses drafted for your approval, problems reported straight to you so you can fix them, and a monthly rating report.',
+    brief: 'A request after every job, replies drafted for your OK, problems flagged to you first.',
   },
   {
     name: 'Local Listings & Citations',

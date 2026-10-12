@@ -70,11 +70,11 @@ export const home = {
         ['What if a caller needs a human?', 'Remi hands off. You set the rules — an emergency, a named client, anyone who asks for a person — and the call warm-transfers to your on-call number. If nobody picks up, you get a "call me now" alert with everything Remi already collected, so the caller never repeats themselves.'],
         ['How long does setup take?', 'Five business days for most accounts. Day one is a 20-minute call to map how you answer now; then we write your intake script, connect your number, calendar and CRM, and you test it yourself before it takes a real call.'],
         ['Is there a contract?', 'No. Every plan is month-to-month, there is no build fee on the Found base tier, and you can change plans or cancel any month.'],
-        ['Does it sound like a robot?', 'It sounds like a competent front desk. Remi answers in two rings, uses your vocabulary — consult, job, chair time, showing — and says "let me get someone for you" rather than guessing when it does not know. <a href="/hear-it">Hear sample calls</a>, or just call the number at the top of this page.'],
+        ['Does it sound like a robot?', 'It sounds like a competent front desk. Remi answers in two rings, uses your vocabulary — consult, job, chair time, showing — and says "let me get someone for you" rather than guessing when it does not know. <a href="/hear-it">Hear sample calls</a>, or ask for a live test call when we talk.'],
       ],
       answerCostWith: 'starts at {price}/month', answerCostWithout: 'is quoted to your call volume',
     },
-    close: { h2: 'Call the number and listen to Remi answer.', lede: 'It is the same agent your callers would get. Ask it something awkward — that is the point of the exercise. Found from {found}/month', remi: '; Remi from {price}/month' },
+    close: { h2: 'Call the number and listen to Remi answer.', h2NoPhone: 'Hear Remi answer before you decide.', lede: 'It is the same agent your callers would get. Ask it something awkward — that is the point of the exercise. Found from {found}/month', remi: '; Remi from {price}/month' },
   },
   es: {
     title: 'Trabajadores de IA para negocios locales | Keres AI',
@@ -142,11 +142,11 @@ export const home = {
         ['¿Y si quien llama necesita a una persona?', 'Remi transfiere. Tú pones las reglas (una emergencia, un cliente con nombre, cualquiera que pida a una persona) y la llamada pasa en caliente a tu número de guardia. Si nadie contesta, recibes una alerta de "llámame ahora" con todo lo que Remi ya recopiló, para que quien llama nunca lo repita.'],
         ['¿Cuánto tarda la puesta en marcha?', 'Cinco días hábiles para la mayoría de las cuentas. El primer día es una llamada de 20 minutos para mapear cómo contestas hoy; luego escribimos tu guion de admisión, conectamos tu número, calendario y CRM, y lo pruebas tú mismo antes de que tome una llamada real.'],
         ['¿Hay contrato?', 'No. Todos los planes son mes a mes, no hay costo de construcción en el nivel base de Found, y puedes cambiar de plan o cancelar cualquier mes.'],
-        ['¿Suena como un robot?', 'Suena como una recepción competente. Remi contesta en dos timbres, usa tu vocabulario (consulta, trabajo, tiempo de sillón, visita) y dice "déjame comunicarte con alguien" en lugar de adivinar cuando no sabe. <a href="/hear-it">Escucha llamadas de muestra</a>, o simplemente llama al número de arriba.'],
+        ['¿Suena como un robot?', 'Suena como una recepción competente. Remi contesta en dos timbres, usa tu vocabulario (consulta, trabajo, tiempo de sillón, visita) y dice "déjame comunicarte con alguien" en lugar de adivinar cuando no sabe. <a href="/hear-it">Escucha llamadas de muestra</a>, o pide una llamada de prueba en vivo cuando hablemos.'],
       ],
       answerCostWith: 'empieza en {price}/mes', answerCostWithout: 'se cotiza según tu volumen de llamadas',
     },
-    close: { h2: 'Llama al número y escucha a Remi contestar.', lede: 'Es el mismo agente que atendería a tus clientes. Pregúntale algo incómodo: de eso se trata. Found desde {found}/mes', remi: '; Remi desde {price}/mes' },
+    close: { h2: 'Llama al número y escucha a Remi contestar.', h2NoPhone: 'Escucha a Remi contestar antes de decidir.', lede: 'Es el mismo agente que atendería a tus clientes. Pregúntale algo incómodo: de eso se trata. Found desde {found}/mes', remi: '; Remi desde {price}/mes' },
   },
 } as const;
 
