@@ -70,10 +70,12 @@ const trimDescription = (d: string): string => {
   for (const sentence of sentences) { if ((out + sentence).trim().length > 160) break; out += sentence; }
   out = out.trim();
   if (out.length >= 60) return out;
-  const cut = full.slice(0, 156);
-  const i = Math.max(cut.lastIndexOf(', '), cut.lastIndexOf(' — '), cut.lastIndexOf('; '), cut.lastIndexOf(': '));
-  return (i > 60 ? cut.slice(0, i) : cut.slice(0, cut.lastIndexOf(' '))).replace(/[,;:—\s]+$/, '') + '.';
+  // No whole sentence fits: cut at a word and mark the cut, rather than
+  // ending at a comma with a period that reads like a finished (wrong) list.
+  const cut = full.slice(0, 157);
+  return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:—–\s]+$/, '') + '…';
 };
+if (import.meta.env.KERES_REPORT_DESC) { const n = description.replace(/\s+/g, ' ').trim(); if (n.length > 160 || n.length < 70) console.warn(`DESC ${n.length} ${path} :: ${n}`); }
 const seoDescription = trimDescription(description);
 
 

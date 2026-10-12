@@ -19,7 +19,7 @@ export const organizationSchema = {
     height: 192,
   },
   description:
-    'Keres AI sells AI workers for local businesses. Each does one job: Found gets you found (website, Google listing, reviews), Remi answers every call in two rings and books it, Theo confirms and reminds, June brings past customers back, Sol finds new customers by email, and Custom is built for any recurring job. Every worker reports in one morning text. Live in five business days, month-to-month, in English and Spanish.',
+    'Keres AI sells AI workers for local businesses. Each does one job: Found gets you found (website, Google listing, reviews), Remi answers every call in two rings and books it, Theo confirms and reminds, June brings past customers back, Sol finds new customers by email, and Custom is built for any recurring job. Every worker reports in one morning text. Live in five business days, month-to-month. Site and sales in English and Spanish; Remi answers in English today.',
   // Brand variants and disambiguation: an unrelated keres.ai, the Keras library
   // and Kore.ai show up for the same searches.
   alternateName: ['Keres', 'KeresAI', 'keresai.com'],
@@ -90,7 +90,8 @@ export const workerServiceSchemas = workers.map((w) => ({
   url: `${ORIGIN}${w.href}`,
   provider: { '@id': `${ORIGIN}/#organization` },
   areaServed: { '@type': 'Country', name: 'United States' },
-  availableLanguage: ['English', 'Spanish'],
+  // Remi answers in English until business.remiSpanish is true; the other workers write in both.
+  availableLanguage: w.slug === 'inbound' && business.remiSpanish !== true ? ['English'] : ['English', 'Spanish'],
   audience: { '@type': 'Audience', audienceType: 'Local businesses: home services, law firms, dental practices, med spas, real estate' },
 }));
 
@@ -227,10 +228,13 @@ export function serviceSchema(opts: {
   path: string;
   serviceType: string;
   audience?: string;
+  /** Stable @id, e.g. the one the Organization's offer catalog points at. */
+  id?: string;
 }) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    ...(opts.id ? { '@id': opts.id } : {}),
     name: opts.name,
     serviceType: opts.serviceType,
     description: opts.description,

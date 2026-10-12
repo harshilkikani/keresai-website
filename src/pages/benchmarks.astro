@@ -12,7 +12,7 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Benchmarks', path }];
 const webpage = webPageSchema({
   path,
   name: 'Service Business Benchmarks: Missed Calls, Lead Response & Cost | Keres AI',
-  description: 'Estimated benchmarks on missed calls, lead response, answering costs and conversion for HVAC, roofing, dental and legal service businesses, with sources where they exist.',
+  description: 'Estimates on missed calls, lead response, answering cost and conversion for HVAC, roofing, dental and legal businesses, with sources where they exist.',
   speakableSelectors: ['.answer-block', '.lead'],
 });
 
@@ -23,7 +23,7 @@ const list = itemListSchema({
 ---
 <Layout
   title="Service Business Benchmarks: Missed Calls, Lead Response & Cost | Keres AI"
-  description="Estimated benchmarks on missed calls, lead response, answering costs and conversion for HVAC, roofing, dental and legal service businesses, with sources where they exist. Updated for 2026."
+  description="Estimates on missed calls, lead response, answering cost and conversion for HVAC, roofing, dental and legal businesses, with sources where they exist. Updated for 2026."
   path={path}
 >
   <Schema slot="head" graph={[list, webpage, breadcrumbSchema(crumbs), organizationSchema]} />

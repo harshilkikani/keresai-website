@@ -38,7 +38,7 @@ export const calculators: Calculator[] = [
     eyebrow: 'HVAC · Free tool',
     title: 'HVAC Missed-Call Calculator | Keres AI',
     description:
-      'Free HVAC missed-call calculator. Enter your monthly call volume, answer rate, and average ticket to see the service revenue lost to unanswered calls every month.',
+      'Free HVAC missed-call calculator: enter monthly calls, answer rate and average ticket to see the service revenue lost to unanswered calls.',
     h1: 'What are missed HVAC calls',
     h1Accent: 'costing you?',
     lead: 'Peak-season and after-hours calls are where HVAC companies lose the most. Plug in your numbers to see the monthly and annual revenue slipping away to voicemail.',
@@ -71,7 +71,7 @@ export const calculators: Calculator[] = [
     eyebrow: 'Roofing · Free tool',
     title: 'Roofing Storm-Lead Calculator | Keres AI',
     description:
-      'Free roofing storm-lead calculator. Enter your storm-season call volume, answer rate, and average job value to see the revenue lost when surge calls go unanswered.',
+      'Free roofing storm-lead calculator: enter storm-season calls, answer rate and job value to see the revenue lost when surge calls go unanswered.',
     h1: 'What are missed storm leads',
     h1Accent: 'costing you?',
     lead: 'A hailstorm can generate a season of calls in hours — and the first roofer to answer usually wins the claim. See what an unanswered surge costs you.',

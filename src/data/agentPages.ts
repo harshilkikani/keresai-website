@@ -45,7 +45,7 @@ export const agentPages: AgentPage[] = [
     slug: 'inbound',
     seoTitle: 'AI Receptionist: Answers in 2 Rings, Books the Lead | Keres',
     description:
-      'Remi answers every call in two rings, 24/7 — runs your intake script, qualifies the lead, books into your calendar and CRM, and texts back anything it could not take within 60 seconds.',
+      'Remi answers every call in two rings, 24/7: runs your intake script, qualifies the lead, books the appointment and texts back any call it could not take.',
     h1: 'Remi — the Inbound Worker that answers every call in two rings and books the lead.',
     sub:
       'An AI receptionist that does the whole job, not just the greeting: it answers day or night, asks your questions, qualifies the lead, books the appointment while the caller is still on the line, and tells you what happened before you have put your phone down.',
@@ -120,7 +120,7 @@ export const agentPages: AgentPage[] = [
       { q: 'What does it cost?', a: `${priceSentence('The Answer plan', 'answer', 'your call volume, locations and integrations')} There is no per-call charge and no surcharge for simultaneous calls. Found — the visibility layer — starts separately at $249/month.` },
       { q: 'How long does setup take?', a: 'Five business days. Twenty minutes on how you answer today, then we write your intake script, connect your number, calendar and CRM, and you call it yourself until it answers the way you would.' },
       { q: 'What if a caller needs a human?', a: 'Remi warm-transfers under rules you set, and falls back to a "call me now" alert with the intake attached if the transfer is not picked up.' },
-      { q: 'Can it handle several calls at once?', a: 'Yes, unlimited simultaneous calls at no surcharge. That is the whole point during a storm week or a Monday morning rush — your bill does not move because your call volume did.' },
+      { q: 'Can it handle several calls at once?', a: 'Yes, unlimited simultaneous calls with no surcharge for taking them at once — the whole point during a storm week or a Monday morning rush. Past your included minutes you pay your quoted per-minute rate.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month, and your number stays yours.' },
     ],
     media: {
@@ -138,7 +138,7 @@ export const agentPages: AgentPage[] = [
     slug: 'follow-up',
     seoTitle: 'Appointment Reminders & No-Show Prevention | Keres',
     description:
-      'Theo confirms every appointment, reminds by text and voice, backfills cancellations from your waitlist, and chases the estimate on day 1, 3 and 7 until you get a yes or a no.',
+      'Theo confirms appointments, reminds by text and voice, fills cancellations from your waitlist, and chases each estimate until you get a yes or a no.',
     h1: 'Theo — the Follow-Up Worker that makes sure they show and say yes.',
     sub:
       'Getting the appointment on the calendar is not the same as getting it kept, and a quote nobody chased is a quote somebody else closed. Theo, your Follow-Up Agent, works the two stages where booked work quietly disappears.',
@@ -208,7 +208,7 @@ export const agentPages: AgentPage[] = [
     slug: 'reactivation',
     seoTitle: 'Database Reactivation & Win-Back Campaigns | Keres',
     description:
-      'June reactivates past customers and cold leads in your CRM, revives closed-lost from the last 6–12 months, and asks for the review after every completed job or matter.',
+      'June brings back past customers and cold leads in your CRM, revives closed-lost deals from the last year, and asks every customer for a review.',
     h1: 'June — the Reactivation Worker. The cheapest lead you’ll ever get is one you already have.',
     sub:
       'Every name in your CRM already chose you once, or nearly did. June, your Reactivation Agent, works that list as conversations rather than blasts — and asks for the review after every job, so the next stranger chooses you too.',
@@ -273,7 +273,7 @@ export const agentPages: AgentPage[] = [
     slug: 'outbound',
     seoTitle: 'AI SDR: Cold Email That Reaches the Inbox | Keres',
     description:
-      'Sol runs cold outbound with deliverability set up properly first — SPF, DKIM, DMARC and warm-up — then personalized sequences, replies handled in thread, and meetings booked.',
+      'Sol runs cold outbound with deliverability set up first (SPF, DKIM, DMARC, warm-up), then personalized sequences, replies handled and meetings booked.',
     h1: 'Sol — the Outbound Worker. Cold outreach that reaches the inbox and books the meeting.',
     sub:
       'For firms that need net-new pipeline rather than a better answer to the calls they already get. Sol, your Outbound Agent, does the deliverability work first — because sending is the easy half and landing is the half that gets skipped.',

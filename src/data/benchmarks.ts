@@ -113,7 +113,7 @@ export const benchmarks: Benchmark[] = [
     eyebrow: 'Pricing · Estimates',
     title: 'AI Receptionist Cost Comparison (2026) | Keres AI',
     description:
-      'A 2026 cost study comparing an AI receptionist to a full-time front-desk hire and a per-minute answering service — by coverage, predictability, and cost per booked call.',
+      'Estimated cost of an AI receptionist versus a full-time front-desk hire and a per-minute answering service, by coverage and cost per booked call.',
     h1: 'AI receptionist',
     h1Accent: 'cost study',
     lead: 'What does it actually cost to answer every call? A 2026 comparison of an AI receptionist against a full-time front-desk hire and a per-minute answering service — by coverage, predictability, and cost per booked appointment.',
@@ -124,13 +124,13 @@ export const benchmarks: Benchmark[] = [
       { num: '$35k–$50k', stat: 'annual cost of a full-time front-desk receptionist', context: 'Salary plus benefits and payroll taxes — and that covers roughly 40 hours a week, leaving nights, weekends, and overflow uncovered.' },
       { num: '$1–$3', stat: 'per-minute rate for a typical human answering service', context: 'Per-minute billing means costs rise exactly when call volume spikes, and most services only take a message rather than book the job.' },
       { num: '40 hrs', stat: 'weekly coverage from a single full-time hire', context: 'One receptionist cannot cover 24/7. Nights, weekends, holidays, lunch breaks, and simultaneous calls all fall through the gaps.' },
-      { num: '24/7', stat: 'coverage from an AI receptionist on a monthly plan', context: 'Unlimited simultaneous calls, every hour of every day, for a predictable monthly fee that does not spike with volume.' },
+      { num: '24/7', stat: 'coverage from an AI receptionist on a monthly plan', context: 'Unlimited simultaneous calls, every hour of every day, on a monthly rate with included minutes, then per-minute.' },
     ],
     sections: [
       { h2: 'The hidden cost of a full-time hire', body: '<p>A front-desk salary is only part of the cost. Add benefits, payroll taxes, training, turnover, and paid time off, and the fully loaded cost of one receptionist commonly lands between $35,000 and $50,000 a year. Critically, that buys roughly 40 hours of coverage a week — so nights, weekends, holidays, lunch breaks, and any second call that comes in while they are busy still go unanswered.</p>' },
       { h2: 'Why per-minute billing punishes growth', body: '<p>Per-minute answering services look cheap until your busy season hits. Because you pay by the minute, your bill rises exactly when call volume spikes — and most of these services only take a message, leaving the actual booking to you. The model charges you more for the privilege of doing half the job. See how this compares on the <a href="/ai-answering-service">AI answering service</a> page.</p>' },
       { h2: 'Cost per booked appointment is the real metric', body: '<p>The number that matters is not monthly cost — it is cost per booked appointment. A cheaper option that misses half your calls or only takes messages has a far higher true cost per booking than a service that answers everything and books live. When you measure by booked jobs, 24/7 coverage with unlimited simultaneous calls changes the equation.</p>' },
-      { h2: 'How AI receptionist pricing works', body: '<p>An <a href="/agents/inbound">AI receptionist</a> charges a predictable monthly fee regardless of call volume, answers unlimited simultaneous calls around the clock, and books appointments during the call. For most service businesses that lands well below the cost of a full-time hire while covering the hours a single person never could. See current plans on the <a href="/pricing">pricing page</a>, or compare specific options on the <a href="/compare">comparisons hub</a>.</p>' },
+      { h2: 'How AI receptionist pricing works', body: '<p>An <a href="/agents/inbound">AI receptionist</a> charges a monthly rate with included minutes (then per-minute), answers unlimited simultaneous calls around the clock, and books appointments during the call. For most service businesses that lands well below the cost of a full-time hire while covering the hours a single person never could. See current plans on the <a href="/pricing">pricing page</a>, or compare specific options on the <a href="/compare">comparisons hub</a>.</p>' },
     ],
     faqs: [
       { q: 'How much does an AI receptionist cost vs. a human receptionist?', a: 'A full-time receptionist costs an estimated $35,000–$50,000 a year for ~40 hours of weekly coverage. An AI receptionist uses monthly pricing, covers 24/7 with unlimited simultaneous calls, and typically costs well below a full-time hire. See the <a href="/pricing">pricing page</a> for current plans.' },

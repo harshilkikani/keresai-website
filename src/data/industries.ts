@@ -146,7 +146,7 @@ const allIndustries: Industry[] = [
     shortLower: 'med spa',
     title: 'AI Receptionist for Med Spas | Keres AI',
     description:
-      'Keres AI answers every med spa call 24/7, books treatments and consultations, and handles intake forms — so your front desk never misses a booking, even at peak hours.',
+      'Keres AI answers every med spa call 24/7 and books treatments and consultations, so your front desk never misses a booking at peak hours.',
     intro:
       'Med spas live and die by the booked appointment. When your front desk is with a client, new callers go to voicemail and book somewhere else. Keres answers every call in two rings, qualifies the inquiry, and books the treatment directly on your calendar.',
     pains: [
@@ -204,7 +204,7 @@ const allIndustries: Industry[] = [
     shortLower: 'roofing',
     title: 'AI Receptionist for Roofers — Storm Leads | Keres',
     description:
-      'Keres AI answers every roofing call 24/7, books estimates and inspections, and captures storm-season surges the moment they call — before a competitor answers first.',
+      'Keres AI answers every roofing call 24/7, books estimates and inspections, and catches storm-season surges before a competitor answers first.',
     intro:
       'Storm seasons create call surges that overwhelm even the best front desks — and every missed call during a hailstorm or hurricane is a five-figure job handed to a competitor. Keres answers in two rings, books the estimate, and flags emergency tarp jobs to your crew immediately.',
     pains: [

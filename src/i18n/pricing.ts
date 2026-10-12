@@ -71,7 +71,7 @@ export type Pricing = typeof pricing.en;
 const allPriced = (['remi', 'theo', 'june', 'sol'] as const).every((k) => priceAmount(k));
 const quotedCopy = {
   en: {
-    description: 'Keres pricing: Found starts at $249/month ($499 for law firms); Remi, Theo, June and Sol are quoted to your volume. One monthly rate with included minutes, month-to-month, live in five business days.',
+    description: 'Found starts at $249/month ($499 for law firms). Remi, Theo, June and Sol are quoted to your volume: included minutes, no per-call fees, month-to-month.',
     lede: 'Found publishes its starting price below. Remi, Theo, June and Sol are quoted to your call volume on a 20-minute call, and the list further down says exactly what moves the number. Month-to-month, no per-call fees.',
     faq0: 'Found starts at $249 a month ($499 for law firms). Remi, Theo, June and Sol are quoted to your call volume, locations and integrations on a 20-minute call: one monthly rate with included minutes, per-minute after that, and no per-call fees. Custom is scoped on the same call.',
   },

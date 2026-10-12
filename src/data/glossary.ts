@@ -65,7 +65,7 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is an ai answering service',
     title: 'What Is an AI Answering Service? Definition | Keres',
     description:
-      'An AI answering service answers and handles business calls automatically on a monthly plan — booking appointments and capturing leads 24/7 instead of just taking messages.',
+      'An AI answering service answers business calls automatically, booking appointments and capturing leads 24/7 instead of just taking messages.',
     definition:
       'An AI answering service is an automated phone-answering solution that handles inbound calls 24/7 without human operators. Unlike a traditional answering service that charges per minute to take messages, an AI answering service books appointments, answers common questions, qualifies leads, and routes urgent calls — usually on a predictable monthly plan.',
     sections: [
@@ -94,14 +94,14 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is a virtual receptionist',
     title: 'What Is a Virtual Receptionist? Definition | Keres',
     description:
-      'A virtual receptionist answers and manages business calls remotely. Learn the difference between human virtual receptionists and AI receptionists, and which fits your business.',
+      'A virtual receptionist answers your business calls remotely. How human virtual receptionists and AI receptionists differ, and which fits your business.',
     definition:
       'A virtual receptionist is a remote service — staffed by people or powered by AI — that answers your business calls, greets callers, schedules appointments, and routes messages without sitting at your physical front desk. AI virtual receptionists do this automatically, 24/7, while human ones operate during staffed hours and typically bill per call or per minute.',
     sections: [
       {
         h2: 'Human vs. AI virtual receptionists',
         body:
-          'Human virtual receptionists offer a personal touch but cost more, have limited hours, and can only take one call at a time. An <a href="/glossary/ai-receptionist">AI receptionist</a> answers unlimited calls simultaneously, never sleeps, and completes bookings on a monthly plan — making it a strong fit for businesses with spiky or after-hours call volume.',
+          'Human virtual receptionists offer a personal touch and many now cover 24/7, but each receptionist handles one call at a time and plans are usually billed by minutes or calls. An <a href="/glossary/ai-receptionist">AI receptionist</a> answers unlimited calls simultaneously, never sleeps, and completes bookings on a monthly plan — making it a strong fit for businesses with spiky or after-hours call volume.',
       },
     ],
     related: ['ai-receptionist', 'ai-answering-service', 'call-overflow'],
@@ -213,7 +213,7 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is an ai sdr',
     title: 'What Is an AI SDR? Definition & How It Works | Keres',
     description:
-      'An AI SDR automates outbound sales development — building and sending personalized email sequences, handling replies, and booking meetings without hiring a human rep.',
+      'An AI SDR automates outbound sales development: personalized email sequences, reply handling and meeting booking without hiring a human rep.',
     definition:
       'An AI SDR (sales development representative) is software that automates outbound prospecting: it builds and sends personalized cold-email sequences, manages inbox warmup and deliverability, replies to interested prospects, and books qualified meetings straight onto your calendar — doing the work of a human sales development rep without the headcount.',
     sections: [
@@ -463,7 +463,7 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is conversational ai',
     title: 'What Is Conversational AI? Definition & Examples | Keres AI',
     description:
-      'Conversational AI is technology that understands and responds in natural language — powering AI receptionists and voice agents that hold real phone conversations.',
+      'Conversational AI understands and responds in natural language. It powers AI receptionists and voice agents that hold real phone conversations.',
     definition:
       'Conversational AI is technology that understands and responds in natural human language across voice and text. It combines speech recognition, natural language understanding, and generation to hold real, two-way conversations — handling interruptions and context rather than reading a rigid menu. It’s what lets an AI receptionist actually talk to callers and book appointments.',
     sections: [
@@ -628,7 +628,7 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is email bounce rate',
     title: 'What Is Email Bounce Rate? Hard vs Soft Bounces | Keres AI',
     description:
-      'Email bounce rate is the percentage of emails that fail to deliver. Learn the difference between hard and soft bounces and why a high bounce rate hurts deliverability.',
+      'Email bounce rate is the share of emails that fail to deliver. Hard vs. soft bounces, and why a high bounce rate hurts your inbox placement.',
     definition:
       'Email bounce rate is the percentage of emails that fail to deliver and are returned. A hard bounce is a permanent failure (invalid address); a soft bounce is temporary (full mailbox, server issue). A high bounce rate signals poor list quality to mailbox providers and damages your <a href="/glossary/spam-score">sender reputation</a>.',
     sections: [
@@ -688,7 +688,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'After-hours answering vs. voicemail vs. answering service',
         body:
-          'Voicemail captures a message most callers never leave. A human answering service bills per minute, usually just takes a message, and has limited overnight staffing. An AI after-hours answering service answers unlimited calls simultaneously, books appointments during the conversation, handles emergencies, and costs one monthly rate — with no gaps at 3 AM.',
+          'Voicemail captures a message most callers never leave. A human answering service usually bills by the minute or the call and often takes a message for you to return. An AI after-hours answering service answers unlimited calls simultaneously, books appointments during the conversation, handles emergencies, and costs one monthly rate — with no gaps at 3 AM.',
       },
     ],
     related: ['ai-receptionist', 'call-overflow', 'emergency-dispatch', 'missed-call-recovery'],
@@ -858,7 +858,7 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is front desk automation',
     title: 'What Is Front Desk Automation? Definition | Keres',
     description:
-      'Front desk automation uses AI to handle calls, book appointments, qualify leads, and answer questions automatically — replacing or supplementing human receptionists.',
+      'Front desk automation uses AI to answer calls, book appointments, qualify leads and answer questions, replacing or supplementing human receptionists.',
     definition:
       'Front desk automation uses AI to perform the core tasks of a business\'s front desk without human staff: answering every call, greeting callers, booking and rescheduling appointments, qualifying and routing leads, answering common questions, collecting intake information, and escalating emergencies. It runs 24/7, scales to unlimited simultaneous calls, and costs a fraction of full-time front desk staffing.',
     sections: [

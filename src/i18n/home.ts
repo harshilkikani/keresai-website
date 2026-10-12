@@ -6,7 +6,7 @@ import { priceFrom } from '../config/business';
 export const home = {
   en: {
     title: 'Websites & AI Receptionist for Local Businesses | Keres AI',
-    description: 'A conversion website and a managed Google listing so you show up, and Remi answering every call in two rings so the call gets booked. Live in five days, from $249/month.',
+    description: 'A website and a managed Google profile so local customers find you, and Remi answering every call in two rings. Live in five days, from $249/month.',
     eyebrow: 'AI workers for local businesses',
     h1: [['Get', 'found.'], ['Get', 'answered.'], ['Get', 'booked.']],
     lede: 'Hire one, hire all. Each does one job, reports to you in a text every morning{bundle}. Live in five days, month-to-month.',

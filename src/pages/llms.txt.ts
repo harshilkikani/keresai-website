@@ -21,12 +21,12 @@ export const GET: APIRoute = () => {
 
   const body = `# Keres AI
 
-> Keres AI sells AI workers for local businesses. Each worker does one job, reports to the owner in one text every morning, and can be hired alone or together: Found gets you found (website, Google listing, reviews), Remi answers every call in two rings and books it, Theo confirms and reminds, June brings past customers back and asks for the review, Sol finds new customers by email, and Custom is built for any recurring job. Live in five business days, month-to-month, in English and Spanish.
+> Keres AI sells AI workers for local businesses. Each worker does one job, reports to the owner in one text every morning, and can be hired alone or together: Found gets you found (website, Google listing, reviews), Remi answers every call in two rings and books it, Theo confirms and reminds, June brings past customers back and asks for the review, Sol finds new customers by email, and Custom is built for any recurring job. Live in five business days, month-to-month. Site and sales in English and Spanish; Remi answers in English today.
 
 Keres serves law firms, home-services contractors (HVAC, plumbing, roofing, septic, towing), dental practices and med spas, and real-estate teams: the businesses whose sales team is whoever picks up the phone.
 
 Key facts:
-- Six workers, hired one at a time or together. Each publishes a starting price on ${u('/pricing')} and is quoted to call volume, locations and integrations.
+- Six workers, hired one at a time or together. Found starts at $249/month ($499 for law firms); Remi, Theo, June and Sol are quoted to call volume, locations and integrations on ${u('/pricing')}: a monthly rate with included minutes, then per-minute, no per-call fees.
 - Every call answered in two rings, 24/7, including nights, weekends and holidays. Unlimited simultaneous calls.
 - Live in five business days. Month-to-month, no contract, no cancellation fee. Per-minute usage after included minutes.
 - Owner Daily Brief: one morning text with calls answered, leads qualified, appointments booked, no-shows prevented, reviews posted, and which source produced the bookings. Every worker reports to the same text.
@@ -72,7 +72,7 @@ One price per worker, published as a starting point and quoted to your business.
 - [Custom worker](${u('/custom')}): any recurring job, scoped and built for you.
 - [Pricing](${u('/pricing')}): one row per worker and what changes the quote.
 - [Get a quote](${u('/quote')}): the form and the booking calendar${PHONE ? `, or call ${PHONE.display}` : ''}.
-- [Hear it](${u('/hear-it')}): recorded sample calls per vertical.
+- [Hear it](${u('/hear-it')}): example call transcripts per vertical (examples, not recordings).
 
 ## Industry hubs
 ${hubs.map((h) => `- [${h.name}](${u(`/industries/${h.slug}`)}): ${h.sub.split('. ')[0]}.`).join('\n')}

@@ -64,7 +64,7 @@ export const hubs: Hub[] = [
     name: 'Law firms',
     title: 'AI Intake Receptionist for Law Firms | Keres AI',
     description:
-      'Remi answers every new-client call in two rings, screens for conflicts, qualifies the matter and books the consultation — nights and weekends included. Found for firms from $499/month.',
+      'Remi answers every new-client call in two rings, screens for conflicts and books the consultation, nights and weekends. Found for law firms from $499/month.',
     h1: 'The first firm to answer signs the client. Be that firm, at 2 a.m.',
     sub:
       'Remi, your Inbound Agent, answers every new-client call in two rings, screens for conflicts, qualifies the matter for your practice area, and books the consultation straight into your calendar. A single new case is worth thousands. Most of the calls that produce them arrive after your office is closed.',
@@ -116,7 +116,7 @@ export const hubs: Hub[] = [
     foundLine:
       'Legal is the most competitive local search there is, the listings ecosystem is different — Avvo, FindLaw, Justia — and the review compliance rules are stricter. Found for firms starts at $499 a month and covers the site, the Google Business Profile, reviews, listings and AI-search visibility.',
     compliance:
-      'Conflict screening happens before any advice is given, and Remi never offers legal advice. Call data is processed under a DPA, retained on your schedule, and access is logged. Ask for the security review before you sign anything.',
+      'Conflict screening happens before any advice is given, and Remi never offers legal advice. Call data is retained on your schedule and access is limited to the people who run your account. Keres does not sign DPAs or BAAs today, so ask before you sign.',
     children: [
       { label: 'AI receptionist for professional intake', href: '/industries/law-firms' },
       { label: 'Answering Legal alternative', href: '/answering-legal-alternative' },
@@ -143,7 +143,7 @@ export const hubs: Hub[] = [
     name: 'Home services',
     title: 'AI Receptionist for HVAC, Plumbing & Roofing | Keres',
     description:
-      'Remi answers in two rings, qualifies the job, gives a dispatch window and books it into ServiceTitan or your calendar — then texts back the calls it could not take. Visibility from $249/month.',
+      'Remi answers in two rings, qualifies the job and books it into ServiceTitan or your calendar. Website and Google profile for contractors from $249/month.',
     h1: 'You’re on a roof. The phone’s ringing. Remi answers, books the job, and texts back the ones it can’t.',
     sub:
       'Remi, your Inbound Agent, picks up in two rings while your crew is on a job — grades the emergency, takes the service address, gives a dispatch window and writes the job into your field-service software. Anything it cannot take gets a text back inside 60 seconds.',
@@ -193,7 +193,7 @@ export const hubs: Hub[] = [
     ],
     faqs: [
       { q: 'Can it dispatch to the right tech?', a: 'It creates and grades the job, offers a real dispatch window and writes it to ServiceTitan or your calendar. Assignment stays with your dispatcher — the Daily Brief flags any job that still has no truck on it.' },
-      { q: 'What about the seasonal surge?', a: 'Remi answers unlimited simultaneous calls at no surcharge, which is the entire point during a cold snap. Your bill does not move because a heat wave did.' },
+      { q: 'What about the seasonal surge?', a: 'Remi answers unlimited simultaneous calls with no surcharge for taking them at once, which is the entire point during a cold snap. Past your included minutes you pay your quoted per-minute rate, so size the plan to your busy season.' },
       { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi on the Answer plan', 'answer', 'your call volume, locations and integrations')} Month-to-month.` },
       { q: 'How long does setup take?', a: 'Five business days: twenty minutes on how calls run today, then your script, your number, your calendar and your field-service software, and you test it yourself before it answers a customer.' },
       { q: 'What if the caller needs a person?', a: 'You set the rules — a gas smell, a flood, a commercial account — and Remi warm-transfers to your on-call number, with a "call me now" alert as the fallback.' },
@@ -206,7 +206,7 @@ export const hubs: Hub[] = [
     name: 'Dental & med spa',
     title: 'AI Receptionist for Dental Practices & Med Spas | Keres',
     description:
-      'Every call answered in two rings, every appointment confirmed, every recall filled. Remi books chair time, Theo prevents the no-show, June rebooks recall. Visibility from $249/month.',
+      'Every call answered in two rings, every appointment confirmed, recall filled. Remi books chair time; Found runs your site and Google profile from $249/month.',
     h1: 'Every call booked. Every appointment confirmed. Every recall filled.',
     sub:
       'Remi, your Inbound Agent, answers while your front desk is chairside — qualifies the procedure, checks what insurance you take, and books the chair time. Then Theo confirms it and June brings the recall list back.',
@@ -269,7 +269,7 @@ export const hubs: Hub[] = [
     name: 'Real estate',
     title: 'AI Receptionist for Real Estate Teams | Keres AI',
     description:
-      'Remi answers every listing enquiry in seconds, qualifies the buyer or seller, and books the showing on your calendar — evenings and weekends included. Visibility from $249/month.',
+      'Remi answers every listing enquiry in seconds, qualifies the buyer or seller and books the showing, evenings included. Website and Google profile from $249/mo.',
     h1: 'Answer every lead in seconds. Book the showing before they call the next agent.',
     sub:
       'Remi, your Inbound Agent, answers the listing line and the portal enquiries in seconds — asks whether they are working with an agent, whether they are pre-approved, and what their timeline is — then books the showing while you are still in the car.',

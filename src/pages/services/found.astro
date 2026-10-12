@@ -55,19 +55,27 @@ const faqs = [
   },
 ];
 
-const serviceNodes = foundServices.map((s) =>
-  serviceSchema({
-    name: s.name,
+// One Found service (the @id the Organization's offer catalog references),
+// with the eight jobs as its catalog.
+const serviceNodes = [{
+  ...serviceSchema({
+    name: 'Found: website, Google Business Profile and reviews',
     serviceType: 'Local Search Visibility',
-    description: s.desc,
+    description: 'Done-for-you website, Google Business Profile management, review requests and listings for local service businesses, from $249 a month ($499 for law firms), month-to-month.',
     path,
     audience: 'Local service businesses and professional practices',
-  })
-);
+    id: `https://www.keresai.com${path}#service`,
+  }),
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'What Found includes',
+    itemListElement: foundServices.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, description: s.desc } })),
+  },
+}];
 ---
 <Layout
   title="Contractor Websites & Google Profile Management From $249/mo | Keres AI"
-  description="Done-for-you website, Google Business Profile and reviews for HVAC, plumbing, roofing and other home service businesses, from $249/month, month-to-month. Law firms from $499."
+  description="Done-for-you website, Google Business Profile and reviews for HVAC, plumbing, roofing and other local service businesses. From $249/month, month-to-month."
   path={path}
 >
   <Schema slot="head" graph={[organizationSchema, breadcrumbSchema(crumbs), faqSchema(faqs), ...serviceNodes]} />

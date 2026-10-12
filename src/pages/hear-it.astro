@@ -6,6 +6,7 @@ import Section from '../components/Section.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Button from '../components/Button.astro';
 import CallTranscript from '../components/CallTranscript.astro';
+import FaqSection from '../components/FaqSection.astro';
 import { organizationSchema, breadcrumbSchema, faqSchema } from '../data/schema';
 import { hubs } from '../data/hubs';
 import { PHONE } from '../data/site';
@@ -20,7 +21,7 @@ const faqs = [
   },
   {
     q: 'Are these real customer calls?',
-    a: 'The transcripts below are examples, and they say so. We will not publish a customer call without written permission, and when we do it will be labelled as a recording with the firm named.',
+    a: 'The transcripts on this page are examples, and they say so. We will not publish a customer call without written permission, and when we do it will be labelled as a recording with the firm named.',
   },
   {
     q: 'Does it tell callers it is an assistant?',
@@ -92,4 +93,5 @@ const faqs = [
       </div>
     </div>
   </Section>
+  <FaqSection faqs={faqs} title="Hear it — FAQ" />
 </Layout>

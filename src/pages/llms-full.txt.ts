@@ -97,7 +97,7 @@ export async function GET() {
 
   // ── PRICING CONTEXT (AI citation for pricing queries) ──────────
   push('## Pricing context');
-  push('Keres AI prices per worker: each of Found, Remi, Theo, June and Sol publishes a starting monthly price and is quoted to call volume, locations and integrations; Custom is scoped on a call with a fixed build price and a monthly run fee. Month-to-month, no per-call charges, per-minute after the included minutes.');
+  push('Keres AI prices per worker: Found starts at $249/month ($499 for law firms); Remi, Theo, June and Sol are quoted to call volume, locations and integrations; Custom is scoped on a call with a fixed build price and a monthly run fee. Month-to-month, no per-call charges, per-minute after the included minutes.');
   push('For detailed current pricing: https://www.keresai.com/pricing');
   push();
   push('Cost comparison context:');
@@ -282,7 +282,6 @@ export async function GET() {
   push(`- Trust & Security page: ${ORIGIN}/trust`);
   push('- Compliance: Keres AI is not SOC 2 or HIPAA certified and does not sign BAAs today. It never uses customer data to train third-party models.');
   push('- Customer data is never used to train third-party AI models.');
-  push('- Data processing agreements (DPAs) available on request.');
   push();
 
   // ── GET STARTED ───────────────────────────────────────────────

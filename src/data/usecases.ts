@@ -22,7 +22,7 @@ export const usecases: UseCase[] = [
     targetKeyword: 'after hours answering service',
     title: 'After-Hours Answering Service | Keres AI',
     description:
-      'Keres answers every call after hours, on weekends, and on holidays — booking appointments and flagging emergencies so you never lose a lead to voicemail at 9 PM.',
+      'Keres answers every call after hours, on weekends and holidays, booking appointments and flagging emergencies so no lead is lost to voicemail.',
     h1: 'Answer every call <span class="accent">after hours</span>',
     intro:
       'An after-hours answering service handles the calls that come in once your office closes. Keres answers every one of them 24/7 — nights, weekends, and holidays — in two rings, qualifies the caller, books the appointment, and texts your on-call team the moment something is an emergency, so no lead ever hits voicemail.',
@@ -52,7 +52,7 @@ export const usecases: UseCase[] = [
     targetKeyword: 'overflow call handling service',
     title: 'Overflow Call Handling — Catch Every Call | Keres',
     description:
-      'Keres picks up the calls your team can’t — busy lines, peak season, marketing spikes — answering instantly and booking the job instead of sending callers to voicemail.',
+      'Keres picks up the calls your team can’t (busy lines, peak season, marketing spikes) and books the job instead of sending callers to voicemail.',
     h1: 'Never drop an <span class="accent">overflow call</span>',
     intro:
       'Overflow call handling routes the calls your team can’t answer — because the lines are busy or staff are slammed — to a backup that picks up instantly. Keres answers unlimited simultaneous calls in two rings, qualifies and books each one, so a peak-season rush or a marketing spike never sends callers to voicemail.',
@@ -82,7 +82,7 @@ export const usecases: UseCase[] = [
     targetKeyword: 'ai appointment booking',
     title: 'AI Appointment Booking — Book Jobs on the Call | Keres AI',
     description:
-      'Keres books, confirms, and reschedules appointments during the call — checking live availability and syncing to your calendar, so callers never wait for a callback.',
+      'Keres books, confirms and reschedules appointments during the call, checking live availability on your calendar so callers never wait for a callback.',
     h1: 'Book the appointment <span class="accent">on the call</span>',
     intro:
       'Keres turns every inbound call into a booked appointment. It checks real-time availability on your calendar, books or reschedules during the conversation, avoids double-bookings, and texts the caller a confirmation — eliminating phone tag and the callbacks that quietly lose you customers.',
@@ -112,7 +112,7 @@ export const usecases: UseCase[] = [
     targetKeyword: '24/7 lead capture',
     title: '24/7 Lead Capture & Qualification | Keres AI',
     description:
-      'Keres captures and qualifies every inbound lead 24/7 — asking the right questions, scoring fit, and routing real opportunities to your team while filtering the noise.',
+      'Keres captures and qualifies every inbound lead 24/7, asking your questions and routing real opportunities to your team while filtering the noise.',
     h1: 'Capture and qualify <span class="accent">every lead</span>',
     intro:
       'Keres captures every inbound lead and qualifies it on the spot, 24/7. It asks the questions you define — service, location, urgency, budget — books the ones that fit, routes the rest, and logs everything to your CRM, so your team spends time on real opportunities instead of chasing voicemails.',
@@ -142,7 +142,7 @@ export const usecases: UseCase[] = [
     targetKeyword: 'reduce front desk staffing costs',
     title: 'Reduce Front-Desk Staffing Costs | Keres AI',
     description:
-      'Cover the phones 24/7 without hiring. Keres answers, qualifies, and books on one monthly rate — far less than a full-time receptionist or a per-minute answering service.',
+      'Cover the phones 24/7 without hiring: Keres answers, qualifies and books on one monthly rate with included minutes instead of a full-time hire.',
     h1: 'Cover the phones <span class="accent">without hiring</span>',
     intro:
       'Keres covers your front desk and after-hours phones on one monthly rate — answering, qualifying, and booking every call without adding headcount. It costs far less than a full-time receptionist or a per-minute answering service, and it never calls in sick, takes a lunch, or misses a night call.',
@@ -202,7 +202,7 @@ export const usecases: UseCase[] = [
     targetKeyword: 'emergency dispatch answering service',
     title: 'Emergency Answering & Dispatch Workflow | Keres AI',
     description:
-      'Keres recognizes emergency calls, captures the location and severity, books the visit, and texts your on-call tech instantly — a complete 24/7 emergency dispatch workflow.',
+      'Keres recognizes emergency calls, captures location and severity, books the visit and texts your on-call tech: a 24/7 emergency dispatch workflow.',
     h1: 'Answer and <span class="accent">dispatch every emergency</span>',
     intro:
       'An emergency dispatch workflow turns an urgent inbound call into a dispatched job in seconds. Keres answers in two rings 24/7, recognizes a no-heat, no-cool, flood, or storm emergency, captures the address and severity, books the visit, and texts your on-call tech or driver immediately — so the most valuable calls never wait on hold.',
@@ -232,7 +232,7 @@ export const usecases: UseCase[] = [
     targetKeyword: 'roofing storm response call handling',
     title: 'Storm-Response Dispatch Workflow for Roofers | Keres AI',
     description:
-      'Keres answers unlimited simultaneous storm calls, qualifies hail and wind damage, books inspections, and dispatches emergency tarp jobs — so a roofing surge becomes booked work.',
+      'Keres answers storm-surge calls at once, qualifies hail and wind damage, books inspections and flags tarp jobs, so a roofing surge becomes booked work.',
     h1: 'Turn a storm surge into <span class="accent">booked inspections</span>',
     intro:
       'A storm-response workflow captures the flood of calls a hailstorm or hurricane triggers in a few hours. Keres answers unlimited simultaneous calls, qualifies the damage type, books inspections on your estimators’ calendars, and dispatches emergency tarp and board-up jobs — so the first storm in the area fills your schedule instead of your voicemail.',
@@ -262,7 +262,7 @@ export const usecases: UseCase[] = [
     targetKeyword: 'maintenance plan reactivation calls',
     title: 'Maintenance-Plan Reactivation Workflow | Keres AI',
     description:
-      'Keres books seasonal tune-ups, captures membership renewals, and re-engages lapsed maintenance-plan customers — turning recurring-revenue reminders into booked visits.',
+      'Keres books seasonal tune-ups, captures membership renewals and re-engages lapsed maintenance-plan customers, turning reminders into booked visits.',
     h1: 'Reactivate lapsed <span class="accent">maintenance plans</span>',
     intro:
       'A maintenance-plan reactivation workflow keeps recurring revenue from slipping away. Keres answers every membership and tune-up call, books the seasonal visit on the spot, captures renewals, and re-engages customers whose plans have lapsed — so the maintenance agreements that stabilize your year actually get scheduled.',
@@ -292,7 +292,7 @@ export const usecases: UseCase[] = [
     targetKeyword: 'financing follow up for contractors',
     title: 'Financing Follow-Up Workflow for High-Ticket Jobs | Keres AI',
     description:
-      'Keres captures financing interest on high-ticket jobs, answers payment-option questions, and books the consultation — so price-sensitive leads convert instead of stalling.',
+      'Keres captures financing interest on high-ticket jobs, answers payment-option questions and books the consultation so price-sensitive leads convert.',
     h1: 'Convert high-ticket leads with <span class="accent">financing follow-up</span>',
     intro:
       'A financing follow-up workflow keeps high-ticket leads moving when cost is the sticking point. Keres answers questions about payment and financing options, captures the customer’s interest, and books the consultation or estimate — so a $10,000 HVAC replacement or roof job does not stall the moment price comes up.',

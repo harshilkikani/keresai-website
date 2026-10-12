@@ -26,7 +26,7 @@ const note = rollingOutNote(i.name);
 // A rolling-out integration never claims to work: honest title, intro and FAQ,
 // and noindex until it ships.
 const title = live ? i.title : `${i.name} Integration (Rolling Out) | Keres AI`;
-const description = live ? i.description : `${note} Ask on a call where ${i.name} is on the list.`;
+const description = live ? i.description : `The Keres AI + ${i.name} integration is rolling out, not live yet. Keres connects to ServiceTitan, HubSpot, Google Calendar and Zapier today.`;
 const faqs = live ? i.faqs : [
   { q: `Is the Keres AI + ${i.name} integration live?`, a: `Not yet. ${note} Ask on a call where ${i.name} is on the list.` },
   { q: `What can I use until ${i.name} is connected?`, a: `Remi books into ${liveIntegrationNames.join(', ')} today, and the morning text summarizes every call so nothing depends on the sync.` },
