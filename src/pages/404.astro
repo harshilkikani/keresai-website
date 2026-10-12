@@ -7,6 +7,7 @@ import Layout from '../layouts/Layout.astro';
   path="/404"
   noindex={true}
 >
+  <script slot="head" src="/assets/notfound.js" is:inline></script>
   <header class="page-hero container" style="text-align:center">
     <span class="eyebrow">404</span>
     <h1 style="margin-inline:auto">This page took a <span class="accent">wrong turn</span></h1>
