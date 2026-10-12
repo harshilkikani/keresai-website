@@ -4,7 +4,7 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { organizationSchema, breadcrumbSchema } from '../data/schema';
-import { integrations, integrationCategories } from '../data/integrations';
+import { integrations, integrationCategories, isLive, liveIntegrationNames } from '../data/integrations';
 
 const path = '/integrations';
 const ORIGIN = 'https://www.keresai.com';
@@ -14,7 +14,7 @@ const itemList = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Keres AI integrations',
-  itemListElement: integrations.map((i, idx) => ({
+  itemListElement: integrations.filter(isLive).map((i, idx) => ({
     '@type': 'ListItem',
     position: idx + 1,
     name: `Keres AI + ${i.name}`,
@@ -24,7 +24,7 @@ const itemList = {
 ---
 <Layout
   title="Integrations — Connect Keres AI to Your Stack | Keres AI"
-  description="Keres AI connects to ServiceTitan, Jobber, Housecall Pro, HubSpot, Twilio, RingCentral, Google Calendar, Outlook, Zapier, and Make — plus webhooks for everything else."
+  description="Keres AI connects to Google Calendar, HubSpot, ServiceTitan and Zapier today. Jobber, Housecall Pro, Outlook and others are rolling out and marked that way."
   path={path}
 >
   <Schema slot="head" graph={[breadcrumbSchema(crumbs), itemList, organizationSchema]} />
@@ -33,7 +33,7 @@ const itemList = {
   <header class="page-hero container">
     <span class="eyebrow">Integrations</span>
     <h1>Plugs into <span class="accent">your stack</span></h1>
-    <p class="lead">Keres connects to the calendars, CRMs, phone systems, and field-service platforms you already run on — most one-off integrations go live during onboarding.</p>
+    <p class="lead">Connected today: {liveIntegrationNames.join(', ')}. The rest are rolling out and marked that way below.</p>
     <div class="hero-ctas">
       <a href="/quote" class="btn btn-primary">Book a Demo</a>
     </div>
@@ -43,10 +43,10 @@ const itemList = {
     <section class="page-section container">
       <div class="section-label">{cat}</div>
       <div class="feature-grid">
-        {integrations.filter((i) => i.category === cat).map((i) => (
+        {integrations.filter((i) => i.category === cat).sort((a, b) => Number(isLive(b)) - Number(isLive(a))).map((i) => (
           <a class="feature-card" href={`/integrations/${i.slug}`} style="text-decoration:none; display:block;">
             <h3>Keres AI + {i.name}</h3>
-            <p>{i.intro.slice(0, 130)}…</p>
+            <p>{isLive(i) ? i.intro.slice(0, 130) + '…' : 'Rolling out. Not live yet.'}</p>
           </a>
         ))}
       </div>
@@ -55,7 +55,7 @@ const itemList = {
 
   <section class="page-section container">
     <div class="prose">
-      <p>Don’t see your stack? Keres speaks generic webhooks and CSV out of the box, so most one-off integrations go live during onboarding. <a href="/quote">Book a demo</a> and tell us what you run on.</p>
+      <p>Don’t see your stack? <a href="/quote">Book a call</a> and tell us what you run on; we’ll say plainly whether it works today.</p>
     </div>
   </section>
 

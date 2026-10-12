@@ -94,24 +94,24 @@ export const comparisons: Comparison[] = [
     competitor: 'Smith.ai',
     category: 'Virtual receptionist & answering service',
     pillar: 'inbound',
-    title: 'The Best Smith.ai Alternative — Flat Rate | Keres',
+    title: 'Smith.ai Alternative: AI Receptionist, No Per-Call Fees | Keres AI',
     description:
-      'Looking for a Smith.ai alternative? Keres AI answers every call 24/7, books appointments, and runs on flat-rate pricing — no per-call fees. See the full comparison.',
+      'Looking for a Smith.ai alternative? Keres AI answers every call 24/7, books appointments, and charges one monthly rate with included minutes — no per-call fees. See the full comparison.',
     h1Accent: 'Smith.ai',
     intro:
-      'Smith.ai pairs human agents with AI and bills per call or conversation, which gets expensive as volume grows. Keres is a fully AI receptionist that answers every call 24/7 at a flat monthly rate, books appointments on your calendar, and includes an AI SDR for outbound — so you scale call coverage without scaling cost.',
+      'Smith.ai pairs human agents with AI and bills per call or conversation, which gets expensive as volume grows. Keres is a fully AI receptionist that answers every call 24/7 on one monthly rate with included minutes and books appointments on your calendar, with outbound email (Sol) available as a separate worker.',
     rows: [
       { feature: 'Answers 24/7', keres: 'Yes', them: 'Yes' },
-      { feature: 'Flat-rate pricing (no per-call fees)', keres: 'Yes', them: 'No' },
+      { feature: 'No per-call fees', keres: 'Yes', them: 'No' },
       { feature: 'Unlimited simultaneous calls', keres: 'Yes', them: 'Limited' },
       { feature: 'Books appointments live on your calendar', keres: 'Yes', them: 'Limited' },
       { feature: 'Industry-tuned call flows', keres: 'Yes', them: 'Yes' },
-      { feature: 'AI SDR / outbound included', keres: 'Yes', them: 'No' },
+      { feature: 'Outbound email worker available (Sol, priced separately)', keres: 'Yes', them: 'No' },
     ],
     faqs: [
-      { q: 'Is Keres a good Smith.ai alternative?', a: 'Yes — especially if per-call or per-conversation billing is getting expensive. Keres answers every call 24/7 at a predictable flat rate and books appointments directly on your calendar.' },
+      { q: 'Is Keres a good Smith.ai alternative?', a: 'Yes — especially if per-call or per-conversation billing is getting expensive. Keres answers every call 24/7 on one monthly rate with included minutes and books appointments directly on your calendar.' },
       { q: 'Does Keres use humans like Smith.ai?', a: 'Keres is AI-first: the AI handles calls end to end and escalates to your team by text when something needs a human, so you get 24/7 coverage without per-call human fees.' },
-      { q: 'How is pricing different from Smith.ai?', a: 'Keres uses flat monthly pricing rather than per-call or per-minute billing, which is far more predictable for high-volume and seasonal businesses.' },
+      { q: 'How is pricing different from Smith.ai?', a: 'Keres charges one monthly rate with a pool of included minutes and no per-call charge; past the pool you pay per minute at your quoted rate. See /pricing.' },
     ],
   },
   {
@@ -121,20 +121,19 @@ export const comparisons: Comparison[] = [
     pillar: 'inbound',
     title: 'The Best Ruby Alternative — 24/7 AI Receptionist | Keres AI',
     description:
-      'Searching for a Ruby Receptionists alternative? Keres AI answers every call 24/7, books appointments automatically, and charges a flat rate instead of per minute.',
+      'Searching for a Ruby Receptionists alternative? Keres AI answers every call 24/7, books appointments automatically, and charges one monthly rate with included minutes.',
     h1Accent: 'Ruby',
     intro:
-      'Ruby offers friendly human virtual receptionists, but coverage is tied to staffed hours and minutes you pay for. Keres answers every call 24/7 with AI, books the appointment during the call, and runs at a flat monthly rate — so nights, weekends, and call spikes are covered without per-minute charges.',
+      'Ruby offers friendly human virtual receptionists, but coverage is tied to staffed hours and minutes you pay for. Keres answers every call 24/7 with AI, books the appointment during the call, on one monthly rate with included minutes — so nights, weekends, and call spikes are covered.',
     rows: [
       { feature: 'True 24/7 coverage', keres: 'Yes', them: 'Limited' },
-      { feature: 'Flat-rate (no per-minute billing)', keres: 'Yes', them: 'No' },
       { feature: 'Unlimited simultaneous calls', keres: 'Yes', them: 'No' },
       { feature: 'Books & reschedules on your calendar', keres: 'Yes', them: 'Limited' },
       { feature: 'Captures leads to your CRM', keres: 'Yes', them: 'Yes' },
-      { feature: 'AI SDR / outbound included', keres: 'Yes', them: 'No' },
+      { feature: 'Outbound email worker available (Sol, priced separately)', keres: 'Yes', them: 'No' },
     ],
     faqs: [
-      { q: 'Is Keres a good Ruby alternative?', a: 'Yes, particularly if you want round-the-clock coverage and flat-rate pricing. Keres answers every call 24/7 with AI and books appointments during the call, instead of billing per minute.' },
+      { q: 'Is Keres a good Ruby alternative?', a: 'Yes, particularly if you want round-the-clock coverage. Keres answers every call 24/7 with AI and books appointments during the call.' },
       { q: "Will an AI receptionist sound as friendly as Ruby's humans?", a: "Keres uses natural-sounding voice AI tuned to your brand's tone, holds real conversations, and escalates to your team when a human is genuinely needed." },
       { q: 'Does Keres cover after-hours and weekends?', a: 'Yes — 24/7, including nights, weekends, and holidays, at no extra after-hours rate.' },
     ],
@@ -154,14 +153,14 @@ export const comparisons: Comparison[] = [
       { feature: 'AI answers 24/7', keres: 'Yes', them: 'Yes' },
       { feature: 'Done-for-you setup & tuning', keres: 'Yes', them: 'No' },
       { feature: 'Books appointments on your calendar', keres: 'Yes', them: 'Limited' },
-      { feature: 'Field-service integrations (ServiceTitan, Jobber, etc.)', keres: 'Yes', them: 'Limited' },
+      { feature: 'ServiceTitan integration', keres: 'Yes', them: 'Varies' },
       { feature: 'Emergency escalation to your team', keres: 'Yes', them: 'Limited' },
-      { feature: 'AI SDR / outbound included', keres: 'Yes', them: 'No' },
+      { feature: 'Outbound email worker available (Sol, priced separately)', keres: 'Yes', them: 'No' },
     ],
     faqs: [
       { q: "Is Keres a good Goodcall alternative?", a: "Yes — especially if you'd rather not build and maintain the agent yourself. Keres is fully managed: we configure call flows, integrations, and tuning, and book appointments for you." },
       { q: 'Do I have to set up Keres myself?', a: 'No. Unlike self-serve tools, Keres is done-for-you — most accounts are live within five business days.' },
-      { q: 'Does Keres integrate with my field-service software?', a: 'Yes — ServiceTitan, Jobber, Housecall Pro, FieldEdge, Service Fusion, plus Google Calendar, Outlook, and webhooks.' },
+      { q: 'Does Keres integrate with my field-service software?', a: 'ServiceTitan, Google Calendar and HubSpot today, plus Zapier. Jobber and Housecall Pro are rolling out.' },
     ],
   },
   {
@@ -181,7 +180,7 @@ export const comparisons: Comparison[] = [
       { feature: 'CRM & field-service integrations', keres: 'Yes', them: 'Limited' },
       { feature: 'Industry-tuned call flows', keres: 'Yes', them: 'Limited' },
       { feature: 'Done-for-you setup', keres: 'Yes', them: 'No' },
-      { feature: 'AI SDR / outbound included', keres: 'Yes', them: 'No' },
+      { feature: 'Outbound email worker available (Sol, priced separately)', keres: 'Yes', them: 'No' },
     ],
     faqs: [
       { q: 'Is Keres a good Rosie alternative?', a: 'Yes, if you want more than basic answering. Keres books appointments, integrates with your CRM and field-service tools, escalates emergencies, and adds outbound — all done for you.' },
@@ -204,8 +203,7 @@ export const comparisons: Comparison[] = [
       { feature: 'Purpose-built for service businesses', keres: 'Yes', them: 'No' },
       { feature: 'Done-for-you setup (live in ~5 days)', keres: 'Yes', them: 'No' },
       { feature: 'Field-service integrations', keres: 'Yes', them: 'Limited' },
-      { feature: 'Flat, predictable pricing', keres: 'Yes', them: 'Limited' },
-      { feature: 'AI SDR / outbound included', keres: 'Yes', them: 'Limited' },
+      { feature: 'Outbound email worker available (Sol, priced separately)', keres: 'Yes', them: 'Limited' },
     ],
     faqs: [
       { q: 'Is Keres a good Dialpad alternative?', a: 'Yes — if your goal is answering and booking every call rather than running an enterprise phone system. Keres is a focused, done-for-you AI receptionist for service businesses.' },
@@ -219,20 +217,19 @@ export const comparisons: Comparison[] = [
     pillar: 'inbound',
     title: 'The Best AnsweringLegal Alternative for Law Firms | Keres AI',
     description:
-      'AnsweringLegal alternative: Keres AI answers every call 24/7, qualifies intake, screens conflicts, and books consultations — flat monthly rate, no per-minute billing.',
+      'AnsweringLegal alternative: Keres AI answers every call 24/7, qualifies intake, screens conflicts, and books consultations — one monthly rate with included minutes.',
     h1Accent: 'AnsweringLegal',
     intro:
-      'AnsweringLegal is a human-staffed legal answering service that charges per minute. Keres is an AI-powered legal intake receptionist that answers every call 24/7, screens conflict-of-interest questions, captures case details, and books consultations — all at a flat monthly rate with no per-minute billing.',
+      'AnsweringLegal is a human-staffed legal answering service that charges per minute. Keres is an AI-powered legal intake receptionist that answers every call 24/7, screens conflict-of-interest questions, captures case details, and books consultations, on one monthly rate with included minutes.',
     rows: [
       { feature: 'Answers calls 24/7', keres: 'Yes', them: 'Yes' },
-      { feature: 'Flat monthly pricing (no per-minute fees)', keres: 'Yes', them: 'No' },
       { feature: 'Conflict screening questions', keres: 'Yes', them: 'Limited' },
       { feature: 'Books consultations on your calendar', keres: 'Yes', them: 'Message-only' },
       { feature: 'Handles unlimited simultaneous calls', keres: 'Yes', them: 'No' },
       { feature: 'CRM / case management sync', keres: 'Yes', them: 'Limited' },
     ],
     faqs: [
-      { q: 'Is Keres a good AnsweringLegal alternative for law firms?', a: 'Yes — especially for firms that want live calendar booking, flat-rate pricing, and unlimited simultaneous calls. Keres handles conflict screening and case-type qualification during the call, then books the consultation directly.' },
+      { q: 'Is Keres a good AnsweringLegal alternative for law firms?', a: 'Yes — especially for firms that want live calendar booking and unlimited simultaneous calls. Keres handles conflict screening and case-type qualification during the call, then books the consultation directly.' },
       { q: 'Can an AI receptionist handle legal intake?', a: 'Yes. Keres is trained on your practice areas, asks the intake questions your firm requires, screens for conflicts, and routes urgent calls to on-call attorneys immediately.' },
     ],
   },
@@ -250,13 +247,12 @@ export const comparisons: Comparison[] = [
     rows: [
       { feature: 'Answers every call live (not just texts)', keres: 'Yes', them: 'Limited' },
       { feature: 'Books appointments during the call', keres: 'Yes', them: 'No' },
-      { feature: 'Field-service integrations (ServiceTitan, Jobber)', keres: 'Yes', them: 'No' },
+      { feature: 'ServiceTitan integration', keres: 'Yes', them: 'Varies' },
       { feature: 'Emergency dispatch alerts', keres: 'Yes', them: 'No' },
-      { feature: 'Flat monthly pricing', keres: 'Yes', them: 'Yes' },
       { feature: 'Done-for-you setup (live in ~5 days)', keres: 'Yes', them: 'Self-serve' },
     ],
     faqs: [
-      { q: 'Is Keres a better Numa alternative for home services?', a: 'For businesses that need live appointment booking and field-service integrations, yes. Keres answers calls and books jobs directly in ServiceTitan, Jobber, and Housecall Pro — Numa focuses on text and missed-call deflection.' },
+      { q: 'Is Keres a better Numa alternative for home services?', a: 'For businesses that need live appointment booking and field-service integrations, yes. Keres answers calls and books jobs directly in ServiceTitan, and Housecall Pro — Numa focuses on text and missed-call deflection.' },
       { q: 'Does Keres answer calls or just text back?', a: 'Keres answers live — a real AI voice picks up within two rings, qualifies the caller, and books the appointment during the call. Text follow-up is also sent as a confirmation.' },
     ],
   },
@@ -305,7 +301,7 @@ export const comparisons: Comparison[] = [
     ],
     faqs: [
       { q: 'Is Keres better than Calendly for service businesses?', a: 'They solve different problems. Calendly is for online booking when a prospect is already on your website. Keres handles inbound phone calls — the primary booking channel for HVAC, plumbing, roofing, dental, and most service businesses.' },
-      { q: 'Can Keres and Calendly work together?', a: 'Yes. Keres books directly onto your Google Calendar or Outlook, the same calendar Calendly uses. You can run both: Keres for phone, Calendly for web.' },
+      { q: 'Can Keres and Calendly work together?', a: 'Yes. Keres books directly onto your Google Calendar, the same calendar Calendly can use. You can run both: Keres for phone, Calendly for web.' },
     ],
   },
 ];

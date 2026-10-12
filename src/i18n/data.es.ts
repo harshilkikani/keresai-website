@@ -62,7 +62,7 @@ export const transcripts: Record<Vertical, Transcript> = {
       { who: 'caller', t: '0:52', text: 'A las 9:30.' },
       { who: 'remi', t: '0:56', text: 'Agendado. Su resumen de admisión ya está en el expediente y el bufete lo tiene.' },
     ],
-    outcome: [{ k: 'Consulta agendada', v: 'Lun 9:30 AM' }, { k: 'Verificación de conflictos', v: 'En cola para revisión' }, { k: 'Admisión del asunto', v: 'Guardada en Clio' }] },
+    outcome: [{ k: 'Consulta agendada', v: 'Lun 9:30 AM' }, { k: 'Verificación de conflictos', v: 'En cola para revisión' }, { k: 'Admisión del asunto', v: 'Guardada en HubSpot' }] },
   'home-services': { label: 'Llamada de emergencia de ejemplo — Remi', duration: '0:54', when: 'Vie 6:04 AM', from: '(555) 012-4416', city: 'Emergencia · antes de abrir',
     turns: [
       { who: 'remi', t: '0:00', text: 'Gracias por llamar. Puedo mandarle un técnico hoy mismo. ¿Qué está pasando?' },
@@ -95,7 +95,7 @@ export const transcripts: Record<Vertical, Transcript> = {
       { who: 'caller', t: '0:24', text: 'Preaprobado hasta 550, con la idea de mudarme en primavera.' },
       { who: 'remi', t: '0:31', text: 'Tengo una visita mañana a las 11. La agendo ahora y le envío las divulgaciones a su teléfono.' },
     ],
-    outcome: [{ k: 'Visita agendada', v: 'Dom 11:00 AM' }, { k: 'Comprador', v: 'Preaprobado, sin agente' }, { k: 'Guardado en', v: 'Follow Up Boss' }] },
+    outcome: [{ k: 'Visita agendada', v: 'Dom 11:00 AM' }, { k: 'Comprador', v: 'Preaprobado, sin agente' }, { k: 'Guardado en', v: 'HubSpot' }] },
 };
 
 export const briefs: Record<Vertical, Brief> = {
@@ -159,7 +159,7 @@ export const goPages: GoPage[] = [
     h1: 'Cada llamada de cliente nuevo contestada, revisada y en tu calendario. En marcha en cinco días.', lede: 'La mayoría de las llamadas con intención llegan fuera de horario y se las lleva el primer bufete que contesta. Remi, tu Agente de Entrada, contesta en dos timbres, toma los datos para la verificación de conflictos, califica el asunto según tu área de práctica y agenda la consulta. Mes a mes.',
     facts: [{ k: 'Contesta en', v: '2 timbres' }, { k: 'En marcha en', v: '5 días' }, { k: 'Found desde', v: '$499/mes' }],
     found: { title: 'Sé el bufete que aparece, y luego el que contesta.', text: 'Un sitio web de conversión, un Perfil de Negocio de Google administrado, reseñas después de cada asunto y directorios que coinciden en Avvo y FindLaw. Planes para bufetes desde $499 al mes.' },
-    answered: { title: 'Admisión a las 2 a.m., datos de conflictos capturados, consulta agendada.', text: 'Remi revisa conflictos, califica el asunto, agenda la consulta y escribe la admisión en Clio, Lawmatics o HubSpot antes de que cuelguen.' },
+    answered: { title: 'Admisión a las 2 a.m., datos de conflictos capturados, consulta agendada.', text: 'Remi revisa conflictos, califica el asunto, agenda la consulta y escribe la admisión en HubSpot antes de que cuelguen.' },
     mock: 'law-firms', calc: 'legal', close: { h2: 'El primer bufete que contesta firma al cliente.', text: 'Cotización en veinte minutos. En marcha en cinco días hábiles, mes a mes.' } },
   { slug: 'dental', path: '/es/go/dental', title: 'Dental: cada llamada agendada, cada recall lleno | Keres AI', description: 'Remi contesta cada llamada de paciente en dos timbres, agenda el sillón y precalifica el seguro; Theo confirma para que el sillón no quede vacío. En cinco días.',
     h1: 'Cada llamada agendada. Cada recall lleno. En marcha en cinco días.', lede: 'El diente roto a las 7 am se agenda con quien contesta. Remi, tu Agente de Entrada, contesta en dos timbres, encuentra el expediente, agenda el sillón y envía los formularios por mensaje; Theo confirma la noche anterior para que el sillón no quede vacío. Mes a mes.',

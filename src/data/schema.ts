@@ -115,7 +115,7 @@ export const softwareApplicationSchema = {
   // leave the Offer node out rather than emit a fake one.
   featureList: [
     '24/7 AI call answering — answers in two rings, every call',
-    'Automated appointment booking on Google Calendar, Outlook, ServiceTitan, Jobber, Housecall Pro',
+    'Automated appointment booking on Google Calendar, HubSpot and ServiceTitan',
     'AI lead qualification and capture with CRM sync',
     'Emergency escalation by text to on-call team',
     'AI SDR outbound email with personalization at scale',
@@ -129,7 +129,7 @@ export const softwareApplicationSchema = {
     { '@type': 'PropertyValue', name: 'Contract', value: 'Month-to-month, cancel anytime' },
     { '@type': 'PropertyValue', name: 'Answer speed', value: 'Within two rings, 24/7' },
     { '@type': 'PropertyValue', name: 'Coverage', value: '24/7 including nights, weekends, and holidays' },
-    { '@type': 'PropertyValue', name: 'Pricing model', value: 'Flat monthly subscription' },
+    { '@type': 'PropertyValue', name: 'Pricing model', value: 'One monthly rate per worker with included minutes; per-minute after that' },
     { '@type': 'PropertyValue', name: 'Industries served', value: 'HVAC, plumbing, roofing, septic, towing, dental, med spa, real estate, legal intake' },
   ],
   provider: { '@id': `${ORIGIN}/#organization` },

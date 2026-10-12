@@ -34,6 +34,9 @@ export default defineConfig({
         // City, state and city×trade pages are noindex (templated, no local
         // office behind them), so they stay out of the sitemap too.
         !/^https:\/\/www\.keresai\.com\/ai-receptionist\/(?!home-services$)[^/]+(\/[^/]+)?$/.test(page) &&
+        // Rolling-out integrations are noindex until they ship. Keep this list in
+        // step with status: 'rolling-out' in src/data/integrations.ts.
+        !/^https:\/\/www\.keresai\.com\/integrations\/(jobber|housecall-pro|twilio|ringcentral|outlook|make|fieldedge|service-fusion|acuity|slack)$/.test(page) &&
         // No published customer stories yet; the page is noindex.
         !/^https:\/\/www\.keresai\.com\/customers(\/|$)/.test(page) &&
         // The old /missed-call-calculator path is now a 301 redirect to

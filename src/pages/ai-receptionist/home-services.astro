@@ -28,7 +28,7 @@ const homeServiceIndustries = industries.filter((i) =>
 const faqs = [
   {
     q: 'What is an AI receptionist for home services?',
-    a: 'An AI receptionist for home services is software that answers every inbound call 24/7 in two rings, qualifies the caller — capturing service type, location, and urgency — books the job on your calendar, and dispatches your on-call crew by text for emergencies. It covers the after-hours calls, surge periods, and overflow that a human front desk can\'t absorb, at a flat monthly rate.',
+    a: 'An AI receptionist for home services is software that answers every inbound call 24/7 in two rings, qualifies the caller — capturing service type, location, and urgency — books the job on your calendar, and dispatches your on-call crew by text for emergencies. It covers the after-hours calls, surge periods, and overflow that a human front desk can\'t absorb, on one monthly rate.',
   },
   {
     q: 'Which home-service trades does Keres support?',
@@ -36,7 +36,7 @@ const faqs = [
   },
   {
     q: 'Does Keres integrate with ServiceTitan, Jobber, and Housecall Pro?',
-    a: 'Yes — Keres integrates natively with ServiceTitan, Jobber, Housecall Pro, FieldEdge, and Service Fusion, pushing jobs and customer records automatically so your dispatch board stays accurate.',
+    a: 'ServiceTitan, yes: Keres pushes jobs and customer records to it automatically, so your dispatch board stays accurate. Jobber and Housecall Pro are rolling out; until then Remi books to Google Calendar or HubSpot.',
   },
   {
     q: 'How does Keres handle peak-season call surges?',
@@ -57,7 +57,7 @@ const webpage = webPageSchema({
 ---
 <Layout
   title="AI Receptionist for Home Services | Keres AI"
-  description="Keres AI answers every home-services call 24/7, dispatches emergencies, and books jobs in ServiceTitan, Jobber, and Housecall Pro. Built for HVAC, plumbing, roofing, towing, and septic."
+  description="Keres AI answers every home-services call 24/7, dispatches emergencies, and books jobs in ServiceTitan or your calendar. Built for HVAC, plumbing, roofing, towing, and septic."
   path={path}
 >
   <Schema slot="head" graph={[
@@ -79,7 +79,7 @@ const webpage = webPageSchema({
   <header class="page-hero container">
     <span class="eyebrow">AI Receptionist · Home Services</span>
     <h1>The AI receptionist built for <span class="accent">home-services contractors</span></h1>
-    <p class="lead">HVAC, plumbing, roofing, towing, and septic companies run on the phone. Keres answers every call in two rings, dispatches emergencies to your crew, and books jobs straight into ServiceTitan, Jobber, and Housecall Pro — 24/7, including storm surges and 2 AM breakdowns.</p>
+    <p class="lead">HVAC, plumbing, roofing, towing, and septic companies run on the phone. Keres answers every call in two rings, dispatches emergencies to your crew, and books jobs straight into ServiceTitan or your calendar — 24/7, including storm surges and 2 AM breakdowns.</p>
     <div class="hero-ctas">
       <a href="/quote" class="btn btn-primary">Book a Demo</a>
       <a href="/tools/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
@@ -131,10 +131,9 @@ const webpage = webPageSchema({
       <p>Keres syncs to the platforms home-service businesses run on — not just a calendar, but the full field-service system where you manage jobs, customers, and dispatch.</p>
       <ul>
         <li><a href="/integrations/servicetitan">ServiceTitan</a> — jobs, customers, and call records sync in real time</li>
-        <li><a href="/integrations/jobber">Jobber</a> — two-way sync for clients, jobs, and invoices</li>
-        <li><a href="/integrations/housecall-pro">Housecall Pro</a> — customers, jobs, and payments</li>
-        <li><a href="/integrations/twilio">Twilio</a> — call handling and SMS dispatch alerts</li>
-        <li>FieldEdge and Service Fusion — plus generic webhooks for any other system</li>
+        <li><a href="/integrations/google-calendar">Google Calendar</a> and <a href="/integrations/hubspot">HubSpot</a> — bookings and contacts</li>
+        <li><a href="/integrations/zapier">Zapier</a> — hand leads to other apps</li>
+        <li>Jobber, Housecall Pro, FieldEdge and Service Fusion — rolling out; ask where yours is</li>
       </ul>
     </div>
   </section>

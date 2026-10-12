@@ -47,7 +47,7 @@ export const industries: Industry[] = [
     ],
     faqs: [
       { q: 'Can the AI receptionist handle HVAC emergencies?', a: 'Yes. Keres recognizes no-heat, no-cool, and gas-smell emergencies, captures the address and details, and texts your on-call tech or dispatcher immediately while booking the visit.' },
-      { q: 'Does it integrate with ServiceTitan or Housecall Pro?', a: 'Yes. Keres syncs jobs, customers, and calls with ServiceTitan, Housecall Pro, Jobber, FieldEdge, and Service Fusion, plus generic webhooks.' },
+      { q: 'Does it integrate with ServiceTitan or Housecall Pro?', a: 'ServiceTitan, yes: Keres writes jobs, customers and calls to it today, as well as Google Calendar and HubSpot. Housecall Pro and Jobber are rolling out; ask where yours is.' },
       { q: 'Will it handle peak-season call volume?', a: 'Yes — Keres answers unlimited simultaneous calls, so a heat wave never sends a caller to voicemail.' },
     ],
   },
@@ -76,7 +76,7 @@ export const industries: Industry[] = [
     ],
     faqs: [
       { q: 'Can it dispatch emergency plumbing calls?', a: 'Yes. Keres identifies emergencies like floods and burst pipes, captures the details, books the visit, and texts your on-call plumber immediately.' },
-      { q: 'Does it work with my scheduling software?', a: 'Yes — Keres integrates with Jobber, Housecall Pro, ServiceTitan, Service Fusion, and more, plus Google Calendar and Outlook.' },
+      { q: 'Does it work with my scheduling software?', a: 'Keres books into ServiceTitan, Google Calendar and HubSpot today, and connects to other apps through Zapier. Jobber and Housecall Pro are rolling out.' },
       { q: 'How fast does it answer?', a: 'Every call is answered within two rings, 24/7, including nights and weekends.' },
     ],
   },
@@ -222,7 +222,7 @@ export const industries: Industry[] = [
     faqs: [
       { q: 'Can the AI receptionist handle a storm-season call surge?', a: 'Yes — Keres answers unlimited simultaneous calls, so a hailstorm or hurricane never sends a caller to voicemail. Every storm lead gets booked before a competitor answers.' },
       { q: 'Does it capture insurance claim leads?', a: 'Yes. Keres qualifies the damage type, captures the address and contact details, and books the inspection appointment — everything your estimator needs in their calendar.' },
-      { q: 'Does it work with field-service software?', a: 'Yes — Keres integrates with ServiceTitan, Jobber, and Housecall Pro, pushing new jobs and customer records automatically.' },
+      { q: 'Does it work with field-service software?', a: 'Keres writes new jobs and customer records to ServiceTitan today, plus Google Calendar and HubSpot. Jobber and Housecall Pro are rolling out.' },
     ],
   },
   {
@@ -280,7 +280,7 @@ export const industries: Industry[] = [
     faqs: [
       { q: 'Can it handle septic emergency calls?', a: 'Yes. Keres identifies backup and overflow emergencies, captures the address and details, books the dispatch, and texts your on-call crew immediately.' },
       { q: 'Does it send maintenance reminders?', a: 'Keres captures customer information and service history so you can trigger pumping reminders — typically every 2–3 years — to keep your schedule full year-round.' },
-      { q: 'Does it integrate with field-service software?', a: 'Yes — Keres integrates with Jobber, Housecall Pro, ServiceTitan, and generic webhooks so jobs sync to your existing system automatically.' },
+      { q: 'Does it integrate with field-service software?', a: 'Keres writes jobs to ServiceTitan, Google Calendar and HubSpot today, and to other apps through Zapier. Jobber and Housecall Pro are rolling out.' },
     ],
   },
 ];

@@ -91,7 +91,7 @@ export const usecases: UseCase[] = [
     how: [
       'Checks live calendar availability and books during the call',
       'Reschedules and cancels without phone tag',
-      'Books onto Google Calendar, Outlook, or your field-service software',
+      'Books onto Google Calendar, HubSpot or ServiceTitan',
       'Sends automatic confirmations and reminders to cut no-shows',
     ],
     outcomes: [
@@ -100,7 +100,7 @@ export const usecases: UseCase[] = [
       'No double-bookings, no manual scheduling',
     ],
     faqs: [
-      { q: 'What calendars does Keres book into?', a: 'Google Calendar, Outlook/Microsoft 365, and field-service tools like ServiceTitan, Jobber, and Housecall Pro.' },
+      { q: 'What calendars does Keres book into?', a: 'Google Calendar, HubSpot and ServiceTitan today. Outlook, Jobber and Housecall Pro are rolling out.' },
       { q: 'Does it reduce no-shows?', a: 'Yes — automatic text confirmations and reminders, plus instant rescheduling, meaningfully cut no-shows.' },
     ],
     related: ['lead-capture', 'after-hours-answering', 'overflow-call-handling'],
@@ -142,14 +142,14 @@ export const usecases: UseCase[] = [
     targetKeyword: 'reduce front desk staffing costs',
     title: 'Reduce Front-Desk Staffing Costs | Keres AI',
     description:
-      'Cover the phones 24/7 without hiring. Keres answers, qualifies, and books at a flat monthly rate — far less than a full-time receptionist or a per-minute answering service.',
+      'Cover the phones 24/7 without hiring. Keres answers, qualifies, and books on one monthly rate — far less than a full-time receptionist or a per-minute answering service.',
     h1: 'Cover the phones <span class="accent">without hiring</span>',
     intro:
-      'Keres covers your front desk and after-hours phones at a flat monthly rate — answering, qualifying, and booking every call without adding headcount. It costs far less than a full-time receptionist or a per-minute answering service, and it never calls in sick, takes a lunch, or misses a night call.',
+      'Keres covers your front desk and after-hours phones on one monthly rate — answering, qualifying, and booking every call without adding headcount. It costs far less than a full-time receptionist or a per-minute answering service, and it never calls in sick, takes a lunch, or misses a night call.',
     problem:
       'A full-time front-desk hire is expensive and still only covers business hours. Per-minute answering services balloon during busy seasons and usually just take a message. Either way, you’re paying a lot for incomplete coverage.',
     how: [
-      'One flat monthly rate — no per-minute billing, no overtime',
+      'One monthly rate with included minutes, no overtime rates',
       'Covers business hours, after hours, and overflow in one solution',
       'Answers unlimited calls at once — no need to staff for peaks',
       'Books appointments and updates your CRM, not just takes messages',
@@ -160,7 +160,7 @@ export const usecases: UseCase[] = [
       'Your team freed up for higher-value work',
     ],
     faqs: [
-      { q: 'Is Keres cheaper than a receptionist?', a: 'Typically yes — a flat monthly rate that’s well below the cost of a full-time front-desk hire, while covering nights and weekends too.' },
+      { q: 'Is Keres cheaper than a receptionist?', a: 'Typically yes — one monthly rate that’s well below the cost of a full-time front-desk hire, while covering nights and weekends too.' },
       { q: 'Does it replace my front desk entirely?', a: 'Many businesses use Keres for after-hours and overflow, and others run it as their full front desk. It scales to whatever coverage you need.' },
     ],
     related: ['after-hours-answering', 'overflow-call-handling', 'lead-capture'],

@@ -99,7 +99,7 @@ export const hubs: Hub[] = [
       { step: 'Matter qualification', text: 'Practice area, what happened, when it happened, whether there is a police report or filing, and whether any deadline is already running.' },
       { step: 'Urgency', text: 'A custody emergency and a slip-and-fall from March do not get the same handling. Remi grades the urgency on your rules and escalates the ones that cannot wait.' },
       { step: 'Consult booking', text: 'Real availability offered on the call, the consultation written into your calendar, and a confirmation text the caller can reply to.' },
-      { step: 'Intake record', text: 'The full intake summary is written to Clio, Lawmatics or HubSpot, so the attorney reads the file rather than re-interviewing the client.' },
+      { step: 'Intake record', text: 'The full intake summary is written to HubSpot (Clio and Lawmatics are rolling out), so the attorney reads the file rather than re-interviewing the client.' },
     ],
     segmentsH2: 'Practice areas',
     segments: [
@@ -143,7 +143,7 @@ export const hubs: Hub[] = [
     name: 'Home services',
     title: 'AI Receptionist for HVAC, Plumbing & Roofing | Keres',
     description:
-      'Remi answers in two rings, qualifies the job, gives a dispatch window and books it into ServiceTitan or Jobber — then texts back the calls it could not take. Visibility from $249/month.',
+      'Remi answers in two rings, qualifies the job, gives a dispatch window and books it into ServiceTitan or your calendar — then texts back the calls it could not take. Visibility from $249/month.',
     h1: 'You’re on a roof. The phone’s ringing. Remi answers, books the job, and texts back the ones it can’t.',
     sub:
       'Remi, your Inbound Agent, picks up in two rings while your crew is on a job — grades the emergency, takes the service address, gives a dispatch window and writes the job into your field-service software. Anything it cannot take gets a text back inside 60 seconds.',
@@ -162,7 +162,7 @@ export const hubs: Hub[] = [
       { step: 'Emergency grading', text: 'No heat with a newborn in the house is not the same call as a seasonal tune-up. Remi grades it on your rules and flags the ones that need a truck today.' },
       { step: 'Job qualification', text: 'Job type, equipment, service address, access notes, and whether this is the property you already quoted an estimate on.' },
       { step: 'Dispatch window', text: 'Remi offers the windows you actually have open and commits to one on the call, instead of promising that someone will ring back.' },
-      { step: 'Written to your software', text: 'The job lands in ServiceTitan, Jobber or Housecall Pro with the notes attached, so the tech is not calling the office for the address.' },
+      { step: 'Written to your software', text: 'The job lands in ServiceTitan or your calendar with the notes attached (Jobber and Housecall Pro are rolling out), so the tech is not calling the office for the address.' },
       { step: 'Missed-call text-back', text: 'Any call that still gets away gets a text inside 60 seconds asking what they need — and the conversation carries on by SMS.' },
     ],
     segmentsH2: 'Trades',
@@ -192,7 +192,7 @@ export const hubs: Hub[] = [
       { proves: 'estimates closing because somebody followed up on day three' },
     ],
     faqs: [
-      { q: 'Can it dispatch to the right tech?', a: 'It creates and grades the job, offers a real dispatch window and writes it to ServiceTitan, Jobber or Housecall Pro. Assignment stays with your dispatcher — the Daily Brief flags any job that still has no truck on it.' },
+      { q: 'Can it dispatch to the right tech?', a: 'It creates and grades the job, offers a real dispatch window and writes it to ServiceTitan or your calendar. Assignment stays with your dispatcher — the Daily Brief flags any job that still has no truck on it.' },
       { q: 'What about the seasonal surge?', a: 'Remi answers unlimited simultaneous calls at no surcharge, which is the entire point during a cold snap. Your bill does not move because a heat wave did.' },
       { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi on the Answer plan', 'answer', 'your call volume, locations and integrations')} Month-to-month.` },
       { q: 'How long does setup take?', a: 'Five business days: twenty minutes on how calls run today, then your script, your number, your calendar and your field-service software, and you test it yourself before it answers a customer.' },
@@ -269,7 +269,7 @@ export const hubs: Hub[] = [
     name: 'Real estate',
     title: 'AI Receptionist for Real Estate Teams | Keres AI',
     description:
-      'Remi answers every listing enquiry in seconds, qualifies the buyer or seller, and books the showing into Follow Up Boss — evenings and weekends included. Visibility from $249/month.',
+      'Remi answers every listing enquiry in seconds, qualifies the buyer or seller, and books the showing on your calendar — evenings and weekends included. Visibility from $249/month.',
     h1: 'Answer every lead in seconds. Book the showing before they call the next agent.',
     sub:
       'Remi, your Inbound Agent, answers the listing line and the portal enquiries in seconds — asks whether they are working with an agent, whether they are pre-approved, and what their timeline is — then books the showing while you are still in the car.',
@@ -288,7 +288,7 @@ export const hubs: Hub[] = [
       { step: 'Buyer or seller', text: 'Are they buying, selling, or both — and are they already working with an agent, asked before anyone spends an hour on an unrepresented tour.' },
       { step: 'Qualification', text: 'Pre-approval status, price range, timeline and area, captured in the caller’s own words rather than a form they abandon.' },
       { step: 'Showing booked', text: 'A showing or a listing consultation put straight on the calendar, with disclosures texted immediately.' },
-      { step: 'Written to your CRM', text: 'The lead and everything Remi learned lands in Follow Up Boss or your CRM, tagged with the source that produced it.' },
+      { step: 'Written to your CRM', text: 'The lead and everything Remi learned lands in HubSpot (Follow Up Boss is rolling out), tagged with the source that produced it.' },
     ],
     segmentsH2: 'Teams',
     segments: [

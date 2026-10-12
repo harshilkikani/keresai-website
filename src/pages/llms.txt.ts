@@ -102,9 +102,8 @@ Outbound:
 ## Integrations
 Connected today: Google Calendar, HubSpot, ServiceTitan, Zapier.
 Rolling out: Clio, Lawmatics, Jobber, Housecall Pro, Dentrix, Open Dental, Follow Up Boss.
-Anything else connects by webhook or CSV.
 - [Integrations index](${u('/integrations')})
-- [ServiceTitan](${u('/integrations/servicetitan')}) · [HubSpot](${u('/integrations/hubspot')}) · [Google Calendar](${u('/integrations/google-calendar')}) · [Zapier](${u('/integrations/zapier')}) · [Twilio](${u('/integrations/twilio')}) · [Outlook](${u('/integrations/outlook')})
+- [ServiceTitan](${u('/integrations/servicetitan')}) · [HubSpot](${u('/integrations/hubspot')}) · [Google Calendar](${u('/integrations/google-calendar')}) · [Zapier](${u('/integrations/zapier')})
 
 ## Tools
 - [Free tools index](${u('/tools')})

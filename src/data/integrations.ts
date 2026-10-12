@@ -2,6 +2,11 @@
 export interface Integration {
   slug: string;
   name: string;
+  /**
+   * 'live' only when Remi writes to it in production today. Everything else
+   * renders as rolling out, noindex, with no claim that it works.
+   */
+  status: 'live' | 'rolling-out';
   category: 'Phone & SMS' | 'Calendar' | 'CRM' | 'Field Service' | 'Automation';
   targetKeyword: string;
   title: string;
@@ -17,6 +22,7 @@ export const integrations: Integration[] = [
   {
     slug: 'servicetitan',
     name: 'ServiceTitan',
+    status: 'live',
     category: 'Field Service',
     targetKeyword: 'servicetitan ai receptionist',
     title: 'Keres AI + ServiceTitan — AI Receptionist Integration',
@@ -40,6 +46,7 @@ export const integrations: Integration[] = [
   {
     slug: 'jobber',
     name: 'Jobber',
+    status: 'rolling-out',
     category: 'Field Service',
     targetKeyword: 'jobber ai receptionist',
     title: 'Keres AI + Jobber — Book Jobs From Every Call',
@@ -63,6 +70,7 @@ export const integrations: Integration[] = [
   {
     slug: 'housecall-pro',
     name: 'Housecall Pro',
+    status: 'rolling-out',
     category: 'Field Service',
     targetKeyword: 'housecall pro ai receptionist',
     title: 'Keres AI + Housecall Pro — AI Receptionist',
@@ -86,6 +94,7 @@ export const integrations: Integration[] = [
   {
     slug: 'hubspot',
     name: 'HubSpot',
+    status: 'live',
     category: 'CRM',
     targetKeyword: 'hubspot ai receptionist integration',
     title: 'Keres AI + HubSpot — AI Receptionist & SDR',
@@ -109,6 +118,7 @@ export const integrations: Integration[] = [
   {
     slug: 'twilio',
     name: 'Twilio',
+    status: 'rolling-out',
     category: 'Phone & SMS',
     targetKeyword: 'twilio ai receptionist',
     title: 'Keres AI + Twilio — AI on Your Twilio Numbers',
@@ -132,6 +142,7 @@ export const integrations: Integration[] = [
   {
     slug: 'ringcentral',
     name: 'RingCentral',
+    status: 'rolling-out',
     category: 'Phone & SMS',
     targetKeyword: 'ringcentral ai receptionist',
     title: 'Keres AI + RingCentral — AI Receptionist',
@@ -155,6 +166,7 @@ export const integrations: Integration[] = [
   {
     slug: 'google-calendar',
     name: 'Google Calendar',
+    status: 'live',
     category: 'Calendar',
     targetKeyword: 'ai receptionist google calendar',
     title: 'Keres AI + Google Calendar — Automatic Booking',
@@ -178,6 +190,7 @@ export const integrations: Integration[] = [
   {
     slug: 'outlook',
     name: 'Outlook',
+    status: 'rolling-out',
     category: 'Calendar',
     targetKeyword: 'ai receptionist outlook calendar',
     title: 'Keres AI + Outlook — AI for Microsoft 365',
@@ -201,6 +214,7 @@ export const integrations: Integration[] = [
   {
     slug: 'zapier',
     name: 'Zapier',
+    status: 'live',
     category: 'Automation',
     targetKeyword: 'keres ai zapier integration',
     title: 'Keres AI + Zapier — Connect to 6,000+ Apps | Keres AI',
@@ -224,6 +238,7 @@ export const integrations: Integration[] = [
   {
     slug: 'make',
     name: 'Make',
+    status: 'rolling-out',
     category: 'Automation',
     targetKeyword: 'keres ai make integration',
     title: 'Keres AI + Make — Automate Your Workflows',
@@ -247,6 +262,7 @@ export const integrations: Integration[] = [
   {
     slug: 'fieldedge',
     name: 'FieldEdge',
+    status: 'rolling-out',
     category: 'Field Service',
     targetKeyword: 'keres ai fieldedge integration',
     title: 'Keres AI + FieldEdge — AI for HVAC & Plumbing',
@@ -270,6 +286,7 @@ export const integrations: Integration[] = [
   {
     slug: 'service-fusion',
     name: 'Service Fusion',
+    status: 'rolling-out',
     category: 'Field Service',
     targetKeyword: 'keres ai service fusion integration',
     title: 'Keres AI + Service Fusion — Field Service AI',
@@ -293,6 +310,7 @@ export const integrations: Integration[] = [
   {
     slug: 'acuity',
     name: 'Acuity Scheduling',
+    status: 'rolling-out',
     category: 'Calendar',
     targetKeyword: 'keres ai acuity scheduling integration',
     title: 'Keres AI + Acuity — Book Appointments by Phone',
@@ -316,6 +334,7 @@ export const integrations: Integration[] = [
   {
     slug: 'slack',
     name: 'Slack',
+    status: 'rolling-out',
     category: 'Automation',
     targetKeyword: 'keres ai slack integration',
     title: 'Keres AI + Slack — Real-Time Call Alerts',
@@ -345,3 +364,10 @@ export const integrationCategories = [
   'Field Service',
   'Automation',
 ] as const;
+
+export const isLive = (i: Integration) => i.status === 'live';
+/** Names of the integrations that work today, for copy that lists them. */
+export const liveIntegrationNames = integrations.filter(isLive).map((i) => i.name);
+/** The honest one-liner shown wherever a rolling-out integration appears. */
+export const rollingOutNote = (name: string) =>
+  `The ${name} integration is rolling out and is not live yet. Today Keres connects to ${liveIntegrationNames.join(', ').replace(/, ([^,]*)$/, ' and $1')}.`;

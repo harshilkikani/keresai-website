@@ -41,7 +41,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'AI receptionist vs. answering service vs. voicemail',
         body:
-          'Voicemail captures a message and hopes you call back. A traditional <a href="/glossary/ai-answering-service">answering service</a> uses human operators who usually just take a message — and bill per minute. An AI receptionist actually <strong>completes the task</strong>: it books the appointment during the call, works 24/7 at a flat rate, and never puts a caller on hold.',
+          'Voicemail captures a message and hopes you call back. A traditional <a href="/glossary/ai-answering-service">answering service</a> uses human operators who usually just take a message — and bill per minute. An AI receptionist actually <strong>completes the task</strong>: it books the appointment during the call, works 24/7 on a monthly plan, and never puts a caller on hold.',
       },
       {
         h2: 'What businesses use AI receptionists',
@@ -51,7 +51,7 @@ export const glossary: GlossaryTerm[] = [
     ],
     related: ['ai-answering-service', 'virtual-receptionist', 'appointment-booking-automation', 'missed-call-text-back'],
     faqs: [
-      { q: 'How is an AI receptionist different from an answering service?', a: 'A traditional answering service takes a message; an AI receptionist completes the task — it books the appointment during the call, works 24/7 at a flat rate, and syncs everything to your calendar and CRM.' },
+      { q: 'How is an AI receptionist different from an answering service?', a: 'A traditional answering service takes a message; an AI receptionist completes the task — it books the appointment during the call, works 24/7 on a monthly plan, and syncs everything to your calendar and CRM.' },
       { q: 'Can an AI receptionist book appointments?', a: 'Yes. It checks real-time calendar availability, books and reschedules during the call, and texts the caller a confirmation.' },
       { q: 'Does an AI receptionist sound human?', a: 'Modern AI receptionists use natural-sounding voices, understand interruptions, and hold a real conversation rather than reading a rigid menu.' },
     ],
@@ -65,14 +65,14 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is an ai answering service',
     title: 'What Is an AI Answering Service? Definition | Keres',
     description:
-      'An AI answering service answers and handles business calls automatically at a flat rate — booking appointments and capturing leads 24/7 instead of just taking messages.',
+      'An AI answering service answers and handles business calls automatically on a monthly plan — booking appointments and capturing leads 24/7 instead of just taking messages.',
     definition:
-      'An AI answering service is an automated phone-answering solution that handles inbound calls 24/7 without human operators. Unlike a traditional answering service that charges per minute to take messages, an AI answering service books appointments, answers common questions, qualifies leads, and routes urgent calls — usually at a predictable flat monthly rate.',
+      'An AI answering service is an automated phone-answering solution that handles inbound calls 24/7 without human operators. Unlike a traditional answering service that charges per minute to take messages, an AI answering service books appointments, answers common questions, qualifies leads, and routes urgent calls — usually on a predictable monthly plan.',
     sections: [
       {
         h2: 'Why businesses switch from per-minute answering services',
         body:
-          'Per-minute human answering services get expensive fast during busy seasons, and most just take a message you still have to act on. An AI answering service flips that: flat-rate pricing, unlimited simultaneous calls, and completed bookings instead of callback slips.',
+          'Per-minute human answering services get expensive fast during busy seasons, and most just take a message you still have to act on. An AI answering service flips that: monthly plans, unlimited simultaneous calls, and completed bookings instead of callback slips.',
       },
       {
         h2: 'What an AI answering service can do',
@@ -82,7 +82,7 @@ export const glossary: GlossaryTerm[] = [
     ],
     related: ['ai-receptionist', 'virtual-receptionist', 'call-overflow', 'appointment-booking-automation'],
     faqs: [
-      { q: 'Is an AI answering service cheaper than a human one?', a: 'Usually yes — AI answering services charge a flat monthly rate rather than per minute, which is far more predictable for high-volume or seasonal businesses.' },
+      { q: 'Is an AI answering service cheaper than a human one?', a: 'Usually yes — AI answering services usually charge a monthly plan rather than billing every minute a human spends, which is far more predictable for high-volume or seasonal businesses.' },
       { q: 'Does it work after hours?', a: 'Yes — it answers 24/7, including nights, weekends, and holidays, with no extra after-hours fees.' },
     ],
     cta: { href: '/ai-answering-service', label: 'See the Keres AI answering service' },
@@ -101,7 +101,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Human vs. AI virtual receptionists',
         body:
-          'Human virtual receptionists offer a personal touch but cost more, have limited hours, and can only take one call at a time. An <a href="/glossary/ai-receptionist">AI receptionist</a> answers unlimited calls simultaneously, never sleeps, and completes bookings at a flat rate — making it a strong fit for businesses with spiky or after-hours call volume.',
+          'Human virtual receptionists offer a personal touch but cost more, have limited hours, and can only take one call at a time. An <a href="/glossary/ai-receptionist">AI receptionist</a> answers unlimited calls simultaneously, never sleeps, and completes bookings on a monthly plan — making it a strong fit for businesses with spiky or after-hours call volume.',
       },
     ],
     related: ['ai-receptionist', 'ai-answering-service', 'call-overflow'],
@@ -173,12 +173,12 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'How AI booking reduces no-shows',
         body:
-          'Automated confirmations and reminders sent by text dramatically cut no-shows, and instant rescheduling means a cancellation gets refilled instead of lost. The AI books straight onto Google Calendar, Outlook, or your field-service software.',
+          'Automated confirmations and reminders sent by text dramatically cut no-shows, and instant rescheduling means a cancellation gets refilled instead of lost. The AI books straight onto Google Calendar, HubSpot or ServiceTitan.',
       },
     ],
     related: ['ai-receptionist', 'ai-answering-service', 'lead-qualification'],
     faqs: [
-      { q: 'What calendars does AI appointment booking work with?', a: 'Keres books directly on Google Calendar, Outlook/Microsoft 365, and field-service platforms like ServiceTitan, Jobber, and Housecall Pro.' },
+      { q: 'What calendars does AI appointment booking work with?', a: 'Keres books directly on Google Calendar, HubSpot and ServiceTitan today. Outlook, Jobber and Housecall Pro are rolling out.' },
     ],
     cta: { href: '/ai-receptionist', label: 'Automate your bookings' },
   },
@@ -678,7 +678,7 @@ export const glossary: GlossaryTerm[] = [
     description:
       'After-hours answering handles calls that come in when your office is closed — booking appointments and capturing leads 24/7 so no after-hours caller is lost.',
     definition:
-      'After-hours answering is a service that handles inbound calls outside normal business hours — evenings, weekends, and holidays. It ensures callers who reach out when your office is closed can still get help, book an appointment, or report an emergency, rather than reaching voicemail and calling a competitor. AI-powered after-hours answering does this automatically at a flat rate, 24/7.',
+      'After-hours answering is a service that handles inbound calls outside normal business hours — evenings, weekends, and holidays. It ensures callers who reach out when your office is closed can still get help, book an appointment, or report an emergency, rather than reaching voicemail and calling a competitor. AI-powered after-hours answering does this automatically on a monthly plan, 24/7.',
     sections: [
       {
         h2: 'Why after-hours calls are your most valuable',
@@ -688,7 +688,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'After-hours answering vs. voicemail vs. answering service',
         body:
-          'Voicemail captures a message most callers never leave. A human answering service bills per minute, usually just takes a message, and has limited overnight staffing. An AI after-hours answering service answers unlimited calls simultaneously, books appointments during the conversation, handles emergencies, and costs a flat monthly rate — with no gaps at 3 AM.',
+          'Voicemail captures a message most callers never leave. A human answering service bills per minute, usually just takes a message, and has limited overnight staffing. An AI after-hours answering service answers unlimited calls simultaneously, books appointments during the conversation, handles emergencies, and costs one monthly rate — with no gaps at 3 AM.',
       },
     ],
     related: ['ai-receptionist', 'call-overflow', 'emergency-dispatch', 'missed-call-recovery'],
@@ -865,7 +865,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'What front desk automation replaces',
         body:
-          'A traditional front desk staff member costs $35,000–$50,000 per year, handles one call at a time, works 40 hours a week, and takes vacations. Front desk automation covers all call-handling tasks continuously — including nights, weekends, call surges, and emergencies — at a predictable flat monthly cost. It doesn\'t replace the human judgment calls, but it handles everything routine, which is 80% of the volume.',
+          'A traditional front desk staff member costs $35,000–$50,000 per year, handles one call at a time, works 40 hours a week, and takes vacations. Front desk automation covers all call-handling tasks continuously — including nights, weekends, call surges, and emergencies — at a predictable monthly cost. It doesn\'t replace the human judgment calls, but it handles everything routine, which is 80% of the volume.',
       },
       {
         h2: 'Industries where front desk automation delivers the most value',
@@ -900,13 +900,13 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Dispatch automation integrations',
         body:
-          'Keres connects to the field-service platforms your dispatch team already uses: <a href="/integrations/servicetitan">ServiceTitan</a>, <a href="/integrations/jobber">Jobber</a>, and <a href="/integrations/housecall-pro">Housecall Pro</a>. New jobs sync automatically — the dispatcher sees every call-driven booking in the same system they already manage, without manual data entry.',
+          'Keres writes new jobs to <a href="/integrations/servicetitan">ServiceTitan</a> today; Jobber and Housecall Pro are rolling out. New jobs sync automatically — the dispatcher sees every call-driven booking in the same system they already manage, without manual data entry.',
       },
     ],
     related: ['emergency-dispatch', 'ai-receptionist', 'after-hours-answering', 'appointment-booking-automation'],
     faqs: [
-      { q: 'Does Keres automate dispatch for HVAC companies?', a: 'Yes. Keres answers HVAC calls 24/7, qualifies service requests and emergencies, books jobs in ServiceTitan or Jobber, and texts your on-call tech for urgent dispatch immediately.' },
-      { q: 'What field-service software does Keres dispatch into?', a: 'ServiceTitan, Jobber, Housecall Pro, FieldEdge, and Service Fusion — plus generic webhooks for any other system.' },
+      { q: 'Does Keres automate dispatch for HVAC companies?', a: 'Yes. Keres answers HVAC calls 24/7, qualifies service requests and emergencies, books jobs in ServiceTitan or your calendar, and texts your on-call tech for urgent dispatch immediately.' },
+      { q: 'What field-service software does Keres dispatch into?', a: 'ServiceTitan today. Jobber, Housecall Pro and others are rolling out; Zapier covers many other systems in the meantime.' },
     ],
     cta: { href: '/ai-receptionist-for-hvac', label: 'See AI dispatch for HVAC' },
   },

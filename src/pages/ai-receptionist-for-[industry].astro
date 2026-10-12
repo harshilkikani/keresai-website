@@ -244,17 +244,15 @@ const peerIndustries = industries.filter((i) => i.slug !== ind.slug).slice(0, 5)
         {isFieldService ? (
           <>
             <li><a href="/integrations/servicetitan">ServiceTitan</a> — jobs and customers sync automatically</li>
-            <li><a href="/integrations/jobber">Jobber</a> — two-way client and job sync</li>
-            <li><a href="/integrations/housecall-pro">Housecall Pro</a> — customers, jobs, and payments</li>
-            <li><a href="/integrations/google-calendar">Google Calendar</a> and <a href="/integrations/outlook">Outlook</a></li>
-            <li><a href="/integrations/twilio">Twilio</a> for call handling and SMS dispatch alerts</li>
+            <li><a href="/integrations/google-calendar">Google Calendar</a> and <a href="/integrations/hubspot">HubSpot</a></li>
+            <li><a href="/integrations/zapier">Zapier</a> for other apps</li>
+            <li>Jobber and Housecall Pro — rolling out; ask where yours is</li>
           </>
         ) : (
           <>
-            <li><a href="/integrations/google-calendar">Google Calendar</a> and <a href="/integrations/outlook">Outlook</a></li>
+            <li><a href="/integrations/google-calendar">Google Calendar</a></li>
             <li><a href="/integrations/hubspot">HubSpot CRM</a> — contact and deal creation</li>
-            <li><a href="/integrations/zapier">Zapier</a> and <a href="/integrations/make">Make</a> for custom workflows</li>
-            <li><a href="/integrations/ringcentral">RingCentral</a> for existing phone systems</li>
+            <li><a href="/integrations/zapier">Zapier</a> for custom workflows</li>
           </>
         )}
       </ul>
@@ -272,11 +270,11 @@ const peerIndustries = industries.filter((i) => i.slug !== ind.slug).slice(0, 5)
         <li><strong>Emergency recognition and dispatch</strong> — the AI should identify urgent calls and alert your team instantly, not just take a message</li>
         <li><strong>Live calendar booking</strong> — booking during the call, not a callback promise</li>
         {isFieldService ? (
-          <li><strong>Field-service integrations</strong> — direct sync with ServiceTitan, Jobber, or Housecall Pro, not just webhook workarounds</li>
+          <li><strong>Field-service integrations</strong> — direct sync with the system your dispatcher uses (Keres writes to ServiceTitan today)</li>
         ) : (
           <li><strong>CRM and calendar sync</strong> — every call logged automatically to your system</li>
         )}
-        <li><strong>Flat-rate pricing</strong> — per-minute billing balloons during busy seasons; flat rate is predictable</li>
+        <li><strong>Predictable pricing</strong> — a monthly rate with included minutes sized to your busy season</li>
         <li><strong>Done-for-you setup</strong> — you shouldn't have to build call flows from scratch</li>
       </ul>
       <p>Keres checks every box, and most {ind.shortLower} accounts are live within five business days. <a href="/quote">Book a demo</a> to see the flow for your specific use case.</p>

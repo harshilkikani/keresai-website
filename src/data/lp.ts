@@ -56,7 +56,7 @@ export const landingPages: LandingPage[] = [
       },
       {
         head: 'It books the consult and writes the file',
-        text: 'Real availability offered on the call, the consultation on your calendar, and the full intake summary written to Clio, Lawmatics or HubSpot before you open your laptop.',
+        text: 'Real availability offered on the call, the consultation on your calendar, and the full intake summary written to HubSpot before you open your laptop.',
       },
     ],
     formFieldLabel: 'Practice area',
@@ -68,7 +68,7 @@ export const landingPages: LandingPage[] = [
       'Estate planning',
       'Other',
     ],
-    integrations: 'Works with Clio, Lawmatics, HubSpot and Google Calendar.',
+    integrations: 'Works with HubSpot and Google Calendar today. Clio and Lawmatics are rolling out.',
     testimonials: [
       { proves: 'after-hours new-client calls turning into signed matters' },
       { proves: 'consults booked overnight that used to hit voicemail' },
