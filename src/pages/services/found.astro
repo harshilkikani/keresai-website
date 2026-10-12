@@ -22,6 +22,14 @@ const found = plans.find((p) => p.slug === 'found')!;
 
 const faqs = [
   {
+    q: 'What kinds of businesses is Found for?',
+    a: 'Local service businesses that win work from Google and the phone: HVAC, plumbing, roofing, electrical, landscaping and cleaning companies, plus real estate agents, law firms, and dental and med-spa practices. The site template is built for your trade, so the service pages, calls to action and booking flow match how your customers buy.',
+  },
+  {
+    q: 'How is Found different from hiring a marketing agency?',
+    a: 'Found is a fixed scope at a published monthly price: the website, the Google Business Profile, review requests and listings, month-to-month with no build fee at the base tier. We do not run Google Ads or sell traffic; we set up and answer Local Services Ads because Remi answers in two rings.',
+  },
+  {
     q: 'Is there a contract?',
     a: 'No. Found is month-to-month like every other plan, and there is no build fee at the base tier — design, hosting and the care plan are all inside the monthly price.',
   },
@@ -58,8 +66,8 @@ const serviceNodes = foundServices.map((s) =>
 );
 ---
 <Layout
-  title="Websites, Google Profile & Reviews From $249/mo | Keres"
-  description="A conversion website, a managed Google Business Profile, automated reviews and AI-search visibility — from $249/month, $499 for law firms, all wired to Remi who answers the calls they generate."
+  title="Contractor Websites & Google Profile Management From $249/mo | Keres AI"
+  description="Done-for-you website, Google Business Profile and reviews for HVAC, plumbing, roofing and other home service businesses, from $249/month, month-to-month. Law firms from $499."
   path={path}
 >
   <Schema slot="head" graph={[organizationSchema, breadcrumbSchema(crumbs), faqSchema(faqs), ...serviceNodes]} />
@@ -101,6 +109,28 @@ const serviceNodes = foundServices.map((s) =>
           </div>
         </div>
       </div>
+    </div>
+  </Section>
+
+  <Section spacing="standard" labelledby="for-title">
+    <div class="k-band">
+      <div class="k-band__head">
+        <Eyebrow>Who it&rsquo;s for</Eyebrow>
+        <h2 id="for-title" class="k-h2">Built for the trades and practices that live on the phone.</h2>
+        <p class="k-lede k-measure answer-block">
+          Keres Found is a done-for-you website, Google Business Profile and review service for local
+          service businesses: HVAC, plumbing, roofing, electrical, landscaping and cleaning companies,
+          real estate agents, law firms, and dental and med-spa practices. It starts at $249 a month
+          ($499 for law firms), month-to-month, with no build fee at the base tier.
+        </p>
+      </div>
+      <ul class="k-svc">
+        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">HVAC, plumbing &amp; electrical</h3></div><p class="k-svc__desc">Service pages for each job type and the area you cover, emergency calls to action that ring the phone, and a Google profile kept current through the busy season.</p></li>
+        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">Roofing &amp; exteriors</h3></div><p class="k-svc__desc">Inspection and estimate requests front and centre, storm-season posts on your Google profile, and a review request after every finished job.</p></li>
+        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">Landscaping, cleaning &amp; other home services</h3></div><p class="k-svc__desc">A fast mobile site with click-to-call and a quote form, photos of real work on your profile, and listings that agree with each other.</p></li>
+        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">Real estate, law firms, dental &amp; med spas</h3></div><p class="k-svc__desc">The same scope, tuned to how your clients choose: profile, reviews and listings first, with consultation or showing requests booked by Remi.</p></li>
+      </ul>
+      <p class="k-body" style="margin-top:18px">See it by industry: <a href="/industries/home-services">home services</a> · <a href="/industries/real-estate">real estate</a> · <a href="/industries/law-firms">law firms</a> · <a href="/industries/dental-med-spa">dental &amp; med spas</a>.</p>
     </div>
   </Section>
 
