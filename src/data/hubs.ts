@@ -122,7 +122,8 @@ export const hubs: Hub[] = [
     compliance:
       'Conflict screening happens before any advice is given, and Remi never offers legal advice. Call data is retained on your schedule and access is limited to the people who run your account. Keres does not sign DPAs or BAAs today, so ask before you sign.',
     children: [
-      { label: 'AI receptionist for professional intake', href: '/industries/law-firms' },
+      { label: 'Ruby Receptionists alternatives', href: '/ruby-alternative' },
+      { label: 'What an AI receptionist costs', href: '/ai-receptionist-cost' },
       { label: 'Answering Legal alternative', href: '/answering-legal-alternative' },
       { label: 'Smith.ai alternative', href: '/smith-ai-alternative' },
       { label: 'Legal intake benchmarks', href: '/benchmarks/legal-intake-conversion' },
@@ -192,6 +193,8 @@ export const hubs: Hub[] = [
       { label: 'AI receptionist for septic', href: '/ai-receptionist-for-septic' },
       { label: 'AI receptionist for towing', href: '/ai-receptionist-for-towing' },
       { label: 'HVAC answering benchmarks', href: '/benchmarks/hvac-answering' },
+      { label: 'Roofing lead-response benchmarks', href: '/benchmarks/roofing-lead-response' },
+      { label: 'Google Business Profile management', href: '/google-business-profile-management' },
     ],
     testimonials: [
       { proves: 'after-hours calls turning into dispatched jobs' },
@@ -253,8 +256,8 @@ export const hubs: Hub[] = [
     compliance:
       'Remi is configured not to collect clinical detail it does not need, and access is limited to the people who run your account. Keres does not sign BAAs today, so if you need one, ask before you sign.',
     children: [
-      { label: 'AI receptionist for dentists', href: '/industries/dental-med-spa' },
-      { label: 'AI receptionist for med spas', href: '/ai-receptionist-for-med-spas' },
+      { label: 'What an AI receptionist costs', href: '/ai-receptionist-cost' },
+      { label: 'Google Business Profile management', href: '/google-business-profile-management' },
       { label: 'Dental no-show benchmarks', href: '/benchmarks/dental-no-show' },
       { label: 'Dental no-show calculator', href: '/tools/dental-no-show-calculator' },
     ],
@@ -315,7 +318,8 @@ export const hubs: Hub[] = [
     foundLine:
       'Buyers check your reviews and your profile before they call the number on the sign. Found covers the site, the Google Business Profile, review generation and listings from $249 a month.',
     children: [
-      { label: 'AI receptionist for real estate', href: '/industries/real-estate' },
+      { label: 'Best AI receptionists compared', href: '/best-ai-receptionist' },
+      { label: 'Google Business Profile management', href: '/google-business-profile-management' },
       { label: 'Lead response time calculator', href: '/tools/lead-response-time-calculator' },
       { label: 'Missed-call statistics', href: '/missed-call-statistics' },
     ],

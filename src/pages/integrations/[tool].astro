@@ -20,7 +20,9 @@ const crumbs = [
 ];
 const related = i.related
   .map((slug) => integrations.find((g) => g.slug === slug))
-  .filter((g): g is NonNullable<typeof g> => Boolean(g));
+  .filter((g): g is NonNullable<typeof g> => Boolean(g))
+  // Indexable (live) pages link only to other live integrations.
+  .filter((g) => !isLive(i) || isLive(g));
 const live = isLive(i);
 const note = rollingOutNote(i.name);
 // A rolling-out integration never claims to work: honest title, intro and FAQ,
