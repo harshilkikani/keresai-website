@@ -253,7 +253,7 @@ export const plans: Plan[] = [
     includes: [
       'Everything in Answer',
       'Web chat and SMS on your site',
-      'Lead-source responder — GBP, forms, Yelp, Zillow',
+      'Lead-source responder — website forms and texts',
       'Theo — reminders and no-show prevention',
       'June — review and referral requests',
     ],

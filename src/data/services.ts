@@ -98,7 +98,7 @@ const byStage: Record<number, { services: Service[]; ctaHref: string; ctaLabel: 
       {
         name: 'Lead-Source Responder',
         plan: 'Convert',
-        desc: 'Google Business Profile messages, website forms, Yelp, Thumbtack, Avvo and Zillow enquiries all get answered in minutes instead of whenever someone checks the inbox.',
+        desc: 'Website form and text enquiries get answered in minutes instead of whenever someone checks the inbox; Yelp, Thumbtack, Avvo and Zillow inboxes are rolling out.',
       },
     ],
   },

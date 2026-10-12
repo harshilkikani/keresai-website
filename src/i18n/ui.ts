@@ -66,7 +66,7 @@ export const ui = {
       labels: { 'home-services': 'home services', legal: 'law firms', dental: 'dental and med spa', 'real-estate': 'real estate', professional: 'professional services', 'med-spa': 'med spas' },
     },
     mocks: {
-      caller: 'Caller', exampleCall: 'Example call, not a customer recording. Real recordings live on', hearIt: 'Hear it', exampleBrief: 'Example brief. Your numbers are your own.',
+      caller: 'Caller', exampleCall: 'Example call, not a customer recording. More examples on', hearIt: 'Hear it', exampleBrief: 'Example brief. Your numbers are your own.',
       briefHeader: 'Owner Daily Brief · Example', reply: 'Reply CALL to be connected', keres: 'Keres',
       siteCaption: 'The conversion template Found ships. Example business.', listingCaption: 'The stars are the example business’s, not ours.',
       hours: 'Hours', phone: 'Phone', call: 'Call', directions: 'Directions', website: 'Website', bookAVisit: 'Book a visit', callNow: 'Call now',
@@ -137,7 +137,7 @@ export const ui = {
       labels: { 'home-services': 'servicios para el hogar', legal: 'bufetes de abogados', dental: 'dental y med spa', 'real-estate': 'bienes raíces', professional: 'servicios profesionales', 'med-spa': 'med spas' },
     },
     mocks: {
-      caller: 'Quien llama', exampleCall: 'Llamada de ejemplo, no una grabación de un cliente. Las grabaciones reales están en', hearIt: 'Escúchalo', exampleBrief: 'Resumen de ejemplo. Tus números son tuyos.',
+      caller: 'Quien llama', exampleCall: 'Llamada de ejemplo, no una grabación de un cliente. Más ejemplos en', hearIt: 'Escúchalo', exampleBrief: 'Resumen de ejemplo. Tus números son tuyos.',
       briefHeader: 'Resumen diario del dueño · Ejemplo', reply: 'Responde CALL para que te conecten', keres: 'Keres',
       siteCaption: 'La plantilla de conversión que incluye Found. Negocio de ejemplo.', listingCaption: 'Las estrellas son del negocio de ejemplo, no nuestras.',
       hours: 'Horario', phone: 'Teléfono', call: 'Llamar', directions: 'Cómo llegar', website: 'Sitio web', bookAVisit: 'Agendar visita', callNow: 'Llamar ahora',

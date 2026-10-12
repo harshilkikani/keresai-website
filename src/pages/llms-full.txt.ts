@@ -167,8 +167,8 @@ export async function GET() {
   push('## Missed-call statistics for service businesses (2026)');
   push(`Source: ${ORIGIN}/missed-call-statistics`);
   push('Industry estimates and ranges — directional benchmarks, not guarantees:');
-  push('- Service businesses miss an estimated 25–40% of inbound calls, higher after hours and during seasonal surges.');
-  push('- About 85% of callers who reach voicemail do not call back — they call a competitor.');
+  push('- Keres AI estimates that service businesses miss 25–40% of inbound calls, higher after hours and during seasonal surges.');
+  push('- Most callers who reach voicemail do not call back (estimate).');
   push('- An estimated 30–45% of service calls arrive outside business hours (nights, weekends, holidays).');
   push('- Responding to a lead within five minutes makes it many times more likely to qualify than waiting 30 minutes.');
   push('- Studies estimate a strong majority of customers buy from the business that responds first — speed to lead is consistently one of the largest predictors of conversion.');

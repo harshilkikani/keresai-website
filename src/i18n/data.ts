@@ -18,7 +18,7 @@ export const transcriptsFor = (l: Locale) => pick(l, trEn, es.transcripts);
 export const briefsFor = (l: Locale) => pick(l, brEn, es.briefs);
 export const agentMocksFor = (l: Locale) => pick(l, amEn, es.agentMocks);
 export const siteMockFor = (l: Locale) => pick(l, smEn, es.siteMock);
-export const siteMockTextFor = (l: Locale) => pick(l, { eyebrow: 'HVAC · Licensed & insured', sub: 'Furnace out? AC dead? A real person books you in two rings, day or night.' }, es.siteMockText);
+export const siteMockTextFor = (l: Locale) => pick(l, { eyebrow: 'HVAC · Licensed & insured', sub: 'Furnace out? AC dead? We book you in two rings, day or night.' }, es.siteMockText);
 export const listingMockFor = (l: Locale) => pick(l, lmEn, es.listingMock);
 export const heroTailFor = (l: Locale) => pick(l, htEn, es.heroTail);
 export const goPagesFor = (l: Locale) => pick(l, goEn, es.goPages);

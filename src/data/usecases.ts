@@ -272,7 +272,7 @@ export const usecases: UseCase[] = [
       'Answers every membership, renewal, and tune-up call and books it during the conversation',
       'Captures plan details and schedules seasonal service on your calendar',
       'Re-engages lapsed plan customers and rebooks their next visit',
-      'Logs renewals and service history to your CRM or field-service software',
+      'Logs renewals to HubSpot or ServiceTitan',
     ],
     outcomes: [
       'More maintenance agreements renewed and tune-ups booked',

@@ -744,7 +744,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Why intake is the bottleneck for dental and med spa growth',
         body:
-          'Every missed new-patient call or delayed intake process costs a high-value appointment. For <a href="/industries/dental-med-spa">dental practices</a> and <a href="/ai-receptionist-for-med-spas">med spas</a>, a new patient can be worth thousands of dollars in lifetime value — but only if the intake is smooth enough that they don\'t book somewhere more responsive. AI intake collects what you need during the call, confirms the appointment, and logs everything to your practice management system automatically.',
+          'Every missed new-patient call or delayed intake process costs a high-value appointment. For <a href="/industries/dental-med-spa">dental practices</a> and <a href="/ai-receptionist-for-med-spas">med spas</a>, a new patient can be worth thousands of dollars in lifetime value — but only if the intake is smooth enough that they don\'t book somewhere more responsive. AI intake collects what you need during the call, confirms the appointment, and logs it to your calendar or CRM.',
       },
       {
         h2: 'What AI collects during patient intake',
@@ -754,7 +754,7 @@ export const glossary: GlossaryTerm[] = [
     ],
     related: ['ai-receptionist', 'appointment-booking-automation', 'no-show-rate', 'appointment-reminders'],
     faqs: [
-      { q: 'Can AI collect patient intake over the phone?', a: 'Yes. Keres asks the intake questions you configure during the booking call, captures the answers, and pushes the data to your practice management system before the appointment.' },
+      { q: 'Can AI collect patient intake over the phone?', a: 'Yes. Keres asks the intake questions you configure during the booking call, captures the answers, and sends them to your team before the appointment (practice-management integrations are rolling out).' },
       { q: 'Is AI patient intake HIPAA compliant?', a: 'It depends on the vendor. Keres is not HIPAA certified and does not sign BAAs today, so tell us your requirements before you sign up.' },
     ],
     cta: { href: '/industries/dental-med-spa', label: 'See AI patient intake for dental' },
@@ -784,7 +784,7 @@ export const glossary: GlossaryTerm[] = [
     ],
     related: ['ai-receptionist', 'lead-qualification', 'appointment-booking-automation', 'patient-intake'],
     faqs: [
-      { q: 'Can AI handle conflict screening for a law firm?', a: 'Yes. Keres asks your configured conflict-check questions, captures opposing party names and matter type, and flags any potential conflict to your team before confirming the booking.' },
+      { q: 'Can AI handle conflict screening for a law firm?', a: 'It can collect what a conflict check needs. Keres asks your configured conflict-check questions and captures opposing party names and matter type, then passes them to your team to run the check against your matter list; the AI never clears a conflict itself.' },
       { q: 'Is AI legal intake confidential?', a: 'Keres never uses intake data to train third-party AI models and limits access to the people who run your account. It does not hold a SOC 2 report; raise specific confidentiality requirements before you sign.' },
       { q: 'What practice areas work well with AI intake?', a: 'Personal injury, family law, criminal defense, immigration, estate planning, and employment law all have structured intake processes that AI handles well — capturing the matter details and qualifying the caller before booking.' },
     ],

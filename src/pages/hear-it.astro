@@ -62,15 +62,9 @@ const faqs = [
           <Eyebrow>{hub.name}</Eyebrow>
           <h2 id={`hear-${hub.slug}`} class="k-h2">{hub.name} intake</h2>
           <p class="k-lede">{hub.problemAnswer}</p>
-          {/* PLACEHOLDER — audio goes here once a customer gives permission
-              to publish a recording. Until then the slot stays visible. */}
-          <div class="k-audio-slot" data-slot="recording">
-            <span class="k-quote__tag">Recording: none yet</span>
-            <p class="k-quote__need">
-              Needed: a real {hub.name.toLowerCase()} call, published with the firm&rsquo;s written
-              permission. The transcript beside this is an example, not a recording.
-            </p>
-          </div>
+          {/* Audio goes here once there is a demo-line recording (labelled as a
+              demo) or a customer call published with written permission. */}
+          <p class="k-body"><em>The transcript beside this is an example, not a recording.</em></p>
           <Button href={`/industries/${hub.slug}`} variant="ghost">{hub.name} in detail</Button>
         </div>
         <div class="k-split__mock">

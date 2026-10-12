@@ -43,7 +43,7 @@ export const home = {
     industries: {
       eyebrow: 'Who it is for', h2: 'It uses your words, not “customer.”', lede: 'A conflict check is not an intake form and chair time is not an appointment. Remi is trained on the vocabulary and the questions your vertical actually asks.',
       items: [
-        ['/industries/law-firms', 'Law firms', 'A new-client call at 2 a.m., screened for conflicts, the matter qualified, the consult on the calendar before you open.'],
+        ['/industries/law-firms', 'Law firms', 'A new-client call at 2 a.m., conflict-check names collected, the matter qualified, the consult on the calendar before you open.'],
         ['/industries/home-services', 'Home services', 'Emergency jobs triaged, a dispatch window given on the call, estimates chased until they close.'],
         ['/industries/dental-med-spa', 'Dental & med spa', 'Chair time filled from the cancellation list, recall rebooked, no-shows headed off the night before.'],
         ['/industries/real-estate', 'Real estate', 'Listing calls answered on a Saturday, buyers qualified, showings booked without you in the car.'],

@@ -94,11 +94,11 @@ export const agentPages: AgentPage[] = [
       {
         h2: 'Web chat, SMS and every lead source',
         answer:
-          'Plenty of people will not phone you. Remi answers the chat widget on your website and your business text line with the same script, and picks up enquiries from Google Business Profile messages, website forms, Yelp, Thumbtack, Avvo and Zillow — in minutes, rather than whenever somebody next checks the inbox.',
+          'Plenty of people will not phone you. Remi answers the chat widget on your website and your business text line with the same script, and picks up website form enquiries in minutes. Answering marketplace inboxes (Yelp, Thumbtack, Avvo, Zillow) directly is rolling out — in minutes, rather than whenever somebody next checks the inbox.',
         bullets: [
           'Web chat on your site, with the same intake script as the phone.',
           'Business SMS answered and continued in thread.',
-          'Google Business Profile messages, website forms, Yelp, Thumbtack, Avvo, Zillow.',
+          'Website forms today; Yelp, Thumbtack, Avvo and Zillow inboxes rolling out.',
         ],
       },
       {

@@ -39,10 +39,10 @@ export const landingPages: LandingPage[] = [
     slug: 'law-firms-nj',
     title: 'NJ Law Firms: Answer Every After-Hours Case Call',
     description:
-      'Remi answers every new-client call in two rings, screens conflicts, qualifies the matter and books the consult. New Jersey law firms, live in five business days, month-to-month.',
+      'Remi answers every new-client call in two rings, collects conflict-check details, qualifies the matter and books the consult. New Jersey law firms, live in five business days, month-to-month.',
     h1: 'New Jersey law firms: stop losing after-hours cases to the firm that picked up.',
     sub:
-      'Remi, your Inbound Agent, answers every new-client call in two rings — nights, weekends and holidays — screens for conflicts, qualifies the matter, and books the consultation straight into your calendar. Live in five business days. Month-to-month.',
+      'Remi, your Inbound Agent, answers every new-client call in two rings — nights, weekends and holidays — collects conflict-check details, qualifies the matter, and books the consultation straight into your calendar. Live in five business days. Month-to-month.',
     calcPreset: 'legal',
     calcLabel: 'law firm',
     bullets: [
@@ -80,7 +80,7 @@ export const landingPages: LandingPage[] = [
       },
       {
         q: 'How long does setup take?',
-        a: 'Five business days. Twenty minutes on how your intake runs today, then we write the script for your practice areas, connect your number, calendar and case management system, and you test it yourself before it answers a real client.',
+        a: 'Five business days. Twenty minutes on how your intake runs today, then we write the script for your practice areas, connect your number and your calendar or CRM (Google Calendar, HubSpot; others through Zapier), and you test it yourself before it answers a real client.',
       },
       {
         q: 'What if a caller needs an attorney right now?',

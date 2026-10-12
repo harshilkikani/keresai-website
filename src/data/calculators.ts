@@ -155,7 +155,7 @@ export const calculators: Calculator[] = [
     faqs: [
       { q: 'How much do law firms lose to missed intake calls?', a: 'With case values of $1,000–$10,000+ and the first firm to respond usually signing the client, even a modest miss rate costs significant revenue. Enter your numbers above, and see the <a href="/benchmarks/legal-intake-conversion">legal intake conversion benchmarks</a>.' },
       { q: 'Why do firms lose new clients?', a: 'High-value legal inquiries often arrive after hours and callers rarely leave voicemails. When the call is not answered live, the prospective client simply calls the next firm. See the <a href="/industries/law-firms">AI receptionist for legal intake</a>.' },
-      { q: 'How can a firm improve intake conversion?', a: 'Answer every inquiry live, screen and qualify the matter, and book the consultation — around the clock. An AI receptionist for legal intake handles all of this 24/7, including conflict screening.' },
+      { q: 'How can a firm improve intake conversion?', a: 'Answer every inquiry live, screen and qualify the matter, and book the consultation — around the clock. An AI receptionist for legal intake handles all of this 24/7, including collecting the names your firm needs for its conflict check.' },
     ],
     related: [
       { label: 'AI receptionist for legal intake', href: '/industries/law-firms' },
