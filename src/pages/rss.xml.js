@@ -11,12 +11,13 @@ export function GET(context) {
       description: g.listDesc,
       link: `${ORIGIN}/guides/${g.slug}.html`,
       categories: [g.category],
+      pubDate: new Date(g.datePublished + 'T12:00:00Z'),
     }));
 
   return rss({
     title: 'Keres AI — Resources & Guides',
     description:
-      'Playbooks and case studies on AI receptionists, missed-call recovery, appointment automation, and AI outbound for service businesses.',
+      'Guides from Keres AI on answering and booking every call, after-hours coverage, automation ROI and the tools local service businesses use.',
     site: context.site ?? ORIGIN,
     items,
   });
