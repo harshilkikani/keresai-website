@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, articleSchema } from '../data/schema';
+
+// Answers "what does Google Business Profile management include and cost?"
+// Every claim about Keres comes from Found's published scope (src/data/site.ts);
+// every claim about Google cites Google or a dated change.
+const path = '/google-business-profile-management';
+const title = 'Google Business Profile Management: What It Includes & Costs';
+const description = 'What Google Business Profile management includes, what Google retired, DIY vs software vs done-for-you, and what it costs. Keres AI Found from $249/month.';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Found', path: '/services/found' },
+  { name: 'Google Business Profile management', path },
+];
+
+const faqs = [
+  { q: 'How much does Google Business Profile management cost?', a: 'Doing it yourself costs time rather than money. Software tools charge a monthly fee per location. Done-for-you services vary by scope; Keres AI includes weekly profile management in Found, which starts at $249 a month ($499 for law firms) with the website, review requests and listings, month-to-month.' },
+  { q: 'How long until Google Business Profile changes show results?', a: 'Profile changes tend to move within two to six weeks; listings and citations take a full cycle to propagate. Reviews start the week the request flow is switched on, because they depend on your job volume.' },
+  { q: 'Can I ask every customer for a review?', a: 'Yes, and you should ask all of them the same way. Google’s policies do not allow selectively asking only happy customers or discouraging negative reviews, and the FTC rule on consumer reviews restricts suppressing them.' },
+  { q: 'Does Google Business Profile still have chat or Q&A?', a: 'No. Google ended Business Profile chat on July 31, 2024, and removed the Questions & Answers section from Business Profiles in late 2025. Any service that still sells those is out of date.' },
+  { q: 'Do I need a website if I have a Google Business Profile?', a: 'The profile gets you into the map results; the website is where a searcher checks you out and books. Found manages both together so the name, services and hours agree everywhere.' },
+];
+
+const article = articleSchema({
+  path,
+  headline: title,
+  description,
+  datePublished: '2026-10-11',
+  dateModified: '2026-10-11',
+  readingTime: 'PT5M',
+});
+const webpage = webPageSchema({ path, name: title, description, speakableSelectors: ['.answer-block', '.faq-a'] });
+---
+<Layout title="Google Business Profile Management Cost & Scope | Keres AI" description={description} path={path} ogType="article">
+  <Schema slot="head" graph={[article, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">Google Business Profile</span>
+    <h1>Google Business Profile management: <span class="accent">what it includes and what it costs</span></h1>
+    <p class="lead">Updated October 11, 2026.</p>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block">
+      <p>Google Business Profile management means keeping your categories, services, hours and photos current, posting weekly, replying to every review, and removing spam listings that compete with you. Business owners can do it themselves, use software, or hire a done-for-you service. Keres AI’s Found manages the profile weekly alongside your website, review requests and listings, from $249 a month ($499 for law firms), month-to-month.</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>What does weekly Google Business Profile management involve?</h2>
+      <ul>
+        <li><strong>Set-up and optimization, once:</strong> primary and secondary categories, the services you offer, service area or address, hours, photos, and verification.</li>
+        <li><strong>Weekly posts:</strong> offers, seasonal reminders and recent work, so the profile shows activity.</li>
+        <li><strong>Photo updates:</strong> real jobs and real staff, not stock images.</li>
+        <li><strong>Review replies:</strong> a response to every review, positive or negative, drafted for your approval.</li>
+        <li><strong>Spam-listing removal:</strong> reporting fake or duplicate listings that take your map position.</li>
+        <li><strong>Monthly insights:</strong> searches, calls, direction requests and which keywords found you.</li>
+        <li><strong>Consistent listings:</strong> the same name, address and phone on Apple, Bing, Yelp, Nextdoor, Angi and your trade directories, so Google trusts the profile.</li>
+      </ul>
+
+      <h2>What has Google retired?</h2>
+      <p>Two features many guides still mention are gone. <a href="https://support.google.com/business/answer/14919062" rel="noopener" target="_blank">Business Profile chat ended on July 31, 2024</a>, and Google removed the Questions &amp; Answers section from Business Profiles in late 2025, replacing it with AI-generated answers. A management plan that still bills for chat or Q&amp;A is out of date; the time is better spent on reviews, photos and accurate services.</p>
+
+      <h2>DIY, software, or done-for-you?</h2>
+      <ul>
+        <li><strong>Do it yourself:</strong> free apart from your time. Works if you will actually post weekly and reply to every review.</li>
+        <li><strong>Software:</strong> a monthly fee per location for scheduling posts, tracking map rankings and drafting review replies. You still do the work.</li>
+        <li><strong>Done-for-you:</strong> someone else does the weekly work. Compare on what is included (posts, photos, review replies, listings, reporting), whether the website is included, and the contract terms.</li>
+      </ul>
+
+      <h2>How much does Google Business Profile management cost with Keres AI?</h2>
+      <p><a href="/services/found">Found</a> includes weekly profile management, a conversion website with hosting and care, a review request after every job, and consistent listings, from $249 a month ($499 for law firms because legal directories and review rules differ). There is no build fee at the base tier and no contract. The quote rises with the number of locations and if you add AI search visibility or Local Services Ads set-up.</p>
+
+      <h2>How do reviews fit in?</h2>
+      <p>Reviews are the part of the profile you can move fastest. Found asks every customer for a review after each completed job, drafts owner replies for your approval, and flags anyone who reports a problem to you directly so you can fix it. Every customer gets the same request; Google does not allow review gating.</p>
+
+      <h2>Where does the AI receptionist come in?</h2>
+      <p>A better profile produces more calls. <a href="/agents/inbound">Remi</a>, Keres AI’s AI receptionist, can answer them in two rings and book the appointment, but Found is sold on its own; you can keep answering your own phone.</p>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} title="Google Business Profile management FAQ" />
+  <CtaBand heading="Get your profile and website managed" sub="Book a 20-minute call and get a quote for Found." />
+</Layout>
