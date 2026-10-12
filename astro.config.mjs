@@ -42,6 +42,8 @@ export default defineConfig({
         !/^https:\/\/www\.keresai\.com\/(dialpad|numa|openphone|calendly|apollo|instantly|smartlead)-alternative$/.test(page) &&
         // Merged use cases (redirect stubs) and the quote form pages (noindex).
         !/^https:\/\/www\.keresai\.com\/(use-cases\/(after-hours-answering|appointment-booking)|quote|es\/quote)$/.test(page) &&
+        // Thin email/outbound glossary terms are noindex (see glossary/[term].astro).
+        !/^https:\/\/www\.keresai\.com\/glossary\/(dkim|dmarc|spf|email-sequence|email-bounce-rate|email-blacklist|spam-score|reply-rate|cold-email-outreach|outbound-sales|lead-scoring)$/.test(page) &&
         // No published customer stories yet; the page is noindex.
         !/^https:\/\/www\.keresai\.com\/customers(\/|$)/.test(page) &&
         // The cost study moved to /ai-receptionist-cost; the old URL is a redirect stub.

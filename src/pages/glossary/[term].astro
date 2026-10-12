@@ -68,8 +68,12 @@ const webpage = webPageSchema({
   description: t.description,
   speakableSelectors: ['.answer-block', '.faq-a'],
 });
+// Thin email/outbound definitions that compete with vendor docs on a product
+// (Sol) that is not the focus: noindex until consolidated into one guide.
+// Keep in step with the sitemap filter in astro.config.mjs.
+const THIN_EMAIL_TERMS = ['dkim', 'dmarc', 'spf', 'email-sequence', 'email-bounce-rate', 'email-blacklist', 'spam-score', 'reply-rate', 'cold-email-outreach', 'outbound-sales', 'lead-scoring'];
 ---
-<Layout title={t.title} description={t.description} path={path}>
+<Layout title={t.title} description={t.description} path={path} noindexFollow={THIN_EMAIL_TERMS.includes(t.slug)}>
   <Schema slot="head" graph={[
     definedTermSchema({ term: t.term, definition: cleanDefinition, path }),
     faqSchema(t.faqs),

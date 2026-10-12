@@ -52,7 +52,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'What businesses use AI receptionists',
         body:
-          'Any business that lives on the phone: <a href="/ai-receptionist-for-hvac">HVAC</a> and <a href="/ai-receptionist-for-plumbers">plumbing</a> contractors, <a href="/industries/dental-med-spa">dental practices</a>, <a href="/ai-receptionist-for-med-spas">med spas</a>, <a href="/industries/real-estate">real estate teams</a>, and <a href="/industries/law-firms">law firms</a> — wherever a missed call is a lost customer.',
+          'Any business that lives on the phone: <a href="/ai-receptionist-for-hvac">HVAC</a> and <a href="/ai-receptionist-for-plumbers">plumbing</a> contractors, <a href="/industries/dental-med-spa">dental practices</a>, <a href="/industries/dental-med-spa">med spas</a>, <a href="/industries/real-estate">real estate teams</a>, and <a href="/industries/law-firms">law firms</a> — wherever a missed call is a lost customer.',
       },
     ],
     related: ['ai-answering-service', 'virtual-receptionist', 'appointment-booking-automation', 'missed-call-text-back'],
@@ -69,7 +69,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['automated answering service', 'virtual answering service'],
     category: 'AI Receptionist',
     targetKeyword: 'what is an ai answering service',
-    title: 'What Is an AI Answering Service? Definition | Keres',
+    title: 'What Is an AI Answering Service? Definition | Keres AI',
     description:
       'An AI answering service answers business calls automatically, booking appointments and capturing leads 24/7 instead of just taking messages.',
     definition:
@@ -141,7 +141,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['missed call automation'],
     category: 'AI Receptionist',
     targetKeyword: 'what is missed call text back',
-    title: 'What Is Missed-Call Text-Back? Definition | Keres',
+    title: 'What Is Missed-Call Text-Back? Definition | Keres AI',
     description:
       'Missed-call text-back automatically sends a text to any caller you miss, so the lead never goes cold. Learn how it works and why it recovers revenue.',
     definition:
@@ -289,7 +289,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['AI sales development rep', 'AI outbound agent'],
     category: 'AI SDR & Outbound',
     targetKeyword: 'what is an ai sdr',
-    title: 'What Is an AI SDR? Definition & How It Works | Keres',
+    title: 'What Is an AI SDR? Definition & How It Works | Keres AI',
     description:
       'An AI SDR automates outbound sales development: personalized email sequences, reply handling and meeting booking without hiring a human rep.',
     definition:
@@ -396,7 +396,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['SPF record'],
     category: 'Email Deliverability',
     targetKeyword: 'what is an spf record',
-    title: 'What Is an SPF Record? Email Authentication | Keres',
+    title: 'What Is an SPF Record? Email Authentication | Keres AI',
     description:
       'SPF (Sender Policy Framework) is a DNS record that lists which servers may send email for your domain. Learn how it works and why it matters for deliverability.',
     definition:
@@ -420,7 +420,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['DKIM signature'],
     category: 'Email Deliverability',
     targetKeyword: 'what is dkim',
-    title: 'What Is DKIM? Email Authentication Explained | Keres',
+    title: 'What Is DKIM? Email Authentication Explained | Keres AI',
     description:
       'DKIM adds a cryptographic signature to your emails so receivers can verify they weren’t altered and really came from your domain. Learn how it works.',
     definition:
@@ -444,7 +444,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['DMARC policy', 'Domain-based Message Authentication'],
     category: 'Email Deliverability',
     targetKeyword: 'what is dmarc',
-    title: 'What Is DMARC? Email Authentication Policy | Keres',
+    title: 'What Is DMARC? Email Authentication Policy | Keres AI',
     description:
       'DMARC tells receiving servers what to do when an email fails SPF and DKIM, and reports who is sending as your domain. Learn how it protects your domain and inbox placement.',
     definition:
@@ -826,7 +826,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['after-hours answering service', 'after-hours call answering'],
     category: 'AI Receptionist',
     targetKeyword: 'what is after-hours answering',
-    title: 'What Is After-Hours Answering? Definition | Keres',
+    title: 'What Is After-Hours Answering? Definition | Keres AI',
     description:
       'After-hours answering handles calls that come in when your office is closed — booking appointments and capturing leads 24/7 so no after-hours caller is lost.',
     definition:
@@ -849,7 +849,7 @@ export const glossary: GlossaryTerm[] = [
       { q: 'What happens to after-hours emergencies?', a: 'Keres identifies emergency calls, captures the details, books the visit, and texts your on-call team immediately — so urgent jobs reach your crew the moment they come in.' },
       { q: 'Is after-hours answering worth it for small businesses?', a: 'Typically yes — a significant share of service calls arrive outside business hours, and each one is a job opportunity lost if it goes to voicemail.' },
     ],
-    cta: { href: '/use-cases/after-hours-answering', label: 'See after-hours answering in action' },
+    cta: { href: '/24-7-ai-receptionist', label: 'See after-hours answering in action' },
   },
   {
     slug: 'emergency-dispatch',
@@ -896,12 +896,12 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Why intake is the bottleneck for dental and med spa growth',
         body:
-          'Every missed new-patient call or delayed intake process costs a high-value appointment. For <a href="/industries/dental-med-spa">dental practices</a> and <a href="/ai-receptionist-for-med-spas">med spas</a>, a new patient can be worth thousands of dollars in lifetime value — but only if the intake is smooth enough that they don\'t book somewhere more responsive. AI intake collects what you need during the call, confirms the appointment, and logs it to your calendar or CRM.',
+          'Every missed new-patient call or delayed intake process costs a high-value appointment. For <a href="/industries/dental-med-spa">dental practices</a> and <a href="/industries/dental-med-spa">med spas</a>, a new patient can be worth thousands of dollars in lifetime value — but only if the intake is smooth enough that they don\'t book somewhere more responsive. AI intake collects what you need during the call, confirms the appointment, and logs it to your calendar or CRM.',
       },
       {
         h2: 'What AI collects during patient intake',
         body:
-          'The AI captures name, date of birth, insurance provider and ID, reason for visit, primary care provider if relevant, and any pre-treatment questions you configure — then syncs the record to your system. For <a href="/ai-receptionist-for-med-spas">med spas</a>, it asks about treatment history, allergies, and contraindications before the consultation.',
+          'The AI captures name, date of birth, insurance provider and ID, reason for visit, primary care provider if relevant, and any pre-treatment questions you configure — then syncs the record to your system. For <a href="/industries/dental-med-spa">med spas</a>, it books the treatment or consultation and collects only what is needed to book; clinical history stays with your clinician.',
       },
     ],
     related: ['ai-receptionist', 'appointment-booking-automation', 'no-show-rate', 'appointment-reminders'],
@@ -917,7 +917,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['law firm intake', 'client intake for lawyers'],
     category: 'AI Receptionist',
     targetKeyword: 'what is legal intake',
-    title: 'What Is Legal Intake? Definition for Law Firms | Keres',
+    title: 'What Is Legal Intake? Definition for Law Firms | Keres AI',
     description:
       'Legal intake is the process of qualifying and onboarding new legal clients — capturing case details, running conflict checks, and booking consultations. Learn how AI automates it.',
     definition:
@@ -970,7 +970,7 @@ export const glossary: GlossaryTerm[] = [
       { q: 'What is a good no-show rate for a dental practice?', a: 'Well-run practices typically target under 5% no-show rates. Automated text reminders with easy rescheduling are the most effective lever — practices without reminders often see 15–25%.' },
       { q: 'Does AI rescheduling actually refill cancelled slots?', a: 'Yes — because the rescheduling happens in real time, a cancellation text at 8 AM can be re-booked by another patient the same morning rather than sitting empty.' },
     ],
-    cta: { href: '/use-cases/appointment-booking', label: 'Reduce no-shows with AI booking' },
+    cta: { href: '/agents/inbound', label: 'Reduce no-shows with AI booking' },
   },
   {
     slug: 'lead-response-time',
@@ -1008,7 +1008,7 @@ export const glossary: GlossaryTerm[] = [
     aka: ['AI front desk', 'automated front desk'],
     category: 'AI Receptionist',
     targetKeyword: 'what is front desk automation',
-    title: 'What Is Front Desk Automation? Definition | Keres',
+    title: 'What Is Front Desk Automation? Definition | Keres AI',
     description:
       'Front desk automation uses AI to answer calls, book appointments, qualify leads and answer questions, replacing or supplementing human receptionists.',
     definition:
@@ -1022,7 +1022,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Industries where front desk automation delivers the most value',
         body:
-          'Any business with high inbound call volume: <a href="/ai-receptionist-for-hvac">HVAC</a> and home-services contractors, <a href="/industries/dental-med-spa">dental practices</a>, <a href="/ai-receptionist-for-med-spas">med spas</a>, <a href="/industries/real-estate">real estate teams</a>, and <a href="/industries/law-firms">law firms</a>. In each case, every missed or delayed call is a revenue leak that automation closes permanently.',
+          'Any business with high inbound call volume: <a href="/ai-receptionist-for-hvac">HVAC</a> and home-services contractors, <a href="/industries/dental-med-spa">dental practices</a>, <a href="/industries/dental-med-spa">med spas</a>, <a href="/industries/real-estate">real estate teams</a>, and <a href="/industries/law-firms">law firms</a>. In each case, every missed or delayed call is a revenue leak that automation closes permanently.',
       },
     ],
     related: ['ai-receptionist', 'appointment-booking-automation', 'lead-response-time', 'after-hours-answering'],
