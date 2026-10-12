@@ -1,6 +1,7 @@
 // /pricing and /es/pricing: one row per worker.
 import type { Locale } from './index';
 
+import { priceAmount } from '../config/business';
 export const pricing = {
   en: {
     title: 'Pricing — One Price Per Worker, Quoted to You | Keres AI',
@@ -64,5 +65,26 @@ export const pricing = {
   },
 } as const;
 export type Pricing = typeof pricing.en;
-export const pricingCopy = (locale: Locale): Pricing => (pricing[locale] as unknown) as Pricing;
+// Until every talking worker has a published price, the page must not claim
+// that each one "publishes what it starts at": Found shows its number, the
+// rest say they are quoted.
+const allPriced = (['remi', 'theo', 'june', 'sol'] as const).every((k) => priceAmount(k));
+const quotedCopy = {
+  en: {
+    description: 'Keres pricing: Found starts at $249/month ($499 for law firms); Remi, Theo, June and Sol are quoted to your volume. One monthly rate with included minutes, month-to-month, live in five business days.',
+    lede: 'Found publishes its starting price below. Remi, Theo, June and Sol are quoted to your call volume on a 20-minute call, and the list further down says exactly what moves the number. Month-to-month, no per-call fees.',
+    faq0: 'Found starts at $249 a month ($499 for law firms). Remi, Theo, June and Sol are quoted to your call volume, locations and integrations on a 20-minute call: one monthly rate with included minutes, per-minute after that, and no per-call fees. Custom is scoped on the same call.',
+  },
+  es: {
+    description: 'Precios de Keres: Found desde $249/mes ($499 para bufetes); Remi, Theo, June y Sol se cotizan según tu volumen. Una tarifa mensual con minutos incluidos, mes a mes, en marcha en cinco días hábiles.',
+    lede: 'Found publica su precio inicial abajo. Remi, Theo, June y Sol se cotizan según tu volumen de llamadas en una llamada de 20 minutos, y la lista de más abajo dice exactamente qué mueve el número. Mes a mes, sin cargos por llamada.',
+    faq0: 'Found empieza en $249 al mes ($499 para bufetes). Remi, Theo, June y Sol se cotizan según tu volumen, ubicaciones e integraciones en una llamada de 20 minutos: una tarifa mensual con minutos incluidos, por minuto después, y sin cargos por llamada. Custom se define en la misma llamada.',
+  },
+};
+export const pricingCopy = (locale: Locale): Pricing => {
+  const base = (pricing[locale] as unknown) as Pricing;
+  if (allPriced) return base;
+  const q = quotedCopy[locale];
+  return { ...base, description: q.description, lede: q.lede, faqs: base.faqs.map((f, i) => (i === 0 ? [f[0], q.faq0] : f)) as typeof base.faqs };
+};
 export const pricingFaqs = (locale: Locale) => pricingCopy(locale).faqs.map(([q, a]) => ({ q, a }));

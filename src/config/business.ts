@@ -26,7 +26,7 @@ export const business = {
   // Per-worker from-prices, digits only, rendered "from $X/mo" on the
   // roster, the pricing table, the nav and the hero. All required; under
   // KERES_ALLOW_MISSING=1 the price line is omitted, never bracketed.
-  foundFrom: '',        // Found: site, Google listing, reviews
+  foundFrom: '249',     // Found: site, Google listing, reviews (published across the site)
   remiFrom: '',         // Remi: answers and books
   theoFrom: '',         // Theo: confirms, reminds, chases the estimate
   juneFrom: '',         // June: brings customers back, asks for the review

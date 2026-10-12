@@ -65,7 +65,7 @@ const webpage = webPageSchema({
   path={path}
   ogType="article"
 >
-  <Schema slot="head" graph={[article, statSchema, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[article, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 
@@ -81,8 +81,8 @@ const webpage = webPageSchema({
 
   <!-- DIRECT ANSWER BLOCK -->
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
-      <p itemprop="text"><strong>Service businesses miss an estimated 25–40% of inbound calls</strong>, and about 85% of callers who reach voicemail never call back — they call a competitor. Because 30–45% of service calls arrive after hours and the first business to respond usually wins the job, every unanswered call is measurable lost revenue.</p>
+    <div class="answer-block">
+      <p><strong>Service businesses miss an estimated 25–40% of inbound calls</strong>, and about 85% of callers who reach voicemail never call back — they call a competitor. Because 30–45% of service calls arrive after hours and the first business to respond usually wins the job, every unanswered call is measurable lost revenue.</p>
     </div>
   </section>
 

@@ -77,8 +77,8 @@ const webpage = webPageSchema({
 
   <!-- DIRECT ANSWER BLOCK — marked speakable and as schema.org Answer for AI retrieval -->
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer" id={`${t.slug}-definition`}>
-      <p set:html={t.definition} itemprop="text" />
+    <div class="answer-block" id={`${t.slug}-definition`}>
+      <p set:html={t.definition} />
     </div>
   </section>
 

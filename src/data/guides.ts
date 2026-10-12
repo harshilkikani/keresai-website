@@ -10,11 +10,17 @@ export interface Guide {
   titleHtml: string;
   readTime: string;
   order: number;
+  /** First published on this domain (git history). */
+  datePublished: string;
+  /** Last substantive edit. */
+  dateModified: string;
 }
 
 export const guides: Guide[] = [
   {
     slug: "septic-automation-playbook",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Featured · Deep dive",
     listTitle: "The Septic Service Automation Playbook",
     listDesc: "Where AI delivers the highest ROI for septic operators: intake triage, pumping reminders, emergency call handling, and invoice follow-up.",
@@ -26,6 +32,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "customer-intake-automation",
+    datePublished: '2026-05-26',
+    dateModified: '2026-05-26',
     category: "Guide",
     listTitle: "Customer Intake Automation for Field Service",
     listDesc: "How to automate customer intake calls and forms so no lead slips through the cracks.",
@@ -37,6 +45,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "roofing-growth-through-ai",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Deep dive",
     listTitle: "Roofing Company Growth Through AI",
     listDesc: "A practical look at how roofing companies use AI to capture and book more storm-season leads.",
@@ -48,6 +58,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "hvac-scaling-checklist",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Deep dive",
     listTitle: "HVAC Business Scaling Checklist",
     listDesc: "Seasonal automation, maintenance reminders, emergency dispatch, and billing automation for HVAC leaders.",
@@ -59,6 +71,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "towing-operations-automation",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Deep dive",
     listTitle: "Towing Dispatch & Operations Automation",
     listDesc: "Automating dispatch, intake, and follow-up for high-volume towing operations.",
@@ -70,6 +84,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "measuring-automation-roi",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Best practice",
     listTitle: "Measuring the ROI of Business Automation",
     listDesc: "A simple framework for measuring the real cost and time savings of automation.",
@@ -81,6 +97,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "integrating-ai-into-your-stack",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Best practice",
     listTitle: "Integrating AI Into Your Current Stack",
     listDesc: "How to connect AI agents to the CRM, calendar, and phone systems you already run on.",

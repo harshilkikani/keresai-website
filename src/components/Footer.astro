@@ -60,7 +60,7 @@ const roleOf = (slug: string) => (agents.find((a) => a.slug === slug)?.title ?? 
       <h3>{ui.footer.services}</h3>
       <ul>
         <li><a href="/services">{ui.footer.allServices}</a></li>
-        <li><a href="/services/found">Found{foundPrice && <> &mdash; {ui.mocks.from} {foundPrice}</>}</a></li>
+        <li><a href="/services/found">Found{foundPrice && ` — ${ui.mocks.from} ${foundPrice}`}</a></li>
         <li><a href={l(locale, '/custom')}>{ui.footer.customBuilds}</a></li>
         <li><a href="/integrations">{ui.footer.integrations}</a></li>
         <li><a href={l(locale, '/pricing')}>{ui.footer.pricing}</a></li>

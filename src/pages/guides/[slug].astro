@@ -40,12 +40,10 @@ const articleSchema = {
   image: `${ORIGIN}/assets/img/og-image.png`,
   url,
   mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-  author: { '@type': 'Organization', name: 'Keres AI', url: ORIGIN },
-  publisher: {
-    '@type': 'Organization',
-    name: 'Keres AI',
-    logo: { '@type': 'ImageObject', url: `${ORIGIN}/assets/img/KeresLogo.png` },
-  },
+  datePublished: g.datePublished,
+  dateModified: g.dateModified,
+  author: { '@id': `${ORIGIN}/#organization` },
+  publisher: { '@id': `${ORIGIN}/#organization` },
   isPartOf: { '@id': `${ORIGIN}/#website` },
   inLanguage: 'en-US',
 };
@@ -63,6 +61,7 @@ const articleSchema = {
         <div class="guide-meta">
           <span>{g.readTime}</span>
           <span>For operators</span>
+          <span>Updated <time datetime={g.dateModified}>{new Date(g.dateModified + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time></span>
         </div>
       )}
     </header>

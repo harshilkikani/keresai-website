@@ -96,8 +96,8 @@ const relatedComparisons = comparisons
 
   <!-- DIRECT ANSWER BLOCK (AI citation target) -->
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
-      <p itemprop="text">
+    <div class="answer-block">
+      <p>
         {isRoundup ? roundupAnswer : c.pillar === 'inbound'
           ? `Keres AI is an alternative to ${c.competitor} for businesses that need a done-for-you AI receptionist: it answers every call 24/7, books appointments on your calendar, integrates with field-service software, and charges one monthly rate with included minutes rather than per-call fees.`
           : `Keres AI is an alternative to ${c.competitor} that goes beyond sending and infrastructure: it adds AI personalization at scale, handles replies, and books qualified meetings directly to your calendar — replacing the need for a human SDR to follow through on every sequence.`}

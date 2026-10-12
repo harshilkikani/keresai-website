@@ -98,11 +98,12 @@ const howTo = howToSchema({
 });
 
 const video = videoObjectSchema({
-  name: `Keres AI Receptionist for ${ind.short} — Live Demo`,
-  description: `See how Keres AI answers calls, qualifies ${ind.shortLower} customers, books appointments, and dispatches emergencies automatically.`,
+  name: 'Keres AI receptionist: example call and operator portal',
+  description: 'An example of Remi answering a call, qualifying the caller and booking the appointment, then the operator portal the owner sees. Demo account, not a customer.',
   contentUrl: '/assets/video/ai-receptionist.mp4',
-  uploadDate: '2026-01-15',
-  duration: 'PT2M30S',
+  thumbnailUrl: '/assets/img/operator-portal.webp',
+  uploadDate: '2026-05-25',
+  duration: 'PT7M57S',
 });
 
 const webpage = webPageSchema({
@@ -146,8 +147,8 @@ const peerIndustries = industries.filter((i) => i.slug !== ind.slug).slice(0, 5)
 
   <!-- DIRECT ANSWER BLOCK (AI citation target) -->
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
-      <p itemprop="text">The <strong>Keres AI receptionist for {ind.nameLower}</strong> answers every inbound call 24/7 in two rings, qualifies the caller, books the appointment on your calendar, and texts your team the moment a call is an emergency — so no lead goes to voicemail and every call becomes a booked job.</p>
+    <div class="answer-block">
+      <p>The <strong>Keres AI receptionist for {ind.nameLower}</strong> answers every inbound call 24/7 in two rings, qualifies the caller, books the appointment on your calendar, and texts your team the moment a call is an emergency — so no lead goes to voicemail and every call becomes a booked job.</p>
     </div>
   </section>
 

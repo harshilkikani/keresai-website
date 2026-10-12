@@ -48,7 +48,7 @@ const webpage = webPageSchema({
 });
 ---
 <Layout title={b.title} description={b.description} path={path} ogType="article">
-  <Schema slot="head" graph={[article, statSchema, webpage, faqSchema(b.faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[article, webpage, faqSchema(b.faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 
@@ -63,8 +63,8 @@ const webpage = webPageSchema({
   </header>
 
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
-      <p itemprop="text" set:html={b.answer} />
+    <div class="answer-block">
+      <p set:html={b.answer} />
     </div>
   </section>
 

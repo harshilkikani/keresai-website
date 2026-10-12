@@ -15,8 +15,8 @@ export const organizationSchema = {
   logo: {
     '@type': 'ImageObject',
     url: `${ORIGIN}/assets/img/KeresLogo.png`,
-    width: 400,
-    height: 400,
+    width: 192,
+    height: 192,
   },
   description:
     'Keres AI sells AI workers for local businesses. Each does one job: Found gets you found (website, Google listing, reviews), Remi answers every call in two rings and books it, Theo confirms and reminds, June brings past customers back, Sol finds new customers by email, and Custom is built for any recurring job. Every worker reports in one morning text. Live in five business days, month-to-month, in English and Spanish.',
@@ -60,12 +60,6 @@ export const organizationSchema = {
     url: `${ORIGIN}/quote`,
     email: business.contactEmail,
     availableLanguage: ['English', 'Spanish'],
-    hoursAvailable: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      opens: '00:00',
-      closes: '23:59',
-    },
   },
   // The roster as an offer catalog. Prices appear only when the config key is
   // set; an Offer without a price is valid here because Organization has no
@@ -79,7 +73,6 @@ export const organizationSchema = {
         '@type': 'Offer',
         itemOffered: { '@id': `${ORIGIN}${w.href}#service` },
         url: `${ORIGIN}${w.href}`,
-        availability: 'https://schema.org/InStock',
         ...(price ? { price, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price, priceCurrency: 'USD', unitText: w.slug === 'custom' ? 'month (run fee; build priced on scope)' : 'month', billingIncrement: 1 } } : {}),
       };
     }),
@@ -111,7 +104,7 @@ export const softwareApplicationSchema = {
   operatingSystem: 'Web',
   url: ORIGIN,
   description:
-    'AI receptionist and AI SDR platform. Answers every call in two rings, books appointments, qualifies leads, and runs outbound email that lands in the inbox.',
+    'AI workers for local service businesses: Found runs the website, Google Business Profile and reviews; Remi answers every call and books the appointment; Theo, June and Sol handle reminders, reactivation and outbound email.',
   // Offer intentionally omitted: Keres uses custom B2B quotes, not a public
   // numeric price. Google's structured-data guidelines reject Offer entries
   // without a real `price`, so we surface pricing on the /pricing page and
@@ -148,9 +141,10 @@ export const websiteSchema = {
   '@type': 'WebSite',
   '@id': `${ORIGIN}/#website`,
   name: 'Keres AI',
-  url: ORIGIN,
+  alternateName: ['Keres', 'KeresAI', 'keresai.com'],
+  url: `${ORIGIN}/`,
   publisher: { '@id': `${ORIGIN}/#organization` },
-  inLanguage: 'en-US',
+  inLanguage: ['en-US', 'es-US'],
 };
 
 export function faqSchema(items: { q: string; a: string }[]) {
@@ -213,6 +207,8 @@ export function definedTermSchema(opts: { term: string; definition: string; path
   return {
     '@context': 'https://schema.org',
     '@type': 'DefinedTerm',
+    // Matches the @id the Organization's knowsAbout points at.
+    '@id': `${ORIGIN}${opts.path}#term`,
     name: opts.term,
     description: opts.definition,
     url: ORIGIN + opts.path,
@@ -263,9 +259,10 @@ export function videoObjectSchema(opts: {
     name: opts.name,
     description: opts.description,
     contentUrl: ORIGIN + opts.contentUrl,
-    thumbnailUrl: opts.thumbnailUrl ?? `${ORIGIN}/assets/img/og-image.png`,
-    uploadDate: opts.uploadDate ?? '2026-01-15',
-    duration: opts.duration ?? 'PT2M30S',
+    thumbnailUrl: opts.thumbnailUrl ? ORIGIN + opts.thumbnailUrl : `${ORIGIN}/assets/img/og-image.png`,
+    // No invented defaults: a VideoObject without a real date/length is left out.
+    ...(opts.uploadDate ? { uploadDate: opts.uploadDate } : {}),
+    ...(opts.duration ? { duration: opts.duration } : {}),
     publisher: { '@id': `${ORIGIN}/#organization` },
     inLanguage: 'en-US',
   };
