@@ -8,7 +8,7 @@ export const custom = {
     description: 'We build AI agents that do one recurring job in your business and report to you in a text every morning. Fixed build price, monthly run fee, first version in two weeks.',
     eyebrow: 'Custom workers',
     h1: 'A worker for the job nobody on your team has time for.',
-    lede: 'We build AI agents that do one recurring job in your business, report to you in a text every morning, and cost less than the hour a week you’d spend doing it badly.',
+    lede: 'Keres AI builds Custom workers: AI agents that do one recurring job in your business and report to you in a text every morning, quoted from a one-page scope.',
     scope: 'Scope a build', call: 'Call',
     cases: {
       eyebrow: 'Three examples', h2: 'What a custom worker looks like.',
@@ -56,7 +56,7 @@ export const custom = {
     description: 'Construimos agentes de IA que hacen una sola tarea recurrente en tu negocio y te reportan cada mañana por mensaje de texto. Precio fijo de desarrollo, cuota mensual, primera versión en dos semanas.',
     eyebrow: 'Trabajadores a medida',
     h1: 'Un trabajador para la tarea que nadie en tu equipo tiene tiempo de hacer.',
-    lede: 'Construimos agentes de IA que hacen una sola tarea recurrente en tu negocio, te reportan cada mañana por mensaje de texto y cuestan menos que la hora a la semana que pasarías haciéndola mal.',
+    lede: 'Keres AI construye trabajadores a medida: agentes de IA que hacen una sola tarea recurrente en tu negocio y te reportan cada mañana por mensaje de texto, cotizados a partir de un alcance de una página.',
     scope: 'Cotizar mi agente', call: 'Llamar al',
     cases: {
       eyebrow: 'Tres ejemplos', h2: 'Cómo se ve un trabajador a medida.',

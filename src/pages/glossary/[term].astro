@@ -61,6 +61,7 @@ const softCtaMap: Record<string, { href: string; label: string; context: string 
   },
 };
 const isLocal = t.category === 'Local Search';
+const isEmail = /email|outbound|sdr/i.test(t.category);
 const softCta = softCtaMap[t.category];
 
 const webpage = webPageSchema({
@@ -86,7 +87,7 @@ const THIN_EMAIL_TERMS = NOINDEX_GLOSSARY;
   <Breadcrumbs crumbs={crumbs} />
 
   <header class="page-hero container">
-    <span class="eyebrow">{t.category} · Glossary</span>
+    <span class="eyebrow">Keres AI glossary · {t.category}</span>
     <h1>{h1}</h1>
   </header>
 
@@ -154,11 +155,13 @@ const THIN_EMAIL_TERMS = NOINDEX_GLOSSARY;
 
   <!-- HARD CTA — only after full content consumed -->
   <CtaBand
-    heading={isLocal ? 'Get found, then get the call answered' : t.cta ? `See ${shortTerm} working live` : 'Stop losing leads to voicemail'}
+    heading={isLocal ? 'Get found, then get the call answered' : isEmail ? 'See how Sol runs outbound email' : t.cta ? `See ${shortTerm} working live` : 'Stop losing leads to voicemail'}
     sub={isLocal
       ? 'Book a free 20-minute call to go through your Google profile, reviews and listings, and what Found would manage for you.'
-      : 'Book a free 20-minute call and watch Keres answer a call, qualify the lead, and book an appointment in under sixty seconds.'}
-    cta={t.cta ? t.cta.label : 'Book a Demo'}
+      : isEmail
+        ? 'Book a free 20-minute call to go through your sending domains, your list and what Sol would send for you.'
+        : 'Book a free 20-minute call and hear Remi answer, qualify and book a call.'}
+    cta={t.cta ? t.cta.label : 'Book a 20-minute call'}
     href={t.cta ? t.cta.href : '/quote'}
   />
 </Layout>

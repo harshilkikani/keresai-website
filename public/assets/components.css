@@ -2059,7 +2059,7 @@ html[data-motion] [data-hero].is-live [data-owner]   { animation: kPop 0.5s cubi
 .site__h1 { margin: 0; font: 600 17px/1.12 var(--serif); letter-spacing: -0.02em; color: #14100D; }
 .site__sub { margin: 7px 0 10px; font: 400 9.5px/1.45 var(--sans); color: #6B625A; }
 .site__cta { display: inline-block; font: 600 10px var(--sans); color: #fff; background: #14100D; padding: 7px 11px; border-radius: 4px; }
-.site__services { list-style: none; margin: 0; padding: 0 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.site__services { list-style: none; margin: 0; padding: 0 14px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px; }
 .site__services li { font: 500 9px var(--sans); color: #3A332D; background: #fff; border: 1px solid #E4DFD9; border-radius: 4px; padding: 7px 8px; }
 .site__review { margin: 12px 14px 0; padding: 10px 11px; background: #fff; border: 1px solid #E4DFD9; border-radius: 6px; }
 .site__stars { display: inline-flex; gap: 1px; color: #F4B400; }
@@ -2238,7 +2238,7 @@ html[data-motion] .pipe__stage.is-active { opacity: 1; transform: none; pointer-
 
 /* SMS thread — shared by the agent mocks and the Daily Brief */
 .sms { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-3); }
-.sms__msg { display: grid; gap: 3px; max-width: 86%; }
+.sms__msg { display: grid; grid-template-columns: minmax(0, auto); gap: 3px; max-width: 86%; min-width: 0; }
 .sms__msg--agent { justify-self: start; }
 .sms__msg--them { justify-self: end; justify-items: end; }
 .sms__t { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.06em; color: var(--ink-3); }
@@ -2561,7 +2561,7 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 @media (max-width: 1023px) { .roster__card .btn-k { padding-inline: 8px; font-size: var(--text--1); } }
 .roster__foot { margin: var(--space-5) 0 0; font-size: var(--text-0); color: var(--ink-1); }
 .scope { margin: 0; display: grid; gap: 8px; }
-.scope__row { display: grid; grid-template-columns: 78px 1fr; gap: 8px; align-items: baseline; }
+.scope__row { display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 8px; align-items: baseline; }
 .scope__row dt { font: 500 0.64rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
 .scope__row dd { margin: 0; font-size: var(--text--1); line-height: 1.4; color: var(--ink-1); }
 
@@ -2696,3 +2696,4 @@ html[data-motion] .pipe__stage:focus-within { opacity: 1; transform: none; point
 .pipe__by, .k-member__go, a.k-stat__source { min-height: 24px; }
 .k-mock__caption a { display: inline-block; padding-block: 4px; }
 main:focus { outline: none; }
+.site__services li, .scope__row dd, .sms__bubble { overflow-wrap: anywhere; min-width: 0; }

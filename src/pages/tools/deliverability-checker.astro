@@ -17,7 +17,7 @@ const faqs = [
   { q: 'What does this email deliverability checker do?', a: 'It looks up your domain’s SPF, DKIM, and DMARC DNS records (plus MX) in real time and tells you what’s configured, what’s missing, and what to fix so your email reaches the inbox.' },
   { q: 'Why does DKIM sometimes show as not found?', a: 'DKIM records live under custom selectors that aren’t publicly discoverable. This tool checks the most common selectors, so a valid DKIM setup under a non-standard selector may not be detected. The result is best-effort.' },
   { q: 'Do I need SPF, DKIM, and DMARC?', a: 'Yes. All three authenticate your mail, and Gmail and Yahoo now require them for bulk senders. Missing or misconfigured records are a leading cause of email landing in spam.' },
-  { q: 'How do I fix what this finds?', a: 'You add or correct TXT records in your domain’s DNS. Keres sets up and monitors SPF, DKIM, and DMARC for you, warms your inboxes, and ramps volume safely — book a demo to have it handled.' },
+  { q: 'How do I fix what this finds?', a: 'You add or correct TXT records in your domain’s DNS. Keres sets up and monitors SPF, DKIM, and DMARC for you, warms your inboxes, and ramps volume safely — Sol, the outbound worker from Keres AI, can have it handled for you.' },
 ];
 
 const webApp = {
@@ -44,7 +44,7 @@ const webApp = {
   <header class="page-hero container">
     <span class="eyebrow">Free tool</span>
     <h1>Is your email <span class="accent">landing in spam?</span></h1>
-    <p class="lead">Check your domain’s SPF, DKIM, and DMARC in seconds. Enter a domain and we’ll look up the records live and tell you exactly what to fix.</p>
+    <p class="lead">A free tool from Keres AI: check your domain’s SPF, DKIM, and DMARC in seconds. Enter a domain and we’ll look up the records live and tell you exactly what to fix.</p>
   </header>
 
   <section class="page-section container container-narrow">
@@ -61,8 +61,24 @@ const webApp = {
     </div>
   </section>
 
+
+  <section class="page-section container container-narrow">
+    <div class="prose">
+      <h2>What does each record do?</h2>
+      <ul>
+        <li><strong>SPF</strong> lists the servers allowed to send mail for your domain. A receiving server checks the sending IP against it.</li>
+        <li><strong>DKIM</strong> adds a signature to each message that the receiver verifies with a public key in your DNS, proving the message was not changed in transit.</li>
+        <li><strong>DMARC</strong> tells receivers what to do when SPF or DKIM fails (nothing, quarantine or reject) and where to send reports, and it requires the visible From domain to align with them.</li>
+        <li><strong>MX</strong> records say which servers receive mail for your domain. They do not affect sending, but a domain with no MX looks unfinished to some filters.</li>
+      </ul>
+      <h2>How do I read the results?</h2>
+      <p>A record marked missing needs to be added at your DNS host. A DMARC policy of <code>p=none</code> is a monitoring setting: it is the right place to start, then move to <code>quarantine</code> once your reports show only your own services sending. If DKIM shows as not found but you have set it up, your provider is probably using a selector this tool does not guess; check its admin panel for the selector name.</p>
+      <h2>What should I fix first?</h2>
+      <p>Fix SPF and DKIM before DMARC, because a strict DMARC policy on a domain with broken authentication will send your own mail to spam. For cold outreach, send from a separate domain so your main domain’s reputation is protected. More on each term: <a href="/glossary/email-deliverability">email deliverability</a>, <a href="/glossary/inbox-warmup">inbox warm-up</a> and <a href="/agents/outbound">how Sol handles outbound</a>.</p>
+    </div>
+  </section>
   <FaqSection faqs={faqs} title="Deliverability checker FAQ" />
-  <CtaBand heading="Want this fixed and monitored for you?" sub="Keres sets up SPF, DKIM, and DMARC, warms your inboxes, and ramps volume safely. Book a demo." />
+  <CtaBand heading="Want this fixed and monitored for you?" sub="Sol, the outbound worker from Keres AI, sets up SPF, DKIM and DMARC, warms your inboxes and ramps volume safely. Book a 20-minute call." />
 
   <script slot="scripts" src="/assets/deliverability.js?v=1" is:inline></script>
 </Layout>

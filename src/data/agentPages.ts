@@ -142,7 +142,7 @@ export const agentPages: AgentPage[] = [
       'Theo confirms appointments, reminds by text and voice, fills cancellations from your waitlist, and chases each estimate until you get a yes or a no.',
     h1: 'Theo — the Follow-Up Worker that makes sure they show and say yes.',
     sub:
-      'Getting the appointment on the calendar is not the same as getting it kept, and a quote nobody chased is a quote somebody else closed. Theo, your Follow-Up Agent, works the two stages where booked work quietly disappears.',
+      'Getting the appointment on the calendar is not the same as getting it kept, and a quote nobody chased is a quote somebody else closed. Theo, the follow-up worker from Keres AI, works the two stages where booked work quietly disappears.',
     heroVertical: 'dental-med-spa',
     flowH2: 'What happens after the booking',
     flowLede:
@@ -212,7 +212,7 @@ export const agentPages: AgentPage[] = [
       'June brings back past customers and cold leads in your CRM, revives closed-lost deals from the last year, and asks every customer for a review.',
     h1: 'June — the Reactivation Worker. The cheapest lead you’ll ever get is one you already have.',
     sub:
-      'Every name in your CRM already chose you once, or nearly did. June, your Reactivation Agent, works that list as conversations rather than blasts — and asks for the review after every job, so the next stranger chooses you too.',
+      'Every name in your CRM already chose you once, or nearly did. June, the reactivation worker from Keres AI, works that list as conversations rather than blasts — and asks for the review after every job, so the next stranger chooses you too.',
     heroVertical: 'home-services',
     flowH2: 'How a campaign runs',
     flowLede:
@@ -277,7 +277,7 @@ export const agentPages: AgentPage[] = [
       'Sol runs cold outbound with deliverability set up first (SPF, DKIM, DMARC, warm-up), then personalized sequences, replies handled and meetings booked.',
     h1: 'Sol — the Outbound Worker. Cold outreach that reaches the inbox and books the meeting.',
     sub:
-      'For firms that need net-new pipeline rather than a better answer to the calls they already get. Sol, your Outbound Agent, does the deliverability work first — because sending is the easy half and landing is the half that gets skipped.',
+      'For firms that need net-new pipeline rather than a better answer to the calls they already get. Sol, the outbound worker from Keres AI, does the deliverability work first — because sending is the easy half and landing is the half that gets skipped.',
     heroVertical: 'default',
     flowH2: 'How outbound runs',
     flowLede:

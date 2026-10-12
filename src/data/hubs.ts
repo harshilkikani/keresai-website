@@ -71,7 +71,7 @@ export const hubs: Hub[] = [
     answer:
       'Keres AI helps law firms sign more of the clients who call. Remi, its AI intake receptionist, answers new-client calls in two rings, 24/7, collects the matter type, the opposing party and urgency, and books the consultation on your calendar. It never gives legal advice and never clears a conflict itself. Found for law firms (website, Google Business Profile, reviews and legal directories) starts at $499 a month.',
     sub:
-      'Remi, your Inbound Agent, answers every new-client call in two rings, collects conflict-check details, qualifies the matter for your practice area, and books the consultation straight into your calendar. A single new case is worth thousands. Most of the calls that produce them arrive after your office is closed.',
+      'Remi, the AI receptionist from Keres AI, answers every new-client call in two rings, collects conflict-check details, qualifies the matter for your practice area, and books the consultation straight into your calendar. A single new case is worth thousands. Most of the calls that produce them arrive after your office is closed.',
     vertical: 'law-firms',
     calcPreset: 'legal',
     benchmark: { href: '/benchmarks/legal-intake-conversion', label: 'Legal intake conversion benchmarks' },
@@ -153,7 +153,7 @@ export const hubs: Hub[] = [
     answer:
       'Keres AI gives home service contractors two things: Found, a website plus Google Business Profile and review management from $249 a month, and Remi, an AI receptionist that answers every call in two rings, 24/7, flags emergencies like no heat or a burst pipe, and books the job into ServiceTitan or Google Calendar. Calls Remi cannot take get a text back within 60 seconds.',
     sub:
-      'Remi, your Inbound Agent, picks up in two rings while your crew is on a job — grades the emergency, takes the service address, gives a dispatch window and writes the job into ServiceTitan or your calendar. Anything it cannot take gets a text back inside 60 seconds.',
+      'Remi, the AI receptionist from Keres AI, picks up in two rings while your crew is on a job — grades the emergency, takes the service address, gives a dispatch window and writes the job into ServiceTitan or your calendar. Anything it cannot take gets a text back inside 60 seconds.',
     vertical: 'home-services',
     calcPreset: 'home-services',
     benchmark: { href: '/benchmarks/hvac-answering', label: 'HVAC answering benchmarks' },
@@ -220,7 +220,7 @@ export const hubs: Hub[] = [
     answer:
       'Keres AI helps dental practices and med spas fill the schedule. Remi, its AI receptionist, answers while the front desk is with patients, books new-patient and treatment appointments, and asks only for the details needed to book. Theo sends confirmations and reminders to cut no-shows. Found runs the website, Google Business Profile and reviews from $249 a month. Keres AI does not sign BAAs today.',
     sub:
-      'Remi, your Inbound Agent, answers while your front desk is chairside — qualifies the procedure, checks what insurance you take, and books the chair time. Then Theo confirms it and June brings the recall list back.',
+      'Remi, the AI receptionist from Keres AI, answers while your front desk is chairside — qualifies the procedure, checks what insurance you take, and books the chair time. Then Theo confirms it and June brings the recall list back.',
     vertical: 'dental-med-spa',
     calcPreset: 'dental',
     benchmark: { href: '/benchmarks/dental-no-show', label: 'Dental no-show benchmarks' },
@@ -288,7 +288,7 @@ export const hubs: Hub[] = [
     answer:
       'Keres AI helps real estate agents and teams answer every listing call in seconds. Remi, its AI receptionist, asks whether the caller already has an agent, is pre-approved and when they want to move, then books the showing on your calendar and texts you the lead. Found runs your website, Google Business Profile and reviews from $249 a month. Follow Up Boss integration is rolling out.',
     sub:
-      'Remi, your Inbound Agent, answers the listing line and the portal enquiries in seconds — asks whether they are working with an agent, whether they are pre-approved, and what their timeline is — then books the showing while you are still in the car.',
+      'Remi, the AI receptionist from Keres AI, answers the listing line and the portal enquiries in seconds — asks whether they are working with an agent, whether they are pre-approved, and what their timeline is — then books the showing while you are still in the car.',
     vertical: 'real-estate',
     calcPreset: 'real-estate',
     benchmark: { href: '/missed-call-statistics', label: 'Missed-call and lead-response statistics' },

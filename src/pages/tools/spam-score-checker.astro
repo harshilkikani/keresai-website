@@ -42,7 +42,7 @@ const webApp = {
   <header class="page-hero container">
     <span class="eyebrow">Free tool</span>
     <h1>Will your email <span class="accent">land in spam?</span></h1>
-    <p class="lead">Paste your subject and body. We’ll score the content for spam-filter risk and tell you exactly what to fix — all in your browser, nothing uploaded.</p>
+    <p class="lead">A free tool from Keres AI. Paste your subject and body. We’ll score the content for spam-filter risk and tell you exactly what to fix — all in your browser, nothing uploaded.</p>
   </header>
 
   <section class="page-section container container-narrow">
@@ -64,8 +64,24 @@ const webApp = {
     </div>
   </section>
 
+
+  <section class="page-section container container-narrow">
+    <div class="prose">
+      <h2>What does a spam score measure?</h2>
+      <p>Spam filters weigh many signals: who sent the message (authentication and domain reputation), how recipients have treated your past mail, and what the message itself contains. This tool scores only the last part, the words and formatting you can change before you hit send, so a clean score here does not guarantee the inbox if your domain is not authenticated.</p>
+      <h2>Which content patterns raise the score?</h2>
+      <ul>
+        <li><strong>Pressure words</strong> such as “act now”, “guaranteed” or “risk-free”, especially in the subject line.</li>
+        <li><strong>Shouting:</strong> long runs of capital letters and repeated exclamation marks.</li>
+        <li><strong>Link-heavy bodies:</strong> several links or link shorteners in a short message.</li>
+        <li><strong>Money and urgency together:</strong> prices, “free” and deadlines stacked in a short message.</li>
+      </ul>
+      <h2>What should I check besides the content?</h2>
+      <p>Run your sending domain through the <a href="/tools/deliverability-checker">deliverability checker</a> for SPF, DKIM and DMARC, warm new inboxes gradually (see <a href="/glossary/inbox-warmup">inbox warm-up</a>), and keep cold outreach on a separate domain. <a href="/agents/outbound">Sol</a> does this set-up before it sends anything.</p>
+    </div>
+  </section>
   <FaqSection faqs={faqs} title="Spam-score checker FAQ" />
-  <CtaBand heading="Want deliverability handled end to end?" sub="Keres manages authentication, warmup, and sending so your outbound reaches the inbox. Book a demo." />
+  <CtaBand heading="Want deliverability handled end to end?" sub="Sol, the outbound worker from Keres AI, manages authentication, warm-up and sending so your outbound reaches the inbox. Book a 20-minute call." />
 
   <script slot="scripts" src="/assets/spam-checker.js?v=1" is:inline></script>
 </Layout>
