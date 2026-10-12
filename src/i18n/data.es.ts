@@ -137,7 +137,7 @@ export const heroTail = { booking: { day: 'Mié', date: '18', time: '8:00–10:0
 export const writtenTo = 'Guardado en';
 
 export const goSteps = [
-  { n: '01', title: 'Pide una cotización, o llama', text: 'Veinte minutos por teléfono para mapear lo que pasa hoy cuando entra una llamada: quién contesta, qué se pregunta y dónde se detiene.' },
+  { n: '01', title: 'Pide una cotización, o llama', text: 'Treinta minutos por teléfono para mapear lo que pasa hoy cuando entra una llamada: quién contesta, qué se pregunta y dónde se detiene.' },
   { n: '02', title: 'Construimos tu sitio, tu ficha y tu guion de admisión', text: 'Tus servicios, tus horarios, tus precios, tus reglas de transferencia. Luego entran tu número, tu calendario y tu CRM.' },
   { n: '03', title: 'Lo pruebas y entra en marcha', text: 'Primero lo llamas tú y lo ajustamos hasta que conteste como lo harías tú. Los plazos dependen de tus flujos de llamadas e integraciones, y los acordamos en la primera llamada. Desde ahí, mes a mes.' },
 ];
@@ -148,25 +148,25 @@ export const goPages: GoPage[] = [
     facts: [{ k: 'Contesta en', v: '2 timbres' }, { k: 'Implementación', v: 'La hacemos por ti' }, { k: 'Planes desde', v: '$249/mes' }],
     found: { title: 'Aparece donde ocurre la búsqueda.', text: 'Un sitio web hecho para convertir, un Perfil de Negocio de Google trabajado cada semana, reseñas que siguen llegando y directorios que coinciden entre sí. Alcance fijo, desde $249 al mes.' },
     answered: { title: 'Cada llamada contestada en dos timbres y agendada.', text: 'Remi contesta de día o de noche, sigue tu guion de admisión, ofrece disponibilidad real y escribe la cita en tu calendario y CRM antes de que cuelguen.' },
-    mock: 'default', calc: 'home-services', close: { h2: 'Deja de perder las llamadas que ya pagaste.', text: 'Cotización en veinte minutos. Lo configuramos por ti, mes a mes.' } },
+    mock: 'default', calc: 'home-services', close: { h2: 'Deja de perder las llamadas que ya pagaste.', text: 'Cotización en treinta minutos. Lo configuramos por ti, mes a mes.' } },
   { slug: 'home-services', path: '/es/go/home-services', title: 'HVAC y plomería: llamadas fuera de horario agendadas | Keres AI', description: 'Las llamadas perdidas fuera de horario le cuestan el trabajo a las empresas de HVAC y plomería. Remi contesta cada llamada en dos timbres, clasifica la emergencia y agenda la ventana de despacho. Mes a mes.',
     h1: 'Cada llamada fuera de horario, contestada y agendada.', lede: 'La llamada sin calefacción a las 9 pm se la lleva quien contesta. Remi, tu Agente de Entrada, contesta en dos timbres, clasifica el trabajo, da una ventana de despacho y lo escribe en ServiceTitan o en tu calendario, mientras tú sigues en el techo. Mes a mes.',
     facts: [{ k: 'Contesta en', v: '2 timbres' }, { k: 'Implementación', v: 'La hacemos por ti' }, { k: 'Found desde', v: '$249/mes' }],
     found: { title: 'Aparece cuando se muere la caldera.', text: 'Un sitio web de conversión, un Perfil de Negocio de Google trabajado cada semana, reseñas después de cada trabajo y Local Services Ads contestados en dos timbres. Desde $249 al mes.' },
     answered: { title: 'Emergencias clasificadas y despachadas, no al buzón.', text: 'Remi pregunta qué pasa, dónde y qué tan urgente es, da una ventana de llegada real y avisa al técnico de guardia. Los presupuestos se persiguen el día 1, 3 y 7.' },
-    mock: 'home-services', calc: 'home-services', close: { h2: 'La próxima llamada fuera de horario vale todo el mes.', text: 'Cotización en veinte minutos. Lo configuramos por ti, mes a mes.' } },
+    mock: 'home-services', calc: 'home-services', close: { h2: 'La próxima llamada fuera de horario vale todo el mes.', text: 'Cotización en treinta minutos. Lo configuramos por ti, mes a mes.' } },
   { slug: 'law', path: '/es/go/law', title: 'Bufetes: clientes nuevos contestados y agendados | Keres AI', description: 'El primer bufete que contesta firma al cliente. Remi contesta cada llamada de cliente nuevo en dos timbres, revisa conflictos, califica el asunto y agenda la consulta. Mes a mes.',
     h1: 'Cada llamada de cliente nuevo contestada, revisada y en tu calendario.', lede: 'La mayoría de las llamadas con intención llegan fuera de horario y se las lleva el primer bufete que contesta. Remi, tu Agente de Entrada, contesta en dos timbres, toma los datos para la verificación de conflictos, califica el asunto según tu área de práctica y agenda la consulta. Mes a mes.',
     facts: [{ k: 'Contesta en', v: '2 timbres' }, { k: 'Implementación', v: 'La hacemos por ti' }, { k: 'Found desde', v: '$499/mes' }],
     found: { title: 'Sé el bufete que aparece, y luego el que contesta.', text: 'Un sitio web de conversión, un Perfil de Negocio de Google administrado, reseñas después de cada asunto y directorios que coinciden en Avvo y FindLaw. Planes para bufetes desde $499 al mes.' },
     answered: { title: 'Admisión a las 2 a.m., datos de conflictos capturados, consulta agendada.', text: 'Remi revisa conflictos, califica el asunto, agenda la consulta y escribe la admisión en HubSpot antes de que cuelguen.' },
-    mock: 'law-firms', calc: 'legal', close: { h2: 'El primer bufete que contesta firma al cliente.', text: 'Cotización en veinte minutos. Lo configuramos por ti, mes a mes.' } },
+    mock: 'law-firms', calc: 'legal', close: { h2: 'El primer bufete que contesta firma al cliente.', text: 'Cotización en treinta minutos. Lo configuramos por ti, mes a mes.' } },
   { slug: 'dental', path: '/es/go/dental', title: 'Dental: cada llamada agendada, cada recall lleno | Keres AI', description: 'Remi contesta cada llamada de paciente en dos timbres, agenda el sillón y precalifica el seguro; Theo confirma para que el sillón no quede vacío. Mes a mes.',
     h1: 'Cada llamada agendada. Cada recall lleno.', lede: 'El diente roto a las 7 am se agenda con quien contesta. Remi, tu Agente de Entrada, contesta en dos timbres, encuentra el expediente, agenda el sillón y envía los formularios por mensaje; Theo confirma la noche anterior para que el sillón no quede vacío. Mes a mes.',
     facts: [{ k: 'Contesta en', v: '2 timbres' }, { k: 'Implementación', v: 'La hacemos por ti' }, { k: 'Found desde', v: '$249/mes' }],
     found: { title: 'Aparece en la búsqueda que empieza con un dolor de muela.', text: 'Un sitio web de conversión, un Perfil de Negocio de Google administrado, reseñas después de cada visita y directorios que coinciden en Healthgrades. Desde $249 al mes.' },
     answered: { title: 'Sillón agendado, recall lleno, ausencias evitadas.', text: 'Remi agenda la cita y precalifica seguro y procedimiento; Theo confirma y recuerda; June reagenda la lista de recall antes de que la higienista tenga un hueco.' },
-    mock: 'dental-med-spa', calc: 'dental', close: { h2: 'Un sillón vacío cuesta lo mismo que uno lleno.', text: 'Cotización en veinte minutos. Lo configuramos por ti, mes a mes.' } },
+    mock: 'dental-med-spa', calc: 'dental', close: { h2: 'Un sillón vacío cuesta lo mismo que uno lleno.', text: 'Cotización en treinta minutos. Lo configuramos por ti, mes a mes.' } },
 ];
 
 export const goWebsitePages: GoWebsitePage[] = [
@@ -187,7 +187,7 @@ export const goWebsiteText = {
     { who: 'Keres Found', cost: '{price}/mes, sin costo de construcción', then: 'ficha de Google administrada cada semana', time: 'Plazo acordado en tu primera llamada', us: true },
   ],
   remi: 'Todo sitio Found viene listo para agendar con Remi. Agrega la contestación cuando quieras.',
-  closeH2: 'Llámanos o agenda 20 minutos.', closeLede: 'Veinte minutos, sin presentación.',
+  closeH2: 'Llámanos o agenda 30 minutos.', closeLede: 'Treinta minutos, sin presentación.',
 };
 
 import type { Worker } from '../data/workers';

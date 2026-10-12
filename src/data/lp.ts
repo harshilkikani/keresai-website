@@ -80,7 +80,7 @@ export const landingPages: LandingPage[] = [
       },
       {
         q: 'How long does setup take?',
-        a: 'It depends on your intake and integrations, and the timing is agreed on your first call. Twenty minutes on how your intake runs today, then we write the script for your practice areas, connect your number and your calendar or CRM (Google Calendar, HubSpot; others through Zapier), and you test it yourself before it answers a real client.',
+        a: 'It depends on your intake and integrations, and the timing is agreed on your first call. Thirty minutes on how your intake runs today, then we write the script for your practice areas, connect your number and your calendar or CRM (Google Calendar, HubSpot; others through Zapier), and you test it yourself before it answers a real client.',
       },
       {
         q: 'What if a caller needs an attorney right now?',

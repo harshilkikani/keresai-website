@@ -168,7 +168,7 @@ const allIndustries: Industry[] = [
         'Who writes the script and the emergency rules, and how long until it is live?',
       ],
       ctaHeading: 'Get HVAC calls out of voicemail before the next heat wave',
-      ctaSub: 'Book a 20-minute call, tell us your emergency rules, and hear Remi take an HVAC call.',
+      ctaSub: 'Book a 30-minute call, tell us your emergency rules, and hear Remi take an HVAC call.',
     },
   },
   {
@@ -266,7 +266,7 @@ const allIndustries: Industry[] = [
         'Can your emergency rules change with the season, such as no hot water in January?',
       ],
       ctaHeading: 'Answer the 2 a.m. burst-pipe call',
-      ctaSub: 'Book a 20-minute call and hear Remi take a plumbing call with your shutoff and emergency rules.',
+      ctaSub: 'Book a 30-minute call and hear Remi take a plumbing call with your shutoff and emergency rules.',
     },
   },
   {
@@ -482,7 +482,7 @@ const allIndustries: Industry[] = [
       priceBody:
         '<p>Live answering services publish plans from about $250/month (Ruby, 50 minutes) and AI receptionists from about $25–$100/month; see <a href="/ai-receptionist-cost">what an AI receptionist costs</a>. For a roofer, the bigger difference is the storm week: a plan with a small minute allowance can run over fast, and a message-taker does not book the inspection.</p><p>Keres quotes Remi to your call volume, including your storm season: a monthly rate with included minutes, then per-minute, with no per-call fees. Ask on the call how Remi handles your storm-week peak. See <a href="/pricing">pricing</a>.</p>',
       ctaHeading: 'Book the inspection before the other roofer does',
-      ctaSub: 'Book a 20-minute call and hear Remi take a storm call with your claim questions.',
+      ctaSub: 'Book a 30-minute call and hear Remi take a storm call with your claim questions.',
     },
   },
   {
@@ -578,7 +578,7 @@ const allIndustries: Industry[] = [
         'Is it billed per call, which adds up on an ice-storm night, or by the month?',
       ],
       ctaHeading: 'Answer the stranded driver on the first call',
-      ctaSub: 'Book a 20-minute call and hear Remi take a roadside call with your dispatch rules.',
+      ctaSub: 'Book a 30-minute call and hear Remi take a roadside call with your dispatch rules.',
     },
   },
   {
@@ -672,7 +672,7 @@ const allIndustries: Industry[] = [
         'Is it billed per call or by the month with included minutes?',
       ],
       ctaHeading: 'Answer septic calls while the crew is on the truck',
-      ctaSub: 'Book a 20-minute call and hear Remi take an alarm call with your rules.',
+      ctaSub: 'Book a 30-minute call and hear Remi take an alarm call with your rules.',
     },
   },
 ];

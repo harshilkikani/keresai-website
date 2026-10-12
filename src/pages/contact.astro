@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { EMAIL } from '../data/site';
+import { CONTACT_PHONE } from '../config/business';
 import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { organizationSchema, breadcrumbSchema } from '../data/schema';
@@ -10,7 +11,7 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path }];
 ---
 <Layout
   title="Contact Keres AI: Sales and Support"
-  description="Contact Keres AI about websites, Google Business Profile management or Remi, the AI receptionist. Email us or book a 20-minute call; we reply within a day."
+  description="Contact Keres AI about websites, Google Business Profile management or Remi, the AI receptionist. Email us or book a 30-minute call; we reply within a day."
   path={path}
   pageType="ContactPage"
   mainEntityId="https://www.keresai.com/#organization"
@@ -21,7 +22,7 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path }];
   <header class="page-hero container">
     <span class="eyebrow">Contact</span>
     <h1>Let's <span class="accent">connect</span></h1>
-    <p class="lead">Questions about Found (websites and Google Business Profile management) or Remi (the AI receptionist)? Send a message below, email <a href={`mailto:${EMAIL}`}>{EMAIL}</a>, or <a href="/quote">get a quote</a> and book a 20-minute call. We reply within 24 hours, and on the call we put Remi on the line so you can test it yourself.</p>
+    <p class="lead">Questions about Found (websites and Google Business Profile management) or Remi (the AI receptionist)? Send a message below, email <a href={`mailto:${EMAIL}`}>{EMAIL}</a>{CONTACT_PHONE && <>, call <a href={CONTACT_PHONE.href} data-event="tel_click">{CONTACT_PHONE.display}</a></>}, or <a href="/quote">get a quote</a> and book a 30-minute call. We reply within 24 hours, and on the call we put Remi on the line so you can test it yourself.</p>
   </header>
 
   <section class="page-section container container-narrow">
@@ -77,10 +78,10 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path }];
       <h2>What should you include in a message?</h2>
       <p>The more we know, the more useful the first reply. For a quote, tell us your trade, how many locations you run, roughly how many calls you get a month, and which calendar, CRM or field-service system your team uses (Keres AI connects to Google Calendar, HubSpot, ServiceTitan and Zapier today). If you are asking about Found, include your website address and the name on your Google Business Profile. If something is not working for an existing account, say what happened, when, and the caller’s number if a call is involved.</p>
       <h2>What happens next?</h2>
-      <p>We reply by email within 24 hours. For a quote, the next step is a 20-minute call: we map how calls are answered today, put Remi on the line so you can test it, and come back with a monthly rate with included minutes. Everything is month-to-month, and Keres sets it up for you. Remi answers in English.</p>
+      <p>We reply by email within 24 hours. For a quote, the next step is a 30-minute call: we map how calls are answered today, put Remi on the line so you can test it, and come back with a monthly rate with included minutes. Everything is month-to-month, and Keres sets it up for you. Remi answers in English.</p>
       <h2>Looking for something else?</h2>
       <ul>
-        <li><a href="/quote">Get a quote</a>: five questions, then a 20-minute call with the number ready.</li>
+        <li><a href="/quote">Get a quote</a>: five questions, then a 30-minute call with the number ready.</li>
         <li><a href="/pricing">Pricing</a>: what each worker starts at and what changes the quote.</li>
         <li><a href="/hear-it">Hear it</a>: example calls by industry.</li>
         <li><a href="/trust">Trust and security</a>: how your data is handled, and what certifications Keres AI does not hold.</li>

@@ -1,4 +1,4 @@
-import { business } from '../config/business';
+import { business, CONTACT_PHONE, ADDRESS_LINE } from '../config/business';
 // Centralized JSON-LD building blocks. Keep entity identity consistent everywhere.
 import { PHONE } from './site';
 import { workers } from './workers';
@@ -136,11 +136,12 @@ export const organizationSchema = {
   // not one). Add LinkedIn / G2 / Capterra / YouTube URLs here when they do.
   // The line Keres itself answers. Sourced from src/data/site.ts so the
   // header, sticky bar, footer and this node can never drift apart.
-  ...(PHONE ? { telephone: PHONE.e164 } : {}),
+  ...((PHONE ?? CONTACT_PHONE) ? { telephone: (PHONE ?? CONTACT_PHONE)!.e164 } : {}),
+  ...(ADDRESS_LINE ? { address: { '@type': 'PostalAddress', addressLocality: business.city, addressRegion: business.state, addressCountry: 'US' } } : {}),
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'sales',
-    ...(PHONE ? { telephone: PHONE.e164 } : {}),
+    ...((PHONE ?? CONTACT_PHONE) ? { telephone: (PHONE ?? CONTACT_PHONE)!.e164 } : {}),
     url: `${ORIGIN}/quote`,
     email: business.contactEmail,
     availableLanguage: ['English', 'Spanish'],

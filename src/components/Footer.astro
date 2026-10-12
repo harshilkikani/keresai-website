@@ -1,5 +1,6 @@
 ---
 import { PHONE, EMAIL, ADDRESS } from '../data/site';
+import { CONTACT_PHONE } from '../config/business';
 import { type Locale, l } from '../i18n';
 import { t } from '../i18n/ui';
 import { agentsFor, workersFor } from '../i18n/data';
@@ -92,7 +93,7 @@ const roleOf = (slug: string) => (agents.find((a) => a.slug === slug)?.title ?? 
   </div>
 
   <p class="footer-address">
-    Keres AI{ADDRESS.line && ` · ${ADDRESS.line}`} · <a href={`mailto:${EMAIL}`}>{EMAIL}</a>{PHONE && <> · <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a></>}
+    Keres AI{ADDRESS.line && ` · ${ADDRESS.line}`} · <a href={`mailto:${EMAIL}`}>{EMAIL}</a>{(PHONE ?? CONTACT_PHONE) && <> · <a href={(PHONE ?? CONTACT_PHONE)!.href} data-event="tel_click">{(PHONE ?? CONTACT_PHONE)!.display}</a></>}
   </p>
 
   <div class="footer-bottom">

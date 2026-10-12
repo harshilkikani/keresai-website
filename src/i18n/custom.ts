@@ -25,7 +25,7 @@ export const custom = {
     how: {
       eyebrow: 'How it works', h2: 'Six steps, and you approve everything it publishes.',
       steps: [
-        ['A 20-minute call', 'You describe the job as you would to a new hire: what comes in, what should go out, what “done” looks like.'],
+        ['A 30-minute call', 'You describe the job as you would to a new hire: what comes in, what should go out, what “done” looks like.'],
         ['A one-page scope', 'Within two business days: the inputs, the outputs, the rules, what it may never do, and what it reports to you.'],
         ['A fixed build price', 'One number for the build, agreed before we start. It does not move once the scope is signed.'],
         ['A monthly run fee', 'Covers the running, the model costs, the monitoring, and the changes the job needs as your business changes.'],
@@ -73,7 +73,7 @@ export const custom = {
     how: {
       eyebrow: 'Cómo funciona', h2: 'Seis pasos, y tú apruebas todo lo que publica.',
       steps: [
-        ['Una llamada de 20 minutos', 'Describes la tarea como se la explicarías a alguien nuevo: qué entra, qué debe salir y cómo se ve “terminado”.'],
+        ['Una llamada de 30 minutos', 'Describes la tarea como se la explicarías a alguien nuevo: qué entra, qué debe salir y cómo se ve “terminado”.'],
         ['Un documento de una página', 'En dos días hábiles: las entradas, las salidas, las reglas, lo que nunca puede hacer y qué te reporta.'],
         ['Un precio fijo de desarrollo', 'Un solo número por el desarrollo, acordado antes de empezar. No cambia una vez firmado el alcance.'],
         ['Una cuota mensual', 'Cubre la operación, el costo de los modelos, el monitoreo y los cambios que la tarea necesita cuando tu negocio cambia.'],

@@ -1,6 +1,7 @@
 ---
 /** Ad-landing footer: the one-liner, contact line, privacy and terms. No link grid. */
 import { PHONE, EMAIL, ADDRESS } from '../data/site';
+import { CONTACT_PHONE } from '../config/business';
 import type { Locale } from '../i18n';
 import { t } from '../i18n/ui';
 export interface Props { locale?: Locale }
@@ -11,7 +12,7 @@ const year = new Date().getFullYear();
 <footer role="contentinfo" id="footer" class="footer--go">
   <p class="footer-address">{ui.footer.oneLiner}</p>
   <p class="footer-address">
-    &copy; {year} Keres AI{ADDRESS.line && ` · ${ADDRESS.line}`} · <a href={`mailto:${EMAIL}`}>{EMAIL}</a>{PHONE && <> · <a href={PHONE.href} data-event="tel_click">{PHONE.display}</a></>}
+    &copy; {year} Keres AI{ADDRESS.line && ` · ${ADDRESS.line}`} · <a href={`mailto:${EMAIL}`}>{EMAIL}</a>{(PHONE ?? CONTACT_PHONE) && <> · <a href={(PHONE ?? CONTACT_PHONE)!.href} data-event="tel_click">{(PHONE ?? CONTACT_PHONE)!.display}</a></>}
     · <a href="/legal/privacy.html">{ui.footer.privacyShort}</a> · <a href="/legal/terms.html">{ui.footer.termsShort}</a>
   </p>
 </footer>

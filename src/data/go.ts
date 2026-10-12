@@ -29,7 +29,7 @@ export interface GoPage {
 }
 
 const steps = [
-  { n: '01', title: 'Get a quote, or call', text: 'Twenty minutes on the phone to map what happens today when a call comes in — who answers, what gets asked, where it stops.' },
+  { n: '01', title: 'Get a quote, or call', text: 'Thirty minutes on the phone to map what happens today when a call comes in — who answers, what gets asked, where it stops.' },
   { n: '02', title: 'We build your site, your listing and your intake script', text: 'Your services, your hours, your prices, your handoff rules. Then your number, calendar and CRM go in.' },
   { n: '03', title: 'You test it, then it goes live', text: 'You call it yourself first and keep tuning until it answers the way you would. Timing depends on your call flows and integrations, and we agree it on the first call. Month-to-month from there.' },
 ];
@@ -48,7 +48,7 @@ export const goPages: GoPage[] = [
     answered: { title: 'Every call answered in two rings and booked.', text: 'Remi picks up day or night, runs your intake script, offers real availability and writes the appointment to your calendar and CRM before the caller hangs up.' },
     mock: 'default',
     calc: 'home-services',
-    close: { h2: 'Stop losing the calls you already paid for.', text: 'Get a quote in twenty minutes. Set up for you, month-to-month.' },
+    close: { h2: 'Stop losing the calls you already paid for.', text: 'Get a quote in thirty minutes. Set up for you, month-to-month.' },
   },
   {
     slug: 'home-services',
@@ -62,7 +62,7 @@ export const goPages: GoPage[] = [
     answered: { title: 'Emergency jobs triaged and dispatched, not voicemailed.', text: 'Remi asks what is happening, where, and how urgent, gives a real arrival window, and pages the on-call tech. Estimates get chased on day 1, 3 and 7.' },
     mock: 'home-services',
     calc: 'home-services',
-    close: { h2: 'The next after-hours call is worth the whole month.', text: 'Get a quote in twenty minutes. Set up for you, month-to-month.' },
+    close: { h2: 'The next after-hours call is worth the whole month.', text: 'Get a quote in thirty minutes. Set up for you, month-to-month.' },
   },
   {
     slug: 'law',
@@ -76,7 +76,7 @@ export const goPages: GoPage[] = [
     answered: { title: 'Intake at 2 a.m., conflict details captured, consult booked.', text: 'Remi collects conflict-check details, qualifies the matter, books the consultation and writes the intake to HubSpot before the caller hangs up.' },
     mock: 'law-firms',
     calc: 'legal',
-    close: { h2: 'The first firm to answer signs the client.', text: 'Get a quote in twenty minutes. Set up for you, month-to-month.' },
+    close: { h2: 'The first firm to answer signs the client.', text: 'Get a quote in thirty minutes. Set up for you, month-to-month.' },
   },
   {
     slug: 'dental',
@@ -90,7 +90,7 @@ export const goPages: GoPage[] = [
     answered: { title: 'Chair time booked, recall filled, no-shows headed off.', text: 'Remi books the appointment and pre-qualifies insurance and procedure; Theo confirms and reminds; June rebooks the recall list before the hygienist has a gap.' },
     mock: 'dental-med-spa',
     calc: 'dental',
-    close: { h2: 'An empty chair costs the same as a full one.', text: 'Get a quote in twenty minutes. Set up for you, month-to-month.' },
+    close: { h2: 'An empty chair costs the same as a full one.', text: 'Get a quote in thirty minutes. Set up for you, month-to-month.' },
   },
 ];
 

@@ -58,7 +58,7 @@ export const home = {
     start: {
       eyebrow: 'How it starts', h2: 'How long does it take to get started?',
       steps: [
-        ['Call us, or book 20 minutes', 'We map what happens today when your phone rings — who it goes to, what gets asked, and where it stops. Twenty minutes, no deck.'],
+        ['Call us, or book 30 minutes', 'We map what happens today when your phone rings — who it goes to, what gets asked, and where it stops. Thirty minutes, no deck.'],
         ['We build your site, your listing and your intake script', 'Your services, your hours, your prices, your handoff rules. Then your number, calendar and CRM go in.'],
         ['You test it, then it goes live', 'You call it yourself first and keep tuning until it answers the way you would. Timing depends on your call flows and integrations, and we agree it on the first call. Month-to-month from there, and the Daily Brief starts the next morning.'],
       ],
@@ -69,7 +69,7 @@ export const home = {
         ['How much does Keres AI cost?', 'Found — the website, Google listing, reviews and listings layer — starts at $249/month, $499/month for law firms. Remi, the AI receptionist, {answerCost}: a monthly rate with included minutes, then per minute, no per-call fees. Every worker is month-to-month with no cancellation fee. <a href="/pricing">See what changes the quote</a>.'],
         ['Do I have to buy the whole team?', 'No. Most firms start at one door — Found if nobody can find them, Remi if the phone is the leak — and add the next stage once that one is working. You can also buy Found on its own and keep answering calls yourself.'],
         ['What if a caller needs a human?', 'Remi hands off. You set the rules — an emergency, a named client, anyone who asks for a person — and the call warm-transfers to your on-call number. If nobody picks up, you get a "call me now" alert with everything Remi already collected, so the caller never repeats themselves.'],
-        ['How long does setup take?', 'It depends on your call flows and integrations. Day one is a 20-minute call to map how you answer now; then Keres writes your intake script and connects your number, calendar and CRM. We agree the timing on that first call, and you test Remi yourself before it answers a customer.'],
+        ['How long does setup take?', 'It depends on your call flows and integrations. Day one is a 30-minute call to map how you answer now; then Keres writes your intake script and connects your number, calendar and CRM. We agree the timing on that first call, and you test Remi yourself before it answers a customer.'],
         ['Is there a contract?', 'No. Every plan is month-to-month, there is no build fee on the Found base tier, and you can change plans or cancel any month.'],
         ['Does it sound like a robot?', 'It sounds like a competent front desk. Remi answers in two rings, uses your vocabulary — consult, job, chair time, showing — and says "let me get someone for you" rather than guessing when it does not know. <a href="/hear-it">Hear sample calls</a>, or ask for a live test call when we talk.'],
       ],
@@ -131,7 +131,7 @@ export const home = {
     start: {
       eyebrow: 'Cómo empieza', h2: '¿Cuánto tarda en estar listo?',
       steps: [
-        ['Llámanos o agenda 20 minutos', 'Mapeamos lo que pasa hoy cuando suena tu teléfono: a quién le llega, qué se pregunta y dónde se detiene. Veinte minutos, sin presentación.'],
+        ['Llámanos o agenda 30 minutos', 'Mapeamos lo que pasa hoy cuando suena tu teléfono: a quién le llega, qué se pregunta y dónde se detiene. Treinta minutos, sin presentación.'],
         ['Construimos tu sitio, tu ficha y tu guion de admisión', 'Tus servicios, tus horarios, tus precios, tus reglas de transferencia. Luego entran tu número, tu calendario y tu CRM.'],
         ['Lo pruebas y entra en marcha', 'Primero lo llamas tú y lo ajustamos hasta que conteste como lo harías tú. Los plazos dependen de tus flujos de llamadas e integraciones, y los acordamos en la primera llamada. Desde ahí, mes a mes, y el resumen diario empieza a la mañana siguiente.'],
       ],
@@ -142,7 +142,7 @@ export const home = {
         ['¿Cuánto cuesta Keres AI?', 'Found (el sitio web, la ficha de Google, las reseñas y los directorios) empieza en $249/mes, $499/mes para bufetes de abogados. Remi, el recepcionista con IA, {answerCost}: una tarifa mensual con minutos incluidos, luego por minuto, sin cargos por llamada. Todo es mes a mes, sin cargo por cancelar. <a href="/pricing">Ver qué cambia la cotización</a>.'],
         ['¿Tengo que comprar todo el equipo?', 'No. La mayoría empieza por una puerta (Found si nadie los encuentra, Remi si la fuga es el teléfono) y agrega la siguiente etapa cuando la primera ya funciona. También puedes contratar solo Found y seguir contestando tú mismo.'],
         ['¿Y si quien llama necesita a una persona?', 'Remi transfiere. Tú pones las reglas (una emergencia, un cliente con nombre, cualquiera que pida a una persona) y la llamada pasa en caliente a tu número de guardia. Si nadie contesta, recibes una alerta de "llámame ahora" con todo lo que Remi ya recopiló, para que quien llama nunca lo repita.'],
-        ['¿Cuánto tarda la puesta en marcha?', 'Depende de tus flujos de llamadas y tus integraciones. El primer día es una llamada de 20 minutos para mapear cómo contestas hoy; luego escribimos tu guion de admisión y conectamos tu número, calendario y CRM. Acordamos los plazos en esa primera llamada, y tú pruebas a Remi antes de que conteste a un cliente.'],
+        ['¿Cuánto tarda la puesta en marcha?', 'Depende de tus flujos de llamadas y tus integraciones. El primer día es una llamada de 30 minutos para mapear cómo contestas hoy; luego escribimos tu guion de admisión y conectamos tu número, calendario y CRM. Acordamos los plazos en esa primera llamada, y tú pruebas a Remi antes de que conteste a un cliente.'],
         ['¿Hay contrato?', 'No. Todos los planes son mes a mes, no hay costo de construcción en el nivel base de Found, y puedes cambiar de plan o cancelar cualquier mes.'],
         ['¿Suena como un robot?', 'Suena como una recepción competente. Remi contesta en dos timbres, usa tu vocabulario (consulta, trabajo, tiempo de sillón, visita) y dice "déjame comunicarte con alguien" en lugar de adivinar cuando no sabe. <a href="/hear-it">Escucha llamadas de muestra</a>, o pide una llamada de prueba en vivo cuando hablemos.'],
       ],

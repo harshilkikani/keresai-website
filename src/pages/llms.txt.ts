@@ -10,6 +10,7 @@
 // pages are left out, so this file only ever lists indexable final URLs.
 
 import type { APIRoute } from 'astro';
+import { CONTACT_PHONE } from '../config/business';
 import { plans, foundServices, PHONE, EMAIL, ORIGIN } from '../data/site';
 import { workers } from '../data/workers';
 import { translatedPaths } from '../i18n';
@@ -36,10 +37,10 @@ const bullets = (xs: string[]) => xs.filter(Boolean).map((x) => `- ${x}`).join('
 const billing: Record<string, string> = {
   found: 'From $249/month ($499 for law firms), month-to-month.',
   inbound: 'Quoted: one monthly rate with included minutes, then per minute; no per-call fees; month-to-month.',
-  'follow-up': 'Quoted to your volume on a 20-minute call; month-to-month.',
-  reactivation: 'Quoted to your volume on a 20-minute call; month-to-month.',
-  outbound: 'Quoted to your volume on a 20-minute call; month-to-month.',
-  custom: 'Fixed build price and a monthly run fee, scoped on a 20-minute call.',
+  'follow-up': 'Quoted to your volume on a 30-minute call; month-to-month.',
+  reactivation: 'Quoted to your volume on a 30-minute call; month-to-month.',
+  outbound: 'Quoted to your volume on a 30-minute call; month-to-month.',
+  custom: 'Fixed build price and a monthly run fee, scoped on a 30-minute call.',
 };
 
 export const GET: APIRoute = () => {
@@ -60,7 +61,8 @@ Key facts:
 - Owner Daily Brief: one morning text with calls answered, leads qualified, appointments booked, no-shows prevented, reviews posted, and which source produced the bookings. Every worker reports to the same text.
 - Human escalation is a feature: warm transfer under rules you set, or a "call me now" alert carrying the intake already collected.
 - Site available in English and Spanish (homepage, pricing, custom-worker page under ${u('/es')}). Remi answers calls in English only.
-${PHONE ? `- Phone: ${PHONE.display}\n` : ''}- Contact: ${EMAIL}
+- Based in Houston, Texas; serves local service businesses across the United States.
+${(PHONE ?? CONTACT_PHONE) ? `- Phone (office, answered by a person): ${(PHONE ?? CONTACT_PHONE)!.display}\n` : ''}- Contact: ${EMAIL}
 - Full reference (definitions, FAQs, descriptions): ${ORIGIN}/llms-full.txt
 
 ## The roster: six workers
@@ -72,7 +74,7 @@ ${workers
 On a customer's own line each worker introduces itself with whatever name that customer configures. Remi, Theo, June and Sol are the product's default names.
 
 ## How to buy
-- Get a quote: ${u('/quote') || `${ORIGIN}/quote`} — five questions, then a 20-minute call; the booking calendar is on the same page.
+- Get a quote: ${u('/quote') || `${ORIGIN}/quote`} — five questions, then a 30-minute call; the booking calendar is on the same page.
 - Custom worker: ${u('/custom')} — one recurring job, one-page scope, fixed build price, monthly run fee, first version in two weeks, you approve everything it publishes.
 
 ## The pipeline — seven stages

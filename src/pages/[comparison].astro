@@ -88,7 +88,7 @@ const relatedComparisons = comparisons
 
 const switchSteps = [
   'Forward your number to Remi, or port it to Keres AI.',
-  'On a 20-minute call, share your current script and escalation rules.',
+  'On a 30-minute call, share your current script and escalation rules.',
   'Connect your calendar so Remi books into it.',
   'Place test calls yourself and adjust anything that sounds wrong.',
   'Go live once it answers the way you would; the timing is agreed on your first call.',
@@ -249,7 +249,7 @@ const switchSteps = [
           ) : (
             <p>The difference is where execution stops. Most outbound tools give you infrastructure to run yourself — you still need to manage sequences, review replies, and book the meetings manually. Keres does the whole motion: targeting, personalization, sending, reply handling, and booking. You focus on the meetings it books, not the machine that books them.</p>
           )}
-          <p>See the <a href={secondaryCta.href}>{secondaryCta.label}</a> for the full picture, or <a href="/quote">book a 20-minute call</a> to hear it work live.</p>
+          <p>See the <a href={secondaryCta.href}>{secondaryCta.label}</a> for the full picture, or <a href="/quote">book a 30-minute call</a> to hear it work live.</p>
         </div>
       </section>
     </>
@@ -287,7 +287,7 @@ const switchSteps = [
   <CtaBand
     heading={isRoundup ? 'Hear Keres answer a call before you choose' : `See why teams pick Keres over ${c.competitor}`}
     sub={c.pillar === 'inbound'
-      ? 'Book a 20-minute call and hear Remi answer, qualify and book a call.'
+      ? 'Book a 30-minute call and hear Remi answer, qualify and book a call.'
       : 'Book a demo and watch Keres book a meeting end to end — targeting, sending, replies, and scheduling.'}
   />
 </Layout>

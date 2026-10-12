@@ -73,7 +73,7 @@ export async function GET() {
   push('### The roster: six AI workers');
   for (const w of workers) {
     const price = priceAmount(w.priceKey);
-    const bill = w.slug === 'custom' ? 'Fixed build price and a monthly run fee, scoped on a 20-minute call.'
+    const bill = w.slug === 'custom' ? 'Fixed build price and a monthly run fee, scoped on a 30-minute call.'
       : w.slug === 'found' ? 'From $249/month ($499 for law firms), month-to-month.'
       : w.slug === 'inbound' ? 'Quoted: one monthly rate with included minutes, then per minute; no per-call fees.'
       : price ? `From ${price}/month, quoted to your volume.` : 'Quoted to your volume.';
@@ -300,7 +300,7 @@ export async function GET() {
 
   // ── GET STARTED ───────────────────────────────────────────────
   push('## Get started');
-  push(`- Get a quote: ${ORIGIN}/quote (five questions, then a 20-minute call; the booking calendar is on the same page)`);
+  push(`- Get a quote: ${ORIGIN}/quote (five questions, then a 30-minute call; the booking calendar is on the same page)`);
   push(`- Custom worker: ${ORIGIN}/custom`);
   push(`- Spanish: ${ORIGIN}/es · ${ORIGIN}/es/pricing · ${ORIGIN}/es/custom`);
   push(`- Pricing: ${ORIGIN}/pricing`);
