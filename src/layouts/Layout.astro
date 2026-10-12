@@ -11,6 +11,7 @@ import { business } from '../config/business';
 import { type Locale, translatedPaths, stripLocale, localePath, ogLocale, l } from '../i18n';
 import { t } from '../i18n/ui';
 import { websiteSchema } from '../data/schema';
+import { isIndexable } from '../seo/indexing.mjs';
 
 export interface Props {
   title: string;
@@ -119,6 +120,13 @@ const motionVer = createHash('sha256').update(readFileSync(new URL('../../public
 const canonical = origin + path;
 const isNotFound = path === '/404';
 const indexable = !(noindex || go || noindexFollow);
+// Markdown twin written by scripts/build-md.mjs for every sitemap URL:
+// / -> /index.md, /pricing -> /pricing.md, /guides/x.html -> /guides/x.md.
+// Same rule as the sitemap (isIndexable), so the link never points at a file
+// that was not generated.
+const markdownHref = indexable && !isNotFound && isIndexable(path)
+  ? origin + (path === '/' ? '/index.md' : path.replace(/\.html$/, '') + '.md')
+  : null;
 
 // Pages whose H1 is .k-display (Fraunces 600). Everything else sets its
 // headline in the legacy serif hero (Fraunces 300/400 → fraunces-400.woff2).
@@ -212,6 +220,7 @@ const META_DOMAIN_VERIFICATION = '';
 <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
 {!isNotFound && <link rel="canonical" href={canonical} />}
 <link rel="alternate" type="application/rss+xml" title="Keres AI — Resources & Guides" href="/rss.xml" />
+{markdownHref && <link rel="alternate" type="text/markdown" href={markdownHref} />}
 
 <!-- hreflang only on indexable pages: a noindex page has no alternates to offer. -->
 {!indexable ? null : hasTwin ? (
