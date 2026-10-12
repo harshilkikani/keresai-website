@@ -26,7 +26,7 @@ const termSet = {
 };
 ---
 <Layout
-  title="Glossary — AI Receptionist & Deliverability Terms | Keres"
+  title="AI Receptionist & Local Marketing Glossary | Keres AI"
   description="Plain-English definitions of AI receptionist, AI SDR, appointment automation, and email deliverability terms — SPF, DKIM, DMARC, inbox warmup, and more."
   path={path}
 >
@@ -41,7 +41,7 @@ const termSet = {
 
   {glossaryCategories.map((cat) => (
     <section class="page-section container">
-      <div class="section-label">{cat}</div>
+      <h2 class="section-label">{cat}</h2>
       <div class="feature-grid">
         {glossary.filter((t) => t.category === cat).map((t) => (
           <a class="feature-card" href={`/glossary/${t.slug}`} style="text-decoration:none; display:block;">

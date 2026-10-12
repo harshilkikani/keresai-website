@@ -83,7 +83,7 @@ const allIndustries: Industry[] = [
     nameLower: 'HVAC companies',
     short: 'HVAC',
     shortLower: 'HVAC',
-    title: 'AI Receptionist for HVAC — Book More Calls | Keres',
+    title: 'AI Receptionist for HVAC Companies | Keres AI',
     description:
       'Keres AI answers HVAC calls 24/7 in two rings, books service and install visits, and flags no-heat and no-cool emergencies on your rules.',
     intro:
@@ -177,7 +177,7 @@ const allIndustries: Industry[] = [
     nameLower: 'plumbing companies',
     short: 'Plumbers',
     shortLower: 'plumbers',
-    title: 'AI Receptionist for Plumbers — Answer Every Call | Keres',
+    title: 'AI Receptionist for Plumbers | Keres AI',
     description:
       'Keres AI answers plumbing calls 24/7, books service visits, and sends burst pipes and sewage backups to your on-call plumber on the rules you set.',
     intro:
@@ -391,7 +391,7 @@ const allIndustries: Industry[] = [
     nameLower: 'roofing companies',
     short: 'Roofing',
     shortLower: 'roofing',
-    title: 'AI Receptionist for Roofers — Storm Leads | Keres',
+    title: 'AI Receptionist for Roofers & Storm Leads | Keres AI',
     description:
       'Keres AI answers roofing calls 24/7, books estimates and storm inspections, and keeps answering through a storm-season surge.',
     intro:
@@ -491,7 +491,7 @@ const allIndustries: Industry[] = [
     nameLower: 'towing companies',
     short: 'Towing',
     shortLower: 'towing',
-    title: 'AI Receptionist for Towing — 24/7 Dispatch | Keres',
+    title: 'AI Receptionist for Towing Companies | Keres AI',
     description:
       'Keres AI answers towing calls 24/7 in two rings, takes the location and vehicle details, and sends the job to your dispatcher on your rules.',
     intro:

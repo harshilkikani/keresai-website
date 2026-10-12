@@ -146,7 +146,7 @@ export const hubs: Hub[] = [
   {
     slug: 'home-services',
     name: 'Home services',
-    title: 'AI Receptionist for HVAC, Plumbing & Roofing | Keres',
+    title: 'AI Receptionist & Websites for Contractors | Keres AI',
     description:
       'Remi answers in two rings, qualifies the job and books it into ServiceTitan or your calendar. Website and Google profile for contractors from $249/month.',
     h1: 'You’re on a roof. The phone’s ringing. Remi answers, books the job, and texts back the ones it can’t.',
@@ -213,7 +213,7 @@ export const hubs: Hub[] = [
   {
     slug: 'dental-med-spa',
     name: 'Dental & med spa',
-    title: 'AI Receptionist for Dental Practices & Med Spas | Keres',
+    title: 'AI Receptionist for Dental & Med Spas | Keres AI',
     description:
       'Every call answered in two rings, every appointment confirmed, recall filled. Remi books chair time; Found runs your site and Google profile from $249/month.',
     h1: 'Every call booked. Every appointment confirmed. Every recall filled.',

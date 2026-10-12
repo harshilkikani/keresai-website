@@ -50,7 +50,7 @@ const allUsecases: UseCase[] = [
     slug: 'overflow-call-handling',
     name: 'Overflow call handling',
     targetKeyword: 'overflow call handling service',
-    title: 'Overflow Call Handling — Catch Every Call | Keres',
+    title: 'Overflow Call Handling | Keres AI',
     description:
       'Keres picks up the calls your team can’t (busy lines, peak season, marketing spikes) and books the job instead of sending callers to voicemail.',
     h1: 'Never drop an <span class="accent">overflow call</span>',

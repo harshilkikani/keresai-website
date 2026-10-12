@@ -11,7 +11,7 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Benchmarks', path }];
 
 const webpage = webPageSchema({
   path,
-  name: 'Service Business Benchmarks: Missed Calls, Lead Response & Cost | Keres AI',
+  name: 'Missed-Call & Lead-Response Benchmarks | Keres AI',
   description: 'Estimates on missed calls, lead response, missed-call cost and conversion for HVAC, roofing, dental and legal businesses, with sources where they exist.',
   speakableSelectors: ['.answer-block', '.lead'],
 });
@@ -22,7 +22,7 @@ const list = itemListSchema({
 });
 ---
 <Layout
-  title="Service Business Benchmarks: Missed Calls, Lead Response & Cost | Keres AI"
+  title="Missed-Call & Lead-Response Benchmarks | Keres AI"
   description="Estimates on missed calls, lead response, missed-call cost and conversion for HVAC, roofing, dental and legal businesses, with sources where they exist. Updated for 2026."
   path={path}
 >
@@ -41,6 +41,7 @@ const list = itemListSchema({
   </header>
 
   <section class="page-section container">
+    <h2 class="section-label">Benchmarks and statistics</h2>
     <div class="answer-block">
       <p>These benchmarks compile commonly cited industry estimates on call answering, lead response, and conversion for service businesses. Use them as directional context — and run your own numbers with the <a href="/tools/missed-call-calculator">missed-call calculator</a>.</p>
     </div>

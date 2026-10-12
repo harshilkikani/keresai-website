@@ -41,7 +41,7 @@ const itemList = {
 
   {integrationCategories.map((cat) => (
     <section class="page-section container">
-      <div class="section-label">{cat}</div>
+      <h2 class="section-label">{cat}</h2>
       <div class="feature-grid">
         {integrations.filter((i) => i.category === cat).sort((a, b) => Number(isLive(b)) - Number(isLive(a))).map((i) => (
           <a class="feature-card" href={`/integrations/${i.slug}`} style="text-decoration:none; display:block;">

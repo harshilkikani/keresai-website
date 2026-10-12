@@ -52,7 +52,7 @@ export const custom = {
     },
   },
   es: {
-    title: 'Trabajadores de IA a medida para una tarea recurrente | Keres AI',
+    title: 'Trabajadores de IA a medida | Keres AI',
     description: 'Construimos agentes de IA que hacen una sola tarea recurrente en tu negocio y te reportan cada mañana por mensaje de texto. Precio fijo de desarrollo, cuota mensual, primera versión en dos semanas.',
     eyebrow: 'Trabajadores a medida',
     h1: 'Un trabajador para la tarea que nadie en tu equipo tiene tiempo de hacer.',

@@ -43,7 +43,7 @@ export interface AgentPage {
 export const agentPages: AgentPage[] = [
   {
     slug: 'inbound',
-    seoTitle: 'AI Receptionist: Answers in 2 Rings, Books the Lead | Keres',
+    seoTitle: 'AI Receptionist That Answers & Books | Keres AI',
     description:
       'Remi answers every call in two rings, 24/7: runs your intake script, qualifies the lead, books the appointment and texts back any call it could not take.',
     h1: 'Remi, the AI receptionist from Keres AI, answers every call in two rings and books the job.',
@@ -137,7 +137,7 @@ export const agentPages: AgentPage[] = [
 
   {
     slug: 'follow-up',
-    seoTitle: 'Appointment Reminders & No-Show Prevention | Keres',
+    seoTitle: 'Appointment Reminders & No-Show Prevention | Keres AI',
     description:
       'Theo confirms appointments, reminds by text and voice, fills cancellations from your waitlist, and chases each estimate until you get a yes or a no.',
     h1: 'Theo — the Follow-Up Worker that makes sure they show and say yes.',
@@ -207,7 +207,7 @@ export const agentPages: AgentPage[] = [
 
   {
     slug: 'reactivation',
-    seoTitle: 'Database Reactivation & Win-Back Campaigns | Keres',
+    seoTitle: 'Database Reactivation & Win-Back | Keres AI',
     description:
       'June brings back past customers and cold leads in your CRM, revives closed-lost deals from the last year, and asks every customer for a review.',
     h1: 'June — the Reactivation Worker. The cheapest lead you’ll ever get is one you already have.',
@@ -272,7 +272,7 @@ export const agentPages: AgentPage[] = [
 
   {
     slug: 'outbound',
-    seoTitle: 'AI SDR: Cold Email That Reaches the Inbox | Keres',
+    seoTitle: 'AI SDR: Cold Email That Reaches the Inbox | Keres AI',
     description:
       'Sol runs cold outbound with deliverability set up first (SPF, DKIM, DMARC, warm-up), then personalized sequences, replies handled and meetings booked.',
     h1: 'Sol — the Outbound Worker. Cold outreach that reaches the inbox and books the meeting.',

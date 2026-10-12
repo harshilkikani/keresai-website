@@ -2674,3 +2674,6 @@ html[data-motion] .k-hero [data-hero].is-live .shift__foot { animation: shift-in
 @media (min-width: 1024px) and (max-height: 820px) {
   .k-hero .k-display, .k-grid .k-display { font-size: clamp(2.75rem, 4.6vw, 3.75rem); }
 }
+
+/* Section labels promoted to h2 for heading order; keep the label look. */
+h2.section-label { margin: 0 0 14px; line-height: 1.4; }

@@ -25,7 +25,7 @@ export const integrations: Integration[] = [
     status: 'live',
     category: 'Field Service',
     targetKeyword: 'servicetitan ai receptionist',
-    title: 'Keres AI + ServiceTitan — AI Receptionist Integration',
+    title: 'Keres AI + ServiceTitan Integration | Keres AI',
     description:
       'Connect Keres AI to ServiceTitan to answer every call 24/7 and book jobs straight into your ServiceTitan tenant. Customers, calls, and jobs sync automatically.',
     intro:
@@ -169,7 +169,7 @@ export const integrations: Integration[] = [
     status: 'live',
     category: 'Calendar',
     targetKeyword: 'ai receptionist google calendar',
-    title: 'Keres AI + Google Calendar — Automatic Booking',
+    title: 'Keres AI + Google Calendar Booking | Keres AI',
     description:
       'Connect Keres AI to Google Calendar so the AI receptionist books, confirms, and reschedules appointments on your team’s calendar in real time.',
     intro:
