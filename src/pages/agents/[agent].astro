@@ -66,7 +66,6 @@ const others = agents.filter((a) => a.slug !== page.slug);
         </div>
         <ul class="k-hero__facts" aria-label="At a glance">
           <li><span class="k-hero__fact-k">Stage</span><span class="k-hero__fact-v">{agent.stage}</span></li>
-          <li><span class="k-hero__fact-k">First in</span><span class="k-hero__fact-v">{plan.name}</span></li>
           {planPriced && <li><span class="k-hero__fact-k">From</span><span class="k-hero__fact-v" data-figure>{plan.from.replace('from ', '')}/mo</span></li>}
         </ul>
       </div>

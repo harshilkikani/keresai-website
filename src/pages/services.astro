@@ -25,6 +25,8 @@ const serviceNodes = stageBlocks.map((b) =>
     audience: 'Small service firms and professional practices',
   })
 );
+// Show the worker a service belongs to, not the internal plan name.
+const workerFor: Record<string, string> = { Found: 'Found', Answer: 'Remi', Convert: 'Theo', Grow: 'June', Custom: 'Sol' };
 ---
 <Layout
   title="AI Workers for Local Businesses | Keres AI"
@@ -88,7 +90,7 @@ const serviceNodes = stageBlocks.map((b) =>
               <div class="k-svc__head">
                 <h3 class="k-svc__name">{s.name}</h3>
                 <span class:list={['k-svc__plan', s.addOn && 'k-svc__plan--addon']}>
-                  {s.addOn ? `${s.plan} add-on` : `Included in ${s.plan}`}
+                  {s.addOn ? `${workerFor[s.plan]} add-on` : `Part of ${workerFor[s.plan]}`}
                 </span>
               </div>
               <p class="k-svc__desc">{s.desc}</p>
@@ -117,7 +119,7 @@ const serviceNodes = stageBlocks.map((b) =>
           <li class="k-svc__item">
             <div class="k-svc__head">
               <h3 class="k-svc__name">{s.name}</h3>
-              <span class="k-svc__plan">Included in {s.plan}</span>
+              <span class="k-svc__plan">Part of {workerFor[s.plan]}</span>
             </div>
             <p class="k-svc__desc">{s.desc}</p>
           </li>

@@ -136,7 +136,7 @@ export const hubs: Hub[] = [
     faqs: [
       { q: 'Does it give legal advice?', a: 'No, and it says so. Remi collects facts and conflict-check names, grades urgency and books the consultation. Anything that sounds like advice gets a "the attorney will go through that with you on Monday" and, if it is urgent, a warm transfer.' },
       { q: 'How does the conflict check work?', a: 'Remi collects the caller’s name, the opposing party and any other involved party, then passes them to your team to run the conflict check (Clio and Lawmatics integrations are rolling out). It never clears a conflict on its own — that decision stays with the firm.' },
-      { q: 'What does it cost?', a: `Found for firms starts at $499/month. ${priceSentence('Remi on the Answer plan', 'answer', 'your call volume, practice areas and integrations')} Month-to-month, no setup fee on the Found base tier.` },
+      { q: 'What does it cost?', a: `Found for firms starts at $499/month. ${priceSentence('Remi', 'answer', 'your call volume, practice areas and integrations')} Month-to-month, no setup fee on the Found base tier.` },
       { q: 'How long does setup take?', a: 'Five business days. We spend twenty minutes on how your intake runs today, write the script for your practice areas, connect your number and your calendar or CRM (Google Calendar, HubSpot; others through Zapier), and you test it before it answers a real client.' },
       { q: 'What if a caller needs an attorney right now?', a: 'You set the escalation rules — an arraignment, a custody emergency, a named existing client — and Remi warm-transfers to the on-call number. If nobody answers, the on-call attorney gets a "call me now" alert with the intake already written down.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month, and you keep your number and your data.' },
@@ -203,7 +203,7 @@ export const hubs: Hub[] = [
     faqs: [
       { q: 'Can it dispatch to the right tech?', a: 'It creates and grades the job, offers a real dispatch window and writes it to ServiceTitan or your calendar. Assignment stays with your dispatcher — the Daily Brief flags any job that still has no truck on it.' },
       { q: 'What about the seasonal surge?', a: 'Remi answers unlimited simultaneous calls with no surcharge for taking them at once, which is the entire point during a cold snap. Past your included minutes you pay your quoted per-minute rate, so size the plan to your busy season.' },
-      { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi on the Answer plan', 'answer', 'your call volume, locations and integrations')} Month-to-month.` },
+      { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi', 'answer', 'your call volume, locations and integrations')} Month-to-month.` },
       { q: 'How long does setup take?', a: 'Five business days: twenty minutes on how calls run today, then your script, your number, and your calendar or ServiceTitan, and you test it yourself before it answers a customer.' },
       { q: 'What if the caller needs a person?', a: 'You set the rules — a gas smell, a flood, a commercial account — and Remi warm-transfers to your on-call number, with a "call me now" alert as the fallback.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month, and your number stays yours.' },
@@ -271,7 +271,7 @@ export const hubs: Hub[] = [
       { q: 'Will Remi answer calls from my ads and website?', a: 'Yes. Remi answers every call to the number you route to it, whatever ad, listing or page the caller found you on, including evenings and weekends when your front desk is closed.' },
       { q: 'Does it integrate with our practice management system?', a: 'Google Calendar, HubSpot and ServiceTitan are connected today. Dentrix and Open Dental are rolling out — ask where yours is, and in the meantime Remi books to a shared calendar your front desk already watches.' },
       { q: 'Can it answer insurance questions?', a: 'It confirms which plans you accept and flags anything it cannot answer for your front desk. It does not quote coverage or estimate a patient’s out-of-pocket cost — that is a conversation for a person with the plan in front of them.' },
-      { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi on the Answer plan', 'answer', 'your call volume, locations and integrations')} Month-to-month.` },
+      { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi', 'answer', 'your call volume, locations and integrations')} Month-to-month.` },
       { q: 'How long does setup take?', a: 'Five business days. Twenty minutes on how the front desk handles calls now, then your script, your number and your calendar, and you test it before a patient does.' },
       { q: 'What if the caller has an emergency?', a: 'You define what counts. Remi warm-transfers those to the on-call number and sends a "call me now" alert with what it already collected if nobody picks up.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month.' },
@@ -333,7 +333,7 @@ export const hubs: Hub[] = [
     faqs: [
       { q: 'Does it work with Zillow and Realtor.com leads?', a: 'Calls from your listings, yes: they ring your number and Remi answers. Website form enquiries are answered in minutes too. Answering Zillow and Realtor.com message inboxes directly is rolling out.' },
       { q: 'Will it hand me an unqualified buyer?', a: 'It asks whether they are working with an agent, whether they are pre-approved, their price range and their timeline, and the Daily Brief separates the qualified ones from the browsers. You decide what qualified means.' },
-      { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi on the Answer plan', 'answer', 'your lead volume and integrations')} Month-to-month.` },
+      { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi', 'answer', 'your lead volume and integrations')} Month-to-month.` },
       { q: 'How long does setup take?', a: 'Five business days: twenty minutes on how leads reach you now, then your script, your numbers, your calendar and your CRM, and you test it before a buyer does.' },
       { q: 'What if a caller wants me specifically?', a: 'Remi warm-transfers to you under rules you set, and sends a "call me now" alert with the lead detail if you cannot pick up.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month.' },
