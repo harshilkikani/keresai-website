@@ -1,4 +1,57 @@
 // Data-driven industry receptionist pages. Add an entry → a new page builds.
+//
+// The five field-service trades (hvac, plumbers, roofing, septic, towing) carry
+// a `trade` block: everything on their page that is specific to the trade. The
+// template renders almost nothing shared, so each page stands on its own.
+//
+// HONESTY RULES for `trade` copy:
+// - Emergency handling is written as rules the OWNER sets with Keres during
+//   setup ("a typical setup flags…"), never as guaranteed behaviour.
+// - Example calls are fictional and labelled "Example call, not a customer".
+// - No customer names, results or statistics. The only figures are the Keres AI
+//   estimates already published on the matching /benchmarks page.
+// - Live integrations: Google Calendar, HubSpot, ServiceTitan, Zapier. Jobber
+//   and Housecall Pro are rolling out, not live.
+export interface CallLine {
+  who: 'Caller' | 'Remi';
+  line: string;
+}
+
+export interface TradeContent {
+  /** 50–80 word answer naming Keres AI and the trade. May contain <strong>. */
+  answer: string;
+  painsH2: string;
+  /** Closing line under the pain bullets. */
+  painsNote: string;
+  callH2: string;
+  call: CallLine[];
+  /** What the example shows, and how a different rule would change it. */
+  callNote: string;
+  emergencyH2: string;
+  emergencyIntro: string;
+  /** Rules the owner sets. May contain links. */
+  emergencyRules: string[];
+  emergencyNote: string;
+  intakeH2: string;
+  intakeIntro: string;
+  intake: { field: string; why: string }[];
+  booksH2: string;
+  /** Trade-specific note above the integrations list. */
+  softwareNote: string;
+  costH2: string;
+  /** HTML. Only Keres AI estimates from the matching benchmark page. */
+  costBody: string;
+  calculator: { href: string; label: string };
+  compareH2: string;
+  compareIntro: string;
+  checklist: string[];
+  /** Optional pricing comparison (HTML). */
+  priceH2?: string;
+  priceBody?: string;
+  ctaHeading: string;
+  ctaSub: string;
+}
+
 export interface Industry {
   slug: string; // e.g. "hvac" -> /ai-receptionist-for-hvac
   name: string; // display, e.g. "HVAC Companies"
@@ -19,6 +72,8 @@ export interface Industry {
   pains: string[];
   books: string[];
   faqs: { q: string; a: string }[];
+  /** Trade-specific page content. Every industry that still builds has one. */
+  trade?: TradeContent;
 }
 
 const allIndustries: Industry[] = [
@@ -30,26 +85,91 @@ const allIndustries: Industry[] = [
     shortLower: 'HVAC',
     title: 'AI Receptionist for HVAC — Book More Calls | Keres',
     description:
-      'Keres AI answers every HVAC call 24/7, books service and install appointments, and flags no-heat/no-cool emergencies to your team. Stop losing jobs to voicemail.',
+      'Keres AI answers HVAC calls 24/7 in two rings, books service and install visits, and flags no-heat and no-cool emergencies on your rules.',
     intro:
-      'HVAC demand spikes in heat waves and cold snaps — exactly when your team can’t pick up fast enough. Keres answers every call in two rings, books the service call, and texts your dispatcher the moment an emergency comes in.',
+      'HVAC demand spikes in heat waves and cold snaps, which is exactly when the office can’t pick up fast enough. Remi answers in two rings, books the service call, and alerts your on-call tech when a call matches the emergency rules you set.',
     pains: [
-      'Peak-season call volume your office can’t answer fast enough',
-      'After-hours no-heat and no-cool emergencies going to voicemail',
-      'Techs in the field missing the next booking',
-      'Per-minute answering services that just take a message',
+      'A heat wave or cold snap that multiplies calls overnight',
+      'No-heat and no-cool calls after 6 p.m. that land in voicemail',
+      'Techs on a roof or in a crawlspace who can’t take the next booking',
+      'Answering services that take a message instead of booking the visit',
     ],
     books: [
-      'Service and repair appointments',
-      'Maintenance and tune-up scheduling',
-      'Emergency dispatch alerts to the owner',
-      'Seasonal maintenance reminders',
+      'Repair and diagnostic visits',
+      'Maintenance-plan tune-ups',
+      'Comfort-advisor visits for replacement quotes',
+      'Emergency calls routed to the on-call tech',
     ],
     faqs: [
-      { q: 'Can the AI receptionist handle HVAC emergencies?', a: 'Yes. Keres recognizes no-heat, no-cool, and gas-smell emergencies, captures the address and details, and texts your on-call tech or dispatcher immediately while booking the visit.' },
-      { q: 'Does it integrate with ServiceTitan or Housecall Pro?', a: 'ServiceTitan, yes: Keres writes jobs, customers and calls to it today, as well as Google Calendar and HubSpot. Housecall Pro and Jobber are rolling out; ask where yours is.' },
-      { q: 'Will it handle peak-season call volume?', a: 'Yes — Keres answers unlimited simultaneous calls, so a heat wave never sends a caller to voicemail.' },
+      { q: 'Can an AI receptionist handle HVAC emergency calls?', a: 'Yes, within the rules you set with Keres during setup. A typical HVAC setup treats no heat with an infant or elderly person at home as an emergency and warm-transfers it to the on-call tech. For a gas smell, Remi tells the caller to leave the building and call the gas utility or 911, then alerts on-call.' },
+      { q: 'Will Remi keep up during a heat wave?', a: 'Remi answers calls that arrive at the same time, and Keres does not charge extra for simultaneous calls. You pay a monthly rate with included minutes, then a per-minute rate after that, with no per-call fees.' },
+      { q: 'Can it tell a maintenance-plan member from a new customer?', a: 'Remi asks whether the caller is on a maintenance plan and writes the answer into the job notes, so your dispatcher can give members the priority your plan promises.' },
+      { q: 'Will Remi quote a price for a new system?', a: 'No. Remi only states prices you put in its script, such as your diagnostic or trip fee. Replacement pricing needs someone to see the house, so Remi books a comfort-advisor visit instead.' },
+      { q: 'Does Remi speak Spanish?', a: 'Remi answers in English today. If a large share of your callers speak Spanish, raise it on the demo call so Keres can tell you where that stands before you sign.' },
+      { q: 'How long does an HVAC setup take?', a: 'Five business days. Keres writes your intake script and emergency rules with you, connects your number and ServiceTitan or calendar, and you call the line yourself until it answers the way your best CSR would.' },
     ],
+    trade: {
+      answer:
+        '<strong>Keres AI’s receptionist for HVAC companies is Remi</strong>, an AI agent that answers every call in two rings, 24/7, through heat waves and cold snaps. Remi asks your intake questions (system type, symptoms, address), grades the call against the emergency rules you set, and books the visit into Google Calendar, HubSpot or ServiceTitan. Billing is a monthly rate with included minutes, then per-minute, with no per-call fees. HVAC accounts go live in five business days.',
+      painsH2: 'Why do HVAC companies miss so many calls?',
+      painsNote:
+        'HVAC call volume follows the weather, not your staffing plan. The first 90-degree week of the summer and the first hard freeze of the winter are when a full office still sends callers to voicemail, and a homeowner sweating through the night does not wait for a callback.',
+      callH2: 'What an HVAC call to Remi sounds like',
+      call: [
+        { who: 'Remi', line: 'Thanks for calling [your company], this is Remi. How can I help?' },
+        { who: 'Caller', line: 'Our furnace quit and the house is down to 58. We have a newborn.' },
+        { who: 'Remi', line: 'I’m sorry, let’s get someone out to you. First, do you smell gas anywhere in the house?' },
+        { who: 'Caller', line: 'No, nothing like that.' },
+        { who: 'Remi', line: 'Good. What’s the service address, and is it a gas furnace or a heat pump?' },
+        { who: 'Caller', line: '14 Elm Street. Gas furnace, about twelve years old.' },
+        { who: 'Remi', line: 'Thank you. With an infant at home I’m treating this as an emergency and connecting you to the on-call technician now. If they don’t pick up, they’ll have your details and call you straight back.' },
+        { who: 'Caller', line: 'Okay. Thank you.' },
+      ],
+      callNote:
+        'In this example the owner’s rules say no heat plus an infant is an emergency, so Remi transfers instead of offering tomorrow morning. Under a different rule, Remi would book the first open visit and text the caller a confirmation.',
+      emergencyH2: 'Can an AI receptionist handle HVAC emergency calls?',
+      emergencyIntro:
+        'You decide which HVAC calls count as emergencies, and Keres writes those rules into Remi’s script during setup. Remi does not invent its own. A typical HVAC setup flags these:',
+      emergencyRules: [
+        '<strong>Gas smell or a carbon monoxide alarm.</strong> Remi tells the caller to leave the building and call the gas utility or 911 from outside, then alerts your on-call tech. It does not troubleshoot or book it as a normal visit.',
+        '<strong>No heat with someone vulnerable at home</strong>, such as an infant, an elderly person or someone with a medical condition, or no heat below an outdoor temperature you choose.',
+        '<strong>No cooling during a heat advisory</strong>, with the same question about who is in the house.',
+        '<strong>Water pouring from an indoor unit or a ceiling</strong> under an air handler. Some shops send a truck tonight; others book the first slot tomorrow.',
+        '<strong>Everything else</strong> (tune-ups, a noisy blower, thermostat questions, replacement quotes) books into a normal slot.',
+      ],
+      emergencyNote:
+        'When a call matches an emergency rule, Remi warm-transfers it to your on-call number. If nobody picks up, the tech gets a “call me now” alert with the address and notes already written down. Read more about <a href="/glossary/emergency-dispatch">emergency dispatch</a>.',
+      intakeH2: 'What Remi asks an HVAC caller',
+      intakeIntro: 'The questions come from your script. A typical HVAC intake covers:',
+      intake: [
+        { field: 'Name and callback number', why: 'so the tech can call ahead' },
+        { field: 'Service address and access notes', why: 'gate codes, pets, who will be home' },
+        { field: 'System type', why: 'furnace, heat pump, central AC, boiler or mini-split' },
+        { field: 'What it is doing', why: 'no heat, blowing warm, short-cycling, leaking, a new noise' },
+        { field: 'Approximate age of the equipment', why: 'helps the tech bring the right parts' },
+        { field: 'Maintenance-plan member or new customer', why: 'so plan members get the priority you promise' },
+        { field: 'Preferred arrival window', why: 'offered from your real availability' },
+      ],
+      booksH2: 'What can Remi book for an HVAC company?',
+      softwareNote:
+        'ServiceTitan, yes. When Remi books an HVAC call it writes the customer, the job and the call notes into ServiceTitan, so dispatch sees the system type and symptoms before assigning a tech.',
+      costH2: 'What does a missed HVAC call cost?',
+      costBody:
+        '<p>Keres AI estimates that HVAC companies miss 30–45% of inbound calls in peak season and that 35–50% of HVAC demand arrives after hours. It puts a typical service call at $300–$600, with replacements worth far more. These are directional estimates from the <a href="/benchmarks/hvac-answering">HVAC call answering benchmarks</a>, not measurements of your business.</p><p>Your own number is missed calls a month, times the share that would have booked, times your average ticket.</p>',
+      calculator: { href: '/tools/hvac-missed-call-calculator', label: 'HVAC missed-call calculator' },
+      compareH2: 'How do you compare AI receptionists for HVAC?',
+      compareIntro: 'Ask every vendor the same questions, Keres included:',
+      checklist: [
+        'Can it grade no-heat and no-cool calls on your rules, including a question about who is in the house?',
+        'What exactly does it say on a gas-smell call? Ask to hear it.',
+        'Does it write the job into your field-service software, or only email you a summary?',
+        'How is it billed in a heat wave: per call, per minute, or a monthly rate with included minutes?',
+        'Can it ask about maintenance-plan membership and note it on the job?',
+        'Who writes the script and the emergency rules, and how long until it is live?',
+      ],
+      ctaHeading: 'Get HVAC calls out of voicemail before the next heat wave',
+      ctaSub: 'Book a 30-minute demo, tell us your emergency rules, and hear Remi take an HVAC call.',
+    },
   },
   {
     slug: 'plumbers',
@@ -57,28 +177,97 @@ const allIndustries: Industry[] = [
     nameLower: 'plumbing companies',
     short: 'Plumbers',
     shortLower: 'plumbers',
-    title: 'AI Receptionist for Plumbers — Book Every Call | Keres',
+    title: 'AI Receptionist for Plumbers — Answer Every Call | Keres',
     description:
-      'Keres AI answers every plumbing call 24/7, books service appointments, and flags burst pipes and floods to your team instantly. Capture every job, day or night.',
+      'Keres AI answers plumbing calls 24/7, books service visits, and sends burst pipes and sewage backups to your on-call plumber on the rules you set.',
     intro:
-      'Plumbing emergencies don’t wait for business hours. Keres answers every call around the clock, books the job, and alerts your on-call plumber the second a flood or burst pipe comes in — so the work goes to you, not the next number on the list.',
+      'Plumbing emergencies don’t wait for business hours. Remi answers around the clock, books the job, and sends a burst pipe or a backup to your on-call plumber on the rules you set, so calls stop going to voicemail.',
     pains: [
-      'After-hours emergencies going to voicemail',
-      'Missed calls while your plumbers are on a job',
-      'Callers hiring the next plumber who actually picks up',
-      'No coverage on nights, weekends, and holidays',
+      'Water-on-the-floor calls at night that reach voicemail',
+      'Plumbers under a sink who can’t answer the next call',
+      'Callers who hire whichever plumber picks up first',
+      'Weekends and holidays with nobody on the phones',
     ],
     books: [
-      'Emergency and standard service calls',
-      'Drain, water-heater, and repair appointments',
-      'On-call dispatch alerts for emergencies',
-      'Follow-up and quote scheduling',
+      'Leak, clog and drain-cleaning visits',
+      'Water-heater repair and replacement estimates',
+      'Fixture installs and remodel walkthroughs',
+      'Urgent calls sent to the on-call plumber',
     ],
     faqs: [
-      { q: 'Can it dispatch emergency plumbing calls?', a: 'Yes. Keres identifies emergencies like floods and burst pipes, captures the details, books the visit, and texts your on-call plumber immediately.' },
-      { q: 'Does it work with my scheduling software?', a: 'Keres books into ServiceTitan, Google Calendar and HubSpot today, and connects to other apps through Zapier. Jobber and Housecall Pro are rolling out.' },
-      { q: 'How fast does it answer?', a: 'Every call is answered within two rings, 24/7, including nights and weekends.' },
+      { q: 'Can an AI receptionist book plumbing jobs, or only take messages?', a: 'Remi books. It offers real windows from your calendar or ServiceTitan while the caller is on the line, writes the job in, and texts the caller a confirmation they can reply to.' },
+      { q: 'What happens when a burst-pipe call comes in at 2 a.m.?', a: 'Whatever your rules say. A typical setup asks whether the water is shut off; if it is not, Remi warm-transfers to the on-call plumber, and if nobody answers, sends a “call me now” alert with the address and details.' },
+      { q: 'Can it tell a homeowner from a tenant?', a: 'Yes. Remi asks whether the caller owns the property and, for tenants, takes the landlord or property manager’s contact, so nobody rolls a truck to work that has not been approved.' },
+      { q: 'Does it work with Jobber or Housecall Pro?', a: 'Not yet. Both are rolling out and are not live. ServiceTitan, Google Calendar, HubSpot and Zapier are live today; ask Keres what would fit your setup in the meantime.' },
+      { q: 'Will Remi quote a price for a water heater?', a: 'Only prices you put in the script, such as a service-call fee. Water-heater replacements depend on the unit and the install, so Remi books an estimate.' },
+      { q: 'What if a caller hangs up before Remi picks up?', a: 'Remi texts the number back within 60 seconds with a real question and carries on by text until it can book the job or hand it to you.' },
+      { q: 'Is an AI receptionist cheaper than an answering service for plumbers?', a: 'It depends on your call volume, which is why Keres quotes Remi to it: a monthly rate with included minutes, then per-minute, with no per-call fees. See <a href="/ai-receptionist-cost">what AI receptionists cost</a> for published prices.' },
     ],
+    trade: {
+      answer:
+        '<strong>Keres AI gives plumbing companies Remi</strong>, an AI receptionist that picks up every call in two rings, day or night. For each caller Remi runs your plumbing intake (the problem, where the water is, whether it is shut off, owner or tenant), then books the job into ServiceTitan, Google Calendar or HubSpot. You pay a monthly rate that includes minutes, then per-minute beyond them, with no per-call fees. Plumbers go live within five business days.',
+      painsH2: 'Why do plumbers lose jobs to voicemail?',
+      painsNote:
+        'A caller with water coming through the ceiling does not leave a message. They keep dialing down the search results until someone answers, and the plumber who picks up gets the job and, often, the customer for years.',
+      callH2: 'What a plumbing call to Remi sounds like',
+      call: [
+        { who: 'Remi', line: 'Thanks for calling [your company], this is Remi. What’s going on?' },
+        { who: 'Caller', line: 'There’s water pouring out from under my kitchen sink.' },
+        { who: 'Remi', line: 'Let’s deal with that first. Has the water to the house been shut off?' },
+        { who: 'Caller', line: 'My husband just turned it off at the meter.' },
+        { who: 'Remi', line: 'Good. Is any water near outlets or the electrical panel?' },
+        { who: 'Caller', line: 'No, it’s the cabinet and the kitchen floor.' },
+        { who: 'Remi', line: 'Okay. Do you own the home, and what’s the address?' },
+        { who: 'Caller', line: 'We own it. 220 Bay Road.' },
+        { who: 'Remi', line: 'I can have a plumber there between 6 and 8 tonight. Shall I book that? You’ll get a text confirming it.' },
+        { who: 'Caller', line: 'Yes, please.' },
+      ],
+      callNote:
+        'Here the owner treats a leak that is already shut off as same-day work rather than a middle-of-the-night callout. If the caller could not stop the water, the rule would send the call straight to the on-call plumber.',
+      emergencyH2: 'Which plumbing calls count as emergencies?',
+      emergencyIntro:
+        'That is your decision, made once with Keres during setup and written into Remi’s script. A typical plumbing setup flags:',
+      emergencyRules: [
+        '<strong>Water that cannot be stopped</strong>: a burst pipe or failed supply line where the caller cannot find or close the shutoff. If water is near outlets or the panel, Remi tells the caller to keep clear of it.',
+        '<strong>Sewage backing up into the home</strong>, or every drain in the house backing up at once.',
+        '<strong>No water at all to the property.</strong>',
+        '<strong>A gas smell near a water heater or gas line.</strong> Remi tells the caller to leave the building and call the gas utility or 911, then alerts your on-call plumber.',
+        '<strong>No hot water</strong> is urgent for some shops in winter and next-day work for others. You choose.',
+        '<strong>Routine work</strong> (a dripping tap, a running toilet, a fixture install, a water-heater quote) books into a normal window.',
+      ],
+      emergencyNote:
+        'Calls that match a rule are warm-transferred to the on-call plumber. If the transfer is not answered, Remi sends a “call me now” alert with the address, the problem and whether the water is off.',
+      intakeH2: 'What Remi asks a plumbing caller',
+      intakeIntro: 'Your script sets the questions. Most plumbing shops want:',
+      intake: [
+        { field: 'Name, callback number and address', why: 'where the truck is going' },
+        { field: 'The problem', why: 'leak, clog, no hot water, sewer smell, install' },
+        { field: 'Where in the building', why: 'kitchen, bathroom, basement, slab, outside' },
+        { field: 'Is the water shut off?', why: 'decides emergency or same-day' },
+        { field: 'Owner, tenant or property manager', why: 'who approves the work' },
+        { field: 'Water-heater type and age', why: 'tank or tankless, gas or electric' },
+        { field: 'Access and preferred window', why: 'parking, pets, who will be home' },
+      ],
+      booksH2: 'What jobs can Remi book for a plumber?',
+      softwareNote:
+        'ServiceTitan is live: Remi writes the customer and job into it while the caller is still on the line. Shops that run on a calendar book straight into Google Calendar, with the caller logged in HubSpot.',
+      costH2: 'What does a missed plumbing call cost?',
+      costBody:
+        '<p>Keres AI has not published a plumbing benchmark, so this page gives no plumbing statistic. The arithmetic is simple: missed calls a month, times the share that would have booked, times your average ticket.</p><p>Emergency calls weigh more than the average. A caller with water on the floor rarely waits for a callback, and a good emergency visit is often how a household picks its plumber for the next water heater.</p>',
+      calculator: { href: '/tools/missed-call-calculator', label: 'missed-call calculator' },
+      compareH2: 'What should plumbers check before choosing an AI answering service?',
+      compareIntro: 'A short list to take into any demo:',
+      checklist: [
+        'Does it ask about the shutoff, and about water near electrics, before it books?',
+        'Can it separate owners from tenants and take the landlord’s details?',
+        'Does it offer real windows from your calendar, or promise a callback?',
+        'What happens when two burst-pipe calls arrive on the coldest night of the year?',
+        'Does it text back a caller who hangs up before it answers?',
+        'Can your emergency rules change with the season, such as no hot water in January?',
+      ],
+      ctaHeading: 'Answer the 2 a.m. burst-pipe call',
+      ctaSub: 'Book a 30-minute demo and hear Remi take a plumbing call with your shutoff and emergency rules.',
+    },
   },
   {
     slug: 'dentists',
@@ -204,26 +393,97 @@ const allIndustries: Industry[] = [
     shortLower: 'roofing',
     title: 'AI Receptionist for Roofers — Storm Leads | Keres',
     description:
-      'Keres AI answers every roofing call 24/7, books estimates and inspections, and catches storm-season surges before a competitor answers first.',
+      'Keres AI answers roofing calls 24/7, books estimates and storm inspections, and keeps answering through a storm-season surge.',
     intro:
-      'Storm seasons create call surges that overwhelm even the best front desks — and every missed call during a hailstorm or hurricane is a five-figure job handed to a competitor. Keres answers in two rings, books the estimate, and flags emergency tarp jobs to your crew immediately.',
+      'A hailstorm can fill a week of calls into one afternoon. Remi answers in two rings, books the estimate or inspection, and sends an active leak to your crew on the rules you set, so storm calls stop going to voicemail.',
     pains: [
-      'Hailstorm and hurricane call surges your office cannot absorb',
-      'After-hours storm damage calls going unanswered while competitors pick up',
-      'Insurance inspection leads lost during the first critical hours after a storm',
-      'Estimators in the field missing inbound calls during the busiest days',
+      'Hail and wind events that bring a week of calls in an afternoon',
+      'Storm-damage calls in the evening, after the office has closed',
+      'Insurance-claim homeowners who book whoever inspects first',
+      'Estimators on a roof who can’t answer the next lead',
     ],
     books: [
-      'Storm damage estimates and inspections',
-      'Insurance inspection appointments',
-      'Repair and replacement scheduling',
-      'Emergency tarp and board-up dispatch',
+      'Storm-damage inspections',
+      'Replacement and repair estimates',
+      'Inspections timed before the adjuster visit',
+      'Tarp and board-up calls sent to your crew',
     ],
     faqs: [
-      { q: 'Can the AI receptionist handle a storm-season call surge?', a: 'Yes — Keres answers unlimited simultaneous calls, so a hailstorm or hurricane never sends a caller to voicemail. Every storm lead gets booked before a competitor answers.' },
-      { q: 'Does it capture insurance claim leads?', a: 'Yes. Keres qualifies the damage type, captures the address and contact details, and books the inspection appointment — everything your estimator needs in their calendar.' },
-      { q: 'Does it work with field-service software?', a: 'Keres writes new jobs and customer records to ServiceTitan today, plus Google Calendar and HubSpot. Jobber and Housecall Pro are rolling out.' },
+      { q: 'Can an AI receptionist handle a storm-season call surge?', a: 'Remi answers calls that arrive at the same time, and Keres does not charge extra for simultaneous calls. You pay a monthly rate with included minutes, then per-minute, so a storm week costs minutes, not per-call fees.' },
+      { q: 'Does it capture insurance-claim details?', a: 'Yes. Remi asks for the storm date, whether a claim is open, and when the adjuster is coming, and puts all three in the job notes so the estimator knows the deadline.' },
+      { q: 'Will Remi tell a homeowner whether insurance will pay?', a: 'No. Remi does not give coverage advice. It books the inspection and leaves the claim conversation to your estimator.' },
+      { q: 'Does it handle retail replacement leads as well as storm work?', a: 'Yes. For a replacement lead Remi asks the roof’s age, the material and the homeowner’s timeline, then books an estimate.' },
+      { q: 'What happens to a tarp request at night?', a: 'It follows your rules. If you tarp after hours, Remi transfers to the on-call crew lead. If you do not, Remi says so plainly and books the first morning slot.' },
+      { q: 'Does it work with roofing CRMs?', a: 'ServiceTitan, Google Calendar and HubSpot are live, plus Zapier for other apps. Jobber and Housecall Pro are rolling out. If you run a roofing-specific CRM, ask Keres whether Zapier covers it.' },
     ],
+    trade: {
+      answer:
+        '<strong>For roofing companies, Keres AI runs Remi</strong>, an AI receptionist that answers every call within two rings, 24/7, including the hours after a hailstorm. Remi asks your roofing questions (storm date, active leak, claim status, roof type) and books inspections into Google Calendar, HubSpot or ServiceTitan. Pricing is a monthly rate with included minutes and a per-minute rate after that, with no per-call fees and no surcharge for simultaneous calls. Setup takes five business days.',
+      painsH2: 'Why do roofers lose storm leads?',
+      painsNote:
+        'Storm demand arrives all at once. The same office that handles a normal Tuesday comfortably will miss dozens of calls the day after hail, and those are the homeowners with an insurance claim and a reason to hire quickly.',
+      callH2: 'What a roofing call to Remi sounds like',
+      call: [
+        { who: 'Remi', line: 'Thanks for calling [your company], this is Remi.' },
+        { who: 'Caller', line: 'We had hail Tuesday night and my neighbor says my shingles are damaged.' },
+        { who: 'Remi', line: 'Is any water coming into the house right now?' },
+        { who: 'Caller', line: 'No, it’s dry inside.' },
+        { who: 'Remi', line: 'Good. Have you opened an insurance claim, and is an adjuster visit scheduled?' },
+        { who: 'Caller', line: 'I called them yesterday. The adjuster comes next Friday.' },
+        { who: 'Remi', line: 'Then let’s get an inspection in before Friday. I have Wednesday at 10 or Thursday at 2.' },
+        { who: 'Caller', line: 'Wednesday at 10.' },
+        { who: 'Remi', line: 'Booked. What’s the property address, and is it one story or two?' },
+        { who: 'Caller', line: '31 Ridge Lane. Two stories.' },
+      ],
+      callNote:
+        'No active leak, so this books as an inspection rather than a tarp call. The adjuster date goes into the job notes so the estimator sees the deadline.',
+      emergencyH2: 'Which roofing calls are emergencies, and what does Remi do?',
+      emergencyIntro:
+        'You set the rules with Keres during setup; Remi follows them and nothing else. A typical roofing setup flags:',
+      emergencyRules: [
+        '<strong>Water coming into the living space</strong> during or after a storm. If you offer emergency tarping, the call goes to the on-call crew lead.',
+        '<strong>A tree or debris through the roof</strong>, or a section of roof missing.',
+        '<strong>A sagging or dripping ceiling.</strong> Remi tells the caller to keep people out of that room, then alerts on-call.',
+        '<strong>Storm damage with no leak</strong> usually books as an inspection, not an emergency truck.',
+        '<strong>An adjuster visit within a day or two</strong> can be set as priority booking rather than an emergency.',
+        '<strong>Routine work</strong> (replacement estimates, gutters, maintenance) books into a normal slot.',
+      ],
+      emergencyNote:
+        'Anything flagged is warm-transferred to the number you choose. If nobody answers, the crew lead gets a “call me now” alert with the address and what the caller described.',
+      intakeH2: 'What Remi asks a roofing caller',
+      intakeIntro: 'Your intake script decides. A typical roofing intake asks for:',
+      intake: [
+        { field: 'Name, callback number and property address', why: 'where the estimator is going' },
+        { field: 'What happened and when', why: 'the storm date matters for the claim' },
+        { field: 'Is water coming in?', why: 'decides tarp call or inspection' },
+        { field: 'Claim status and adjuster date', why: 'so the inspection lands first' },
+        { field: 'Roof type and stories', why: 'asphalt, metal, tile or flat; ladder setup' },
+        { field: 'Owner or landlord', why: 'who signs the contract' },
+        { field: 'Best inspection time', why: 'booked from your estimators’ calendars' },
+      ],
+      booksH2: 'What can Remi book for a roofing company?',
+      softwareNote:
+        'ServiceTitan is live, so a storm inspection lands as a job with the claim notes attached. If your estimators work from Google Calendar, Remi books there and logs the lead in HubSpot.',
+      costH2: 'What does a missed roofing lead cost?',
+      costBody:
+        '<p>Keres AI estimates that a roof replacement is routinely worth $10,000 or more, and that the first company to inspect after a storm usually wins the job. The <a href="/benchmarks/roofing-lead-response">roofing lead-response benchmarks</a> explain those estimates and cite the published lead-response research behind them.</p><p>The cost lands on your best days: a storm sends many calls in a few hours, and every busy signal is a homeowner calling the next roofer.</p>',
+      calculator: { href: '/tools/roofing-storm-lead-calculator', label: 'roofing storm-lead calculator' },
+      compareH2: 'What should a roofer ask an AI receptionist vendor?',
+      compareIntro: 'Questions worth asking before storm season, of Keres or anyone else:',
+      checklist: [
+        'Can it tell an active leak from an inspection request, on your rules?',
+        'Does it capture the storm date, claim status and adjuster date?',
+        'Is there a cap or a surcharge when many calls arrive at once?',
+        'Does it book onto your estimators’ calendars, or only take a message?',
+        'What languages does it answer in? Remi answers in English today.',
+        'Is the per-minute rate after included minutes written into the quote?',
+      ],
+      priceH2: 'Is an AI receptionist cheaper than an answering service for roofers?',
+      priceBody:
+        '<p>Live answering services publish plans from about $250/month (Ruby, 50 minutes) and AI receptionists from about $25–$100/month; see <a href="/ai-receptionist-cost">what an AI receptionist costs</a>. For a roofer, the bigger difference is the storm week: a plan with a small minute allowance can run over fast, and a message-taker does not book the inspection.</p><p>Keres quotes Remi to your call volume, including your storm season: a monthly rate with included minutes, then per-minute, with no per-call fees and no surcharge for simultaneous calls. See <a href="/pricing">pricing</a>.</p>',
+      ctaHeading: 'Book the inspection before the other roofer does',
+      ctaSub: 'Book a 30-minute demo and hear Remi take a storm call with your claim questions.',
+    },
   },
   {
     slug: 'towing',
@@ -233,26 +493,93 @@ const allIndustries: Industry[] = [
     shortLower: 'towing',
     title: 'AI Receptionist for Towing — 24/7 Dispatch | Keres',
     description:
-      'Keres AI answers every towing call 24/7, captures roadside assistance requests, and dispatches your drivers — so no stranded motorist ever calls a competitor.',
+      'Keres AI answers towing calls 24/7 in two rings, takes the location and vehicle details, and sends the job to your dispatcher on your rules.',
     intro:
-      'In towing, every call is urgent — a stranded driver dials the next company the moment a call goes unanswered. Keres answers in two rings around the clock, captures the location and situation, and gets the job to your dispatcher immediately, day or night.',
+      'In towing, a stranded driver dials the next company the moment a call goes unanswered. Remi answers in two rings, around the clock, takes the location and the vehicle, and gets the job to your dispatcher, so calls stop going to voicemail.',
     pains: [
-      'Stranded motorists who immediately call a competitor when the line is busy',
-      'After-hours dispatch gaps when the office is closed',
-      'High call volume during bad weather or accidents overwhelming the front desk',
-      'Drivers missing inbound calls while running another job',
+      'Stranded drivers who call the next company on a busy line',
+      'Nights and weekends with nobody in the office',
+      'Ice storms and pileups that flood the line at once',
+      'Drivers on a hook-up who can’t take the next call',
     ],
     books: [
-      'Roadside assistance and tow requests',
-      'Dispatch alerts to the on-call driver',
-      'Lockout, jump-start, and fuel-delivery bookings',
-      'Accident recovery and impound intake',
+      'Tows, jump-starts, lockouts and fuel delivery',
+      'Scheduled transports and non-running vehicle pickups',
+      'Accident-recovery calls sent to dispatch',
+      'Impound and vehicle-release questions answered',
     ],
     faqs: [
-      { q: 'Can the AI handle emergency tow requests?', a: 'Yes — Keres captures the location, vehicle type, and situation, flags the job as an emergency to your dispatcher by text, and keeps the motorist informed until help is confirmed.' },
-      { q: 'Does it cover 24/7 dispatch?', a: 'Keres answers around the clock — including nights, weekends, and holidays — so your towing business never misses a call at 2 AM when stranded motorists need you most.' },
-      { q: 'Can it handle high call volume during bad weather?', a: 'Yes — Keres answers unlimited simultaneous calls, so ice storms, accidents, and high-volume nights never overwhelm your dispatch line.' },
+      { q: 'Can an AI receptionist take tow calls at 2 a.m.?', a: 'Yes. Remi answers in two rings, 24/7, takes the location, vehicle and destination, and sends the job to your dispatcher or on-call driver the way your rules say.' },
+      { q: 'How does Remi get a location a driver can use?', a: 'It asks for the road, the direction of travel, the nearest exit, mile marker or cross street, and a landmark, then reads it back to the caller before passing it on.' },
+      { q: 'Can it handle motor-club and roadside-plan calls?', a: 'Remi asks which motor club or roadside plan the caller is using and notes it on the job, so your dispatcher can check coverage before the truck rolls.' },
+      { q: 'Will it quote tow prices?', a: 'Only the prices you put in its script, such as a hook-up fee or a per-mile rate. Anything else goes to your dispatcher.' },
+      { q: 'What about impound and vehicle-release calls?', a: 'Remi answers with the hours, documents and fees you give it. It does not release vehicles or make exceptions; those go to your office.' },
+      { q: 'What happens on a night when many calls come in at once?', a: 'Remi answers calls that arrive at the same time, and Keres does not charge extra for simultaneous calls. Billing is a monthly rate with included minutes, then per-minute, never per call.' },
     ],
+    trade: {
+      answer:
+        '<strong>Keres AI’s answer for towing companies is Remi</strong>, an AI receptionist that takes every call in two rings, 24/7, so a stranded driver gets an answer instead of voicemail. Remi asks your towing questions (exact location, vehicle and drive type, destination, motor club), sends urgent jobs to dispatch, and books scheduled tows into Google Calendar, HubSpot or ServiceTitan. Billing is a monthly rate with included minutes, then per-minute, with no per-call fees. Towing setups go live in five business days.',
+      painsH2: 'Why do towing companies miss calls?',
+      painsNote:
+        'Towing is all urgent and mostly after hours. The calls you miss are rarely recoverable, because the driver on the shoulder has already called someone else by the time you call back.',
+      callH2: 'What a towing call to Remi sounds like',
+      call: [
+        { who: 'Remi', line: '[Your company], this is Remi. Are you somewhere safe right now?' },
+        { who: 'Caller', line: 'Yes, I’m on the shoulder. My car just died on Route 9.' },
+        { who: 'Remi', line: 'Okay. Which direction are you headed, and what’s the nearest exit or mile marker?' },
+        { who: 'Caller', line: 'Northbound, just past exit 14.' },
+        { who: 'Remi', line: 'Thank you. What’s the vehicle, and is it all-wheel drive?' },
+        { who: 'Caller', line: 'A 2019 Outback, so yes.' },
+        { who: 'Remi', line: 'Then it needs a flatbed. Where would you like it taken?' },
+        { who: 'Caller', line: 'To my mechanic in town.' },
+        { who: 'Remi', line: 'Got it. I’ve sent this to dispatch with your location, and they’ll text you the driver’s arrival time.' },
+      ],
+      callNote:
+        'Safety comes first in this example because the owner put it first in the script. The drive-type question decides flatbed or wheel-lift before the dispatcher assigns a truck.',
+      emergencyH2: 'How does Remi prioritise towing calls?',
+      emergencyIntro:
+        'Nearly every tow call is urgent, so towing rules are about priority and safety rather than whether to dispatch. You set them with Keres during setup. A typical towing setup:',
+      emergencyRules: [
+        '<strong>Someone hurt, or a vehicle blocking a travel lane.</strong> Remi tells the caller to call 911 first, then sends the job to dispatch.',
+        '<strong>A child or pet locked in a vehicle.</strong> Remi tells the caller to call 911, then alerts dispatch.',
+        '<strong>A caller alone at night, with children, or in extreme weather</strong> goes to the top of the queue.',
+        '<strong>Police or accident-scene requests</strong> go straight to the dispatcher you name.',
+        '<strong>Scheduled transports and non-running pickups</strong> book into an open slot.',
+        '<strong>Impound and release questions</strong> are answered from your script, not dispatched.',
+      ],
+      emergencyNote:
+        'Urgent jobs are warm-transferred to your dispatcher or on-call driver. If the transfer is not picked up, Remi sends a “call me now” alert with the location and vehicle already written down.',
+      intakeH2: 'What Remi asks a towing caller',
+      intakeIntro: 'The script is yours. A typical towing intake asks:',
+      intake: [
+        { field: 'Is the caller safe?', why: 'asked before anything else' },
+        { field: 'Exact location', why: 'road, direction, exit or mile marker, cross street, landmark' },
+        { field: 'Vehicle year, make, model and colour', why: 'so the driver spots it' },
+        { field: 'Drive type and whether it rolls', why: 'flatbed or wheel-lift' },
+        { field: 'What happened', why: 'won’t start, flat, lockout, out of fuel, accident' },
+        { field: 'Destination and passengers', why: 'where it goes and who needs a ride' },
+        { field: 'Motor club, roadside plan or direct pay', why: 'so dispatch knows before the truck rolls' },
+      ],
+      booksH2: 'What can Remi handle for a towing company?',
+      softwareNote:
+        'Most towing dispatch runs on its own board, so Remi’s main job is getting the details to your dispatcher fast. Scheduled transports can book into ServiceTitan or Google Calendar, with every caller logged in HubSpot.',
+      costH2: 'What does a missed towing call cost?',
+      costBody:
+        '<p>Keres AI has not published a towing benchmark, so this page gives no towing statistic. A missed tow call is the least recoverable kind: the driver on the shoulder will not wait for a callback.</p><p>The value depends on your mix of motor-club jobs, cash tows and accident recovery. Multiply missed calls a month by the share you would have run and your average ticket for each.</p>',
+      calculator: { href: '/tools/missed-call-calculator', label: 'missed-call calculator' },
+      compareH2: 'What should a towing company look for in an AI receptionist?',
+      compareIntro: 'Questions to put to any vendor:',
+      checklist: [
+        'Does it ask about safety before anything else?',
+        'Does it get a location precise enough for a driver at night?',
+        'Does it ask drive type, so dispatch sends the right truck?',
+        'Can it note motor-club and roadside-plan details for dispatch?',
+        'How fast does the job reach your dispatcher, and by what channel?',
+        'Is it billed per call, which adds up on an ice-storm night, or by the month?',
+      ],
+      ctaHeading: 'Answer the stranded driver on the first call',
+      ctaSub: 'Book a 30-minute demo and hear Remi take a roadside call with your dispatch rules.',
+    },
   },
   {
     slug: 'septic',
@@ -262,26 +589,91 @@ const allIndustries: Industry[] = [
     shortLower: 'septic',
     title: 'AI Receptionist for Septic Services | Keres AI',
     description:
-      'Keres AI answers every septic call 24/7, books pumping and inspection appointments, and dispatches emergency backups instantly. Never lose a job to voicemail.',
+      'Keres AI answers septic calls 24/7, books pumping and inspections, and sends backups and alarm calls to your crew on the rules you set.',
     intro:
-      'Septic backups are emergencies — homeowners call whoever picks up first. Keres answers every call in two rings, books routine pumping appointments, and dispatches your crew immediately when an emergency comes in, so every job stays yours.',
+      'A septic backup is a call homeowners make to whoever answers first. Remi picks up in two rings, books routine pumping, and sends an alarm or a backup to your crew on the rules you set, so calls stop going to voicemail.',
     pains: [
-      'Emergency backup calls missed while crews are in the field',
-      'Routine pumping reminders and bookings falling through',
-      'Callers hiring a competitor because no one answered',
-      'After-hours emergencies with no dispatch coverage',
+      'Backup calls missed while the crew is out on a truck',
+      'Routine pumping calls nobody had time to return',
+      'Real-estate inspection requests with a closing date attached',
+      'Alarm calls at night with nobody on the phones',
     ],
     books: [
-      'Routine pumping and inspection appointments',
-      'Emergency backup and overflow dispatch',
-      'System inspection and repair scheduling',
-      'Maintenance reminder follow-ups',
+      'Routine pumping',
+      'Real-estate transfer inspections',
+      'Alarm and backup calls sent to the on-call crew',
+      'Riser, lid and repair estimates',
     ],
     faqs: [
-      { q: 'Can it handle septic emergency calls?', a: 'Yes. Keres identifies backup and overflow emergencies, captures the address and details, books the dispatch, and texts your on-call crew immediately.' },
-      { q: 'Does it send maintenance reminders?', a: 'Keres captures customer information and service history so you can trigger pumping reminders — typically every 2–3 years — to keep your schedule full year-round.' },
-      { q: 'Does it integrate with field-service software?', a: 'Keres writes jobs to ServiceTitan, Google Calendar and HubSpot today, and to other apps through Zapier. Jobber and Housecall Pro are rolling out.' },
+      { q: 'Can an AI receptionist handle septic backup calls?', a: 'Yes, on the rules you set during setup. A typical septic setup treats sewage in the house or surfacing in the yard as an emergency and warm-transfers it to the on-call crew, with a “call me now” alert if nobody picks up.' },
+      { q: 'Does Remi book routine pumping?', a: 'Yes. Remi asks when the tank was last pumped, its size if known, and whether the lid is buried, then books a slot and texts the homeowner a confirmation.' },
+      { q: 'Can it take real-estate inspection requests?', a: 'Yes. Remi asks for the closing date, who is paying, and the agent’s contact, and books the inspection with that deadline in the notes.' },
+      { q: 'Does it send pumping reminders?', a: 'Remi records the last pump date. Reminders are the job of Theo, the Keres follow-up agent, or of your own system.' },
+      { q: 'Does it know my service area?', a: 'Your script lists the towns or counties you serve. Callers outside them hear that plainly instead of getting booked for a visit you cannot make.' },
     ],
+    trade: {
+      answer:
+        '<strong>Keres AI answers the phone for septic service companies</strong> with Remi, an AI receptionist that picks up every call in two rings, around the clock. Remi asks your septic intake questions (last pump date, system type, alarm or backup, closing date for inspections) and books pumping, inspections and urgent visits into Google Calendar, HubSpot or ServiceTitan. Keres bills a monthly rate with included minutes, then per-minute, with no per-call fees. A septic setup goes live in five business days.',
+      painsH2: 'Why do septic companies miss calls?',
+      painsNote:
+        'Septic work is small crews and long drives. The person who would answer the phone is usually the one running the truck, so calls pile up exactly when the business is busiest.',
+      callH2: 'What a septic call to Remi sounds like',
+      call: [
+        { who: 'Remi', line: 'Thanks for calling [your company], this is Remi. How can I help?' },
+        { who: 'Caller', line: 'The alarm on our septic system started beeping an hour ago.' },
+        { who: 'Remi', line: 'Is the alarm light on as well, and are any drains backing up inside?' },
+        { who: 'Caller', line: 'The light’s on. Drains are fine so far.' },
+        { who: 'Remi', line: 'Until a technician checks it, keep water use low: no laundry, dishwasher or long showers. What’s the property address?' },
+        { who: 'Caller', line: '9 Mill Pond Road.' },
+        { who: 'Remi', line: 'Do you know when the tank was last pumped?' },
+        { who: 'Caller', line: 'Maybe three years ago.' },
+        { who: 'Remi', line: 'Thank you. I’m sending this to the on-call technician as an alarm call. You’ll get a text when they confirm a time.' },
+      ],
+      callNote:
+        'In this example the owner’s script includes the water-use advice and treats any alarm as on-call work. A shop that handles alarms next morning would have Remi book the first slot instead.',
+      emergencyH2: 'Which septic calls are emergencies?',
+      emergencyIntro:
+        'You decide, with Keres, during setup, and Remi follows those rules. A typical septic setup flags:',
+      emergencyRules: [
+        '<strong>Sewage backing up into the house</strong>, or surfacing in the yard near the tank or drain field.',
+        '<strong>A high-water or pump alarm</strong> on an aerobic or pump system. A typical script asks the caller to cut water use until the crew arrives.',
+        '<strong>Every drain in the house slow at once.</strong>',
+        '<strong>A real-estate inspection with a near closing date</strong> is usually priority booking rather than an emergency.',
+        '<strong>Routine pumping, riser installs and estimates</strong> book into a normal slot.',
+      ],
+      emergencyNote:
+        'Flagged calls are warm-transferred to the on-call crew. If nobody answers, Remi sends a “call me now” alert with the address, the symptoms and the last pump date.',
+      intakeH2: 'What Remi asks a septic caller',
+      intakeIntro: 'Your script decides. A typical septic intake covers:',
+      intake: [
+        { field: 'Name, callback number and property address', why: 'where the truck is going' },
+        { field: 'Where the tank is, if known', why: 'and whether the lid is buried or on a riser' },
+        { field: 'Last pump date and tank size', why: 'so the crew brings the right truck' },
+        { field: 'System type', why: 'conventional, aerobic, mound or pump' },
+        { field: 'Symptoms', why: 'alarm, slow drains, odour, backup, wet ground' },
+        { field: 'Reason for the call', why: 'routine pumping, inspection with a closing date, or a problem' },
+        { field: 'Access', why: 'gates, dogs, where the truck can park' },
+      ],
+      booksH2: 'What can Remi book for a septic company?',
+      softwareNote:
+        'Remi writes septic jobs into ServiceTitan, or books Google Calendar and logs the caller in HubSpot. Zapier can carry the last pump date into another system you use.',
+      costH2: 'What does a missed septic call cost?',
+      costBody:
+        '<p>Keres AI has not published a septic benchmark, so this page gives no septic statistic. What a missed call costs depends on the kind of call: a missed routine pumping call may come back later, while a backup call goes to whoever answers.</p><p>Septic customers also come back. A household you pump today will need pumping again, and it is far more likely to call you if it has your number.</p>',
+      calculator: { href: '/tools/missed-call-calculator', label: 'missed-call calculator' },
+      compareH2: 'What matters in an answering service for septic companies?',
+      compareIntro: 'Use this list in any demo, including ours:',
+      checklist: [
+        'Does it ask the last pump date and system type?',
+        'Can it tell an alarm or a backup from a routine pumping call?',
+        'Can it book real-estate inspections against a closing date?',
+        'Does it know your service area and say no politely outside it?',
+        'Does it write the job somewhere your crew already looks?',
+        'Is it billed per call or by the month with included minutes?',
+      ],
+      ctaHeading: 'Answer septic calls while the crew is on the truck',
+      ctaSub: 'Book a 30-minute demo and hear Remi take an alarm call with your rules.',
+    },
   },
 ];
 
@@ -293,6 +685,7 @@ export const mergedIndustries: Record<string, string> = {
   'real-estate': '/industries/real-estate',
   'professional-intake': '/industries/law-firms',
   dentists: '/industries/dental-med-spa',
+  'med-spas': '/industries/dental-med-spa',
 };
 /** The industry pages that still build. */
 export const industries: Industry[] = allIndustries.filter((i) => !(i.slug in mergedIndustries));
