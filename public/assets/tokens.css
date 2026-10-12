@@ -41,6 +41,8 @@
   --accent-hover:  color-mix(in srgb, #C2410C 82%, #14100D);
   --accent-ink:    #FFFFFF;
   --accent-wash:   rgba(194, 65, 12, 0.07);
+  /* Small accent text on an accent wash: #C2410C measured 4.24:1 there. */
+  --accent-text:   #9A3412;
 
   /* ─── Semantic — Owner Daily Brief only ────────────────── */
   --good:      #0F7B4F;
@@ -164,6 +166,7 @@
   --accent-hover: color-mix(in srgb, #F2711C 85%, #FFFFFF);
   --accent-ink:   #17110B;
   --accent-wash:  rgba(242, 113, 28, 0.12);
+  --accent-text:  #F2711C;
 
   --good:      #34D399;
   --good-wash: rgba(52, 211, 153, 0.12);
@@ -198,6 +201,7 @@
     --accent-hover: color-mix(in srgb, #F2711C 85%, #FFFFFF);
     --accent-ink:   #17110B;
     --accent-wash:  rgba(242, 113, 28, 0.12);
+    --accent-text:  #F2711C;
 
     --good:      #34D399;
     --good-wash: rgba(52, 211, 153, 0.12);

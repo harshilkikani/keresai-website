@@ -63,7 +63,7 @@ const keresCells = row(keresRow);
   </div>
   <div class="wtable" role="table" aria-labelledby="workers-title">
     <div class="wtable__head" role="row">
-      {p.cols.map((c) => <span role="columnheader">{c}</span>)}
+      {p.cols.map((c) => <span role="columnheader">{c || <span class="sr-only">{p.quote}</span>}</span>)}
     </div>
     {workers.filter((w) => w.slug !== 'custom').map((w) => { const price = priceAmount(w.priceKey); return (
       <div class:list={['wtable__row', w.slug === 'inbound' && 'wtable__row--lead']} role="row">

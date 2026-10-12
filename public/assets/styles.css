@@ -81,12 +81,11 @@ input, textarea, select, button { font: inherit; color: inherit; }
 }
 .skip-link {
   position: absolute; top: -40px; left: 0;
-  background: var(--orange); color: #fff; padding: 10px 16px;
+  background: var(--orange); color: var(--accent-ink); padding: 10px 16px;
   z-index: 10000; border-radius: 0 0 var(--radius) 0;
   font-weight: 500;
-  display: none;
 }
-.skip-link:focus { display: block; top: 0; }
+.skip-link:focus { top: 0; }
 
 :focus-visible {
   outline: 2px solid var(--orange);
@@ -563,7 +562,7 @@ section.dark .section-body { color: var(--text-on-dark); }
   line-height: 1;
 }
 .btn-primary {
-  background: var(--orange); color: #fff;
+  background: var(--orange); color: var(--accent-ink);
   box-shadow: 0 4px 16px rgba(232,93,4,0.25);
 }
 .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(232,93,4,0.35); }
@@ -936,7 +935,7 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
 }
 .cal-day:hover:not(.empty):not(.past) { background: color-mix(in srgb, var(--orange) 12%, transparent); color: var(--orange); }
 .cal-day.today { background: color-mix(in srgb, var(--orange) 18%, transparent); color: var(--orange); font-weight: 600; }
-.cal-day.selected { background: var(--orange); color: #fff !important; font-weight: 600; }
+.cal-day.selected { background: var(--orange); color: var(--accent-ink) !important; font-weight: 600; }
 .cal-day.past { color: var(--text-dim); opacity: 0.55; cursor: default; }
 .cal-day.empty { cursor: default; }
 .cal-info { padding: 14px 20px; border-top: 1px solid var(--border); font-size: 13.5px; color: var(--text-muted); }
@@ -1256,14 +1255,14 @@ footer[role="contentinfo"] {
 }
 .roi-vert-btn.active {
   background: var(--orange);
-  color: #fff;
+  color: var(--accent-ink);
 }
 .roi-grid {
   display: grid;
   grid-template-columns: minmax(240px, 1fr) 1.4fr;
   gap: 24px;
 }
-@media (max-width: 780px) { .roi-grid { grid-template-columns: 1fr; } }
+@media (max-width: 780px) { .roi-grid { grid-template-columns: minmax(0, 1fr); } }
 
 .roi-inputs { display: flex; flex-direction: column; gap: 14px; }
 .roi-field { display: flex; flex-direction: column; gap: 5px; }

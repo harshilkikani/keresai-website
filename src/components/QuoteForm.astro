@@ -48,29 +48,29 @@ const showCallback = locale === 'es' && has.remiSpanish && has.callback;
       <legend class="qf__legend">{f.legend1}</legend>
       <div class="qf__field">
         <label class="qf__label" for={`${id}-business`}>{f.business}</label>
-        <input class="qf__input" id={`${id}-business`} name="business" type="text" required autocomplete="organization" />
-        <p class="qf__error" data-qf-error="business"></p>
+        <input class="qf__input" id={`${id}-business`} aria-describedby={`${id}-business-error`} name="business" type="text" required autocomplete="organization" />
+        <p class="qf__error" id={`${id}-business-error`} data-qf-error="business" aria-live="polite"></p>
       </div>
       <div class="qf__field">
         <label class="qf__label" for={`${id}-phone`}>{f.mobile}</label>
-        <input class="qf__input" id={`${id}-phone`} name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="(555) 123-4567" />
-        <p class="qf__error" data-qf-error="phone"></p>
+        <input class="qf__input" id={`${id}-phone`} aria-describedby={`${id}-phone-error`} name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="(555) 123-4567" />
+        <p class="qf__error" id={`${id}-phone-error`} data-qf-error="phone" aria-live="polite"></p>
       </div>
       {kind === 'custom' ? (
         <div class="qf__field">
           <label class="qf__label" for={`${id}-job`}>{f.job}</label>
-          <textarea class="qf__input qf__textarea" id={`${id}-job`} name="job" required maxlength="200" rows="3" aria-describedby={`${id}-job-hint`}></textarea>
+          <textarea class="qf__input qf__textarea" id={`${id}-job`} name="job" required maxlength="200" rows="3" aria-describedby={`${id}-job-hint ${id}-job-error`}></textarea>
           <p class="qf__hint" id={`${id}-job-hint`}>{f.jobHint}</p>
-          <p class="qf__error" data-qf-error="job"></p>
+          <p class="qf__error" id={`${id}-job-error`} data-qf-error="job" aria-live="polite"></p>
         </div>
       ) : (
         <div class="qf__field">
           <label class="qf__label" for={`${id}-industry`}>{f.industry}</label>
-          <select class="qf__input" id={`${id}-industry`} name="industry" required>
+          <select class="qf__input" id={`${id}-industry`} aria-describedby={`${id}-industry-error`} name="industry" required>
             <option value="">{f.chooseOne}</option>
             {f.industries.map(([v, lbl]) => <option value={v} selected={v === industry}>{lbl}</option>)}
           </select>
-          <p class="qf__error" data-qf-error="industry"></p>
+          <p class="qf__error" id={`${id}-industry-error`} data-qf-error="industry" aria-live="polite"></p>
         </div>
       )}
       <button type="button" class="btn-k btn-k--primary btn-k--wide" data-qf-next>{f.next}</button>
@@ -80,19 +80,19 @@ const showCallback = locale === 'es' && has.remiSpanish && has.callback;
       <legend class="qf__legend">{f.legend2}</legend>
       <div class="qf__field">
         <label class="qf__label" for={`${id}-volume`}>{f.volume}</label>
-        <select class="qf__input" id={`${id}-volume`} name="volume" required>
+        <select class="qf__input" id={`${id}-volume`} aria-describedby={`${id}-volume-error`} name="volume" required>
           <option value="">{f.chooseOne}</option>
           {f.volumes.map(([v, lbl]) => <option value={v}>{lbl}</option>)}
         </select>
-        <p class="qf__error" data-qf-error="volume"></p>
+        <p class="qf__error" id={`${id}-volume-error`} data-qf-error="volume" aria-live="polite"></p>
       </div>
       <div class="qf__field">
         <label class="qf__label" for={`${id}-handling`}>{f.handling}</label>
-        <select class="qf__input" id={`${id}-handling`} name="handling" required>
+        <select class="qf__input" id={`${id}-handling`} aria-describedby={`${id}-handling-error`} name="handling" required>
           <option value="">{f.chooseOne}</option>
           {f.handlings.map(([v, lbl]) => <option value={v}>{lbl}</option>)}
         </select>
-        <p class="qf__error" data-qf-error="handling"></p>
+        <p class="qf__error" id={`${id}-handling-error`} data-qf-error="handling" aria-live="polite"></p>
       </div>
       <div class="qf__actions">
         <button type="button" class="btn-k btn-k--ghost" data-qf-back>{f.back}</button>
