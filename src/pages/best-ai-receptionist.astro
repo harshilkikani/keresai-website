@@ -1,0 +1,164 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, articleSchema, itemListSchema } from '../data/schema';
+import { answeringVendors, keresRow, VENDORS_CHECKED } from '../data/answeringVendors';
+import { comparisons, ROUNDUP_SLUGS } from '../data/comparisons';
+
+const path = '/best-ai-receptionist';
+const title = 'Best AI Receptionists for Small Businesses (2026) | Keres AI';
+const h1 = 'Best AI Receptionists for Small Businesses (2026)';
+const description = 'Ten AI receptionists and answering services compared on who answers, how each bills and its published price, with picks by need and by industry.';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Compare', path: '/compare' },
+  { name: 'Best AI receptionists', path },
+];
+
+const vendors = Object.values(answeringVendors);
+const roundups = ROUNDUP_SLUGS.map((s) => comparisons.find((c) => c.slug === s)!).filter(Boolean);
+
+// Each pick comes from the table: the vendor's own positioning, billing and
+// lowest published plan. Keres AI picks are limited to what it actually does.
+const picks: { need: string; pick: string }[] = [
+  { need: 'Lowest price', pick: 'Smith.ai’s AI receptionist is free for 25 calls a month, then $3 a call. The lowest paid plans are Upfirst ($24.95/mo for 30 calls) and Dialzara ($29/mo for 60 minutes). See <a href="/ai-receptionist-cost">what 100 calls a month cost</a> on each.' },
+  { need: 'Live humans on every call', pick: 'Ruby ($250/mo for 50 minutes) and PATLive ($99/mo for 50 minutes, bilingual answering included) answer with US-based receptionists. Abby Connect ($165/mo) pairs a receptionist team with AI for routine calls, and Smith.ai offers AI with live receptionists on the same line.' },
+  { need: 'Legal intake', pick: 'AnsweringLegal answers only for law firms but does not publish prices. Smith.ai and Abby Connect both name Clio among their integrations. Keres AI runs intake by practice area, collects the caller’s and opposing party’s names for your conflict check, and books the consultation; its Clio and Lawmatics integrations are rolling out.' },
+  { need: 'Home services on ServiceTitan', pick: 'Keres AI books jobs into ServiceTitan during the call, and also into Google Calendar or HubSpot. If you are weighing another vendor, ask whether it books into ServiceTitan or sends you a message to enter. PATLive names Jobber among its integrations; Keres AI’s Jobber and Housecall Pro integrations are rolling out.' },
+  { need: 'Real estate agents', pick: 'Keres AI answers listing calls, asks about pre-approval and timeline, and books the showing into Google Calendar or HubSpot (Follow Up Boss is rolling out). My AI Front Desk suits agents who want phone, text and website chat answered by one AI.' },
+  { need: 'Website and receptionist from one team', pick: 'Keres AI: Found builds and runs the website, Google Business Profile and reviews from $249/mo ($499 for law firms), and Remi answers the phone, quoted to your call volume.' },
+  { need: 'Billing by caller', pick: 'Goodcall ($79/mo for 100 unique callers; a repeat caller counts once a month).' },
+  { need: 'Spanish-speaking callers', pick: 'Rosie ($49/mo for 250 minutes) answers in English and Spanish; PATLive includes bilingual answering; Upfirst lists many languages. Keres AI’s Remi answers in English today.' },
+];
+
+const faqs = [
+  { q: 'What is the best AI receptionist for a small business?', a: 'It depends on the need. For the lowest price, Upfirst and Dialzara publish paid plans under $30 a month. For a person on every call, Ruby and PATLive. For people and AI together, Smith.ai and Abby Connect. For calls booked into ServiceTitan, HubSpot or Google Calendar, plus the website and Google profile from the same team, Keres AI.' },
+  { q: 'What is the cheapest AI receptionist?', a: 'On prices published on October 11, 2026, Smith.ai’s AI receptionist is free for 25 calls a month, then $3 per call. The cheapest paid plans are Upfirst at $24.95 for 30 calls and Dialzara at $29 for 60 minutes. The <a href="/ai-receptionist-cost">AI receptionist cost guide</a> works out what 100 calls a month cost on each.' },
+  { q: 'Which AI receptionists have live humans as backup?', a: 'Smith.ai and Abby Connect offer AI and live receptionists in one service. Ruby and PATLive answer with people only. Keres AI does not answer with people: Remi texts or transfers urgent calls to your own team.' },
+  { q: 'Is Keres AI HIPAA compliant?', a: 'No. Keres AI is not HIPAA or SOC 2 certified and does not sign BAAs or DPAs. Practices that need a BAA should choose a vendor that signs one; Abby Connect’s pricing page mentions HIPAA compliance options, so ask it directly.' },
+  { q: 'Does Keres AI answer calls in Spanish?', a: 'Not yet. Remi answers in English today. Rosie and PATLive answer in English and Spanish, and Upfirst lists many languages.' },
+  { q: 'How were these AI receptionists chosen?', a: 'They are the services our five alternatives pages compare: Smith.ai, Ruby, Goodcall, Rosie and AnsweringLegal, plus the alternatives listed on those pages. Every price and feature comes from the vendor’s own site, checked October 11, 2026.' },
+];
+
+const article = articleSchema({
+  path,
+  headline: h1,
+  description,
+  datePublished: '2026-10-11',
+  dateModified: '2026-10-11',
+  readingTime: 'PT8M',
+});
+
+const list = itemListSchema({
+  name: 'AI receptionists and answering services compared (2026)',
+  items: [...vendors, keresRow].map((v) => ({ name: v.name, description: `${v.type}. ${v.billing} ${v.starting} Best for: ${v.bestFor}` })),
+});
+
+const webpage = webPageSchema({
+  path,
+  name: title,
+  description,
+  speakableSelectors: ['.answer-block', '.faq-a'],
+});
+---
+<Layout title={title} description={description} path={path} ogType="article">
+  <Schema slot="head" graph={[article, list, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">Buyer’s guide · 2026</span>
+    <h1>Best AI receptionists for <span class="accent">small businesses</span> (2026)</h1>
+    <p class="updated" style="font-size:14px;color:var(--text-dim);margin:-8px 0 16px">Updated <time datetime="2026-10-11">October 11, 2026</time></p>
+    <p class="lead" style="font-size:16px">Written by Keres AI, which sells one of the receptionists below. Prices and features come from each vendor's own site, checked October 11, 2026.</p>
+    <div class="hero-ctas">
+      <a href="/ai-receptionist-cost" class="btn btn-primary">Compare costs</a>
+      <a href="/hear-it" class="btn btn-outline">Hear Remi answer a call</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block">
+      <p>The best AI receptionist depends on what you need. For the lowest price, Upfirst ($24.95 a month for 30 calls) and Dialzara ($29 for 60 minutes) publish the cheapest paid plans. For a person on every call, Ruby and PATLive use live receptionists, and Smith.ai and Abby Connect mix people with AI. AnsweringLegal answers only for law firms. Keres AI suits local service businesses that want calls booked into ServiceTitan, HubSpot or Google Calendar and their website run by the same team.</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>How we compared them</h2>
+      <p>We compared ten services on four things: who answers (AI, people or both), how each one bills (per minute, per call or per caller), its lowest published plan, and who the vendor says it is for. Every figure comes from the vendor’s own pricing or product page on {VENDORS_CHECKED}; the table links each source. This is a comparison of published information, not a test of call quality, and there is no overall score: the picks below are by need. Keres AI wrote this page and sells Remi, which is listed in the same columns and under the same rules.</p>
+    </div>
+  </section>
+
+  <section class="page-section container" aria-labelledby="table-title">
+    <div class="section-label">Side by side</div>
+    <h2 id="table-title" class="section-title" style="margin-bottom:8px">AI receptionists and answering services compared</h2>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr><th>Option</th><th>Who answers</th><th>How it bills</th><th>Lowest published plan</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr class="keres">
+            <td><a href={keresRow.url}>{keresRow.name}</a> <em>(that’s us)</em></td>
+            <td>{keresRow.type}</td><td>{keresRow.billing}</td><td>{keresRow.starting}</td><td>{keresRow.bestFor}</td>
+          </tr>
+          {vendors.map((v) => (
+            <tr>
+              <td><a href={v.url} rel="noopener nofollow" target="_blank">{v.name}</a></td>
+              <td>{v.type}</td><td>{v.billing}</td><td>{v.starting}</td><td>{v.bestFor}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="margin-top:6px">Sources, checked {VENDORS_CHECKED}: {vendors.map((v, i) => (<>{i > 0 ? ' · ' : ''}<a href={v.source} rel="noopener nofollow" target="_blank">{v.name}</a></>))} · <a href="/pricing">Keres AI</a>.</p>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Which AI receptionist is best for your need?</h2>
+      <ul>{picks.map((p) => <li><strong>{p.need}:</strong> <Fragment set:html={p.pick} /></li>)}</ul>
+
+      <h2>Best AI receptionists by industry</h2>
+      <h3>Home services: HVAC, plumbing, roofing</h3>
+      <p>Trade calls are urgent and often come after hours, so booking the job on the call matters more than a low entry price. Keres AI books into ServiceTitan, Google Calendar or HubSpot and texts the on-call tech under your emergency rules. See <a href="/industries/home-services">Keres AI for home services</a>.</p>
+      <h3>Law firms</h3>
+      <p>Look for intake questions by practice area, capture of the opposing party’s name for your conflict check, and on-call attorney escalation. AnsweringLegal answers only for law firms. Smith.ai, Abby Connect and Upfirst each name Clio among the integrations on their own sites. See <a href="/industries/law-firms">Keres AI for law firms</a> and <a href="/answering-legal-alternative">AnsweringLegal alternatives</a>.</p>
+      <h3>Real estate</h3>
+      <p>Listing calls and portal enquiries arrive in the evening and at weekends, when agents are showing. Keres AI qualifies the buyer or seller and books the showing; My AI Front Desk covers phone, text and website chat. See <a href="/industries/real-estate">Keres AI for real estate</a>.</p>
+      <h3>Dental and med spa</h3>
+      <p>Practices that handle patient information may need a BAA. Keres AI does not sign BAAs today; Abby Connect’s pricing page mentions HIPAA compliance options, so confirm with any vendor before you sign. See <a href="/industries/dental-med-spa">Keres AI for dental and med spa</a>.</p>
+
+      <h2>When Keres AI is not the right pick</h2>
+      <ul>
+        <li><strong>You want a live receptionist on every call.</strong> Choose Ruby, PATLive or another live service; Remi is AI.</li>
+        <li><strong>You want the lowest published price and will set it up yourself.</strong> Self-serve AI tools start at $24.95 a month; Keres AI sets Remi up for you and quotes it to your volume.</li>
+        <li><strong>You need a BAA.</strong> Keres AI is not HIPAA or SOC 2 certified and does not sign BAAs or DPAs.</li>
+        <li><strong>Many of your callers speak Spanish.</strong> Remi answers in English today.</li>
+      </ul>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} title="Best AI receptionist FAQ" />
+
+  <section class="page-section container" aria-labelledby="related-title">
+    <div class="section-label">Keep comparing</div>
+    <h2 id="related-title" class="section-title" style="margin-bottom:8px">Alternatives by vendor</h2>
+    <ul class="prose">
+      {roundups.map((r) => <li><a href={`/${r.slug}`}>{r.detail?.linkLabel ?? `${r.competitor} alternatives`}</a></li>)}
+      <li><a href="/ai-receptionist-cost">How much does an AI receptionist cost?</a></li>
+      <li><a href="/compare">All comparisons</a></li>
+    </ul>
+  </section>
+
+  <CtaBand
+    heading="Hear Remi before you choose"
+    sub="Listen to a sample call with Remi, then get a quote to your call volume."
+    cta="Hear it"
+    href="/hear-it"
+  />
+</Layout>

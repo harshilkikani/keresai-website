@@ -44,6 +44,8 @@ export default defineConfig({
         !/^https:\/\/www\.keresai\.com\/(use-cases\/(after-hours-answering|appointment-booking)|quote|es\/quote)$/.test(page) &&
         // No published customer stories yet; the page is noindex.
         !/^https:\/\/www\.keresai\.com\/customers(\/|$)/.test(page) &&
+        // The cost study moved to /ai-receptionist-cost; the old URL is a redirect stub.
+        !/^https:\/\/www\.keresai\.com\/benchmarks\/ai-receptionist-cost-study(\.html)?$/.test(page) &&
         // The old /missed-call-calculator path is now a 301 redirect to
         // /tools/missed-call-calculator — keep the redirect out of the sitemap.
         // Anchored so the canonical /tools/ URL is not matched.
@@ -94,6 +96,8 @@ export default defineConfig({
     '/use-cases/appointment-booking': '/agents/inbound',
     // Never published, but named in the brief and cheap to honour.
     '/deliverability': '/agents/outbound',
+    // The benchmark cost study was rebuilt from published vendor prices.
+    '/benchmarks/ai-receptionist-cost-study': '/ai-receptionist-cost',
   },
   build: {
     // Emit /ai-receptionist.html style files so GitHub Pages serves clean URLs.
