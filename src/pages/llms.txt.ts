@@ -84,7 +84,7 @@ More specific industry pages sit beneath these hubs:
 ## City pages (AI receptionist by metro)
 Houston, Phoenix, Dallas, Atlanta, Chicago, Miami, Los Angeles, Charlotte, Tampa, Denver, Las Vegas, Austin — e.g. ${u('/ai-receptionist/houston')}
 
-## Benchmarks (sourced data)
+## Benchmarks (estimates; primary sources linked where they exist)
 - [Benchmarks index](${u('/benchmarks')})
 - [Legal intake conversion](${u('/benchmarks/legal-intake-conversion')}) · [HVAC answering](${u('/benchmarks/hvac-answering')}) · [Dental no-show](${u('/benchmarks/dental-no-show')}) · [Roofing lead response](${u('/benchmarks/roofing-lead-response')}) · [AI receptionist cost study](${u('/benchmarks/ai-receptionist-cost-study')})
 
@@ -116,7 +116,7 @@ Rolling out: Clio, Lawmatics, Jobber, Housecall Pro, Dentrix, Open Dental, Follo
 - [Email deliverability](${u('/glossary/email-deliverability')}) · [SPF](${u('/glossary/spf')}) · [DKIM](${u('/glossary/dkim')}) · [Inbox warmup](${u('/glossary/inbox-warmup')})
 
 ## Trust and company
-- [Trust & security](${u('/trust')}): data handling, DPAs, access logging.
+- [Trust & security](${u('/trust')}): data handling; not SOC 2 or HIPAA certified, no BAAs.
 - [About](${u('/about')}) · [Partners](${u('/partners')}) · [Customers](${u('/customers')}) · [Contact](${u('/contact')})
 
 ## Spanish (español)

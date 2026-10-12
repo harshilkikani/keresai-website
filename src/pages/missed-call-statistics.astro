@@ -19,14 +19,14 @@ const crumbs = [
   { name: 'Missed Call Statistics', path },
 ];
 
-// Honest, hedged industry ranges/estimates — matches the voice used elsewhere on
-// the site. Each is citable as a data point by AI search engines.
+// Hedged industry ranges/estimates. Only the lead-response figures have a
+// primary source (linked below); the rest are labelled estimates on the page.
 const stats = [
   { num: '25–40%', stat: '25–40% of inbound calls to service businesses go unanswered', context: 'Industry estimates put the share of inbound calls that service businesses miss between a quarter and two-fifths — higher after hours and during seasonal surges.' },
-  { num: '~85%', stat: 'About 85% of people whose call is not answered will not call back', context: 'When a caller reaches voicemail or a busy signal, the large majority do not leave a message or try again — they call the next business on the list.' },
+  { num: 'Most', stat: 'Most callers who reach voicemail do not call back', context: 'Industry surveys commonly report that the large majority of callers who reach voicemail or a busy signal neither leave a message nor try again; treat the exact share as an estimate.' },
   { num: '30–45%', stat: '30–45% of service calls arrive outside business hours', context: 'A large share of inbound demand — emergencies especially — comes at night, on weekends, and on holidays, when most front desks are closed.' },
-  { num: '5 min', stat: 'Responding within 5 minutes dramatically raises the odds of qualifying a lead', context: 'Studies of lead response time have found that contacting a lead within five minutes makes it many times more likely to be qualified than waiting even 30 minutes.' },
-  { num: 'First', stat: 'The first business to respond usually wins the job', context: 'Studies of lead response consistently find a strong majority of customers buy from whoever answers first, which is why missed and delayed calls leak revenue to faster competitors.' },
+  { num: '21×', stat: 'Odds of qualifying a lead are 21 times higher at 5 minutes than at 30', context: 'From the Lead Response Management study of 15,000 web leads across six companies (Oldroyd and InsideSales.com).' },
+  { num: '7×', stat: 'Firms that respond within an hour are nearly 7 times as likely to qualify the lead', context: 'From a 2011 Harvard Business Review analysis of online sales leads, compared with firms that waited even one hour longer; speed decides who wins the job.' },
   { num: '$1,200+', stat: 'A single missed high-ticket job can exceed $1,200 in lost revenue', context: 'For trades like HVAC, roofing, and restoration, one missed emergency call can represent a four- or five-figure job handed to a competitor.' },
 ];
 
@@ -41,9 +41,9 @@ const faqs = [
 const article = articleSchema({
   path,
   headline: 'Missed Call Statistics for Service Businesses (2026)',
-  description: 'How many calls service businesses miss, what those missed calls cost, and why speed to lead decides the job — with citable industry statistics.',
-  datePublished: '2026-02-01',
-  dateModified: '2026-05-26',
+  description: 'How many calls service businesses miss, what those missed calls cost, and why speed to lead decides the job: industry estimates with primary sources where they exist.',
+  datePublished: '2026-09-05',
+  dateModified: '2026-10-11',
   readingTime: 'PT6M',
 });
 
@@ -55,13 +55,13 @@ const statSchema = statisticListSchema({
 const webpage = webPageSchema({
   path,
   name: 'Missed Call Statistics 2026 | Keres AI',
-  description: 'How many calls service businesses miss, what those missed calls cost, and why speed to lead decides the job — with citable industry statistics.',
+  description: 'How many calls service businesses miss, what those missed calls cost, and why speed to lead decides the job: industry estimates with primary sources where they exist.',
   speakableSelectors: ['.answer-block', '.stat-card', '.faq-a'],
 });
 ---
 <Layout
   title="Missed Call Statistics 2026 | Keres AI"
-  description="How many calls do service businesses miss, what does it cost, and why does answering speed decide the job? Citable missed-call statistics for 2026."
+  description="How many calls do service businesses miss, what does it cost, and why does answering speed decide the job? Missed-call estimates for 2026, with sources where they exist."
   path={path}
   ogType="article"
 >
@@ -109,14 +109,22 @@ const webpage = webPageSchema({
       <p>The damage concentrates in two windows. The first is <a href="/glossary/after-hours-answering">after hours</a> — nights, weekends, and holidays — when 30–45% of demand arrives but most front desks are dark. The second is <a href="/use-cases/overflow-call-handling">overflow</a>, when your team is already on the phone and a second caller hits a busy signal. Both are exactly when high-intent and emergency calls come in.</p>
 
       <h2>Speed to lead decides who wins</h2>
-      <p>Even answered calls leak revenue when the response is slow. Research on <a href="/glossary/lead-response-time">lead response time</a> has consistently shown that contacting a lead within five minutes makes it dramatically more likely to qualify than waiting even half an hour — and that the first business to respond wins the majority of jobs. For phone-driven businesses, "first to respond" simply means "first to pick up."</p>
+      <p>Even answered calls leak revenue when the response is slow. Research on <a href="/glossary/lead-response-time">lead response time</a> has consistently shown that contacting a lead within five minutes makes it dramatically more likely to qualify than waiting even half an hour — and a 2011 Harvard Business Review analysis found firms that responded within an hour were nearly seven times as likely to qualify the lead. For phone-driven businesses, "first to respond" simply means "first to pick up."</p>
 
       <h2>What the math looks like for one business</h2>
       <p>Put the ranges together for a typical home-services operation: 250 inbound leads a month, a 60% answer rate, a 25% close rate on answered leads, and a $680 average ticket. That missed-call gap alone is roughly $17,000 in lost revenue every month — over $200,000 a year. Plug in your own numbers with the <a href="/tools/missed-call-calculator">missed-call revenue calculator</a>.</p>
 
       <h2>Closing the gap</h2>
       <p>The fix is structural, not motivational: you cannot hire your way to two-ring pickup at 2 a.m. An <a href="/agents/inbound">AI receptionist</a> answers every call in two rings, 24/7, qualifies the caller, and books the appointment during the call — driving the missed-call rate toward zero across after-hours, overflow, and surge periods. See how it works by <a href="/ai-receptionist-for-hvac">industry</a> or compare it to a traditional <a href="/ai-answering-service">answering service</a>.</p>
-      <p>For deeper, industry-specific data, see our <a href="/benchmarks">benchmarks hub</a> — including <a href="/benchmarks/hvac-answering">HVAC answering benchmarks</a>, <a href="/benchmarks/roofing-lead-response">roofing lead-response benchmarks</a>, the <a href="/benchmarks/ai-receptionist-cost-study">AI receptionist cost study</a>, <a href="/benchmarks/dental-no-show">dental no-show benchmarks</a>, and <a href="/benchmarks/legal-intake-conversion">legal intake conversion benchmarks</a>.</p>
+      <p>For deeper, industry-specific data, see our <a href="/benchmarks">benchmarks hub</a> — including <a href="/benchmarks/hvac-answering">HVAC answering benchmarks</a>, <a href="/benchmarks/roofing-lead-response">roofing lead-response benchmarks</a>, the <a href="/benchmarks/ai-receptionist-cost-study">AI receptionist cost comparison</a>, <a href="/benchmarks/dental-no-show">dental no-show benchmarks</a>, and <a href="/benchmarks/legal-intake-conversion">legal intake conversion benchmarks</a>.</p>
+
+      <h2>How these numbers were put together</h2>
+      <p>The ranges above are Keres estimates drawn from public industry reporting, not a Keres customer study. The two lead-response figures come from primary research:</p>
+      <ul>
+        <li><a href="https://www.mortech.com/hs-fs/hub/25649/file-13535879-pdf/docs/mit_study.pdf" rel="noopener" target="_blank">Oldroyd &amp; InsideSales.com, Lead Response Management Study</a> (15,000 leads, six companies)</li>
+        <li><a href="https://scholarsarchive.byu.edu/facpub/9711" rel="noopener" target="_blank">Oldroyd, McElheran &amp; Elkington, “The Short Life of Online Sales Leads,” Harvard Business Review (2011)</a></li>
+      </ul>
+      <p>Last reviewed October 11, 2026.</p>
     </div>
   </section>
 

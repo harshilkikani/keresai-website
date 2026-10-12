@@ -23,6 +23,8 @@ export interface Benchmark {
   sections: { h2: string; body: string }[]; // HTML allowed in body
   faqs: { q: string; a: string }[];
   related: { label: string; href: string }[];
+  /** Primary sources for the figures that have one. Ranges without a source are labelled estimates. */
+  sources?: { label: string; url: string }[];
 }
 
 export const benchmarks: Benchmark[] = [
@@ -30,14 +32,14 @@ export const benchmarks: Benchmark[] = [
     slug: 'hvac-answering',
     category: 'HVAC',
     pillar: 'inbound',
-    eyebrow: 'HVAC · Data',
+    eyebrow: 'HVAC · Estimates',
     title: 'HVAC Call Answering Benchmarks (2026) | Keres AI',
     description:
       'How many HVAC calls go unanswered, what share arrive after hours, and what a missed no-cool call costs. Citable HVAC answering benchmarks for 2026.',
     h1: 'HVAC call answering',
     h1Accent: 'benchmarks',
     lead: 'How many HVAC calls go unanswered, how much demand arrives after hours, and what a missed no-cool emergency really costs — the answering numbers every contractor should track.',
-    datePublished: '2026-02-10',
+    datePublished: '2026-09-05',
     answer:
       '<strong>HVAC companies miss an estimated 30–45% of inbound calls during peak season</strong>, and an estimated 35–50% of demand arrives after hours, when most offices are closed. Because a no-cool or no-heat call is urgent, callers who reach voicemail almost always dial a competitor — making peak-season answer rate one of the highest-leverage numbers in the business.',
     stats: [
@@ -67,16 +69,16 @@ export const benchmarks: Benchmark[] = [
     slug: 'roofing-lead-response',
     category: 'Roofing',
     pillar: 'inbound',
-    eyebrow: 'Roofing · Data',
+    eyebrow: 'Roofing · Estimates',
     title: 'Roofing Lead-Response Benchmarks (2026) | Keres AI',
     description:
       'How fast roofers must respond after a storm, why the first inspector wins the claim, and what a missed storm lead costs. Roofing lead-response benchmarks for 2026.',
     h1: 'Roofing lead-response',
     h1Accent: 'benchmarks',
     lead: 'How fast roofing companies must respond after a storm, why the first inspector usually wins the insurance claim, and what a missed storm-season lead really costs.',
-    datePublished: '2026-02-12',
+    datePublished: '2026-09-05',
     answer:
-      '<strong>In roofing, the first company to respond and inspect typically wins the insurance claim</strong> — studies of lead response consistently show a strong majority of customers buy from whoever answers first. Because hail and wind events generate huge simultaneous call surges, a roofer whose phone goes to voicemail during a storm hands five-figure jobs directly to faster competitors.',
+      '<strong>In roofing, the first company to respond and inspect typically wins the insurance claim</strong> — lead-response research consistently finds that speed decides who wins the job. Because hail and wind events generate huge simultaneous call surges, a roofer whose phone goes to voicemail during a storm hands five-figure jobs directly to faster competitors. In the Lead Response Management study (15,000 web leads across six companies), the odds of qualifying a lead were 21 times higher when it was contacted within five minutes than at 30 minutes; a 2011 Harvard Business Review analysis found firms that responded within an hour were nearly seven times as likely to qualify the lead.',
     stats: [
       { num: 'First', stat: 'responder usually wins the storm claim', context: 'Lead-response research consistently finds a strong majority of customers buy from the business that answers first; in a post-storm rush, the first roofer to inspect usually signs the contract.' },
       { num: '5 min', stat: 'response window that dramatically lifts qualification odds', context: 'Studies of lead response time find that contacting a lead within five minutes makes it many times more likely to convert than waiting even 30 minutes.' },
@@ -94,6 +96,10 @@ export const benchmarks: Benchmark[] = [
       { q: 'Why do roofers lose leads after a storm?', a: 'Hail and wind events generate huge simultaneous call surges in a few hours. A normal front desk cannot answer them all, so high-value insurance leads go to voicemail — and most callers simply dial the next roofer.' },
       { q: 'What does a missed roofing lead cost?', a: 'Roof replacement jobs are routinely worth $10,000 or more, so missing even a few storm calls can cost six figures across a season. Use the <a href="/tools/missed-call-calculator">missed-call calculator</a> to estimate your own exposure.' },
     ],
+    sources: [
+      { label: 'Oldroyd, McElheran & Elkington, “The Short Life of Online Sales Leads,” Harvard Business Review (2011)', url: 'https://scholarsarchive.byu.edu/facpub/9711' },
+      { label: 'Oldroyd & InsideSales.com, Lead Response Management Study (15,000 leads, six companies)', url: 'https://www.mortech.com/hs-fs/hub/25649/file-13535879-pdf/docs/mit_study.pdf' },
+    ],
     related: [
       { label: 'AI receptionist for roofing', href: '/ai-receptionist-for-roofing' },
       { label: 'Lead response time', href: '/glossary/lead-response-time' },
@@ -104,14 +110,14 @@ export const benchmarks: Benchmark[] = [
     slug: 'ai-receptionist-cost-study',
     category: 'Pricing',
     pillar: 'pricing',
-    eyebrow: 'Pricing · Study',
-    title: 'AI Receptionist Cost Study 2026 | Keres AI',
+    eyebrow: 'Pricing · Estimates',
+    title: 'AI Receptionist Cost Comparison (2026) | Keres AI',
     description:
       'A 2026 cost study comparing an AI receptionist to a full-time front-desk hire and a per-minute answering service — by coverage, predictability, and cost per booked call.',
     h1: 'AI receptionist',
     h1Accent: 'cost study',
     lead: 'What does it actually cost to answer every call? A 2026 comparison of an AI receptionist against a full-time front-desk hire and a per-minute answering service — by coverage, predictability, and cost per booked appointment.',
-    datePublished: '2026-02-15',
+    datePublished: '2026-09-05',
     answer:
       '<strong>A full-time receptionist costs an estimated $35,000–$50,000 a year and covers only ~40 hours a week.</strong> A per-minute answering service typically runs $1–$3 per minute (often $200–$600+ a month) and usually just takes a message. An AI receptionist uses monthly pricing, covers 24/7/365 including unlimited simultaneous calls, and books appointments live — usually well below the cost of a full-time hire.',
     stats: [
@@ -141,14 +147,14 @@ export const benchmarks: Benchmark[] = [
     slug: 'dental-no-show',
     category: 'Dental',
     pillar: 'inbound',
-    eyebrow: 'Dental · Data',
+    eyebrow: 'Dental · Estimates',
     title: 'Dental No-Show & Booking Benchmarks (2026) | Keres AI',
     description:
       'Typical dental no-show rates, what each no-show costs, and how missed and after-hours calls drive lost patients. Dental booking benchmarks for 2026.',
     h1: 'Dental no-show',
     h1Accent: 'benchmarks',
     lead: 'Typical dental no-show rates, what each empty chair costs, and how missed reschedule and new-patient calls quietly drain a practice — the booking numbers every front office should track.',
-    datePublished: '2026-02-18',
+    datePublished: '2026-09-05',
     answer:
       '<strong>Dental practices see no-show rates estimated at 10–20%</strong>, and each empty chair can cost $200 or more in lost production. Many no-shows trace back to missed reschedule calls and a front desk too busy to confirm appointments — while new patients who reach voicemail simply book with another practice.',
     stats: [
@@ -178,16 +184,16 @@ export const benchmarks: Benchmark[] = [
     slug: 'legal-intake-conversion',
     category: 'Legal',
     pillar: 'inbound',
-    eyebrow: 'Legal · Data',
+    eyebrow: 'Legal · Estimates',
     title: 'Legal Intake Conversion Benchmarks (2026) | Keres AI',
     description:
       'How fast law firms must respond to new-client calls, how many high-value leads are lost to slow intake, and what each missed case is worth. Legal intake benchmarks for 2026.',
     h1: 'Legal intake conversion',
     h1Accent: 'benchmarks',
     lead: 'How fast law firms must respond to new-client inquiries, how many high-value leads are lost to slow or missed intake, and what each lost case is really worth.',
-    datePublished: '2026-02-20',
+    datePublished: '2026-09-05',
     answer:
-      '<strong>For law firms, the firm that responds first usually wins the client</strong> — and a single missed new-client call can represent thousands of dollars in lost case value. Because high-intent legal inquiries often arrive after hours and callers rarely leave voicemails, intake speed and coverage are among the biggest levers on a firm’s growth.',
+      '<strong>For law firms, the firm that responds first usually wins the client</strong> — and a single missed new-client call can represent thousands of dollars in lost case value. Because high-intent legal inquiries often arrive after hours and callers rarely leave voicemails, intake speed and coverage are among the biggest levers on a firm’s growth. In the Lead Response Management study (15,000 web leads across six companies), the odds of qualifying a lead were 21 times higher when it was contacted within five minutes than at 30 minutes; a 2011 Harvard Business Review analysis found firms that responded within an hour were nearly seven times as likely to qualify the lead.',
     stats: [
       { num: 'First', stat: 'responder usually signs the client', context: 'Prospective clients in distress hire the first firm that answers and reassures them; delay hands the case to a competitor.' },
       { num: '5 min', stat: 'response window that lifts intake conversion', context: 'Lead-response research consistently finds that contacting a lead within five minutes vastly outperforms a delayed callback.' },
@@ -204,6 +210,10 @@ export const benchmarks: Benchmark[] = [
       { q: 'How fast should a law firm respond to a new-client call?', a: 'As fast as possible — ideally live, on the first call. Lead-response research shows responding within five minutes dramatically outperforms a delayed callback, and in legal intake the first firm to respond usually signs the client.' },
       { q: 'Why do law firms lose new clients?', a: 'High-value legal inquiries often arrive after hours and callers rarely leave voicemails. When the call is not answered live, the prospective client simply calls the next firm — so the lead is lost without the firm ever knowing.' },
       { q: 'How can a firm improve intake conversion?', a: 'Answer every inquiry live, screen and qualify the matter, and book the consultation — around the clock. An <a href="/ai-receptionist-for-professional-intake">AI receptionist for legal intake</a> handles all of this 24/7, including conflict screening.' },
+    ],
+    sources: [
+      { label: 'Oldroyd, McElheran & Elkington, “The Short Life of Online Sales Leads,” Harvard Business Review (2011)', url: 'https://scholarsarchive.byu.edu/facpub/9711' },
+      { label: 'Oldroyd & InsideSales.com, Lead Response Management Study (15,000 leads, six companies)', url: 'https://www.mortech.com/hs-fs/hub/25649/file-13535879-pdf/docs/mit_study.pdf' },
     ],
     related: [
       { label: 'AI receptionist for legal intake', href: '/ai-receptionist-for-professional-intake' },
