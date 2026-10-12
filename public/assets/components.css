@@ -2662,3 +2662,15 @@ html[data-motion] .k-hero [data-hero].is-live .shift__foot { animation: shift-in
 .k-svc--four .k-svc__desc { margin-top: 4px; font-size: var(--text--1); line-height: 1.45; }
 @media (min-width: 720px) { .k-svc--four { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); } }
 @media (min-width: 1024px) { .k-svc--four { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ─── Tap targets: 44px minimum on touch screens (WCAG 2.5.5) ───────── */
+@media (pointer: coarse) {
+  .icon-btn, .hamburger { min-width: 44px; min-height: 44px; }
+  .nav .logo { min-height: 44px; display: inline-flex; align-items: center; }
+  .breadcrumbs a, #footer .footer-grid a { display: inline-block; padding-block: 12px; }
+}
+
+/* ─── Long hero headlines: keep the hero CTA above a 768px laptop fold ─ */
+@media (min-width: 1024px) and (max-height: 820px) {
+  .k-hero .k-display, .k-grid .k-display { font-size: clamp(2.75rem, 4.6vw, 3.75rem); }
+}

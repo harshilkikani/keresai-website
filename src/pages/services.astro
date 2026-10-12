@@ -47,7 +47,7 @@ const serviceNodes = stageBlocks.map((b) =>
         </p>
         <div class="price-hero-ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-          <Button href="/pricing" variant="ghost">See plans and floors</Button>
+          <Button href="/pricing" variant={PHONE ? 'ghost' : 'primary'}>See plans and floors</Button>
         </div>
       </div>
       <div class="k-col-5">

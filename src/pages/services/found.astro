@@ -86,7 +86,7 @@ const serviceNodes = foundServices.map((s) =>
         </p>
         <div class="price-hero-ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-          <Button href="/quote" variant="ghost" event="demo_click">Get your quote</Button>
+          <Button href="/quote" variant={PHONE ? 'ghost' : 'primary'} event="demo_click">Get your quote</Button>
         </div>
       </div>
       <div class="k-col-5">
