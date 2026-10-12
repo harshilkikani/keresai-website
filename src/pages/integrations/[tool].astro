@@ -66,7 +66,7 @@ const blurb = (g: typeof i) => (isLive(g) ? g.intro.slice(0, 110) + '…' : `Rol
 
   <section class="page-section container">
     <div class="section-label">{live ? 'What it does' : 'What it will do'}</div>
-    <h2 class="section-title" style="margin-bottom:8px">{live ? `With ${i.name} connected, Keres can` : `When the ${i.name} integration ships, Keres will`}</h2>
+    <h2 class="section-title" style="margin-bottom:8px">{live ? `What does Keres AI do in ${i.name}?` : `What will Keres AI do in ${i.name} once it ships?`}</h2>
     <div class="feature-grid">
       {i.does.map((d) => (
         <div class="feature-card"><h3>{d}</h3></div>
@@ -76,7 +76,7 @@ const blurb = (g: typeof i) => (isLive(g) ? g.intro.slice(0, 110) + '…' : `Rol
 
   <section class="page-section container">
     <div class="prose">
-      <h2>{live ? `What syncs with ${i.name}` : `What will sync with ${i.name}`}</h2>
+      <h2>{live ? `What syncs with ${i.name}?` : `What will sync with ${i.name}?`}</h2>
       <ul>
         {i.syncs.map((s) => <li>{s}</li>)}
       </ul>
@@ -85,6 +85,16 @@ const blurb = (g: typeof i) => (isLive(g) ? g.intro.slice(0, 110) + '…' : `Rol
         : <p>{note} Ask on a call where {i.name} is on the list.</p>}
     </div>
   </section>
+
+  {live && (i.setup || i.writes || i.limits) && (
+    <section class="page-section container">
+      <div class="prose">
+        {i.setup && (<><h2>How does setup work?</h2><p>{i.setup}</p></>)}
+        {i.writes && (<><h2>What does Keres AI write to {i.name}?</h2><p>{i.writes}</p></>)}
+        {i.limits && (<><h2>What doesn’t sync, and what are the limits?</h2><p>{i.limits}</p></>)}
+      </div>
+    </section>
+  )}
 
   {related.length > 0 && (
     <section class="page-section container">

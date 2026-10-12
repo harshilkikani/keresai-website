@@ -119,3 +119,36 @@ export const keresRow: AnsweringVendor = {
   bestFor: 'Local service businesses that want calls booked into Google Calendar, HubSpot or ServiceTitan, and their website and Google profile run by the same team.',
   source: 'https://www.keresai.com/pricing',
 };
+
+/**
+ * Spanish wording for the /es/pricing comparison table. Same facts as the
+ * English rows above, translated line by line; numbers are unchanged. Keep
+ * these in step with the English entries whenever a price is rechecked.
+ */
+export const vendorTypeEs: Record<AnsweringVendor['type'], string> = { AI: 'IA', Human: 'Persona', Hybrid: 'Híbrido' };
+export const answeringVendorsEs: Record<string, { billing: string; starting: string }> = {
+  'Keres AI (Remi)': {
+    billing: 'Una tarifa mensual con minutos incluidos, luego por minuto; sin cargos por llamada.',
+    starting: 'Cotizado según tu volumen de llamadas; mes a mes.',
+  },
+  'Smith.ai': {
+    billing: 'Por llamada: los planes incluyen un número fijo de llamadas y luego una tarifa por llamada.',
+    starting: 'Recepcionistas humanos desde $300/mes por 30 llamadas ($11.50 por llamada adicional). El recepcionista con IA tiene un nivel gratuito de 25 llamadas al mes, luego $3 por llamada.',
+  },
+  Ruby: {
+    billing: 'Planes mensuales con minutos de recepcionista incluidos.',
+    starting: '$250/mes por 50 minutos de recepcionista.',
+  },
+  Goodcall: {
+    billing: 'Por persona distinta que llama cada mes; sin cargos por minuto.',
+    starting: '$79/mes por 100 personas distintas que llaman (79¢ por cada persona adicional).',
+  },
+  PATLive: {
+    billing: 'Por minuto, con planes mensuales que incluyen minutos.',
+    starting: '$99/mes por 50 minutos ($2.29 por minuto adicional); pago por uso a $2.99/min.',
+  },
+  Upfirst: {
+    billing: 'Planes mensuales con llamadas incluidas, luego por llamada.',
+    starting: '$24.95/mes por 30 llamadas ($1.50 por llamada adicional).',
+  },
+};
