@@ -293,6 +293,7 @@ export const mergedIndustries: Record<string, string> = {
   'real-estate': '/industries/real-estate',
   'professional-intake': '/industries/law-firms',
   dentists: '/industries/dental-med-spa',
+  'med-spas': '/industries/dental-med-spa',
 };
 /** The industry pages that still build. */
 export const industries: Industry[] = allIndustries.filter((i) => !(i.slug in mergedIndustries));

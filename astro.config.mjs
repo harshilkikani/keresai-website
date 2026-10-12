@@ -30,7 +30,7 @@ export default defineConfig({
         // listing them would ask crawlers to index a page whose only job
         // is to send them somewhere else.
         // Anchored to the origin so /glossary/ai-receptionist and friends stay in.
-        !/^https:\/\/www\.keresai\.com\/(ai-receptionist|ai-sdr|email-deliverability|deliverability|for-hvac|ai-receptionist-for-(real-estate|professional-intake|dentists))(\.html)?$/.test(page) &&
+        !/^https:\/\/www\.keresai\.com\/(ai-receptionist|ai-sdr|email-deliverability|deliverability|for-hvac|ai-receptionist-for-(real-estate|professional-intake|dentists|med-spas))(\.html)?$/.test(page) &&
         // City, state and city×trade pages are noindex (templated, no local
         // office behind them), so they stay out of the sitemap too; the old
         // /ai-receptionist/home-services hub now redirects to /industries/home-services.
@@ -85,6 +85,7 @@ export default defineConfig({
     '/ai-receptionist-for-real-estate': '/industries/real-estate',
     '/ai-receptionist-for-professional-intake': '/industries/law-firms',
     '/ai-receptionist-for-dentists': '/industries/dental-med-spa',
+    '/ai-receptionist-for-med-spas': '/industries/dental-med-spa',
     '/ai-receptionist/home-services': '/industries/home-services',
     // Never published, but named in the brief and cheap to honour.
     '/deliverability': '/agents/outbound',
