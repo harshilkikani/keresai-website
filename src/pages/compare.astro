@@ -14,8 +14,8 @@ const outboundComparisons = comparisons.filter((c) => c.pillar === 'outbound');
 
 const webpage = webPageSchema({
   path,
-  name: 'Keres AI Comparisons — AI Receptionist & AI SDR Alternatives | Keres AI',
-  description: 'Compare Keres AI to Smith.ai, Ruby, Goodcall, Rosie, Apollo, Instantly, and more. Side-by-side feature comparisons for AI receptionist and AI SDR alternatives.',
+  name: 'Answering Service & AI Receptionist Alternatives Compared | Keres AI',
+  description: 'Smith.ai, Ruby, Goodcall, Rosie and AnsweringLegal alternatives compared: who answers, how each bills, and the price each vendor publishes.',
   speakableSelectors: ['.answer-block', '.lead'],
 });
 
@@ -35,8 +35,8 @@ const compareListSchema = {
 };
 ---
 <Layout
-  title="Keres AI Comparisons — AI Receptionist & AI SDR Alternatives"
-  description="Compare Keres AI to Smith.ai, Ruby, Goodcall, Rosie, Apollo, Instantly, and more. See the full feature comparison for AI receptionist and AI SDR alternatives."
+  title="Answering Service & AI Receptionist Alternatives Compared | Keres AI"
+  description="Smith.ai, Ruby, Goodcall, Rosie and AnsweringLegal alternatives compared: who answers, how each bills, and the price each vendor publishes, plus where Keres AI fits."
   path={path}
 >
   <Schema slot="head" graph={[compareListSchema, webpage, breadcrumbSchema(crumbs), organizationSchema]} />
@@ -56,7 +56,7 @@ const compareListSchema = {
   <!-- DIRECT ANSWER BLOCK -->
   <section class="page-section container">
     <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
-      <p itemprop="text">Keres AI is an AI receptionist and AI SDR platform for service businesses. Compared to answering services like Smith.ai and Ruby, Keres uses AI instead of human operators — delivering unlimited simultaneous calls, and live calendar booking. Compared to outbound tools like Apollo and Instantly, Keres goes beyond infrastructure to run the full outbound motion and book meetings for you.</p>
+      <p itemprop="text">Keres AI sells websites, Google Business Profile management and an AI receptionist (Remi) to local service businesses. Compared to answering services like Smith.ai and Ruby, Keres answers with AI rather than live receptionists, books the appointment during the call, and charges one monthly rate with included minutes rather than per call. The comparison pages below show each alternative with the price it publishes.</p>
     </div>
   </section>
 
@@ -64,7 +64,7 @@ const compareListSchema = {
   <section class="page-section container">
     <div class="section-label">AI Receptionist & Answering Service Alternatives</div>
     <h2 class="section-title" style="margin-bottom:8px">Replacing your answering service?</h2>
-    <p class="prose" style="margin-bottom:var(--space-4)">Human answering services charge per minute, take messages instead of booking, and have limited overnight coverage. Keres answers with AI — unlimited calls, live booking 24/7.</p>
+    <p class="prose" style="margin-bottom:var(--space-4)">Answering services differ on who answers (people, AI or both) and how they bill (per call, per minute, per caller). Keres answers with AI, books the appointment on the call, and handles unlimited simultaneous calls 24/7.</p>
     <div class="feature-grid">
       {inboundComparisons.map((c) => (
         <a class="feature-card" href={`/${c.slug}`} style="text-decoration:none;display:block">
