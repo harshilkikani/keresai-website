@@ -15,7 +15,7 @@ export interface UseCase {
   cta: { href: string; label: string };
 }
 
-export const usecases: UseCase[] = [
+const allUsecases: UseCase[] = [
   {
     slug: 'after-hours-answering',
     name: 'After-hours answering',
@@ -317,3 +317,10 @@ export const usecases: UseCase[] = [
     cta: { href: '/tools/missed-call-calculator', label: 'Calculate your missed-lead losses' },
   },
 ];
+
+/** Use cases merged into a stronger page for the same searcher; old URLs redirect (astro.config.mjs). */
+export const mergedUsecases: Record<string, string> = {
+  'after-hours-answering': '/24-7-ai-receptionist',
+  'appointment-booking': '/agents/inbound',
+};
+export const usecases: UseCase[] = allUsecases.filter((u) => !(u.slug in mergedUsecases));

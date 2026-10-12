@@ -96,7 +96,7 @@ Outbound:
 
 ## Use cases
 - [Use cases index](${u('/use-cases')})
-- [After-hours answering](${u('/use-cases/after-hours-answering')}) · [Overflow call handling](${u('/use-cases/overflow-call-handling')}) · [Appointment booking](${u('/use-cases/appointment-booking')})
+- [After-hours answering](${u('/24-7-ai-receptionist')}) · [Overflow call handling](${u('/use-cases/overflow-call-handling')}) · [Appointment booking](${u('/agents/inbound')})
 - [Lead capture](${u('/use-cases/lead-capture')}) · [Reduce staffing costs](${u('/use-cases/reduce-staffing-costs')}) · [Spam-call screening](${u('/use-cases/spam-call-screening')})
 
 ## Integrations

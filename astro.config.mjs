@@ -40,6 +40,8 @@ export default defineConfig({
         !/^https:\/\/www\.keresai\.com\/integrations\/(jobber|housecall-pro|twilio|ringcentral|outlook|make|fieldedge|service-fusion|acuity|slack)$/.test(page) &&
         // Comparison pages that are not sourced roundups yet are noindex.
         !/^https:\/\/www\.keresai\.com\/(dialpad|numa|openphone|calendly|apollo|instantly|smartlead)-alternative$/.test(page) &&
+        // Merged use cases (redirect stubs) and the quote form pages (noindex).
+        !/^https:\/\/www\.keresai\.com\/(use-cases\/(after-hours-answering|appointment-booking)|quote|es\/quote)$/.test(page) &&
         // No published customer stories yet; the page is noindex.
         !/^https:\/\/www\.keresai\.com\/customers(\/|$)/.test(page) &&
         // The old /missed-call-calculator path is now a 301 redirect to
@@ -86,6 +88,9 @@ export default defineConfig({
     '/ai-receptionist-for-professional-intake': '/industries/law-firms',
     '/ai-receptionist-for-dentists': '/industries/dental-med-spa',
     '/ai-receptionist/home-services': '/industries/home-services',
+    // Use cases merged into the page that targets the same searcher.
+    '/use-cases/after-hours-answering': '/24-7-ai-receptionist',
+    '/use-cases/appointment-booking': '/agents/inbound',
     // Never published, but named in the brief and cheap to honour.
     '/deliverability': '/agents/outbound',
   },
