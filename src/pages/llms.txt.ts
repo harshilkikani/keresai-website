@@ -64,6 +64,7 @@ Key facts:
 - Based in Houston, Texas; serves local service businesses across the United States.
 ${(PHONE ?? CONTACT_PHONE) ? `- Phone (office, answered by a person): ${(PHONE ?? CONTACT_PHONE)!.display}\n` : ''}- Contact: ${EMAIL}
 - Full reference (definitions, FAQs, descriptions): ${ORIGIN}/llms-full.txt
+- Markdown copy of every indexable page: add .md to its URL (home: ${ORIGIN}/index.md; guides: replace .html with .md).
 
 ## The roster: six workers
 ${workers
@@ -101,6 +102,7 @@ ${bullets([
   link('Remi, the AI receptionist', '/agents/inbound', ': answers in two rings, books the appointment, texts back missed callers.'),
   link('Found', '/services/found', ': website, Google Business Profile, reviews, listings and AI search.'),
   link('Google Business Profile management', '/google-business-profile-management', ': what Found does on your profile every week.'),
+  link('Best Google Business Profile management services (2026)', '/best-google-business-profile-management', ': software, done-for-you services and website bundles, with published prices.'),
   link('Custom worker', '/custom', ': any recurring job, scoped and built for you.'),
   link('Pricing', '/pricing', ': one row per worker and what changes the quote.'),
   link('Hear it', '/hear-it', ': example call transcripts per vertical (examples, not recordings).'),
@@ -110,6 +112,9 @@ ${bullets([
 ## AI receptionist buyer's guides
 ${bullets([
   link('Best AI receptionists for small businesses (2026)', '/best-ai-receptionist'),
+  link('Best AI receptionists for HVAC companies', '/best-ai-receptionist-for-hvac'),
+  link('Best AI receptionists for law firms', '/best-ai-receptionist-for-law-firms'),
+  link('Best AI receptionists for real estate agents', '/best-ai-receptionist-for-real-estate'),
   link('How much does an AI receptionist cost?', '/ai-receptionist-cost', ' (published vendor prices)'),
   link('AI answering service vs live answering service', '/ai-answering-service'),
   link('24/7 AI receptionist and after-hours answering', '/24-7-ai-receptionist'),

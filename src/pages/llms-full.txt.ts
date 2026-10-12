@@ -155,6 +155,10 @@ export async function GET() {
   push('## Comparisons and pricing research');
   push(`- How much an AI receptionist costs (2026 prices, sourced): ${ORIGIN}/ai-receptionist-cost`);
   push(`- Best AI receptionists for small businesses (2026): ${ORIGIN}/best-ai-receptionist`);
+  push(`- Best AI receptionists for HVAC companies: ${ORIGIN}/best-ai-receptionist-for-hvac`);
+  push(`- Best AI receptionists for law firms: ${ORIGIN}/best-ai-receptionist-for-law-firms`);
+  push(`- Best AI receptionists for real estate agents: ${ORIGIN}/best-ai-receptionist-for-real-estate`);
+  push(`- Best Google Business Profile management services (2026): ${ORIGIN}/best-google-business-profile-management`);
   push(`- AI answering service vs live answering service: ${ORIGIN}/ai-answering-service`);
   push();
   for (const c of comparisons.filter((x) => x.roundup && x.roundup.length)) {
@@ -317,6 +321,10 @@ export async function GET() {
   const keyPages: [string, string][] = [
     ['Remi, the AI receptionist', '/agents/inbound'],
     ['Best AI receptionists (2026)', '/best-ai-receptionist'],
+    ['Best AI receptionists for HVAC companies', '/best-ai-receptionist-for-hvac'],
+    ['Best AI receptionists for law firms', '/best-ai-receptionist-for-law-firms'],
+    ['Best AI receptionists for real estate agents', '/best-ai-receptionist-for-real-estate'],
+    ['Best Google Business Profile management services', '/best-google-business-profile-management'],
     ['AI answering service vs live answering service', '/ai-answering-service'],
     ['How much an AI receptionist costs', '/ai-receptionist-cost'],
     ['24/7 AI receptionist', '/24-7-ai-receptionist'],

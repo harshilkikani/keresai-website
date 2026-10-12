@@ -20,7 +20,7 @@ const { title, description, path, label, updated } = Astro.props;
 const crumbs = [{ name: 'Home', path: '/' }, { name: label, path }];
 ---
 <Layout title={title} description={description} path={path} noindexFollow>
-  <link slot="head" rel="stylesheet" href="/assets/guide.css?v=5" />
+  <link slot="head" rel="stylesheet" href="/assets/guide.css?v=6" />
   <Schema slot="head" graph={[breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />

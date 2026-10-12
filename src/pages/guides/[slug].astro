@@ -42,7 +42,7 @@ const articleSchema = article({
 });
 ---
 <Layout title={g.metaTitle} description={g.description} path={path} ogType="article">
-  <link slot="head" rel="stylesheet" href="/assets/guide.css?v=5" />
+  <link slot="head" rel="stylesheet" href="/assets/guide.css?v=6" />
   <Schema slot="head" graph={[articleSchema, breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
