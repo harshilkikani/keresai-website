@@ -98,6 +98,15 @@ export const answeringVendors: Record<string, AnsweringVendor> = {
     bestFor: 'Owners who want phone, text and website chat answered by one AI.',
     source: 'https://www.myaifrontdesk.com/pricing',
   },
+  AnsweringLegal: {
+    name: 'AnsweringLegal',
+    url: 'https://www.answeringlegal.com',
+    type: 'Human',
+    billing: 'Not published; packages are shown after a form is submitted.',
+    starting: 'Not published.',
+    bestFor: 'Law firms that want US-based receptionists who answer only for law firms.',
+    source: 'https://www.answeringlegal.com/answering-service-pricing-plans',
+  },
 };
 
 /** Keres, described by the same columns and the same rules. */
