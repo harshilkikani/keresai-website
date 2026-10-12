@@ -60,7 +60,7 @@ const others = agents.filter((a) => a.slug !== page.slug);
         <p class="k-lede">{page.sub}</p>
         <div class="k-hero__ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-          <Button href="/quote" variant={PHONE ? 'ghost' : 'primary'} event="demo_click">Book a demo</Button>
+          <Button href="/quote" variant={PHONE ? 'ghost' : 'primary'} event="demo_click">Get a quote</Button>
         </div>
         <ul class="k-hero__facts" aria-label="At a glance">
           <li><span class="k-hero__fact-k">Stage</span><span class="k-hero__fact-v">{agent.stage}</span></li>

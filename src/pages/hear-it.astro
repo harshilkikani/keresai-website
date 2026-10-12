@@ -50,7 +50,7 @@ const faqs = [
         </p>
         <div class="price-hero-ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-          <Button href="/quote" variant={PHONE ? 'ghost' : 'primary'} event="demo_click">Book a demo</Button>
+          <Button href="/quote" variant={PHONE ? 'ghost' : 'primary'} event="demo_click">Get a quote</Button>
         </div>
       </div>
     </div>
@@ -84,7 +84,7 @@ const faqs = [
       </p>
       <div class="k-close__ctas">
         {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-        <Button href="/quote" variant={PHONE ? 'ghost' : 'primary'} event="demo_click">{PHONE ? 'Book a demo instead' : 'Book a demo'}</Button>
+        <Button href="/quote" variant={PHONE ? 'ghost' : 'primary'} event="demo_click">{PHONE ? 'Get a quote instead' : 'Get a quote'}</Button>
       </div>
     </div>
   </Section>
