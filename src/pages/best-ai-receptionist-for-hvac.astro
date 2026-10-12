@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import IndustryRoundupTable from '../components/IndustryRoundupTable.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, articleSchema, itemListSchema } from '../data/schema';
+import { keresRow, vendorsFor, VENDORS_CHECKED } from '../data/answeringVendors';
+
+const path = '/best-ai-receptionist-for-hvac';
+const title = 'Best AI Receptionists for HVAC Companies (2026) | Keres AI';
+const h1 = 'Best AI Receptionists for HVAC Companies (2026)';
+const description = 'Six AI receptionists for HVAC compared on emergency triage, ServiceTitan booking and peak-season billing, with prices from each vendor’s own site.';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Compare', path: '/compare' },
+  { name: 'Best AI receptionists', path: '/best-ai-receptionist' },
+  { name: 'For HVAC companies', path },
+];
+
+const vendors = vendorsFor('hvac', ['Avoca', 'Sameday AI', 'Smith.ai', 'Rosie', 'Goodcall']);
+const keres = { ...keresRow, fitFor: keresRow.industries!.hvac! };
+
+const faqs = [
+  { q: 'What is the best AI receptionist for an HVAC company?', a: 'It depends on your software and your call volume. Avoca and Sameday AI are built for home service trades and book into ServiceTitan. Smith.ai adds live receptionists for emergencies. Rosie and Goodcall are the lowest-cost self-serve options. Keres AI suits shops that want Remi set up for them and booking into ServiceTitan, Google Calendar or HubSpot. See the <a href="/best-ai-receptionist">general roundup</a> for other trades.' },
+  { q: 'Which AI receptionists book jobs into ServiceTitan?', a: 'From each vendor’s own pages: Keres AI books into ServiceTitan during the call, Avoca has a ServiceTitan integration page, Sameday AI includes “Pro scheduling (ServiceTitan etc)” on its plans, and Smith.ai announces a ServiceTitan integration. Goodcall’s HVAC page connects to ServiceTitan through Zapier. Rosie’s HVAC page names no integrations. See <a href="/integrations/servicetitan">how Remi writes jobs into ServiceTitan</a>.' },
+  { q: 'What should an AI receptionist do on a gas-smell call?', a: 'It should not troubleshoot. A sound script tells the caller to leave the building and call the gas utility or 911 from outside, then alerts your on-call technician. Keres AI writes that rule into Remi’s script with you during setup. Ask every vendor to play you its gas-smell call before you sign. More on <a href="/ai-receptionist-for-hvac">how Remi handles HVAC emergencies</a>.' },
+  { q: 'How should an HVAC company budget for heat waves and cold snaps?', a: 'Price your heaviest week, not an average month. Per-call plans (Smith.ai) rise with every call and per-caller plans (Goodcall) with every new household; minute plans (Rosie, Sameday AI, Keres AI) are sized by talk time. Ask what happens past the included amount, not only the entry price. The <a href="/goodcall-alternative">Goodcall</a>, <a href="/rosie-alternative">Rosie</a> and <a href="/smith-ai-alternative">Smith.ai</a> alternatives pages show what each vendor publishes about going over.' },
+  { q: 'Does Keres AI answer HVAC calls in Spanish?', a: 'Not yet. Remi answers in English only. Rosie lists English and Spanish on every call. If many of your customers call in Spanish, weigh that before anything else on this page.' },
+  { q: 'How do I get a price for Remi?', a: 'Book a 30-minute call on the <a href="/quote">quote page</a> or ring the office on (973) 495-2223, which a person answers. Keres AI quotes Remi to your call volume, including your peak season, and bills month-to-month. More about Keres AI for <a href="/industries/home-services">home service companies</a>.' },
+];
+
+const article = articleSchema({
+  path,
+  headline: h1,
+  description,
+  datePublished: '2026-10-11',
+  dateModified: '2026-10-11',
+  readingTime: 'PT7M',
+});
+
+const list = itemListSchema({
+  name: 'AI receptionists for HVAC companies compared (2026)',
+  items: [keres, ...vendors].map((v) => ({ name: v.name, description: `${v.type}. ${v.fitFor.fit} ${v.billing} ${v.starting}` })),
+});
+
+const webpage = webPageSchema({
+  path,
+  name: title,
+  description,
+  speakableSelectors: ['.answer-block', '.faq-a'],
+});
+---
+<Layout title={title} description={description} path={path} ogType="article">
+  <Schema slot="head" graph={[article, list, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">Buyer’s guide · HVAC · 2026</span>
+    <h1>Best AI receptionists for <span class="accent">HVAC companies</span> (2026)</h1>
+    <p class="updated" style="font-size:14px;color:var(--text-dim);margin:-8px 0 16px">Updated <time datetime="2026-10-11">October 11, 2026</time></p>
+    <p class="lead" style="font-size:16px">Written by Keres AI, which sells Remi, one of the options below. Competitor facts come from each vendor's own pages, checked on the date shown.</p>
+    <div class="hero-ctas">
+      <a href="#table-title" class="btn btn-primary">See the comparison</a>
+      <a href="/hear-it" class="btn btn-outline">Hear Remi answer a call</a>
+    </div>
+  </header>
+
+  <section class="page-section container" aria-labelledby="answer-title">
+    <div class="prose"><h2 id="answer-title">What is the best AI receptionist for HVAC companies?</h2></div>
+    <div class="answer-block">
+      <p>The best AI receptionist for an HVAC company follows your emergency rules and books into your field-service software. Avoca and Sameday AI are built for home service trades and schedule into ServiceTitan. Smith.ai pairs AI with live receptionists for emergencies. Rosie ($49 a month) and Goodcall ($79) are low-cost self-serve options. Keres AI suits shops that want Remi set up for them, booking into ServiceTitan, Google Calendar or HubSpot.</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>What should an HVAC business look for in an AI receptionist?</h2>
+      <p>HVAC calls are not like salon or dental calls. The weather sets the volume, a fraction of the calls are genuine safety issues, and the job is only booked once it is on a technician’s board. Five things separate the options for a heating and cooling shop.</p>
+      <h3>Emergency triage on rules you write</h3>
+      <p>The receptionist should sort calls by your definitions, not its own. A gas smell or a carbon monoxide alarm means telling the caller to leave the house and call the utility or 911 from outside. No heat with an infant or an elderly person at home, or no cooling during a heat advisory, usually goes to the on-call tech now. A noisy blower books into tomorrow. Ask who writes these rules, and ask to hear the gas-smell call.</p>
+      <h3>Booking into ServiceTitan or your field-service software</h3>
+      <p>A message that a CSR has to retype in the morning is not a booked job. Ask whether the vendor creates the customer, the job and the call notes in ServiceTitan (or Jobber or Housecall Pro) during the call, and whether it does that natively or through Zapier. Dispatch should see the system type and symptoms before assigning a tech.</p>
+      <h3>Dispatch windows and service area</h3>
+      <p>The receptionist should offer arrival windows from your real capacity, check the address against your service area, note whether the caller is on a maintenance plan so members get the priority you promise, and quote only the diagnostic or trip fee you put in the script. It should never price a replacement; that needs a comfort-advisor visit.</p>
+      <h3>Seasonal surges priced sensibly</h3>
+      <p>The first 95-degree week and the first hard freeze bring the calls. A per-call plan charges for every one of them, a per-caller plan charges for every new household, and a minute plan charges for talk time. None is wrong, but the overage rate decides your July bill, and some vendors do not publish one. Ask too how many calls it answers at the same moment.</p>
+      <h3>After hours and missed calls</h3>
+      <p>A large share of no-heat and no-cool calls arrive after the office closes. Check what happens at 2 a.m.: a booked visit, a transfer to on-call, or a voicemail. Check also whether a missed caller gets a text back, and whether the receptionist can answer in Spanish if your customers need it.</p>
+    </div>
+  </section>
+
+  <IndustryRoundupTable keres={keres} vendors={vendors} checked={VENDORS_CHECKED} fitLabel="HVAC fit (vendor’s own positioning)" title="How do the HVAC answering options compare?" />
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Which option suits which HVAC shop?</h2>
+
+      <h3>Keres AI (Remi)</h3>
+      <p>Remi is the AI receptionist from Keres AI. It answers in two rings, 24/7, asks your intake questions (system type, symptoms, address), applies the emergency rules you set and books the visit into ServiceTitan, Google Calendar or HubSpot during the call, with other tools through Zapier. It also answers website chat, the text line and form enquiries, and texts back missed callers within 60 seconds. Billing is one monthly rate with included minutes, then per minute, with no per-call fees, and Keres AI does the setup for you. Limitations: the price is quoted to your volume, not published; Remi answers in English only; and Jobber and Housecall Pro integrations are still rolling out.</p>
+
+      <h3>Avoca</h3>
+      <p>Avoca sells an AI CSR for home service trades, with HVAC first on its industry list. Its HVAC page says the AI books jobs into your CRM, routes emergencies, and can transfer to Avoca’s own human CSR team when the AI cannot handle a call; it has a dedicated ServiceTitan integration page and also sells speed-to-lead, Google LSA and outbound campaign tools. It suits larger ServiceTitan shops that want a wider front-office suite. Avoca publishes no prices, so you cannot compare its cost without a demo.</p>
+
+      <h3>Sameday AI</h3>
+      <p>Sameday AI is an AI CSR for home service businesses, HVAC among them. Its Launch plan starts at $449 a month with 500 minutes and three locations; Scale starts at $789 with 1,000 minutes and unlimited locations, and both include “Pro scheduling (ServiceTitan etc)”. It suits multi-truck shops that want ServiceTitan scheduling from a trade specialist. The pricing page does not publish an overage rate, so ask what a heat-wave month costs past the included minutes.</p>
+
+      <h3>Smith.ai</h3>
+      <p>Smith.ai mixes AI with North America-based live receptionists. Its HVAC page says the AI handles routine scheduling while people take emergency coordination and upset customers, and it links its ServiceTitan integration. Billing is per call: the AI receptionist is free for 25 calls a month and then $3 a call; human plans start at $300 for 30 calls. It suits shops that want a person available on hard calls. In a surge week, per-call billing grows with every call, short or long.</p>
+
+      <h3>Rosie</h3>
+      <p>Rosie is a self-serve AI answering service with English and Spanish on every call. Its $49 plan includes 250 minutes and sends appointment links by text; booking directly on your calendar starts on the $149 Scale plan with 1,000 minutes. Its HVAC page says it sorts urgent from non-urgent calls and notifies you, but that it cannot dispatch technicians directly. It suits owner-operators with a light call load.</p>
+
+      <h3>Goodcall</h3>
+      <p>Goodcall is a self-serve AI agent billed per unique caller: $79 a month covers 100 different callers, then 79¢ each, and a repeat caller counts once a month. Its HVAC page argues this absorbs seasonal spikes and says Zapier connects it to ServiceTitan, Jobber and Housecall Pro. It suits shops with many repeat callers. A heat wave that brings many first-time households still raises the bill caller by caller.</p>
+
+      <h2>How did we choose these HVAC options?</h2>
+      <p>Each vendor here markets to HVAC or home service companies on its own site; the table links the page where it does. We recorded who answers, how it bills and the lowest plan it publishes, on {VENDORS_CHECKED}. This is a comparison of published information, not a call-quality test, and there is no overall winner. Vendors that do not publish a price are marked “Not published” rather than estimated.</p>
+
+      <h2>How much does an AI receptionist cost for an HVAC company?</h2>
+      <p>Published entry prices for these HVAC options run from $49 a month (Rosie, 250 minutes) and $79 (Goodcall, 100 callers) to $449 (Sameday AI, 500 minutes). Smith.ai’s AI tier is free for 25 calls, then $3 a call. Avoca does not publish prices, and Keres AI quotes Remi to your volume. For an HVAC company the useful number is the cost of your busiest month, so size the plan to July or January and compare overage rates. The <a href="/ai-receptionist-cost">AI receptionist cost guide</a> works out what 100 calls cost on each published plan, and the <a href="/tools/hvac-missed-call-calculator">HVAC missed-call calculator</a> puts a figure on the calls you miss now.</p>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} title="AI receptionists for HVAC: FAQ" />
+
+  <section class="page-section container" aria-labelledby="related-title">
+    <div class="section-label">Keep comparing</div>
+    <h2 id="related-title" class="section-title" style="margin-bottom:8px">Where can HVAC owners compare more?</h2>
+    <ul class="prose">
+      <li><a href="/ai-receptionist-for-hvac">Remi for HVAC companies: intake, emergency rules and ServiceTitan</a></li>
+      <li><a href="/industries/home-services">Keres AI for home services</a></li>
+      <li><a href="/best-ai-receptionist">Best AI receptionists for small businesses</a></li>
+      <li><a href="/goodcall-alternative">Goodcall alternatives</a> · <a href="/rosie-alternative">Rosie alternatives</a> · <a href="/smith-ai-alternative">Smith.ai alternatives</a></li>
+      <li><a href="/benchmarks/hvac-answering">HVAC call answering benchmarks</a></li>
+    </ul>
+  </section>
+
+  <CtaBand
+    heading="Hear Remi take an HVAC call"
+    sub="Book a 30-minute call, tell us your emergency rules, and get Remi quoted to your peak-season volume."
+    cta="Get a quote"
+    href="/quote"
+  />
+</Layout>

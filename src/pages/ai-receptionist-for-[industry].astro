@@ -192,6 +192,7 @@ const peers = industries.filter((i) => i.slug !== ind.slug);
       <p>{t.compareIntro}</p>
       <ul>{t.checklist.map((c) => <li>{c}</li>)}</ul>
       <p>Keres AI’s own answers are on <a href="/agents/inbound">Remi’s page</a> and <a href="/pricing">pricing</a>.</p>
+      {t.roundup && <p>Other vendors’ answers: <a href={t.roundup.href}>{t.roundup.label}</a>.</p>}
       {guides.length > 0 && (
         <>
           <h2>Guides for {ind.shortLower} operators</h2>
