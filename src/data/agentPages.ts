@@ -46,9 +46,9 @@ export const agentPages: AgentPage[] = [
     seoTitle: 'AI Receptionist: Answers in 2 Rings, Books the Lead | Keres',
     description:
       'Remi answers every call in two rings, 24/7: runs your intake script, qualifies the lead, books the appointment and texts back any call it could not take.',
-    h1: 'Remi — the Inbound Worker that answers every call in two rings and books the lead.',
+    h1: 'Remi, the AI receptionist from Keres AI, answers every call in two rings and books the job.',
     sub:
-      'An AI receptionist that does the whole job, not just the greeting: it answers day or night, asks your questions, qualifies the lead, books the appointment while the caller is still on the line, and tells you what happened before you have put your phone down.',
+      'Remi is Keres AI’s AI receptionist. It answers every call in two rings, 24/7, asks your intake questions, books the appointment into Google Calendar, HubSpot or ServiceTitan while the caller is still on the line, and texts back any call it could not take within 60 seconds. Pricing is a monthly rate with included minutes, then per minute, with no per-call fees. Most accounts are live in five business days.',
     heroVertical: 'default',
     flowH2: 'How a call goes',
     flowLede:
@@ -64,7 +64,7 @@ export const agentPages: AgentPage[] = [
     blocks: [
       {
         id: 'intake',
-        h2: 'Intake and qualification, in your vocabulary',
+        h2: 'What questions does Remi ask callers?',
         answer:
           'Remi runs the intake script your business already uses rather than a generic call-centre form. A law firm gets matter type, opposing party and conflict details; a plumbing company gets job type, service address and urgency; a dental practice gets procedure, insurance and whether the patient is on file; a real-estate team gets listing, pre-approval and timeline.',
         bullets: [
@@ -76,7 +76,7 @@ export const agentPages: AgentPage[] = [
       },
       {
         id: 'booking',
-        h2: 'Booking straight into your calendar',
+        h2: 'Which calendars and CRMs does Remi book into?',
         answer:
           'Remi reads real availability and writes the appointment during the call, so nobody is told that someone will ring them back. The booking lands in the system your team already opens: Google Calendar, HubSpot and ServiceTitan are connected today, with Clio, Lawmatics, Jobber, Housecall Pro, Dentrix, Open Dental and Follow Up Boss rolling out.',
         bullets: [
@@ -87,12 +87,12 @@ export const agentPages: AgentPage[] = [
         ],
       },
       {
-        h2: 'Missed-call text-back in 60 seconds',
+        h2: 'What happens to a call Remi can’t take?',
         answer:
           'If a call still gets away — a bad line, a caller who hangs up, a number that rings while an outage is running — Remi texts back within 60 seconds with a real question rather than an autoresponder, and carries the conversation on by SMS until it can book or hand off.',
       },
       {
-        h2: 'Web chat, SMS and every lead source',
+        h2: 'Does Remi answer web chat and texts?',
         answer:
           'Plenty of people will not phone you. Remi answers the chat widget on your website and your business text line with the same script, and picks up website form enquiries in minutes. Answering marketplace inboxes (Yelp, Thumbtack, Avvo, Zillow) directly is rolling out — in minutes, rather than whenever somebody next checks the inbox.',
         bullets: [
@@ -102,7 +102,7 @@ export const agentPages: AgentPage[] = [
         ],
       },
       {
-        h2: 'Human escalation is a feature, not a failure',
+        h2: 'What happens when a caller needs a person?',
         answer:
           'You decide what needs a person. Remi warm-transfers those calls to your on-call number, and if nobody picks up it sends a "call me now" alert carrying everything it has already collected — so the caller never repeats themselves and the escalation does not become a lost lead.',
         bullets: [
@@ -117,11 +117,12 @@ export const agentPages: AgentPage[] = [
     testimonialProves: 'after-hours calls being answered, qualified and booked',
     faqs: [
       { q: 'Does it sound like a robot?', a: 'It sounds like a competent front desk. It answers in two rings, uses your vocabulary, and says "let me get someone for you" instead of guessing. Ask for a live test call when we talk and judge it yourself — that is the fastest demo there is.' },
-      { q: 'What does it cost?', a: `${priceSentence('The Answer plan', 'answer', 'your call volume, locations and integrations')} There is no per-call charge and no surcharge for simultaneous calls. Found — the visibility layer — starts separately at $249/month.` },
+      { q: 'How much does Remi cost?', a: `${priceSentence('The Answer plan', 'answer', 'your call volume, locations and integrations')} There is no per-call charge and no surcharge for simultaneous calls. Found — the visibility layer — starts separately at $249/month.` },
       { q: 'How long does setup take?', a: 'Five business days. Twenty minutes on how you answer today, then we write your intake script, connect your number, calendar and CRM, and you call it yourself until it answers the way you would.' },
       { q: 'What if a caller needs a human?', a: 'Remi warm-transfers under rules you set, and falls back to a "call me now" alert with the intake attached if the transfer is not picked up.' },
       { q: 'Can it handle several calls at once?', a: 'Yes, unlimited simultaneous calls with no surcharge for taking them at once — the whole point during a storm week or a Monday morning rush. Past your included minutes you pay your quoted per-minute rate.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month, and your number stays yours.' },
+      { q: 'Is Remi HIPAA compliant?', a: 'No. Keres AI is not HIPAA certified or SOC 2 audited and does not sign BAAs today. Tell us your requirements before you sign up.' },
     ],
     media: {
       src: '/assets/video/ai-receptionist.mp4',

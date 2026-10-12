@@ -71,6 +71,15 @@ import { guidesFor } from '../../data/guides';
     </div>
   </Section>
 
+  {hub.answer && (
+    <Section spacing="standard" labelledby="hub-answer-title">
+      <div class="k-band__head">
+        <h2 id="hub-answer-title" class="k-h2">What does Keres AI do for {hub.name.toLowerCase()}?</h2>
+        <p class="k-lede k-measure answer-block">{hub.answer}</p>
+      </div>
+    </Section>
+  )}
+
   <!-- ── THE PROBLEM ────────────────────────────────────── -->
   <Section tone="raised" spacing="major" labelledby="problem-title">
     <div class="k-band">
