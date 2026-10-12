@@ -3,7 +3,6 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import GoNav from '../components/GoNav.astro';
 import GoFooter from '../components/GoFooter.astro';
-import { ClientRouter } from 'astro:transitions';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { PHONE } from '../data/site';
@@ -182,8 +181,8 @@ const META_DOMAIN_VERIFICATION = '';
   </>
 )}
 
-<link rel="icon" type="image/png" href="/assets/img/KeresLogo.png" />
-<link rel="apple-touch-icon" href="/assets/img/KeresLogo.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="mask-icon" href="/assets/img/KeresLogo.png" color="#C2410C" />
 
 <meta property="og:type" content={ogType} />
@@ -221,9 +220,9 @@ const META_DOMAIN_VERIFICATION = '';
      version number has to be bumped by hand. -->
 <link rel="stylesheet" href={`/assets/site.css?v=${CSS_HASH}`} />
 
-<!-- Client-side navigation with a 250ms crossfade (see ::view-transition
-     in components.css). The nav persists across pages. -->
-<ClientRouter fallback="none" />
+<!-- Page-to-page crossfade comes from CSS cross-document view transitions
+     (@view-transition in components.css), with no client router: the router's
+     JavaScript was the main source of blocking time on mobile. -->
 
 <!-- motion.js is small and blocks on purpose: it stamps html[data-motion]
      BEFORE first paint so the hero choreography starts from its hidden

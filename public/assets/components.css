@@ -2352,6 +2352,7 @@ html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] { transform: tra
 
 
 /* ─── View transitions: 250ms crossfade ───────────────────── */
+@view-transition { navigation: auto; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 250ms; }
 
 /* ─── Reduced motion resolves everything to final state ───── */
