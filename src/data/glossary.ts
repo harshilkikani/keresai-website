@@ -46,7 +46,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'What businesses use AI receptionists',
         body:
-          'Any business that lives on the phone: <a href="/ai-receptionist-for-hvac">HVAC</a> and <a href="/ai-receptionist-for-plumbers">plumbing</a> contractors, <a href="/ai-receptionist-for-dentists">dental practices</a>, <a href="/ai-receptionist-for-med-spas">med spas</a>, <a href="/ai-receptionist-for-real-estate">real estate teams</a>, and <a href="/ai-receptionist-for-professional-intake">law firms</a> — wherever a missed call is a lost customer.',
+          'Any business that lives on the phone: <a href="/ai-receptionist-for-hvac">HVAC</a> and <a href="/ai-receptionist-for-plumbers">plumbing</a> contractors, <a href="/industries/dental-med-spa">dental practices</a>, <a href="/ai-receptionist-for-med-spas">med spas</a>, <a href="/industries/real-estate">real estate teams</a>, and <a href="/industries/law-firms">law firms</a> — wherever a missed call is a lost customer.',
       },
     ],
     related: ['ai-answering-service', 'virtual-receptionist', 'appointment-booking-automation', 'missed-call-text-back'],
@@ -744,7 +744,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Why intake is the bottleneck for dental and med spa growth',
         body:
-          'Every missed new-patient call or delayed intake process costs a high-value appointment. For <a href="/ai-receptionist-for-dentists">dental practices</a> and <a href="/ai-receptionist-for-med-spas">med spas</a>, a new patient can be worth thousands of dollars in lifetime value — but only if the intake is smooth enough that they don\'t book somewhere more responsive. AI intake collects what you need during the call, confirms the appointment, and logs everything to your practice management system automatically.',
+          'Every missed new-patient call or delayed intake process costs a high-value appointment. For <a href="/industries/dental-med-spa">dental practices</a> and <a href="/ai-receptionist-for-med-spas">med spas</a>, a new patient can be worth thousands of dollars in lifetime value — but only if the intake is smooth enough that they don\'t book somewhere more responsive. AI intake collects what you need during the call, confirms the appointment, and logs everything to your practice management system automatically.',
       },
       {
         h2: 'What AI collects during patient intake',
@@ -757,7 +757,7 @@ export const glossary: GlossaryTerm[] = [
       { q: 'Can AI collect patient intake over the phone?', a: 'Yes. Keres asks the intake questions you configure during the booking call, captures the answers, and pushes the data to your practice management system before the appointment.' },
       { q: 'Is AI patient intake HIPAA compliant?', a: 'It depends on the vendor. Keres is not HIPAA certified and does not sign BAAs today, so tell us your requirements before you sign up.' },
     ],
-    cta: { href: '/ai-receptionist-for-dentists', label: 'See AI patient intake for dental' },
+    cta: { href: '/industries/dental-med-spa', label: 'See AI patient intake for dental' },
   },
   {
     slug: 'legal-intake',
@@ -788,7 +788,7 @@ export const glossary: GlossaryTerm[] = [
       { q: 'Is AI legal intake confidential?', a: 'Keres never uses intake data to train third-party AI models and limits access to the people who run your account. It does not hold a SOC 2 report; raise specific confidentiality requirements before you sign.' },
       { q: 'What practice areas work well with AI intake?', a: 'Personal injury, family law, criminal defense, immigration, estate planning, and employment law all have structured intake processes that AI handles well — capturing the matter details and qualifying the caller before booking.' },
     ],
-    cta: { href: '/ai-receptionist-for-professional-intake', label: 'See AI legal intake' },
+    cta: { href: '/industries/law-firms', label: 'See AI legal intake' },
   },
   {
     slug: 'no-show-rate',
@@ -870,7 +870,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Industries where front desk automation delivers the most value',
         body:
-          'Any business with high inbound call volume: <a href="/ai-receptionist-for-hvac">HVAC</a> and home-services contractors, <a href="/ai-receptionist-for-dentists">dental practices</a>, <a href="/ai-receptionist-for-med-spas">med spas</a>, <a href="/ai-receptionist-for-real-estate">real estate teams</a>, and <a href="/ai-receptionist-for-professional-intake">law firms</a>. In each case, every missed or delayed call is a revenue leak that automation closes permanently.',
+          'Any business with high inbound call volume: <a href="/ai-receptionist-for-hvac">HVAC</a> and home-services contractors, <a href="/industries/dental-med-spa">dental practices</a>, <a href="/ai-receptionist-for-med-spas">med spas</a>, <a href="/industries/real-estate">real estate teams</a>, and <a href="/industries/law-firms">law firms</a>. In each case, every missed or delayed call is a revenue leak that automation closes permanently.',
       },
     ],
     related: ['ai-receptionist', 'appointment-booking-automation', 'lead-response-time', 'after-hours-answering'],

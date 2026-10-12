@@ -21,7 +21,7 @@ export interface Industry {
   faqs: { q: string; a: string }[];
 }
 
-export const industries: Industry[] = [
+const allIndustries: Industry[] = [
   {
     slug: 'hvac',
     name: 'HVAC Companies',
@@ -284,3 +284,15 @@ export const industries: Industry[] = [
     ],
   },
 ];
+
+/**
+ * Industry pages that duplicated an /industries/* hub (same searcher, near-identical
+ * title) and were merged into it. The old URLs redirect (astro.config.mjs).
+ */
+export const mergedIndustries: Record<string, string> = {
+  'real-estate': '/industries/real-estate',
+  'professional-intake': '/industries/law-firms',
+  dentists: '/industries/dental-med-spa',
+};
+/** The industry pages that still build. */
+export const industries: Industry[] = allIndustries.filter((i) => !(i.slug in mergedIndustries));

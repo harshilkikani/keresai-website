@@ -118,7 +118,7 @@ export const hubs: Hub[] = [
     compliance:
       'Conflict screening happens before any advice is given, and Remi never offers legal advice. Call data is processed under a DPA, retained on your schedule, and access is logged. Ask for the security review before you sign anything.',
     children: [
-      { label: 'AI receptionist for professional intake', href: '/ai-receptionist-for-professional-intake' },
+      { label: 'AI receptionist for professional intake', href: '/industries/law-firms' },
       { label: 'Answering Legal alternative', href: '/answering-legal-alternative' },
       { label: 'Smith.ai alternative', href: '/smith-ai-alternative' },
       { label: 'Legal intake benchmarks', href: '/benchmarks/legal-intake-conversion' },
@@ -245,7 +245,7 @@ export const hubs: Hub[] = [
     compliance:
       'Remi is configured not to collect clinical detail it does not need, and access is limited to the people who run your account. Keres does not sign BAAs today, so if you need one, ask before you sign.',
     children: [
-      { label: 'AI receptionist for dentists', href: '/ai-receptionist-for-dentists' },
+      { label: 'AI receptionist for dentists', href: '/industries/dental-med-spa' },
       { label: 'AI receptionist for med spas', href: '/ai-receptionist-for-med-spas' },
       { label: 'Dental no-show benchmarks', href: '/benchmarks/dental-no-show' },
       { label: 'Dental no-show calculator', href: '/tools/dental-no-show-calculator' },
@@ -305,7 +305,7 @@ export const hubs: Hub[] = [
     foundLine:
       'Buyers check your reviews and your profile before they call the number on the sign. Found covers the site, the Google Business Profile, review generation and listings from $249 a month.',
     children: [
-      { label: 'AI receptionist for real estate', href: '/ai-receptionist-for-real-estate' },
+      { label: 'AI receptionist for real estate', href: '/industries/real-estate' },
       { label: 'Lead response time calculator', href: '/tools/lead-response-time-calculator' },
       { label: 'Missed-call statistics', href: '/missed-call-statistics' },
     ],

@@ -121,11 +121,11 @@ export const calculators: Calculator[] = [
     note: 'No-show rates for dental practices are commonly estimated at 10–20%. Many no-shows trace back to reschedule calls that went unanswered. Swap in your own production number.',
     faqs: [
       { q: 'How much do dental no-shows cost?', a: 'With no-show rates of 10–20% and each empty chair worth $200 or more, a busy practice can lose thousands a month. Enter your numbers above, and see the <a href="/benchmarks/dental-no-show">dental no-show benchmarks</a>.' },
-      { q: 'How do missed calls cause no-shows?', a: 'When patients cannot reach the office to reschedule, the appointment simply lapses and the chair sits empty. Capturing and rebooking those calls is one of the most direct ways to cut no-shows. See the <a href="/ai-receptionist-for-dentists">AI receptionist for dental practices</a>.' },
+      { q: 'How do missed calls cause no-shows?', a: 'When patients cannot reach the office to reschedule, the appointment simply lapses and the chair sits empty. Capturing and rebooking those calls is one of the most direct ways to cut no-shows. See the <a href="/industries/dental-med-spa">AI receptionist for dental practices</a>.' },
       { q: 'How can a practice reduce no-shows?', a: 'Answer and rebook every reschedule call, confirm appointments proactively, and cover after-hours demand. An AI receptionist does all three automatically, 24/7.' },
     ],
     related: [
-      { label: 'AI receptionist for dental practices', href: '/ai-receptionist-for-dentists' },
+      { label: 'AI receptionist for dental practices', href: '/industries/dental-med-spa' },
       { label: 'Dental no-show benchmarks', href: '/benchmarks/dental-no-show' },
       { label: 'No-show rate', href: '/glossary/no-show-rate' },
     ],
@@ -154,11 +154,11 @@ export const calculators: Calculator[] = [
     note: 'Signed-client rate (20%) reflects a typical answered-inquiry to retained-client rate. Swap in your own number if you track it.',
     faqs: [
       { q: 'How much do law firms lose to missed intake calls?', a: 'With case values of $1,000–$10,000+ and the first firm to respond usually signing the client, even a modest miss rate costs significant revenue. Enter your numbers above, and see the <a href="/benchmarks/legal-intake-conversion">legal intake conversion benchmarks</a>.' },
-      { q: 'Why do firms lose new clients?', a: 'High-value legal inquiries often arrive after hours and callers rarely leave voicemails. When the call is not answered live, the prospective client simply calls the next firm. See the <a href="/ai-receptionist-for-professional-intake">AI receptionist for legal intake</a>.' },
+      { q: 'Why do firms lose new clients?', a: 'High-value legal inquiries often arrive after hours and callers rarely leave voicemails. When the call is not answered live, the prospective client simply calls the next firm. See the <a href="/industries/law-firms">AI receptionist for legal intake</a>.' },
       { q: 'How can a firm improve intake conversion?', a: 'Answer every inquiry live, screen and qualify the matter, and book the consultation — around the clock. An AI receptionist for legal intake handles all of this 24/7, including conflict screening.' },
     ],
     related: [
-      { label: 'AI receptionist for legal intake', href: '/ai-receptionist-for-professional-intake' },
+      { label: 'AI receptionist for legal intake', href: '/industries/law-firms' },
       { label: 'Legal intake conversion benchmarks', href: '/benchmarks/legal-intake-conversion' },
       { label: 'Legal intake', href: '/glossary/legal-intake' },
     ],

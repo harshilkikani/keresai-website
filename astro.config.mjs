@@ -30,10 +30,11 @@ export default defineConfig({
         // listing them would ask crawlers to index a page whose only job
         // is to send them somewhere else.
         // Anchored to the origin so /glossary/ai-receptionist and friends stay in.
-        !/^https:\/\/www\.keresai\.com\/(ai-receptionist|ai-sdr|email-deliverability|deliverability|for-hvac)(\.html)?$/.test(page) &&
+        !/^https:\/\/www\.keresai\.com\/(ai-receptionist|ai-sdr|email-deliverability|deliverability|for-hvac|ai-receptionist-for-(real-estate|professional-intake|dentists))(\.html)?$/.test(page) &&
         // City, state and city×trade pages are noindex (templated, no local
-        // office behind them), so they stay out of the sitemap too.
-        !/^https:\/\/www\.keresai\.com\/ai-receptionist\/(?!home-services$)[^/]+(\/[^/]+)?$/.test(page) &&
+        // office behind them), so they stay out of the sitemap too; the old
+        // /ai-receptionist/home-services hub now redirects to /industries/home-services.
+        !/^https:\/\/www\.keresai\.com\/ai-receptionist\/[^/]+(\/[^/]+)?$/.test(page) &&
         // Rolling-out integrations are noindex until they ship. Keep this list in
         // step with status: 'rolling-out' in src/data/integrations.ts.
         !/^https:\/\/www\.keresai\.com\/integrations\/(jobber|housecall-pro|twilio|ringcentral|outlook|make|fieldedge|service-fusion|acuity|slack)$/.test(page) &&
@@ -78,6 +79,11 @@ export default defineConfig({
     '/ai-receptionist': '/agents/inbound',
     '/ai-sdr': '/agents/outbound',
     '/email-deliverability': '/agents/outbound',
+    // Industry pages merged into the hub that targets the same searcher.
+    '/ai-receptionist-for-real-estate': '/industries/real-estate',
+    '/ai-receptionist-for-professional-intake': '/industries/law-firms',
+    '/ai-receptionist-for-dentists': '/industries/dental-med-spa',
+    '/ai-receptionist/home-services': '/industries/home-services',
     // Never published, but named in the brief and cheap to honour.
     '/deliverability': '/agents/outbound',
   },

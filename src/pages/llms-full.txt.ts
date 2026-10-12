@@ -91,7 +91,7 @@ export async function GET() {
   }
 
   // ── HOME SERVICES HUB ─────────────────────────────────────────
-  push(`### Home Services Hub (${ORIGIN}/ai-receptionist/home-services)`);
+  push(`### Home Services Hub (${ORIGIN}/industries/home-services)`);
   push('Umbrella page for HVAC, plumbing, roofing, towing, and septic AI receptionist implementations. Covers emergency dispatch, ServiceTitan booking, and 24/7 surge coverage.');
   push();
 
@@ -293,7 +293,7 @@ export async function GET() {
   push(`- Pricing: ${ORIGIN}/pricing`);
   push(`- Contact: ${business.contactEmail}`);
   push(`- All comparisons: ${ORIGIN}/compare`);
-  push(`- Home services hub: ${ORIGIN}/ai-receptionist/home-services`);
+  push(`- Home services hub: ${ORIGIN}/industries/home-services`);
   push();
 
   return new Response(L.join('\n'), {
