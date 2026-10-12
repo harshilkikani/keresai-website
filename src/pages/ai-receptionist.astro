@@ -15,11 +15,11 @@ const crumbs = [
 ];
 const faqs = [
   { q: 'What is an AI receptionist?', a: 'An AI receptionist is software that answers your business phone automatically, 24/7. It greets callers, answers common questions, qualifies the lead, books or reschedules appointments on your calendar, and sends your team a summary — so no call goes to voicemail and no lead is lost.' },
-  { q: 'How is an AI receptionist different from a human answering service?', a: 'A human answering service usually just takes a message and charges per minute. Keres AI actually handles the call end to end — it answers in two rings, books the appointment, updates your CRM, and texts the caller a confirmation, at a flat monthly rate with no hold times.' },
-  { q: 'Can the AI receptionist book and reschedule appointments?', a: 'Yes. Keres books, confirms, and reschedules directly on Google Calendar, Outlook, or your field-service software during the call, then sends an SMS confirmation.' },
+  { q: 'How is an AI receptionist different from a human answering service?', a: 'A human answering service usually just takes a message and charges per minute. Keres AI actually handles the call end to end — it answers in two rings, books the appointment, updates your CRM, and texts the caller a confirmation, on one monthly rate with no hold times.' },
+  { q: 'Can the AI receptionist book and reschedule appointments?', a: 'Yes. Keres books, confirms, and reschedules directly on Google Calendar, HubSpot or ServiceTitan during the call, then sends an SMS confirmation.' },
   { q: 'Does it work after hours and on weekends?', a: 'Always. Keres answers nights, weekends, and holidays, and can cover overflow when your team is on another call — the times you lose the most leads.' },
-  { q: 'How much does an AI receptionist cost?', a: 'Keres is a flat monthly subscription based on call volume and features — typically far less than a full-time receptionist or per-minute answering service. See the <a href="/pricing">pricing page</a> or book a demo for a quote.' },
-  { q: 'How long does setup take?', a: 'Most accounts are live within five business days. We map your call flows, connect your number and calendar, train the AI on your business, and launch. Month-to-month, cancel anytime.' },
+  { q: 'How much does an AI receptionist cost?', a: 'Keres is one monthly rate quoted to your call volume, with included minutes — typically far less than a full-time receptionist or per-minute answering service. See the <a href="/pricing">pricing page</a> or book a demo for a quote.' },
+  { q: 'How long does setup take?', a: 'It depends on your call flows and integrations. We map your call flows, connect your number and calendar, set the AI up for your business, and agree the timing with you on the first call; you test it before it answers a customer. Month-to-month, cancel anytime.' },
 ];
 
 const video = videoObjectSchema({
@@ -58,8 +58,8 @@ const webpage = webPageSchema({
     <h1>The AI receptionist that <span class="accent">answers every call</span></h1>
     <p class="lead">Keres answers every inbound call in two rings, qualifies the caller, books the appointment on your calendar, and texts your team a summary — 24/7. Never lose another lead to voicemail.</p>
     <div class="hero-ctas">
-      <a href="/quote" class="btn btn-primary">Book a Demo</a>
-      <a href="/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
+      <a href="/quote" class="btn btn-primary">Get a quote</a>
+      <a href="/tools/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
     </div>
   </header>
 
@@ -109,15 +109,15 @@ const webpage = webPageSchema({
       <h2>Built for businesses that live on the phone</h2>
       <p>Keres works for any business where the next call is the next deal. See the industry-specific pages for call flows, integrations, and pricing context tuned to your trade:</p>
       <ul>
-        <li><a href="/ai-receptionist/home-services">AI receptionist for home services</a> — HVAC, plumbing, roofing, towing, and septic</li>
-        <li><a href="/ai-receptionist-for-hvac">AI receptionist for HVAC</a> — emergency dispatch, ServiceTitan and Jobber sync</li>
+        <li><a href="/industries/home-services">AI receptionist for home services</a> — HVAC, plumbing, roofing, towing, and septic</li>
+        <li><a href="/ai-receptionist-for-hvac">AI receptionist for HVAC</a> — emergency dispatch and ServiceTitan sync</li>
         <li><a href="/ai-receptionist-for-plumbers">AI receptionist for plumbers</a> — burst pipe and emergency answering</li>
         <li><a href="/ai-receptionist-for-roofing">AI receptionist for roofing</a> — storm season surge coverage</li>
         <li><a href="/ai-receptionist-for-towing">AI receptionist for towing</a> — 24/7 dispatch answering</li>
-        <li><a href="/ai-receptionist-for-dentists">AI receptionist for dental practices</a> — patient intake and appointment booking</li>
+        <li><a href="/industries/dental-med-spa">AI receptionist for dental practices</a> — patient intake and appointment booking</li>
         <li><a href="/ai-receptionist-for-med-spas">AI receptionist for med spas</a> — treatment booking and consultation intake</li>
-        <li><a href="/ai-receptionist-for-real-estate">AI receptionist for real estate</a> — showing requests, lead qualification</li>
-        <li><a href="/ai-receptionist-for-professional-intake">AI receptionist for legal intake</a> — conflict screening, consultation booking</li>
+        <li><a href="/industries/real-estate">AI receptionist for real estate</a> — showing requests, lead qualification</li>
+        <li><a href="/industries/law-firms">AI receptionist for legal intake</a> — conflict screening, consultation booking</li>
       </ul>
       <p>Looking for specific coverage? See our <a href="/24-7-ai-receptionist">24/7 AI receptionist</a> and <a href="/ai-answering-service">AI answering service</a> pages, or pair it with our <a href="/agents/outbound">AI SDR</a> for outbound. Comparing options? See <a href="/compare">all comparisons</a>.</p>
       <p>New to the terms? Learn <a href="/glossary/ai-receptionist">what an AI receptionist is</a>, <a href="/glossary/after-hours-answering">after-hours answering</a>, <a href="/glossary/emergency-dispatch">emergency dispatch</a>, <a href="/glossary/appointment-booking-automation">appointment booking automation</a>, and <a href="/glossary/lead-response-time">why speed to lead wins</a>.</p>
@@ -136,6 +136,6 @@ const webpage = webPageSchema({
 
   <CtaBand
     heading="See Keres answer a live call"
-    sub="Book a free 30-minute demo. Watch the AI receptionist answer, qualify, and book an appointment in under sixty seconds."
+    sub="Book a free 30-minute call and hear Remi answer, qualify and book a call."
   />
 </Layout>

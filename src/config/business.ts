@@ -18,15 +18,21 @@ export interface Testimonial {
 }
 
 export const business = {
+  // The Remi demo line: a number Remi answers, shown on "call and hear Remi"
+  // buttons. Leave empty unless Remi answers it.
   phone: '',
   phoneDisplay: '',
+  // The office line a person answers (matches the Google Business Profile).
+  // Shown in the footer, contact page, schema and llms.txt only.
+  contactPhone: '+19734952223',
+  contactPhoneDisplay: '(973) 495-2223',
   answerFromPrice: '',
   convertFromPrice: '',
   growFromPrice: '',
   // Per-worker from-prices, digits only, rendered "from $X/mo" on the
   // roster, the pricing table, the nav and the hero. All required; under
   // KERES_ALLOW_MISSING=1 the price line is omitted, never bracketed.
-  foundFrom: '',        // Found: site, Google listing, reviews
+  foundFrom: '249',     // Found: site, Google listing, reviews (published across the site)
   remiFrom: '',         // Remi: answers and books
   theoFrom: '',         // Theo: confirms, reminds, chases the estimate
   juneFrom: '',         // June: brings customers back, asks for the review
@@ -35,8 +41,14 @@ export const business = {
   // Custom worker (/custom): the one-time build price and the monthly run fee.
   customBuildFrom: '',
   customRunFrom: '',
-  city: '',
-  state: '',
+  // Webmaster-tool verification codes, rendered as <meta> tags when set.
+  // Google is already verified by a DNS TXT record on keresai.com, so this
+  // is only needed for a URL-prefix property. Bing: the msvalidate.01 value,
+  // or skip it by importing the site from Search Console in Bing Webmaster Tools.
+  googleSiteVerification: '',
+  bingSiteVerification: '',
+  city: 'Houston',
+  state: 'TX',
   // Does Remi answer calls in Spanish today? true or false — never guessed.
   // While it is null the build fails naming it. false gates every Spanish
   // page that shows Remi answering: a one-line disclosure under the hero
@@ -131,6 +143,11 @@ export const has = {
 /** tel: link + display, or null when the line is not configured yet. */
 export const PHONE = has.phone
   ? { display: business.phoneDisplay, href: `tel:${business.phone}`, e164: business.phone }
+  : null;
+
+/** The office line a person answers; never used for "hear Remi" CTAs. */
+export const CONTACT_PHONE = business.contactPhone.trim() && business.contactPhoneDisplay.trim()
+  ? { display: business.contactPhoneDisplay, href: `tel:${business.contactPhone}`, e164: business.contactPhone }
   : null;
 
 /** "from $349" or '' — callers omit the sentence when it is empty. */

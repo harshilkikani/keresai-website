@@ -2,6 +2,11 @@
 export interface Integration {
   slug: string;
   name: string;
+  /**
+   * 'live' only when Remi writes to it in production today. Everything else
+   * renders as rolling out, noindex, with no claim that it works.
+   */
+  status: 'live' | 'rolling-out';
   category: 'Phone & SMS' | 'Calendar' | 'CRM' | 'Field Service' | 'Automation';
   targetKeyword: string;
   title: string;
@@ -11,15 +16,20 @@ export interface Integration {
   syncs: string[]; // data that flows
   faqs: { q: string; a: string }[];
   related: string[]; // other integration slugs
+  /** Live integrations only: plain, generic notes. No API specifics we cannot stand behind. */
+  setup?: string;
+  writes?: string;
+  limits?: string;
 }
 
 export const integrations: Integration[] = [
   {
     slug: 'servicetitan',
     name: 'ServiceTitan',
+    status: 'live',
     category: 'Field Service',
     targetKeyword: 'servicetitan ai receptionist',
-    title: 'Keres AI + ServiceTitan — AI Receptionist Integration',
+    title: 'Keres AI + ServiceTitan Integration | Keres AI',
     description:
       'Connect Keres AI to ServiceTitan to answer every call 24/7 and book jobs straight into your ServiceTitan tenant. Customers, calls, and jobs sync automatically.',
     intro:
@@ -36,17 +46,21 @@ export const integrations: Integration[] = [
       { q: 'Will customer records sync to ServiceTitan?', a: 'Yes — Keres creates and updates customers, jobs, and call records in ServiceTitan in real time.' },
     ],
     related: ['jobber', 'housecall-pro', 'google-calendar'],
+    setup: 'On your first call you walk Keres through how a job gets booked today: your job types and business units, which calls count as emergencies, and who gets the alert. Keres connects your ServiceTitan account with access you authorize, sets Remi’s booking rules to match, and you place test calls to check that jobs land where your dispatcher expects before Remi answers a customer.',
+    writes: 'For each caller Remi books: the customer and service location, the job with the answers to your intake questions, and the appointment time the caller agreed to. Calls that end without a booking are still recorded with what Remi collected, and emergencies go to your on-call person by text under your rules.',
+    limits: 'Remi books within the job types, hours and rules you approve. Assigning a technician, pricing the work and anything that needs a site visit first stay with your team. If your tenant uses custom fields or unusual workflows, name them on the first call so Keres can say plainly what Remi will and will not fill in.',
   },
   {
     slug: 'jobber',
     name: 'Jobber',
+    status: 'rolling-out',
     category: 'Field Service',
     targetKeyword: 'jobber ai receptionist',
     title: 'Keres AI + Jobber — Book Jobs From Every Call',
     description:
       'Connect Keres AI to Jobber to answer calls 24/7 and book work directly in Jobber. Quotes, jobs, and customers sync both ways.',
     intro:
-      'Keres connects to Jobber so the AI receptionist answers every call, books the work, and keeps your Jobber account up to date automatically. Quotes, jobs, invoices, and customers sync bi-directionally — so your schedule and records stay accurate without anyone touching a keyboard.',
+      'Keres AI connects to Jobber so the AI receptionist answers every call, books the work, and keeps your Jobber account up to date automatically. Quotes, jobs, invoices, and customers sync bi-directionally — so your schedule and records stay accurate without anyone touching a keyboard.',
     does: [
       'Answer and book service calls straight into Jobber',
       'Create and update clients as leads come in',
@@ -63,13 +77,14 @@ export const integrations: Integration[] = [
   {
     slug: 'housecall-pro',
     name: 'Housecall Pro',
+    status: 'rolling-out',
     category: 'Field Service',
     targetKeyword: 'housecall pro ai receptionist',
     title: 'Keres AI + Housecall Pro — AI Receptionist',
     description:
       'Connect Keres AI to Housecall Pro to answer every call 24/7 and book jobs into Housecall Pro. Customers, jobs, and payments stay in sync.',
     intro:
-      'Keres connects to Housecall Pro so the AI receptionist answers every call, books the job, and updates Housecall Pro automatically. Customers, jobs, and payment records sync both ways, keeping your dispatch board accurate around the clock — even on nights and weekends.',
+      'Keres AI connects to Housecall Pro so the AI receptionist answers every call, books the job, and updates Housecall Pro automatically. Customers, jobs, and payment records sync both ways, keeping your dispatch board accurate around the clock — even on nights and weekends.',
     does: [
       'Answer calls 24/7 and book jobs in Housecall Pro',
       'Create and update customers automatically',
@@ -86,13 +101,14 @@ export const integrations: Integration[] = [
   {
     slug: 'hubspot',
     name: 'HubSpot',
+    status: 'live',
     category: 'CRM',
     targetKeyword: 'hubspot ai receptionist integration',
-    title: 'Keres AI + HubSpot — AI Receptionist & SDR',
+    title: 'Keres AI + HubSpot: AI Receptionist Integration | Keres AI',
     description:
       'Connect Keres AI to HubSpot to log every call, create contacts and deals as leads qualify, and book meetings — inbound and outbound, straight into your CRM.',
     intro:
-      'Keres connects to HubSpot so every qualified call and outbound reply becomes a contact, deal, or task in your CRM automatically. The AI receptionist logs calls and books meetings, and the AI SDR pushes outbound activity into HubSpot — keeping your pipeline accurate without manual entry.',
+      'Keres AI connects to HubSpot so every qualified call and outbound reply becomes a contact, deal, or task in your CRM automatically. The AI receptionist logs calls and books meetings, and the AI SDR pushes outbound activity into HubSpot — keeping your pipeline accurate without manual entry.',
     does: [
       'Create and update contacts as leads qualify',
       'Log calls, summaries, and outcomes to the timeline',
@@ -105,17 +121,21 @@ export const integrations: Integration[] = [
       { q: 'Can Keres create deals in HubSpot?', a: 'Yes — as leads qualify, Keres creates contacts, deals, and follow-up tasks for your team.' },
     ],
     related: ['zapier', 'google-calendar', 'outlook'],
+    setup: 'On your first call you decide what Remi should create in HubSpot: which pipeline and stage a new lead goes to, which properties your intake answers fill, and who owns new contacts. Keres connects HubSpot with access you authorize, maps the fields, and you place test calls to check the records before Remi answers a customer.',
+    writes: 'For each caller: a contact with the name, number and answers to your intake questions, plus a record of the call and its outcome. Where you choose, a deal or a follow-up task for your team, and the booked meeting.',
+    limits: 'Keres writes the fields you agree on during setup. Custom objects and unusual workflows are scoped on the call, not assumed. Reporting and pipeline clean-up stay in your hands, so if a property matters to your reports, name it on the first call.',
   },
   {
     slug: 'twilio',
     name: 'Twilio',
+    status: 'rolling-out',
     category: 'Phone & SMS',
     targetKeyword: 'twilio ai receptionist',
     title: 'Keres AI + Twilio — AI on Your Twilio Numbers',
     description:
       'Connect Keres AI to Twilio to answer calls, send SMS, and stream voice transcripts through your Twilio numbers — a full AI receptionist on your existing telephony.',
     intro:
-      'Keres runs on Twilio so the AI receptionist can answer calls, send SMS confirmations, and stream live transcripts through your existing Twilio numbers. Keep your number and telephony setup; Keres handles the conversation, booking, and follow-up on top of it.',
+      'Keres AI runs on Twilio so the AI receptionist can answer calls, send SMS confirmations, and stream live transcripts through your existing Twilio numbers. Keep your number and telephony setup; Keres handles the conversation, booking, and follow-up on top of it.',
     does: [
       'Answer inbound calls on your Twilio numbers',
       'Send SMS confirmations and follow-ups',
@@ -132,13 +152,14 @@ export const integrations: Integration[] = [
   {
     slug: 'ringcentral',
     name: 'RingCentral',
+    status: 'rolling-out',
     category: 'Phone & SMS',
     targetKeyword: 'ringcentral ai receptionist',
     title: 'Keres AI + RingCentral — AI Receptionist',
     description:
       'Connect Keres AI to RingCentral to auto-answer and intelligently route calls from your RingCentral numbers, 24/7, and book appointments automatically.',
     intro:
-      'Keres connects to RingCentral so the AI receptionist auto-answers and intelligently routes calls from your RingCentral numbers around the clock. Callers reach a helpful AI in two rings, get booked on the calendar, and your team is alerted only when a human is genuinely needed.',
+      'Keres AI connects to RingCentral so the AI receptionist auto-answers and intelligently routes calls from your RingCentral numbers around the clock. Callers reach a helpful AI in two rings, get booked on the calendar, and your team is alerted only when a human is genuinely needed.',
     does: [
       'Auto-answer calls on your RingCentral numbers',
       'Intelligently route and escalate calls',
@@ -155,13 +176,14 @@ export const integrations: Integration[] = [
   {
     slug: 'google-calendar',
     name: 'Google Calendar',
+    status: 'live',
     category: 'Calendar',
     targetKeyword: 'ai receptionist google calendar',
-    title: 'Keres AI + Google Calendar — Automatic Booking',
+    title: 'Keres AI + Google Calendar Booking | Keres AI',
     description:
       'Connect Keres AI to Google Calendar so the AI receptionist books, confirms, and reschedules appointments on your team’s calendar in real time.',
     intro:
-      'Keres connects to Google Calendar so the AI receptionist books, confirms, and reschedules appointments directly on your team’s calendar during the call. It checks real-time availability, avoids double-bookings, and texts the caller a confirmation — turning every call into a scheduled appointment.',
+      'Keres AI connects to Google Calendar so the AI receptionist books, confirms, and reschedules appointments directly on your team’s calendar during the call. It checks real-time availability, avoids double-bookings, and texts the caller a confirmation — turning every call into a scheduled appointment.',
     does: [
       'Check real-time availability and book on the call',
       'Reschedule and cancel without phone tag',
@@ -174,17 +196,21 @@ export const integrations: Integration[] = [
       { q: 'Can it handle multiple team calendars?', a: 'Yes — Keres can route bookings to the correct person or resource calendar.' },
     ],
     related: ['outlook', 'servicetitan', 'jobber'],
+    setup: 'On your first call you tell Keres which calendars Remi may book into, which appointment types you offer, how long each one takes, and which hours to keep clear. Keres connects the calendar with access you authorize, sets the booking rules, and you place test calls to check that bookings land where you expect before Remi answers a customer.',
+    writes: 'An event on the calendar you chose, at a time that was free when Remi offered it, with the caller’s name and number, the reason for the visit and the answers to your intake questions.',
+    limits: 'Remi books only into the calendars, appointment types and hours you approve. Anything outside those rules, such as a job that needs a quote or a site visit first, goes to your team instead of being booked. If you share calendars across people or rooms, raise it on the first call.',
   },
   {
     slug: 'outlook',
     name: 'Outlook',
+    status: 'rolling-out',
     category: 'Calendar',
     targetKeyword: 'ai receptionist outlook calendar',
     title: 'Keres AI + Outlook — AI for Microsoft 365',
     description:
       'Connect Keres AI to Outlook / Microsoft 365 so the AI receptionist books and reschedules appointments on your calendar in real time, two-way.',
     intro:
-      'Keres connects to Outlook and Microsoft 365 so the AI receptionist books and reschedules appointments on your calendar with two-way sync. It reads real-time availability, books during the call, and keeps everyone’s calendar accurate — no double-bookings, no manual scheduling.',
+      'Keres AI connects to Outlook and Microsoft 365 so the AI receptionist books and reschedules appointments on your calendar with two-way sync. It reads real-time availability, books during the call, and keeps everyone’s calendar accurate — no double-bookings, no manual scheduling.',
     does: [
       'Two-way sync with Outlook / Microsoft 365 calendars',
       'Book and reschedule appointments live',
@@ -201,13 +227,14 @@ export const integrations: Integration[] = [
   {
     slug: 'zapier',
     name: 'Zapier',
+    status: 'live',
     category: 'Automation',
     targetKeyword: 'keres ai zapier integration',
     title: 'Keres AI + Zapier — Connect to 6,000+ Apps | Keres AI',
     description:
       'Connect Keres AI to Zapier to trigger 6,000+ downstream apps from any Keres event — calls, bookings, and qualified leads, webhook-first.',
     intro:
-      'Keres connects to Zapier so any event — a booked appointment, a qualified lead, a completed call — can trigger 6,000+ downstream apps automatically. It’s webhook-first, so you can pipe Keres data into virtually any tool in your stack without custom development.',
+      'Keres AI connects to Zapier so any event — a booked appointment, a qualified lead, a completed call — can trigger 6,000+ downstream apps automatically. It’s webhook-first, so you can pipe Keres data into virtually any tool in your stack without custom development.',
     does: [
       'Trigger 6,000+ apps from any Keres event',
       'Send bookings and leads anywhere in your stack',
@@ -220,17 +247,21 @@ export const integrations: Integration[] = [
       { q: 'Is the Zapier integration webhook-based?', a: 'Yes — Keres is webhook-first, so it connects cleanly to Zapier and other automation tools.' },
     ],
     related: ['make', 'hubspot', 'twilio'],
+    setup: 'You tell Keres which events should leave Keres and where they should go: a booked appointment to a spreadsheet, for example, or a qualified lead to a CRM Keres does not connect to directly. Keres sets up the trigger with you, and you test the Zap with a test call before it runs on real calls.',
+    writes: 'Keres sends Zapier the event with the details Remi collected: the caller’s name and number, the intake answers, the outcome, and the booking time if there is one. What happens next is set by the Zap.',
+    limits: 'Zapier is a bridge, not a native integration. What a Zap can do depends on the app at the other end and on the Zapier plan it runs on, and it does not give Remi live availability from that app. For booking against live availability, use Google Calendar, HubSpot or ServiceTitan.',
   },
   {
     slug: 'make',
     name: 'Make',
+    status: 'rolling-out',
     category: 'Automation',
     targetKeyword: 'keres ai make integration',
     title: 'Keres AI + Make — Automate Your Workflows',
     description:
       'Connect Keres AI to Make (Integromat) to use Keres events as triggers or actions in any scenario — automate bookings, leads, and follow-up across your stack.',
     intro:
-      'Keres connects to Make (formerly Integromat) so you can wire Keres events into any scenario as a trigger or action. Route booked appointments, qualified leads, and call data through multi-step automations across your entire stack — no custom code required.',
+      'Keres AI connects to Make (formerly Integromat) so you can wire Keres events into any scenario as a trigger or action. Route booked appointments, qualified leads, and call data through multi-step automations across your entire stack — no custom code required.',
     does: [
       'Use Keres events as triggers in Make scenarios',
       'Push data into any app Make supports',
@@ -247,13 +278,14 @@ export const integrations: Integration[] = [
   {
     slug: 'fieldedge',
     name: 'FieldEdge',
+    status: 'rolling-out',
     category: 'Field Service',
     targetKeyword: 'keres ai fieldedge integration',
     title: 'Keres AI + FieldEdge — AI for HVAC & Plumbing',
     description:
       'Connect Keres AI to FieldEdge so every inbound call books a job directly in FieldEdge — dispatching techs, creating service agreements, and syncing customers automatically.',
     intro:
-      'Keres connects to FieldEdge so every call that comes in gets answered and booked straight into your FieldEdge dispatch board. No manual data entry, no missed jobs — the AI receptionist answers, qualifies, and creates the work order while the caller is still on the line.',
+      'Keres AI connects to FieldEdge so every call that comes in gets answered and booked straight into your FieldEdge dispatch board. No manual data entry, no missed jobs — the AI receptionist answers, qualifies, and creates the work order while the caller is still on the line.',
     does: [
       'Create new service calls in FieldEdge during the call',
       'Sync customer records from caller ID to existing accounts',
@@ -270,6 +302,7 @@ export const integrations: Integration[] = [
   {
     slug: 'service-fusion',
     name: 'Service Fusion',
+    status: 'rolling-out',
     category: 'Field Service',
     targetKeyword: 'keres ai service fusion integration',
     title: 'Keres AI + Service Fusion — Field Service AI',
@@ -293,13 +326,14 @@ export const integrations: Integration[] = [
   {
     slug: 'acuity',
     name: 'Acuity Scheduling',
+    status: 'rolling-out',
     category: 'Calendar',
     targetKeyword: 'keres ai acuity scheduling integration',
     title: 'Keres AI + Acuity — Book Appointments by Phone',
     description:
       'Connect Keres AI to Acuity Scheduling so every inbound call books directly on your Acuity calendar — dental, med spa, and professional service bookings handled automatically 24/7.',
     intro:
-      'Keres integrates with Acuity Scheduling so callers get booked in real time, by phone, into your Acuity calendar. Ideal for dental practices, med spas, and professional service providers — the AI receptionist handles intake questions, confirms availability, and locks in the appointment while the caller is still on the line.',
+      'Keres AI integrates with Acuity Scheduling so callers get booked in real time, by phone, into your Acuity calendar. Ideal for dental practices, med spas, and professional service providers — the AI receptionist handles intake questions, confirms availability, and locks in the appointment while the caller is still on the line.',
     does: [
       'Book appointments directly into Acuity during the call',
       'Check real-time availability across appointment types',
@@ -316,13 +350,14 @@ export const integrations: Integration[] = [
   {
     slug: 'slack',
     name: 'Slack',
+    status: 'rolling-out',
     category: 'Automation',
     targetKeyword: 'keres ai slack integration',
     title: 'Keres AI + Slack — Real-Time Call Alerts',
     description:
       'Connect Keres AI to Slack so your team gets instant notifications for every booked appointment, qualified lead, and emergency call — in the channel that matters.',
     intro:
-      'Keres connects to Slack via webhook or Zapier so your team gets a real-time message every time a call is answered, a lead is qualified, or an emergency comes in. Booked-job summaries, lead details, and dispatch alerts land in the right channel the moment the call ends.',
+      'Keres AI connects to Slack via webhook or Zapier so your team gets a real-time message every time a call is answered, a lead is qualified, or an emergency comes in. Booked-job summaries, lead details, and dispatch alerts land in the right channel the moment the call ends.',
     does: [
       'Post booked-job summaries to a Slack channel instantly',
       'Alert the on-call channel when an emergency call is dispatched',
@@ -345,3 +380,10 @@ export const integrationCategories = [
   'Field Service',
   'Automation',
 ] as const;
+
+export const isLive = (i: Integration) => i.status === 'live';
+/** Names of the integrations that work today, for copy that lists them. */
+export const liveIntegrationNames = integrations.filter(isLive).map((i) => i.name);
+/** The honest one-liner shown wherever a rolling-out integration appears. */
+export const rollingOutNote = (name: string) =>
+  `The ${name} integration is rolling out and is not live yet. Today Keres connects to ${liveIntegrationNames.join(', ').replace(/, ([^,]*)$/, ' and $1')}.`;

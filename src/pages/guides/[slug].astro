@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { organizationSchema, breadcrumbSchema } from '../../data/schema';
+import { organizationSchema, breadcrumbSchema, articleSchema as article } from '../../data/schema';
 import { guides } from '../../data/guides';
 
 // Guide bodies are static HTML partials loaded at build time.
@@ -31,27 +31,18 @@ const crumbs = [
 ];
 const related = guides.filter((o) => o.slug !== g.slug).sort((a, b) => a.order - b.order).slice(0, 3);
 
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  '@id': `${url}#article`,
+// mainEntityOfPage points at the #webpage node Layout emits for this path.
+const articleSchema = article({
+  type: 'BlogPosting',
+  path,
   headline,
   description: g.description,
-  image: `${ORIGIN}/assets/img/og-image.png`,
-  url,
-  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-  author: { '@type': 'Organization', name: 'Keres AI', url: ORIGIN },
-  publisher: {
-    '@type': 'Organization',
-    name: 'Keres AI',
-    logo: { '@type': 'ImageObject', url: `${ORIGIN}/assets/img/KeresLogo.png` },
-  },
-  isPartOf: { '@id': `${ORIGIN}/#website` },
-  inLanguage: 'en-US',
-};
+  datePublished: g.datePublished,
+  dateModified: g.dateModified,
+});
 ---
 <Layout title={g.metaTitle} description={g.description} path={path} ogType="article">
-  <link slot="head" rel="stylesheet" href="/assets/guide.css?v=5" />
+  <link slot="head" rel="stylesheet" href="/assets/guide.css?v=6" />
   <Schema slot="head" graph={[articleSchema, breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
@@ -63,6 +54,7 @@ const articleSchema = {
         <div class="guide-meta">
           <span>{g.readTime}</span>
           <span>For operators</span>
+          <span>Updated <time datetime={g.dateModified}>{new Date(g.dateModified + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time></span>
         </div>
       )}
     </header>
@@ -84,5 +76,5 @@ const articleSchema = {
     <p class="prose" style="margin-top:18px"><a href="/blog">← All resources & guides</a></p>
   </section>
 
-  <CtaBand heading="Want this built for your business?" sub="Book a free 30-minute demo and see Keres answer a call and book an appointment live." />
+  <CtaBand heading="Want this built for your business?" sub="Book a free 30-minute call and see Keres answer a call and book an appointment live." />
 </Layout>

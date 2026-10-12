@@ -1,0 +1,43 @@
+---
+// Served at /legal/security.html (build.format 'file'), the URL it has always had.
+// Only practices that are certain are stated here; keep in step with /trust.
+import LegalPage from '../../components/LegalPage.astro';
+---
+<LegalPage
+  title="Security Practices | Keres AI"
+  description="How Keres AI protects data: encryption in transit, limited access, export or deletion on request, and no model training on your data."
+  path="/legal/security.html"
+  label="Security"
+  updated="October 2026"
+>
+  <Fragment slot="title">Our <span class="accent">Security practices</span></Fragment>
+
+  <p>Keres AI answers your customers and handles their data every day. This page states the practices we follow, and is plain about what we do not have. For the short version, see <a href="/trust" style="color:var(--orange)">Trust &amp; Security</a>.</p>
+
+  <h2><span class="num">01</span>Encryption in transit</h2>
+  <ul>
+    <li>Traffic between callers, our systems and the tools we write to is encrypted in transit.</li>
+  </ul>
+
+  <h2><span class="num">02</span>Access controls</h2>
+  <ul>
+    <li>Principle of least privilege &mdash; only the people who run your account can see it.</li>
+    <li>Access ends when a person&rsquo;s role no longer needs it.</li>
+  </ul>
+
+  <h2><span class="num">03</span>Data handling</h2>
+  <ul>
+    <li>We do not train third-party AI models on client data.</li>
+    <li>Data retention is configured per engagement &mdash; we keep only what is necessary for the service to function.</li>
+    <li>Data can be exported or deleted on request within 15 business days.</li>
+  </ul>
+
+  <h2><span class="num">04</span>Compliance</h2>
+  <p>Keres AI does not hold a SOC 2 report or HIPAA certification and does not sign Business Associate Agreements (BAAs) today. If your business has regulatory requirements, tell us before you sign so we can say plainly whether Keres fits.</p>
+
+  <h2><span class="num">05</span>Responsible disclosure</h2>
+  <p>If you believe you&rsquo;ve found a security vulnerability in our systems or a client deployment we operate, please report it to <a href="mailto:ops@keresai.com" style="color:var(--orange)">ops@keresai.com</a> (see also <a href="/.well-known/security.txt" style="color:var(--orange)">security.txt</a>). We work with reporters to validate and resolve issues, and we do not pursue legal action against good-faith researchers who follow responsible disclosure.</p>
+
+  <h2><span class="num">06</span>Questions</h2>
+  <p>Have specific security or compliance requirements? Email <a href="mailto:ops@keresai.com" style="color:var(--orange)">ops@keresai.com</a> and we&rsquo;ll tell you honestly whether Keres fits.</p>
+</LegalPage>

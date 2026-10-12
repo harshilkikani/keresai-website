@@ -4,7 +4,7 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { organizationSchema, breadcrumbSchema } from '../data/schema';
-import { integrations, integrationCategories } from '../data/integrations';
+import { integrations, integrationCategories, isLive, liveIntegrationNames } from '../data/integrations';
 
 const path = '/integrations';
 const ORIGIN = 'https://www.keresai.com';
@@ -14,7 +14,7 @@ const itemList = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Keres AI integrations',
-  itemListElement: integrations.map((i, idx) => ({
+  itemListElement: integrations.filter(isLive).map((i, idx) => ({
     '@type': 'ListItem',
     position: idx + 1,
     name: `Keres AI + ${i.name}`,
@@ -24,8 +24,9 @@ const itemList = {
 ---
 <Layout
   title="Integrations — Connect Keres AI to Your Stack | Keres AI"
-  description="Keres AI connects to ServiceTitan, Jobber, Housecall Pro, HubSpot, Twilio, RingCentral, Google Calendar, Outlook, Zapier, and Make — plus webhooks for everything else."
+  description="Keres AI connects to Google Calendar, HubSpot, ServiceTitan and Zapier today. Jobber, Housecall Pro, Outlook and others are rolling out and marked that way."
   path={path}
+  pageType="CollectionPage"
 >
   <Schema slot="head" graph={[breadcrumbSchema(crumbs), itemList, organizationSchema]} />
 
@@ -33,20 +34,20 @@ const itemList = {
   <header class="page-hero container">
     <span class="eyebrow">Integrations</span>
     <h1>Plugs into <span class="accent">your stack</span></h1>
-    <p class="lead">Keres connects to the calendars, CRMs, phone systems, and field-service platforms you already run on — most one-off integrations go live during onboarding.</p>
+    <p class="lead answer-block">Keres AI’s AI receptionist, Remi, books appointments and logs callers in the tools you already use. Connected today: {liveIntegrationNames.join(', ')}. Zapier passes leads to thousands of other apps. Everything else below is rolling out and marked that way.</p>
     <div class="hero-ctas">
-      <a href="/quote" class="btn btn-primary">Book a Demo</a>
+      <a href="/quote" class="btn btn-primary">Get a quote</a>
     </div>
   </header>
 
   {integrationCategories.map((cat) => (
     <section class="page-section container">
-      <div class="section-label">{cat}</div>
+      <h2 class="section-label">{cat}</h2>
       <div class="feature-grid">
-        {integrations.filter((i) => i.category === cat).map((i) => (
+        {integrations.filter((i) => i.category === cat).sort((a, b) => Number(isLive(b)) - Number(isLive(a))).map((i) => (
           <a class="feature-card" href={`/integrations/${i.slug}`} style="text-decoration:none; display:block;">
             <h3>Keres AI + {i.name}</h3>
-            <p>{i.intro.slice(0, 130)}…</p>
+            <p>{isLive(i) ? i.intro.slice(0, 130) + '…' : 'Rolling out. Not live yet.'}</p>
           </a>
         ))}
       </div>
@@ -55,9 +56,15 @@ const itemList = {
 
   <section class="page-section container">
     <div class="prose">
-      <p>Don’t see your stack? Keres speaks generic webhooks and CSV out of the box, so most one-off integrations go live during onboarding. <a href="/quote">Book a demo</a> and tell us what you run on.</p>
+      <h2>How does Keres AI connect to your tools?</h2>
+      <p>Keres does the connecting for you. On your first call you say which calendar, CRM or field-service system your team opens every morning, which appointment types Remi may book, and which fields your intake answers should fill. Keres connects the account with access you authorize, sets Remi’s booking rules, and you place test calls to check that records land where you expect before Remi answers a customer. Each live integration page explains what Keres writes and where the limits are: <a href="/integrations/google-calendar">Google Calendar</a>, <a href="/integrations/hubspot">HubSpot</a>, <a href="/integrations/servicetitan">ServiceTitan</a> and <a href="/integrations/zapier">Zapier</a>.</p>
+      <h2>What if my tool is not live yet?</h2>
+      <p>Pages marked rolling out are not live, and we do not claim they work. Until yours ships, Remi can book into Google Calendar and pass each lead to almost any other app through Zapier, and the morning text summarizes every call, so nothing depends on the sync. Clio and Lawmatics, Jobber and Housecall Pro, Dentrix and Open Dental, and Follow Up Boss are among the tools rolling out.</p>
+      <h2>Which integration fits my business?</h2>
+      <p>Home service contractors on ServiceTitan usually connect it directly, so booked jobs land where dispatch already works; see the <a href="/ai-receptionist-for-hvac">AI receptionist for HVAC</a>. Law firms and real estate teams often use HubSpot for intake and follow-up, and practices that live in a shared calendar use Google Calendar.</p>
+      <p>Don’t see your stack? <a href="/quote">Book a call</a> and tell us what you run on; we’ll say plainly whether it works today.</p>
     </div>
   </section>
 
-  <CtaBand heading="Connect Keres to your tools" sub="Book a free 30-minute demo and we’ll map the integration to your exact stack." />
+  <CtaBand heading="Connect Keres to your tools" sub="Book a free 30-minute call and we’ll map the integration to your exact stack." />
 </Layout>

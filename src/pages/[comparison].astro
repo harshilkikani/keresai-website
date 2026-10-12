@@ -4,8 +4,9 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, itemListSchema, webPageSchema } from '../data/schema';
-import { comparisons } from '../data/comparisons';
+import { organizationSchema, faqSchema, breadcrumbSchema, itemListSchema, webPageSchema, articleSchema, VENDORS_CHECKED_ISO } from '../data/schema';
+import { comparisons, ROUNDUP_SLUGS } from '../data/comparisons';
+import { answeringVendors, keresRow, VENDORS_CHECKED } from '../data/answeringVendors';
 
 export function getStaticPaths() {
   return comparisons.map((c) => ({ params: { comparison: c.slug }, props: { c } }));
@@ -13,22 +14,41 @@ export function getStaticPaths() {
 
 const { c } = Astro.props;
 const path = `/${c.slug}`;
+// Roundup pages: a sourced table of alternatives, Keres as one labelled row.
+const alternatives = (c.roundup ?? []).map((k) => answeringVendors[k]).filter(Boolean);
+const isRoundup = alternatives.length > 0;
+const d = c.detail;
+const byType = (t: string) => alternatives.filter((v) => v.type === t).map((v) => v.name);
+const listNames = (xs: string[]) => xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+const roundupAnswer = isRoundup
+  ? `The main ${c.competitor} alternatives are ${listNames(alternatives.map((v) => v.name))}. ` +
+    [byType('Human').length ? `${listNames(byType('Human'))} ${byType('Human').length > 1 ? 'use' : 'uses'} live receptionists` : '',
+     byType('Hybrid').length ? `${listNames(byType('Hybrid'))} ${byType('Hybrid').length > 1 ? 'mix' : 'mixes'} people and AI` : '',
+     byType('AI').length ? `${listNames(byType('AI'))} ${byType('AI').length > 1 ? 'answer' : 'answers'} with AI` : ''].filter(Boolean).join('; ') +
+    '.'
+  : '';
+const roundupList = isRoundup ? itemListSchema({
+  name: `${c.competitor} alternatives`,
+  items: [...alternatives, keresRow].map((v) => ({ name: v.name, description: `${v.type}. ${v.billing} ${v.starting}` })),
+}) : null;
 
-const parent =
-  c.pillar === 'inbound'
-    ? { name: 'AI Receptionist', path: '/ai-receptionist' }
-    : { name: 'AI SDR', path: '/ai-sdr' };
+// Roundups sit under /compare; the noindexed Keres-vs pages keep their pillar parent.
+const parent = isRoundup
+  ? { name: 'Compare', path: '/compare' }
+  : c.pillar === 'inbound'
+    ? { name: 'AI Receptionist', path: '/agents/inbound' }
+    : { name: 'AI SDR', path: '/agents/outbound' };
 
 const crumbs = [
   { name: 'Home', path: '/' },
   parent,
-  { name: `vs. ${c.competitor}`, path },
+  { name: isRoundup ? `${c.competitor} alternatives` : `vs. ${c.competitor}`, path },
 ];
 
 const secondaryCta =
   c.pillar === 'inbound'
-    ? { href: '/ai-receptionist', label: 'How the AI receptionist works' }
-    : { href: '/ai-sdr', label: 'How the AI SDR works' };
+    ? { href: '/agents/inbound', label: 'How the AI receptionist works' }
+    : { href: '/agents/outbound', label: 'How the AI SDR works' };
 
 // ItemList schema makes the comparison table machine-readable for AI crawlers
 // so they can extract structured comparison data rather than parsing HTML.
@@ -40,6 +60,15 @@ const comparisonList = itemListSchema({
   })),
 });
 
+// Roundups are dated: the vendor prices they quote were checked on VENDORS_CHECKED.
+const roundupArticle = isRoundup ? articleSchema({
+  path,
+  headline: c.title.replace(/\s*\|\s*Keres AI$/, ''),
+  description: c.description,
+  datePublished: VENDORS_CHECKED_ISO,
+  dateModified: VENDORS_CHECKED_ISO,
+}) : null;
+
 const webpage = webPageSchema({
   path,
   name: c.title,
@@ -47,15 +76,31 @@ const webpage = webPageSchema({
   speakableSelectors: ['.answer-block', '.faq-a', '.lead'],
 });
 
-// Related comparisons in the same pillar (excludes current page)
+// Roundups link to their four siblings and the hub pages; the noindexed
+// Keres-vs pages keep linking within their pillar.
+const siblingRoundups = ROUNDUP_SLUGS
+  .filter((s) => s !== c.slug)
+  .map((s) => comparisons.find((x) => x.slug === s)!)
+  .filter(Boolean);
 const relatedComparisons = comparisons
   .filter((x) => x.pillar === c.pillar && x.slug !== c.slug)
   .slice(0, 3);
+
+const switchSteps = [
+  'Forward your number to Remi, or port it to Keres AI.',
+  'On a 30-minute call, share your current script and escalation rules.',
+  'Connect your calendar so Remi books into it.',
+  'Place test calls yourself and adjust anything that sounds wrong.',
+  'Go live once it answers the way you would; the timing is agreed on your first call.',
+];
 ---
-<Layout title={c.title} description={c.description} path={path}>
+<!-- Pages that are not roundups yet are templated, with unsourced claims about
+     competitors: noindex until rewritten. -->
+<Layout title={c.title} description={c.description} path={path} noindexFollow={!isRoundup}>
   <Schema slot="head" graph={[
+    ...(roundupArticle ? [roundupArticle] : []),
     faqSchema(c.faqs),
-    comparisonList,
+    isRoundup ? roundupList : comparisonList,
     webpage,
     breadcrumbSchema(crumbs),
     organizationSchema,
@@ -65,26 +110,101 @@ const relatedComparisons = comparisons
 
   <header class="page-hero container">
     <span class="eyebrow">{c.category}</span>
-    <h1>Why teams choose Keres over <span class="accent">{c.h1Accent}</span></h1>
+    {isRoundup
+      ? <h1><span class="accent">{c.h1Accent}</span> alternatives, compared</h1>
+      : <h1>Why teams choose Keres over <span class="accent">{c.h1Accent}</span></h1>}
+    {isRoundup && <p class="updated" style="font-size:14px;color:var(--text-dim);margin:-8px 0 16px">Updated <time datetime="2026-10-11">October 11, 2026</time></p>}
     <p class="lead">{c.intro}</p>
     <div class="hero-ctas">
-      <a href="/quote" class="btn btn-primary">Book a Demo</a>
-      <a href={secondaryCta.href} class="btn btn-outline">{secondaryCta.label}</a>
+      <a href="/quote" class="btn btn-primary">Get a quote</a>
+      <a href={isRoundup ? '/hear-it' : secondaryCta.href} class="btn btn-outline">{isRoundup ? 'Hear Remi answer a call' : secondaryCta.label}</a>
     </div>
   </header>
 
   <!-- DIRECT ANSWER BLOCK (AI citation target) -->
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
-      <p itemprop="text">
-        {c.pillar === 'inbound'
-          ? `Keres AI is an alternative to ${c.competitor} for businesses that need a done-for-you AI receptionist: it answers every call 24/7, books appointments on your calendar, integrates with field-service software, and charges flat-rate pricing — rather than per-call or per-minute fees.`
-          : `Keres AI is an alternative to ${c.competitor} that goes beyond sending and infrastructure: it adds AI personalization at scale, handles replies, and books qualified meetings directly to your calendar — replacing the need for a human SDR to follow through on every sequence.`}
-      </p>
+    <div class="answer-block">
+      {isRoundup ? (
+        <>
+          <p>{roundupAnswer} They also bill differently: per call, per minute, per caller or with included minutes.</p>
+          {d && <p style="margin-top:14px">{d.keresAnswer}</p>}
+        </>
+      ) : (
+        <p>
+          {c.pillar === 'inbound'
+            ? `Keres AI is an alternative to ${c.competitor} for businesses that need a done-for-you AI receptionist: it answers calls 24/7, books appointments on your calendar, books into Google Calendar, HubSpot or ServiceTitan, and charges one monthly rate with included minutes, then per minute, rather than per-call fees.`
+            : `Keres AI is an alternative to ${c.competitor} that goes beyond sending and infrastructure: it adds AI personalization at scale, handles replies, and books qualified meetings directly to your calendar — replacing the need for a human SDR to follow through on every sequence.`}
+        </p>
+      )}
     </div>
   </section>
 
+  {isRoundup && d && (
+    <section class="page-section container" aria-labelledby="price-title">
+      <div class="prose">
+        <h2 id="price-title">{d.priceH2}</h2>
+        <Fragment set:html={d.price} />
+      </div>
+    </section>
+  )}
+
+  {isRoundup && (
+    <section class="page-section container" aria-labelledby="roundup-title">
+      <div class="section-label">Side by side</div>
+      <h2 id="roundup-title" class="section-title" style="margin-bottom:8px">{alternatives.length} {c.competitor} alternatives, plus Keres AI</h2>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th>Option</th><th>Who answers</th><th>How it bills</th><th>Lowest published plan</th><th>Best for</th></tr>
+          </thead>
+          <tbody>
+            <tr class="keres">
+              <td><a href={keresRow.url}>{keresRow.name}</a> <em>(that’s us)</em></td>
+              <td>{keresRow.type}</td><td>{keresRow.billing}</td><td>{keresRow.starting}</td><td>{keresRow.bestFor}</td>
+            </tr>
+            {alternatives.map((v) => (
+              <tr>
+                <td><a href={v.url} rel="noopener nofollow" target="_blank">{v.name}</a></td>
+                <td>{v.type}</td><td>{v.billing}</td><td>{v.starting}</td><td>{v.bestFor}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="prose" style="margin-top:6px">Prices are each vendor’s lowest published plan, taken from its own pricing page on {VENDORS_CHECKED}. They change; check the linked page before you buy. Sources: {alternatives.map((v, i) => (<>{i > 0 ? ' · ' : ''}<a href={v.source} rel="noopener nofollow" target="_blank">{v.name}</a></>))}.</p>
+    </section>
+  )}
+
+  {isRoundup && d && (
+    <section class="page-section container">
+      <div class="prose">
+        <h2>Why do businesses look for {c.competitor} alternatives?</h2>
+        <ul>{d.why.map((w) => <li set:html={w} />)}</ul>
+
+        {d.sections.map((s) => (
+          <>
+            <h2>{s.h2}</h2>
+            <Fragment set:html={s.body} />
+          </>
+        ))}
+
+        <h2>Which {c.competitor} alternative is best for your business?</h2>
+        <p>Each pick below comes from the table above: what the vendor says it is for, how it bills and its lowest published plan.</p>
+        <ul>{d.bestFor.map((b) => <li><strong>{b.need}:</strong> <Fragment set:html={b.pick} /></li>)}</ul>
+
+        <h2>When Keres AI is not the right choice</h2>
+        <ul>{d.notFor.map((n) => <li set:html={n} />)}</ul>
+
+        <h2>How do I switch from {c.competitor} to Keres AI?</h2>
+        <p>{d.switchNote}</p>
+        <ol>{switchSteps.map((s) => <li>{s}</li>)}</ol>
+        <p>Remi is quoted to your call volume: a monthly rate with included minutes, then per minute, month-to-month. See <a href="/pricing">pricing</a> or <a href="/hear-it">hear Remi answer a call</a>.</p>
+      </div>
+    </section>
+  )}
+
   <!-- COMPARISON TABLE -->
+  {!isRoundup && (
   <section class="page-section container">
     <div class="section-label">At a glance</div>
     <h2 class="section-title" style="margin-bottom:8px">Keres AI vs. {c.competitor}</h2>
@@ -104,37 +224,52 @@ const relatedComparisons = comparisons
         </tbody>
       </table>
     </div>
-    <p class="prose" style="margin-top:6px">Comparison reflects typical product positioning and may change as each product evolves. <a href="/quote">Book a demo</a> to get a current, use-case-specific comparison.</p>
+    <p class="prose" style="margin-top:6px">Comparison reflects typical product positioning and may change as each product evolves. <a href="/quote">Get a quote</a> to get a current, use-case-specific comparison.</p>
   </section>
+  )}
 
-  <!-- MEDIUM CTA — pricing before hard demo ask -->
-  <div class="container" style="margin-bottom:var(--space-6)">
-    <div class="soft-cta-card">
-      <div class="soft-cta-body">
-        <h3 class="soft-cta-heading">What does Keres cost vs. {c.competitor}?</h3>
-        <p class="soft-cta-sub">Keres uses flat monthly pricing — no per-call, per-minute, or per-seat fees. See what's included at each level.</p>
+  {!isRoundup && (
+    <>
+      <!-- MEDIUM CTA — pricing before hard demo ask -->
+      <div class="container" style="margin-bottom:var(--space-6)">
+        <div class="soft-cta-card">
+          <div class="soft-cta-body">
+            <h3 class="soft-cta-heading">What does Keres cost vs. {c.competitor}?</h3>
+            <p class="soft-cta-sub">Keres charges one monthly rate with included minutes, then per minute, and no per-call fees.</p>
+          </div>
+          <a href="/pricing" class="btn btn-outline">See pricing →</a>
+        </div>
       </div>
-      <a href="/pricing" class="btn btn-outline">See pricing →</a>
-    </div>
-  </div>
 
-  <!-- WHY KERES WINS -->
-  <section class="page-section container">
-    <div class="prose">
-      <h2>The key difference</h2>
-      {c.pillar === 'inbound' ? (
-        <p>The difference isn't just features — it's the model. Keres is built as a <strong>done-for-you AI receptionist</strong>: we map your call flows, integrate your calendar and field-service stack, train the AI on your business, and launch in five business days. You don't build a bot; you get a front desk. The AI answers every call, books every job, and escalates every emergency — without you touching the configuration after go-live.</p>
-      ) : (
-        <p>The difference is where execution stops. Most outbound tools give you infrastructure to run yourself — you still need to manage sequences, review replies, and book the meetings manually. Keres does the whole motion: targeting, personalization, sending, reply handling, and booking. You focus on the meetings it books, not the machine that books them.</p>
-      )}
-      <p>See the <a href={secondaryCta.href}>{secondaryCta.label}</a> for the full picture, or <a href="/quote">book a 30-minute demo</a> to watch it work live.</p>
-    </div>
-  </section>
+      <section class="page-section container">
+        <div class="prose">
+          <h2>The key difference</h2>
+          {c.pillar === 'inbound' ? (
+            <p>The difference is the model. Keres is a <strong>done-for-you AI receptionist</strong>: we map your call flows, connect your calendar and field-service tools, set the AI up for your business, and launch once you have tested it. You don't build a bot; we run it for you.</p>
+          ) : (
+            <p>The difference is where execution stops. Most outbound tools give you infrastructure to run yourself — you still need to manage sequences, review replies, and book the meetings manually. Keres does the whole motion: targeting, personalization, sending, reply handling, and booking. You focus on the meetings it books, not the machine that books them.</p>
+          )}
+          <p>See the <a href={secondaryCta.href}>{secondaryCta.label}</a> for the full picture, or <a href="/quote">book a 30-minute call</a> to hear it work live.</p>
+        </div>
+      </section>
+    </>
+  )}
 
   <FaqSection faqs={c.faqs} title={`${c.competitor} alternative — FAQ`} />
 
-  <!-- RELATED COMPARISONS -->
-  {relatedComparisons.length > 0 && (
+  {isRoundup ? (
+    <section class="page-section container" aria-labelledby="related-title">
+      <div class="section-label">Also comparing</div>
+      <h2 id="related-title" class="section-title" style="margin-bottom:8px">More AI receptionist comparisons</h2>
+      <ul class="prose">
+        <li><a href="/best-ai-receptionist">Best AI receptionists for small businesses (2026)</a></li>
+        <li><a href="/ai-receptionist-cost">How much does an AI receptionist cost?</a></li>
+        {siblingRoundups.map((r) => <li><a href={`/${r.slug}`}>{r.detail?.linkLabel ?? `${r.competitor} alternatives`}</a></li>)}
+        <li><a href="/compare">All comparisons</a></li>
+        <li><a href="/hear-it">Hear Remi answer a call</a></li>
+      </ul>
+    </section>
+  ) : relatedComparisons.length > 0 && (
     <section class="page-section container">
       <div class="section-label">Also comparing</div>
       <h2 class="section-title" style="margin-bottom:8px">Other {c.pillar === 'inbound' ? 'AI receptionist' : 'AI SDR'} comparisons</h2>
@@ -150,9 +285,9 @@ const relatedComparisons = comparisons
   )}
 
   <CtaBand
-    heading={`See why teams pick Keres over ${c.competitor}`}
+    heading={isRoundup ? 'Hear Keres answer a call before you choose' : `See why teams pick Keres over ${c.competitor}`}
     sub={c.pillar === 'inbound'
-      ? 'Book a demo and watch Keres answer a call and book an appointment in under sixty seconds.'
+      ? 'Book a 30-minute call and hear Remi answer, qualify and book a call.'
       : 'Book a demo and watch Keres book a meeting end to end — targeting, sending, replies, and scheduling.'}
   />
 </Layout>

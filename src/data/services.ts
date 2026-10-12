@@ -45,12 +45,12 @@ const byStage: Record<number, { services: Service[]; ctaHref: string; ctaLabel: 
       {
         name: 'Google Business Profile Management',
         plan: 'Found',
-        desc: 'One-time optimization — categories, services, photos, Q&A, verification — then weekly posts, photo updates, review responses, spam-listing removal and monthly insights.',
+        desc: 'One-time optimization — categories, services, photos, verification — then weekly posts, photo updates, review responses, spam-listing removal and monthly insights.',
       },
       {
         name: 'Review Generation & Reputation',
         plan: 'Found',
-        desc: 'A review request after every completed job or matter, owner responses drafted for your approval, unhappy customers routed to you privately before they post, and a monthly rating report.',
+        desc: 'A review request after every completed job or matter, owner responses drafted for your approval, problems reported straight to you so you can fix them, and a monthly rating report.',
       },
       {
         name: 'Local Listings & Citations',
@@ -98,7 +98,7 @@ const byStage: Record<number, { services: Service[]; ctaHref: string; ctaLabel: 
       {
         name: 'Lead-Source Responder',
         plan: 'Convert',
-        desc: 'Google Business Profile messages, website forms, Yelp, Thumbtack, Avvo and Zillow enquiries all get answered in minutes instead of whenever someone checks the inbox.',
+        desc: 'Website form and text enquiries get answered in minutes instead of whenever someone checks the inbox; Yelp, Thumbtack, Avvo and Zillow inboxes are rolling out.',
       },
     ],
   },
@@ -193,7 +193,7 @@ const byStage: Record<number, { services: Service[]; ctaHref: string; ctaLabel: 
       {
         name: 'Review & Referral Requests',
         plan: 'Convert',
-        desc: 'A review ask after every completed job or matter, unhappy customers intercepted and routed to you privately, and referral asks to the customers who rated you highest.',
+        desc: 'A review ask after every completed job or matter, problems reported straight to you so you can fix them, and referral asks to the customers who rated you highest.',
       },
     ],
   },

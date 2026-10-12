@@ -51,3 +51,19 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Tell Bing (and Yandex, Seznam, Naver via the shared IndexNow API) about
+  # every sitemap URL after each deploy. Bing's index feeds ChatGPT search and
+  # Copilot. The key file public/dfe97f3cfcb4c4e5f6a25992f0f7f6b5.txt proves ownership.
+  # A failed ping never fails the deploy.
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Submit sitemap URLs to IndexNow
+        run: |
+          sleep 30
+          urls=$(curl -fsSL https://www.keresai.com/sitemap-0.xml | grep -o '<loc>[^<]*' | sed 's/<loc>//' | jq -R . | jq -s .)
+          jq -n --argjson urls "$urls" '{host:"www.keresai.com", key:"dfe97f3cfcb4c4e5f6a25992f0f7f6b5", keyLocation:"https://www.keresai.com/dfe97f3cfcb4c4e5f6a25992f0f7f6b5.txt", urlList:$urls}' > body.json
+          curl -sS -o /dev/null -w 'IndexNow HTTP %{http_code}\n' -X POST https://api.indexnow.org/indexnow -H 'Content-Type: application/json; charset=utf-8' --data @body.json

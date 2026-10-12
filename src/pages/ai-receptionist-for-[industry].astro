@@ -4,106 +4,39 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
-import Section from '../components/Section.astro';
-import Eyebrow from '../components/Eyebrow.astro';
 import {
   organizationSchema,
   faqSchema,
   breadcrumbSchema,
   serviceSchema,
-  howToSchema,
-  videoObjectSchema,
+  receptionistVideoSchema,
   webPageSchema,
 } from '../data/schema';
-import { industries } from '../data/industries';
-import { benchmarks } from '../data/benchmarks';
-import { geoVerticals } from '../data/geoVerticals';
-import { cities } from '../data/cities';
+import { industries, type Industry, type TradeContent } from '../data/industries';
+import { guidesFor } from '../data/guides';
 
 export function getStaticPaths() {
   return industries.map((ind) => ({ params: { industry: ind.slug }, props: { ind } }));
 }
 
-const { ind } = Astro.props;
+// Every page that still builds is a field-service trade with its own content.
+// Almost nothing below is shared between trades: the page is the trade data.
+const { ind } = Astro.props as { ind: Industry };
+const t = ind.trade as TradeContent;
+if (!t) throw new Error(`industries.ts: "${ind.slug}" builds a page but has no trade content`);
 const path = `/ai-receptionist-for-${ind.slug}`;
 
-// Matching benchmark page (when one exists for this vertical).
-const industryBenchmark: Record<string, string> = {
-  hvac: 'hvac-answering',
-  roofing: 'roofing-lead-response',
-  dentists: 'dental-no-show',
-  'professional-intake': 'legal-intake-conversion',
-};
-const benchSlug = industryBenchmark[ind.slug];
-const bench = benchSlug ? benchmarks.find((b) => b.slug === benchSlug) : undefined;
-
-// City × this-vertical pages, for local cross-links.
-const cityVerticalLinks = geoVerticals
-  .filter((g) => g.industrySlug === ind.slug)
-  .map((g) => ({ ...g, city: cities.find((c) => c.slug === g.citySlug)! }));
-
-// Each of the nine narrower pages sits beneath one of the four hubs.
-// professional-intake is the exception: law firms were split out to
-// their own hub, so what is left (financial, consulting) climbs to the
-// industries index rather than to a hub that no longer describes it.
-const HUB = {
-  hvac: 'home-services', plumbers: 'home-services', roofing: 'home-services',
-  towing: 'home-services', septic: 'home-services',
-  dentists: 'dental-med-spa', 'med-spas': 'dental-med-spa',
-  'real-estate': 'real-estate',
-};
-const HUB_NAME = {
-  'home-services': 'Home services',
-  'dental-med-spa': 'Dental & med spa',
-  'real-estate': 'Real estate',
-};
-const hubSlug = HUB[ind.slug];
+// The single page that carries the demo video (and its VideoObject schema).
+const showVideo = ind.slug === 'hvac';
 
 const crumbs = [
   { name: 'Home', path: '/' },
   { name: 'Industries', path: '/industries' },
-  ...(hubSlug ? [{ name: HUB_NAME[hubSlug], path: `/industries/${hubSlug}` }] : []),
+  { name: 'Home services', path: '/industries/home-services' },
   { name: `For ${ind.short}`, path },
 ];
 
-// Integration links relevant to each vertical — field-service vs. calendar-first
-const fieldServiceIndustries = ['hvac', 'plumbers', 'roofing', 'towing', 'septic'];
-const isFieldService = fieldServiceIndustries.includes(ind.slug);
-
-// How-it-works workflow steps — used for HowTo schema and the visual steps section
-const workflowSteps = [
-  {
-    name: 'Call comes in',
-    text: `A ${ind.shortLower} customer calls your business — after hours, during a job, or at peak volume. Keres answers within two rings, 24/7.`,
-  },
-  {
-    name: 'AI qualifies the caller',
-    text: `The AI asks the qualifying questions you configure — service needed, location, urgency, budget. Emergency calls are flagged immediately for dispatch.`,
-  },
-  {
-    name: 'Appointment is booked',
-    text: `Keres checks your live calendar availability and books the job or consultation during the call, then texts the caller a confirmation.`,
-  },
-  {
-    name: 'Summary goes to your team',
-    text: `Every call is logged with full details, synced to your CRM or field-service software, and your on-call team is texted instantly for any emergency.`,
-  },
-];
-
-const howTo = howToSchema({
-  name: `How Keres AI works for ${ind.nameLower}`,
-  description: `Step-by-step: how the Keres AI receptionist answers, qualifies, and books ${ind.shortLower} calls automatically, 24/7.`,
-  steps: workflowSteps,
-  totalTime: 'PT5D',
-});
-
-const video = videoObjectSchema({
-  name: `Keres AI Receptionist for ${ind.short} — Live Demo`,
-  description: `See how Keres AI answers calls, qualifies ${ind.shortLower} customers, books appointments, and dispatches emergencies automatically.`,
-  contentUrl: '/assets/video/ai-receptionist.mp4',
-  uploadDate: '2026-01-15',
-  duration: 'PT2M30S',
-});
+const video = receptionistVideoSchema; // shared with /agents/inbound (src/data/schema.ts)
 
 const webpage = webPageSchema({
   path,
@@ -112,8 +45,8 @@ const webpage = webPageSchema({
   speakableSelectors: ['.answer-block', '.faq-a', '.lead'],
 });
 
-// Peer industries for the "Also serves" cross-link section (exclude current)
-const peerIndustries = industries.filter((i) => i.slug !== ind.slug).slice(0, 5);
+const guides = guidesFor(ind.slug);
+const peers = industries.filter((i) => i.slug !== ind.slug);
 ---
 <Layout title={ind.title} description={ind.description} path={path}>
   <Schema slot="head" graph={[
@@ -124,8 +57,7 @@ const peerIndustries = industries.filter((i) => i.slug !== ind.slug).slice(0, 5)
       path,
       audience: ind.name,
     }),
-    howTo,
-    video,
+    ...(showVideo ? [video] : []),
     webpage,
     faqSchema(ind.faqs),
     breadcrumbSchema(crumbs),
@@ -134,237 +66,176 @@ const peerIndustries = industries.filter((i) => i.slug !== ind.slug).slice(0, 5)
 
   <Breadcrumbs crumbs={crumbs} />
 
-  <!-- HERO -->
   <header class="page-hero container">
     <span class="eyebrow">AI Receptionist · {ind.short}</span>
     <h1>The AI receptionist built for <span class="accent">{ind.nameLower}</span></h1>
     <p class="lead">{ind.intro}</p>
     <div class="hero-ctas">
-      <a href="/quote" class="btn btn-primary">Book a Demo</a>
-      <a href="/tools/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
+      <a href="/quote" class="btn btn-primary">Get a quote</a>
+      <a href={t.calculator.href} class="btn btn-outline">Open the {t.calculator.label}</a>
     </div>
   </header>
 
-  <!-- DIRECT ANSWER BLOCK (AI citation target) -->
+  <!-- DIRECT ANSWER (AI citation target) -->
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
-      <p itemprop="text">The <strong>Keres AI receptionist for {ind.nameLower}</strong> answers every inbound call 24/7 in two rings, qualifies the caller, books the appointment on your calendar, and texts your team the moment a call is an emergency — so no lead goes to voicemail and every call becomes a booked job.</p>
-    </div>
+    <div class="answer-block"><p set:html={t.answer} /></div>
   </section>
 
-  <!-- PAIN POINTS -->
   <section class="page-section container">
     <div class="prose">
-      <h2>Why {ind.shortLower} businesses lose calls — and jobs</h2>
-      <ul>
-        {ind.pains.map((p) => <li>{p}</li>)}
-      </ul>
-      <p>Every one of those is a lead that went to a competitor. Keres closes the gap by answering instantly, every time — including after hours, weekends, and surge periods when your front desk can't keep up.</p>
+      <h2>{t.painsH2}</h2>
+      <ul>{ind.pains.map((p) => <li>{p}</li>)}</ul>
+      <p>{t.painsNote}</p>
     </div>
   </section>
 
-  <!-- SOFT CTA — directs to informational use-case pages before hard demo CTA -->
-  <div class="container" style="margin-bottom:var(--space-4)">
-    <div class="inline-cta-row">
-      <a href="/use-cases/after-hours-answering" class="inline-cta-link">→ See how after-hours answering works</a>
-      <a href="/use-cases/overflow-call-handling" class="inline-cta-link">→ Overflow call handling</a>
-      <a href="/use-cases/appointment-booking" class="inline-cta-link">→ Automated appointment booking</a>
+  <!-- EXAMPLE CALL -->
+  <section class="page-section container" aria-labelledby="trade-call">
+    <div class="prose">
+      <h2 id="trade-call">{t.callH2}</h2>
+      <p class="trade-call__label"><strong>Example call, not a customer.</strong> Written to show the flow; names and addresses are made up.</p>
     </div>
-  </div>
-
-  <!-- HOW IT WORKS (HowTo schema target) -->
-  <section class="page-section container" id="how-it-works">
-    <div class="section-label">How it works</div>
-    <h2 class="section-title" style="margin-bottom:8px">Call comes in → booked in seconds</h2>
-    <p class="prose" style="margin-bottom:var(--space-4)">Keres handles the entire call-to-booking workflow automatically, without your team lifting a finger.</p>
-    <div class="steps">
-      {workflowSteps.map((step, i) => (
-        <div class="step">
-          <div class="step-title">{i + 1}. {step.name}</div>
-          <p class="step-desc">{step.text}</p>
-        </div>
+    <ol class="trade-call">
+      {t.call.map((c) => (
+        <li class:list={['trade-call__line', c.who === 'Remi' && 'trade-call__line--remi']}>
+          <span class="trade-call__who">{c.who}</span>
+          <span class="trade-call__text">{c.line}</span>
+        </li>
       ))}
+    </ol>
+    <div class="prose">
+      <p>{t.callNote} <a href="/hear-it">Hear a recorded example call →</a></p>
     </div>
   </section>
 
-  <!-- WHAT KERES BOOKS -->
+  <!-- EMERGENCY RULES -->
   <section class="page-section container">
-    <div class="section-label">What Keres books</div>
-    <h2 class="section-title" style="margin-bottom:8px">Booked, not just answered</h2>
+    <div class="prose">
+      <h2>{t.emergencyH2}</h2>
+      <p>{t.emergencyIntro}</p>
+      <ul>{t.emergencyRules.map((r) => <li set:html={r} />)}</ul>
+      <p set:html={t.emergencyNote} />
+    </div>
+  </section>
+
+  <!-- INTAKE -->
+  <section class="page-section container">
+    <div class="prose">
+      <h2>{t.intakeH2}</h2>
+      <p>{t.intakeIntro}</p>
+      <ul>{t.intake.map((f) => <li><strong>{f.field}</strong>: {f.why}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <h2 class="section-title" style="margin-bottom:8px">{t.booksH2}</h2>
     <div class="feature-grid">
-      {ind.books.map((b) => (
-        <div class="feature-card"><h3>{b}</h3></div>
-      ))}
+      {ind.books.map((b) => <div class="feature-card"><h3>{b}</h3></div>)}
     </div>
   </section>
 
-  <!-- VIDEO DEMO -->
-  <section class="page-section container">
-    <div class="section-label">See it in action</div>
-    <h2 class="section-title" style="margin-bottom:8px">Watch a live call get booked</h2>
-    <p class="prose" style="margin-bottom:var(--space-3)">This is the Keres operator portal — the AI answers the call, qualifies the caller, and books the appointment in under sixty seconds.</p>
-    <video
-      src="/assets/video/ai-receptionist.mp4"
-      poster="/assets/img/operator-portal.jpg"
-      preload="none"
-      playsinline
-      muted
-      loop
-      controls
-      width="1280"
-      height="720"
-      aria-label={`Keres AI receptionist demo for ${ind.shortLower}`}
-      style="width:100%;max-width:720px;height:auto;border-radius:var(--radius-lg);border:1px solid var(--border)"
-    ></video>
-    <p class="k-mock__caption">Recording uses example data. Nothing on this page loads a video until you press play.</p>
-  </section>
+  {showVideo && (
+    <section class="page-section container">
+      <h2 class="section-title" style="margin-bottom:8px">Watch an example call get booked</h2>
+      <p class="prose" style="margin-bottom:var(--space-3)">Remi answers an example call, qualifies the caller and books the appointment; then the operator portal the owner sees. Demo account, not a customer.</p>
+      <video
+        src="/assets/video/ai-receptionist.mp4"
+        poster="/assets/img/operator-portal.webp"
+        preload="none"
+        playsinline
+        muted
+        loop
+        controls
+        width="1280"
+        height="720"
+        aria-label="Keres AI receptionist example call and operator portal"
+        style="width:100%;max-width:720px;height:auto;border-radius:var(--radius-lg);border:1px solid var(--border)"
+      ></video>
+      <p class="k-mock__caption">Recording uses example data. Nothing on this page loads a video until you press play.</p>
+    </section>
+  )}
 
-  <!-- MEDIUM CTA — calculator before hard demo ask -->
-  <section class="page-section container">
-    <div class="soft-cta-card">
-      <div class="soft-cta-body">
-        <p class="soft-cta-label">Before you book a demo</p>
-        <h3 class="soft-cta-heading">What are missed {ind.shortLower} calls costing you?</h3>
-        <p class="soft-cta-sub">Plug in your call volume and average job value to see the monthly revenue at risk from unanswered calls.</p>
-      </div>
-      <a href="/tools/missed-call-calculator" class="btn btn-outline">Open the calculator →</a>
-    </div>
-  </section>
-
-  <!-- INTEGRATIONS (vertical-specific) -->
+  <!-- INTEGRATIONS -->
   <section class="page-section container">
     <div class="prose">
-      <h2>Plugs into the tools {ind.shortLower} teams already use</h2>
-      {isFieldService ? (
-        <p>Keres connects directly to your field-service platform so every call-driven booking appears in the system your team already runs on — no double entry, no manual sync.</p>
-      ) : (
-        <p>Keres connects to your calendar, CRM, and practice management software so every booking lands where your team expects it.</p>
-      )}
+      <h2>Does it book into ServiceTitan, Jobber or Housecall Pro?</h2>
+      <p>{t.softwareNote}</p>
       <ul>
-        {isFieldService ? (
-          <>
-            <li><a href="/integrations/servicetitan">ServiceTitan</a> — jobs and customers sync automatically</li>
-            <li><a href="/integrations/jobber">Jobber</a> — two-way client and job sync</li>
-            <li><a href="/integrations/housecall-pro">Housecall Pro</a> — customers, jobs, and payments</li>
-            <li><a href="/integrations/google-calendar">Google Calendar</a> and <a href="/integrations/outlook">Outlook</a></li>
-            <li><a href="/integrations/twilio">Twilio</a> for call handling and SMS dispatch alerts</li>
-          </>
-        ) : (
-          <>
-            <li><a href="/integrations/google-calendar">Google Calendar</a> and <a href="/integrations/outlook">Outlook</a></li>
-            <li><a href="/integrations/hubspot">HubSpot CRM</a> — contact and deal creation</li>
-            <li><a href="/integrations/zapier">Zapier</a> and <a href="/integrations/make">Make</a> for custom workflows</li>
-            <li><a href="/integrations/ringcentral">RingCentral</a> for existing phone systems</li>
-          </>
-        )}
-      </ul>
-      <p><a href="/integrations">See all integrations →</a></p>
-    </div>
-  </section>
-
-  <!-- TOPICAL DEPTH: What to look for -->
-  <section class="page-section container">
-    <div class="prose">
-      <h2>What to look for in an AI answering service for {ind.nameLower}</h2>
-      <p>Not all AI receptionist platforms are built for {ind.shortLower} workflows. Here's what matters most:</p>
-      <ul>
-        <li><strong>True 24/7 coverage</strong> — including nights, weekends, and surge periods, not just business hours</li>
-        <li><strong>Emergency recognition and dispatch</strong> — the AI should identify urgent calls and alert your team instantly, not just take a message</li>
-        <li><strong>Live calendar booking</strong> — booking during the call, not a callback promise</li>
-        {isFieldService ? (
-          <li><strong>Field-service integrations</strong> — direct sync with ServiceTitan, Jobber, or Housecall Pro, not just webhook workarounds</li>
-        ) : (
-          <li><strong>CRM and calendar sync</strong> — every call logged automatically to your system</li>
-        )}
-        <li><strong>Flat-rate pricing</strong> — per-minute billing balloons during busy seasons; flat rate is predictable</li>
-        <li><strong>Done-for-you setup</strong> — you shouldn't have to build call flows from scratch</li>
-      </ul>
-      <p>Keres checks every box, and most {ind.shortLower} accounts are live within five business days. <a href="/quote">Book a demo</a> to see the flow for your specific use case.</p>
-    </div>
-  </section>
-
-  <!-- RELATED CONCEPTS (glossary + use case links for topical authority) -->
-  <section class="page-section container">
-    <div class="prose">
-      <h2>Related tools and concepts</h2>
-      <p>Learn more about the capabilities behind the Keres {ind.short} AI receptionist:</p>
-      <ul>
-        <li><a href="/glossary/ai-receptionist">What is an AI receptionist?</a> — definition and how it works</li>
-        <li><a href="/glossary/after-hours-answering">After-hours answering</a> — why it matters for {ind.shortLower} businesses</li>
-        <li><a href="/glossary/emergency-dispatch">Emergency dispatch</a> — how AI handles urgent calls</li>
-        <li><a href="/glossary/appointment-booking-automation">Appointment booking automation</a> — no more phone tag</li>
-        <li><a href="/glossary/lead-response-time">Lead response time</a> — why speed to lead wins the job</li>
-        <li><a href="/use-cases/after-hours-answering">After-hours answering</a> · <a href="/use-cases/overflow-call-handling">Overflow handling</a> · <a href="/use-cases/lead-capture">Lead capture</a></li>
-        {bench && <li><a href={`/benchmarks/${bench.slug}`}>{bench.h1} {bench.h1Accent}</a> — citable {bench.category} data on answering and conversion</li>}
+        <li>Live: <a href="/integrations/servicetitan">ServiceTitan</a>, <a href="/integrations/google-calendar">Google Calendar</a>, <a href="/integrations/hubspot">HubSpot</a> and <a href="/integrations/zapier">Zapier</a></li>
+        <li>Rolling out, not live yet: Jobber and Housecall Pro</li>
       </ul>
     </div>
   </section>
 
-  {cityVerticalLinks.length > 0 && (
+  <!-- COST -->
+  <section class="page-section container">
+    <div class="prose">
+      <h2>{t.costH2}</h2>
+      <Fragment set:html={t.costBody} />
+      <p><a href={t.calculator.href}>Open the {t.calculator.label} →</a></p>
+    </div>
+  </section>
+
+  {t.priceH2 && t.priceBody && (
     <section class="page-section container">
       <div class="prose">
-        <h2>{ind.short} AI receptionist by city</h2>
-        <p>Local coverage tuned to the demand patterns of these metros:</p>
-        <ul>
-          {cityVerticalLinks.map((g) => (
-            <li><a href={`/ai-receptionist/${g.citySlug}/${g.verticalSlug}`}>{ind.short} receptionist in {g.city.city}, {g.city.state}</a></li>
-          ))}
-        </ul>
+        <h2>{t.priceH2}</h2>
+        <Fragment set:html={t.priceBody} />
       </div>
     </section>
   )}
 
-  <!-- ALSO SERVES -->
+  <!-- NEUTRAL CHECKLIST -->
   <section class="page-section container">
     <div class="prose">
-      <p>Also serves: {peerIndustries.map((i, idx) => (
-        <>{idx > 0 ? ' · ' : ''}<a href={`/ai-receptionist-for-${i.slug}`}>{i.short}</a></>
-      ))}. See <a href="/agents/inbound">all AI receptionist features</a> or add the <a href="/agents/outbound">AI SDR</a> for outbound.</p>
+      <h2>{t.compareH2}</h2>
+      <p>{t.compareIntro}</p>
+      <ul>{t.checklist.map((c) => <li>{c}</li>)}</ul>
+      <p>Keres AI’s own answers are on <a href="/agents/inbound">Remi’s page</a> and <a href="/pricing">pricing</a>.</p>
+      {t.roundup && <p>Other vendors’ answers: <a href={t.roundup.href}>{t.roundup.label}</a>.</p>}
+      {guides.length > 0 && (
+        <>
+          <h2>Guides for {ind.shortLower} operators</h2>
+          <ul>{guides.map((g) => <li><a href={`/guides/${g.slug}.html`}>{g.listTitle}</a> — {g.listDesc}</li>)}</ul>
+        </>
+      )}
+      <p>
+        Answering is one part of winning the job: <a href="/services/found">Found</a> gets you found on Google
+        and <a href="/agents/follow-up">Theo</a> follows up on open estimates.
+        More trades: {peers.map((p, i) => <>{i > 0 ? ' · ' : ''}<a href={`/ai-receptionist-for-${p.slug}`}>{p.short}</a></>)} ·
+        <a href="/industries/home-services">all home services</a>.
+      </p>
     </div>
   </section>
 
-  {/* Required internal links: the agents, Found, pricing, and the hub
-      this page sits beneath. Without these the nine narrower pages are
-      leaves with nowhere to go. */}
-  <Section tone="raised" spacing="standard" labelledby="ind-next">
-    <div class="k-band">
-      <div class="k-band__head">
-        <Eyebrow>Where to next</Eyebrow>
-        <h2 id="ind-next" class="k-h2">The rest of the pipeline.</h2>
-        <p class="k-lede k-measure">
-          Answering the call is one stage of seven. Plans start at $249/month for visibility
-          and are quoted to your call volume from there.
-        </p>
-      </div>
-      <ul class="k-childlinks">
-        {hubSlug && (
-          <li><a href={`/industries/${hubSlug}`}>{HUB_NAME[hubSlug]} — the full vertical page
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a></li>
-        )}
-        <li><a href="/agents/inbound">Remi — answers and books the call
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a></li>
-        <li><a href="/agents/follow-up">Theo — reminders and estimate follow-up
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a></li>
-        <li><a href="/agents/reactivation">June — win back past customers
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a></li>
-        <li><a href="/services/found">Found — get found in the first place, from $249/mo
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a></li>
-        <li><a href="/pricing">Pricing — every plan and what changes the quote
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a></li>
-      </ul>
-    </div>
-  </Section>
+  <FaqSection faqs={ind.faqs} title={`AI receptionist for ${ind.shortLower}: questions`} />
 
-  <FaqSection faqs={ind.faqs} title={`AI receptionist for ${ind.shortLower} — FAQ`} />
-
-  <CtaBand
-    heading={`Stop losing ${ind.shortLower} leads to voicemail`}
-    sub="Book a free 30-minute demo and see Keres answer and book a call live — trained for your industry."
-  />
+  <CtaBand heading={t.ctaHeading} sub={t.ctaSub} />
 </Layout>
+
+<style>
+  .trade-call__label { font-size: 0.95rem; }
+  .trade-call {
+    list-style: none;
+    margin: var(--space-3, 1.5rem) 0;
+    padding: 0;
+    max-width: 720px;
+    display: grid;
+    gap: 10px;
+  }
+  .trade-call__line {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 12px;
+    align-items: baseline;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg, 12px);
+  }
+  .trade-call__line--remi { border-color: var(--accent, currentColor); }
+  .trade-call__who { font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  .trade-call__line--remi .trade-call__who { color: var(--accent, inherit); }
+  @media (max-width: 480px) {
+    .trade-call__line { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>

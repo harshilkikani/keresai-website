@@ -10,11 +10,17 @@ export interface Guide {
   titleHtml: string;
   readTime: string;
   order: number;
+  /** First published on this domain (git history). */
+  datePublished: string;
+  /** Last substantive edit. */
+  dateModified: string;
 }
 
 export const guides: Guide[] = [
   {
     slug: "septic-automation-playbook",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Featured · Deep dive",
     listTitle: "The Septic Service Automation Playbook",
     listDesc: "Where AI delivers the highest ROI for septic operators: intake triage, pumping reminders, emergency call handling, and invoice follow-up.",
@@ -26,6 +32,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "customer-intake-automation",
+    datePublished: '2026-05-26',
+    dateModified: '2026-05-26',
     category: "Guide",
     listTitle: "Customer Intake Automation for Field Service",
     listDesc: "How to automate customer intake calls and forms so no lead slips through the cracks.",
@@ -37,6 +45,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "roofing-growth-through-ai",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Deep dive",
     listTitle: "Roofing Company Growth Through AI",
     listDesc: "A practical look at how roofing companies use AI to capture and book more storm-season leads.",
@@ -48,6 +58,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "hvac-scaling-checklist",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Deep dive",
     listTitle: "HVAC Business Scaling Checklist",
     listDesc: "Seasonal automation, maintenance reminders, emergency dispatch, and billing automation for HVAC leaders.",
@@ -59,6 +71,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "towing-operations-automation",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Deep dive",
     listTitle: "Towing Dispatch & Operations Automation",
     listDesc: "Automating dispatch, intake, and follow-up for high-volume towing operations.",
@@ -70,6 +84,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "measuring-automation-roi",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Best practice",
     listTitle: "Measuring the ROI of Business Automation",
     listDesc: "A simple framework for measuring the real cost and time savings of automation.",
@@ -81,6 +97,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "integrating-ai-into-your-stack",
+    datePublished: '2026-05-26',
+    dateModified: '2026-10-11',
     category: "Best practice",
     listTitle: "Integrating AI Into Your Current Stack",
     listDesc: "How to connect AI agents to the CRM, calendar, and phone systems you already run on.",
@@ -91,14 +109,32 @@ export const guides: Guide[] = [
     order: 6,
   },
   {
-    slug: "roofing-case-study-15-hours",
-    category: "Case study",
-    listTitle: "Roofing Company Saves 15 Hours/Week",
-    listDesc: "A real client story: how one roofing company reclaimed 15 hours a week with automation.",
-    metaTitle: "Roofing Company Saves 15 Hours Per Week With AI | Keres AI",
-    description: "Real case study: how a mid-size roofing company used lead qualification and scheduling automation to eliminate admin overhead and lift close rate by 22%.",
-    titleHtml: "Roofing Company Saves <span class=\"accent\">15 Hours/Week</span>",
+    slug: "ai-tools-for-local-service-businesses",
+    datePublished: '2026-10-11',
+    dateModified: '2026-10-11',
+    category: "Buyer's guide",
+    listTitle: "The Best AI Tools for Local Service Businesses to Get More Leads",
+    listDesc: "AI tools by funnel stage: getting found on Google, answering every call, following up, and when outbound email fits.",
+    metaTitle: "Best AI Tools for Local Service Business Leads | Keres AI",
+    description: "The AI tools that get local service businesses more leads, by stage: Google profile and reviews, AI receptionists, follow-up and outbound email.",
+    titleHtml: "The Best AI Tools for Local Service Businesses to <span class=\"accent\">Get More Leads</span>",
     readTime: "7 min read",
     order: 7,
   },
 ];
+
+/** Guides worth linking from a trade or hub page, by industry or hub slug. */
+const GUIDE_MAP: Record<string, string[]> = {
+  hvac: ['hvac-scaling-checklist', 'customer-intake-automation', 'measuring-automation-roi'],
+  plumbers: ['customer-intake-automation', 'integrating-ai-into-your-stack', 'measuring-automation-roi'],
+  roofing: ['roofing-growth-through-ai', 'customer-intake-automation', 'measuring-automation-roi'],
+  septic: ['septic-automation-playbook', 'customer-intake-automation', 'measuring-automation-roi'],
+  towing: ['towing-operations-automation', 'customer-intake-automation', 'integrating-ai-into-your-stack'],
+  'med-spas': ['customer-intake-automation', 'measuring-automation-roi'],
+  'home-services': ['hvac-scaling-checklist', 'roofing-growth-through-ai', 'septic-automation-playbook', 'towing-operations-automation', 'customer-intake-automation'],
+  'law-firms': ['customer-intake-automation', 'measuring-automation-roi'],
+  'dental-med-spa': ['customer-intake-automation', 'measuring-automation-roi'],
+  'real-estate': ['customer-intake-automation', 'measuring-automation-roi'],
+};
+export const guidesFor = (slug: string): Guide[] =>
+  (GUIDE_MAP[slug] ?? []).map((s) => guides.find((g) => g.slug === s)).filter((g): g is Guide => Boolean(g));

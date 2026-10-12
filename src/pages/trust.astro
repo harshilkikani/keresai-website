@@ -9,15 +9,15 @@ import { organizationSchema, faqSchema, breadcrumbSchema } from '../data/schema'
 const path = '/trust';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Trust & Security', path }];
 const faqs = [
-  { q: 'Does Keres use my data to train AI models?', a: 'No. Keres does not use your business data to train third-party models. Your calls, contacts, and content are used to operate your service, not to train external AI.' },
-  { q: 'Is Keres HIPAA-aware for medical and dental practices?', a: 'Keres can be configured for HIPAA-aligned workflows and signs BAAs/DPAs where required. Discuss your specific compliance needs on a demo.' },
-  { q: 'Will Keres sign a DPA?', a: 'Yes. Keres signs data processing agreements and supports SOC 2-aligned workflows for businesses that require them.' },
-  { q: 'What infrastructure does Keres run on?', a: 'Keres runs on enterprise-grade cloud and telephony infrastructure (including Twilio) with continuous monitoring and redundancy, so call answering stays available around the clock.' },
+  { q: 'Does Keres use my data to train AI models?', a: 'No. Keres does not use your business data to train third-party models. Your calls, contacts, and content are used to run your service, not to train external AI.' },
+  { q: 'Is Keres HIPAA compliant? Will you sign a BAA?', a: 'Not today. Keres is not HIPAA certified and does not sign BAAs. If your practice needs a BAA for phone intake, tell us before you sign up so we can say plainly whether Keres fits.' },
+  { q: 'Is Keres SOC 2 certified?', a: 'No. Keres does not hold a SOC 2 report. We describe the practices we follow on this page; if your business requires a certification, ask before you sign.' },
+  { q: 'How is my data protected?', a: 'Traffic is encrypted in transit, access is limited to the people who need it, and your data is never used to train third-party models.' },
 ];
 ---
 <Layout
-  title="Trust & Security — How We Handle Your Data | Keres AI"
-  description="How Keres AI handles your data: SOC 2-aligned workflows, DPAs, HIPAA-aware configurations, no model training on your data, and enterprise-grade infrastructure."
+  title="Trust & Security: How Keres Handles Your Data | Keres AI"
+  description="How Keres AI handles your data: encryption in transit, limited access, and no model training on your data. Keres is not SOC 2 or HIPAA certified and does not sign BAAs today."
   path={path}
 >
   <Schema slot="head" graph={[faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
@@ -26,38 +26,36 @@ const faqs = [
   <header class="page-hero container">
     <span class="eyebrow">Trust &amp; Security</span>
     <h1>Built to be <span class="accent">trusted with your calls</span></h1>
-    <p class="lead">Keres answers your customers and handles their data every day. Here’s how we protect it — and keep the line open around the clock.</p>
+    <p class="lead">Keres AI answers your customers’ calls and handles their data every day. Here’s how we protect it: encryption in transit, access limited to the people who run your account, and no training of third-party models on your data.</p>
     <div class="hero-ctas">
-      <a href="/quote" class="btn btn-primary">Book a Demo</a>
+      <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href="/legal/security.html" class="btn btn-outline">Security details</a>
     </div>
   </header>
 
   <section class="page-section container">
     <div class="answer-block">
-      <p>Keres protects your data with <strong>SOC 2-aligned workflows</strong>, signs <strong>DPAs</strong> (and BAAs where required), supports <strong>HIPAA-aligned</strong> configurations, and <strong>never uses your data to train third-party models</strong>. Call answering runs on enterprise-grade, continuously monitored infrastructure so coverage stays available 24/7.</p>
+      <p>Keres <strong>never uses your data to train third-party models</strong>, encrypts traffic in transit, and limits access to the people who need it. We are plain about what we do not have: Keres is <strong>not SOC 2 or HIPAA certified and does not sign BAAs</strong> today. If your business needs any of those, ask before you sign.</p>
     </div>
   </section>
 
   <section class="page-section container">
     <div class="section-label">How we protect your data</div>
-    <h2 class="section-title" style="margin-bottom:8px">Privacy, security &amp; compliance</h2>
+    <h2 class="section-title" style="margin-bottom:8px">Privacy and security, stated plainly</h2>
     <div class="feature-grid">
       <div class="feature-card"><h3>Your data isn’t training data</h3><p>We never use your calls, contacts, or content to train third-party AI models.</p></div>
-      <div class="feature-card"><h3>SOC 2-aligned workflows</h3><p>Access controls, encryption in transit, and least-privilege practices built into how we operate.</p></div>
-      <div class="feature-card"><h3>DPAs &amp; BAAs</h3><p>We sign data processing agreements, and BAAs for healthcare workflows that require them.</p></div>
-      <div class="feature-card"><h3>HIPAA-aligned options</h3><p>Configurable for dental, medical, and med-spa practices with PHI-handling requirements.</p></div>
-      <div class="feature-card"><h3>Enterprise infrastructure</h3><p>Built on proven cloud and telephony infrastructure (including Twilio) with redundancy.</p></div>
-      <div class="feature-card"><h3>Continuous monitoring</h3><p>Systems are monitored around the clock so your phone coverage stays on.</p></div>
+      <div class="feature-card"><h3>Encrypted in transit</h3><p>Traffic between callers, our systems and the tools we write to is encrypted.</p></div>
+      <div class="feature-card"><h3>Limited access</h3><p>Only the people who run your account can see it, and access ends when their role does.</p></div>
+      <div class="feature-card"><h3>What we don’t have yet</h3><p>No SOC 2 report, no HIPAA certification, no BAAs. If you need them, ask first.</p></div>
     </div>
   </section>
 
   <section class="page-section container">
     <div class="prose">
-      <p>Read the details in our <a href="/legal/security.html">security overview</a> and <a href="/legal/privacy.html">privacy policy</a>. Have specific compliance requirements? <a href="/quote">Book a demo</a> and we’ll walk through them.</p>
+      <p>Read the details in our <a href="/legal/security.html">security overview</a> and <a href="/legal/privacy.html">privacy policy</a>. Have specific compliance requirements? <a href="/quote">Book a call</a> and we’ll tell you honestly whether Keres fits.</p>
     </div>
   </section>
 
   <FaqSection faqs={faqs} title="Trust & security FAQ" />
-  <CtaBand heading="Questions about security or compliance?" sub="Book a demo and we’ll cover data handling, DPAs, and your specific requirements." />
+  <CtaBand heading="Questions about security or compliance?" sub="Book a call and we’ll cover data handling and your specific requirements." />
 </Layout>

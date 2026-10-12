@@ -25,9 +25,11 @@ const serviceNodes = stageBlocks.map((b) =>
     audience: 'Small service firms and professional practices',
   })
 );
+// Show the worker a service belongs to, not the internal plan name.
+const workerFor: Record<string, string> = { Found: 'Found', Answer: 'Remi', Convert: 'Theo', Grow: 'June', Custom: 'Sol' };
 ---
 <Layout
-  title="AI Receptionist, Follow-Up & Visibility Workers | Keres"
+  title="AI Workers for Local Businesses | Keres AI"
   description="Seven stages, from being found to bringing customers back. Remi answers in two rings, Theo chases the estimate, June reactivates the list. Visibility from $249/month."
   path={path}
 >
@@ -41,13 +43,15 @@ const serviceNodes = stageBlocks.map((b) =>
         <Eyebrow>Workers</Eyebrow>
         <h1 id="svc-title" class="k-display">One pipeline. Seven stages. Every one of them covered.</h1>
         <p class="k-lede">
-          Start at the stage that&rsquo;s leaking. Add the rest when you&rsquo;re ready. Nothing here is
-          open-ended agency work &mdash; every worker below is fixed in scope, flat in price, and
+          Keres AI sells AI workers to local service businesses, each fixed to one stage of the pipeline,
+          from getting found to answering, booking and bringing customers back. Start at the stage that&rsquo;s leaking.
+          Add the rest when you&rsquo;re ready. Nothing here is
+          open-ended agency work &mdash; every worker below is fixed in scope, priced up front, and
           attached to the stage of your pipeline it exists to plug.
         </p>
         <div class="price-hero-ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-          <Button href="/pricing" variant="ghost">See plans and floors</Button>
+          <Button href="/pricing" variant={PHONE ? 'ghost' : 'primary'}>See plans and floors</Button>
         </div>
       </div>
       <div class="k-col-5">
@@ -88,7 +92,7 @@ const serviceNodes = stageBlocks.map((b) =>
               <div class="k-svc__head">
                 <h3 class="k-svc__name">{s.name}</h3>
                 <span class:list={['k-svc__plan', s.addOn && 'k-svc__plan--addon']}>
-                  {s.addOn ? `${s.plan} add-on` : `Included in ${s.plan}`}
+                  {s.addOn ? `${workerFor[s.plan]} add-on` : `Part of ${workerFor[s.plan]}`}
                 </span>
               </div>
               <p class="k-svc__desc">{s.desc}</p>
@@ -117,7 +121,7 @@ const serviceNodes = stageBlocks.map((b) =>
           <li class="k-svc__item">
             <div class="k-svc__head">
               <h3 class="k-svc__name">{s.name}</h3>
-              <span class="k-svc__plan">Included in {s.plan}</span>
+              <span class="k-svc__plan">Part of {workerFor[s.plan]}</span>
             </div>
             <p class="k-svc__desc">{s.desc}</p>
           </li>

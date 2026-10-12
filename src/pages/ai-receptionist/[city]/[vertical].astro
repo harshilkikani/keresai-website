@@ -37,7 +37,7 @@ const isFieldService = ['hvac', 'plumbers', 'roofing', 'towing', 'septic'].inclu
 
 const crumbs = [
   { name: 'Home', path: '/' },
-  { name: 'AI Receptionist', path: '/ai-receptionist' },
+  { name: 'AI Receptionist', path: '/agents/inbound' },
   { name: city.stateFull, path: statePath },
   { name: `${city.city}, ${city.state}`, path: cityPath },
   { name: `${vLabel} receptionist`, path },
@@ -52,12 +52,12 @@ const faqs = [
   {
     q: `Does Keres integrate with my ${vLabel} software?`,
     a: isFieldService
-      ? 'Yes — Keres books jobs directly in ServiceTitan, Jobber, Housecall Pro, FieldEdge, and Service Fusion, plus Google Calendar and Outlook, so every booking lands in your existing system.'
-      : 'Yes — Keres books directly on Google Calendar, Outlook, and your CRM, and connects to thousands of apps via Zapier and Make.',
+      ? 'Keres books jobs directly in ServiceTitan, Google Calendar and HubSpot today. Jobber and Housecall Pro are rolling out.'
+      : 'Keres books directly on Google Calendar and HubSpot, and connects to other apps through Zapier.',
   },
   {
     q: 'Do I keep my existing phone number?',
-    a: 'Yes. You point your existing number at Keres — no porting, no new hardware. Most accounts go live within five business days.',
+    a: 'Yes. You point your existing number at Keres — no porting, no new hardware. Keres sets it up and agrees the timing with you on the first call.',
   },
 ];
 
@@ -107,8 +107,9 @@ const sameVerticalOtherCities = geoVerticals.filter((x) => x.verticalSlug === g.
   title={`AI Receptionist for ${vLabel} in ${city.city}, ${city.state} | Keres AI`}
   description={`Keres AI is a 24/7 AI receptionist for ${city.city}, ${city.stateFull} ${industry.nameLower}. Answer every call, book jobs, and never miss a lead — day or night. Book a demo.`}
   path={path}
+  noindexFollow
 >
-  <Schema slot="head" graph={[serviceSchema, howto, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[serviceSchema, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 
@@ -117,15 +118,15 @@ const sameVerticalOtherCities = geoVerticals.filter((x) => x.verticalSlug === g.
     <h1>The 24/7 AI receptionist for <span class="accent">{city.city} {vLabel} businesses</span></h1>
     <p class="lead">{g.angle}</p>
     <div class="hero-ctas">
-      <a href="/quote" class="btn btn-primary">Book a Demo</a>
+      <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href="/tools/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
     </div>
   </header>
 
   <!-- DIRECT ANSWER BLOCK -->
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
-      <p itemprop="text">Keres AI is a <strong>24/7 AI receptionist for {city.city}, {city.state} {industry.nameLower}</strong>. It answers every inbound call in two rings, qualifies the {industry.shortLower} job, books the appointment on your calendar, and texts your team the moment a call is an emergency — so no {city.city}-area lead is lost to voicemail, day or night.</p>
+    <div class="answer-block">
+      <p>Keres AI is a <strong>24/7 AI receptionist for {city.city}, {city.state} {industry.nameLower}</strong>. It answers every inbound call in two rings, qualifies the {industry.shortLower} job, books the appointment on your calendar, and texts your team the moment a call is an emergency — so no {city.city}-area lead is lost to voicemail, day or night.</p>
     </div>
   </section>
 
@@ -180,8 +181,8 @@ const sameVerticalOtherCities = geoVerticals.filter((x) => x.verticalSlug === g.
       <p class="prose" style="margin-bottom:var(--space-4)">Every booking syncs to the tools your {city.city} crew already runs on — no double entry.</p>
       <div class="feature-grid">
         <a class="feature-card" href="/integrations/servicetitan" style="text-decoration:none;display:block"><h3>ServiceTitan</h3><p>Create jobs and dispatch on your board during the call.</p></a>
-        <a class="feature-card" href="/integrations/jobber" style="text-decoration:none;display:block"><h3>Jobber</h3><p>Book visits and sync customers automatically.</p></a>
-        <a class="feature-card" href="/integrations/housecall-pro" style="text-decoration:none;display:block"><h3>Housecall Pro</h3><p>Schedule jobs and push contacts in real time.</p></a>
+        <a class="feature-card" href="/integrations/google-calendar" style="text-decoration:none;display:block"><h3>Google Calendar</h3><p>Book visits on the calendar your crew already checks.</p></a>
+        <a class="feature-card" href="/integrations/hubspot" style="text-decoration:none;display:block"><h3>HubSpot</h3><p>Push every caller in as a contact with the call notes.</p></a>
       </div>
     </section>
   )}
@@ -226,5 +227,5 @@ const sameVerticalOtherCities = geoVerticals.filter((x) => x.verticalSlug === g.
     )}
   </section>
 
-  <CtaBand heading={`Stop losing ${city.city} ${industry.shortLower} leads to voicemail`} sub="Book a free 30-minute demo and watch Keres answer and book a call live." />
+  <CtaBand heading={`Stop losing ${city.city} ${industry.shortLower} leads to voicemail`} sub="Book a free 30-minute call and watch Keres answer and book a call live." />
 </Layout>

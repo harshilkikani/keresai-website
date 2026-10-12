@@ -100,7 +100,7 @@ export const agents: Agent[] = [
     bullets: [
       'Runs reactivation campaigns against past customers and the cold leads already sitting in your CRM.',
       'Revives closed-lost — anyone who said no in the last six to twelve months gets asked again, properly.',
-      'Asks for the review after every completed job or matter, and routes the unhappy ones to you privately first.',
+      'Asks every customer for a review after each completed job or matter, and flags anyone who reports a problem to you so you can fix it.',
     ],
     includedIn: 'Grow',
   },
@@ -149,13 +149,13 @@ export const foundServices: FoundService[] = [
   },
   {
     name: 'Google Business Profile Management',
-    desc: 'One-time optimization — categories, services, photos, Q&A, verification — then weekly posts, photo updates, Q&A, review responses, spam-listing removal and monthly insights.',
-    brief: 'Set up once, then weekly posts, photos, Q&A and review replies.',
+    desc: 'One-time optimization — categories, services, photos, verification — then weekly posts, photo updates, review responses, spam-listing removal and monthly insights.',
+    brief: 'Set up once, then weekly posts, photos and review replies.',
   },
   {
     name: 'Review Generation & Reputation',
-    desc: 'An automated review request after every job or matter, owner responses drafted for your approval, negative reviews intercepted before they post, and a monthly rating report.',
-    brief: 'A request after every job, replies drafted for your OK, bad ones intercepted.',
+    desc: 'An automated review request after every job or matter, owner responses drafted for your approval, problems reported straight to you so you can fix them, and a monthly rating report.',
+    brief: 'A request after every job, replies drafted for your OK, problems flagged to you first.',
   },
   {
     name: 'Local Listings & Citations',
@@ -253,7 +253,7 @@ export const plans: Plan[] = [
     includes: [
       'Everything in Answer',
       'Web chat and SMS on your site',
-      'Lead-source responder — GBP, forms, Yelp, Zillow',
+      'Lead-source responder — website forms and texts',
       'Theo — reminders and no-show prevention',
       'June — review and referral requests',
     ],
@@ -301,6 +301,6 @@ export const quoteFactors = [
 /** True of every plan, stated once and reused as a label/value pair. */
 export const planTerms = [
   { k: 'Contract', v: 'Month-to-month. Cancel any month.' },
-  { k: 'Go live', v: 'Five business days.' },
+  { k: 'Setup', v: 'Done for you. Timing agreed on your first call.' },
   { k: 'Usage', v: 'Per-minute after your included minutes.' },
 ];

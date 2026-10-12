@@ -39,10 +39,10 @@ export const landingPages: LandingPage[] = [
     slug: 'law-firms-nj',
     title: 'NJ Law Firms: Answer Every After-Hours Case Call',
     description:
-      'Remi answers every new-client call in two rings, screens conflicts, qualifies the matter and books the consult. New Jersey law firms, live in five business days, month-to-month.',
+      'Remi answers every new-client call in two rings, collects conflict-check details, qualifies the matter and books the consult. New Jersey law firms, set up for you, month-to-month.',
     h1: 'New Jersey law firms: stop losing after-hours cases to the firm that picked up.',
     sub:
-      'Remi, your Inbound Agent, answers every new-client call in two rings — nights, weekends and holidays — screens for conflicts, qualifies the matter, and books the consultation straight into your calendar. Live in five business days. Month-to-month.',
+      'Remi, your Inbound Agent, answers every new-client call in two rings — nights, weekends and holidays — collects conflict-check details, qualifies the matter, and books the consultation straight into your calendar. Set up for you. Month-to-month.',
     calcPreset: 'legal',
     calcLabel: 'law firm',
     bullets: [
@@ -56,7 +56,7 @@ export const landingPages: LandingPage[] = [
       },
       {
         head: 'It books the consult and writes the file',
-        text: 'Real availability offered on the call, the consultation on your calendar, and the full intake summary written to Clio, Lawmatics or HubSpot before you open your laptop.',
+        text: 'Real availability offered on the call, the consultation on your calendar, and the full intake summary written to HubSpot before you open your laptop.',
       },
     ],
     formFieldLabel: 'Practice area',
@@ -68,7 +68,7 @@ export const landingPages: LandingPage[] = [
       'Estate planning',
       'Other',
     ],
-    integrations: 'Works with Clio, Lawmatics, HubSpot and Google Calendar.',
+    integrations: 'Works with HubSpot and Google Calendar today. Clio and Lawmatics are rolling out.',
     testimonials: [
       { proves: 'after-hours new-client calls turning into signed matters' },
       { proves: 'consults booked overnight that used to hit voicemail' },
@@ -80,7 +80,7 @@ export const landingPages: LandingPage[] = [
       },
       {
         q: 'How long does setup take?',
-        a: 'Five business days. Twenty minutes on how your intake runs today, then we write the script for your practice areas, connect your number, calendar and case management system, and you test it yourself before it answers a real client.',
+        a: 'It depends on your intake and integrations, and the timing is agreed on your first call. Thirty minutes on how your intake runs today, then we write the script for your practice areas, connect your number and your calendar or CRM (Google Calendar, HubSpot; others through Zapier), and you test it yourself before it answers a real client.',
       },
       {
         q: 'What if a caller needs an attorney right now?',

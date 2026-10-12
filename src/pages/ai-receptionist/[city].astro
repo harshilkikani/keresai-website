@@ -21,7 +21,7 @@ const cityVerticals = geoVerticalsForCity(c.slug);
 
 const crumbs = [
   { name: 'Home', path: '/' },
-  { name: 'AI Receptionist', path: '/ai-receptionist' },
+  { name: 'AI Receptionist', path: '/agents/inbound' },
   { name: c.stateFull, path: statePath },
   { name: `${c.city}, ${c.state}`, path },
 ];
@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: 'Do I keep my existing phone number?',
-    a: 'Yes. You point your existing number at Keres — no porting, no new hardware. Most accounts go live within five business days.',
+    a: 'Yes. You point your existing number at Keres — no porting, no new hardware. Keres sets it up and agrees the timing with you on the first call.',
   },
   {
     q: `What industries does Keres serve in ${c.city}?`,
@@ -84,6 +84,7 @@ const otherCities = cities.filter((x) => x.slug !== c.slug).slice(0, 8);
   title={`AI Receptionist in ${c.city}, ${c.state} | Keres AI`}
   description={`Keres AI is a 24/7 AI receptionist for ${c.city}, ${c.stateFull} businesses. Answer every call, book appointments, and never miss a lead — day or night. Book a demo.`}
   path={path}
+  noindexFollow
 >
   <Schema slot="head" graph={[serviceSchema, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
@@ -94,15 +95,15 @@ const otherCities = cities.filter((x) => x.slug !== c.slug).slice(0, 8);
     <h1>The 24/7 AI receptionist for <span class="accent">{c.city} businesses</span></h1>
     <p class="lead">{c.intro}</p>
     <div class="hero-ctas">
-      <a href="/quote" class="btn btn-primary">Book a Demo</a>
+      <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href="/tools/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
     </div>
   </header>
 
   <!-- DIRECT ANSWER BLOCK -->
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
-      <p itemprop="text">Keres AI is a <strong>24/7 AI receptionist for {c.city}, {c.state}</strong> businesses. It answers every inbound call in two rings, qualifies the caller, books the appointment on your calendar, and texts your team the moment a call is an emergency — so no {c.city}-area lead is lost to voicemail, day or night.</p>
+    <div class="answer-block">
+      <p>Keres AI is a <strong>24/7 AI receptionist for {c.city}, {c.state}</strong> businesses. It answers every inbound call in two rings, qualifies the caller, books the appointment on your calendar, and texts your team the moment a call is an emergency — so no {c.city}-area lead is lost to voicemail, day or night.</p>
     </div>
   </section>
 
@@ -113,7 +114,7 @@ const otherCities = cities.filter((x) => x.slug !== c.slug).slice(0, 8);
       <ul>
         {c.drivers.map((d) => <li>{d}</li>)}
       </ul>
-      <p>Every unanswered call is a {c.city} customer calling the next business on the list. Keres closes that gap by answering instantly, every time — including the after-hours and surge calls that your front desk can't absorb.</p>
+      <p>Every unanswered call is a customer in {c.city} calling the next business on the list. Keres closes that gap by answering instantly, every time — including the after-hours and surge calls that your front desk can't absorb.</p>
     </div>
   </section>
 
@@ -144,7 +145,7 @@ const otherCities = cities.filter((x) => x.slug !== c.slug).slice(0, 8);
   <!-- SOFT CTA -->
   <div class="container" style="margin-bottom:var(--space-6)">
     <div class="inline-cta-row">
-      <a href="/use-cases/after-hours-answering" class="inline-cta-link">→ After-hours answering</a>
+      <a href="/24-7-ai-receptionist" class="inline-cta-link">→ After-hours answering</a>
       <a href="/use-cases/overflow-call-handling" class="inline-cta-link">→ Overflow call handling</a>
       <a href="/glossary/lead-response-time" class="inline-cta-link">→ Why speed to lead matters</a>
     </div>
@@ -213,5 +214,5 @@ const otherCities = cities.filter((x) => x.slug !== c.slug).slice(0, 8);
     <p class="prose">See all <a href={statePath}>{c.stateFull} coverage</a> · <a href="/agents/inbound">all AI receptionist features →</a></p>
   </section>
 
-  <CtaBand heading={`Stop losing ${c.city} leads to voicemail`} sub="Book a free 30-minute demo and watch Keres answer and book a call live." />
+  <CtaBand heading={`Stop losing ${c.city} leads to voicemail`} sub="Book a free 30-minute call and watch Keres answer and book a call live." />
 </Layout>

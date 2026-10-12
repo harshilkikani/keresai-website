@@ -56,7 +56,7 @@ export const cities: City[] = [
       'Hailstorms trigger roofing and auto-glass call surges',
       'Competitive real estate market where instant lead response wins listings',
     ],
-    faq: { q: 'Can Keres handle high call volume in Dallas–Fort Worth?', a: 'Yes — Keres answers unlimited simultaneous calls, so a hailstorm or a busy listing day never sends DFW callers to voicemail.' },
+    faq: { q: 'Can Keres handle high call volume in Dallas–Fort Worth?', a: 'Remi answers in two rings, 24/7, and texts back any caller it could not take within 60 seconds. Your quote sizes the included minutes to your busy season, so ask on your first call how Remi handles your peak volume after a DFW hailstorm.' },
   },
   {
     slug: 'atlanta',
@@ -92,13 +92,13 @@ export const cities: City[] = [
     state: 'FL',
     stateFull: 'Florida',
     intro:
-      'Miami’s heat, humidity, and hurricane exposure keep AC, roofing, and restoration phones busy year-round, and a bilingual, always-on front desk is a real advantage in a market this diverse.',
+      'Miami’s heat, humidity, and hurricane exposure keep AC, roofing, and restoration phones busy year-round, and an always-on front desk is a real advantage in a market this busy.',
     drivers: [
       'Year-round heat and humidity drive constant HVAC demand',
       'Hurricane season spikes roofing and restoration emergencies',
-      'Diverse market where 24/7, multilingual answering wins more leads',
+      'Busy, diverse market where 24/7 answering wins more leads',
     ],
-    faq: { q: 'Can Keres handle Miami’s seasonal call surges?', a: 'Yes — Keres scales to unlimited simultaneous calls, so hurricane-season surges and summer AC demand never overwhelm your front desk.' },
+    faq: { q: 'Can Keres handle Miami’s seasonal call surges?', a: 'Your quote sizes Remi’s included minutes to your busy season, so plan it around your heaviest week, not an average one. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. Ask on your first call how Remi handles your peak volume.' },
   },
   {
     slug: 'los-angeles',
@@ -154,7 +154,7 @@ export const cities: City[] = [
       'Cold winters create after-hours no-heat emergencies',
       'Active, fast-growing metro with strong home-services demand',
     ],
-    faq: { q: 'Does Keres help Denver roofing companies during hail season?', a: 'Yes — when a hailstorm sends call volume through the roof, Keres answers every call at once, qualifies, and books, so no storm lead is lost.' },
+    faq: { q: 'Does Keres help Denver roofing companies during hail season?', a: 'Yes. Remi answers in two rings, 24/7, qualifies the damage and books the inspection, and texts back any caller it could not take within 60 seconds. Your quote sizes the included minutes to hail season, so ask on your first call how Remi handles your peak volume.' },
   },
   {
     slug: 'las-vegas',
@@ -218,7 +218,7 @@ const stateCopy: Record<string, { intro: string; drivers: string[]; faq: { q: st
       'Hurricane season spikes roofing and restoration emergencies statewide',
       'Large retiree and seasonal population keeps home and health bookings steady',
     ],
-    faq: { q: 'Can Keres handle Florida’s hurricane-season call surges?', a: 'Yes — Keres answers unlimited simultaneous calls, so storm surges across Miami, Tampa, and the rest of Florida never overwhelm your front desk or send callers to voicemail.' },
+    faq: { q: 'Can Keres handle Florida’s hurricane-season call surges?', a: 'Your quote sizes Remi’s included minutes to your busy season, so plan it around your heaviest week, not an average one. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. Ask on your first call how Remi handles your peak volume.' },
   },
   Arizona: {
     intro:
@@ -278,7 +278,7 @@ const stateCopy: Record<string, { intro: string; drivers: string[]; faq: { q: st
       'Cold winters create after-hours no-heat emergencies',
       'Active, fast-growing metros with strong home-services demand',
     ],
-    faq: { q: 'Does Keres help Colorado roofing companies during hail season?', a: 'Yes — when a hailstorm sends call volume through the roof, Keres answers every call at once, qualifies, and books, so no Colorado storm lead is lost.' },
+    faq: { q: 'Does Keres help Colorado roofing companies during hail season?', a: 'Yes. Remi answers in two rings, 24/7, qualifies the damage and books the inspection, and texts back any caller it could not take within 60 seconds. Your quote sizes the included minutes to hail season, so ask on your first call how Remi handles your peak volume.' },
   },
   Nevada: {
     intro:

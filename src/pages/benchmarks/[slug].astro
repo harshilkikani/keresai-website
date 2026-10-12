@@ -31,7 +31,7 @@ const article = articleSchema({
   headline: b.h1 + ' ' + b.h1Accent,
   description: b.description,
   datePublished: b.datePublished,
-  dateModified: '2026-05-26',
+  dateModified: '2026-10-11',
   readingTime: 'PT6M',
 });
 
@@ -48,7 +48,7 @@ const webpage = webPageSchema({
 });
 ---
 <Layout title={b.title} description={b.description} path={path} ogType="article">
-  <Schema slot="head" graph={[article, statSchema, webpage, faqSchema(b.faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[article, webpage, faqSchema(b.faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 
@@ -58,19 +58,19 @@ const webpage = webPageSchema({
     <p class="lead">{b.lead}</p>
     <div class="hero-ctas">
       <a href="/tools/missed-call-calculator" class="btn btn-primary">Calculate your losses</a>
-      <a href="/quote" class="btn btn-outline">Book a demo</a>
+      <a href="/quote" class="btn btn-outline">Get a quote</a>
     </div>
   </header>
 
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
-      <p itemprop="text" set:html={b.answer} />
+    <div class="answer-block">
+      <p set:html={b.answer} />
     </div>
   </section>
 
   <section class="page-section container">
     <div class="section-label">The numbers</div>
-    <h2 class="section-title" style="margin-bottom:8px">{b.category} benchmarks at a glance</h2>
+    <h2 class="section-title" style="margin-bottom:8px">What do the {b.category} benchmarks show?</h2>
     <div class="stat-grid">
       {b.stats.map((s) => (
         <div class="stat-card">
@@ -79,7 +79,20 @@ const webpage = webPageSchema({
         </div>
       ))}
     </div>
-    <p class="prose" style="font-size:13.5px;color:var(--text-dim);max-width:70ch">Figures are industry estimates and ranges compiled from commonly cited service-business and lead-response research; treat them as directional benchmarks, not guarantees. Your own numbers depend on your call volume, close rate, and average ticket.</p>
+  </section>
+
+  <section class="page-section container" aria-labelledby="method-title">
+    <div class="prose">
+      <h2 id="method-title">How were these numbers put together?</h2>
+      <p>The ranges on this page are Keres AI estimates drawn from public industry reporting and the arithmetic shown in each section. They are not from a Keres customer study, and they are directional, not guarantees: your own numbers depend on your call volume, close rate and average ticket.</p>
+      {b.sources && b.sources.length > 0 && (
+        <>
+          <p>Primary research cited on this page:</p>
+          <ul>{b.sources.map((src) => <li><a href={src.url} rel="noopener" target="_blank">{src.label}</a></li>)}</ul>
+        </>
+      )}
+      <p>Last reviewed October 11, 2026.</p>
+    </div>
   </section>
 
   <section class="page-section container">
@@ -117,6 +130,6 @@ const webpage = webPageSchema({
 
   <CtaBand
     heading="Stop losing leads to voicemail"
-    sub="Book a free 30-minute demo and watch Keres answer, qualify, and book a call in under sixty seconds."
+    sub="Book a free 30-minute call and hear Remi answer, qualify and book a call."
   />
 </Layout>

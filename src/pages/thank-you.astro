@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
 import Button from '../components/Button.astro';
 import { PHONE } from '../data/site';
 
@@ -17,6 +18,7 @@ const path = '/thank-you';
   bare
   conversion="form_submit"
 >
+  <Schema slot="head" graph={[]} />
   <section class="lp-hero" aria-labelledby="ty-title">
     <div class="lp-wrap lp-wrap--narrow">
       <p class="lp-eyebrow">Got it</p>
@@ -31,8 +33,8 @@ const path = '/thank-you';
       </div>
       <ul class="k-hero__facts" aria-label="What happens next">
         <li><span class="k-hero__fact-k">Callback</span><span class="k-hero__fact-v">Same business day</span></li>
-        <li><span class="k-hero__fact-k">Setup call</span><span class="k-hero__fact-v" data-figure>20 minutes</span></li>
-        <li><span class="k-hero__fact-k">Live in</span><span class="k-hero__fact-v" data-figure>5 business days</span></li>
+        <li><span class="k-hero__fact-k">Setup call</span><span class="k-hero__fact-v" data-figure>30 minutes</span></li>
+        <li><span class="k-hero__fact-k">Setup</span><span class="k-hero__fact-v">Done for you</span></li>
       </ul>
     </div>
   </section>

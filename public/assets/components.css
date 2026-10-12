@@ -631,7 +631,7 @@ html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] {
 .k-split--reverse .k-split__mock { display: flex; justify-content: center; }
 /* Keep the caption tied to the mock it describes rather than to the column. */
 .k-split__mock .k-brief-fig,
-.k-split__mock .k-call-fig { display: inline-block; }
+.k-split__mock .k-call-fig { display: block; max-width: 100%; min-width: 0; }
 
 @media (max-width: 900px) {
   .k-split { grid-template-columns: minmax(0, 1fr); gap: var(--space-7); }
@@ -1647,7 +1647,7 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(24px, 4vw
 /* Capability bullets on agent pages sit in the full content column
    rather than beside a heading, so they get a wider two-up grid. */
 .k-member__bullets--wide {
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: var(--space-4) var(--space-8);
 }
 
@@ -1753,11 +1753,9 @@ main > .k-section:first-child { padding-top: calc(var(--nav-h) + clamp(24px, 4vw
 .k-stagenum--lg {
   font-size: var(--text-4);
   letter-spacing: 0.04em;
-  /* Ghost numeral. --line-strong measured 1.67:1; at 39px the floor is
-     3:1, and ink-3 at 72% opacity lands ~3.3:1 while still reading as
-     a quiet mark rather than a heading. */
+  /* Ghost numeral in --ink-3 at full opacity: 72% opacity measured 2.86:1,
+     under the 3:1 floor for large text. */
   color: var(--ink-3);
-  opacity: 0.72;
   line-height: 1;
   margin-bottom: var(--space-4);
 }
@@ -2061,7 +2059,7 @@ html[data-motion] [data-hero].is-live [data-owner]   { animation: kPop 0.5s cubi
 .site__h1 { margin: 0; font: 600 17px/1.12 var(--serif); letter-spacing: -0.02em; color: #14100D; }
 .site__sub { margin: 7px 0 10px; font: 400 9.5px/1.45 var(--sans); color: #6B625A; }
 .site__cta { display: inline-block; font: 600 10px var(--sans); color: #fff; background: #14100D; padding: 7px 11px; border-radius: 4px; }
-.site__services { list-style: none; margin: 0; padding: 0 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.site__services { list-style: none; margin: 0; padding: 0 14px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px; }
 .site__services li { font: 500 9px var(--sans); color: #3A332D; background: #fff; border: 1px solid #E4DFD9; border-radius: 4px; padding: 7px 8px; }
 .site__review { margin: 12px 14px 0; padding: 10px 11px; background: #fff; border: 1px solid #E4DFD9; border-radius: 6px; }
 .site__stars { display: inline-flex; gap: 1px; color: #F4B400; }
@@ -2240,7 +2238,7 @@ html[data-motion] .pipe__stage.is-active { opacity: 1; transform: none; pointer-
 
 /* SMS thread — shared by the agent mocks and the Daily Brief */
 .sms { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-3); }
-.sms__msg { display: grid; gap: 3px; max-width: 86%; }
+.sms__msg { display: grid; grid-template-columns: minmax(0, auto); gap: 3px; max-width: 86%; min-width: 0; }
 .sms__msg--agent { justify-self: start; }
 .sms__msg--them { justify-self: end; justify-items: end; }
 .sms__t { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.06em; color: var(--ink-3); }
@@ -2352,6 +2350,7 @@ html[data-motion] [data-reveal]:not(.is-in) [data-reveal-child] { transform: tra
 
 
 /* ─── View transitions: 250ms crossfade ───────────────────── */
+@view-transition { navigation: auto; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 250ms; }
 
 /* ─── Reduced motion resolves everything to final state ───── */
@@ -2562,7 +2561,7 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 @media (max-width: 1023px) { .roster__card .btn-k { padding-inline: 8px; font-size: var(--text--1); } }
 .roster__foot { margin: var(--space-5) 0 0; font-size: var(--text-0); color: var(--ink-1); }
 .scope { margin: 0; display: grid; gap: 8px; }
-.scope__row { display: grid; grid-template-columns: 78px 1fr; gap: 8px; align-items: baseline; }
+.scope__row { display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 8px; align-items: baseline; }
 .scope__row dt { font: 500 0.64rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
 .scope__row dd { margin: 0; font-size: var(--text--1); line-height: 1.4; color: var(--ink-1); }
 
@@ -2601,9 +2600,9 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 }
 
 /* ─── Lead band: form beside calendar ────────────────────────── */
-.lead { display: grid; gap: var(--space-5); align-items: start; margin-top: var(--space-5); }
+.lead { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); align-items: start; margin-top: var(--space-5); }
 @media (min-width: 1024px) { .lead { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); } }
-.lead .qf { margin: 0; }
+.lead .qf { margin: 0; min-width: 0; }
 .book { padding: var(--space-5); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); }
 .book__title { margin: 0 0 var(--space-2); font-family: var(--serif); font-size: var(--text-2); font-weight: 600; letter-spacing: -0.012em; line-height: 1.15; color: var(--ink-0); }
 .book__lede { margin: 0 0 var(--space-4); font-size: var(--text-0); line-height: 1.5; color: var(--ink-2); }
@@ -2661,3 +2660,40 @@ html[data-motion] .k-hero [data-hero].is-live .shift__foot { animation: shift-in
 .k-svc--four .k-svc__desc { margin-top: 4px; font-size: var(--text--1); line-height: 1.45; }
 @media (min-width: 720px) { .k-svc--four { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); } }
 @media (min-width: 1024px) { .k-svc--four { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ─── Tap targets: 44px minimum on touch screens (WCAG 2.5.5) ───────── */
+@media (pointer: coarse) {
+  .icon-btn, .hamburger { min-width: 44px; min-height: 44px; }
+  .nav .logo { min-height: 44px; display: inline-flex; align-items: center; }
+  .breadcrumbs a, #footer .footer-grid a { display: inline-block; padding-block: 12px; }
+}
+
+/* ─── Long hero headlines: keep the hero CTA above a 768px laptop fold ─ */
+@media (min-width: 1024px) and (max-height: 820px) {
+  .k-hero .k-display, .k-grid .k-display { font-size: clamp(2.75rem, 4.6vw, 3.75rem); }
+}
+
+/* Section labels promoted to h2 for heading order; keep the label look. */
+h2.section-label { margin: 0 0 14px; line-height: 1.4; }
+
+/* ─── Accessibility fixes (contrast, reflow, focus) ──────────────────── */
+.page-hero .eyebrow { color: var(--accent-text); }
+/* Links in the inverse band: the light-theme rust measured 3.79:1 on its
+   near-black ground; the dark-theme accent clears 6.6:1. */
+.k-section--inverse .k-close .k-body a { color: #F2711C; }
+/* Inactive pipeline stages are transparent; a keyboard user who tabs into
+   one must be able to see where focus is. */
+html[data-motion] .pipe__stage:focus-within { opacity: 1; transform: none; pointer-events: auto; }
+.k-device__bar { flex-wrap: wrap; }
+@media (max-width: 480px) { .soft-cta-card .btn { white-space: normal; flex: 1 1 auto; text-align: center; } }
+.breadcrumbs ol { align-items: baseline; }
+.hamburger { align-content: center; }
+/* Real form labels and nav captions never below 12px. */
+.form-label, .roi-field-label { font-size: max(12.5px, 0.8rem); }
+.qf__stepdot { font-size: 0.78rem; }
+.nav-drop__sub { font-size: max(12px, 0.75rem); }
+/* Small inline links still get a 24px target. */
+.pipe__by, .k-member__go, a.k-stat__source { min-height: 24px; }
+.k-mock__caption a { display: inline-block; padding-block: 4px; }
+main:focus { outline: none; }
+.site__services li, .scope__row dd, .sms__bubble { overflow-wrap: anywhere; min-width: 0; }

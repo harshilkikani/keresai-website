@@ -26,17 +26,17 @@ const gate = locale === 'es' && !has.remiSpanish;
 const gateLine = ui.remiGate;
 const foundServices = foundServicesFor(locale);
 const enText = {
-  eyebrow: 'Found — the website and the listing', h1: [['A', 'website', 'that', 'books', 'the', 'job.'], ['Live', 'in', 'five', 'days.']],
+  eyebrow: 'Found — the website and the listing', h1: [['A', 'website', 'that', 'books', 'the', 'job.'], ['No', 'build', 'fee.']],
   lede: 'Built for {vertical}, click-to-call, booking wired in, your Google listing managed every week. {price}/mo. No build fee. Month-to-month.',
   seeMyQuote: 'See my quote', getEyebrow: 'What you get', getH2: 'Eight things, one flat fee.', addOn: 'Add-on',
   compareEyebrow: 'What it costs', compareH2: 'Three ways to get a site that rings.',
   compare: [
     { who: 'Local agency', cost: '$3,000–$8,000 to build', then: 'plus hosting, and changes billed by the hour', time: 'Six to twelve weeks' },
     { who: 'DIY builder', cost: 'Your evenings', then: 'a template that looks like everyone else’s', time: 'It still doesn’t ring' },
-    { who: 'Keres Found', cost: '{price}/mo, no build fee', then: 'Google listing managed every week', time: 'Live in five days', us: true },
+    { who: 'Keres Found', cost: '{price}/mo, no build fee', then: 'Google listing managed every week', time: 'Timing agreed on your first call', us: true },
   ],
   remi: 'Every Found site comes with Remi-ready booking. Add answering any time.',
-  closeH2: 'Call us or book 20 minutes.', closeLede: 'Twenty minutes, no deck.',
+  closeH2: 'Call us or book 30 minutes.', closeLede: 'Thirty minutes, no deck.',
 };
 const x = locale === 'es' ? esText : enText;
 const fill = (str: string, map: Record<string, string>) => str.replace(/\{(\w+)\}/g, (_, k) => map[k] ?? '');

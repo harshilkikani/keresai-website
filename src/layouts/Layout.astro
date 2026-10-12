@@ -3,7 +3,6 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import GoNav from '../components/GoNav.astro';
 import GoFooter from '../components/GoFooter.astro';
-import { ClientRouter } from 'astro:transitions';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { PHONE } from '../data/site';
@@ -11,6 +10,8 @@ import { CSS_HASH } from '../data/cssHash';
 import { business } from '../config/business';
 import { type Locale, translatedPaths, stripLocale, localePath, ogLocale, l } from '../i18n';
 import { t } from '../i18n/ui';
+import { websiteSchema } from '../data/schema';
+import { isIndexable } from '../seo/indexing.mjs';
 
 export interface Props {
   title: string;
@@ -20,6 +21,8 @@ export interface Props {
   ogType?: 'website' | 'article';
   ogImage?: string;
   noindex?: boolean;
+  /** Keep the page out of the index but let crawlers follow its links (thin or templated pages). */
+  noindexFollow?: boolean;
   /**
    * Ad landing pages (/lp/*) render with no nav and no footer links —
    * the only things to click are the form, the phone, and the demo.
@@ -34,6 +37,19 @@ export interface Props {
    * arriving rather than by a click.
    */
   conversion?: string;
+  /**
+   * The schema.org type of this page's one WebPage-family node: AboutPage,
+   * ContactPage, CollectionPage (index/listing pages)… Defaults to WebPage.
+   */
+  pageType?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage' | 'FAQPage' | 'ItemPage';
+  /** @id of the page's main entity (e.g. the Organization on /about). */
+  mainEntityId?: string;
+  /**
+   * Which Fraunces file the LCP headline renders in, so only that one is
+   * preloaded: 'display' (.k-display, weight 600) or 'serif' (legacy page
+   * heroes, weight 300/400). Defaults from the path — see DISPLAY_HERO.
+   */
+  heroFont?: 'display' | 'serif';
 }
 
 const {
@@ -43,11 +59,15 @@ const {
   ogType = 'website',
   ogImage = '/assets/img/og-image.png',
   noindex = false,
+  noindexFollow = false,
   bare = false,
   go = false,
   conversion,
   locale = 'en',
   quoteHref,
+  pageType = 'WebPage',
+  mainEntityId,
+  heroFont,
 } = Astro.props;
 const quoteTarget = quoteHref ?? (go ? '#quote' : l(locale, '/quote'));
 const bookTarget = quoteHref || go ? '#book' : l(locale, '/quote') + '#book';
@@ -62,15 +82,18 @@ const hasTwin = translatedPaths.includes(basePath);
 const trimDescription = (d: string): string => {
   const full = d.replace(/\s+/g, ' ').trim();
   if (full.length <= 160) return full;
-  const sentences = full.match(/[^.!?]+[.!?]+(?:\s|$)/g) ?? [full];
+  // A sentence ends at . ! or ? followed by a space or the end, so "Smith.ai" stays whole.
+  const sentences = full.match(/.+?[.!?]+(?=\s|$)\s*/g) ?? [full];
   let out = '';
   for (const sentence of sentences) { if ((out + sentence).trim().length > 160) break; out += sentence; }
   out = out.trim();
   if (out.length >= 60) return out;
-  const cut = full.slice(0, 156);
-  const i = Math.max(cut.lastIndexOf(', '), cut.lastIndexOf(' — '), cut.lastIndexOf('; '), cut.lastIndexOf(': '));
-  return (i > 60 ? cut.slice(0, i) : cut.slice(0, cut.lastIndexOf(' '))).replace(/[,;:—\s]+$/, '') + '.';
+  // No whole sentence fits: cut at a word and mark the cut, rather than
+  // ending at a comma with a period that reads like a finished (wrong) list.
+  const cut = full.slice(0, 157);
+  return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:—–\s]+$/, '') + '…';
 };
+if (import.meta.env.KERES_REPORT_DESC) { const n = description.replace(/\s+/g, ' ').trim(); if (n.length > 160 || n.length < 70) console.warn(`DESC ${n.length} ${path} :: ${n}`); }
 const seoDescription = trimDescription(description);
 
 
@@ -86,24 +109,56 @@ const trackingOn = !!(business.tracking.ga4 || business.tracking.googleAds || bu
 // The Remi callback endpoint, when absolute, must be allowed by connect-src.
 const callbackOrigin = (() => { try { return new URL(business.remiCallbackEndpoint).origin; } catch { return ''; } })();
 
-const motionSrc = readFileSync(new URL('../../public/assets/motion.js', import.meta.url), 'utf8');
-const motionHash = "'sha256-" + createHash('sha256').update(motionSrc).digest('base64') + "'";
+// motion.js loads deferred from /assets; only the one-line stamp below stays
+// inline, because html[data-motion] must be set before first paint so the
+// hero choreography starts from its hidden state instead of flashing. Same
+// guard as motion.js: nothing is stamped under reduced motion or without
+// IntersectionObserver. The CSP carries the stamp's SHA-256 (no 'unsafe-inline').
+const motionStamp = "(function(){var m=window.matchMedia;if((m&&m('(prefers-reduced-motion: reduce)').matches)||!('IntersectionObserver' in window))return;document.documentElement.setAttribute('data-motion','')})();";
+const motionHash = "'sha256-" + createHash('sha256').update(motionStamp).digest('base64') + "'";
+const motionVer = createHash('sha256').update(readFileSync(new URL('../../public/assets/motion.js', import.meta.url))).digest('hex').slice(0, 10);
 const canonical = origin + path;
-// One WebPage node per page: language, site membership, and the link to its
-// translation, so search and AI crawlers see the EN/ES pair as one work.
-const webPageNode = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
+const isNotFound = path === '/404';
+const indexable = !(noindex || go || noindexFollow);
+// Markdown twin written by scripts/build-md.mjs for every sitemap URL:
+// / -> /index.md, /pricing -> /pricing.md, /guides/x.html -> /guides/x.md.
+// Same rule as the sitemap (isIndexable), so the link never points at a file
+// that was not generated.
+const markdownHref = indexable && !isNotFound && isIndexable(path)
+  ? origin + (path === '/' ? '/index.md' : path.replace(/\.html$/, '') + '.md')
+  : null;
+
+// Pages whose H1 is .k-display (Fraunces 600). Everything else sets its
+// headline in the legacy serif hero (Fraunces 300/400 → fraunces-400.woff2).
+// Keep in step with the pages that render a .k-display H1.
+const DISPLAY_HERO = [
+  /^\/$/, /^\/(pricing|custom|quote|hear-it|partners|services|thank-you)$/, /^\/services\/found$/,
+  /^\/agents\//, /^\/industries\/[^/]+$/, /^\/go(\/|$)/, /^\/lp\//,
+];
+const heroFace = heroFont ?? (DISPLAY_HERO.some((re) => re.test(basePath)) ? 'display' : 'serif');
+const heroFontFile = heroFace === 'display' ? '/assets/fonts/fraunces-600.woff2' : '/assets/fonts/fraunces-400.woff2';
+
+// The page's one WebPage-family node: language, site membership, and the link
+// to its translation, so search and AI crawlers see the EN/ES pair as one
+// work. Schema.astro (rendered in every page's head slot, after this
+// frontmatter has run) emits it in the page's single @graph together with the
+// WebSite node, and merges any page-level extension (speakable) into it.
+const twinNode = (loc: Locale) => ({ '@type': 'WebPage', '@id': `${origin}${localePath(loc, basePath)}#webpage`, url: origin + localePath(loc, basePath) });
+const webPageNode = {
+  '@type': pageType,
   '@id': `${origin}${path}#webpage`,
   url: origin + path,
-  name: title,
+  // The brand suffix belongs to the <title>, not the page's name.
+  name: title.replace(/\s*[|·–—-]\s*Keres(\s+AI)?\s*$/i, ''),
   description: seoDescription,
   inLanguage: locale === 'es' ? 'es-US' : 'en-US',
   isPartOf: { '@id': `${origin}/#website` },
   about: { '@id': `${origin}/#organization` },
-  ...(hasTwin && locale === 'en' ? { workTranslation: { '@id': `${origin}${localePath('es', basePath)}#webpage` } } : {}),
-  ...(hasTwin && locale === 'es' ? { translationOfWork: { '@id': `${origin}${localePath('en', basePath)}#webpage` } } : {}),
-});
+  ...(mainEntityId ? { mainEntity: { '@id': mainEntityId } } : {}),
+  ...(hasTwin && locale === 'en' ? { workTranslation: twinNode('es') } : {}),
+  ...(hasTwin && locale === 'es' ? { translationOfWork: twinNode('en') } : {}),
+};
+(Astro.locals as { keresGraph?: Record<string, unknown>[] }).keresGraph = [websiteSchema, webPageNode];
 const ogImageAbs = ogImage.startsWith('http') ? ogImage : origin + ogImage;
 
 // ── Analytics + verification ──────────────────────────────
@@ -127,6 +182,8 @@ const META_DOMAIN_VERIFICATION = '';
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{business.googleSiteVerification && <meta name="google-site-verification" content={business.googleSiteVerification} />}
+{business.bingSiteVerification && <meta name="msvalidate.01" content={business.bingSiteVerification} />}
 <meta name="color-scheme" content="light dark" />
 
 <!--
@@ -156,14 +213,17 @@ const META_DOMAIN_VERIFICATION = '';
 <meta name="author" content="Keres AI" />
 {(noindex || go)
   ? <meta name="robots" content="noindex, nofollow" />
+  : noindexFollow
+  ? <meta name="robots" content="noindex, follow" />
   : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
 <meta name="theme-color" content="#C2410C" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
-<link rel="canonical" href={canonical} />
+{!isNotFound && <link rel="canonical" href={canonical} />}
 <link rel="alternate" type="application/rss+xml" title="Keres AI — Resources & Guides" href="/rss.xml" />
+{markdownHref && <link rel="alternate" type="text/markdown" href={markdownHref} />}
 
-<!-- US English market. Multilingual UI is client-side only, so we do not advertise phantom localized URLs. -->
-{hasTwin ? (
+<!-- hreflang only on indexable pages: a noindex page has no alternates to offer. -->
+{!indexable ? null : hasTwin ? (
   <>
     <link rel="alternate" hreflang="en" href={origin + localePath('en', basePath)} />
     <link rel="alternate" hreflang="es" href={origin + localePath('es', basePath)} />
@@ -176,25 +236,25 @@ const META_DOMAIN_VERIFICATION = '';
   </>
 )}
 
-<link rel="icon" type="image/png" href="/assets/img/KeresLogo.png" />
-<link rel="apple-touch-icon" href="/assets/img/KeresLogo.png" />
-<link rel="mask-icon" href="/assets/img/KeresLogo.png" color="#C2410C" />
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
 
 <meta property="og:type" content={ogType} />
-<meta property="og:url" content={canonical} />
+{!isNotFound && <meta property="og:url" content={canonical} />}
 <meta property="og:title" content={title} />
 <meta property="og:description" content={seoDescription} />
 <meta property="og:image" content={ogImageAbs} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Keres AI — AI Receptionist & AI SDR platform" />
+<meta property="og:image:alt" content="Keres AI: websites, Google Business Profile and AI receptionist for local businesses" />
 <meta property="og:site_name" content="Keres AI" />
 <meta property="og:locale" content={ogLocale[locale]} />
 {hasTwin && <meta property="og:locale:alternate" content={ogLocale[locale === 'en' ? 'es' : 'en']} />}
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@keresai" />
-<meta name="twitter:creator" content="@keresai" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={seoDescription} />
 <meta name="twitter:image" content={ogImageAbs} />
@@ -202,11 +262,11 @@ const META_DOMAIN_VERIFICATION = '';
 <link rel="preconnect" href="https://formspree.io" crossorigin />
 <link rel="preconnect" href="https://calendly.com" crossorigin />
 <!-- Self-hosted fonts (latin subset). No third-party font CDN → faster LCP, no extra DNS/TLS. -->
-<!-- Fraunces Regular (headlines, and the LCP element on most pages) and
-     DM Sans Regular (body). The italic Fraunces was preloaded here by
-     mistake: 80KB of a face the site never renders, downloaded ahead of
-     the upright it does, which is what put LCP a second behind FCP. -->
-<link rel="preload" href="/assets/fonts/fraunces-600.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high" />
+<!-- The Fraunces file the LCP headline is set in (600 for .k-display heroes,
+     400 for the legacy serif heroes; see DISPLAY_HERO) and DM Sans Regular
+     (body). Preloading the wrong weight downloads 18KB ahead of the one the
+     H1 actually waits for. -->
+<link rel="preload" href={heroFontFile} as="font" type="font/woff2" crossorigin fetchpriority="high" />
 <link rel="preload" href="/assets/fonts/dmsans-400.woff2" as="font" type="font/woff2" crossorigin />
 <!-- One request instead of five. site.css is generated by
      scripts/build-css.mjs from fonts → tokens → styles → pages →
@@ -215,19 +275,19 @@ const META_DOMAIN_VERIFICATION = '';
      version number has to be bumped by hand. -->
 <link rel="stylesheet" href={`/assets/site.css?v=${CSS_HASH}`} />
 
-<!-- Client-side navigation with a 250ms crossfade (see ::view-transition
-     in components.css). The nav persists across pages. -->
-<ClientRouter fallback="none" />
+<!-- Page-to-page crossfade comes from CSS cross-document view transitions
+     (@view-transition in components.css), with no client router: the router's
+     JavaScript was the main source of blocking time on mobile. -->
 
-<!-- motion.js is small and blocks on purpose: it stamps html[data-motion]
-     BEFORE first paint so the hero choreography starts from its hidden
-     state instead of flashing visible, then hiding, then animating. It
-     bails immediately under prefers-reduced-motion. -->
-<script is:inline set:html={motionSrc}></script>
+<!-- Only the html[data-motion] stamp blocks, so the hero choreography starts
+     from its hidden state instead of flashing visible, then hiding, then
+     animating. The rest of motion.js (11KB) is deferred; it boots at
+     DOMContentLoaded exactly as it did when inlined. -->
+<script is:inline set:html={motionStamp}></script>
+<script src={`/assets/motion.js?v=${motionVer}`} defer is:inline></script>
 
-<!-- Page-specific structured data + head extras -->
+<!-- Page-specific structured data (one @graph, see Schema.astro) + head extras -->
 <slot name="head" />
-<script type="application/ld+json" set:html={webPageNode}></script>
 </head>
 
 <body class:list={[bare && 'is-bare']} data-conversion={conversion}>
@@ -239,7 +299,7 @@ const META_DOMAIN_VERIFICATION = '';
   <header class="lp-bar" role="banner">
     <div class="lp-bar__inner">
       <a href="/" class="logo" aria-label="Keres AI">
-        <img src="/assets/img/KeresLogo.webp" srcset="/assets/img/KeresLogo.webp 1x, /assets/img/KeresLogo@2x.webp 2x" alt="Keres AI" class="logo-img" width="120" height="32" />
+        <img src="/assets/img/KeresLogo.webp" srcset="/assets/img/KeresLogo.webp 1x, /assets/img/KeresLogo@2x.webp 2x" alt="Keres AI" class="logo-img" width="52" height="52" />
       </a>
       {PHONE && (
         <a href={PHONE.href} class="nav-phone" data-event="tel_click" aria-label={`Call Keres AI on ${PHONE.display}`}>
@@ -252,7 +312,7 @@ const META_DOMAIN_VERIFICATION = '';
     </div>
   </header>
 )}
-<main id="main">
+<main id="main" tabindex="-1">
   <slot />
 </main>
 {!bare && (go ? <GoFooter locale={locale} /> : <Footer locale={locale} />)}

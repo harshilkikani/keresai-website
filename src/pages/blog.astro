@@ -22,21 +22,22 @@ const guides = [...guideData]
   title="Resources & Guides — AI Receptionist Playbooks | Keres AI"
   description="Guides, playbooks, and case studies on AI receptionists, missed-call recovery, appointment automation, and AI outbound for service businesses."
   path={path}
+  pageType="CollectionPage"
 >
   <Schema slot="head" graph={[
     breadcrumbSchema(crumbs),
     organizationSchema,
-    { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Keres AI Resources', url: 'https://www.keresai.com/blog', isPartOf: { '@id': 'https://www.keresai.com/#website' } },
   ]} />
 
   <Breadcrumbs crumbs={crumbs} />
   <header class="page-hero container">
     <span class="eyebrow">Resources</span>
     <h1>Playbooks for <span class="accent">capturing every lead</span></h1>
-    <p class="lead">Guides and case studies on answering every call, recovering missed-call revenue, automating appointments, and running outbound that books meetings.</p>
+    <p class="lead answer-block">Guides from Keres AI for owners of local service businesses: how to answer and book every call, cover after-hours emergencies, measure what automation is worth, and connect it to the tools you already use. Each guide is written for one trade or one job. For the numbers, see <a href="/missed-call-statistics">missed-call statistics</a>, <a href="/benchmarks">benchmarks</a> and the free <a href="/tools">calculators</a>.</p>
   </header>
 
   <section class="page-section container">
+    <h2 class="section-label">Guides</h2>
     <div class="feature-grid">
       {guides.map((g) => (
         <a class="feature-card" href={g.href} style="text-decoration:none; display:block;">
@@ -47,6 +48,12 @@ const guides = [...guideData]
       ))}
     </div>
   </section>
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Which guide should you read first?</h2>
+      <p>Choosing tools? <a href="/guides/ai-tools-for-local-service-businesses.html">The best AI tools for local service businesses</a> sorts them by stage, from getting found to follow-up. If calls are going to voicemail, start with <a href="/guides/customer-intake-automation.html">customer intake automation</a>: it covers the questions to ask and how to measure whether intake is working. Trade owners can go straight to their playbook for <a href="/guides/hvac-scaling-checklist.html">HVAC</a>, <a href="/guides/roofing-growth-through-ai.html">roofing</a>, <a href="/guides/septic-automation-playbook.html">septic</a> or <a href="/guides/towing-operations-automation.html">towing</a>. Before you buy anything, read <a href="/guides/measuring-automation-roi.html">measuring the ROI of automation</a> and <a href="/guides/integrating-ai-into-your-stack.html">integrating AI into your stack</a>, which explain what to track and which tools need to connect.</p>
+    </div>
+  </section>
 
-  <CtaBand heading="Ready to stop losing leads?" sub="Book a free 30-minute demo and see Keres answer and book a call live." />
+  <CtaBand heading="Ready to stop losing leads?" sub="Book a free 30-minute call and hear Remi answer, qualify and book a call." />
 </Layout>

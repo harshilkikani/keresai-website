@@ -4,52 +4,83 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema } from '../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema, webPageSchema } from '../data/schema';
 
+// One page for "24/7 / after-hours answering" (the /use-cases/after-hours-answering
+// page now redirects here). Emergency handling is described as rules the owner
+// sets, never as behaviour Keres guarantees.
 const path = '/24-7-ai-receptionist';
-const crumbs = [{ name: 'Home', path: '/' }, { name: 'AI Receptionist', path: '/ai-receptionist' }, { name: '24/7 Receptionist', path }];
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'AI Receptionist', path: '/agents/inbound' }, { name: '24/7 Receptionist', path }];
 const faqs = [
-  { q: 'What is a 24/7 AI receptionist?', a: 'A 24/7 AI receptionist answers your business phone every hour of every day — nights, weekends, and holidays included — qualifying callers and booking appointments automatically so you never miss a lead, even when your team is off the clock.' },
-  { q: 'Why does after-hours coverage matter?', a: 'A large share of inbound calls — and most emergencies — come in after hours, and the majority of callers who reach voicemail never call back. 24/7 coverage captures the leads your competitors lose overnight.' },
-  { q: 'Does it really work on weekends and holidays?', a: 'Yes. Keres never closes. It answers in two rings at 2 PM on a Tuesday or 2 AM on a holiday, with the same quality.' },
-  { q: 'Can it alert me to emergencies overnight?', a: 'Yes. Keres recognizes urgent calls, captures the details, books the visit, and texts your on-call person immediately.' },
+  { q: 'What is a 24/7 AI receptionist?', a: 'A 24/7 AI receptionist answers your business phone every hour of every day, nights, weekends and holidays included, asks your intake questions and books the appointment, so callers are not sent to voicemail when the office is closed.' },
+  { q: 'Is there an extra after-hours rate?', a: 'No. Remi is one monthly rate with included minutes, then per minute; the rate is the same at 2 p.m. on a Tuesday and 2 a.m. on a holiday.' },
+  { q: 'Can it alert me to emergencies overnight?', a: 'Yes, by the rules you set. During setup you decide which calls count as emergencies (no heat, an active leak, a lockout) and who gets the text; Remi captures the details and alerts that person straight away.' },
+  { q: 'What happens to calls Remi cannot take?', a: 'If a caller hangs up or asks for something outside the script, Remi texts them back within 60 seconds and the call appears in your morning summary.' },
+  { q: 'Does it answer in Spanish?', a: 'Remi answers in English today.' },
+  { q: 'How is this different from an answering service?', a: 'A traditional answering service usually takes a message for you to return, billed by the minute or the call. Remi asks your questions and books the appointment during the call. See /ai-answering-service for the comparison.' },
 ];
+const webpage = webPageSchema({ path, name: '24/7 AI Receptionist', description: '', speakableSelectors: ['.answer-block', '.faq-a'] });
 ---
 <Layout
-  title="24/7 AI Receptionist — Answer Calls Day and Night | Keres AI"
-  description="Keres AI is a 24/7 AI receptionist that answers every call day and night — nights, weekends, and holidays — qualifying leads and booking appointments so you never miss revenue."
+  title="24/7 AI Receptionist: After-Hours Call Answering | Keres AI"
+  description="Keres AI is a 24/7 AI receptionist: it answers every call nights, weekends and holidays, books the appointment and alerts your on-call person by your rules."
   path={path}
 >
   <Schema slot="head" graph={[
-    serviceSchema({ name: '24/7 AI Receptionist', serviceType: 'AI Receptionist', description: '24/7 AI receptionist answering calls nights, weekends, and holidays, qualifying leads and booking appointments.', path }),
+    serviceSchema({ name: '24/7 AI receptionist and after-hours answering', serviceType: 'AI Receptionist', description: 'AI receptionist that answers calls nights, weekends and holidays, books appointments and alerts the on-call person by the owner’s rules.', path }),
+    webpage,
     faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema,
   ]} />
 
   <Breadcrumbs crumbs={crumbs} />
   <header class="page-hero container">
-    <span class="eyebrow">24/7 Coverage</span>
+    <span class="eyebrow">24/7 and after-hours answering</span>
     <h1>A receptionist that <span class="accent">never closes</span></h1>
-    <p class="lead">Nights, weekends, holidays, overflow — Keres answers every call in two rings, around the clock, and books the appointment while the lead is hot. The hours you’re closed are the hours you lose the most leads.</p>
+    <p class="lead">Nights, weekends, holidays and overflow: Remi answers every call in two rings and books the appointment while the caller is still on the line.</p>
     <div class="hero-ctas">
-      <a href="/quote" class="btn btn-primary">Book a Demo</a>
-      <a href="/missed-call-calculator" class="btn btn-outline">See what after-hours calls cost</a>
+      <a href="/quote" class="btn btn-primary">Get a quote</a>
+      <a href="/tools/missed-call-calculator" class="btn btn-outline">See what after-hours calls cost</a>
     </div>
   </header>
 
   <section class="page-section container">
     <div class="answer-block">
-      <p>A <strong>24/7 AI receptionist</strong> answers your business phone every hour of every day — including nights, weekends, and holidays — qualifying callers and booking appointments automatically, so leads are captured even when your team is off the clock.</p>
+      <p>Remi, Keres AI’s AI receptionist, answers your business phone 24/7, including nights, weekends and holidays, in two rings. It asks your intake questions, books the appointment into Google Calendar, HubSpot or ServiceTitan, alerts your on-call person when a call matches the emergency rules you set, and texts back anyone it could not help within 60 seconds. There is no after-hours rate.</p>
     </div>
   </section>
 
   <section class="page-section container">
     <div class="prose">
-      <h2>Capture the leads your competitors miss overnight</h2>
-      <p>Most callers who hit voicemail never call back — they call the next business that answers. After-hours and weekend calls are the ones most at risk, and often the most urgent. Keres answers all of them, instantly.</p>
-      <p>Pair 24/7 coverage with our <a href="/ai-answering-service">AI answering service</a>, or get the full picture on the <a href="/agents/inbound">AI receptionist</a> page.</p>
+      <h2>Why do after-hours calls matter so much?</h2>
+      <p>Most callers who reach voicemail do not call back; they dial the next business that answers. After hours is when that leak is worst, because emergencies, motivated buyers and new clients all call when the front desk has gone home. Keres AI estimates that service businesses miss 25–40% of inbound calls overall, higher after hours (<a href="/missed-call-statistics">how we got there</a>).</p>
+
+      <h2>What happens when a call comes in at 2 a.m.?</h2>
+      <ol>
+        <li>Remi answers in two rings and asks what the caller needs.</li>
+        <li>It asks your intake questions for that kind of job, matter or appointment.</li>
+        <li>If the call matches one of your emergency rules, it alerts your on-call person by text with the details.</li>
+        <li>Otherwise it offers real times from your calendar and books the appointment on the call, then texts the caller a confirmation.</li>
+        <li>Everything lands in your calendar or CRM, and the night’s calls are in one text the next morning.</li>
+      </ol>
+
+      <h2>Which calls count as emergencies?</h2>
+      <p>You decide, during a 30-minute setup call. A typical home-services setup flags no heat or no cooling with vulnerable people in the house, an active leak, or a sewage backup; a law firm might flag an arrest or a court date tomorrow; a property manager a lockout. For anything that sounds like a gas leak, Remi tells the caller to leave the building and call the gas utility or 911, then alerts your on-call person. Everything else is booked for the next open slot.</p>
+
+      <h2>What does it look like by trade?</h2>
+      <ul>
+        <li><a href="/ai-receptionist-for-hvac">HVAC</a>: a no-cool call on a July evening is triaged, the on-call tech is texted, and a routine tune-up request is booked for Monday.</li>
+        <li><a href="/industries/law-firms">Law firms</a>: a new-client call on Saturday gets the matter type and the names your firm needs for its conflict check, and a consultation on Monday.</li>
+        <li><a href="/industries/real-estate">Real estate</a>: an evening call about a listing is qualified (agent, pre-approval, timeline) and the showing is booked.</li>
+        <li><a href="/industries/dental-med-spa">Dental and med spas</a>: a Sunday call books a new-patient appointment and texts the forms.</li>
+      </ul>
+
+      <h2>What does 24/7 coverage cost?</h2>
+      <p>Remi is quoted to your call volume: one monthly rate with included minutes, then per minute, with no per-call fees and no after-hours surcharge. Compare it with answering services and other AI receptionists on <a href="/ai-receptionist-cost">what an AI receptionist costs</a>, or see <a href="/pricing">pricing</a>.</p>
+
+      <p>More on how Remi works: <a href="/agents/inbound">the AI receptionist</a> · <a href="/ai-answering-service">AI answering service vs live answering</a> · <a href="/hear-it">example calls</a>.</p>
     </div>
   </section>
 
   <FaqSection faqs={faqs} title="24/7 AI receptionist FAQ" />
-  <CtaBand heading="Never miss an after-hours lead again" sub="Book a demo and see Keres answer and book a call at any hour." />
+  <CtaBand heading="Stop sending after-hours callers to voicemail" sub="Book a 30-minute call and hear Remi answer and book a call." />
 </Layout>

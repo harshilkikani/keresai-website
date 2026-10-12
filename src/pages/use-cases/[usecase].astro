@@ -28,6 +28,7 @@ const howto = howToSchema({
   description: u.description,
   steps: u.how.map((h, i) => ({ name: `Step ${i + 1}`, text: h })),
 });
+const topic = (u.name.charAt(0).toLowerCase() + u.name.slice(1)).replace(' & ', ' and ');
 const webpage = webPageSchema({
   path,
   name: u.title,
@@ -38,7 +39,6 @@ const webpage = webPageSchema({
 <Layout title={u.title} description={u.description} path={path}>
   <Schema slot="head" graph={[
     serviceSchema({ name: u.name, serviceType: 'AI Receptionist', description: u.description, path }),
-    howto,
     webpage,
     faqSchema(u.faqs),
     breadcrumbSchema(crumbs),
@@ -50,27 +50,27 @@ const webpage = webPageSchema({
     <span class="eyebrow">Use Case</span>
     <h1 set:html={u.h1} />
     <div class="hero-ctas">
-      <a href="/quote" class="btn btn-primary">Book a Demo</a>
+      <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href="/use-cases" class="btn btn-outline">All use cases</a>
     </div>
   </header>
 
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer">
-      <p itemprop="text">{u.intro}</p>
+    <div class="answer-block">
+      <p>{u.intro}</p>
     </div>
   </section>
 
   <section class="page-section container">
     <div class="prose">
-      <h2>The problem</h2>
+      <h2>{u.problemH2 ?? `What goes wrong without ${topic}?`}</h2>
       <p>{u.problem}</p>
     </div>
   </section>
 
   <section class="page-section container">
     <div class="section-label">How Keres handles it</div>
-    <h2 class="section-title" style="margin-bottom:8px">What Keres does</h2>
+    <h2 class="section-title" style="margin-bottom:8px">{u.howH2 ?? `How does Keres AI handle ${topic}?`}</h2>
     <div class="feature-grid">
       {u.how.map((h) => (
         <div class="feature-card"><h3>{h}</h3></div>
@@ -80,12 +80,25 @@ const webpage = webPageSchema({
 
   <section class="page-section container">
     <div class="prose">
-      <h2>What you get</h2>
+      <h2>What changes for you?</h2>
       <ul>
         {u.outcomes.map((o) => <li>{o}</li>)}
       </ul>
     </div>
   </section>
+
+  {u.details && u.details.length > 0 && (
+    <section class="page-section container">
+      <div class="prose">
+        {u.details.map((d) => (
+          <>
+            <h2>{d.h2}</h2>
+            <Fragment set:html={d.body} />
+          </>
+        ))}
+      </div>
+    </section>
+  )}
 
   {related.length > 0 && (
     <section class="page-section container">
@@ -103,5 +116,5 @@ const webpage = webPageSchema({
   )}
 
   <FaqSection faqs={u.faqs} title={`${u.name} — FAQ`} />
-  <CtaBand heading="See it work for your business" sub="Book a free 30-minute demo and watch Keres answer a call and book an appointment live." cta={u.cta.label} href={u.cta.href} />
+  <CtaBand heading="See it work for your business" sub="Book a free 30-minute call and hear Remi answer, qualify and book a call." cta={u.cta.label} href={u.cta.href} />
 </Layout>

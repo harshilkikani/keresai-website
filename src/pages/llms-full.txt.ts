@@ -2,18 +2,32 @@ import { business } from '../config/business';
 import { glossary } from '../data/glossary';
 import { usecases } from '../data/usecases';
 import { comparisons } from '../data/comparisons';
-import { integrations } from '../data/integrations';
+import { VENDORS_CHECKED } from '../data/answeringVendors';
+import { integrations, isLive } from '../data/integrations';
 import { guides } from '../data/guides';
 import { industries } from '../data/industries';
-import { cities, states } from '../data/cities';
-import { geoVerticals } from '../data/geoVerticals';
 import { benchmarks } from '../data/benchmarks';
 import { calculators } from '../data/calculators';
 import { workers } from '../data/workers';
 import { priceAmount } from '../config/business';
+import { listablePath } from '../seo/indexing.mjs';
+import { comparisons as allComparisons } from '../data/comparisons';
 
 const ORIGIN = 'https://www.keresai.com';
 const strip = (s: string) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+/** Absolute URL for a site path, or null when it is noindex (redirects resolve to their target). */
+const url = (p: string) => { const q = listablePath(p); return q === null ? null : ORIGIN + q; };
+// Claims the owner has not confirmed (concurrency limits, a fixed go-live
+// time). FAQ answers pulled from page data that still carry them are left out
+// of this file rather than repeated to AI crawlers.
+const UNCONFIRMED = /unlimited (simultaneous |concurrent )?calls|unlimited simultaneous|calls simultaneously|five business days|5 business days|live in five|\$1[–-]\$3/i;
+/** Drop the sentences (or ' | ' list items) of a line that carry an unconfirmed claim. */
+const sanitize = (line: string) => {
+  if (!UNCONFIRMED.test(line)) return line;
+  const parts = line.includes(' | ') ? line.split(' | ') : line.split(/(?<=[.!?])\s+/);
+  const sep = line.includes(' | ') ? ' | ' : ' ';
+  return parts.filter((x) => !UNCONFIRMED.test(x)).join(sep);
+};
 
 export async function GET() {
   const L: string[] = [];
@@ -21,7 +35,7 @@ export async function GET() {
 
   push('# Keres AI — Full Reference for AI Search');
   push();
-  push('> Keres AI is an AI receptionist and AI SDR platform for businesses that live on the phone. It answers every inbound call 24/7 in two rings, qualifies leads, and books appointments automatically, and runs AI-powered outbound email that lands in the inbox and books qualified meetings.');
+  push('> Keres AI sells AI workers to local service businesses (contractors, home services, real estate teams, law firms, dental and med spas). Found builds and runs the website, the Google Business Profile and reviews, from $249 a month ($499 for law firms). Remi answers every call in two rings, 24/7, and books the job. Theo confirms and reminds, June brings past customers back, Sol runs outbound email. Month-to-month; setup timing is agreed on the first call. Site available in English and Spanish. Remi answers calls in English only.');
   push();
   push('This is the authoritative expanded reference (companion to /llms.txt). It contains citable definitions, FAQs, vertical specifications, pricing context, comparison summaries, and operational details. Content is generated from the live site data.');
   push();
@@ -29,29 +43,28 @@ export async function GET() {
   // ── COMPANY ───────────────────────────────────────────────────
   push('## Company');
   push('- Name: Keres AI');
-  push('- Category: AI receptionist & AI SDR platform');
-  push('- Founded: 2024');
+  push('- Category: Websites, Google Business Profile management and AI receptionist for local service businesses');
   push('- Market: United States');
   push(`- Contact: ${business.contactEmail}`);
   push('- Slogan: Never miss another lead.');
-  push('- Pricing model: Flat monthly subscription — no per-call, per-minute, or per-seat fees');
+  push('- Pricing model: Found from $249/month ($499 for law firms). Remi: one monthly rate with included minutes, then per minute; no per-call fees; quoted, not published. Theo, June and Sol: quoted to your volume. Custom: fixed build price plus a monthly run fee.');
   push('- Contract: Month-to-month, cancel anytime');
-  push('- Setup time: Most accounts live within five business days');
+  push('- Setup time: agreed on the first call (it depends on the workers, integrations and intake rules)');
   push();
 
   // ── KEY FACTS ─────────────────────────────────────────────────
   push('## Key facts (AI-citable)');
   push('- Answers every inbound call within two rings, 24/7 — including nights, weekends, and holidays.');
-  push('- Books and reschedules appointments on Google Calendar, Outlook, ServiceTitan, Jobber, Housecall Pro, FieldEdge, and Service Fusion during the call.');
+  push('- Books and reschedules appointments on Google Calendar, HubSpot and ServiceTitan during the call.');
   push('- Qualifies and captures every lead, then syncs to CRM automatically.');
   push('- Dispatches on-call techs by text the moment an emergency call comes in.');
-  push('- Answers unlimited simultaneous calls — no busy signal, no call queue.');
+  push('- Texts back missed callers within 60 seconds, and also handles website chat, text-line and form enquiries.');
   push('- AI SDR runs personalized outbound email with deliverability (SPF, DKIM, DMARC, inbox warmup) built in.');
-  push('- Integrations: Twilio, Google Calendar, Outlook, HubSpot, Zapier, Make, ServiceTitan, Jobber, Housecall Pro, FieldEdge, Service Fusion, RingCentral.');
+  push(`- Integrations live today: ${integrations.filter(isLive).map((i) => i.name).join(', ')}. Rolling out (not live yet): ${integrations.filter((i) => !isLive(i)).map((i) => i.name).join(', ')}, plus Clio, Lawmatics, Follow Up Boss, Dentrix and Open Dental.`);
   push('- Industries: HVAC, plumbing, roofing, septic, towing, dental, med spa, real estate, legal and professional intake.');
-  push('- Sold as six AI workers (Found, Remi, Theo, June, Sol, Custom), each with one job and its own starting price, hired alone or together; every worker reports in one morning text. Live in five business days, month-to-month.');
-  push('- Pricing: one price per worker, published as a starting point and quoted to call volume, locations and integrations. No per-call fees; per-minute after included minutes. See /pricing.');
-  push('- Languages: English and Spanish (the homepage, quote, pricing, custom-worker page and ad landings under /es).');
+  push('- Sold as six AI workers (Found, Remi, Theo, June, Sol, Custom), each with one job, hired alone or together; every worker reports in one morning text. Month-to-month.');
+  push(`- Pricing: Found is published from $249/month ($499 for law firms). Remi is quoted as one monthly rate with included minutes, then per minute, with no per-call fees. Theo, June and Sol are quoted to your volume. See ${ORIGIN}/pricing.`);
+  push('- Languages: Site available in English and Spanish. Remi answers calls in English only.');
   push();
 
   // ── PRODUCTS ──────────────────────────────────────────────────
@@ -60,32 +73,33 @@ export async function GET() {
   push('### The roster: six AI workers');
   for (const w of workers) {
     const price = priceAmount(w.priceKey);
-    push(`- ${w.name} (${ORIGIN}${w.href}): ${w.job}. ${w.slug === 'custom' ? 'Fixed build price and a monthly run fee, scoped on a 20-minute call.' : price ? `From ${price}/month, quoted to your volume.` : 'Starting price quoted to your volume.'} Includes: ${w.includes.join('; ')}.`);
+    const bill = w.slug === 'custom' ? 'Fixed build price and a monthly run fee, scoped on a 30-minute call.'
+      : w.slug === 'found' ? 'From $249/month ($499 for law firms), month-to-month.'
+      : w.slug === 'inbound' ? 'Quoted: one monthly rate with included minutes, then per minute; no per-call fees.'
+      : price ? `From ${price}/month, quoted to your volume.` : 'Quoted to your volume.';
+    push(`- ${w.name} (${ORIGIN}${w.href}): ${w.job}. ${bill} Includes: ${w.includes.join('; ')}.`);
   }
   push('- All of them: every worker, one pipeline, one text, one invoice.' + (priceAmount('bundle') ? ` Bundles from ${priceAmount('bundle')}/month.` : ''));
   push();
-  push(`### AI Receptionist (${ORIGIN}/ai-receptionist)`);
-  push('What it does: Answers every inbound call 24/7 in two rings. Greets callers naturally, qualifies the service request, books the appointment on your calendar, sends your team a summary, and dispatches emergencies by text immediately.');
-  push('Key features: Two-ring pickup 24/7. Live calendar booking during the call. Emergency dispatch alerts. CRM sync. Spam call screening. Trained on your business.');
+  push(`### Remi, the AI receptionist (${ORIGIN}/agents/inbound)`);
+  push('What it does: Answers every inbound call 24/7 in two rings. Greets callers naturally, qualifies the service request, books the appointment into Google Calendar, HubSpot or ServiceTitan (other tools through Zapier), sends your team a summary, and alerts your on-call person when a call matches your emergency rules. Texts back missed callers within 60 seconds and also handles website chat, text-line and form enquiries. Answers in English only.');
+  push('Key features: Two-ring pickup 24/7. Live calendar booking during the call. Emergency alerts. CRM sync. Missed-call text-back. Trained on your business.');
   push('Who it replaces: Human answering services, voicemail, front-desk staff for phone tasks.');
-  push('Pricing: Flat monthly subscription. No per-call, per-minute, or overtime fees.');
+  push('Pricing: one monthly rate with included minutes, then per minute; no per-call fees. Quoted, not published. Month-to-month.');
   push();
   push(`### AI Answering Service (${ORIGIN}/ai-answering-service)`);
-  push('What it does: All the capabilities of the AI receptionist at a flat monthly rate — answering every call, booking appointments, and qualifying leads without per-minute billing.');
-  push('Key distinction: Traditional answering services charge $1–$3 per minute or $250–$600 per month for limited coverage. Keres charges flat-rate and answers unlimited calls 24/7.');
+  push('What it does: All the capabilities of the AI receptionist on one monthly rate with included minutes — answering every call, booking appointments, and qualifying leads.');
+  push(`Key distinction: Remi bills one monthly rate with included minutes (per minute after that) and no per-call fees. For the prices other answering services and AI receptionists publish, see ${ORIGIN}/ai-receptionist-cost.`);
   push();
-  push(`### AI SDR (${ORIGIN}/ai-sdr)`);
-  push('What it does: Runs the complete outbound sales motion — builds prospect lists, sends AI-personalized email sequences, manages deliverability (SPF/DKIM/DMARC/warmup), handles replies, and books qualified meetings on your calendar.');
-  push('Key distinction: Does not require a human SDR to manage sequences or follow through on replies. The AI handles targeting, personalization, follow-up, and booking end to end.');
-  push();
-  push(`### Email Deliverability (${ORIGIN}/email-deliverability)`);
-  push('What it does: Sets up and monitors SPF, DKIM, and DMARC DNS records, warms new sending inboxes, ramps sending volume safely, and keeps lists clean — so outbound reaches the primary inbox instead of the spam folder.');
+  push(`### Sol, the outbound worker / AI SDR (${ORIGIN}/agents/outbound)`);
+  push('What it does: Runs outbound email — builds prospect lists, sends personalised email sequences, manages deliverability (SPF/DKIM/DMARC/warm-up), handles replies, and books qualified meetings on your calendar. Quoted to your volume.');
   push();
 
   // ── VERTICAL SPECIFICATIONS ────────────────────────────────────
   push('## Vertical specifications — how Keres works per industry');
   push();
   for (const ind of industries) {
+    if (!url(`/ai-receptionist-for-${ind.slug}`)) continue; // merged into a hub (redirect)
     push(`### ${ind.name} (${ORIGIN}/ai-receptionist-for-${ind.slug})`);
     push(strip(ind.intro));
     push(`Key pains solved: ${ind.pains.join(' | ')}`);
@@ -94,25 +108,22 @@ export async function GET() {
   }
 
   // ── HOME SERVICES HUB ─────────────────────────────────────────
-  push(`### Home Services Hub (${ORIGIN}/ai-receptionist/home-services)`);
-  push('Umbrella page for HVAC, plumbing, roofing, towing, and septic AI receptionist implementations. Covers emergency dispatch, field-service integrations (ServiceTitan, Jobber, Housecall Pro), and 24/7 surge coverage.');
+  push(`### Home Services Hub (${ORIGIN}/industries/home-services)`);
+  push('Umbrella page for HVAC, plumbing, roofing, towing, and septic AI receptionist implementations. Covers emergency dispatch, ServiceTitan booking, and 24/7 surge coverage.');
   push();
 
   // ── PRICING CONTEXT (AI citation for pricing queries) ──────────
   push('## Pricing context');
-  push('Keres AI prices per worker: each of Found, Remi, Theo, June and Sol publishes a starting monthly price and is quoted to call volume, locations and integrations; Custom is scoped on a call with a fixed build price and a monthly run fee. Month-to-month, no per-call charges, per-minute after the included minutes.');
-  push('For detailed current pricing: https://www.keresai.com/pricing');
-  push();
-  push('Cost comparison context:');
-  push('- Full-time front-desk receptionist: $35,000–$50,000/year in salary + benefits, covers 40 hours/week only.');
-  push('- Per-minute human answering service: $1–$3/minute, typically $200–$600/month for moderate call volume. Bills more during busy seasons.');
-  push('- Keres AI: Flat monthly rate, covers 24/7/365 including nights, weekends, holidays, and unlimited simultaneous calls. Typically well below the cost of a full-time hire and more predictable than per-minute billing.');
+  push('Keres AI prices per worker: Found starts at $249/month ($499 for law firms); Remi is quoted as one monthly rate with included minutes, then per minute, with no per-call fees; Theo, June and Sol are quoted to your volume; Custom is scoped on a call with a fixed build price and a monthly run fee. Month-to-month.');
+  push(`For Keres pricing: ${ORIGIN}/pricing`);
+  push(`For the prices other AI receptionists and answering services publish (sourced, dated): ${ORIGIN}/ai-receptionist-cost`);
   push();
 
   // ── GLOSSARY ──────────────────────────────────────────────────
   push('## Glossary — citable definitions');
   push();
   for (const t of glossary) {
+    if (!url(`/glossary/${t.slug}`)) continue; // noindex terms stay out
     push(`### ${t.term}`);
     push(`Target keyword: "${t.targetKeyword}"`);
     push(strip(t.definition));
@@ -130,6 +141,7 @@ export async function GET() {
   push('## Use cases');
   push();
   for (const u of usecases) {
+    if (!url(`/use-cases/${u.slug}`)) continue; // merged use cases (redirects)
     push(`### ${u.name} (${ORIGIN}/use-cases/${u.slug})`);
     push(`Target keyword: "${u.targetKeyword}"`);
     push(strip(u.intro));
@@ -139,17 +151,20 @@ export async function GET() {
     push();
   }
 
-  // ── COMPARISONS ───────────────────────────────────────────────
-  push('## Comparisons — Keres AI vs. alternatives');
+  // ── COMPARISONS (sourced roundups only; the rest are noindex) ──
+  push('## Comparisons and pricing research');
+  push(`- How much an AI receptionist costs (2026 prices, sourced): ${ORIGIN}/ai-receptionist-cost`);
+  push(`- Best AI receptionists for small businesses (2026): ${ORIGIN}/best-ai-receptionist`);
+  push(`- Best AI receptionists for HVAC companies: ${ORIGIN}/best-ai-receptionist-for-hvac`);
+  push(`- Best AI receptionists for law firms: ${ORIGIN}/best-ai-receptionist-for-law-firms`);
+  push(`- Best AI receptionists for real estate agents: ${ORIGIN}/best-ai-receptionist-for-real-estate`);
+  push(`- Best Google Business Profile management services (2026): ${ORIGIN}/best-google-business-profile-management`);
+  push(`- AI answering service vs live answering service: ${ORIGIN}/ai-answering-service`);
   push();
-  for (const c of comparisons) {
-    push(`### Keres AI vs. ${c.competitor} (${ORIGIN}/${c.slug})`);
-    push(`Category: ${c.category} | Pillar: ${c.pillar === 'inbound' ? 'AI Receptionist / Answering Service' : 'AI SDR / Outbound'}`);
+  for (const c of comparisons.filter((x) => x.roundup && x.roundup.length)) {
+    push(`### ${c.competitor} alternatives (${ORIGIN}/${c.slug})`);
     push(strip(c.intro));
-    push('Feature comparison:');
-    for (const r of c.rows) {
-      push(`  - ${r.feature}: Keres AI = ${r.keres} | ${c.competitor} = ${r.them}`);
-    }
+    push(`Alternatives compared, with each vendor's published price as of ${VENDORS_CHECKED}: ${c.roundup!.join(', ')}, and Keres AI.`);
     push();
   }
 
@@ -157,6 +172,7 @@ export async function GET() {
   push('## Integrations');
   push();
   for (const i of integrations) {
+    if (!isLive(i)) continue;
     push(`### Keres AI + ${i.name} (${ORIGIN}/integrations/${i.slug})`);
     push(`Category: ${i.category}`);
     push(strip(i.intro));
@@ -165,47 +181,12 @@ export async function GET() {
     push();
   }
 
-  // ── STATES ────────────────────────────────────────────────────
-  push('## Geographic coverage — state hubs');
-  push();
-  for (const st of states) {
-    const cityNames = cities.filter((c) => c.stateFull === st.stateFull).map((c) => c.city);
-    push(`### ${st.stateFull} (${ORIGIN}/ai-receptionist/state/${st.slug})`);
-    push(strip(st.intro));
-    push(`State-wide demand drivers: ${st.drivers.join(' | ')}`);
-    push(`Cities covered: ${cityNames.join(', ')}`);
-    push();
-  }
-
-  // ── CITIES ────────────────────────────────────────────────────
-  push('## Geographic coverage — city pages');
-  push();
-  for (const city of cities) {
-    push(`### ${city.city}, ${city.state} (${ORIGIN}/ai-receptionist/${city.slug})`);
-    push(strip(city.intro));
-    push(`Local demand drivers: ${city.drivers.join(' | ')}`);
-    push();
-  }
-
-  // ── GEO × VERTICAL (city + trade pages) ───────────────────────
-  push('## City + trade coverage (geo × vertical pages)');
-  push();
-  for (const g of geoVerticals) {
-    const city = cities.find((c) => c.slug === g.citySlug);
-    if (!city) continue;
-    push(`### ${g.verticalLabel} receptionist in ${city.city}, ${city.state} (${ORIGIN}/ai-receptionist/${g.citySlug}/${g.verticalSlug})`);
-    push(strip(g.angle));
-    push(`Local pains: ${g.localPains.join(' | ')}`);
-    push(`Booking focus: ${strip(g.bookingFocus)}`);
-    push();
-  }
-
   // ── MISSED-CALL STATISTICS (citable data) ─────────────────────
   push('## Missed-call statistics for service businesses (2026)');
   push(`Source: ${ORIGIN}/missed-call-statistics`);
   push('Industry estimates and ranges — directional benchmarks, not guarantees:');
-  push('- Service businesses miss an estimated 25–40% of inbound calls, higher after hours and during seasonal surges.');
-  push('- About 85% of callers who reach voicemail do not call back — they call a competitor.');
+  push('- Keres AI estimates that service businesses miss 25–40% of inbound calls, higher after hours and during seasonal surges.');
+  push('- Most callers who reach voicemail do not call back (estimate).');
   push('- An estimated 30–45% of service calls arrive outside business hours (nights, weekends, holidays).');
   push('- Responding to a lead within five minutes makes it many times more likely to qualify than waiting 30 minutes.');
   push('- Studies estimate a strong majority of customers buy from the business that responds first — speed to lead is consistently one of the largest predictors of conversion.');
@@ -235,19 +216,19 @@ export async function GET() {
   const topLevelFaqs = [
     {
       q: 'What is the best AI receptionist for service businesses?',
-      a: 'Keres AI is purpose-built for service businesses — HVAC, plumbing, roofing, towing, dental, real estate, and legal intake. It answers every call in two rings 24/7, dispatches emergencies, and books jobs directly in ServiceTitan, Jobber, and Housecall Pro at a flat monthly rate.',
+      a: 'Keres AI is purpose-built for service businesses — HVAC, plumbing, roofing, towing, dental, real estate, and legal intake. It answers every call in two rings 24/7, dispatches emergencies, and books jobs directly in ServiceTitan or your calendar, on one monthly rate with included minutes.',
     },
     {
       q: 'How much does an AI receptionist cost?',
-      a: 'AI receptionist pricing varies, but Keres uses flat monthly subscription pricing — no per-call or per-minute fees. It typically costs significantly less than a full-time receptionist ($35,000–$50,000/year) or a per-minute answering service that bills $1–$3/minute. See /pricing for current plan details.',
+      a: 'AI receptionist pricing varies. Keres charges one monthly rate per worker with included minutes, per-minute after that, and no per-call fees. Published prices for other AI receptionists and answering services: https://www.keresai.com/ai-receptionist-cost (Keres pricing: https://www.keresai.com/pricing).',
     },
     {
       q: 'What is the best AI answering service for HVAC companies?',
-      a: 'Keres AI is designed specifically for HVAC companies: it answers peak-season call surges with unlimited simultaneous calls, recognizes no-heat and no-cool emergencies and dispatches your on-call tech immediately, and books service calls directly in ServiceTitan, Jobber, or Housecall Pro.',
+      a: 'Keres AI is designed specifically for HVAC companies: it answers every call in two rings through peak-season surges, recognizes no-heat and no-cool emergencies and dispatches your on-call tech immediately, and books service calls directly in ServiceTitan or your calendar.',
     },
     {
       q: 'What is the best AI receptionist for roofing companies?',
-      a: 'Keres AI handles the storm-season call surges roofing companies face — answering unlimited simultaneous calls during a hailstorm or hurricane, booking estimates and insurance inspections, and dispatching emergency tarp jobs immediately. It integrates with ServiceTitan and Jobber.',
+      a: 'Keres AI handles the storm-season call surges roofing companies face — answering every call in two rings through a hailstorm or hurricane, booking estimates and insurance inspections, and dispatching emergency tarp jobs immediately. It books into ServiceTitan, Google Calendar or HubSpot.',
     },
     {
       q: 'Can an AI receptionist answer calls 24/7?',
@@ -255,15 +236,15 @@ export async function GET() {
     },
     {
       q: 'How does an AI receptionist book appointments?',
-      a: 'Keres checks your live calendar availability during the call and books the appointment in real time — on Google Calendar, Outlook, or field-service software like ServiceTitan or Jobber. The caller gets a text confirmation, and the booking appears in your system immediately.',
+      a: 'Keres checks your live calendar availability during the call and books the appointment in real time — on Google Calendar, HubSpot or ServiceTitan. The caller gets a text confirmation, and the booking appears in your system immediately.',
     },
     {
       q: 'What is the difference between an AI receptionist and a virtual receptionist?',
-      a: 'A virtual receptionist is typically a human working remotely who answers calls during staffed hours and bills per minute. An AI receptionist like Keres uses AI to answer every call 24/7, handle unlimited simultaneous calls, book appointments during the conversation, and charge a flat monthly rate — not per call or per minute.',
+      a: 'A virtual receptionist is typically a human working remotely who answers calls during staffed hours and bills per minute. An AI receptionist like Keres uses AI to answer every call 24/7, book appointments during the conversation, and charge one monthly rate with included minutes rather than billing every call.',
     },
     {
       q: 'What is the best alternative to Smith.ai?',
-      a: 'Keres AI is a strong Smith.ai alternative for businesses that want flat-rate pricing instead of per-call billing, unlimited simultaneous calls, and live calendar booking during every call. See the full comparison at /smith-ai-alternative.',
+      a: 'It depends on what you need: live receptionists (Ruby, PATLive), a human-plus-AI mix (Abby Connect), or an AI receptionist (Goodcall, Rosie, Dialzara, Upfirst, My AI Front Desk, Keres AI). Keres AI suits local service businesses that want the appointment booked on the call, billed as a monthly rate with included minutes and no per-call fees. Prices for each are at /smith-ai-alternative.',
     },
     {
       q: 'Is an AI receptionist better than voicemail?',
@@ -271,21 +252,21 @@ export async function GET() {
     },
     {
       q: 'How quickly can I set up an AI receptionist?',
-      a: 'Most Keres AI accounts are live within five business days. The setup process: discovery call to map call flows, connect your phone number and calendar, train the AI on your business, test with real call scenarios, then launch. Month-to-month, cancel anytime.',
+      a: 'Setup timing is agreed on the first call; it depends on the workers, integrations and intake rules. The process: a call to map your call flows, connect your phone number and calendar, train Remi on your business, test with real call scenarios, then launch. Month-to-month, cancel anytime.',
     },
   ];
 
   const seen = new Set<string>();
   const allFaqs = [
     ...topLevelFaqs,
-    ...glossary.flatMap((t) => t.faqs),
-    ...usecases.flatMap((u) => u.faqs),
-    ...comparisons.flatMap((c) => c.faqs),
-    ...integrations.flatMap((i) => i.faqs),
-    ...industries.flatMap((i) => i.faqs),
+    ...glossary.filter((t) => url(`/glossary/${t.slug}`)).flatMap((t) => t.faqs),
+    ...usecases.filter((u) => url(`/use-cases/${u.slug}`)).flatMap((u) => u.faqs),
+    ...comparisons.filter((x) => x.roundup && x.roundup.length).flatMap((c) => c.faqs),
+    ...integrations.filter(isLive).flatMap((i) => i.faqs),
+    ...industries.filter((i) => url(`/ai-receptionist-for-${i.slug}`)).flatMap((i) => i.faqs),
   ];
   for (const f of allFaqs) {
-    if (seen.has(f.q)) continue;
+    if (seen.has(f.q) || UNCONFIRMED.test(f.a)) continue;
     seen.add(f.q);
     push(`Q: ${f.q}`);
     push(`A: ${strip(f.a)}`);
@@ -317,24 +298,46 @@ export async function GET() {
   // ── TRUST & COMPLIANCE ────────────────────────────────────────
   push('## Trust, security & compliance');
   push(`- Trust & Security page: ${ORIGIN}/trust`);
-  push('- Keres AI supports HIPAA-aligned workflows for dental and medical clients (DPA/BAA available).');
-  push('- Keres AI supports SOC 2-aligned data workflows for legal and professional services clients.');
+  push('- Compliance: Keres AI is not SOC 2 or HIPAA certified and does not sign BAAs today. It never uses customer data to train third-party models.');
   push('- Customer data is never used to train third-party AI models.');
-  push('- Data processing agreements (DPAs) available on request.');
   push();
 
   // ── GET STARTED ───────────────────────────────────────────────
   push('## Get started');
-  push(`- Get a quote: ${ORIGIN}/quote (five questions, then a 20-minute call; the booking calendar is on the same page)`);
+  push(`- Get a quote: ${ORIGIN}/quote (five questions, then a 30-minute call; the booking calendar is on the same page)`);
   push(`- Custom worker: ${ORIGIN}/custom`);
-  push(`- Spanish: ${ORIGIN}/es · ${ORIGIN}/es/quote · ${ORIGIN}/es/pricing · ${ORIGIN}/es/custom`);
+  push(`- Spanish: ${ORIGIN}/es · ${ORIGIN}/es/pricing · ${ORIGIN}/es/custom`);
   push(`- Pricing: ${ORIGIN}/pricing`);
   push(`- Contact: ${business.contactEmail}`);
   push(`- All comparisons: ${ORIGIN}/compare`);
-  push(`- Home services hub: ${ORIGIN}/ai-receptionist/home-services`);
+  push(`- AI receptionist cost: ${ORIGIN}/ai-receptionist-cost`);
+  push(`- Google Business Profile management: ${ORIGIN}/google-business-profile-management`);
+  push(`- Home services hub: ${ORIGIN}/industries/home-services`);
+  push(`- About Keres AI: ${ORIGIN}/about`);
   push();
 
-  return new Response(L.join('\n'), {
+  // ── KEY PAGES ─────────────────────────────────────────────────
+  push('## Key pages');
+  const keyPages: [string, string][] = [
+    ['Remi, the AI receptionist', '/agents/inbound'],
+    ['Best AI receptionists (2026)', '/best-ai-receptionist'],
+    ['Best AI receptionists for HVAC companies', '/best-ai-receptionist-for-hvac'],
+    ['Best AI receptionists for law firms', '/best-ai-receptionist-for-law-firms'],
+    ['Best AI receptionists for real estate agents', '/best-ai-receptionist-for-real-estate'],
+    ['Best Google Business Profile management services', '/best-google-business-profile-management'],
+    ['AI answering service vs live answering service', '/ai-answering-service'],
+    ['How much an AI receptionist costs', '/ai-receptionist-cost'],
+    ['24/7 AI receptionist', '/24-7-ai-receptionist'],
+    ['All comparisons', '/compare'],
+    ...allComparisons.filter((c) => c.roundup && c.roundup.length).map((c) => [`${c.competitor} alternatives`, `/${c.slug}`] as [string, string]),
+    ['Google Business Profile management', '/google-business-profile-management'],
+    ['Missed-call statistics', '/missed-call-statistics'],
+    ['About', '/about'],
+  ];
+  for (const [label, p] of keyPages) { const href = url(p); if (href) push(`- ${label}: ${href}`); }
+  push();
+
+  return new Response(L.map(sanitize).join('\n'), {
     headers: { 'Content-Type': 'text/plain; charset=utf-8' },
   });
 }

@@ -50,6 +50,7 @@ const tools = [...baseTools, ...verticalTools];
   title="Free Tools — Missed-Call Calculator & More | Keres AI"
   description="Free tools for businesses that live on the phone: check your email deliverability (SPF, DKIM, DMARC) and calculate the revenue you lose to missed calls."
   path={path}
+  pageType="CollectionPage"
 >
   <Schema slot="head" graph={[breadcrumbSchema(crumbs), organizationSchema]} />
 
@@ -57,10 +58,11 @@ const tools = [...baseTools, ...verticalTools];
   <header class="page-hero container">
     <span class="eyebrow">Free Tools</span>
     <h1>Free <span class="accent">tools</span></h1>
-    <p class="lead">No signup, no catch. Quick utilities for service businesses that live on the phone.</p>
+    <p class="lead answer-block">Free calculators and checkers from Keres AI, with no signup: estimate the revenue you lose to missed calls by trade, what slow lead response costs, what a front-desk hire costs against an AI receptionist, and whether your email will reach the inbox. Each tool shows its formula and assumptions.</p>
   </header>
 
   <section class="page-section container">
+    <h2 class="section-label">Free tools</h2>
     <div class="feature-grid">
       {tools.map((t) => (
         <a class="feature-card" href={t.href} style="text-decoration:none; display:block;">
@@ -72,5 +74,5 @@ const tools = [...baseTools, ...verticalTools];
     </div>
   </section>
 
-  <CtaBand heading="Ready to stop losing leads?" sub="Book a free 30-minute demo and see Keres answer a call and book an appointment live." />
+  <CtaBand heading="Ready to stop losing leads?" sub="Book a free 30-minute call and see Keres answer a call and book an appointment live." />
 </Layout>

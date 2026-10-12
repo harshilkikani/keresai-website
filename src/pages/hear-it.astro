@@ -6,6 +6,7 @@ import Section from '../components/Section.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Button from '../components/Button.astro';
 import CallTranscript from '../components/CallTranscript.astro';
+import FaqSection from '../components/FaqSection.astro';
 import { organizationSchema, breadcrumbSchema, faqSchema } from '../data/schema';
 import { hubs } from '../data/hubs';
 import { PHONE } from '../data/site';
@@ -20,7 +21,7 @@ const faqs = [
   },
   {
     q: 'Are these real customer calls?',
-    a: 'The transcripts below are examples, and they say so. We will not publish a customer call without written permission, and when we do it will be labelled as a recording with the firm named.',
+    a: 'The transcripts on this page are examples, and they say so. We will not publish a customer call without written permission, and when we do it will be labelled as a recording with the firm named.',
   },
   {
     q: 'Does it tell callers it is an assistant?',
@@ -30,7 +31,7 @@ const faqs = [
 ---
 <Layout
   title="Hear It — Sample AI Receptionist Calls | Keres AI"
-  description="Example calls per vertical, showing how Remi answers in two rings, qualifies the lead and books the appointment. Or call the number and hear it yourself."
+  description={`Example calls per vertical, showing how Remi answers in two rings, qualifies the lead and books the appointment. ${PHONE ? 'Or call the number and hear it yourself.' : 'Ask for a live test call on your quote call.'}`}
   path={path}
 >
   <Schema slot="head" graph={[organizationSchema, breadcrumbSchema(crumbs), faqSchema(faqs)]} />
@@ -41,15 +42,15 @@ const faqs = [
     <div class="k-grid">
       <div class="k-col-7">
         <Eyebrow>Hear it</Eyebrow>
-        <h1 id="hear-title" class="k-display">The fastest demo is the phone number.</h1>
+        <h1 id="hear-title" class="k-display">{PHONE ? 'The fastest demo is the phone number.' : 'Hear how Remi handles a call.'}</h1>
         <p class="k-lede">
-          Call it. You will be talking to Remi, the same Inbound Agent that would answer your
-          firm&rsquo;s phone. The transcripts below show how a call goes in four different
-          verticals &mdash; audio recordings go here as customers give us permission to publish them.
+          Remi is Keres AI&rsquo;s AI receptionist: it answers in two rings, 24/7, asks your intake questions and books the appointment.
+          {PHONE ? 'Call the number and you will be talking to the same Remi that would answer your firm’s phone.' : 'Ask for a live test call when we talk; it is the same Remi that would answer your firm’s phone.'} The transcripts below show how a call goes in four different
+          verticals. They are examples written for this page, and any example calls we publish are recorded with test callers playing customers.
         </p>
         <div class="price-hero-ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-          <Button href="/quote" variant="ghost" event="demo_click">Book a demo</Button>
+          <Button href="/quote" variant={PHONE ? 'ghost' : 'primary'} event="demo_click">Get a quote</Button>
         </div>
       </div>
     </div>
@@ -62,15 +63,9 @@ const faqs = [
           <Eyebrow>{hub.name}</Eyebrow>
           <h2 id={`hear-${hub.slug}`} class="k-h2">{hub.name} intake</h2>
           <p class="k-lede">{hub.problemAnswer}</p>
-          {/* PLACEHOLDER — audio goes here once a customer gives permission
-              to publish a recording. Until then the slot stays visible. */}
-          <div class="k-audio-slot" data-slot="recording">
-            <span class="k-quote__tag">Recording: none yet</span>
-            <p class="k-quote__need">
-              Needed: a real {hub.name.toLowerCase()} call, published with the firm&rsquo;s written
-              permission. The transcript beside this is an example, not a recording.
-            </p>
-          </div>
+          {/* Audio goes here once there is a demo-line recording (labelled as a
+              demo) or a customer call published with written permission. */}
+          <p class="k-body"><em>The transcript beside this is an example, not a recording.</em></p>
           <Button href={`/industries/${hub.slug}`} variant="ghost">{hub.name} in detail</Button>
         </div>
         <div class="k-split__mock">
@@ -89,8 +84,9 @@ const faqs = [
       </p>
       <div class="k-close__ctas">
         {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-        <Button href="/quote" variant="ghost" event="demo_click">Book a demo instead</Button>
+        <Button href="/quote" variant={PHONE ? 'ghost' : 'primary'} event="demo_click">{PHONE ? 'Get a quote instead' : 'Get a quote'}</Button>
       </div>
     </div>
   </Section>
+  <FaqSection faqs={faqs} title="Hear it — FAQ" />
 </Layout>

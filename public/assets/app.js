@@ -65,10 +65,18 @@
     if (!btn || !menu || !first(btn, 'menu')) return;
 
     function setOpen(open) {
+      const wasOpen = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', open);
       menu.setAttribute('data-open', open);
       document.body.style.overflow = open ? 'hidden' : '';
+      const label = open ? btn.dataset.labelClose : btn.dataset.labelOpen;
+      if (label) btn.setAttribute('aria-label', label);
+      // Keep Tab inside the open menu: everything behind the overlay is inert.
+      document.querySelectorAll('main, footer, #footer').forEach((el) => { el.inert = open; });
+      menu.inert = !open;
+      if (!open && wasOpen) btn.focus();
     }
+    menu.inert = true;
     btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
     bindOnce(document, 'L1', 'keydown', (e) => { if (e.key === 'Escape') setOpen(false); });

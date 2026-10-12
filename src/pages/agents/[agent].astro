@@ -9,8 +9,9 @@ import Eyebrow from '../../components/Eyebrow.astro';
 import Button from '../../components/Button.astro';
 import Testimonial from '../../components/Testimonial.astro';
 import CallTranscript from '../../components/CallTranscript.astro';
+import AgentMock from '../../components/AgentMock.astro';
 import DailyBrief from '../../components/DailyBrief.astro';
-import { organizationSchema, breadcrumbSchema, faqSchema, serviceSchema } from '../../data/schema';
+import { organizationSchema, breadcrumbSchema, faqSchema, workerService, receptionistVideoSchema, outboundVideoSchema } from '../../data/schema';
 import { agentPages } from '../../data/agentPages';
 import { agents, agentBySlug, plans, planBySlug, PHONE } from '../../data/site';
 import { hubs } from '../../data/hubs';
@@ -22,6 +23,8 @@ export function getStaticPaths() {
 const { page } = Astro.props;
 const agent = agentBySlug(page.slug);
 const plan = planBySlug(agent.includedIn.toLowerCase());
+// Only a real number is printed; an empty or 'Quoted' price never renders as '/mo'.
+const planPriced = /^from \$\d/.test(plan.from);
 const path = `/agents/${page.slug}`;
 const crumbs = [
   { name: 'Home', path: '/' },
@@ -37,13 +40,12 @@ const others = agents.filter((a) => a.slug !== page.slug);
       organizationSchema,
       breadcrumbSchema(crumbs),
       faqSchema(page.faqs),
-      serviceSchema({
-        name: `${agent.name} — ${agent.title}`,
-        serviceType: agent.title,
-        description: page.description,
-        path,
-        audience: 'Small service firms and professional practices',
-      }),
+      // The same #service node the Organization's offer catalog and /pricing
+      // carry: one @id, one name, one description (src/data/schema.ts).
+      workerService(page.slug),
+      // The recording embedded below, where one is on the page.
+      ...(page.slug === 'inbound' ? [receptionistVideoSchema] : []),
+      ...(page.slug === 'outbound' ? [outboundVideoSchema] : []),
     ]}
   />
 
@@ -58,16 +60,17 @@ const others = agents.filter((a) => a.slug !== page.slug);
         <p class="k-lede">{page.sub}</p>
         <div class="k-hero__ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-          <Button href="/quote" variant="ghost" event="demo_click">Book a demo</Button>
+          <Button href="/quote" variant={PHONE ? 'ghost' : 'primary'} event="demo_click">Get a quote</Button>
         </div>
         <ul class="k-hero__facts" aria-label="At a glance">
           <li><span class="k-hero__fact-k">Stage</span><span class="k-hero__fact-v">{agent.stage}</span></li>
-          <li><span class="k-hero__fact-k">First in</span><span class="k-hero__fact-v">{plan.name}</span></li>
-          <li><span class="k-hero__fact-k">From</span><span class="k-hero__fact-v" data-figure>{plan.from.replace('from ', '')}/mo</span></li>
+          {planPriced && <li><span class="k-hero__fact-k">From</span><span class="k-hero__fact-v" data-figure>{plan.from.replace('from ', '')}/mo</span></li>}
         </ul>
       </div>
       <div class="k-hero__mock">
-        <CallTranscript vertical={page.heroVertical} />
+        {page.slug === 'inbound'
+          ? <CallTranscript vertical={page.heroVertical} />
+          : <AgentMock slug={page.slug} />}
       </div>
     </div>
   </Section>
@@ -135,7 +138,7 @@ const others = agents.filter((a) => a.slug !== page.slug);
             <video
               class="k-shot__video"
               src={page.media.src}
-              poster={page.media.poster}
+              poster={page.media.posterWebp}
               preload="none" playsinline muted loop controls
               width={page.media.w} height={page.media.h}
               aria-label={page.media.label}
@@ -180,7 +183,7 @@ const others = agents.filter((a) => a.slug !== page.slug);
           <li class="k-ind">
             <a class="k-ind__link" href={`/industries/${h.slug}`}>
               <h3 class="k-ind__name">{h.name}</h3>
-              <p class="k-ind__line">{h.sub.split('. ')[0]}.</p>
+              <p class="k-ind__line">{(h.answer ?? h.sub).split('. ')[0]}.</p>
               <span class="k-ind__go" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
@@ -214,15 +217,17 @@ const others = agents.filter((a) => a.slug !== page.slug);
   <Section tone="inverse" spacing="standard" labelledby="plan-title">
     <div class="k-close k-close--wide">
       <Eyebrow>Pricing</Eyebrow>
-      <h2 id="plan-title" class="k-h2">{plan.name}, {plan.from.replace('from ', 'from ')} a month.</h2>
-      <p class="k-lede">{page.planLine} Quoted to your volume, month-to-month, live in five business days.</p>
+      <h2 id="plan-title" class="k-h2">{planPriced ? `${plan.name}, ${plan.from} a month.` : `${plan.name}, quoted to your volume.`}</h2>
+      <p class="k-lede">{page.planLine} Quoted to your volume, month-to-month, set up for you.</p>
       <p class="k-body">
         Also on the team: {others.map((o) => o.name).join(', ')}.
         <a href="/services">See how the four work together</a>, or
         <a href="/pricing">what changes the quote</a>.
       </p>
       <div class="k-close__ctas">
-        {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
+        {PHONE
+          ? <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>
+          : <Button href="/quote" variant="primary" event="demo_click">Get a quote</Button>}
         <Button href="/pricing" variant="ghost">See pricing</Button>
       </div>
     </div>

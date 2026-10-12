@@ -81,7 +81,7 @@ export const transcripts: Record<Vertical, Transcript> = {
     outcome: [
       { k: 'Consult booked', v: 'Mon 9:30 AM' },
       { k: 'Conflict check', v: 'Queued for review' },
-      { k: 'Matter intake', v: 'Written to Clio' },
+      { k: 'Matter intake', v: 'Written to HubSpot' },
     ],
   },
 
@@ -147,7 +147,7 @@ export const transcripts: Record<Vertical, Transcript> = {
     outcome: [
       { k: 'Showing booked', v: 'Sun 11:00 AM' },
       { k: 'Buyer', v: 'Pre-approved, unrepresented' },
-      { k: 'Written to', v: 'Follow Up Boss' },
+      { k: 'Written to', v: 'HubSpot' },
     ],
   },
 };
@@ -277,7 +277,7 @@ export const bookings: Record<Vertical, Booking> = {
     who: 'Attorney on intake',
     where: 'Phone consult',
     sms: 'Your consultation is confirmed for Monday 9:30 AM. We will call this number. Reply R to reschedule.',
-    writtenTo: 'Clio + Google Calendar',
+    writtenTo: 'HubSpot + Google Calendar',
   },
   'home-services': {
     kind: 'Job',
@@ -301,7 +301,7 @@ export const bookings: Record<Vertical, Booking> = {
     who: 'Buyer — pre-approved, unrepresented',
     where: 'Hawthorne listing',
     sms: 'Showing confirmed for Sunday 11 AM at the Hawthorne listing. Disclosures are attached. Reply R to reschedule.',
-    writtenTo: 'Follow Up Boss',
+    writtenTo: 'HubSpot',
   },
 };
 

@@ -10,6 +10,8 @@
     "astro": "astro",
     "build:css": "node scripts/build-css.mjs",
     "prebuild": "node scripts/build-css.mjs",
+    "postbuild": "node scripts/build-md.mjs",
+    "build:md": "node scripts/build-md.mjs",
     "predev": "node scripts/build-css.mjs"
   },
   "dependencies": {

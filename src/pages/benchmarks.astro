@@ -11,38 +11,41 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Benchmarks', path }];
 
 const webpage = webPageSchema({
   path,
-  name: 'Service Business Benchmarks & Data Studies | Keres AI',
-  description: 'Citable benchmarks on missed calls, lead response, answering costs, and conversion for HVAC, roofing, dental, and legal service businesses.',
+  name: 'Missed-Call & Lead-Response Benchmarks | Keres AI',
+  description: 'Estimates on missed calls, lead response, missed-call cost and conversion for HVAC, roofing, dental and legal businesses, with sources where they exist.',
   speakableSelectors: ['.answer-block', '.lead'],
 });
 
 const list = itemListSchema({
-  name: 'Keres AI — Benchmarks & Data Studies',
+  name: 'Keres AI — Service business benchmarks',
   items: benchmarks.map((b) => ({ name: `${b.h1} ${b.h1Accent}`, description: b.description })),
 });
 ---
 <Layout
-  title="Service Business Benchmarks & Data Studies | Keres AI"
-  description="Citable benchmarks on missed calls, lead response, answering costs, and conversion for HVAC, roofing, dental, and legal service businesses. Updated for 2026."
+  title="Missed-Call & Lead-Response Benchmarks | Keres AI"
+  description="Estimates on missed calls, lead response, missed-call cost and conversion for HVAC, roofing, dental and legal businesses, with sources where they exist. Updated for 2026."
   path={path}
+  pageType="CollectionPage"
 >
   <Schema slot="head" graph={[list, webpage, breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 
   <header class="page-hero container">
-    <span class="eyebrow">Data &amp; Benchmarks</span>
+    <span class="eyebrow">Benchmarks</span>
     <h1>Benchmarks for businesses that <span class="accent">live on the phone</span></h1>
-    <p class="lead">Citable data on missed calls, lead response, answering costs, and conversion — compiled for the service industries where the next call is the next job.</p>
+    <p class="lead answer-block">Keres AI’s estimates for service businesses: how many calls HVAC companies, roofers, dental practices and law firms miss, how fast leads must be answered, and what missed calls cost. Each page says how its numbers were put together and links primary research where it exists. Start with <a href="/missed-call-statistics">missed-call statistics</a>; for prices, see <a href="/ai-receptionist-cost">what an AI receptionist costs</a>.</p>
     <div class="hero-ctas">
       <a href="/tools/missed-call-calculator" class="btn btn-primary">Calculate your losses</a>
-      <a href="/quote" class="btn btn-outline">Book a demo</a>
+      <a href="/quote" class="btn btn-outline">Get a quote</a>
     </div>
   </header>
 
   <section class="page-section container">
+    <h2 class="section-label">Benchmarks and statistics</h2>
     <div class="answer-block">
-      <p>These benchmarks compile commonly cited industry estimates on call answering, lead response, and conversion for service businesses. Use them as directional context — and run your own numbers with the <a href="/tools/missed-call-calculator">missed-call calculator</a>.</p>
+      <p>These benchmarks are Keres AI estimates on call answering, lead response and conversion for service businesses, drawn from public industry reporting and labelled that way. The lead-response figures come from published research, which each page links. Use the ranges as directional context, then run your own numbers with the <a href="/tools/missed-call-calculator">missed-call calculator</a>.</p>
+      <p>How to read them: a range such as 30–45% is a typical spread, not a promise about your business. Your own missed-call rate is the number that matters, and most phone systems can report it. If yours is near the top of a range, start with after-hours and overflow coverage; if it is low but leads still go cold, look at <a href="/glossary/lead-response-time">lead response time</a> instead.</p>
     </div>
   </section>
 
@@ -52,14 +55,14 @@ const list = itemListSchema({
         <div class="service-cat" style="margin-bottom:4px">All industries</div>
         <h3>Missed-call statistics (2026)</h3>
         <p>How many calls service businesses miss, what it costs, and why speed to lead decides the job.</p>
-        <span class="inline-cta-link" style="margin-top:8px;display:inline-block">Read the data →</span>
+        <span class="inline-cta-link" style="margin-top:8px;display:inline-block">Read the benchmarks →</span>
       </a>
       {benchmarks.map((b) => (
         <a class="feature-card" href={`/benchmarks/${b.slug}`} style="text-decoration:none;display:block">
           <div class="service-cat" style="margin-bottom:4px">{b.category}</div>
           <h3>{b.h1} {b.h1Accent}</h3>
           <p>{b.lead.slice(0, 120)}…</p>
-          <span class="inline-cta-link" style="margin-top:8px;display:inline-block">Read the data →</span>
+          <span class="inline-cta-link" style="margin-top:8px;display:inline-block">Read the benchmarks →</span>
         </a>
       ))}
     </div>
@@ -67,6 +70,6 @@ const list = itemListSchema({
 
   <CtaBand
     heading="See the numbers work for your business"
-    sub="Book a free 30-minute demo and watch Keres answer, qualify, and book a call live."
+    sub="Book a free 30-minute call and hear Remi answer, qualify and book a call."
   />
 </Layout>

@@ -43,12 +43,12 @@ export interface AgentPage {
 export const agentPages: AgentPage[] = [
   {
     slug: 'inbound',
-    seoTitle: 'AI Receptionist: Answers in 2 Rings, Books the Lead | Keres',
+    seoTitle: 'AI Receptionist That Answers & Books | Keres AI',
     description:
-      'Remi answers every call in two rings, 24/7 — runs your intake script, qualifies the lead, books into your calendar and CRM, and texts back anything it could not take within 60 seconds.',
-    h1: 'Remi — the Inbound Worker that answers every call in two rings and books the lead.',
+      'Remi answers every call in two rings, 24/7: runs your intake script, qualifies the lead, books the appointment and texts back any call it could not take.',
+    h1: 'Remi, the AI receptionist from Keres AI, answers every call in two rings and books the job.',
     sub:
-      'An AI receptionist that does the whole job, not just the greeting: it answers day or night, asks your questions, qualifies the lead, books the appointment while the caller is still on the line, and tells you what happened before you have put your phone down.',
+      'Remi is Keres AI’s AI receptionist. It answers every call in two rings, 24/7, asks your intake questions, books the appointment into Google Calendar, HubSpot or ServiceTitan while the caller is still on the line, and texts back any call it could not take within 60 seconds. Pricing is a monthly rate with included minutes, then per minute, with no per-call fees. Keres sets it up for you.',
     heroVertical: 'default',
     flowH2: 'How a call goes',
     flowLede:
@@ -64,7 +64,7 @@ export const agentPages: AgentPage[] = [
     blocks: [
       {
         id: 'intake',
-        h2: 'Intake and qualification, in your vocabulary',
+        h2: 'What questions does Remi ask callers?',
         answer:
           'Remi runs the intake script your business already uses rather than a generic call-centre form. A law firm gets matter type, opposing party and conflict details; a plumbing company gets job type, service address and urgency; a dental practice gets procedure, insurance and whether the patient is on file; a real-estate team gets listing, pre-approval and timeline.',
         bullets: [
@@ -76,7 +76,7 @@ export const agentPages: AgentPage[] = [
       },
       {
         id: 'booking',
-        h2: 'Booking straight into your calendar',
+        h2: 'Which calendars and CRMs does Remi book into?',
         answer:
           'Remi reads real availability and writes the appointment during the call, so nobody is told that someone will ring them back. The booking lands in the system your team already opens: Google Calendar, HubSpot and ServiceTitan are connected today, with Clio, Lawmatics, Jobber, Housecall Pro, Dentrix, Open Dental and Follow Up Boss rolling out.',
         bullets: [
@@ -87,22 +87,22 @@ export const agentPages: AgentPage[] = [
         ],
       },
       {
-        h2: 'Missed-call text-back in 60 seconds',
+        h2: 'What happens to a call Remi can’t take?',
         answer:
           'If a call still gets away — a bad line, a caller who hangs up, a number that rings while an outage is running — Remi texts back within 60 seconds with a real question rather than an autoresponder, and carries the conversation on by SMS until it can book or hand off.',
       },
       {
-        h2: 'Web chat, SMS and every lead source',
+        h2: 'Does Remi answer web chat and texts?',
         answer:
-          'Plenty of people will not phone you. Remi answers the chat widget on your website and your business text line with the same script, and picks up enquiries from Google Business Profile messages, website forms, Yelp, Thumbtack, Avvo and Zillow — in minutes, rather than whenever somebody next checks the inbox.',
+          'Plenty of people will not phone you. Remi answers the chat widget on your website and your business text line with the same script, and picks up website form enquiries in minutes. Answering marketplace inboxes (Yelp, Thumbtack, Avvo, Zillow) directly is rolling out — in minutes, rather than whenever somebody next checks the inbox.',
         bullets: [
           'Web chat on your site, with the same intake script as the phone.',
           'Business SMS answered and continued in thread.',
-          'Google Business Profile messages, website forms, Yelp, Thumbtack, Avvo, Zillow.',
+          'Website forms today; Yelp, Thumbtack, Avvo and Zillow inboxes rolling out.',
         ],
       },
       {
-        h2: 'Human escalation is a feature, not a failure',
+        h2: 'What happens when a caller needs a person?',
         answer:
           'You decide what needs a person. Remi warm-transfers those calls to your on-call number, and if nobody picks up it sends a "call me now" alert carrying everything it has already collected — so the caller never repeats themselves and the escalation does not become a lost lead.',
         bullets: [
@@ -116,12 +116,13 @@ export const agentPages: AgentPage[] = [
       'Remi is the Answer plan. Add Theo and June on Convert and Grow when the phone is handled.',
     testimonialProves: 'after-hours calls being answered, qualified and booked',
     faqs: [
-      { q: 'Does it sound like a robot?', a: 'It sounds like a competent front desk. It answers in two rings, uses your vocabulary, and says "let me get someone for you" instead of guessing. Call the number at the top of this page and judge it yourself — that is the fastest demo there is.' },
-      { q: 'What does it cost?', a: `${priceSentence('The Answer plan', 'answer', 'your call volume, locations and integrations')} There is no per-call charge and no surcharge for simultaneous calls. Found — the visibility layer — starts separately at $249/month.` },
-      { q: 'How long does setup take?', a: 'Five business days. Twenty minutes on how you answer today, then we write your intake script, connect your number, calendar and CRM, and you call it yourself until it answers the way you would.' },
-      { q: 'What if a caller needs a human?', a: 'Remi warm-transfers under rules you set, and falls back to a "call me now" alert with the intake attached if the transfer is not picked up.' },
-      { q: 'Can it handle several calls at once?', a: 'Yes, unlimited simultaneous calls at no surcharge. That is the whole point during a storm week or a Monday morning rush — your bill does not move because your call volume did.' },
+      { q: 'Does it sound like a robot?', a: 'It sounds like a competent front desk. It answers in two rings, uses your vocabulary, and says "let me get someone for you" instead of guessing. Ask for a live test call when we talk and judge it yourself — that is the fastest demo there is. Under the hood it is <a href="/glossary/conversational-ai">conversational AI</a>, not a menu.' },
+      { q: 'How much does Remi cost?', a: `${priceSentence('Remi', 'answer', 'your call volume, locations and integrations')} It is a monthly rate with included minutes, then per minute; there is no per-call charge. Found starts separately at $249/month. Published prices for other AI receptionists and answering services are compared on /ai-receptionist-cost.` },
+      { q: 'How long does setup take?', a: 'It depends on your call flows and integrations. Thirty minutes on how you answer today, then Keres writes your intake script and connects your number, calendar and CRM. We agree the timing on that first call, and you call Remi yourself until it answers the way you would.' },
+      { q: 'What if a caller needs a human?', a: 'Remi warm-transfers under rules you set, and falls back to a "call me now" alert with the intake attached if the transfer is not picked up. Junk calls are screened the same way; see <a href="/use-cases/spam-call-screening">spam-call screening</a>.' },
+      { q: 'What about a storm week or a Monday morning rush?', a: 'Your quote sizes Remi’s included minutes to your busy season, so plan it around your heaviest week, not an average one. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. Ask on your first call how Remi handles your peak volume.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month, and your number stays yours.' },
+      { q: 'Is Remi HIPAA compliant?', a: 'No. Keres AI is not HIPAA certified or SOC 2 audited and does not sign BAAs today. Tell us your requirements before you sign up.' },
     ],
     media: {
       src: '/assets/video/ai-receptionist.mp4',
@@ -136,12 +137,12 @@ export const agentPages: AgentPage[] = [
 
   {
     slug: 'follow-up',
-    seoTitle: 'Appointment Reminders & No-Show Prevention | Keres',
+    seoTitle: 'Appointment Reminders & No-Show Prevention | Keres AI',
     description:
-      'Theo confirms every appointment, reminds by text and voice, backfills cancellations from your waitlist, and chases the estimate on day 1, 3 and 7 until you get a yes or a no.',
+      'Theo confirms appointments, reminds by text and voice, fills cancellations from your waitlist, and chases each estimate until you get a yes or a no.',
     h1: 'Theo — the Follow-Up Worker that makes sure they show and say yes.',
     sub:
-      'Getting the appointment on the calendar is not the same as getting it kept, and a quote nobody chased is a quote somebody else closed. Theo, your Follow-Up Agent, works the two stages where booked work quietly disappears.',
+      'Getting the appointment on the calendar is not the same as getting it kept, and a quote nobody chased is a quote somebody else closed. Theo, the follow-up worker from Keres AI, works the two stages where booked work quietly disappears.',
     heroVertical: 'dental-med-spa',
     flowH2: 'What happens after the booking',
     flowLede:
@@ -197,7 +198,7 @@ export const agentPages: AgentPage[] = [
     faqs: [
       { q: 'Will it annoy my customers?', a: 'The cadence is yours, everything is opt-out in one word, and Theo stops the moment somebody answers. Three touches on an estimate over a week is the schedule most firms would run themselves if they had the time.' },
       { q: 'What does it cost?', a: `${priceSentence('Theo on the Convert plan', 'convert', 'your appointment volume and integrations')} Estimate and post-consult follow-up come with Grow.` },
-      { q: 'How long does setup take?', a: 'Five business days, and usually less if Remi is already answering — your appointment types and cadences are the only new things to configure.' },
+      { q: 'How long does setup take?', a: 'It depends on your appointment types, cadences and integrations, and it is quicker if Remi is already answering. Keres sets it up for you and agrees the timing on your first call.' },
       { q: 'What if someone replies with a real question?', a: 'It goes to a person. Theo handles scheduling and confirmation; anything that turns into a negotiation or a technical question is handed to you with the thread attached.' },
       { q: 'Do I need Remi first?', a: 'No, but it is the usual order. Theo works on appointments booked any way at all, including ones your front desk books by hand.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month.' },
@@ -206,12 +207,12 @@ export const agentPages: AgentPage[] = [
 
   {
     slug: 'reactivation',
-    seoTitle: 'Database Reactivation & Win-Back Campaigns | Keres',
+    seoTitle: 'Database Reactivation & Win-Back | Keres AI',
     description:
-      'June reactivates past customers and cold leads in your CRM, revives closed-lost from the last 6–12 months, and asks for the review after every completed job or matter.',
+      'June brings back past customers and cold leads in your CRM, revives closed-lost deals from the last year, and asks every customer for a review.',
     h1: 'June — the Reactivation Worker. The cheapest lead you’ll ever get is one you already have.',
     sub:
-      'Every name in your CRM already chose you once, or nearly did. June, your Reactivation Agent, works that list as conversations rather than blasts — and asks for the review after every job, so the next stranger chooses you too.',
+      'Every name in your CRM already chose you once, or nearly did. June, the reactivation worker from Keres AI, works that list as conversations rather than blasts — and asks for the review after every job, so the next stranger chooses you too.',
     heroVertical: 'home-services',
     flowH2: 'How a campaign runs',
     flowLede:
@@ -242,10 +243,10 @@ export const agentPages: AgentPage[] = [
       {
         h2: 'Review and referral requests',
         answer:
-          'June asks for the review after every completed job or matter, at the point where the customer is happiest. Anyone who signals they are unhappy is routed privately to the owner first instead of being pushed toward a public review, and the customers who rated you highest are the ones asked for a referral.',
+          'June asks for the review after every completed job or matter, at the point where the customer is happiest. Every customer gets the same review request; anyone who reports a problem also reaches the owner directly, and the customers who rated you highest are the ones asked for a referral.',
         bullets: [
           'An automatic ask after every completed job or matter.',
-          'Unhappy customers intercepted and sent to the owner, not to Google.',
+          'Every customer gets the same review request; anyone who reports a problem also reaches the owner directly.',
           'Referral asks aimed at the people who already rated you well.',
           'Owner responses drafted for your approval, never posted unread.',
         ],
@@ -262,21 +263,21 @@ export const agentPages: AgentPage[] = [
     faqs: [
       { q: 'Is this just mass texting my customers?', a: 'No. Each campaign targets a segment you approve, with a reason that applies to that segment, and every reply is handled as a conversation. You see the list and the message before anything sends.' },
       { q: 'What does it cost?', a: `${priceSentence('June on the Grow plan', 'grow', 'your list size and campaign volume')} Individual reactivation campaigns can also be quoted on their own if you want to try one before committing.` },
-      { q: 'How long does setup take?', a: 'Five business days for the plan. A single campaign is usually live inside a week of us getting access to the list.' },
-      { q: 'What happens when someone replies?', a: 'Interested people are qualified and booked. Anyone who says no is marked in your CRM and not contacted again by that campaign. Anything that needs a person comes to you with the thread.' },
-      { q: 'Will it damage my reputation?', a: 'It is designed not to. Unhappy customers are routed to the owner privately instead of toward a public review, opt-outs are honoured in one word, and June never contacts a bought or scraped list.' },
+      { q: 'How long does setup take?', a: 'It depends on your list and your integrations. Keres sets it up for you and agrees the timing on your first call, and you approve the list and the message before anything sends.' },
+      { q: 'What happens when someone replies?', a: 'Interested people are qualified and booked. Anyone who says no is marked in your CRM and not contacted again by that campaign. Anything that needs a person comes to you with the thread. For HVAC and plumbing, see <a href="/use-cases/maintenance-plan-reactivation">maintenance-plan reactivation</a>.' },
+      { q: 'Will it damage my reputation?', a: 'It is designed not to. Every customer gets the same review request, anyone who reports a problem reaches the owner directly, opt-outs are honoured in one word, and June never contacts a bought or scraped list.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month.' },
     ],
   },
 
   {
     slug: 'outbound',
-    seoTitle: 'AI SDR: Cold Email That Reaches the Inbox | Keres',
+    seoTitle: 'AI SDR: Cold Email That Reaches the Inbox | Keres AI',
     description:
-      'Sol runs cold outbound with deliverability set up properly first — SPF, DKIM, DMARC and warm-up — then personalized sequences, replies handled in thread, and meetings booked.',
+      'Sol runs cold outbound with deliverability set up first (SPF, DKIM, DMARC, warm-up), then personalized sequences, replies handled and meetings booked.',
     h1: 'Sol — the Outbound Worker. Cold outreach that reaches the inbox and books the meeting.',
     sub:
-      'For firms that need net-new pipeline rather than a better answer to the calls they already get. Sol, your Outbound Agent, does the deliverability work first — because sending is the easy half and landing is the half that gets skipped.',
+      'For firms that need net-new pipeline rather than a better answer to the calls they already get. Sol, the outbound worker from Keres AI, does the deliverability work first — because sending is the easy half and landing is the half that gets skipped.',
     heroVertical: 'default',
     flowH2: 'How outbound runs',
     flowLede:
@@ -315,10 +316,10 @@ export const agentPages: AgentPage[] = [
       'Sol is quoted on the Custom plan, alongside custom agent builds and managed campaigns.',
     testimonialProves: 'cold outreach producing booked meetings rather than bounces',
     faqs: [
-      { q: 'Will this get my domain blacklisted?', a: 'Not if the setup is done properly, which is why the deliverability work happens before anything sends. Sol sends from separate domains from your main business domain, so your day-to-day email is never the thing at risk.' },
+      { q: 'Will this get my domain blacklisted?', a: 'Not if the setup is done properly, which is why the deliverability work happens before anything sends. Sol sends from separate domains from your main business domain, so your day-to-day email is never the thing at risk. Check any domain with the free <a href="/tools/deliverability-checker">deliverability checker</a>, and read <a href="/glossary/inbox-warmup">inbox warmup</a> for why the ramp matters.' },
       { q: 'What does it cost?', a: 'Sol is quoted on the Custom plan. The number depends on sending volume, how many domains and inboxes are needed, and whether we are also managing the list.' },
       { q: 'How long does setup take?', a: 'Longer than the other agents, and deliberately so: domain and inbox warm-up takes two to four weeks before real volume. We would rather start slowly than burn your domains.' },
-      { q: 'Who handles the replies?', a: 'Sol handles scheduling and qualification in thread. Anything that turns into a negotiation, a technical question, or an objection worth a human answer comes straight to you.' },
+      { q: 'Who handles the replies?', a: 'Sol handles scheduling and qualification in thread. Anything that turns into a negotiation, a technical question, or an objection worth a human answer comes straight to you. See <a href="/glossary/ai-sdr">what an AI SDR does</a> and test a draft with the <a href="/tools/spam-score-checker">spam score checker</a>.' },
       { q: 'Should I buy this or June?', a: 'Almost certainly June first. Reactivating people who already know your name converts better than cold outreach, and it costs less. Sol is for when that list is worked out.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month.' },
     ],

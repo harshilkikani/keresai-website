@@ -8,12 +8,12 @@ export const custom = {
     description: 'We build AI agents that do one recurring job in your business and report to you in a text every morning. Fixed build price, monthly run fee, first version in two weeks.',
     eyebrow: 'Custom workers',
     h1: 'A worker for the job nobody on your team has time for.',
-    lede: 'We build AI agents that do one recurring job in your business, report to you in a text every morning, and cost less than the hour a week you’d spend doing it badly. We run three of them on our own company.',
+    lede: 'Keres AI builds Custom workers: AI agents that do one recurring job in your business and report to you in a text every morning, quoted from a one-page scope.',
     scope: 'Scope a build', call: 'Call',
     cases: {
-      eyebrow: 'Three we run on ourselves', h2: 'Not demos. Our own workers, doing their job today.',
-      lede: 'Each one started as the one-page scope you’ll get. The numbers inside the mocks show the shape of the work, not results.',
-      label: 'Runs on Keres today', example: 'Example',
+      eyebrow: 'Three examples', h2: 'What a custom worker looks like.',
+      lede: 'Each is the kind of recurring job a one-page scope covers. The numbers inside the mocks show the shape of the work, not results.',
+      label: 'Example scope', example: 'Example',
       items: [
         { title: 'Google listing agent', job: 'Audits the Business Profile, writes the weekly posts, replies to every review, keeps a 25-point rank grid around the office and drafts outreach to the prospects it finds nearby.' },
         { title: 'Sol, outbound', job: 'Checks SPF, DKIM and DMARC before a single send, warms the domain for weeks, then runs the sequence and books the reply into the calendar.' },
@@ -25,7 +25,7 @@ export const custom = {
     how: {
       eyebrow: 'How it works', h2: 'Six steps, and you approve everything it publishes.',
       steps: [
-        ['A 20-minute call', 'You describe the job as you would to a new hire: what comes in, what should go out, what “done” looks like.'],
+        ['A 30-minute call', 'You describe the job as you would to a new hire: what comes in, what should go out, what “done” looks like.'],
         ['A one-page scope', 'Within two business days: the inputs, the outputs, the rules, what it may never do, and what it reports to you.'],
         ['A fixed build price', 'One number for the build, agreed before we start. It does not move once the scope is signed.'],
         ['A monthly run fee', 'Covers the running, the model costs, the monitoring, and the changes the job needs as your business changes.'],
@@ -52,16 +52,16 @@ export const custom = {
     },
   },
   es: {
-    title: 'Trabajadores de IA a medida para una tarea recurrente | Keres AI',
+    title: 'Trabajadores de IA a medida | Keres AI',
     description: 'Construimos agentes de IA que hacen una sola tarea recurrente en tu negocio y te reportan cada mañana por mensaje de texto. Precio fijo de desarrollo, cuota mensual, primera versión en dos semanas.',
     eyebrow: 'Trabajadores a medida',
     h1: 'Un trabajador para la tarea que nadie en tu equipo tiene tiempo de hacer.',
-    lede: 'Construimos agentes de IA que hacen una sola tarea recurrente en tu negocio, te reportan cada mañana por mensaje de texto y cuestan menos que la hora a la semana que pasarías haciéndola mal. Nosotros usamos tres en nuestra propia empresa.',
+    lede: 'Keres AI construye trabajadores a medida: agentes de IA que hacen una sola tarea recurrente en tu negocio y te reportan cada mañana por mensaje de texto, cotizados a partir de un alcance de una página.',
     scope: 'Cotizar mi agente', call: 'Llamar al',
     cases: {
-      eyebrow: 'Tres que usamos nosotros', h2: 'No son demos. Nuestros propios trabajadores, trabajando hoy.',
-      lede: 'Cada uno empezó como el documento de una página que tú también vas a recibir. Los números dentro de los ejemplos muestran la forma del trabajo, no resultados.',
-      label: 'Funciona en Keres hoy', example: 'Ejemplo',
+      eyebrow: 'Tres ejemplos', h2: 'Cómo se ve un trabajador a medida.',
+      lede: 'Cada uno es el tipo de tarea recurrente que cubre un documento de una página. Los números dentro de los ejemplos muestran la forma del trabajo, no resultados.',
+      label: 'Alcance de ejemplo', example: 'Ejemplo',
       items: [
         { title: 'Agente de ficha de Google', job: 'Audita el Perfil de Negocio, escribe las publicaciones semanales, responde cada reseña, mantiene una cuadrícula de ranking de 25 puntos alrededor de la oficina y redacta mensajes para los prospectos que encuentra cerca.' },
         { title: 'Sol, salida', job: 'Verifica SPF, DKIM y DMARC antes de un solo envío, calienta el dominio durante semanas y luego corre la secuencia y agenda la respuesta en el calendario.' },
@@ -73,7 +73,7 @@ export const custom = {
     how: {
       eyebrow: 'Cómo funciona', h2: 'Seis pasos, y tú apruebas todo lo que publica.',
       steps: [
-        ['Una llamada de 20 minutos', 'Describes la tarea como se la explicarías a alguien nuevo: qué entra, qué debe salir y cómo se ve “terminado”.'],
+        ['Una llamada de 30 minutos', 'Describes la tarea como se la explicarías a alguien nuevo: qué entra, qué debe salir y cómo se ve “terminado”.'],
         ['Un documento de una página', 'En dos días hábiles: las entradas, las salidas, las reglas, lo que nunca puede hacer y qué te reporta.'],
         ['Un precio fijo de desarrollo', 'Un solo número por el desarrollo, acordado antes de empezar. No cambia una vez firmado el alcance.'],
         ['Una cuota mensual', 'Cubre la operación, el costo de los modelos, el monitoreo y los cambios que la tarea necesita cuando tu negocio cambia.'],

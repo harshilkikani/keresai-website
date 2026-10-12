@@ -1,0 +1,170 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, articleSchema, itemListSchema } from '../data/schema';
+import { gbpVendors, keresGbpRow, GBP_VENDORS_CHECKED, GBP_VENDORS_CHECKED_ISO, GBP_CATEGORY_LABEL, type GbpCategory } from '../data/gbpVendors';
+
+// Answers "best Google Business Profile management service for small
+// businesses", and the website-plus-profile questions contractors ask.
+// Vendor facts live in src/data/gbpVendors.ts with a source URL each; Keres
+// claims are limited to Found's published scope.
+const path = '/best-google-business-profile-management';
+const title = 'Best Google Business Profile Management (2026) | Keres AI';
+const h1 = 'Best Google Business Profile Management Services (2026)';
+const description = 'Google Business Profile software, done-for-you services and website bundles compared on what each includes and the price it publishes, checked October 2026.';
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Compare', path: '/compare' },
+  { name: 'Best Google Business Profile management', path },
+];
+
+const order: GbpCategory[] = ['Website + profile', 'Done-for-you', 'Software'];
+const rows = [keresGbpRow, ...gbpVendors].sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category));
+const byCategory = (c: GbpCategory) => rows.filter((r) => r.category === c);
+
+const faqs = [
+  { q: 'What is the best Google Business Profile management service for a small business?', a: 'It depends on who will do the work. If you will post and reply yourself, software such as BrightLocal, Localo or Merchynt’s Paige is the cheapest route. If you want someone else to do it, a done-for-you service such as BrightLocal’s managed local SEO, Hibu or Scorpion. If you also need a website, a bundle such as Keres AI’s Found or Thryv covers both.' },
+  { q: 'How much does Google Business Profile management cost?', a: 'On prices published on October 11, 2026, software for one location costs $41 to $99 a month billed monthly (less on annual billing), BrightLocal’s managed service is $1,299 a month, and Keres AI’s Found, which includes the website, starts at $249 a month ($499 for law firms). Birdeye, Podium, Hibu and Scorpion do not publish prices.' },
+  { q: 'Who builds a website and manages the Google Business Profile for a contractor?', a: 'Keres AI’s Found builds and runs the website and the Google Business Profile for local service businesses, sends a review request after every job and keeps listings consistent, from $249 a month, month-to-month. Thryv, Hibu and Scorpion also sell a website together with listings or reviews.' },
+  { q: 'Is there a done-for-you website and Google reviews service for home service businesses?', a: 'Yes. Keres AI’s Found builds the website, manages the Google Business Profile weekly and asks every customer for a review after each job, with replies drafted for your approval. Scorpion and Hibu also sell websites with automated review requests; neither publishes a price.' },
+  { q: 'Can software manage my Google Business Profile for me?', a: 'Partly. Merchynt’s Paige uses AI to post and optimize the profile each month, and Localo generates posts with AI and publishes them on a schedule. BrightLocal schedules posts and collects reviews, but you write them. None of them builds your website or answers the calls the profile produces.' },
+  { q: 'Should a Google Business Profile service still offer chat or Q&A?', a: 'No. Google ended Business Profile chat on July 31, 2024, and removed the Questions and Answers section from Business Profiles in late 2025. A service that still sells either is out of date.' },
+];
+
+const article = articleSchema({
+  path,
+  headline: h1,
+  description,
+  datePublished: GBP_VENDORS_CHECKED_ISO,
+  dateModified: GBP_VENDORS_CHECKED_ISO,
+  readingTime: 'PT7M',
+});
+
+const list = itemListSchema({
+  name: 'Google Business Profile management options compared (2026)',
+  items: rows.map((v) => ({ name: v.name, description: `${GBP_CATEGORY_LABEL[v.category]}. ${v.included} Lowest published price: ${v.starting}` })),
+});
+
+const webpage = webPageSchema({ path, name: title, description, speakableSelectors: ['.answer-block', '.faq-a'] });
+---
+<Layout title={title} description={description} path={path} ogType="article">
+  <Schema slot="head" graph={[article, list, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+
+  <header class="page-hero container">
+    <span class="eyebrow">Buyer’s guide · 2026</span>
+    <h1>Best Google Business Profile management <span class="accent">services</span> (2026)</h1>
+    <p class="updated" style="font-size:14px;color:var(--text-dim);margin:-8px 0 16px">Updated <time datetime={GBP_VENDORS_CHECKED_ISO}>{GBP_VENDORS_CHECKED}</time></p>
+    <p class="lead" style="font-size:16px">Written by Keres AI, which sells one of the options below (Found). Prices and features come from each vendor’s own site, checked {GBP_VENDORS_CHECKED}.</p>
+    <div class="hero-ctas">
+      <a href="#table-title" class="btn btn-primary">See the comparison</a>
+      <a href="/google-business-profile-management" class="btn btn-outline">What management includes</a>
+    </div>
+  </header>
+
+  <section class="page-section container">
+    <div class="answer-block">
+      <p>The best Google Business Profile management option depends on who does the work. If you will do it yourself, software such as BrightLocal (from $41 a month), Localo ($49) or Merchynt’s Paige ($99) schedules posts and tracks reviews. If you want it done for you, BrightLocal’s managed service costs $1,299 a month; Hibu and Scorpion quote privately. If you also need a website, Keres AI’s Found starts at $249 a month and Thryv at $99.</p>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>How did we compare them?</h2>
+      <p>Buyers usually compare three kinds of option: software you run yourself, a done-for-you service, or a bundle that builds the website and runs the profile together. We list each option under one of those three, with what its own pricing or product page says is included and the lowest price it publishes, checked {GBP_VENDORS_CHECKED}. Where a vendor does not publish a price, the table says so. This compares published information; it is not a test of results, and there is no overall score. Keres AI wrote this page and sells Found, which is listed in the same columns under the same rules.</p>
+
+      <h2>What should Google Business Profile management include?</h2>
+      <ul>
+        <li><strong>Set-up and optimization:</strong> the right primary and secondary categories, services, service area, hours, photos and verification.</li>
+        <li><strong>Weekly posts and photos:</strong> offers, seasonal reminders and recent jobs, with real photos rather than stock images.</li>
+        <li><strong>Review requests and replies:</strong> the same request to every customer after each job (Google does not allow asking only happy customers), and a reply to every review.</li>
+        <li><strong>Spam-listing reports:</strong> reporting fake or duplicate competitors that take map positions.</li>
+        <li><strong>Consistent listings:</strong> one name, address and phone across Apple, Bing, Yelp and your trade directories.</li>
+        <li><strong>Insights:</strong> searches, calls and direction requests each month, so you can see what the work produced.</li>
+      </ul>
+      <p>Two features many plans still mention are gone: Google ended Business Profile chat on July 31, 2024, and removed the Questions and Answers section in late 2025. See <a href="/google-business-profile-management">what Google Business Profile management includes and costs</a> for the full scope.</p>
+    </div>
+  </section>
+
+  <section class="page-section container" aria-labelledby="table-title">
+    <div class="section-label">Side by side</div>
+    <h2 id="table-title" class="section-title" style="margin-bottom:8px">Google Business Profile management options compared</h2>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr><th>Option</th><th>Type</th><th>What’s included</th><th>Lowest published price</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          {rows.map((v) => v === keresGbpRow ? (
+            <tr class="keres">
+              <td><a href="/services/found">{v.name}</a> <em>(that’s us)</em></td>
+              <td>{GBP_CATEGORY_LABEL[v.category]}</td><td>{v.included}</td><td>{v.starting}</td><td><a href="/services/found">Found</a></td>
+            </tr>
+          ) : (
+            <tr>
+              <td><a href={v.url} rel="noopener nofollow" target="_blank">{v.name}</a></td>
+              <td>{GBP_CATEGORY_LABEL[v.category]}</td><td>{v.included}</td><td>{v.starting}</td>
+              <td><a href={v.source} rel="noopener nofollow" target="_blank">{new URL(v.source).hostname.replace(/^www\./, '')}</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="margin-top:6px">All sources checked {GBP_VENDORS_CHECKED}. Prices are in US dollars as each vendor shows them. Local agencies and freelancers also manage profiles; their scope and prices vary too much to list.</p>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>What are the strengths and limits of each option?</h2>
+      {order.map((c) => (
+        <>
+          <h3>{GBP_CATEGORY_LABEL[c]}</h3>
+          <ul>
+            {byCategory(c).map((v) => (
+              <li><strong>{v.name}:</strong> {v.included} <em>Limitation:</em> {v.limitation}</li>
+            ))}
+          </ul>
+        </>
+      ))}
+
+      <h2>DIY vs software vs done-for-you: which fits?</h2>
+      <ul>
+        <li><strong>Do it yourself</strong> if you have one location, a few spare hours a week, and the habit of replying to every review. It costs nothing but time.</li>
+        <li><strong>Software</strong> if you will do the work but want posts scheduled, rankings tracked and review requests sent automatically. Published prices for one location run from $41 to $99 a month billed monthly.</li>
+        <li><strong>A done-for-you service</strong> if nobody in the business will keep the profile current. Compare on what is included (posts, photos, review replies, listings, reporting), whether the website is part of it, and the contract terms.</li>
+        <li><strong>A website and profile bundle</strong> if your website is also out of date, so one team keeps the services, hours and reviews the same on both.</li>
+      </ul>
+
+      <h2>Who builds a website and manages the Google profile for a contractor?</h2>
+      <p><a href="/services/found">Keres AI’s Found</a> does both for local service businesses such as HVAC, plumbing, roofing and electrical contractors. It builds and runs the website, manages the Google Business Profile every week (posts, photos, review replies drafted for your approval, spam-listing reports and monthly insights), sends the same review request after every job and keeps your listings consistent. It starts at $249 a month ($499 for law firms) with no build fee at the base tier, month-to-month.</p>
+      <p>Other options that publicly sell a website together with listings or reviews are Thryv (from $99 a month), Hibu and Scorpion (prices not published). A local web designer paired with GBP software is the do-it-yourself version of the same thing.</p>
+
+      <h2>When is Keres AI not the right pick?</h2>
+      <ul>
+        <li><strong>You run many locations and want one dashboard for all of them.</strong> Found’s quote rises with each location; BrightLocal and Birdeye price their software by location count.</li>
+        <li><strong>You only want software and will do the work yourself.</strong> Localo, BrightLocal or Paige cost less.</li>
+        <li><strong>You are not a local service business.</strong> Found is built for local service businesses such as trades, law firms and practices.</li>
+      </ul>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} title="Google Business Profile management FAQ" />
+
+  <section class="page-section container" aria-labelledby="related-title">
+    <div class="section-label">Keep reading</div>
+    <h2 id="related-title" class="section-title" style="margin-bottom:8px">Related pages</h2>
+    <ul class="prose">
+      <li><a href="/google-business-profile-management">Google Business Profile management: what it includes and costs</a></li>
+      <li><a href="/services/found">Found: websites and Google Business Profile management</a></li>
+      <li><a href="/guides/ai-tools-for-local-service-businesses.html">The best AI tools for local service businesses to get more leads</a></li>
+      <li><a href="/best-ai-receptionist">Best AI receptionists for small businesses</a></li>
+      <li><a href="/compare">All comparisons</a></li>
+    </ul>
+  </section>
+
+  <CtaBand heading="Get your website and profile managed" sub="Book a 30-minute call and get a quote for Found." />
+</Layout>

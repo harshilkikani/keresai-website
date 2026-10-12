@@ -1,4 +1,5 @@
 ---
+import { roiResult, usd, count } from '../../data/calcDefaults';
 import { business, has } from '../../config/business';
 import Layout from '../../layouts/Layout.astro';
 import Schema from '../../components/Schema.astro';
@@ -27,6 +28,8 @@ const crumbs = [
   { name: hub.name, path },
 ];
 const answer = plans.find((p) => p.slug === 'answer')!;
+import { guidesFor } from '../../data/guides';
+const roiOut = roiResult({ leads: 250, answer: 60, job: 680, ah: 35 }, hub.calcPreset);
 ---
 <Layout title={hub.title} description={hub.description} path={path}>
   <Schema
@@ -56,11 +59,11 @@ const answer = plans.find((p) => p.slug === 'answer')!;
         <p class="k-lede">{hub.sub}</p>
         <div class="k-hero__ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
-          <Button href="/quote" variant="ghost" event="demo_click">Book a demo</Button>
+          <Button href="/quote" variant={PHONE ? 'ghost' : 'primary'} event="demo_click">Get a quote</Button>
         </div>
         <ul class="k-hero__facts" aria-label="At a glance">
           <li><span class="k-hero__fact-k">Answers in</span><span class="k-hero__fact-v" data-figure>2 rings</span></li>
-          <li><span class="k-hero__fact-k">Live in</span><span class="k-hero__fact-v" data-figure>5 days</span></li>
+          <li><span class="k-hero__fact-k">Contract</span><span class="k-hero__fact-v">Month-to-month</span></li>
           <li><span class="k-hero__fact-k">Visibility from</span><span class="k-hero__fact-v" data-figure>{hub.foundFrom.replace('from ', '')}/mo</span></li>
         </ul>
       </div>
@@ -69,6 +72,15 @@ const answer = plans.find((p) => p.slug === 'answer')!;
       </div>
     </div>
   </Section>
+
+  {hub.answer && (
+    <Section spacing="standard" labelledby="hub-answer-title">
+      <div class="k-band__head">
+        <h2 id="hub-answer-title" class="k-h2">What does Keres AI do for {hub.name.toLowerCase()}?</h2>
+        <p class="k-lede k-measure answer-block">{hub.answer}</p>
+      </div>
+    </Section>
+  )}
 
   <!-- ── THE PROBLEM ────────────────────────────────────── -->
   <Section tone="raised" spacing="major" labelledby="problem-title">
@@ -207,16 +219,16 @@ const answer = plans.find((p) => p.slug === 'answer')!;
         </div>
         <div class="roi-output">
           <div class="roi-headline-label">You&rsquo;re losing</div>
-          <div class="roi-headline-value"><span id="roi-lost-mo">$0</span><span class="roi-per">/mo</span></div>
-          <div class="roi-headline-year">&asymp; <span id="roi-lost-yr">$0</span> / year</div>
+          <div class="roi-headline-value"><span id="roi-lost-mo">{usd(roiOut.lostMo)}</span><span class="roi-per">/mo</span></div>
+          <div class="roi-headline-year">&asymp; <span id="roi-lost-yr">{usd(roiOut.lostYr)}</span> / year</div>
           <div class="roi-math">
-            <div class="roi-math-row"><span>Missed leads / mo</span><span id="roi-missed">0</span></div>
+            <div class="roi-math-row"><span>Missed leads / mo</span><span id="roi-missed">{count(roiOut.missed)}</span></div>
             <div class="roi-math-row muted"><span id="roi-missed-calc"></span><span></span></div>
-            <div class="roi-math-row"><span>Would-have-closed jobs</span><span id="roi-jobs">0</span></div>
+            <div class="roi-math-row"><span>Would-have-closed jobs</span><span id="roi-jobs">{count(roiOut.jobs)}</span></div>
             <div class="roi-math-row muted"><span id="roi-close-calc"></span><span></span></div>
-            <div class="roi-math-row"><span>Lost revenue</span><span id="roi-lost-mo-2">$0</span></div>
+            <div class="roi-math-row"><span>Lost revenue</span><span id="roi-lost-mo-2">{usd(roiOut.lostMo)}</span></div>
             <div class="roi-math-row muted"><span id="roi-job-calc"></span><span></span></div>
-            <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">0</span></div>
+            <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">{count(roiOut.ah)}</span></div>
             <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
           </div>
           <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href="/quote" data-event="demo_click">Get a quote with these numbers</a>
@@ -233,8 +245,10 @@ const answer = plans.find((p) => p.slug === 'answer')!;
       <h2 id="found-title" class="k-h2">Found, {hub.foundFrom} a month.</h2>
       <p class="k-lede">{hub.foundLine}</p>
       <p class="k-body">
-        Remi on the Answer plan starts at {answer.from.replace('from ', '')}/month, quoted to your
-        volume. <a href="/pricing">See every plan and what changes the quote</a>.
+        {/^from \$\d/.test(answer.from)
+          ? `Remi, the AI receptionist, starts at ${answer.from.replace('from ', '')}/month, quoted to your volume. `
+          : 'Remi, the AI receptionist, is quoted to your call volume. '}
+        <a href="/pricing">See every plan and what changes the quote</a>.
       </p>
       <div class="k-close__ctas">
         <Button href="/services/found" variant="primary">What Found includes</Button>
@@ -285,6 +299,11 @@ const answer = plans.find((p) => p.slug === 'answer')!;
       <ul class="k-childlinks">
         {hub.children.map((c) => (
           <li><a href={c.href}>{c.label}
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></li>
+        ))}
+        {guidesFor(hub.slug).map((g) => (
+          <li><a href={`/guides/${g.slug}.html`}>{g.listTitle}
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a></li>
         ))}

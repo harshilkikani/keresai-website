@@ -4,57 +4,91 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema } from '../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema, webPageSchema } from '../data/schema';
+import { answeringVendors, keresRow, VENDORS_CHECKED } from '../data/answeringVendors';
 
+// "AI answering service" head term. Competitor facts come only from
+// answeringVendors.ts (vendor pricing pages, dated); Keres facts from the
+// confirmed billing model.
 const path = '/ai-answering-service';
-const crumbs = [{ name: 'Home', path: '/' }, { name: 'AI Receptionist', path: '/ai-receptionist' }, { name: 'AI Answering Service', path }];
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'AI Receptionist', path: '/agents/inbound' }, { name: 'AI Answering Service', path }];
+const rows = ['Ruby', 'PATLive', 'Smith.ai', 'Abby Connect', 'Goodcall', 'Upfirst'].map((k) => answeringVendors[k]);
 const faqs = [
-  { q: 'What is an AI answering service?', a: 'An AI answering service uses artificial intelligence to answer your business calls, qualify callers, and book appointments — instead of a human operator who only takes a message. It answers in two rings, 24/7, at a flat monthly rate with no per-minute charges.' },
-  { q: 'How is it better than a traditional answering service?', a: 'Traditional services charge per minute and usually just relay a message. Keres handles the call end to end — qualifies the lead, books the appointment on your calendar, updates your CRM, and texts a confirmation — for a predictable flat fee.' },
-  { q: 'Does it sound robotic?', a: 'No. Keres speaks naturally, handles interruptions, and follows your call scripts and tone so callers get a smooth, professional experience.' },
-  { q: 'How much does it cost?', a: 'A flat monthly subscription based on call volume — typically less than a per-minute answering service or a part-time receptionist. See <a href="/pricing">pricing</a>.' },
+  { q: 'What is an AI answering service?', a: 'An AI answering service answers your business calls with an AI voice agent instead of a human operator. A good one asks your intake questions and books the appointment on the call; a basic one only takes a message.' },
+  { q: 'Is an AI answering service cheaper than a live one?', a: 'Usually. Live answering services publish entry plans from about $99 to $300 a month for 30 to 50 calls or minutes (as of ' + VENDORS_CHECKED + '), billed per minute or per call after that. AI services publish entry plans from about $25 to $100. Your real cost depends on call volume and length.' },
+  { q: 'When is a live answering service the better choice?', a: 'When every caller must reach a person, when calls need judgement a script cannot cover, or when your industry requires agreements Keres does not sign (Keres AI does not sign BAAs today).' },
+  { q: 'Does an AI answering service sound robotic?', a: 'Modern voice agents speak naturally and handle interruptions; listen before you decide. Example Remi calls are on /hear-it.' },
+  { q: 'How does Keres AI bill?', a: 'One monthly rate with included minutes sized to your volume, then per minute at your quoted rate, with no per-call fees. Month-to-month.' },
 ];
+const webpage = webPageSchema({ path, name: 'AI answering service vs live answering service', description: '', speakableSelectors: ['.answer-block', '.faq-a'] });
 ---
 <Layout
-  title="AI Answering Service — Answer & Book Every Call | Keres AI"
-  description="Keres AI is an AI answering service that answers every call in two rings, qualifies leads, and books appointments 24/7 — for a flat monthly rate, no per-minute charges."
+  title="AI Answering Service vs Live Answering Service | Keres AI"
+  description="AI answering service vs live answering service: who answers, how each bills, published prices, and when each fits. Keres AI books the appointment on the call."
   path={path}
 >
   <Schema slot="head" graph={[
-    serviceSchema({ name: 'AI Answering Service', serviceType: 'Answering Service', description: 'AI answering service that answers, qualifies, and books calls 24/7 at a flat monthly rate.', path }),
+    serviceSchema({ name: 'AI answering service (Remi)', serviceType: 'Answering Service', description: 'AI answering service that answers in two rings 24/7, asks the business’s intake questions and books the appointment; monthly rate with included minutes, then per minute.', path }),
+    webpage,
     faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema,
   ]} />
 
   <Breadcrumbs crumbs={crumbs} />
   <header class="page-hero container">
-    <span class="eyebrow">AI Answering Service</span>
-    <h1>An answering service that <span class="accent">actually books the job</span></h1>
-    <p class="lead">Traditional answering services take a message. Keres answers in two rings, qualifies the caller, books the appointment, and texts a confirmation — 24/7, at a flat monthly rate.</p>
+    <span class="eyebrow">AI answering service</span>
+    <h1>AI answering service vs <span class="accent">live answering service</span></h1>
+    <p class="lead">Updated {VENDORS_CHECKED}.</p>
     <div class="hero-ctas">
-      <a href="/quote" class="btn btn-primary">Book a Demo</a>
-      <a href="/agents/inbound" class="btn btn-outline">How it works</a>
+      <a href="/quote" class="btn btn-primary">Get a quote</a>
+      <a href="/hear-it" class="btn btn-outline">Hear example calls</a>
     </div>
   </header>
 
   <section class="page-section container">
     <div class="answer-block">
-      <p>An <strong>AI answering service</strong> answers your business calls with artificial intelligence — greeting callers, answering questions, qualifying leads, and booking appointments automatically, 24/7. Unlike a per-minute human service that just takes a message, Keres completes the call and books the work.</p>
+      <p>An AI answering service answers your calls with an AI voice agent; a live answering service uses human receptionists. Live services publish entry plans from about $99 to $300 a month and bill per minute or per call after that; AI services publish entry plans from about $25 to $100. Keres AI’s Remi is an AI answering service that books the appointment on the call, on one monthly rate with included minutes, then per minute.</p>
     </div>
   </section>
 
   <section class="page-section container">
     <div class="prose">
-      <h2>Flat-rate, full-service, always on</h2>
+      <h2>How do AI and live answering services compare?</h2>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead><tr><th>Option</th><th>Who answers</th><th>How it bills</th><th>Lowest published plan</th></tr></thead>
+        <tbody>
+          <tr class="keres"><td><a href={keresRow.url}>{keresRow.name}</a></td><td>{keresRow.type}</td><td>{keresRow.billing}</td><td>{keresRow.starting}</td></tr>
+          {rows.map((v) => (
+            <tr><td><a href={v.source} rel="noopener nofollow" target="_blank">{v.name}</a></td><td>{v.type}</td><td>{v.billing}</td><td>{v.starting}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="margin-top:6px">Prices from each vendor’s own pricing page, checked {VENDORS_CHECKED}. More options on <a href="/best-ai-receptionist">best AI receptionists</a> and <a href="/ai-receptionist-cost">what an AI receptionist costs</a>.</p>
+  </section>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Per minute, per call or included minutes: which billing model suits you?</h2>
       <ul>
-        <li>Answers every call in two rings — no hold, no voicemail</li>
-        <li>Books and reschedules on your calendar</li>
-        <li>Flags emergencies to your team instantly</li>
-        <li>Flat monthly price — no per-minute billing</li>
+        <li><strong>Per minute</strong> (PATLive and many live services): cheapest when calls are short; long intake calls get expensive.</li>
+        <li><strong>Per call</strong> (Smith.ai, Upfirst): predictable per caller; expensive when many short calls come in.</li>
+        <li><strong>Per unique caller</strong> (Goodcall): repeat callers don’t cost extra.</li>
+        <li><strong>Included minutes, then per minute</strong> (Keres AI, Ruby, Abby Connect): a pool sized to your volume, so a normal month is one known number; a busy season can go past the pool.</li>
       </ul>
-      <p>Need round-the-clock coverage specifically? See our <a href="/24-7-ai-receptionist">24/7 AI receptionist</a>. Want it tailored to your trade? Browse <a href="/ai-receptionist-for-hvac">HVAC</a>, <a href="/ai-receptionist-for-plumbers">plumbing</a>, <a href="/ai-receptionist-for-dentists">dental</a>, and <a href="/ai-receptionist-for-real-estate">real estate</a>.</p>
+
+      <h2>Can an AI answering service book appointments?</h2>
+      <p>Some can, some only take messages. Remi checks real availability and books the appointment into Google Calendar, HubSpot or ServiceTitan while the caller is on the line, then texts a confirmation. Jobber, Housecall Pro, Clio and other integrations are rolling out.</p>
+
+      <h2>When is a live answering service the better choice?</h2>
+      <p>Choose people when every caller must reach a human, when calls need judgement a script can’t cover, or when you need agreements Keres does not sign today, such as a BAA. Choose AI when you want every call answered in two rings at any hour, booked on the call, without paying for receptionist minutes on routine calls.</p>
+
+      <h2>How does Keres AI handle a call?</h2>
+      <p>Remi answers in two rings, 24/7, asks your intake questions, books the appointment, alerts your on-call person by the rules you set, and texts back any call it could not take within 60 seconds. Keres sets it up for you and agrees the timing on your first call. See <a href="/agents/inbound">how Remi works</a> and the <a href="/24-7-ai-receptionist">after-hours flow</a>.</p>
     </div>
   </section>
 
   <FaqSection faqs={faqs} title="AI answering service FAQ" />
-  <CtaBand heading="Replace voicemail with booked jobs" sub="Book a demo and hear Keres answer and book a call live." />
+  <CtaBand heading="Hear an AI answering service book a call" sub="Book a 30-minute call and test Remi with your own questions." />
 </Layout>

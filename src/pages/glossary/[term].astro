@@ -11,6 +11,7 @@ import {
   definedTermSchema,
   webPageSchema,
 } from '../../data/schema';
+import { NOINDEX_GLOSSARY } from '../../seo/indexing.mjs';
 import { glossary } from '../../data/glossary';
 
 export function getStaticPaths() {
@@ -30,26 +31,37 @@ const related = t.related
   .filter((g): g is NonNullable<typeof g> => Boolean(g));
 
 const cleanDefinition = t.definition.replace(/<[^>]+>/g, '');
+const shortTerm = t.term.replace(/\s*\(.*\)\s*/, '');
+const h1 = t.h1 ?? `What is ${shortTerm}?`;
+// Section bodies that start with a block tag (<p>, <ol>, <ul>) render in a div, not a <p>.
+const isBlock = (html: string) => /^\s*<(p|ol|ul)[\s>]/.test(html);
 
 // Soft CTA: sends informational readers to the most relevant product/use-case page
 // rather than jumping straight to demo — matches where they are in the funnel.
 const softCtaMap: Record<string, { href: string; label: string; context: string }> = {
   'AI Receptionist': {
-    href: t.cta?.href ?? '/ai-receptionist',
+    href: t.cta?.href ?? '/agents/inbound',
     label: 'See how it works for your industry →',
     context: 'See the product behind this concept',
   },
   'AI SDR & Outbound': {
-    href: t.cta?.href ?? '/ai-sdr',
+    href: t.cta?.href ?? '/agents/outbound',
     label: 'See the AI SDR →',
     context: 'See outbound in action',
   },
   'Email Deliverability': {
-    href: t.cta?.href ?? '/email-deliverability',
+    href: t.cta?.href ?? '/agents/outbound',
     label: 'Fix your deliverability →',
     context: 'See deliverability tools',
   },
+  'Local Search': {
+    href: t.cta?.href ?? '/services/found',
+    label: 'See what Found manages →',
+    context: 'See the service behind this concept',
+  },
 };
+const isLocal = t.category === 'Local Search';
+const isEmail = /email|outbound|sdr/i.test(t.category);
 const softCta = softCtaMap[t.category];
 
 const webpage = webPageSchema({
@@ -58,8 +70,12 @@ const webpage = webPageSchema({
   description: t.description,
   speakableSelectors: ['.answer-block', '.faq-a'],
 });
+// Thin email/outbound definitions that compete with vendor docs on a product
+// (Sol) that is not the focus: noindex until consolidated into one guide.
+// One list (src/seo/indexing.mjs) shared with the sitemap and llms.txt.
+const THIN_EMAIL_TERMS = NOINDEX_GLOSSARY;
 ---
-<Layout title={t.title} description={t.description} path={path}>
+<Layout title={t.title} description={t.description} path={path} noindexFollow={THIN_EMAIL_TERMS.includes(t.slug)}>
   <Schema slot="head" graph={[
     definedTermSchema({ term: t.term, definition: cleanDefinition, path }),
     faqSchema(t.faqs),
@@ -71,14 +87,14 @@ const webpage = webPageSchema({
   <Breadcrumbs crumbs={crumbs} />
 
   <header class="page-hero container">
-    <span class="eyebrow">{t.category} · Glossary</span>
-    <h1>What is {t.term.replace(/\s*\(.*\)\s*/, '')}?</h1>
+    <span class="eyebrow">Keres AI glossary · {t.category}</span>
+    <h1>{h1}</h1>
   </header>
 
   <!-- DIRECT ANSWER BLOCK — marked speakable and as schema.org Answer for AI retrieval -->
   <section class="page-section container">
-    <div class="answer-block" itemscope itemtype="https://schema.org/Answer" id={`${t.slug}-definition`}>
-      <p set:html={t.definition} itemprop="text" />
+    <div class="answer-block" id={`${t.slug}-definition`}>
+      <p set:html={t.definition} />
     </div>
   </section>
 
@@ -87,7 +103,7 @@ const webpage = webPageSchema({
     <section class="page-section container">
       <div class="prose">
         <h2>{s.h2}</h2>
-        <p set:html={s.body} />
+        {isBlock(s.body) ? <div set:html={s.body} /> : <p set:html={s.body} />}
       </div>
     </section>
   ))}
@@ -99,7 +115,7 @@ const webpage = webPageSchema({
         <div class="soft-cta-body">
           <p class="soft-cta-label">{softCta.context}</p>
           <h3 class="soft-cta-heading">Want to see {t.term.replace(/\s*\(.*\)\s*/, '')} working in practice?</h3>
-          <p class="soft-cta-sub">Keres AI uses this in every call — see how it works for your specific vertical and workflow.</p>
+          <p class="soft-cta-sub">See how Keres puts it to work for your vertical and workflow.</p>
         </div>
         <a href={softCta.href} class="btn btn-outline">{softCta.label}</a>
       </div>
@@ -139,9 +155,13 @@ const webpage = webPageSchema({
 
   <!-- HARD CTA — only after full content consumed -->
   <CtaBand
-    heading={t.cta ? `See ${t.term.replace(/\s*\(.*\)\s*/, '')} working live` : 'Stop losing leads to voicemail'}
-    sub="Book a free 30-minute demo and watch Keres answer a call, qualify the lead, and book an appointment in under sixty seconds."
-    cta={t.cta ? t.cta.label : 'Book a Demo'}
+    heading={isLocal ? 'Get found, then get the call answered' : isEmail ? 'See how Sol runs outbound email' : t.cta ? `See ${shortTerm} working live` : 'Stop losing leads to voicemail'}
+    sub={isLocal
+      ? 'Book a free 30-minute call to go through your Google profile, reviews and listings, and what Found would manage for you.'
+      : isEmail
+        ? 'Book a free 30-minute call to go through your sending domains, your list and what Sol would send for you.'
+        : 'Book a free 30-minute call and hear Remi answer, qualify and book a call.'}
+    cta={t.cta ? t.cta.label : 'Book a 30-minute call'}
     href={t.cta ? t.cta.href : '/quote'}
   />
 </Layout>

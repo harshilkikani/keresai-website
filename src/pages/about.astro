@@ -4,35 +4,79 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { organizationSchema, breadcrumbSchema } from '../data/schema';
+import { business, CONTACT_PHONE } from '../config/business';
 
 const path = '/about';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path }];
 ---
 <Layout
-  title="About Keres AI — The AI Receptionist & AI SDR Platform"
-  description="Keres AI builds the AI receptionist and AI SDR platform for businesses that live on the phone — answering every call and booking every appointment."
+  title="About Keres AI: Websites & AI Receptionist"
+  description="Keres AI builds and runs websites and Google Business Profiles for local service businesses, and answers their calls with Remi, an AI receptionist."
   path={path}
+  pageType="AboutPage"
+  mainEntityId="https://www.keresai.com/#organization"
 >
-  <Schema slot="head" graph={[breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[
+    breadcrumbSchema(crumbs),
+    organizationSchema,
+  ]} />
 
   <Breadcrumbs crumbs={crumbs} />
   <header class="page-hero container">
     <span class="eyebrow">About</span>
-    <h1>We build the front desk and sales team that <span class="accent">never sleeps</span></h1>
-    <p class="lead">Keres AI is a platform for service businesses that live on the phone. We answer every call, book every appointment, and run outbound that reaches the inbox — so growing teams stop losing revenue to missed calls and slow follow-up.</p>
-    <div class="hero-ctas"><a href="/quote" class="btn btn-primary">Book a Demo</a></div>
+    <h1>About <span class="accent">Keres AI</span></h1>
+    <p class="lead answer-block">Keres AI sells done-for-you growth services to local service businesses. Found builds and runs a business’s website, Google Business Profile, reviews and listings from $249 a month ($499 for law firms). Remi, its AI receptionist, answers every call in two rings, 24/7, and books the appointment. Theo, June and Sol handle reminders and estimate follow-up, past-customer reactivation, and outbound email.</p>
+    <div class="hero-ctas"><a href="/quote" class="btn btn-primary">Get a quote</a></div>
   </header>
 
   <section class="page-section container">
     <div class="prose">
-      <h2>Why we exist</h2>
-      <p>Service businesses lose 25–40% of inbound calls — and most callers who hit voicemail never call back. The leads are there; the capacity to answer them isn’t. Hiring more front-desk staff is expensive, and traditional answering services just take messages. We built Keres so every call gets answered and every lead gets booked, automatically.</p>
-      <h2>What we do</h2>
-      <p>Our <a href="/agents/inbound">AI receptionist</a> answers inbound calls in two rings, 24/7, qualifies the caller, and books the appointment. Our <a href="/agents/outbound">AI SDR</a> runs personalized outbound email with <a href="/agents/outbound">deliverability</a> built in, and books qualified meetings on your calendar. One platform for every lead — inbound and outbound.</p>
-      <h2>How we work</h2>
-      <p>We’re done-for-you. We map your call flows and outbound goals, connect your number, calendar, and CRM, train the AI on your business, and launch — usually within five business days. Month-to-month, cancel anytime. Your data is never used to train third-party models; we sign DPAs and support SOC 2-aligned and HIPAA-aware workflows.</p>
+      <h2>What does Keres AI sell?</h2>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead><tr><th>Worker</th><th>Job</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr><td><a href="/services/found">Found</a></td><td>Website, Google Business Profile, reviews and listings</td><td>From $249/month ($499 for law firms)</td></tr>
+            <tr><td><a href="/agents/inbound">Remi</a></td><td>AI receptionist: answers every call in two rings and books it</td><td>Quoted to call volume; included minutes, then per-minute; no per-call fees</td></tr>
+            <tr><td><a href="/agents/follow-up">Theo</a></td><td>Confirmations, reminders and estimate follow-up</td><td>Quoted</td></tr>
+            <tr><td><a href="/agents/reactivation">June</a></td><td>Brings past customers back and asks every customer for a review</td><td>Quoted</td></tr>
+            <tr><td><a href="/agents/outbound">Sol</a></td><td>Outbound email with deliverability set up first</td><td>Quoted</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Everything is month-to-month with no cancellation fee. See <a href="/pricing">pricing</a> for what changes a quote.</p>
+
+      <h2>Who is Keres AI for?</h2>
+      <p>Local businesses whose sales team is whoever picks up the phone: <a href="/industries/home-services">HVAC, plumbing, roofing and other home service contractors</a>, <a href="/industries/law-firms">law firms</a>, <a href="/industries/dental-med-spa">dental practices and med spas</a>, and <a href="/industries/real-estate">real estate agents and teams</a>, across the United States.</p>
+
+      <h2>Why does it exist?</h2>
+      <p>Keres AI estimates that service businesses miss 25–40% of inbound calls, and most callers who reach voicemail do not call back (<a href="/missed-call-statistics">how we got there</a>). The leads are there; the capacity to answer them often isn’t. Found makes sure the business is easy to find, and Remi makes sure the call that follows is answered and booked.</p>
+
+      <h2>How does onboarding work?</h2>
+      <p>A 30-minute call on how your calls and intake run today. We write the script, connect your number and your calendar or CRM, and you test it yourself before it answers a customer. Timing depends on your call flows and integrations, and we agree it on that first call.</p>
+
+      <h2>What does Keres AI connect to?</h2>
+      <p>Today: Google Calendar, HubSpot, ServiceTitan and Zapier. Rolling out: Jobber, Housecall Pro, Clio, Lawmatics, Follow Up Boss, Dentrix and Open Dental. See <a href="/integrations">integrations</a>.</p>
+
+      <h2>What Keres AI does not do</h2>
+      <ul>
+        <li>It does not run Google Ads; it sets up and answers Local Services Ads.</li>
+        <li>Remi never gives legal, medical or financial advice, and never clears a legal conflict itself.</li>
+        <li>Keres AI is not SOC 2 or HIPAA certified and does not sign BAAs today (<a href="/trust">trust and security</a>).</li>
+        <li>It never uses your data to train third-party AI models.</li>
+        <li>Remi answers in English today.</li>
+      </ul>
+
+      <h2>Is Keres AI related to Keras, Kore.ai or keres.ai?</h2>
+      <p>No. Keres AI (keresai.com) is not affiliated with keres.ai, the Keras deep-learning library or Kore.ai.</p>
+
+      <h2>Where is Keres AI based?</h2>
+      <p>Keres AI is based in Houston, Texas, and works with local service businesses across the United States. Most setup happens over the phone and by video; Houston-area clients can meet in person.</p>
+
+      <h2>How do I contact Keres AI?</h2>
+      <p>Email <a href={`mailto:${business.contactEmail}`}>{business.contactEmail}</a>{CONTACT_PHONE && <>, call the office at <a href={CONTACT_PHONE.href}>{CONTACT_PHONE.display}</a></>}, or <a href="/quote">get a quote</a> and book a 30-minute call.</p>
     </div>
   </section>
 
-  <CtaBand heading="See what Keres can do for your business" sub="Book a free 30-minute demo and watch the platform answer and book a call live." />
+  <CtaBand heading="See what Keres can do for your business" sub="Book a 30-minute call and hear Remi answer and book a call live." />
 </Layout>
