@@ -18,7 +18,7 @@ const roleOf = (slug: string) => (agents.find((a) => a.slug === slug)?.title ?? 
   <div class="footer-grid">
     <div class="footer-brand">
       <a href={l(locale, '/')} class="logo" aria-label="Keres AI">
-        <img src="/assets/img/KeresLogo.webp" srcset="/assets/img/KeresLogo.webp 1x, /assets/img/KeresLogo@2x.webp 2x" alt="Keres AI" class="logo-img" width="120" height="32" />
+        <img src="/assets/img/KeresLogo.webp" srcset="/assets/img/KeresLogo.webp 1x, /assets/img/KeresLogo@2x.webp 2x" alt="Keres AI" class="logo-img" width="140" height="140" loading="lazy" decoding="async" />
       </a>
       <p>
         {ui.footer.oneLiner}

@@ -1,8 +1,9 @@
 /* =============================================================
    Keres AI — motion
-   Loaded in <head>, blocking, on purpose: it stamps html[data-motion]
-   before first paint so choreographed elements start hidden instead of
-   flashing. Everything here is transform/opacity, IntersectionObserver-
+   Loaded with defer. Layout.astro inlines a one-line stamp that sets
+   html[data-motion] before first paint (so choreographed elements start
+   hidden instead of flashing); this file stamps again (idempotent) and
+   boots the rest. Everything here is transform/opacity, IntersectionObserver-
    gated, and resolves to final state under prefers-reduced-motion.
 
    Motion system:
