@@ -108,6 +108,19 @@ export const guides: Guide[] = [
     readTime: "10 min read",
     order: 6,
   },
+  {
+    slug: "ai-tools-for-local-service-businesses",
+    datePublished: '2026-10-11',
+    dateModified: '2026-10-11',
+    category: "Buyer's guide",
+    listTitle: "The Best AI Tools for Local Service Businesses to Get More Leads",
+    listDesc: "AI tools by funnel stage: getting found on Google, answering every call, following up, and when outbound email fits.",
+    metaTitle: "Best AI Tools for Local Service Business Leads | Keres AI",
+    description: "The AI tools that get local service businesses more leads, by stage: Google profile and reviews, AI receptionists, follow-up and outbound email.",
+    titleHtml: "The Best AI Tools for Local Service Businesses to <span class=\"accent\">Get More Leads</span>",
+    readTime: "7 min read",
+    order: 7,
+  },
 ];
 
 /** Guides worth linking from a trade or hub page, by industry or hub slug. */

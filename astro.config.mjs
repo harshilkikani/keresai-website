@@ -28,6 +28,7 @@ export default defineConfig({
         'https://www.keresai.com/guides/towing-operations-automation.html',
         'https://www.keresai.com/guides/measuring-automation-roi.html',
         'https://www.keresai.com/guides/integrating-ai-into-your-stack.html',
+        'https://www.keresai.com/guides/ai-tools-for-local-service-businesses.html',
       ],
     }),
     // The home page's canonical is https://www.keresai.com/ (with the slash).
