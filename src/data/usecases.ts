@@ -176,7 +176,7 @@ const allUsecases: UseCase[] = [
     ],
     faqs: [
       { q: 'Is Keres cheaper than a receptionist?', a: 'Typically yes — one monthly rate that’s well below the cost of a full-time front-desk hire, while covering nights and weekends too.' },
-      { q: 'Does it replace my front desk entirely?', a: 'Many businesses use Keres for after-hours and overflow, and others run it as their full front desk. It scales to whatever coverage you need.' },
+      { q: 'Does it replace my front desk entirely?', a: 'Many businesses use Keres for after-hours and overflow, and others run it as their full front desk. It scales to whatever coverage you need. See <a href="/glossary/front-desk-automation">front desk automation</a>.' },
     ],
     related: ['after-hours-answering', 'overflow-call-handling', 'lead-capture'],
     cta: { href: '/pricing', label: 'See pricing' },
@@ -242,7 +242,7 @@ const allUsecases: UseCase[] = [
     ],
     faqs: [
       { q: 'How does the AI know a call is an emergency?', a: 'Keres asks the triage questions you configure — no heat, no cool, flooding, gas smell, storm damage — and flags the call as urgent the moment those criteria are met.' },
-      { q: 'How does dispatch reach my on-call team?', a: 'Keres texts your on-call tech or driver instantly with the address, situation, and contact details, and follows your escalation rules until the job is acknowledged.' },
+      { q: 'How does dispatch reach my on-call team?', a: 'Keres texts your on-call tech or driver instantly with the address, situation, and contact details, and follows your escalation rules until the job is acknowledged. See <a href="/glossary/dispatch-automation">dispatch automation</a>.' },
     ],
     related: ['after-hours-answering', 'storm-response-dispatch', 'appointment-booking'],
     cta: { href: '/glossary/emergency-dispatch', label: 'What is emergency dispatch?' },
@@ -337,7 +337,7 @@ const allUsecases: UseCase[] = [
     ],
     faqs: [
       { q: 'Can the AI answer financing questions?', a: 'Keres answers the financing and payment-option questions you configure, captures the lead’s interest and budget, and books the consultation — then routes the details to your sales team.' },
-      { q: 'How does this help high-ticket trades?', a: 'For replacements and major repairs, cost is the top objection. Capturing financing interest and booking the consultation immediately keeps the lead from stalling and going to a competitor.' },
+      { q: 'How does this help high-ticket trades?', a: 'For replacements and major repairs, cost is the top objection. Capturing financing interest and booking the consultation immediately keeps the lead from stalling and going to a competitor. See <a href="/glossary/lead-qualification">lead qualification</a> for the questions that come first.' },
     ],
     related: ['lead-capture', 'appointment-booking', 'maintenance-plan-reactivation'],
     cta: { href: '/tools/missed-call-calculator', label: 'Calculate your missed-lead losses' },

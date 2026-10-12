@@ -155,7 +155,7 @@ const allIndustries: Industry[] = [
         'ServiceTitan, yes. When Remi books an HVAC call it writes the customer, the job and the call notes into ServiceTitan, so dispatch sees the system type and symptoms before assigning a tech.',
       costH2: 'What does a missed HVAC call cost?',
       costBody:
-        '<p>Keres AI estimates that HVAC companies miss 30–45% of inbound calls in peak season and that 35–50% of HVAC demand arrives after hours. It puts a typical service call at $300–$600, with replacements worth far more. These are directional estimates from the <a href="/benchmarks/hvac-answering">HVAC call answering benchmarks</a>, not measurements of your business.</p><p>Your own number is missed calls a month, times the share that would have booked, times your average ticket.</p>',
+        '<p>Keres AI estimates that HVAC companies miss 30–45% of inbound calls in peak season and that 35–50% of HVAC demand arrives after hours. It puts a typical service call at $300–$600, with replacements worth far more. These are directional estimates from the <a href="/benchmarks/hvac-answering">HVAC call answering benchmarks</a>, not measurements of your business.</p><p>Your own number is missed calls a month, times the share that would have booked, times your average ticket. Two follow-on jobs recover revenue from customers you already have: <a href="/use-cases/maintenance-plan-reactivation">maintenance-plan reactivation</a> and <a href="/use-cases/financing-follow-up">financing follow-up</a> for replacements.</p>',
       calculator: { href: '/tools/hvac-missed-call-calculator', label: 'HVAC missed-call calculator' },
       compareH2: 'How do you compare AI receptionists for HVAC?',
       compareIntro: 'Ask every vendor the same questions, Keres included:',
@@ -466,7 +466,7 @@ const allIndustries: Industry[] = [
         'ServiceTitan is live, so a storm inspection lands as a job with the claim notes attached. If your estimators work from Google Calendar, Remi books there and logs the lead in HubSpot.',
       costH2: 'What does a missed roofing lead cost?',
       costBody:
-        '<p>Keres AI estimates that a roof replacement is routinely worth $10,000 or more, and that the first company to inspect after a storm usually wins the job. The <a href="/benchmarks/roofing-lead-response">roofing lead-response benchmarks</a> explain those estimates and cite the published lead-response research behind them.</p><p>The cost lands on your best days: a storm sends many calls in a few hours, and every busy signal is a homeowner calling the next roofer.</p>',
+        '<p>Keres AI estimates that a roof replacement is routinely worth $10,000 or more, and that the first company to inspect after a storm usually wins the job. The <a href="/benchmarks/roofing-lead-response">roofing lead-response benchmarks</a> explain those estimates and cite the published lead-response research behind them.</p><p>The cost lands on your best days: a storm sends many calls in a few hours, and every busy signal is a homeowner calling the next roofer. When price stalls a replacement, <a href="/use-cases/financing-follow-up">financing follow-up</a> keeps the lead moving.</p>',
       calculator: { href: '/tools/roofing-storm-lead-calculator', label: 'roofing storm-lead calculator' },
       compareH2: 'What should a roofer ask an AI receptionist vendor?',
       compareIntro: 'Questions worth asking before storm season, of Keres or anyone else:',

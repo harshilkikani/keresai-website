@@ -1,4 +1,5 @@
 ---
+import { calcDefaultResult, usd } from '../../data/calcDefaults';
 import Layout from '../../layouts/Layout.astro';
 import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
@@ -25,6 +26,7 @@ const webpage = webPageSchema({
   description: c.description,
   speakableSelectors: ['.answer-block', '.faq-a'],
 });
+const calcOut = calcDefaultResult(c);
 ---
 <Layout title={c.title} description={c.description} path={path}>
   <Schema slot="head" graph={[faqSchema(c.faqs), breadcrumbSchema(crumbs), webpage, organizationSchema]} />
@@ -63,8 +65,8 @@ const webpage = webPageSchema({
         </div>
         <div class="roi-output">
           <div class="roi-headline-label">{c.resultLabel}</div>
-          <div class="roi-headline-value"><span data-calc-out="primary">$0</span><span class="roi-per">{c.perLabel}</span></div>
-          <div class="roi-headline-year">≈ <span data-calc-out="secondary">$0</span> {c.secondaryLabel}</div>
+          <div class="roi-headline-value"><span data-calc-out="primary">{usd(calcOut.primary)}</span><span class="roi-per">{c.perLabel}</span></div>
+          <div class="roi-headline-year">≈ <span data-calc-out="secondary">{usd(calcOut.secondary)}</span> {c.secondaryLabel}</div>
           <div class="roi-math" data-calc-steps></div>
           <a class="btn btn-primary" data-calc-cta href="/quote">Book a demo with these numbers →</a>
           <div class="roi-note">{c.note}</div>
@@ -76,11 +78,11 @@ const webpage = webPageSchema({
   {(c.example || c.formula || c.assumptions || c.nextSteps) && (
     <section class="page-section container container-narrow">
       <div class="prose">
-        {c.example && (<><h2>Worked example</h2><p set:html={c.example} /></>)}
-        {c.formula && (<><h2>The formula in words</h2><p set:html={c.formula} /></>)}
+        {c.example && (<><h2>What does a typical example look like?</h2><p set:html={c.example} /></>)}
+        {c.formula && (<><h2>How is the number calculated?</h2><p set:html={c.formula} /></>)}
         {c.assumptions && c.assumptions.length > 0 && (
           <>
-            <h2>Assumptions behind the number</h2>
+            <h2>What assumptions are behind the number?</h2>
             <ul>
               {c.assumptions.map((a) => (
                 <li>
@@ -93,7 +95,7 @@ const webpage = webPageSchema({
             </ul>
           </>
         )}
-        {c.nextSteps && (<><h2>What to do with this number</h2><div set:html={c.nextSteps} /></>)}
+        {c.nextSteps && (<><h2>What should you do with this number?</h2><div set:html={c.nextSteps} /></>)}
       </div>
     </section>
   )}
