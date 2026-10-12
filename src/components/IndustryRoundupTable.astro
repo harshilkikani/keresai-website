@@ -1,0 +1,50 @@
+---
+/**
+ * The comparison table on the "best AI receptionist for …" industry roundups.
+ * Every row comes from src/data/answeringVendors.ts: the vendor's own
+ * pricing page and the page where it positions itself for the industry.
+ * Keres AI is one labelled row under the same columns.
+ */
+import type { AnsweringVendor, IndustryFit } from '../data/answeringVendors';
+
+type Row = AnsweringVendor & { fitFor: IndustryFit };
+export interface Props {
+  keres: Row;
+  vendors: Row[];
+  checked: string;
+  /** e.g. "HVAC fit", used as the column header. */
+  fitLabel: string;
+  title: string;
+}
+const { keres, vendors, checked, fitLabel, title } = Astro.props;
+const ext = { rel: 'noopener nofollow', target: '_blank' };
+---
+<section class="page-section container" aria-labelledby="table-title">
+  <div class="section-label">Side by side</div>
+  <h2 id="table-title" class="section-title" style="margin-bottom:8px">{title}</h2>
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr><th>Option</th><th>Type</th><th>{fitLabel}</th><th>How it bills</th><th>Lowest published plan</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr class="keres">
+          <td><a href="/agents/inbound">{keres.name}</a> <em>(that’s us)</em></td>
+          <td>{keres.type}</td><td>{keres.fitFor.fit}</td><td>{keres.billing}</td><td>{keres.starting}</td>
+          <td><a href="/pricing">Pricing</a> · <a href={keres.fitFor.source}>Industry page</a></td>
+        </tr>
+        {vendors.map((v) => (
+          <tr>
+            <td><a href={v.url} {...ext}>{v.name}</a></td>
+            <td>{v.type}</td><td>{v.fitFor.fit}</td><td>{v.billing}</td><td>{v.starting}</td>
+            <td>
+              <a href={v.source} {...ext}>Pricing</a>
+              {v.fitFor.source !== v.source && <> · <a href={v.fitFor.source} {...ext}>Industry page</a></>}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="prose" style="margin-top:6px">All facts from each vendor’s own pages, checked {checked}. “Not published” means the vendor shows no price without a form, a demo or a call.</p>
+</section>
