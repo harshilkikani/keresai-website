@@ -1,0 +1,37 @@
+---
+// Shared shell for /legal/*.html: site Layout (nav, footer, one JSON-LD
+// graph), breadcrumbs, and the guide typography the legal pages always used.
+// Legal pages are noindex, follow and stay out of the sitemap.
+import Layout from '../layouts/Layout.astro';
+import Schema from './Schema.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import { organizationSchema, breadcrumbSchema } from '../data/schema';
+
+export interface Props {
+  title: string;
+  description: string;
+  /** e.g. /legal/terms.html — the historical URL, kept exactly. */
+  path: string;
+  /** Breadcrumb and H1 label, e.g. "Terms of Service". */
+  label: string;
+  updated: string;
+}
+const { title, description, path, label, updated } = Astro.props;
+const crumbs = [{ name: 'Home', path: '/' }, { name: label, path }];
+---
+<Layout title={title} description={description} path={path} noindexFollow>
+  <link slot="head" rel="stylesheet" href="/assets/guide.css?v=5" />
+  <Schema slot="head" graph={[breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <article class="guide-wrap">
+    <header class="guide-hero" style="padding-bottom: 32px;">
+      <span class="guide-category">Legal</span>
+      <h1 class="guide-title"><slot name="title" /></h1>
+      <div class="guide-meta"><span>Last updated: {updated}</span></div>
+    </header>
+    <section class="guide-body">
+      <slot />
+    </section>
+  </article>
+</Layout>
