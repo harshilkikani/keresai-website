@@ -1,18 +1,24 @@
 // Data-driven glossary. Add an entry → a new /glossary/{slug} page builds.
 // Each term leads with a 40–60 word direct-answer `definition` (the AI-citation
 // payload) followed by deeper sections. Keep definitions factual and quotable.
+import { answeringVendors, VENDORS_CHECKED } from './answeringVendors';
+
+/** A vendor's published starting price, as recorded in answeringVendors.ts. */
+const vp = (name: string) => answeringVendors[name].starting.replace(/\.$/, '');
+
 export interface GlossarySection {
   h2: string;
-  body: string; // may contain inline <a>/<strong> HTML
+  body: string; // inline HTML, or block HTML (<p>, <ol>, <ul>) when it starts with a block tag
 }
 export interface GlossaryTerm {
   slug: string;
   term: string; // canonical display name
   aka?: string[]; // synonyms surfaced in copy
-  category: 'AI Receptionist' | 'AI SDR & Outbound' | 'Email Deliverability';
+  category: 'AI Receptionist' | 'AI SDR & Outbound' | 'Email Deliverability' | 'Local Search';
   targetKeyword: string;
   title: string;
   description: string;
+  h1?: string; // optional page heading; defaults to "What is {term}?"
   definition: string; // 40–60 word direct answer, first paragraph
   sections: GlossarySection[];
   related: string[]; // other glossary slugs
@@ -90,25 +96,44 @@ export const glossary: GlossaryTerm[] = [
   {
     slug: 'virtual-receptionist',
     term: 'Virtual Receptionist',
+    aka: ['remote receptionist', 'virtual answering service'],
     category: 'AI Receptionist',
     targetKeyword: 'what is a virtual receptionist',
-    title: 'What Is a Virtual Receptionist? Definition | Keres',
+    title: 'What Is a Virtual Receptionist? Human vs AI | Keres AI',
     description:
-      'A virtual receptionist answers your business calls remotely. How human virtual receptionists and AI receptionists differ, and which fits your business.',
+      'A virtual receptionist answers your business calls remotely. How human and AI virtual receptionists work, how they bill, and how to choose between them.',
+    h1: 'What is a virtual receptionist?',
     definition:
-      'A virtual receptionist is a remote service — staffed by people or powered by AI — that answers your business calls, greets callers, schedules appointments, and routes messages without sitting at your physical front desk. AI virtual receptionists do this automatically, 24/7, while human ones operate during staffed hours and typically bill per call or per minute.',
+      'A virtual receptionist is a remote service that answers your business phone for you, staffed by people or run by AI. It greets callers, answers routine questions, takes details, books appointments and passes urgent calls to your team, without anyone sitting at your front desk.',
     sections: [
       {
-        h2: 'Human vs. AI virtual receptionists',
+        h2: 'How a virtual receptionist works',
         body:
-          'Human virtual receptionists offer a personal touch and many now cover 24/7, but each receptionist handles one call at a time and plans are usually billed by minutes or calls. An <a href="/glossary/ai-receptionist">AI receptionist</a> answers unlimited calls simultaneously, never sleeps, and completes bookings on a monthly plan — making it a strong fit for businesses with spiky or after-hours call volume.',
+          '<p>The setup is much the same whether a person or software answers:</p> <ol> <li><strong>Forward your number.</strong> You keep your business number and forward calls to the service all the time, after hours, or only when your line is busy.</li> <li><strong>Give it your script.</strong> You supply your greeting, services, service area, hours and the questions to ask each caller.</li> <li><strong>It answers and acts.</strong> The receptionist takes the caller’s details, answers what it can, and books the appointment if it has access to your calendar.</li> <li><strong>You get the record.</strong> A message, summary or booking lands in your email, texts, calendar or CRM.</li> <li><strong>Urgent calls reach a person.</strong> Calls that match your escalation rules are transferred or texted to whoever is on call.</li> </ol>',
+      },
+      {
+        h2: 'Human virtual receptionist vs AI receptionist',
+        body:
+          '<p>A human virtual receptionist is a trained person at a remote answering company. People handle unusual calls well and can use judgment a script did not anticipate. Most human services bill by the minute or by the call, and one person handles one call at a time, so a busy hour can mean hold time or a message instead of a booking.</p> <p>An <a href="/glossary/ai-receptionist">AI receptionist</a> is software that answers in a natural voice. It answers at 3 a.m. the same way it answers at 3 p.m. and asks every caller the same intake questions. It is weaker on calls that need real judgment, which is why a good setup sends those to a person.</p>',
+      },
+      {
+        h2: 'What a virtual receptionist costs',
+        body: `<p>Human services usually sell plans with a set number of minutes or calls and charge for overage. As of ${VENDORS_CHECKED}, Ruby’s published entry plan was ${vp('Ruby')}, and PATLive’s was ${vp('PATLive')}. AI receptionists more often charge a monthly rate with included minutes; Dialzara, for example, listed ${vp('Dialzara')} on the same date. Compare options on cost per booked appointment, not monthly price. See <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>.</p>`,
+      },
+      {
+        h2: 'How Keres AI handles it',
+        body:
+          '<p>Keres AI’s virtual receptionist is <a href="/agents/inbound">Remi</a>, an AI receptionist. Remi answers in two rings, 24/7, asks your intake questions, and books into Google Calendar, HubSpot or ServiceTitan. Calls Remi couldn’t take get a text back within 60 seconds. Remi escalates to a person by the rules you set, and it answers in English today. Billing is a monthly rate with included minutes, then per minute, with no per-call fees.</p>',
       },
     ],
-    related: ['ai-receptionist', 'ai-answering-service', 'call-overflow'],
+    related: ['ai-receptionist', 'ai-answering-service', 'call-overflow', 'after-hours-answering'],
     faqs: [
-      { q: 'Is an AI receptionist a type of virtual receptionist?', a: 'Yes — an AI receptionist is a virtual receptionist powered by AI instead of human operators, so it works 24/7 and handles unlimited concurrent calls.' },
+      { q: 'Is an AI receptionist a type of virtual receptionist?', a: 'Yes. A virtual receptionist is any remote answering service; an AI receptionist is one run by software instead of people. It answers around the clock and asks every caller the same questions, and it should hand calls that need judgment to a person.' },
+      { q: 'How much does a virtual receptionist cost?', a: 'Human services usually charge for a set number of minutes or calls each month, plus overage. AI receptionists usually charge a monthly rate with included minutes. See <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> for published prices and how to compare them.' },
+      { q: 'Can a virtual receptionist book appointments?', a: 'Yes, if it has access to your calendar or scheduling system. Without that access it can only take a message. Keres AI’s Remi books directly into Google Calendar, HubSpot or ServiceTitan.' },
+      { q: 'Do I need a new phone number for a virtual receptionist?', a: 'No. You keep your business number and forward calls to the virtual receptionist, either all the time, after hours or when your line is busy.' },
     ],
-    cta: { href: '/agents/inbound', label: 'Compare with Keres AI' },
+    cta: { href: '/agents/inbound', label: 'See Remi, the Keres AI receptionist' },
   },
   {
     slug: 'missed-call-text-back',
@@ -140,23 +165,40 @@ export const glossary: GlossaryTerm[] = [
     aka: ['overflow answering', 'call spillover'],
     category: 'AI Receptionist',
     targetKeyword: 'what is call overflow handling',
-    title: 'What Is Call Overflow Handling? Definition | Keres',
+    title: 'What Is Call Overflow Handling? | Keres AI',
     description:
-      'Call overflow handling routes calls your team can’t answer to a backup that picks up instantly. Learn how AI overflow keeps every caller from hitting voicemail.',
+      'Call overflow handling sends calls your team can’t pick up to a backup that answers live. How overflow works, what it costs, and human vs AI overflow.',
     definition:
-      'Call overflow handling routes calls that your team can’t pick up — because the lines are busy or staff are unavailable — to a backup that answers immediately. With an AI receptionist as overflow, every spillover call is answered in two rings and booked, instead of ringing out to voicemail during your busiest moments.',
+      'Call overflow handling sends calls your team can’t pick up, because every line is busy or nobody answers within a few rings, to a backup that answers live. The backup can be another office, an answering service or an AI receptionist instead of voicemail.',
     sections: [
       {
-        h2: 'When overflow matters most',
+        h2: 'How call overflow works',
         body:
-          'Peak seasons, marketing pushes, and emergencies create call spikes your front desk can’t absorb. AI overflow answers unlimited simultaneous calls, so a heat wave or a viral ad never sends callers to voicemail.',
+          '<ol> <li>Calls ring your team first, as they do today.</li> <li>You set the trigger: a busy line, no answer after a set number of rings, or a schedule such as lunch hours.</li> <li>Your phone carrier or phone system forwards the call when the trigger is met; most offer “forward when busy” and “forward when unanswered”.</li> <li>The backup answers, follows your script, and books the appointment or takes the details.</li> <li>Your team gets the summary or booking, so nothing is handled twice.</li> </ol>',
+      },
+      {
+        h2: 'Human overflow vs AI overflow',
+        body:
+          '<p>A human answering service handles overflow with trained operators, usually billed by the minute or by the call. People cope well with unusual calls, but your busiest hours may be theirs too, and then your callers queue there instead. An <a href="/glossary/ai-receptionist">AI receptionist</a> answers each overflow call the same way, books directly into your calendar, and costs the same at 2 a.m. as at noon. For overflow specifically, ask whether the backup can complete the booking, or only take a message your team must return.</p>',
+      },
+      {
+        h2: 'What call overflow costs',
+        body: `<p>Overflow forwarding is usually a feature of your phone service. The backup is the cost. Human services usually charge by minutes or calls; as of ${VENDORS_CHECKED}, PATLive listed ${vp('PATLive')}. AI receptionists usually charge a monthly rate with included minutes. See <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>.</p>`,
+      },
+      {
+        h2: 'How Keres AI handles it',
+        body:
+          '<p>Set your phone to forward busy or unanswered calls to <a href="/agents/inbound">Remi</a>. Remi answers in two rings, asks your intake questions, books into Google Calendar, HubSpot or ServiceTitan, and escalates to a person by your rules. Calls it couldn’t take get a text back within 60 seconds. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. See <a href="/use-cases/overflow-call-handling">overflow call handling</a>.</p>',
       },
     ],
-    related: ['ai-receptionist', 'ai-answering-service', 'missed-call-text-back'],
+    related: ['ai-receptionist', 'call-routing', 'missed-call-text-back', 'virtual-receptionist'],
     faqs: [
-      { q: 'How does AI call overflow work?', a: 'Calls your team doesn’t answer within a set number of rings forward to the AI, which picks up instantly, helps the caller, and books or routes as needed.' },
+      { q: 'How does call overflow work?', a: 'Your phone system forwards calls that are busy, or unanswered after a set number of rings, to a backup answerer, which picks up live instead of sending the caller to voicemail.' },
+      { q: 'What is the difference between call overflow and call forwarding?', a: 'Call forwarding sends calls to another number all the time. Overflow forwards only the calls your team can’t take, so your staff still answer first.' },
+      { q: 'How many rings before a call should overflow?', a: 'It is your choice. A short window, such as three or four rings, gives your team the first chance to answer without leaving the caller waiting long enough to hang up.' },
+      { q: 'Is an AI receptionist good for overflow calls?', a: 'It suits overflow because it answers each call the same way at any hour and can book directly into your calendar. Calls that need judgment should still be escalated to a person by your rules.' },
     ],
-    cta: { href: '/agents/inbound', label: 'Add AI overflow coverage' },
+    cta: { href: '/use-cases/overflow-call-handling', label: 'Add overflow coverage' },
   },
   {
     slug: 'appointment-booking-automation',
@@ -166,44 +208,80 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is appointment booking automation',
     title: 'What Is Appointment Booking Automation? | Keres AI',
     description:
-      'Appointment booking automation lets software schedule, confirm, and reschedule appointments without manual back-and-forth. Learn how AI books directly on your calendar.',
+      'Appointment booking automation schedules, confirms and reschedules appointments without phone tag. How it works, what it costs, and booking on the call.',
     definition:
-      'Appointment booking automation uses software to schedule, confirm, and reschedule appointments without manual back-and-forth. An AI agent checks real-time calendar availability, books the slot during the call or chat, syncs it to your calendar and CRM, and sends the customer an automatic confirmation and reminder — eliminating phone tag and no-shows.',
+      'Appointment booking automation is software that schedules, confirms and reschedules appointments without staff going back and forth with the customer. It checks live calendar availability, applies your booking rules, writes the appointment to your calendar or CRM, and sends the customer a confirmation.',
     sections: [
       {
-        h2: 'How AI booking reduces no-shows',
+        h2: 'How appointment booking automation works',
         body:
-          'Automated confirmations and reminders sent by text dramatically cut no-shows, and instant rescheduling means a cancellation gets refilled instead of lost. The AI books straight onto Google Calendar, HubSpot or ServiceTitan.',
+          '<ol> <li><strong>Connect the calendar</strong> or job system the appointment should land in.</li> <li><strong>Set booking rules:</strong> appointment types and lengths, buffers between jobs, service area, business hours, and who can be booked for what.</li> <li><strong>The request comes in</strong> by phone, web form, chat or text.</li> <li><strong>Availability is checked live</strong> and the customer is offered open slots that fit the rules.</li> <li><strong>The appointment is written</strong> to the calendar or CRM, and a confirmation goes out.</li> <li><strong>Changes follow the same path:</strong> a reschedule frees the old slot and books a new one.</li> </ol>',
+      },
+      {
+        h2: 'Self-service booking links vs booking on the call',
+        body:
+          '<p>Online scheduling links let customers pick a time themselves, which works for people already on your website. Phone callers are different: they want to describe the problem and be booked in the same conversation. An <a href="/glossary/ai-receptionist">AI receptionist</a> books on the call using the same rules as your scheduling tool, so a caller is not sent a link to finish later. Most businesses need both, because customers arrive both ways.</p>',
+      },
+      {
+        h2: 'What appointment booking automation costs',
+        body:
+          '<p>Stand-alone scheduling tools are usually priced per user per month. Booking by phone through an AI receptionist is part of that receptionist’s plan, usually a monthly rate with included minutes. See <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>.</p>',
+      },
+      {
+        h2: 'How Keres AI handles it',
+        body:
+          '<p><a href="/agents/inbound">Remi</a> answers in two rings, 24/7, asks your intake questions and books directly into Google Calendar, HubSpot or ServiceTitan. Other tools can connect through Zapier; Outlook, Jobber and Housecall Pro are rolling out. After the booking, <a href="/agents/follow-up">Theo</a> sends the confirmation and reminders, and handles a reschedule in the same text thread. See all <a href="/integrations">integrations</a>.</p>',
       },
     ],
-    related: ['ai-receptionist', 'ai-answering-service', 'lead-qualification'],
+    related: ['ai-receptionist', 'appointment-reminders', 'lead-qualification', 'no-show-rate'],
     faqs: [
-      { q: 'What calendars does AI appointment booking work with?', a: 'Keres books directly on Google Calendar, HubSpot and ServiceTitan today. Outlook, Jobber and Housecall Pro are rolling out.' },
+      { q: 'What calendars does AI appointment booking work with?', a: 'Keres AI books directly into Google Calendar, HubSpot and ServiceTitan today, and connects to other tools through Zapier. Outlook, Jobber and Housecall Pro are rolling out.' },
+      { q: 'Does booking automation prevent double-booking?', a: 'It checks live availability before offering a slot and writes the appointment straight away, which avoids most double-bookings. It is only as accurate as the calendar it reads, so appointments booked elsewhere need to be on the same calendar.' },
+      { q: 'Can customers reschedule without calling?', a: 'Yes, if the system sends a confirmation they can reply to. A reschedule frees the old slot and books a new one under the same rules.' },
+      { q: 'Can an AI receptionist book appointments during the call?', a: 'Yes, when it is connected to your calendar or job system. It checks open slots against your booking rules, offers the caller a time, writes the appointment and sends a confirmation before the call ends.' },
     ],
-    cta: { href: '/agents/inbound', label: 'Automate your bookings' },
+    cta: { href: '/agents/inbound', label: 'Book appointments on the call' },
   },
   {
     slug: 'lead-qualification',
     term: 'Lead Qualification',
+    aka: ['lead screening', 'intake qualification'],
     category: 'AI Receptionist',
     targetKeyword: 'what is lead qualification',
     title: 'What Is Lead Qualification? Definition | Keres AI',
     description:
-      'Lead qualification is the process of determining whether a prospect is a good fit. Learn how AI qualifies leads on every call so your team only talks to real opportunities.',
+      'Lead qualification decides whether an inquiry is a real fit before your team spends time on it. How it works, how it differs from lead scoring, and AI’s role.',
     definition:
-      'Lead qualification is the process of determining whether a prospect is a genuine, ready-to-buy opportunity worth your team’s time. It captures details like budget, timeline, location, and intent, then scores or routes the lead accordingly. AI qualifies leads on every inbound call automatically — asking the right questions and booking only the prospects that fit.',
+      'Lead qualification is the process of deciding whether an inquiry is a real fit for your business before your team spends time on it. It checks details like the service needed, location, timeline and budget against your criteria, then books, routes or politely declines the lead.',
     sections: [
       {
-        h2: 'How AI qualifies leads on the phone',
+        h2: 'How lead qualification works',
         body:
-          'The AI asks the qualifying questions you define — service needed, location, urgency, budget — captures the answers, and either books the appointment or routes the lead to the right person. Your team stops wasting time on tire-kickers and spam.',
+          '<ol> <li><strong>Define a good lead:</strong> the services you offer, the area you cover, the jobs you won’t take, and a minimum job size if you have one.</li> <li><strong>Turn that into questions</strong> asked on every inquiry, in the same order.</li> <li><strong>Record the answers</strong> in your CRM or job system so nobody asks twice.</li> <li><strong>Decide the next step:</strong> book qualified leads, route edge cases to a person, and refer out the ones you can’t help.</li> <li><strong>Review the results</strong> every month and adjust the questions.</li> </ol>',
+      },
+      {
+        h2: 'Lead qualification vs lead scoring',
+        body:
+          '<p>Qualification is a yes, no or maybe, decided during the conversation. <a href="/glossary/lead-scoring">Lead scoring</a> assigns points over time based on fit and behavior, and is more common in longer B2B sales cycles. Service businesses that live on the phone usually need qualification first: is this a job we do, in our area, and how soon? Sales teams often use frameworks such as BANT (budget, authority, need, timeline); a home-services or legal intake applies the same idea with questions specific to the trade or practice area.</p>',
+      },
+      {
+        h2: 'What lead qualification costs',
+        body:
+          '<p>Manual qualification costs staff time on every call, including the ones that turn out to be spam or out of area. When an AI receptionist qualifies calls, the work is part of its plan, usually a monthly rate with included minutes. See <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>.</p>',
+      },
+      {
+        h2: 'How Keres AI handles it',
+        body:
+          '<p><a href="/agents/inbound">Remi</a> answers in two rings, 24/7, and asks your intake questions on every call. Qualified callers are booked into Google Calendar, HubSpot or ServiceTitan; calls that need judgment go to a person by your rules. Calls Remi couldn’t take get a text back within 60 seconds, so the lead isn’t lost before it is qualified. See <a href="/glossary/legal-intake">legal intake</a> and <a href="/glossary/patient-intake">patient intake</a> for examples by vertical.</p>',
       },
     ],
-    related: ['ai-receptionist', 'ai-sdr', 'appointment-booking-automation'],
+    related: ['ai-receptionist', 'lead-scoring', 'appointment-booking-automation', 'legal-intake'],
     faqs: [
-      { q: 'Can AI qualify leads as well as a human?', a: 'For structured qualification — capturing budget, timeline, location, and intent against your criteria — AI is consistent and never skips a question, then escalates judgment calls to your team.' },
+      { q: 'What questions qualify a lead?', a: 'The ones that decide whether you can take the job: what service is needed, where, how soon, and any limits you have, such as a minimum job size or the types of matters you accept.' },
+      { q: 'Can AI qualify leads as well as a person?', a: 'For structured questions asked the same way on every call, AI is consistent and doesn’t skip steps. Judgment calls, such as an unusual job or an upset caller, should be escalated to a person.' },
+      { q: 'What is the difference between lead qualification and lead scoring?', a: 'Qualification decides fit during the conversation. Lead scoring ranks leads with points over time, based on fit and behavior, and is more common in longer sales cycles.' },
     ],
-    cta: { href: '/agents/inbound', label: 'Qualify every caller automatically' },
+    cta: { href: '/agents/inbound', label: 'Qualify every caller' },
   },
   {
     slug: 'ai-sdr',
@@ -459,25 +537,43 @@ export const glossary: GlossaryTerm[] = [
   {
     slug: 'conversational-ai',
     term: 'Conversational AI',
+    aka: ['voice AI', 'AI voice agent'],
     category: 'AI Receptionist',
     targetKeyword: 'what is conversational ai',
-    title: 'What Is Conversational AI? Definition & Examples | Keres AI',
+    title: 'What Is Conversational AI? Definition | Keres AI',
     description:
-      'Conversational AI understands and responds in natural language. It powers AI receptionists and voice agents that hold real phone conversations.',
+      'Conversational AI understands and replies in natural language by voice or text. How it works, how it differs from IVR and chatbots, and what it costs.',
     definition:
-      'Conversational AI is technology that understands and responds in natural human language across voice and text. It combines speech recognition, natural language understanding, and generation to hold real, two-way conversations — handling interruptions and context rather than reading a rigid menu. It’s what lets an AI receptionist actually talk to callers and book appointments.',
+      'Conversational AI is software that understands what a person says or types in their own words and replies in natural language. It combines speech recognition, a language model and speech synthesis to hold a two-way conversation, follow context and complete tasks such as booking an appointment.',
     sections: [
       {
-        h2: 'Conversational AI vs. a chatbot or IVR',
+        h2: 'How conversational AI works',
         body:
-          'Old <a href="/glossary/ivr">IVR</a> phone trees and basic chatbots follow fixed scripts. Conversational AI understands intent, adapts to what the caller says, and completes tasks like booking — which is why an <a href="/glossary/ai-receptionist">AI receptionist</a> feels like a conversation, not a menu.',
+          '<p>On a phone call, each turn of the conversation goes through five steps:</p> <ol> <li><strong>Speech recognition</strong> turns the caller’s audio into text as they speak.</li> <li><strong>Language understanding</strong>, usually a large language model, works out what the caller wants and what information is still missing.</li> <li><strong>Tools and rules</strong> let it act: check calendar availability, look up a customer, or follow your escalation rules.</li> <li><strong>Response generation</strong> writes the reply, kept to your script and approved facts.</li> <li><strong>Speech synthesis</strong> reads the reply aloud in a natural voice, and the loop repeats until the task is done.</li> </ol> <p>In text channels such as chat and SMS, the first and last steps drop out; the middle is the same.</p>',
+      },
+      {
+        h2: 'Conversational AI vs chatbots and IVR',
+        body:
+          '<p>Rule-based chatbots and <a href="/glossary/ivr">IVR</a> menus follow fixed scripts: the user picks from options the designer anticipated. Conversational AI handles open-ended input, interruptions and corrections (“actually, Thursday is better”). The trade-off is control. A scripted system can only say what was written; a conversational system needs clear instructions, approved facts and escalation rules so it stays accurate. That is why business deployments pair it with guardrails and a human fallback.</p>',
+      },
+      {
+        h2: 'What conversational AI costs',
+        body:
+          '<p>Building conversational AI yourself means paying for speech, language-model and telephony usage, plus the engineering time to connect and test it. Packaged products such as AI receptionists usually charge a monthly rate with included minutes. See <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>.</p>',
+      },
+      {
+        h2: 'How Keres AI handles it',
+        body:
+          '<p><a href="/agents/inbound">Remi</a> is Keres AI’s conversational AI for the phone. It answers in two rings, 24/7, asks your intake questions in conversation rather than through a menu, books into Google Calendar, HubSpot or ServiceTitan, and escalates to a person by your rules. Calls Remi couldn’t take get a text back within 60 seconds. Remi answers in English today.</p>',
       },
     ],
-    related: ['ai-receptionist', 'ivr', 'call-routing'],
+    related: ['ai-receptionist', 'ivr', 'call-routing', 'lead-qualification'],
     faqs: [
-      { q: 'Is an AI receptionist conversational AI?', a: 'Yes — an AI receptionist is a voice application of conversational AI, built to answer calls, understand intent, and complete tasks like booking.' },
+      { q: 'Is an AI receptionist conversational AI?', a: 'Yes. An AI receptionist is a voice application of conversational AI built to answer business calls, ask intake questions and book appointments.' },
+      { q: 'What is the difference between conversational AI and a chatbot?', a: 'A traditional chatbot follows a fixed script and a menu of options. Conversational AI understands open-ended language, keeps track of context and can complete tasks, though it still needs rules and approved facts to stay accurate.' },
+      { q: 'Can conversational AI make mistakes?', a: 'Yes. It can mishear a word or misunderstand a request. Well-run systems read key details back to the caller, stick to approved information and hand unclear or sensitive calls to a person.' },
     ],
-    cta: { href: '/agents/inbound', label: 'Hear conversational AI in action' },
+    cta: { href: '/agents/inbound', label: 'Hear Remi on a call' },
   },
   {
     slug: 'ivr',
@@ -485,70 +581,126 @@ export const glossary: GlossaryTerm[] = [
     aka: ['phone tree', 'auto attendant'],
     category: 'AI Receptionist',
     targetKeyword: 'what is ivr',
-    title: 'What Is IVR? Interactive Voice Response Explained | Keres AI',
+    title: 'What Is IVR? Interactive Voice Response | Keres AI',
     description:
-      'IVR (interactive voice response) is the automated phone menu that routes callers by keypad or voice. Learn how it works and how AI receptionists go beyond it.',
+      'IVR (interactive voice response) is the automated phone menu that routes callers by keypad or voice. How it works, what it costs, and IVR vs AI receptionists.',
     definition:
-      'IVR (interactive voice response) is an automated phone system that greets callers and routes them through a menu using keypad presses or simple voice commands (“press 1 for sales”). It’s good for routing but can’t hold a real conversation or book an appointment — which is where conversational AI receptionists go further.',
+      'IVR (interactive voice response) is an automated phone system that greets callers with a recorded menu and routes them by keypad presses or short spoken answers, such as “press 1 for sales.” It directs calls well but cannot hold an open conversation or book an appointment by itself.',
     sections: [
       {
-        h2: 'IVR vs. an AI receptionist',
+        h2: 'How IVR works',
         body:
-          'IVR routes; it doesn’t resolve. Callers still wait for a human to actually help. An <a href="/glossary/ai-receptionist">AI receptionist</a> built on <a href="/glossary/conversational-ai">conversational AI</a> answers the question, qualifies the lead, and books the appointment in the same call — no menu maze.',
+          '<p>A typical IVR call runs like this:</p> <ol> <li>The call reaches your phone system and plays a recorded greeting.</li> <li>The caller hears a menu and presses a key or says a short phrase.</li> <li>The system matches that input to a rule you configured: a department, an extension, a voicemail box or a recorded message such as your hours.</li> <li>Deeper menus repeat the process until the call reaches a destination.</li> <li>If nobody is free at the destination, the caller waits on hold or leaves a voicemail.</li> </ol> <p>Some IVR systems also look up account data, such as an order status, when they are connected to a database. Speech-enabled IVR accepts spoken words, but only the options its menu expects.</p>',
+      },
+      {
+        h2: 'IVR vs AI receptionist',
+        body:
+          '<p>IVR routes; an <a href="/glossary/ai-receptionist">AI receptionist</a> resolves. With IVR the caller does the sorting, and there still has to be a person at the end to book the job. An AI receptionist uses <a href="/glossary/conversational-ai">conversational AI</a> to understand the request in the caller’s own words, asks your intake questions, and books the appointment on the same call. IVR still makes sense for large organizations with many departments and callers who already know which one they want. For a small business with one front desk, a menu mostly adds steps before the caller reaches the same voicemail.</p>',
+      },
+      {
+        h2: 'What IVR costs',
+        body:
+          '<p>Basic auto-attendant menus are often included in business phone and VoIP plans, while contact-center IVR is priced by its vendor per seat or per minute. The larger cost is what happens after the menu: if nobody picks up, the call is still missed. AI receptionists are usually billed as a monthly rate with included minutes. See <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>.</p>',
+      },
+      {
+        h2: 'How Keres AI handles it',
+        body:
+          '<p>Keres AI does not put callers in a menu. <a href="/agents/inbound">Remi</a> answers in two rings, 24/7, asks the caller what they need, asks your intake questions, and books into Google Calendar, HubSpot or ServiceTitan. Calls that need a person are escalated by your rules, and calls Remi couldn’t take get a text back within 60 seconds. You can also keep an existing menu and forward one option, or your after-hours calls, to Remi. Remi answers in English today.</p>',
       },
     ],
-    related: ['ai-receptionist', 'conversational-ai', 'call-routing'],
+    related: ['ai-receptionist', 'conversational-ai', 'call-routing', 'call-overflow'],
     faqs: [
-      { q: 'Is IVR the same as an AI receptionist?', a: 'No. IVR is a menu that routes calls; an AI receptionist holds a natural conversation and completes tasks like booking, rather than just directing the caller.' },
+      { q: 'Is IVR the same as an AI receptionist?', a: 'No. IVR plays a menu and routes the call based on a key press or short phrase. An AI receptionist holds a conversation, asks your intake questions and books the appointment during the call.' },
+      { q: 'What is the difference between IVR and an auto attendant?', a: 'The terms overlap. An auto attendant usually means a simple menu that transfers calls to extensions; IVR can also take spoken input and look up information, such as an account balance, before routing the call.' },
+      { q: 'Why do callers dislike IVR menus?', a: 'Menus make the caller do the sorting, and a wrong choice can mean starting over or landing in voicemail. Callers with an urgent problem may press zero or hang up instead.' },
+      { q: 'Can I replace my IVR with an AI receptionist?', a: 'Yes. You forward your number, or one menu option, to an AI receptionist, which answers in natural language, handles routine requests and routes only the calls that need a person.' },
     ],
-    cta: { href: '/agents/inbound', label: 'Upgrade from IVR to AI' },
+    cta: { href: '/agents/inbound', label: 'Replace the menu with Remi' },
   },
   {
     slug: 'call-routing',
     term: 'Call Routing',
-    aka: ['call forwarding', 'call distribution'],
+    aka: ['call distribution', 'call flow'],
     category: 'AI Receptionist',
     targetKeyword: 'what is call routing',
-    title: 'What Is Call Routing? Definition & Best Practices | Keres AI',
+    title: 'What Is Call Routing? Definition & Rules | Keres AI',
     description:
-      'Call routing directs inbound calls to the right person, team, or destination based on rules. Learn how AI routing answers first, then routes only what needs a human.',
+      'Call routing sends each inbound call to the right person, team or destination using rules. How routing works, rule-based vs AI routing, and what it costs.',
     definition:
-      'Call routing is the process of directing inbound calls to the right destination — a person, team, location, or queue — based on rules like time of day, caller input, or availability. AI-powered routing answers every call first, handles or books what it can, and escalates only the calls that genuinely need a human.',
+      'Call routing is the set of rules that decides where an inbound call goes: to a person, team, location, queue or voicemail. Rules can use the time of day, the number dialed, the caller’s menu choice or what the caller says, and who is available to answer.',
     sections: [
       {
-        h2: 'Smart routing with an AI front desk',
+        h2: 'How call routing works',
         body:
-          'Instead of bouncing callers through menus, Keres answers in two rings, resolves routine requests, and routes by listing, location, or on-call schedule — texting the right person for emergencies. See <a href="/use-cases/after-hours-answering">after-hours answering</a> and <a href="/use-cases/overflow-call-handling">overflow handling</a>.',
+          '<ol> <li><strong>The call arrives</strong> on a number you own, and your phone system reads what it knows: the number dialed, the caller ID and the time.</li> <li><strong>Rules are checked in order.</strong> For example: business hours go to the front desk, after hours go to the answering service, and the number on your ads goes to the sales line.</li> <li><strong>The caller may be asked.</strong> An <a href="/glossary/ivr">IVR</a> menu or an AI receptionist finds out what the caller needs.</li> <li><strong>The call is connected</strong> to a person, a ring group, a queue or a voicemail box.</li> <li><strong>A fallback applies</strong> if nobody answers within a set number of rings: <a href="/glossary/call-overflow">overflow</a> to another line, a backup answerer or voicemail.</li> </ol>',
+      },
+      {
+        h2: 'Rule-based routing vs AI routing',
+        body:
+          '<p>Traditional routing uses fixed signals: the time, the number dialed and the key the caller pressed. It is predictable and inexpensive, but the caller does the sorting, and a wrong choice sends them to the wrong place. AI routing listens to the request in the caller’s own words, answers or books what it can, and connects only the calls that need a person, with the details already collected. Common rule types apply to both: time of day, round-robin across a team, by location or service area, and by skill or department.</p>',
+      },
+      {
+        h2: 'What call routing costs',
+        body:
+          '<p>Basic routing rules come with most business phone systems. The cost that matters is the calls routing sends nowhere: a ring group nobody picks up, or voicemail after hours. If you are comparing routing through an AI receptionist, see <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>.</p>',
+      },
+      {
+        h2: 'How Keres AI handles it',
+        body:
+          '<p><a href="/agents/inbound">Remi</a> answers every call first, in two rings, 24/7. It asks your intake questions, books routine appointments into Google Calendar, HubSpot or ServiceTitan, and escalates to a person by the rules you set, for example sending an after-hours emergency to the technician on call. Calls Remi couldn’t take get a text back within 60 seconds. See <a href="/glossary/after-hours-answering">after-hours answering</a> and <a href="/glossary/emergency-dispatch">emergency dispatch</a>.</p>',
       },
     ],
-    related: ['ai-receptionist', 'ivr', 'call-overflow'],
+    related: ['ai-receptionist', 'ivr', 'call-overflow', 'after-hours-answering'],
     faqs: [
-      { q: 'Can AI route calls to the right team?', a: 'Yes — Keres routes by listing, location, agent, or on-call schedule, and escalates emergencies to the right person by text.' },
+      { q: 'What is the difference between call routing and call forwarding?', a: 'Call forwarding sends every call from one number to another. Call routing applies rules, such as time of day or what the caller needs, to decide where each call goes.' },
+      { q: 'Can AI route calls to the right person?', a: 'Yes. An AI receptionist asks what the caller needs, handles routine requests itself and escalates the rest by your rules. Keres AI’s Remi escalates to a person based on rules you set, such as emergencies after hours.' },
+      { q: 'What happens when a routed call isn’t answered?', a: 'It falls to the fallback you set: another line, a backup answerer or voicemail. Without a live fallback, the caller reaches voicemail and may call someone else.' },
+      { q: 'What is round-robin call routing?', a: 'Round-robin rotates incoming calls across a group so each person takes calls in turn, which spreads the load evenly across a team.' },
     ],
-    cta: { href: '/agents/inbound', label: 'See AI call routing' },
+    cta: { href: '/agents/inbound', label: 'See how Remi routes calls' },
   },
   {
     slug: 'appointment-reminders',
     term: 'Appointment Reminders',
+    aka: ['appointment confirmations', 'reminder texts'],
     category: 'AI Receptionist',
     targetKeyword: 'what are appointment reminders',
-    title: 'What Are Appointment Reminders? Cut No-Shows | Keres AI',
+    title: 'What Are Appointment Reminders? | Keres AI',
     description:
-      'Appointment reminders are automated messages that confirm upcoming appointments to reduce no-shows. Learn how AI sends and manages them by text automatically.',
+      'Appointment reminders are automated texts, calls or emails that confirm upcoming visits. How they work, when to send them, and how they help cut no-shows.',
+    h1: 'What are appointment reminders?',
     definition:
-      'Appointment reminders are automated messages — usually text or email — that confirm an upcoming appointment and give the customer an easy way to confirm, reschedule, or cancel. They’re one of the most effective ways to cut no-shows, and an AI receptionist sends them automatically and handles the reschedules that come back.',
+      'Appointment reminders are automated messages, usually texts, calls or emails, sent before an appointment to confirm it and give the customer an easy way to confirm, reschedule or cancel. They reduce no-shows by keeping the visit in mind and making a change easier than simply not turning up.',
     sections: [
       {
-        h2: 'How reminders reduce no-shows',
+        h2: 'How appointment reminders work',
         body:
-          'A timely text confirmation keeps the appointment top of mind and lets customers reschedule instead of ghosting. When a reschedule comes in, <a href="/glossary/appointment-booking-automation">appointment booking automation</a> refills the slot rather than losing it.',
+          '<ol> <li><strong>The appointment is booked</strong> and written to your calendar or practice system.</li> <li><strong>A confirmation goes out</strong> straight away with the date, time, address and how to make changes.</li> <li><strong>Reminders follow on a schedule you set</strong>, for example a few days before and again the day before.</li> <li><strong>The customer replies</strong> to confirm, reschedule or cancel.</li> <li><strong>Changes update the calendar</strong>, and an opened slot can be offered to someone on your waitlist.</li> </ol>',
+      },
+      {
+        h2: 'Confirmations vs reminders, one-way vs two-way',
+        body:
+          '<p>A confirmation is sent at booking to say the appointment exists. A reminder is sent closer to the date to make sure it still happens. One-way reminders only inform; two-way reminders let the customer reply, which turns a likely no-show into a reschedule you can refill. Only send reminder texts to customers who gave you their number for that purpose, and follow the messaging rules that apply to your business.</p>',
+      },
+      {
+        h2: 'What appointment reminders cost',
+        body:
+          '<p>Reminder features are often bundled into scheduling and practice-management software, sometimes with per-message charges for texts; stand-alone texting tools usually bill by message volume. When reminders come with an AI receptionist plan, see <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>. To see what no-shows cost you now, use the <a href="/tools/dental-no-show-calculator">no-show calculator</a>.</p>',
+      },
+      {
+        h2: 'How Keres AI handles it',
+        body:
+          '<p>Reminders are handled by <a href="/agents/follow-up">Theo</a>, Keres AI’s follow-up worker, included from the Convert plan. Theo confirms each appointment as soon as it is booked, reminds by text and voice on the schedule you set, handles a reschedule in the same thread, and offers a cancelled slot to your waitlist. The appointments themselves come from <a href="/agents/inbound">Remi</a>, which books into Google Calendar, HubSpot or ServiceTitan.</p>',
       },
     ],
-    related: ['appointment-booking-automation', 'ai-receptionist', 'missed-call-text-back'],
+    related: ['appointment-booking-automation', 'no-show-rate', 'ai-receptionist', 'patient-intake'],
     faqs: [
-      { q: 'Do appointment reminders reduce no-shows?', a: 'Yes — automated text reminders with easy rescheduling are one of the most reliable ways to cut no-show rates.' },
+      { q: 'When should appointment reminders be sent?', a: 'It depends on how far ahead people book. A common pattern is a confirmation at booking, a reminder a few days ahead for appointments booked weeks out, and another the day before. Test and adjust for your customers.' },
+      { q: 'Do appointment reminders reduce no-shows?', a: 'They help, especially two-way reminders that make rescheduling easy, because a customer who can change the time is less likely to simply not turn up. Estimate what no-shows cost you with the <a href="/tools/dental-no-show-calculator">no-show calculator</a>.' },
+      { q: 'Should appointment reminders be texts, calls or emails?', a: 'Texts suit short-notice reminders, email suits longer details such as forms or directions, and a voice call reaches customers who don’t read texts. Many businesses combine them.' },
+      { q: 'What is the difference between an appointment confirmation and a reminder?', a: 'A confirmation is sent when the appointment is booked. A reminder is sent closer to the date to make sure it still happens and to offer an easy way to change it.' },
     ],
-    cta: { href: '/use-cases/appointment-booking', label: 'Automate reminders & booking' },
+    cta: { href: '/agents/follow-up', label: 'See how Theo sends reminders' },
   },
   {
     slug: 'lead-scoring',
@@ -910,10 +1062,244 @@ export const glossary: GlossaryTerm[] = [
     ],
     cta: { href: '/ai-receptionist-for-hvac', label: 'See AI dispatch for HVAC' },
   },
+  {
+    slug: 'google-business-profile',
+    term: 'Google Business Profile',
+    aka: ['GBP', 'Google My Business', 'Google Maps listing'],
+    category: 'Local Search',
+    targetKeyword: 'what is a google business profile',
+    title: 'What Is a Google Business Profile? | Keres AI',
+    description:
+      'A Google Business Profile is the free listing that shows your business on Google Search and Maps. How it works, what changed, and what managing it costs.',
+    h1: 'What is a Google Business Profile?',
+    definition:
+      'A Google Business Profile is the free listing Google shows for a local business in Search and Maps. It holds your name, category, address or service area, hours, phone number, photos, services and reviews, and it is often the first thing a nearby customer sees before deciding to call.',
+    sections: [
+      {
+        h2: 'How a Google Business Profile works',
+        body:
+          '<ol> <li><strong>Create or claim the profile.</strong> Google may already have a listing for your business built from public information; you claim it rather than start over.</li> <li><strong>Verify it.</strong> Google chooses which verification methods to offer, for example a video recording, phone, text or email.</li> <li><strong>Set the basics:</strong> primary and secondary categories, services, hours, phone, website, and either an address or a service area if you visit customers.</li> <li><strong>Keep it active:</strong> add photos, publish posts, update holiday hours and reply to reviews.</li> <li><strong>Google ranks it</strong> in local results on relevance, distance and prominence, the three factors Google describes in its <a href="https://support.google.com/business/answer/7091" rel="noopener" target="_blank">guide to local ranking</a>.</li> </ol>',
+      },
+      {
+        h2: 'What changed: chat and Q&A are gone',
+        body:
+          '<p>Some older guides still recommend features that no longer exist. <a href="https://support.google.com/business/answer/14919062" rel="noopener" target="_blank">Google ended Business Profile chat on July 31, 2024</a>, and removed the Questions &amp; Answers section from Business Profiles in late 2025. Calls, website visits, direction requests and reviews are what remain, so the phone number on the profile has to be answered. A management plan that still bills for chat or Q&amp;A is out of date.</p>',
+      },
+      {
+        h2: 'Google Business Profile vs your website',
+        body:
+          '<p>The profile is where people decide whether to call; the website is where they go for more detail. Google controls the profile’s layout and can show edits suggested by the public, so it needs regular checking. You control the website completely. They work best when they agree: the same name, phone, hours and services on both, so Google and customers see one consistent business. See <a href="/glossary/nap-consistency">NAP consistency</a>.</p>',
+      },
+      {
+        h2: 'What a Google Business Profile costs',
+        body:
+          '<p>The profile is free from Google. The cost is the time to keep it current, or a service that does it for you. Found, Keres AI’s visibility plan, starts from $249 a month ($499 for law firms), month-to-month, with no build fee at the base tier. See <a href="/google-business-profile-management">Google Business Profile management</a> for what that covers, and <a href="/pricing">pricing</a> for how quotes are set.</p>',
+      },
+      {
+        h2: 'How Keres AI’s Found handles it',
+        body:
+          '<p><a href="/services/found">Found</a> optimizes the profile once (categories, services, photos and verification), then works it every week: posts, photo updates, review responses, reporting spam listings that compete with you, and monthly insights. It runs the profile alongside your website, review requests and listings so all of them agree. The number on the profile can be answered by <a href="/agents/inbound">Remi</a> in two rings, 24/7.</p>',
+      },
+    ],
+    related: ['map-pack', 'review-generation', 'nap-consistency', 'local-services-ads'],
+    faqs: [
+      { q: 'Is a Google Business Profile free?', a: 'Yes. Creating and managing a profile costs nothing from Google. Paying a service to manage it is optional; Keres AI’s Found includes profile management from $249 a month.' },
+      { q: 'Does Google Business Profile still have chat or Q&A?', a: 'No. Google ended Business Profile chat on July 31, 2024, and removed the Questions & Answers section from Business Profiles in late 2025.' },
+      { q: 'Is Google Business Profile the same as Google My Business?', a: 'Yes. Google My Business was renamed Google Business Profile in 2021. The listing works the same way.' },
+      { q: 'Can a service-area business hide its address?', a: 'Yes. Businesses that serve customers at the customer’s location, such as plumbers, can show a service area instead of a street address.' },
+    ],
+    cta: { href: '/google-business-profile-management', label: 'See Google Business Profile management' },
+  },
+  {
+    slug: 'local-services-ads',
+    term: 'Local Services Ads',
+    aka: ['LSA', 'Google Guaranteed ads', 'Google Screened ads'],
+    category: 'Local Search',
+    targetKeyword: 'what are google local services ads',
+    title: 'What Are Google Local Services Ads? | Keres AI',
+    description:
+      'Local Services Ads are Google ads for service businesses that charge per lead, not per click. How they work, how Google ranks them, and what they cost.',
+    h1: 'What are Local Services Ads?',
+    definition:
+      'Local Services Ads are Google ads for local service businesses that often appear at the top of results for searches like “plumber near me.” Businesses pass Google’s screening and pay for leads, such as calls and messages, rather than clicks. Approved businesses show a Google Guaranteed or Google Screened badge.',
+    sections: [
+      {
+        h2: 'How Local Services Ads work',
+        body:
+          '<ol> <li><strong>Check eligibility.</strong> Local Services Ads are offered for specific service categories and locations, which Google lists.</li> <li><strong>Pass screening.</strong> Depending on the category, Google’s checks can include business registration, licenses, insurance and background checks.</li> <li><strong>Set up the ad:</strong> services, service area, hours and a weekly budget.</li> <li><strong>Receive leads.</strong> Customers call or message from the ad, and you pay for leads, not clicks or impressions.</li> <li><strong>Answer and earn reviews.</strong> Google lists responsiveness to customer inquiries and your reviews among the factors it uses to rank these ads.</li> </ol>',
+      },
+      {
+        h2: 'How Google ranks Local Services Ads',
+        body:
+          '<p>Google’s Local Services help pages list the factors it uses, including your proximity to the customer, your review score and number of reviews, how responsive you are to customer inquiries, your business hours, and serious or repeated complaints about your business. Two of those are things a business controls day to day: answering every lead, and asking every customer for a review.</p>',
+      },
+      {
+        h2: 'Local Services Ads vs Google Search ads',
+        body:
+          '<p>Standard Google Search ads charge per click, rank on bids and ad quality, and let you write the ad and choose keywords. Local Services Ads charge per lead, use a fixed format showing your rating and badge, and Google decides which searches they appear on from your service categories and area. They reward operational basics, answering and reviews, more than ad copy. Keres AI does not manage standard Google Search ads; that work is referred out.</p>',
+      },
+      {
+        h2: 'What Local Services Ads cost',
+        body:
+          '<p>You set a weekly budget and pay per lead. Lead cost varies by service category and location, so there is no single price; Google shows an estimate during setup. The Local Services Ads add-on to Found is quoted with the plan. Found starts from $249 a month ($499 for law firms), month-to-month. See <a href="/pricing">pricing</a>.</p>',
+      },
+      {
+        h2: 'How Keres AI’s Found handles it',
+        body:
+          '<p>Local Services Ads setup and response is an add-on to <a href="/services/found">Found</a>: verification, listing, and answering. <a href="/agents/inbound">Remi</a> answers each lead’s call in two rings, 24/7, asks your intake questions and books into Google Calendar, HubSpot or ServiceTitan. Found also sends a review request after every job and manages your <a href="/google-business-profile-management">Google Business Profile</a>, which covers the review side of the ranking factors.</p>',
+      },
+    ],
+    related: ['google-business-profile', 'review-generation', 'map-pack', 'lead-response-time'],
+    faqs: [
+      { q: 'How much do Local Services Ads cost?', a: 'You set a weekly budget and pay per lead rather than per click. Lead cost varies by service category and location, so check the estimate Google shows for your business during setup.' },
+      { q: 'How does Google rank Local Services Ads?', a: 'Google lists factors including your proximity to the customer, your review score and number of reviews, how responsive you are to customer inquiries, your business hours, and serious or repeated complaints.' },
+      { q: 'What is the difference between Google Guaranteed and Google Screened?', a: 'Both are badges for businesses that pass Google’s checks. Google Guaranteed is used for home-service categories; Google Screened is used for professional services such as law firms.' },
+      { q: 'Does Keres AI manage Local Services Ads?', a: 'Yes, as an add-on to Found: verification, listing, and answering every lead in two rings with Remi. Keres AI does not manage standard Google Search ads.' },
+    ],
+    cta: { href: '/services/found', label: 'See Found and its add-ons' },
+  },
+  {
+    slug: 'map-pack',
+    term: 'Map Pack (Local Pack)',
+    aka: ['local pack', 'local 3-pack', 'Google Maps results'],
+    category: 'Local Search',
+    targetKeyword: 'what is the google map pack',
+    title: 'What Is the Google Map Pack (Local Pack)? | Keres AI',
+    description:
+      'The map pack is the map and short list of local businesses Google shows for nearby searches. How Google picks them, and what a business can influence.',
+    h1: 'What is the map pack?',
+    definition:
+      'The map pack, also called the local pack, is the map and short list of businesses, usually three, that Google shows near the top of results for local searches such as “dentist near me.” Each entry comes from a Google Business Profile and shows the rating, hours and a call button.',
+    sections: [
+      {
+        h2: 'How the map pack works',
+        body:
+          '<ol> <li>Someone searches for a service with local intent, or Google infers it from their location.</li> <li>Google finds Business Profiles that match the search (<strong>relevance</strong>), using categories, services and other profile details.</li> <li>It weighs how far each business is from the searcher, or from the place named in the search (<strong>distance</strong>).</li> <li>It weighs how well known each business is (<strong>prominence</strong>), which Google says includes review count and score and information from across the web, such as links, articles and directories.</li> <li>The top results show in the pack; “More places” opens the full list in Maps.</li> </ol> <p>Google describes these factors in its guide to <a href="https://support.google.com/business/answer/7091" rel="noopener" target="_blank">improving your local ranking</a>, and says there is no way to request or pay for a better local ranking.</p>',
+      },
+      {
+        h2: 'Map pack vs organic results vs Local Services Ads',
+        body:
+          '<p>Organic results below the pack are web pages, ranked mainly on the page itself. The map pack lists businesses and is driven by the Business Profile. <a href="/glossary/local-services-ads">Local Services Ads</a>, when they show, sit above both and are paid per lead. A local business can appear in all three for the same search, and each one needs the same phone number answered.</p>',
+      },
+      {
+        h2: 'What it costs to appear in the map pack',
+        body:
+          '<p>Appearing in the map pack is free, and Google says you can’t pay for a better local ranking. The cost is the work behind it: a complete profile, a steady flow of reviews, consistent listings and a website that supports the services you list. Found covers that work from $249 a month ($499 for law firms), month-to-month, with no build fee at the base tier. See <a href="/pricing">pricing</a>.</p>',
+      },
+      {
+        h2: 'How Keres AI’s Found handles it',
+        body:
+          '<p><a href="/services/found">Found</a> works on the parts a business can influence: the profile’s categories, services and photos, weekly posts and review replies; a review request after every job; one consistent name, address and phone across Apple, Bing, Yelp, Nextdoor and Angi; and a website built for your trade. Distance is the one factor nobody can change, which is why no honest provider can guarantee a map pack position. See <a href="/google-business-profile-management">Google Business Profile management</a>.</p>',
+      },
+    ],
+    related: ['google-business-profile', 'review-generation', 'nap-consistency', 'local-services-ads'],
+    faqs: [
+      { q: 'How many businesses are in the Google map pack?', a: 'Usually three, with a link to see more in Google Maps. The exact layout changes with the search and the device.' },
+      { q: 'How do I get my business into the map pack?', a: 'Google says local results are based on relevance, distance and prominence. Keep your Business Profile complete and accurate, ask every customer for a review, keep your listings consistent, and make sure your website supports the services you list.' },
+      { q: 'Can I pay to appear in the map pack?', a: 'Not in the unpaid local results; Google says there is no way to request or pay for a better local ranking. Ads, including Local Services Ads, can appear near local results and are labelled as sponsored.' },
+    ],
+    cta: { href: '/google-business-profile-management', label: 'See Google Business Profile management' },
+  },
+  {
+    slug: 'nap-consistency',
+    term: 'NAP Consistency (Citations)',
+    aka: ['NAP', 'local citations', 'business listings'],
+    category: 'Local Search',
+    targetKeyword: 'what is nap consistency',
+    title: 'What Is NAP Consistency? Local Citations | Keres AI',
+    description:
+      'NAP consistency means your business name, address and phone match everywhere you are listed online. Why it matters for local search and how to fix it.',
+    h1: 'What is NAP consistency?',
+    definition:
+      'NAP consistency means your business name, address and phone number appear the same way everywhere you are listed online: your Google Business Profile, website, Apple Maps, Bing, Yelp and industry directories. Each listing is a citation. Matching details help customers and search engines recognize one business.',
+    sections: [
+      {
+        h2: 'How NAP cleanup works',
+        body:
+          '<ol> <li><strong>Pick the canonical version</strong> of your name, address and phone, usually as it appears on your Google Business Profile and signage.</li> <li><strong>Find your existing listings</strong>, including ones created automatically by data providers or left over from a previous owner or address.</li> <li><strong>Fix the differences:</strong> an old phone number, a previous address, a different suite format, or a name with extra keywords added.</li> <li><strong>Merge or remove duplicates</strong>, which split reviews and confuse customers.</li> <li><strong>Check again</strong> after a move, a new number or a rebrand, because old details can resurface from data providers.</li> </ol>',
+      },
+      {
+        h2: 'Why NAP consistency matters',
+        body:
+          '<p>Google says prominence in local results is based partly on information about a business from across the web, such as links, articles and directories, in its <a href="https://support.google.com/business/answer/7091" rel="noopener" target="_blank">guide to local ranking</a>. Conflicting details make that information harder to tie to one business. They also cost calls directly: a customer who finds an old number on one directory reaches a dead line or someone else.</p>',
+      },
+      {
+        h2: 'NAP vs citations',
+        body:
+          '<p>Citations are the listings and mentions themselves; NAP consistency is whether they agree. A structured citation is a directory listing with fields, such as Yelp, Angi or Apple Business Connect. An unstructured citation is a mention in an article, blog or local news story. Both should carry the same name, address and phone.</p>',
+      },
+      {
+        h2: 'What NAP consistency costs',
+        body:
+          '<p>Fixing listings yourself is free but slow, because each directory has its own login and verification. Listing services charge to push one set of details out and keep it there. In Keres AI’s Found, listings and citations are part of the plan, from $249 a month ($499 for law firms), month-to-month. See <a href="/pricing">pricing</a>.</p>',
+      },
+      {
+        h2: 'How Keres AI’s Found handles it',
+        body:
+          '<p><a href="/services/found">Found</a> keeps one consistent name, address and phone across Apple, Bing, Yelp, Nextdoor and Angi, plus Avvo and FindLaw for law firms or Healthgrades for practices, matched to your Google Business Profile and website. Found’s AI search visibility add-on extends the same consistency to the details AI assistants read about your business. See <a href="/google-business-profile-management">Google Business Profile management</a>.</p>',
+      },
+    ],
+    related: ['google-business-profile', 'map-pack', 'review-generation', 'local-services-ads'],
+    faqs: [
+      { q: 'What does NAP stand for?', a: 'Name, address and phone number. Some people add a W for website (NAPW).' },
+      { q: 'What is a local citation?', a: 'Any online mention of your business name, address and phone, such as a directory listing on Yelp or Angi or a mention in a local news article.' },
+      { q: 'Do service-area businesses need NAP consistency?', a: 'Yes. Even if your address is hidden on Google, your name and phone still appear across directories, and an old phone number on one listing sends customers to a dead line.' },
+      { q: 'How do I find inconsistent listings?', a: 'Search your business name together with old phone numbers and addresses, then check the major directories one by one. A listings service can run the scan for you.' },
+    ],
+    cta: { href: '/services/found', label: 'See what Found manages' },
+  },
+  {
+    slug: 'review-generation',
+    term: 'Review Generation',
+    aka: ['review requests', 'getting more Google reviews'],
+    category: 'Local Search',
+    targetKeyword: 'what is review generation',
+    title: 'What Is Review Generation? Rules & Methods | Keres AI',
+    description:
+      'Review generation is asking every customer for an online review after the job. How it works, why review gating is not allowed, and what it costs.',
+    definition:
+      'Review generation is the routine of asking every customer for an online review after the job, usually by text or email with a direct link to your Google Business Profile. Done properly, every customer gets the same request, whatever you think of how the job went.',
+    sections: [
+      {
+        h2: 'How review generation works',
+        body:
+          '<ol> <li><strong>Trigger on a finished job:</strong> a completed work order, a closed matter or a finished visit.</li> <li><strong>Send one short request</strong> by text or email with a direct link to your Google review form.</li> <li><strong>Send one reminder</strong> if there is no reply, then stop.</li> <li><strong>Reply to every review</strong>, positive or negative, within a few days.</li> <li><strong>Track your rating and review count</strong> monthly, and follow up on problems customers raise.</li> </ol>',
+      },
+      {
+        h2: 'Review gating and the rules',
+        body:
+          '<p>Review gating means asking customers how they feel first and sending only the happy ones to Google. Google’s review policy does not allow businesses to selectively solicit positive reviews or discourage negative ones, and it does not allow offering incentives for reviews. In the US, the FTC’s rule on consumer reviews and testimonials (16 CFR Part 465) bars fake reviews, incentives conditioned on a review expressing a particular sentiment, and suppressing negative reviews through threats, intimidation or false accusations. The safe pattern is simple: ask every customer the same way.</p>',
+      },
+      {
+        h2: 'Review generation vs reputation management',
+        body:
+          '<p>Review generation brings in new reviews. Reputation management is broader: replying to reviews, flagging fake or policy-violating ones to Google, fixing the problems customers raise, and watching the trend. A steady flow of genuine reviews matters because Google says review count and score factor into local search ranking. See the <a href="/glossary/map-pack">map pack</a>.</p>',
+      },
+      {
+        h2: 'What review generation costs',
+        body:
+          '<p>Asking for reviews costs nothing but the habit, which is what usually breaks down in a busy week. Review software automates the request and is usually priced per location per month. In Keres AI’s Found, review generation is included, from $249 a month ($499 for law firms), month-to-month; the quote depends partly on how many review requests you send each month. See <a href="/pricing">pricing</a>.</p>',
+      },
+      {
+        h2: 'How Keres AI’s Found handles it',
+        body:
+          '<p><a href="/services/found">Found</a> sends an automated review request after every job or matter, the same request to every customer. It drafts owner replies for your approval, passes any problem a customer reports to you so you can fix it, and gives you a monthly rating report. Nothing filters who receives the review link. See <a href="/google-business-profile-management">Google Business Profile management</a>.</p>',
+      },
+    ],
+    related: ['google-business-profile', 'map-pack', 'local-services-ads', 'nap-consistency'],
+    faqs: [
+      { q: 'What is review gating?', a: 'Review gating is screening customers first and asking only the satisfied ones to post a public review. Google’s policy does not allow selectively soliciting positive reviews, so every customer should get the same request.' },
+      { q: 'Can I offer a discount for a Google review?', a: 'No. Google’s policy does not allow incentives for reviews, and the FTC rule (16 CFR Part 465) bars incentives conditioned on a review expressing a particular sentiment.' },
+      { q: 'When should I ask a customer for a review?', a: 'Soon after the job is finished, while the experience is fresh, with a direct link so it takes the customer a minute. One reminder is enough.' },
+      { q: 'Should I reply to negative reviews?', a: 'Yes. A calm, specific reply that offers to fix the problem shows future customers how you handle issues. Never threaten or pressure a reviewer to remove a review.' },
+    ],
+    cta: { href: '/services/found', label: 'See how Found asks for reviews' },
+  },
 ];
 
 export const glossaryCategories = [
   'AI Receptionist',
   'AI SDR & Outbound',
   'Email Deliverability',
+  'Local Search',
 ] as const;

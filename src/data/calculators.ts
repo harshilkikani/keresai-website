@@ -26,6 +26,14 @@ export interface Calculator {
   perLabel: string; // e.g. "/mo"
   secondaryLabel: string; // e.g. "/ year"
   note: string; // methodology disclosure shown under the result
+  /** Worked example using the default inputs, written out as sentences (HTML allowed). */
+  example?: string;
+  /** The formula in words (HTML allowed). */
+  formula?: string;
+  /** Every assumption the result rests on; no source means it is labelled a Keres AI assumption. */
+  assumptions?: { text: string; source?: { label: string; url: string } }[];
+  /** What to do with the number (HTML allowed; may start with <p>, <ol> or <ul>). */
+  nextSteps?: string;
   faqs: { q: string; a: string }[];
   related: { label: string; href: string }[];
 }
@@ -43,7 +51,7 @@ export const calculators: Calculator[] = [
     h1Accent: 'costing you?',
     lead: 'Peak-season and after-hours calls are where HVAC companies lose the most. Plug in your numbers to see the monthly and annual revenue slipping away to voicemail.',
     answer:
-      '<strong>HVAC missed-call loss</strong> = monthly calls × missed-call rate × close rate × average ticket. HVAC companies miss an estimated 30–45% of calls in peak season, and with service tickets averaging $300–$600 (and replacements far higher), even a 65% answer rate can mean five figures a month walking to competitors.',
+      '<strong>HVAC missed-call loss</strong> = monthly calls × missed-call rate × close rate × average ticket. With the default inputs (400 calls a month, a 65% answer rate, a 25% close rate and a $450 average ticket), the estimate is <strong>$15,750 a month</strong>. The defaults and the close rate are Keres AI assumptions; replace them with your own phone report and job data.',
     fields: [
       { id: 'leads', label: 'Monthly calls', default: 400, min: 0 },
       { id: 'answer', label: 'Answer rate %', default: 65, min: 0, max: 100 },
@@ -52,11 +60,23 @@ export const calculators: Calculator[] = [
     resultLabel: "You're losing",
     perLabel: '/mo',
     secondaryLabel: '/ year',
-    note: 'Close rate (25%) is the typical answered-lead close rate for home services. Swap in your own number if you track it.',
+    note: 'Close rate (25%) is a Keres AI assumption, not a measured industry figure. To use your own close rate, multiply the result by (your close rate ÷ 25%).',
+    example:
+      'An HVAC company that gets 400 calls a month and answers 65% of them misses 140 calls (400 × 35%). If 25% of those callers would have booked, that is 35 lost jobs, and at a $450 average ticket the calculator shows <strong>$15,750 a month</strong>. The yearly line, <strong>$189,000</strong>, assumes every month looks like this one.',
+    formula:
+      'Missed calls = monthly calls × (100% − answer rate). Lost jobs = missed calls × close rate. Lost revenue per month = lost jobs × average ticket. The yearly figure is the monthly figure × 12.',
+    assumptions: [
+      { text: 'A 25% close rate on calls that would have been answered. It is fixed in this calculator; scale the result by (your close rate ÷ 25%) to use your own.' },
+      { text: 'The default inputs (400 calls, 65% answer rate, $450 ticket) are example values, not industry averages.' },
+      { text: 'Every missed caller is counted as lost. Some call back or leave a voicemail you return, so treat the result as an upper estimate.' },
+      { text: 'Yearly = monthly × 12. HVAC demand is seasonal, so run the calculator once for a peak month and once for a slow month.' },
+    ],
+    nextSteps:
+      '<ul> <li><strong>Check the answer rate.</strong> Pull answered and missed calls from your phone system for the same month, split into business hours and after hours.</li> <li><strong>Find where the gap is.</strong> Daytime misses point to overflow coverage; evening and weekend misses point to after-hours coverage.</li> <li><strong>Compare the loss with the cost of closing it.</strong> Set the monthly figure against the cost of an answering option. See <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>.</li> </ul>',
     faqs: [
-      { q: 'How much revenue do HVAC companies lose to missed calls?', a: 'It depends on call volume and average ticket, but HVAC companies missing 30–45% of peak-season calls commonly lose five figures a month. Enter your numbers above for an estimate, and see the <a href="/benchmarks/hvac-answering">HVAC answering benchmarks</a> for context.' },
-      { q: 'Why do HVAC companies miss so many calls?', a: 'Demand is spiky — a heat wave or cold snap multiplies call volume overnight, and a large share of no-cool and no-heat calls arrive after hours when the office is closed. See the <a href="/ai-receptionist-for-hvac">AI receptionist for HVAC</a>.' },
-      { q: 'How can an HVAC company stop missing calls?', a: 'An AI receptionist answers every call in two rings, 24/7, books the service visit, and dispatches no-cool and no-heat emergencies to your on-call tech — closing both the peak-season and after-hours gaps.' },
+      { q: 'How do I find my real answer rate?', a: 'Most business phone systems and carriers report answered and missed calls. Divide answered calls by total inbound calls for the same period, and check business hours and after hours separately, because the gaps usually differ.' },
+      { q: 'Is the 25% close rate right for my HVAC business?', a: 'It is a Keres AI assumption that keeps the example simple, not an industry statistic. If you track how many answered calls become booked jobs, use that rate instead: multiply the result by your close rate divided by 25%.' },
+      { q: 'How can an HVAC company stop missing calls?', a: 'Cover the hours and peaks when calls go unanswered: overflow forwarding during busy periods and an answering option after hours. Keres AI’s <a href="/ai-receptionist-for-hvac">AI receptionist for HVAC</a> answers in two rings, 24/7, asks your intake questions and books into ServiceTitan, Google Calendar or HubSpot.' },
     ],
     related: [
       { label: 'AI receptionist for HVAC', href: '/ai-receptionist-for-hvac' },
@@ -76,7 +96,7 @@ export const calculators: Calculator[] = [
     h1Accent: 'costing you?',
     lead: 'A hailstorm can generate a season of calls in hours — and the first roofer to answer usually wins the claim. See what an unanswered surge costs you.',
     answer:
-      '<strong>Roofing storm-lead loss</strong> = storm-season calls × missed-call rate × close rate × average job value. Because the first company to inspect typically wins the insurance claim and replacement jobs run $10,000+, missing even a fraction of a hail-surge can cost six figures across a season.',
+      '<strong>Roofing storm-lead loss</strong> = storm-season calls × missed-call rate × close rate × average job value. With the default inputs (300 calls in a storm month, a 60% answer rate, a 30% close rate and a $9,000 average job), the estimate is <strong>$324,000 for that month</strong>. The defaults and close rate are Keres AI assumptions; use your own numbers.',
     fields: [
       { id: 'leads', label: 'Storm-season calls / mo', default: 300, min: 0 },
       { id: 'answer', label: 'Answer rate %', default: 60, min: 0, max: 100 },
@@ -84,12 +104,24 @@ export const calculators: Calculator[] = [
     ],
     resultLabel: "You're losing",
     perLabel: '/mo',
-    secondaryLabel: '/ season (×12)',
-    note: 'Close rate (30%) reflects a typical answered storm-lead booking rate. Storm volume is bursty — your worst month matters more than your average. Swap in your own numbers.',
+    secondaryLabel: '/ yr if every month were a storm month',
+    note: 'Close rate (30%) is a Keres AI assumption for answered storm leads that become signed jobs. The second figure multiplies by 12; multiply the monthly result by your actual number of storm months instead.',
+    example:
+      'A roofer that gets 300 calls in a storm month and answers 60% of them misses 120 calls (300 × 40%). If 30% of those callers would have signed, that is 36 lost jobs, and at a $9,000 average job the calculator shows <strong>$324,000 for the month</strong>. Storm seasons are rarely twelve months long: with three storm months like this one, the season figure would be about <strong>$972,000</strong>, not the ×12 line.',
+    formula:
+      'Missed calls = storm-month calls × (100% − answer rate). Lost jobs = missed calls × close rate. Lost revenue for the month = lost jobs × average job value. Multiply by the number of storm months you actually have for a season figure.',
+    assumptions: [
+      { text: 'A 30% close rate from answered storm call to signed job. It is fixed in this calculator; scale the result by (your close rate ÷ 30%) to use your own.' },
+      { text: 'The default inputs (300 calls, 60% answer rate, $9,000 job) are example values, not industry averages. A repair-heavy business should enter a much lower job value.' },
+      { text: 'Every missed caller is counted as lost. Some call back, so treat the result as an upper estimate.' },
+      { text: 'The calculator’s second line multiplies by 12. Use your own number of storm months instead.' },
+    ],
+    nextSteps:
+      '<ul> <li><strong>Use your busiest month.</strong> Enter calls from your last storm surge, not your yearly average, because surges are when calls are missed.</li> <li><strong>Plan surge coverage before the season.</strong> Decide who answers when every line is busy, and how inspections get booked on the call.</li> <li><strong>Compare the loss with the cost of coverage.</strong> See <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>.</li> </ul>',
     faqs: [
-      { q: 'How much do roofers lose to missed storm calls?', a: 'With roof replacements routinely worth $10,000+, missing even a handful of storm calls can cost six figures across a season. Enter your numbers above, and see the <a href="/benchmarks/roofing-lead-response">roofing lead-response benchmarks</a>.' },
-      { q: 'Why do roofing companies miss storm leads?', a: 'Hail and wind events generate huge simultaneous call surges in a few hours. A normal front desk cannot answer them all, so high-value insurance leads go to voicemail — and most callers dial the next roofer. See the <a href="/ai-receptionist-for-roofing">AI receptionist for roofing</a>.' },
-      { q: 'How can roofers capture more storm leads?', a: 'An AI receptionist answers unlimited simultaneous calls the instant a storm hits, qualifies the damage, and books inspections — so a surge becomes a full schedule instead of a full voicemail box.' },
+      { q: 'How do I estimate storm-season call volume?', a: 'Use your call log from the last storm season and enter the busiest month rather than the average, because a surge is when calls are missed. If you are new to an area, start with a conservative number and update it after the first event.' },
+      { q: 'Why shouldn’t I use the yearly figure for roofing?', a: 'The calculator multiplies the monthly result by 12, but storm demand is concentrated in a few months. Multiply the monthly figure by the number of storm months you actually have.' },
+      { q: 'How can roofers capture more storm leads?', a: 'Make sure every call during a surge is answered and the inspection is booked on the call. Keres AI’s <a href="/ai-receptionist-for-roofing">AI receptionist for roofing</a> answers in two rings, 24/7, asks your intake questions about the damage, and texts back calls it couldn’t take within 60 seconds.' },
     ],
     related: [
       { label: 'AI receptionist for roofing', href: '/ai-receptionist-for-roofing' },
@@ -109,7 +141,7 @@ export const calculators: Calculator[] = [
     h1Accent: 'costing your practice?',
     lead: 'Empty chairs are lost production you rarely recover same-day. See what your no-show rate costs every month — and every year.',
     answer:
-      '<strong>Dental no-show loss</strong> = monthly appointments × no-show rate × average production per visit. With no-show rates estimated at 10–20% and each empty chair worth $200 or more, a busy practice can lose thousands a month — much of it from reschedule calls the front desk never answered.',
+      '<strong>Dental no-show loss</strong> = monthly appointments × no-show rate × average production per visit. With the default inputs (400 appointments a month, a 15% no-show rate and $250 average production), the estimate is <strong>$15,000 a month</strong>. The defaults are Keres AI example values; enter your own from your practice-management system.',
     fields: [
       { id: 'appts', label: 'Appointments / mo', default: 400, min: 0 },
       { id: 'noshow', label: 'No-show rate %', default: 15, min: 0, max: 100 },
@@ -118,11 +150,22 @@ export const calculators: Calculator[] = [
     resultLabel: "You're losing",
     perLabel: '/mo',
     secondaryLabel: '/ year',
-    note: 'No-show rates for dental practices are commonly estimated at 10–20%. Many no-shows trace back to reschedule calls that went unanswered. Swap in your own production number.',
+    note: 'The 15% no-show rate and $250 production per visit are Keres AI example values, not industry statistics. Replace them with figures from your practice-management system.',
+    example:
+      'A practice with 400 appointments a month and a 15% no-show rate has 60 no-shows (400 × 15%). At $250 average production per visit, the calculator shows <strong>$15,000 a month</strong> in lost production, or <strong>$180,000 a year</strong> if the rate holds every month.',
+    formula:
+      'No-shows = monthly appointments × no-show rate. Lost production per month = no-shows × average production per visit. The yearly figure is the monthly figure × 12.',
+    assumptions: [
+      { text: 'The default inputs (400 appointments, 15% no-show rate, $250 production) are example values, not industry averages.' },
+      { text: 'Every no-show is counted as fully lost production. Slots refilled the same day reduce the real loss, so treat the result as an upper estimate.' },
+      { text: 'Yearly = monthly × 12, assuming a steady appointment volume.' },
+    ],
+    nextSteps:
+      '<ul> <li><strong>Measure your actual rate.</strong> Divide no-shows by scheduled appointments for the last three months, and look at which appointment types and times miss most.</li> <li><strong>Confirm and remind.</strong> Confirm each appointment when it is booked and send reminders that make rescheduling easy. See <a href="/glossary/appointment-reminders">appointment reminders</a>.</li> <li><strong>Answer the reschedule calls.</strong> A patient who can’t reach the office to move an appointment often just doesn’t come. See <a href="/pricing">Keres AI pricing</a>.</li> </ul>',
     faqs: [
-      { q: 'How much do dental no-shows cost?', a: 'With no-show rates of 10–20% and each empty chair worth $200 or more, a busy practice can lose thousands a month. Enter your numbers above, and see the <a href="/benchmarks/dental-no-show">dental no-show benchmarks</a>.' },
-      { q: 'How do missed calls cause no-shows?', a: 'When patients cannot reach the office to reschedule, the appointment simply lapses and the chair sits empty. Capturing and rebooking those calls is one of the most direct ways to cut no-shows. See the <a href="/industries/dental-med-spa">AI receptionist for dental practices</a>.' },
-      { q: 'How can a practice reduce no-shows?', a: 'Answer and rebook every reschedule call, confirm appointments proactively, and cover after-hours demand. An AI receptionist does all three automatically, 24/7.' },
+      { q: 'How do I calculate my dental no-show rate?', a: 'Divide missed appointments (no-shows without notice) by scheduled appointments for the same period. Count late cancellations separately if your practice treats them differently.' },
+      { q: 'Does the calculator include same-day cancellations?', a: 'Only if you count them in the no-show rate you enter. If you refill some cancelled slots the same day, the real loss is lower than the calculator shows.' },
+      { q: 'How can a dental practice reduce no-shows?', a: 'Confirm each appointment when it is booked, send reminders that make rescheduling easy, and answer reschedule calls so a change doesn’t become a no-show. Keres AI’s <a href="/agents/follow-up">Theo</a> sends confirmations and text and voice reminders, and offers cancelled slots to your waitlist.' },
     ],
     related: [
       { label: 'AI receptionist for dental practices', href: '/industries/dental-med-spa' },
@@ -142,7 +185,7 @@ export const calculators: Calculator[] = [
     h1Accent: 'costing your firm?',
     lead: 'A single missed new-client call can be thousands in lost case value handed to the firm that answered. See what your intake gap costs.',
     answer:
-      '<strong>Legal intake loss</strong> = monthly new-client calls × missed-call rate × signed-client rate × average case value. Because the first firm to respond usually signs the client and case values run $1,000–$10,000+, even a modest miss rate on high-intent inquiries adds up fast.',
+      '<strong>Legal intake loss</strong> = monthly new-client calls × missed-call rate × signed-client rate × average case value. With the default inputs (80 new-client calls a month, a 55% answer rate, a 20% signed-client rate and a $3,500 average case value), the estimate is <strong>$25,200 a month</strong>. The defaults and signed-client rate are Keres AI assumptions; use your own intake data.',
     fields: [
       { id: 'leads', label: 'New-client calls / mo', default: 80, min: 0 },
       { id: 'answer', label: 'Answer rate %', default: 55, min: 0, max: 100 },
@@ -151,11 +194,23 @@ export const calculators: Calculator[] = [
     resultLabel: "You're losing",
     perLabel: '/mo',
     secondaryLabel: '/ year',
-    note: 'Signed-client rate (20%) reflects a typical answered-inquiry to retained-client rate. Swap in your own number if you track it.',
+    note: 'Signed-client rate (20%) is a Keres AI assumption, not a measured industry figure. To use your own rate, multiply the result by (your signed-client rate ÷ 20%).',
+    example:
+      'A firm that gets 80 new-client calls a month and answers 55% of them misses 36 calls (80 × 45%). If 20% of those callers would have signed, that is 7.2 clients (the calculator shows 7), and at a $3,500 average case value it shows <strong>$25,200 a month</strong>, or <strong>$302,400 a year</strong> if every month looks the same.',
+    formula:
+      'Missed calls = new-client calls × (100% − answer rate). Lost clients = missed calls × signed-client rate. Lost fees per month = lost clients × average case value. The yearly figure is the monthly figure × 12.',
+    assumptions: [
+      { text: 'A 20% signed-client rate on inquiries that would have been answered. It is fixed in this calculator; scale the result by (your rate ÷ 20%) to use your own.' },
+      { text: 'Average case value means the fees your firm collects per signed matter, not the settlement or verdict amount.' },
+      { text: 'The default inputs (80 calls, 55% answer rate, $3,500 case value) are example values, not industry averages.' },
+      { text: 'Every missed caller is counted as lost. Some call back or leave a voicemail you return, so treat the result as an upper estimate.' },
+    ],
+    nextSteps:
+      '<ul> <li><strong>Count only prospective clients.</strong> Separate new-client calls from existing clients, courts and vendors in your intake log.</li> <li><strong>Check when the misses happen.</strong> If they cluster after hours or during court time, that is the coverage to add first.</li> <li><strong>Compare the loss with the cost of coverage.</strong> See <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>.</li> </ul>',
     faqs: [
-      { q: 'How much do law firms lose to missed intake calls?', a: 'With case values of $1,000–$10,000+ and the first firm to respond usually signing the client, even a modest miss rate costs significant revenue. Enter your numbers above, and see the <a href="/benchmarks/legal-intake-conversion">legal intake conversion benchmarks</a>.' },
-      { q: 'Why do firms lose new clients?', a: 'High-value legal inquiries often arrive after hours and callers rarely leave voicemails. When the call is not answered live, the prospective client simply calls the next firm. See the <a href="/industries/law-firms">AI receptionist for legal intake</a>.' },
-      { q: 'How can a firm improve intake conversion?', a: 'Answer every inquiry live, screen and qualify the matter, and book the consultation — around the clock. An AI receptionist for legal intake handles all of this 24/7, including collecting the names your firm needs for its conflict check.' },
+      { q: 'What should I enter as average case value?', a: 'Use the average fee your firm collects per signed matter of this type, not the settlement or verdict amount. If you handle several practice areas, run the calculator once per area.' },
+      { q: 'How do I count new-client calls?', a: 'Count only calls from prospective clients, not existing clients, courts or vendors. Your intake log, or a tracking number per marketing channel, gives the cleanest count.' },
+      { q: 'How can a law firm stop missing new-client calls?', a: 'Answer every inquiry live, including after hours, and book the consultation on the call. Keres AI’s <a href="/industries/law-firms">AI receptionist for law firms</a> answers in two rings, 24/7, asks your intake questions, and escalates to a person by your rules.' },
     ],
     related: [
       { label: 'AI receptionist for legal intake', href: '/industries/law-firms' },
@@ -175,7 +230,7 @@ export const calculators: Calculator[] = [
     h1Accent: 'costing you?',
     lead: 'Speed to lead decides the job. See the estimated revenue you can recover by responding to every inbound lead in under five minutes.',
     answer:
-      '<strong>Speed to lead</strong> is one of the strongest predictors of conversion: responding within five minutes makes a lead far more likely to qualify than waiting even 30 minutes, and the first business to respond usually wins. This calculator estimates the revenue you can recover by closing your response-time gap.',
+      '<strong>Speed to lead</strong> matters: in the Lead Response Management study (15,000 web leads across six companies), the odds of qualifying a lead were 21 times higher when it was contacted within five minutes than at 30 minutes. With the default inputs (200 leads a month, a $700 average deal and a 30-minute response), this calculator estimates <strong>$22,750 a month</strong> recoverable. Its conversion steps are Keres AI assumptions.',
     fields: [
       { id: 'leads', label: 'Monthly leads', default: 200, min: 0 },
       { id: 'value', label: 'Avg deal value', default: 700, min: 0, prefix: '$' },
@@ -184,11 +239,23 @@ export const calculators: Calculator[] = [
     resultLabel: 'You can recover',
     perLabel: '/mo',
     secondaryLabel: '/ year',
-    note: 'Illustrative model: relative conversion vs. a sub-5-minute response is stepped (≤5 min = 100%, ≤10 = 60%, ≤30 = 35%, ≤60 = 20%, >60 = 10%) against a 25% base close rate. Treat as directional, not exact.',
+    note: 'Illustrative model: relative conversion vs. a sub-5-minute response is stepped (≤5 min = 100%, ≤10 = 60%, ≤30 = 35%, ≤60 = 20%, >60 = 10%) against a 25% base close rate. The steps and the base rate are Keres AI assumptions. Treat the result as directional, not exact.',
+    example:
+      'A business that gets 200 leads a month, closes 25% of them when it responds within five minutes, and averages $700 a deal could close 50 deals worth $35,000. Responding in about 30 minutes, the calculator applies a 35% relative-conversion factor, so it captures about $12,250 now and shows <strong>$22,750 a month</strong> recoverable, or <strong>$273,000 a year</strong>.',
+    formula:
+      'Potential revenue = monthly leads × 25% base close rate × average deal value. Current capture = potential revenue × the relative-conversion factor for your response time. Recoverable revenue = potential revenue − current capture. The yearly figure is the monthly figure × 12.',
+    assumptions: [
+      { text: 'Faster response raises the odds of qualifying a lead: contacted within five minutes, the odds were 21 times higher than at 30 minutes in this study.', source: { label: 'Oldroyd & InsideSales.com, Lead Response Management Study (15,000 leads, six companies)', url: 'https://www.mortech.com/hs-fs/hub/25649/file-13535879-pdf/docs/mit_study.pdf' } },
+      { text: 'Firms that tried to contact a lead within an hour were nearly seven times as likely to qualify it as firms that tried an hour later.', source: { label: 'Oldroyd, McElheran & Elkington, “The Short Life of Online Sales Leads,” Harvard Business Review (2011)', url: 'https://scholarsarchive.byu.edu/facpub/9711' } },
+      { text: 'The relative-conversion steps (≤5 min = 100%, ≤10 = 60%, ≤30 = 35%, ≤60 = 20%, over 60 = 10%) are a simplified curve that follows the direction of that research. They are not values taken from it.' },
+      { text: 'A 25% base close rate for leads answered within five minutes, and the default inputs (200 leads, $700 deal, 30 minutes), are example values.' },
+    ],
+    nextSteps:
+      '<ul> <li><strong>Measure your real response time.</strong> For calls, a missed call’s response time is however long the callback takes. For web forms, compare the form timestamp with your first reply.</li> <li><strong>Fix the slowest channel first.</strong> After-hours calls and weekend forms usually wait longest.</li> <li><strong>Compare the gap with the cost of closing it.</strong> See <a href="/ai-receptionist-cost">how much an AI receptionist costs</a> and <a href="/pricing">Keres AI pricing</a>.</li> </ul>',
     faqs: [
-      { q: 'Why does lead response time matter so much?', a: 'Studies of lead response time consistently find that contacting a lead within five minutes makes it many times more likely to qualify than waiting 30 minutes, and the first business to respond usually wins the job. See <a href="/glossary/lead-response-time">lead response time</a>.' },
-      { q: 'How is the recoverable revenue calculated?', a: 'The model compares the deals you would close responding in under five minutes against your current capture at your stated response time, using a stepped relative-conversion factor and a base close rate. It is illustrative — treat it as directional context.' },
-      { q: 'How can I respond to every lead in under five minutes?', a: 'An <a href="/agents/inbound">AI receptionist</a> answers every call in two rings, 24/7, so your effective response time is seconds — for every lead, including after hours and overflow.' },
+      { q: 'Why does lead response time matter?', a: 'In the Lead Response Management study of 15,000 web leads, the odds of qualifying a lead were 21 times higher when it was contacted within five minutes than at 30 minutes. See <a href="/glossary/lead-response-time">lead response time</a>.' },
+      { q: 'How is the recoverable revenue calculated?', a: 'The calculator takes the deals you would close responding within five minutes (leads × 25% × deal value), applies a stepped factor for your current response time, and subtracts what you capture now. The steps and the 25% base are Keres AI assumptions, so treat the result as directional.' },
+      { q: 'How do I measure my current lead response time?', a: 'For calls, it is the time until a person or system answers; for a missed call, it is how long the callback takes. For web forms, compare the form timestamp with your first reply, and use the average over a normal month.' },
     ],
     related: [
       { label: 'Lead response time', href: '/glossary/lead-response-time' },

@@ -30,6 +30,10 @@ const related = t.related
   .filter((g): g is NonNullable<typeof g> => Boolean(g));
 
 const cleanDefinition = t.definition.replace(/<[^>]+>/g, '');
+const shortTerm = t.term.replace(/\s*\(.*\)\s*/, '');
+const h1 = t.h1 ?? `What is ${shortTerm}?`;
+// Section bodies that start with a block tag (<p>, <ol>, <ul>) render in a div, not a <p>.
+const isBlock = (html: string) => /^\s*<(p|ol|ul)[\s>]/.test(html);
 
 // Soft CTA: sends informational readers to the most relevant product/use-case page
 // rather than jumping straight to demo — matches where they are in the funnel.
@@ -49,7 +53,13 @@ const softCtaMap: Record<string, { href: string; label: string; context: string 
     label: 'Fix your deliverability →',
     context: 'See deliverability tools',
   },
+  'Local Search': {
+    href: t.cta?.href ?? '/services/found',
+    label: 'See what Found manages →',
+    context: 'See the service behind this concept',
+  },
 };
+const isLocal = t.category === 'Local Search';
 const softCta = softCtaMap[t.category];
 
 const webpage = webPageSchema({
@@ -72,7 +82,7 @@ const webpage = webPageSchema({
 
   <header class="page-hero container">
     <span class="eyebrow">{t.category} · Glossary</span>
-    <h1>What is {t.term.replace(/\s*\(.*\)\s*/, '')}?</h1>
+    <h1>{h1}</h1>
   </header>
 
   <!-- DIRECT ANSWER BLOCK — marked speakable and as schema.org Answer for AI retrieval -->
@@ -87,7 +97,7 @@ const webpage = webPageSchema({
     <section class="page-section container">
       <div class="prose">
         <h2>{s.h2}</h2>
-        <p set:html={s.body} />
+        {isBlock(s.body) ? <div set:html={s.body} /> : <p set:html={s.body} />}
       </div>
     </section>
   ))}
@@ -139,8 +149,10 @@ const webpage = webPageSchema({
 
   <!-- HARD CTA — only after full content consumed -->
   <CtaBand
-    heading={t.cta ? `See ${t.term.replace(/\s*\(.*\)\s*/, '')} working live` : 'Stop losing leads to voicemail'}
-    sub="Book a free 20-minute call and watch Keres answer a call, qualify the lead, and book an appointment in under sixty seconds."
+    heading={isLocal ? 'Get found, then get the call answered' : t.cta ? `See ${shortTerm} working live` : 'Stop losing leads to voicemail'}
+    sub={isLocal
+      ? 'Book a free 20-minute call to go through your Google profile, reviews and listings, and what Found would manage for you.'
+      : 'Book a free 20-minute call and watch Keres answer a call, qualify the lead, and book an appointment in under sixty seconds.'}
     cta={t.cta ? t.cta.label : 'Book a Demo'}
     href={t.cta ? t.cta.href : '/quote'}
   />
