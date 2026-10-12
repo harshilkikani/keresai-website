@@ -280,8 +280,7 @@ export async function GET() {
   // ── TRUST & COMPLIANCE ────────────────────────────────────────
   push('## Trust, security & compliance');
   push(`- Trust & Security page: ${ORIGIN}/trust`);
-  push('- Keres AI supports HIPAA-aligned workflows for dental and medical clients (DPA/BAA available).');
-  push('- Keres AI supports SOC 2-aligned data workflows for legal and professional services clients.');
+  push('- Compliance: Keres AI is not SOC 2 or HIPAA certified and does not sign BAAs today. It never uses customer data to train third-party models.');
   push('- Customer data is never used to train third-party AI models.');
   push('- Data processing agreements (DPAs) available on request.');
   push();

@@ -105,7 +105,7 @@ export const industries: Industry[] = [
     ],
     faqs: [
       { q: 'Can the AI receptionist book dental appointments?', a: 'Yes. Keres books new patients, reschedules, and confirms appointments directly on your practice calendar, then texts the patient a confirmation.' },
-      { q: 'Is it HIPAA-aware?', a: 'Keres can be configured for HIPAA-aligned workflows, signs DPAs, and respects data-handling requirements. Discuss specifics on your demo.' },
+      { q: 'Is Keres HIPAA compliant?', a: 'No. Keres is not HIPAA certified and does not sign BAAs today, so tell us your requirements before you sign up. Remi can be set up not to collect clinical detail it does not need.' },
       { q: 'Does it handle insurance questions?', a: 'Keres answers common questions, captures insurance details for intake, and routes anything that needs your team.' },
     ],
   },
@@ -193,7 +193,7 @@ export const industries: Industry[] = [
     faqs: [
       { q: 'Can it handle conflict screening for law firms?', a: 'Yes. Keres asks the conflict-check questions you configure, captures opposing parties, and flags any potential conflict to your team before booking.' },
       { q: 'Is it appropriate for high-value professional inquiries?', a: 'Yes. The agent matches your firm\'s tone, captures the matter details, and qualifies the lead so your attorneys or advisors only meet with real opportunities.' },
-      { q: 'How does it protect confidential information?', a: 'Keres can be configured for SOC 2-aligned workflows, signs DPAs, and never uses your data to train third-party models. Discuss compliance specifics on your demo.' },
+      { q: 'How does it protect confidential information?', a: 'Keres never uses your data to train third-party models and limits access to the people who run your account. It does not hold a SOC 2 report, so raise any compliance requirement before you sign.' },
     ],
   },
   {

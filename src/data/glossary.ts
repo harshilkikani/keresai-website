@@ -755,7 +755,7 @@ export const glossary: GlossaryTerm[] = [
     related: ['ai-receptionist', 'appointment-booking-automation', 'no-show-rate', 'appointment-reminders'],
     faqs: [
       { q: 'Can AI collect patient intake over the phone?', a: 'Yes. Keres asks the intake questions you configure during the booking call, captures the answers, and pushes the data to your practice management system before the appointment.' },
-      { q: 'Is AI patient intake HIPAA compliant?', a: 'Keres can be configured for HIPAA-aligned workflows, signs BAAs where required, and handles PHI according to your data requirements — discuss specifics during your demo.' },
+      { q: 'Is AI patient intake HIPAA compliant?', a: 'It depends on the vendor. Keres is not HIPAA certified and does not sign BAAs today, so tell us your requirements before you sign up.' },
     ],
     cta: { href: '/ai-receptionist-for-dentists', label: 'See AI patient intake for dental' },
   },
@@ -785,7 +785,7 @@ export const glossary: GlossaryTerm[] = [
     related: ['ai-receptionist', 'lead-qualification', 'appointment-booking-automation', 'patient-intake'],
     faqs: [
       { q: 'Can AI handle conflict screening for a law firm?', a: 'Yes. Keres asks your configured conflict-check questions, captures opposing party names and matter type, and flags any potential conflict to your team before confirming the booking.' },
-      { q: 'Is AI legal intake confidential?', a: 'Keres can be configured for SOC 2-aligned workflows, never uses intake data to train third-party AI models, and signs DPAs. Discuss specific confidentiality requirements on your demo.' },
+      { q: 'Is AI legal intake confidential?', a: 'Keres never uses intake data to train third-party AI models and limits access to the people who run your account. It does not hold a SOC 2 report; raise specific confidentiality requirements before you sign.' },
       { q: 'What practice areas work well with AI intake?', a: 'Personal injury, family law, criminal defense, immigration, estate planning, and employment law all have structured intake processes that AI handles well — capturing the matter details and qualifying the caller before booking.' },
     ],
     cta: { href: '/ai-receptionist-for-professional-intake', label: 'See AI legal intake' },

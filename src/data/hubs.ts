@@ -243,7 +243,7 @@ export const hubs: Hub[] = [
     foundLine:
       'Patients choose a practice on the profile and the reviews before they ever call. Found covers the site, the Google Business Profile, review generation, listings and health-directory citations from $249 a month.',
     compliance:
-      'Remi is configured not to collect clinical detail it does not need, call data is processed under a DPA, and access is logged. If you need a BAA in place, ask before you sign.',
+      'Remi is configured not to collect clinical detail it does not need, and access is limited to the people who run your account. Keres does not sign BAAs today, so if you need one, ask before you sign.',
     children: [
       { label: 'AI receptionist for dentists', href: '/ai-receptionist-for-dentists' },
       { label: 'AI receptionist for med spas', href: '/ai-receptionist-for-med-spas' },
