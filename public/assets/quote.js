@@ -107,7 +107,7 @@
         if (!validate(steps[1])) return;
         var hp = form.elements._gotcha;
         var tooFast = Date.now() - rendered < MIN_MS;
-        if ((hp && hp.value) || tooFast) { err('form', M('fast', 'That was quick — try again in a moment.')); return; }
+        if ((hp && hp.value) || tooFast) { err('form', M('fast', 'Please wait a few seconds, then press Send again.')); return; }
         var btn = form.querySelector('[data-qf-submit]');
         btn.disabled = true; btn.textContent = M('sending', 'Sending…');
         err('form', '');

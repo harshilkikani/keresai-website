@@ -18,10 +18,10 @@ const labelAttrs = Object.fromEntries(Object.entries(c.labels).map(([k, v]) => [
   </div>
   <div class="roi-grid">
     <div class="roi-inputs">
-      <label class="roi-field"><span class="roi-field-label">{c.leads}</span><input type="number" id="roi-leads" min="0" value="250"></label>
-      <label class="roi-field"><span class="roi-field-label">{c.answer}</span><input type="number" id="roi-answer" min="0" max="100" value="60"></label>
-      <label class="roi-field"><span class="roi-field-label">{c.ticket}</span><div class="roi-field-prefix"><span>$</span><input type="number" id="roi-job" min="0" value="680"></div></label>
-      <label class="roi-field"><span class="roi-field-label">{c.afterHours}</span><input type="number" id="roi-afterhours" min="0" max="100" value="35"></label>
+      <label class="roi-field" for="roi-leads"><span class="roi-field-label">{c.leads}</span><input type="number" id="roi-leads" min="0" value="250"></label>
+      <label class="roi-field" for="roi-answer"><span class="roi-field-label">{c.answer}</span><input type="number" id="roi-answer" min="0" max="100" value="60"></label>
+      <label class="roi-field" for="roi-job"><span class="roi-field-label">{c.ticket}</span><div class="roi-field-prefix"><span>$</span><input type="number" id="roi-job" min="0" value="680"></div></label>
+      <label class="roi-field" for="roi-afterhours"><span class="roi-field-label">{c.afterHours}</span><input type="number" id="roi-afterhours" min="0" max="100" value="35"></label>
     </div>
     <div class="roi-output">
       <div class="roi-headline-label">{c.losing}</div>
