@@ -1,4 +1,5 @@
 ---
+import { roiResult, usd, count } from '../../data/calcDefaults';
 import Layout from '../../layouts/Layout.astro';
 import Schema from '../../components/Schema.astro';
 import Button from '../../components/Button.astro';
@@ -19,6 +20,7 @@ const path = `/lp/${lp.slug}`;
 // PLACEHOLDER — a dedicated Formspree endpoint per landing page would
 // keep ad attribution clean. This reuses the site's contact endpoint.
 const FORM_ACTION = 'https://formspree.io/f/mojywlnn';
+const roiOut = roiResult({ leads: 80, answer: 50, job: 3500, ah: 45 }, lp.calcPreset);
 ---
 <Layout title={lp.title} description={lp.description} path={path} noindex bare>
   <Schema slot="head" graph={[]} />
@@ -39,7 +41,7 @@ const FORM_ACTION = 'https://formspree.io/f/mojywlnn';
 
         <ul class="k-hero__facts" aria-label="At a glance">
           <li><span class="k-hero__fact-k">Answers in</span><span class="k-hero__fact-v" data-figure>2 rings</span></li>
-          <li><span class="k-hero__fact-k">Live in</span><span class="k-hero__fact-v" data-figure>5 days</span></li>
+          <li><span class="k-hero__fact-k">Setup</span><span class="k-hero__fact-v">Done for you</span></li>
           <li><span class="k-hero__fact-k">Contract</span><span class="k-hero__fact-v">None</span></li>
         </ul>
       </div>
@@ -80,7 +82,7 @@ const FORM_ACTION = 'https://formspree.io/f/mojywlnn';
 
           <button type="submit" class="btn-k btn-k--primary btn-k--wide">Get my quote</button>
           <p class="lp-form__fine qf__consent">By sending, you agree we may call or text this number about your quote. Reply STOP to any text to opt out. <a href="/legal/privacy.html">Privacy policy</a>.</p>
-          <p class="lp-form__fine">No contract. Live in five business days.</p>
+          <p class="lp-form__fine">No contract. Set up for you.</p>
         </form>
       </div>
     </div>
@@ -128,16 +130,16 @@ const FORM_ACTION = 'https://formspree.io/f/mojywlnn';
           </div>
           <div class="roi-output">
             <div class="roi-headline-label">You&rsquo;re losing</div>
-            <div class="roi-headline-value"><span id="roi-lost-mo">$0</span><span class="roi-per">/mo</span></div>
-            <div class="roi-headline-year">&asymp; <span id="roi-lost-yr">$0</span> / year</div>
+            <div class="roi-headline-value"><span id="roi-lost-mo">{usd(roiOut.lostMo)}</span><span class="roi-per">/mo</span></div>
+            <div class="roi-headline-year">&asymp; <span id="roi-lost-yr">{usd(roiOut.lostYr)}</span> / year</div>
             <div class="roi-math">
-              <div class="roi-math-row"><span>Missed calls / mo</span><span id="roi-missed">0</span></div>
+              <div class="roi-math-row"><span>Missed calls / mo</span><span id="roi-missed">{count(roiOut.missed)}</span></div>
               <div class="roi-math-row muted"><span id="roi-missed-calc"></span><span></span></div>
-              <div class="roi-math-row"><span>Would-have-signed matters</span><span id="roi-jobs">0</span></div>
+              <div class="roi-math-row"><span>Would-have-signed matters</span><span id="roi-jobs">{count(roiOut.jobs)}</span></div>
               <div class="roi-math-row muted"><span id="roi-close-calc"></span><span></span></div>
-              <div class="roi-math-row"><span>Lost case value</span><span id="roi-lost-mo-2">$0</span></div>
+              <div class="roi-math-row"><span>Lost case value</span><span id="roi-lost-mo-2">{usd(roiOut.lostMo)}</span></div>
               <div class="roi-math-row muted"><span id="roi-job-calc"></span><span></span></div>
-              <div class="roi-math-row"><span>After-hours calls / mo</span><span id="roi-ah">0</span></div>
+              <div class="roi-math-row"><span>After-hours calls / mo</span><span id="roi-ah">{count(roiOut.ah)}</span></div>
               <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
             </div>
             <a id="roi-cta" class="btn-k btn-k--primary btn-k--wide" href={PHONE ? PHONE.href : '#lead'} data-event={PHONE ? 'tel_click' : 'demo_click'}>{PHONE ? `Call ${PHONE.display}` : 'Get a quote'}</a>

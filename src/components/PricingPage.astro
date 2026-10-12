@@ -22,7 +22,14 @@ const bundle = priceAmount('bundle');
 const build = priceAmount('customBuild');
 const run = priceAmount('customRun');
 const quote = l(locale, '/quote');
-import { answeringVendors, keresRow, VENDORS_CHECKED } from '../data/answeringVendors';
+import { answeringVendors, keresRow, VENDORS_CHECKED, answeringVendorsEs, vendorTypeEs } from '../data/answeringVendors';
+import type { AnsweringVendor } from '../data/answeringVendors';
+/** Vendor row in the page language: Spanish wording from answeringVendorsEs, English otherwise. */
+const row = (v: AnsweringVendor) => {
+  const es = locale === 'es' ? answeringVendorsEs[v.name] : undefined;
+  return { type: locale === 'es' ? vendorTypeEs[v.type] : v.type, billing: es?.billing ?? v.billing, starting: es?.starting ?? v.starting };
+};
+const keresCells = row(keresRow);
 ---
 <Breadcrumbs crumbs={crumbs} />
 
@@ -130,15 +137,15 @@ import { answeringVendors, keresRow, VENDORS_CHECKED } from '../data/answeringVe
 <Section tone="raised" spacing="standard" labelledby="vs-title" id="compare">
   <h2 id="vs-title" class="k-h2">{locale === 'es' ? '¿Cómo se compara Keres AI con los servicios de contestación?' : 'How does Keres AI compare with answering services and AI receptionists?'}</h2>
   <p class="k-lede k-measure">{locale === 'es'
-    ? 'Precios publicados por cada proveedor en su propio sitio, revisados el ' + VENDORS_CHECKED + '.'
+    ? 'El plan más bajo que cada proveedor publica en su propia página de precios (en inglés), revisado el ' + VENDORS_CHECKED + '. Traducimos los datos sin cambiar las cifras.'
     : 'Each vendor’s lowest published plan, from its own pricing page, checked ' + VENDORS_CHECKED + '.'}</p>
   <div class="compare-wrap">
     <table class="compare-table">
       <thead><tr><th>{locale === 'es' ? 'Opción' : 'Option'}</th><th>{locale === 'es' ? 'Quién contesta' : 'Who answers'}</th><th>{locale === 'es' ? 'Cómo cobra' : 'How it bills'}</th><th>{locale === 'es' ? 'Plan más bajo publicado' : 'Lowest published plan'}</th></tr></thead>
       <tbody>
-        <tr class="keres"><td>{keresRow.name}</td><td>{keresRow.type}</td><td>{keresRow.billing}</td><td>{keresRow.starting}</td></tr>
+        <tr class="keres"><td>{keresRow.name}</td><td>{keresCells.type}</td><td>{keresCells.billing}</td><td>{keresCells.starting}</td></tr>
         {['Ruby', 'PATLive', 'Smith.ai', 'Goodcall', 'Upfirst'].map((k) => answeringVendors[k]).map((v) => (
-          <tr><td><a href={v.source} rel="noopener nofollow" target="_blank">{v.name}</a></td><td>{v.type}</td><td>{v.billing}</td><td>{v.starting}</td></tr>
+          <tr><td><a href={v.source} rel="noopener nofollow" target="_blank">{v.name}</a></td><td>{row(v).type}</td><td>{row(v).billing}</td><td>{row(v).starting}</td></tr>
         ))}
       </tbody>
     </table>

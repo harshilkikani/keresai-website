@@ -51,16 +51,16 @@ export const geoVerticals: GeoVertical[] = [
     angle:
       "Houston roofs take a beating from Gulf hurricanes, hail, and relentless humidity, and after a major storm the first contractor to inspect a damaged roof usually wins the insurance claim. When hundreds of homeowners call at once, a front desk that can't pick up hands five-figure jobs straight to competitors.",
     localPains: [
-      'Hurricane and hail events trigger massive simultaneous call surges your office cannot absorb',
+      'Hurricane and hail events trigger call surges your office cannot absorb',
       'The first roofer to inspect typically wins the insurance claim — speed decides the job',
       'After-hours storm-damage calls go unanswered while competitors pick up',
       'Estimators stuck on roofs all day miss the inbound calls that drive the next job',
     ],
     bookingFocus:
-      'Keres answers unlimited simultaneous storm calls, qualifies the damage type, books the inspection or estimate, and dispatches emergency tarp jobs — so no Houston storm lead is lost to a busy signal.',
+      'Remi answers Houston storm calls in two rings, 24/7, qualifies the damage type, books the inspection or estimate, flags emergency tarp jobs, and texts back any caller it could not take within 60 seconds.',
     faq: {
       q: 'How does Keres handle a Houston storm-season call surge for roofers?',
-      a: 'Keres answers unlimited simultaneous calls, so when a hurricane or hailstorm sends hundreds of Houston homeowners dialing at once, every one is answered in two rings, qualified, and booked for an inspection — before a competitor picks up.',
+      a: 'Remi answers in two rings, 24/7, qualifies each storm-damage lead and books the inspection, and texts back any caller it could not take within 60 seconds. Your quote sizes the included minutes to hurricane and hail season, so ask on your first call how Remi handles your peak volume.',
     },
   },
   {
@@ -80,7 +80,7 @@ export const geoVerticals: GeoVertical[] = [
       'Keres captures every hail-damage lead the instant it calls, qualifies the claim, and books the inspection on your estimators’ calendars so Dallas storm demand turns into booked jobs, not voicemails.',
     faq: {
       q: 'Can Keres keep up with Dallas hail-season call volume for roofing companies?',
-      a: 'Yes — DFW hailstorms can generate a season’s worth of calls in a single afternoon. Keres answers unlimited simultaneous calls, qualifies each hail-damage lead, and books inspections automatically, so no Dallas storm lead slips through.',
+      a: 'DFW hailstorms can generate a season’s worth of calls in a single afternoon. Remi answers in two rings, qualifies each hail-damage lead, books the inspection, and texts back any caller it could not take within 60 seconds. Your quote sizes the included minutes to hail season, so ask on your first call how Remi handles your peak volume.',
     },
   },
   {
@@ -109,18 +109,18 @@ export const geoVerticals: GeoVertical[] = [
     industrySlug: 'hvac',
     verticalLabel: 'HVAC',
     angle:
-      "Miami's heat and humidity run year-round, so AC systems work overtime and fail constantly — and a dead unit in a humid Florida summer quickly becomes a mold and air-quality problem, not just discomfort. Add hurricane-season power events and a large Spanish-speaking customer base, and an always-on, bilingual front desk becomes a real competitive edge.",
+      "Miami's heat and humidity run year-round, so AC systems work overtime and fail constantly — and a dead unit in a humid Florida summer quickly becomes a mold and air-quality problem, not just discomfort. Add hurricane-season power events, and a front desk that answers around the clock becomes a real competitive edge.",
     localPains: [
       'Year-round heat and humidity keep AC systems under constant strain and failing often',
       'A dead unit in Florida humidity fast becomes a mold and air-quality emergency',
       'Hurricane-season power surges and outages spike repair demand',
-      'A large bilingual customer base expects a front desk that answers in English or Spanish',
+      'Many callers prefer Spanish; Remi answers in English today, so raise it on your first call',
     ],
     bookingFocus:
-      'Keres answers every Miami AC call 24/7 — in English or Spanish — books the repair or maintenance visit, and flags humidity-driven emergencies to your on-call tech right away.',
+      'Remi answers Miami AC calls in two rings, 24/7, in English, books the repair or maintenance visit, and flags humidity-driven emergencies to your on-call tech right away.',
     faq: {
-      q: 'Does Keres handle bilingual HVAC calls in Miami?',
-      a: 'Yes. Keres answers Miami AC calls around the clock and can handle callers in English or Spanish, qualifying the issue, booking the repair, and dispatching urgent humidity- and heat-driven failures to your team immediately.',
+      q: 'Does Keres answer Miami HVAC calls in Spanish?',
+      a: 'Not today. Remi answers in English only. It answers Miami AC calls around the clock, qualifies the issue, books the repair and alerts your on-call tech to urgent heat- and humidity-driven failures. If many of your callers prefer Spanish, raise it on your first call before you decide.',
     },
   },
   {
@@ -132,15 +132,15 @@ export const geoVerticals: GeoVertical[] = [
       'Denver and the Front Range are among the most hail-battered regions in the country, and a single summer hailstorm can damage thousands of roofs in minutes. High-altitude UV and wild temperature swings accelerate roof wear, so storm season brings an avalanche of inspection and insurance-claim calls that no front desk can answer alone.',
     localPains: [
       'Front Range hail is among the most destructive in the U.S., damaging thousands of roofs at once',
-      'A single hailstorm triggers a flood of simultaneous inspection and claim calls',
+      'A single hailstorm triggers a flood of inspection and claim calls',
       'High-altitude UV and rapid temperature swings drive steady repair and replacement demand',
       'Estimators in the field during peak season can’t answer the inbound calls that fuel the pipeline',
     ],
     bookingFocus:
-      'Keres answers every Denver hail-damage call at once, qualifies the claim, and books inspections and estimates so a storm surge becomes a full calendar, not a string of missed calls.',
+      'Remi answers Denver hail-damage calls in two rings, qualifies the claim, and books inspections and estimates so a storm surge becomes a full calendar, not a string of missed calls.',
     faq: {
       q: 'Can Keres handle Denver hail-storm roofing surges?',
-      a: 'Yes — when a Front Range hailstorm damages thousands of roofs in minutes, Keres answers unlimited simultaneous calls, qualifies each hail-damage lead, and books inspections automatically, so your Denver crew’s calendar fills instead of your voicemail.',
+      a: 'When a Front Range hailstorm damages thousands of roofs in minutes, Remi answers in two rings, qualifies each hail-damage lead, books the inspection, and texts back any caller it could not take within 60 seconds. Your quote sizes the included minutes to hail season, so ask on your first call how Remi handles your peak volume.',
     },
   },
 ];

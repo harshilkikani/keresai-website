@@ -1,4 +1,6 @@
 ---
+import { roiResult, usd, count } from '../../data/calcDefaults';
+const roiOut = roiResult({ leads: 250, answer: 60, job: 680, ah: 35 }, 'home-services');
 import Layout from '../../layouts/Layout.astro';
 import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
@@ -63,16 +65,16 @@ const webpage = webPageSchema({
         </div>
         <div class="roi-output">
           <div class="roi-headline-label">You're losing</div>
-          <div class="roi-headline-value"><span id="roi-lost-mo">$0</span><span class="roi-per">/mo</span></div>
-          <div class="roi-headline-year">≈ <span id="roi-lost-yr">$0</span> / year</div>
+          <div class="roi-headline-value"><span id="roi-lost-mo">{usd(roiOut.lostMo)}</span><span class="roi-per">/mo</span></div>
+          <div class="roi-headline-year">≈ <span id="roi-lost-yr">{usd(roiOut.lostYr)}</span> / year</div>
           <div class="roi-math">
-            <div class="roi-math-row"><span>Missed leads / mo</span><span id="roi-missed">0</span></div>
+            <div class="roi-math-row"><span>Missed leads / mo</span><span id="roi-missed">{count(roiOut.missed)}</span></div>
             <div class="roi-math-row muted"><span id="roi-missed-calc">= 250 × (100% − 60%)</span><span></span></div>
-            <div class="roi-math-row"><span>Would-have-closed jobs</span><span id="roi-jobs">0</span></div>
+            <div class="roi-math-row"><span>Would-have-closed jobs</span><span id="roi-jobs">{count(roiOut.jobs)}</span></div>
             <div class="roi-math-row muted"><span id="roi-close-calc">= missed × 25% close rate</span><span></span></div>
-            <div class="roi-math-row"><span>Lost revenue</span><span id="roi-lost-mo-2">$0</span></div>
+            <div class="roi-math-row"><span>Lost revenue</span><span id="roi-lost-mo-2">{usd(roiOut.lostMo)}</span></div>
             <div class="roi-math-row muted"><span id="roi-job-calc">= jobs × $680 avg ticket</span><span></span></div>
-            <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">0</span></div>
+            <div class="roi-math-row"><span>After-hours leads / mo</span><span id="roi-ah">{count(roiOut.ah)}</span></div>
             <div class="roi-math-row muted"><span>- the ones most at risk</span><span></span></div>
           </div>
           <a id="roi-cta" class="btn btn-primary" href="/quote">Book a demo with these numbers →</a>
@@ -94,7 +96,7 @@ const webpage = webPageSchema({
       <div class="soft-cta-body">
         <span class="soft-cta-label">Next step</span>
         <p class="soft-cta-heading">See how Keres recovers every missed call</p>
-        <p class="soft-cta-sub">Book a free demo — watch the AI receptionist answer, qualify, and book a call in under sixty seconds.</p>
+        <p class="soft-cta-sub">Book a free 20-minute call and hear Remi answer, qualify and book a call.</p>
       </div>
       <a href="/quote" class="btn btn-primary">Book a Demo</a>
     </div>

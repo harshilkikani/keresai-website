@@ -301,6 +301,6 @@ export const quoteFactors = [
 /** True of every plan, stated once and reused as a label/value pair. */
 export const planTerms = [
   { k: 'Contract', v: 'Month-to-month. Cancel any month.' },
-  { k: 'Go live', v: 'Five business days.' },
+  { k: 'Setup', v: 'Done for you. Timing agreed on your first call.' },
   { k: 'Usage', v: 'Per-minute after your included minutes.' },
 ];
