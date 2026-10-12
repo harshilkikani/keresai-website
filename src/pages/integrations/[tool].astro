@@ -37,7 +37,7 @@ const blurb = (g: typeof i) => (isLive(g) ? g.intro.slice(0, 110) + '…' : `Rol
   <Schema slot="head" graph={[
     serviceSchema({
       name: `Keres AI + ${i.name} integration`,
-      serviceType: 'AI Receptionist & AI SDR integration',
+      serviceType: 'AI receptionist integration',
       description,
       path,
     }),
@@ -100,5 +100,5 @@ const blurb = (g: typeof i) => (isLive(g) ? g.intro.slice(0, 110) + '…' : `Rol
   )}
 
   <FaqSection faqs={faqs} title={`Keres AI + ${i.name} — FAQ`} />
-  <CtaBand heading={live ? `Connect Keres to ${i.name}` : `Ask where ${i.name} is on the list`} sub={live ? 'Book a free 30-minute demo and we’ll wire it to your exact setup.' : 'Book a free 30-minute call and we’ll tell you what works with your setup today.'} />
+  <CtaBand heading={live ? `Connect Keres to ${i.name}` : `Ask where ${i.name} is on the list`} sub={live ? 'Book a free 20-minute call and we’ll wire it to your exact setup.' : 'Book a free 20-minute call and we’ll tell you what works with your setup today.'} />
 </Layout>

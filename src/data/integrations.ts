@@ -97,7 +97,7 @@ export const integrations: Integration[] = [
     status: 'live',
     category: 'CRM',
     targetKeyword: 'hubspot ai receptionist integration',
-    title: 'Keres AI + HubSpot — AI Receptionist & SDR',
+    title: 'Keres AI + HubSpot: AI Receptionist Integration | Keres AI',
     description:
       'Connect Keres AI to HubSpot to log every call, create contacts and deals as leads qualify, and book meetings — inbound and outbound, straight into your CRM.',
     intro:
