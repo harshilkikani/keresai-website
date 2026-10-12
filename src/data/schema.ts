@@ -20,7 +20,11 @@ export const organizationSchema = {
   },
   description:
     'Keres AI sells AI workers for local businesses. Each does one job: Found gets you found (website, Google listing, reviews), Remi answers every call in two rings and books it, Theo confirms and reminds, June brings past customers back, Sol finds new customers by email, and Custom is built for any recurring job. Every worker reports in one morning text. Live in five business days, month-to-month, in English and Spanish.',
-  foundingDate: '2024',
+  // Brand variants and disambiguation: an unrelated keres.ai, the Keras library
+  // and Kore.ai show up for the same searches.
+  alternateName: ['Keres', 'KeresAI', 'keresai.com'],
+  disambiguatingDescription:
+    'Keres AI (keresai.com) sells websites, Google Business Profile management and an AI receptionist to local service businesses in the United States. Not affiliated with keres.ai, the Keras deep-learning library or Kore.ai.',
   slogan: 'Never miss another lead.',
   areaServed: { '@type': 'Country', name: 'United States' },
   email: business.contactEmail,
@@ -44,9 +48,8 @@ export const organizationSchema = {
   // are operated by Keres — Google de-indexes structured data that references
   // dead or unrelated profiles. Re-add LinkedIn / X / G2 / Capterra here once
   // the corresponding accounts are live.
-  sameAs: [
-    'https://calendly.com/ops-keresai/30min',
-  ],
+  // sameAs is omitted until real identity profiles exist (a booking link is
+  // not one). Add LinkedIn / G2 / Capterra / YouTube URLs here when they do.
   // The line Keres itself answers. Sourced from src/data/site.ts so the
   // header, sticky bar, footer and this node can never drift apart.
   ...(PHONE ? { telephone: PHONE.e164 } : {}),
@@ -344,17 +347,14 @@ export function webPageSchema(opts: {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
+    // Same @id as the WebPage node Layout.astro emits on every page, so the two
+    // merge into one node. Only the speakable extension is added here; name,
+    // url, about and language come from Layout, so they can never disagree.
     '@id': `${ORIGIN}${opts.path}#webpage`,
-    url: ORIGIN + opts.path,
-    name: opts.name,
-    description: opts.description,
-    isPartOf: { '@id': `${ORIGIN}/#website` },
-    about: { '@id': `${ORIGIN}/#software` },
     speakable: {
       '@type': 'SpeakableSpecification',
       cssSelector: opts.speakableSelectors ?? ['.answer-block', '.faq-a', '.lead'],
     },
-    inLanguage: 'en-US',
   };
 }
 

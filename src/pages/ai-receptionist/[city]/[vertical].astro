@@ -109,7 +109,7 @@ const sameVerticalOtherCities = geoVerticals.filter((x) => x.verticalSlug === g.
   path={path}
   noindexFollow
 >
-  <Schema slot="head" graph={[serviceSchema, howto, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[serviceSchema, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 

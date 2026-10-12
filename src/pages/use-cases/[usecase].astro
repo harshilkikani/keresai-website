@@ -38,7 +38,6 @@ const webpage = webPageSchema({
 <Layout title={u.title} description={u.description} path={path}>
   <Schema slot="head" graph={[
     serviceSchema({ name: u.name, serviceType: 'AI Receptionist', description: u.description, path }),
-    howto,
     webpage,
     faqSchema(u.faqs),
     breadcrumbSchema(crumbs),
