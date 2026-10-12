@@ -102,15 +102,15 @@ const allIndustries: Industry[] = [
     ],
     faqs: [
       { q: 'Can an AI receptionist handle HVAC emergency calls?', a: 'Yes, within the rules you set with Keres during setup. A typical HVAC setup treats no heat with an infant or elderly person at home as an emergency and warm-transfers it to the on-call tech. For a gas smell, Remi tells the caller to leave the building and call the gas utility or 911, then alerts on-call.' },
-      { q: 'Will Remi keep up during a heat wave?', a: 'Remi answers calls that arrive at the same time, and Keres does not charge extra for simultaneous calls. You pay a monthly rate with included minutes, then a per-minute rate after that, with no per-call fees.' },
+      { q: 'Will Remi keep up during a heat wave?', a: 'Your quote sizes Remi’s included minutes to your busy season, so plan it around your heaviest week, not an average one. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. Ask on your first call how Remi handles your peak volume.' },
       { q: 'Can it tell a maintenance-plan member from a new customer?', a: 'Remi asks whether the caller is on a maintenance plan and writes the answer into the job notes, so your dispatcher can give members the priority your plan promises.' },
       { q: 'Will Remi quote a price for a new system?', a: 'No. Remi only states prices you put in its script, such as your diagnostic or trip fee. Replacement pricing needs someone to see the house, so Remi books a comfort-advisor visit instead.' },
       { q: 'Does Remi speak Spanish?', a: 'Remi answers in English today. If a large share of your callers speak Spanish, raise it on the demo call so Keres can tell you where that stands before you sign.' },
-      { q: 'How long does an HVAC setup take?', a: 'Five business days. Keres writes your intake script and emergency rules with you, connects your number and ServiceTitan or calendar, and you call the line yourself until it answers the way your best CSR would.' },
+      { q: 'How long does an HVAC setup take?', a: 'It depends on your call flows and integrations. Keres writes your intake script and emergency rules with you and connects your number and ServiceTitan or calendar. The timing is agreed on your first call, and you call the line yourself until it answers the way your best CSR would.' },
     ],
     trade: {
       answer:
-        '<strong>Keres AI’s receptionist for HVAC companies is Remi</strong>, an AI agent that answers every call in two rings, 24/7, through heat waves and cold snaps. Remi asks your intake questions (system type, symptoms, address), grades the call against the emergency rules you set, and books the visit into Google Calendar, HubSpot or ServiceTitan. Billing is a monthly rate with included minutes, then per-minute, with no per-call fees. HVAC accounts go live in five business days.',
+        '<strong>Keres AI’s receptionist for HVAC companies is Remi</strong>, an AI agent that answers every call in two rings, 24/7, through heat waves and cold snaps. Remi asks your intake questions (system type, symptoms, address), grades the call against the emergency rules you set, and books the visit into Google Calendar, HubSpot or ServiceTitan. Billing is a monthly rate with included minutes, then per-minute, with no per-call fees. Keres sets it up for you.',
       painsH2: 'Why do HVAC companies miss so many calls?',
       painsNote:
         'HVAC call volume follows the weather, not your staffing plan. The first 90-degree week of the summer and the first hard freeze of the winter are when a full office still sends callers to voicemail, and a homeowner sweating through the night does not wait for a callback.',
@@ -168,7 +168,7 @@ const allIndustries: Industry[] = [
         'Who writes the script and the emergency rules, and how long until it is live?',
       ],
       ctaHeading: 'Get HVAC calls out of voicemail before the next heat wave',
-      ctaSub: 'Book a 30-minute demo, tell us your emergency rules, and hear Remi take an HVAC call.',
+      ctaSub: 'Book a 20-minute call, tell us your emergency rules, and hear Remi take an HVAC call.',
     },
   },
   {
@@ -205,7 +205,7 @@ const allIndustries: Industry[] = [
     ],
     trade: {
       answer:
-        '<strong>Keres AI gives plumbing companies Remi</strong>, an AI receptionist that picks up every call in two rings, day or night. For each caller Remi runs your plumbing intake (the problem, where the water is, whether it is shut off, owner or tenant), then books the job into ServiceTitan, Google Calendar or HubSpot. You pay a monthly rate that includes minutes, then per-minute beyond them, with no per-call fees. Plumbers go live within five business days.',
+        '<strong>Keres AI gives plumbing companies Remi</strong>, an AI receptionist that picks up every call in two rings, day or night. For each caller Remi runs your plumbing intake (the problem, where the water is, whether it is shut off, owner or tenant), then books the job into ServiceTitan, Google Calendar or HubSpot. You pay a monthly rate that includes minutes, then per-minute beyond them, with no per-call fees. Keres sets it up for you.',
       painsH2: 'Why do plumbers lose jobs to voicemail?',
       painsNote:
         'A caller with water coming through the ceiling does not leave a message. They keep dialing down the search results until someone answers, and the plumber who picks up gets the job and, often, the customer for years.',
@@ -266,7 +266,7 @@ const allIndustries: Industry[] = [
         'Can your emergency rules change with the season, such as no hot water in January?',
       ],
       ctaHeading: 'Answer the 2 a.m. burst-pipe call',
-      ctaSub: 'Book a 30-minute demo and hear Remi take a plumbing call with your shutoff and emergency rules.',
+      ctaSub: 'Book a 20-minute call and hear Remi take a plumbing call with your shutoff and emergency rules.',
     },
   },
   {
@@ -409,7 +409,7 @@ const allIndustries: Industry[] = [
       'Tarp and board-up calls sent to your crew',
     ],
     faqs: [
-      { q: 'Can an AI receptionist handle a storm-season call surge?', a: 'Remi answers calls that arrive at the same time, and Keres does not charge extra for simultaneous calls. You pay a monthly rate with included minutes, then per-minute, so a storm week costs minutes, not per-call fees.' },
+      { q: 'Can an AI receptionist handle a storm-season call surge?', a: 'Your quote sizes Remi’s included minutes to your busy season, so plan it around your heaviest week, not an average one. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. Ask on your first call how Remi handles your peak volume.' },
       { q: 'Does it capture insurance-claim details?', a: 'Yes. Remi asks for the storm date, whether a claim is open, and when the adjuster is coming, and puts all three in the job notes so the estimator knows the deadline.' },
       { q: 'Will Remi tell a homeowner whether insurance will pay?', a: 'No. Remi does not give coverage advice. It books the inspection and leaves the claim conversation to your estimator.' },
       { q: 'Does it handle retail replacement leads as well as storm work?', a: 'Yes. For a replacement lead Remi asks the roof’s age, the material and the homeowner’s timeline, then books an estimate.' },
@@ -418,7 +418,7 @@ const allIndustries: Industry[] = [
     ],
     trade: {
       answer:
-        '<strong>For roofing companies, Keres AI runs Remi</strong>, an AI receptionist that answers every call within two rings, 24/7, including the hours after a hailstorm. Remi asks your roofing questions (storm date, active leak, claim status, roof type) and books inspections into Google Calendar, HubSpot or ServiceTitan. Pricing is a monthly rate with included minutes and a per-minute rate after that, with no per-call fees and no surcharge for simultaneous calls. Setup takes five business days.',
+        '<strong>For roofing companies, Keres AI runs Remi</strong>, an AI receptionist that answers every call within two rings, 24/7, including the hours after a hailstorm. Remi asks your roofing questions (storm date, active leak, claim status, roof type) and books inspections into Google Calendar, HubSpot or ServiceTitan. Pricing is a monthly rate with included minutes and a per-minute rate after that, with no per-call fees. Keres sets it up for you.',
       painsH2: 'Why do roofers lose storm leads?',
       painsNote:
         'Storm demand arrives all at once. The same office that handles a normal Tuesday comfortably will miss dozens of calls the day after hail, and those are the homeowners with an insurance claim and a reason to hire quickly.',
@@ -473,16 +473,16 @@ const allIndustries: Industry[] = [
       checklist: [
         'Can it tell an active leak from an inspection request, on your rules?',
         'Does it capture the storm date, claim status and adjuster date?',
-        'Is there a cap or a surcharge when many calls arrive at once?',
+        'How does it handle your storm-week peak, and how are the included minutes sized for it?',
         'Does it book onto your estimators’ calendars, or only take a message?',
         'What languages does it answer in? Remi answers in English today.',
         'Is the per-minute rate after included minutes written into the quote?',
       ],
       priceH2: 'Is an AI receptionist cheaper than an answering service for roofers?',
       priceBody:
-        '<p>Live answering services publish plans from about $250/month (Ruby, 50 minutes) and AI receptionists from about $25–$100/month; see <a href="/ai-receptionist-cost">what an AI receptionist costs</a>. For a roofer, the bigger difference is the storm week: a plan with a small minute allowance can run over fast, and a message-taker does not book the inspection.</p><p>Keres quotes Remi to your call volume, including your storm season: a monthly rate with included minutes, then per-minute, with no per-call fees and no surcharge for simultaneous calls. See <a href="/pricing">pricing</a>.</p>',
+        '<p>Live answering services publish plans from about $250/month (Ruby, 50 minutes) and AI receptionists from about $25–$100/month; see <a href="/ai-receptionist-cost">what an AI receptionist costs</a>. For a roofer, the bigger difference is the storm week: a plan with a small minute allowance can run over fast, and a message-taker does not book the inspection.</p><p>Keres quotes Remi to your call volume, including your storm season: a monthly rate with included minutes, then per-minute, with no per-call fees. Ask on the call how Remi handles your storm-week peak. See <a href="/pricing">pricing</a>.</p>',
       ctaHeading: 'Book the inspection before the other roofer does',
-      ctaSub: 'Book a 30-minute demo and hear Remi take a storm call with your claim questions.',
+      ctaSub: 'Book a 20-minute call and hear Remi take a storm call with your claim questions.',
     },
   },
   {
@@ -514,11 +514,11 @@ const allIndustries: Industry[] = [
       { q: 'Can it handle motor-club and roadside-plan calls?', a: 'Remi asks which motor club or roadside plan the caller is using and notes it on the job, so your dispatcher can check coverage before the truck rolls.' },
       { q: 'Will it quote tow prices?', a: 'Only the prices you put in its script, such as a hook-up fee or a per-mile rate. Anything else goes to your dispatcher.' },
       { q: 'What about impound and vehicle-release calls?', a: 'Remi answers with the hours, documents and fees you give it. It does not release vehicles or make exceptions; those go to your office.' },
-      { q: 'What happens on a night when many calls come in at once?', a: 'Remi answers calls that arrive at the same time, and Keres does not charge extra for simultaneous calls. Billing is a monthly rate with included minutes, then per-minute, never per call.' },
+      { q: 'What happens on a night when many calls come in at once?', a: 'Your quote sizes Remi’s included minutes to your busy season, so plan it around your heaviest week, not an average one. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. Ask on your first call how Remi handles your peak volume.' },
     ],
     trade: {
       answer:
-        '<strong>Keres AI’s answer for towing companies is Remi</strong>, an AI receptionist that takes every call in two rings, 24/7, so a stranded driver gets an answer instead of voicemail. Remi asks your towing questions (exact location, vehicle and drive type, destination, motor club), sends urgent jobs to dispatch, and books scheduled tows into Google Calendar, HubSpot or ServiceTitan. Billing is a monthly rate with included minutes, then per-minute, with no per-call fees. Towing setups go live in five business days.',
+        '<strong>Keres AI’s answer for towing companies is Remi</strong>, an AI receptionist that takes every call in two rings, 24/7, so a stranded driver gets an answer instead of voicemail. Remi asks your towing questions (exact location, vehicle and drive type, destination, motor club), sends urgent jobs to dispatch, and books scheduled tows into Google Calendar, HubSpot or ServiceTitan. Billing is a monthly rate with included minutes, then per-minute, with no per-call fees. Keres sets it up for you.',
       painsH2: 'Why do towing companies miss calls?',
       painsNote:
         'Towing is all urgent and mostly after hours. The calls you miss are rarely recoverable, because the driver on the shoulder has already called someone else by the time you call back.',
@@ -578,7 +578,7 @@ const allIndustries: Industry[] = [
         'Is it billed per call, which adds up on an ice-storm night, or by the month?',
       ],
       ctaHeading: 'Answer the stranded driver on the first call',
-      ctaSub: 'Book a 30-minute demo and hear Remi take a roadside call with your dispatch rules.',
+      ctaSub: 'Book a 20-minute call and hear Remi take a roadside call with your dispatch rules.',
     },
   },
   {
@@ -613,7 +613,7 @@ const allIndustries: Industry[] = [
     ],
     trade: {
       answer:
-        '<strong>Keres AI answers the phone for septic service companies</strong> with Remi, an AI receptionist that picks up every call in two rings, around the clock. Remi asks your septic intake questions (last pump date, system type, alarm or backup, closing date for inspections) and books pumping, inspections and urgent visits into Google Calendar, HubSpot or ServiceTitan. Keres bills a monthly rate with included minutes, then per-minute, with no per-call fees. A septic setup goes live in five business days.',
+        '<strong>Keres AI answers the phone for septic service companies</strong> with Remi, an AI receptionist that picks up every call in two rings, around the clock. Remi asks your septic intake questions (last pump date, system type, alarm or backup, closing date for inspections) and books pumping, inspections and urgent visits into Google Calendar, HubSpot or ServiceTitan. Keres bills a monthly rate with included minutes, then per-minute, with no per-call fees. Keres sets it up for you.',
       painsH2: 'Why do septic companies miss calls?',
       painsNote:
         'Septic work is small crews and long drives. The person who would answer the phone is usually the one running the truck, so calls pile up exactly when the business is busiest.',
@@ -672,7 +672,7 @@ const allIndustries: Industry[] = [
         'Is it billed per call or by the month with included minutes?',
       ],
       ctaHeading: 'Answer septic calls while the crew is on the truck',
-      ctaSub: 'Book a 30-minute demo and hear Remi take an alarm call with your rules.',
+      ctaSub: 'Book a 20-minute call and hear Remi take an alarm call with your rules.',
     },
   },
 ];

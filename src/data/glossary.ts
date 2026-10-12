@@ -78,7 +78,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Why businesses switch from per-minute answering services',
         body:
-          'Per-minute human answering services get expensive fast during busy seasons, and most just take a message you still have to act on. An AI answering service flips that: monthly plans, unlimited simultaneous calls, and completed bookings instead of callback slips.',
+          'Per-minute human answering services get expensive fast during busy seasons, and most just take a message you still have to act on. An AI answering service flips that: monthly plans with included minutes, answers around the clock, and completed bookings instead of callback slips.',
       },
       {
         h2: 'What an AI answering service can do',
@@ -840,7 +840,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'After-hours answering vs. voicemail vs. answering service',
         body:
-          'Voicemail captures a message most callers never leave. A human answering service usually bills by the minute or the call and often takes a message for you to return. An AI after-hours answering service answers unlimited calls simultaneously, books appointments during the conversation, handles emergencies, and costs one monthly rate — with no gaps at 3 AM.',
+          'Voicemail captures a message most callers never leave. A human answering service usually bills by the minute or the call and often takes a message for you to return. An AI after-hours answering service answers in two rings, books appointments during the conversation, handles emergencies, and costs one monthly rate — with no gaps at 3 AM.',
       },
     ],
     related: ['ai-receptionist', 'call-overflow', 'emergency-dispatch', 'missed-call-recovery'],
@@ -992,7 +992,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'How AI eliminates response time for phone leads',
         body:
-          'A human front desk can only answer one call at a time, misses calls while busy, and can\'t staff nights and weekends at the same cost as business hours. An AI receptionist answers unlimited concurrent calls in two rings, 24/7 — including the after-hours calls that are statistically your most valuable. For outbound, the <a href="/glossary/ai-sdr">AI SDR</a> follows up with email leads within minutes of their first interaction.',
+          'A human front desk can only answer one call at a time, misses calls while busy, and can\'t staff nights and weekends at the same cost as business hours. An AI receptionist answers in two rings, 24/7 — including the after-hours calls that are statistically your most valuable. For outbound, the <a href="/glossary/ai-sdr">AI SDR</a> follows up with email leads within minutes of their first interaction.',
       },
     ],
     related: ['ai-receptionist', 'missed-call-recovery', 'after-hours-answering', 'lead-qualification'],
@@ -1012,7 +1012,7 @@ export const glossary: GlossaryTerm[] = [
     description:
       'Front desk automation uses AI to answer calls, book appointments, qualify leads and answer questions, replacing or supplementing human receptionists.',
     definition:
-      'Front desk automation uses AI to perform the core tasks of a business\'s front desk without human staff: answering every call, greeting callers, booking and rescheduling appointments, qualifying and routing leads, answering common questions, collecting intake information, and escalating emergencies. It runs 24/7, scales to unlimited simultaneous calls, and costs a fraction of full-time front desk staffing.',
+      'Front desk automation uses AI to perform the core tasks of a business\'s front desk without human staff: answering every call, greeting callers, booking and rescheduling appointments, qualifying and routing leads, answering common questions, collecting intake information, and escalating emergencies. It runs 24/7 and costs a fraction of full-time front desk staffing.',
     sections: [
       {
         h2: 'What front desk automation replaces',

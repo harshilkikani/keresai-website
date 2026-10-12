@@ -55,14 +55,14 @@ const allUsecases: UseCase[] = [
       'Keres picks up the calls your team can’t (busy lines, peak season, marketing spikes) and books the job instead of sending callers to voicemail.',
     h1: 'Never drop an <span class="accent">overflow call</span>',
     intro:
-      'Overflow call handling routes the calls your team can’t answer — because the lines are busy or staff are slammed — to a backup that picks up instantly. Keres answers unlimited simultaneous calls in two rings, qualifies and books each one, so a peak-season rush or a marketing spike never sends callers to voicemail.',
+      'Overflow call handling routes the calls your team can’t answer — because the lines are busy or staff are slammed — to a backup that picks up. Remi, Keres AI’s AI receptionist, answers the overflow in two rings, qualifies and books each caller, and texts back any call it could not take within 60 seconds, so a peak-season rush or a marketing spike is far less likely to end in voicemail.',
     problem:
       'During busy seasons, ad campaigns, and emergencies, call volume spikes past what your front desk can absorb. Every call that rings out is a booked job handed to a competitor — exactly when demand is highest.',
     how: [
-      'Answers unlimited simultaneous calls — no busy signal, ever',
+      'Answers overflow calls in two rings, 24/7',
       'Picks up overflow after a set number of rings from your existing system',
       'Qualifies and books each caller on your calendar',
-      'Scales instantly for heat waves, storms, and ad-driven spikes',
+      'Texts back any caller it could not take within 60 seconds',
     ],
     outcomes: [
       'Every spillover call answered and booked',
@@ -71,7 +71,7 @@ const allUsecases: UseCase[] = [
     ],
     faqs: [
       { q: 'How does overflow handling work with my phone system?', a: 'Calls your team doesn’t pick up within a set number of rings forward to Keres, which answers instantly and books or routes the caller.' },
-      { q: 'Can Keres handle a sudden spike in calls?', a: 'Yes — it answers unlimited simultaneous calls, so a heat wave or viral ad never sends a caller to voicemail.' },
+      { q: 'Can Keres handle a sudden spike in calls?', a: 'Your quote sizes Remi’s included minutes to your busy season, so plan it around your heaviest week, not an average one. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. Ask on your first call how Remi handles your peak volume.' },
     ],
     related: ['after-hours-answering', 'reduce-staffing-costs', 'lead-capture'],
     cta: { href: '/agents/inbound', label: 'Add AI overflow coverage' },
@@ -151,7 +151,7 @@ const allUsecases: UseCase[] = [
     how: [
       'One monthly rate with included minutes, no overtime rates',
       'Covers business hours, after hours, and overflow in one solution',
-      'Answers unlimited calls at once — no need to staff for peaks',
+      'Included minutes sized to your volume, with your busy season planned into the quote',
       'Books appointments and updates your CRM, not just takes messages',
     ],
     outcomes: [
@@ -232,14 +232,14 @@ const allUsecases: UseCase[] = [
     targetKeyword: 'roofing storm response call handling',
     title: 'Storm-Response Dispatch Workflow for Roofers | Keres AI',
     description:
-      'Keres answers storm-surge calls at once, qualifies hail and wind damage, books inspections and flags tarp jobs, so a roofing surge becomes booked work.',
+      'Keres answers storm calls in two rings, qualifies hail and wind damage, books inspections and flags tarp jobs, so a roofing surge becomes booked work.',
     h1: 'Turn a storm surge into <span class="accent">booked inspections</span>',
     intro:
-      'A storm-response workflow captures the flood of calls a hailstorm or hurricane triggers in a few hours. Keres answers unlimited simultaneous calls, qualifies the damage type, books inspections on your estimators’ calendars, and dispatches emergency tarp and board-up jobs — so the first storm in the area fills your schedule instead of your voicemail.',
+      'A storm-response workflow captures the flood of calls a hailstorm or hurricane triggers in a few hours. Remi answers in two rings, 24/7, qualifies the damage type, books inspections on your estimators’ calendars, and dispatches emergency tarp and board-up jobs — so the first storm in the area fills your schedule instead of your voicemail.',
     problem:
       'Storm demand arrives all at once, and the first roofer to inspect usually wins the insurance claim. A front desk that handles a normal day fine will send dozens of high-value storm callers to voicemail — exactly the leads worth five figures each.',
     how: [
-      'Answers unlimited simultaneous calls the instant a storm hits — no busy signal',
+      'Answers storm calls in two rings and texts back any caller it could not take within 60 seconds',
       'Qualifies hail, wind, and water damage and captures the property details',
       'Books inspections and insurance appointments on your estimators’ calendars',
       'Dispatches emergency tarp and board-up jobs to your crew immediately',
@@ -250,7 +250,7 @@ const allUsecases: UseCase[] = [
       'Emergency tarp jobs dispatched in minutes, not hours',
     ],
     faqs: [
-      { q: 'Can Keres handle hundreds of storm calls at once?', a: 'Yes — Keres answers unlimited simultaneous calls, so a hail or wind event never sends a caller to voicemail. Every storm lead is answered, qualified, and booked.' },
+      { q: 'How does Keres handle a storm-week surge?', a: 'Your quote sizes Remi’s included minutes to your busy season, so plan it around your heaviest week, not an average one. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. Ask on your first call how Remi handles your peak volume.' },
       { q: 'Does it book insurance inspections?', a: 'Yes. Keres qualifies the damage, captures the address and contact details, and books the inspection on your estimator’s calendar. See the <a href="/benchmarks/roofing-lead-response">roofing lead-response benchmarks</a>.' },
     ],
     related: ['emergency-dispatch', 'overflow-call-handling', 'after-hours-answering'],

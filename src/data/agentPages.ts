@@ -48,7 +48,7 @@ export const agentPages: AgentPage[] = [
       'Remi answers every call in two rings, 24/7: runs your intake script, qualifies the lead, books the appointment and texts back any call it could not take.',
     h1: 'Remi, the AI receptionist from Keres AI, answers every call in two rings and books the job.',
     sub:
-      'Remi is Keres AI’s AI receptionist. It answers every call in two rings, 24/7, asks your intake questions, books the appointment into Google Calendar, HubSpot or ServiceTitan while the caller is still on the line, and texts back any call it could not take within 60 seconds. Pricing is a monthly rate with included minutes, then per minute, with no per-call fees. Most accounts are live in five business days.',
+      'Remi is Keres AI’s AI receptionist. It answers every call in two rings, 24/7, asks your intake questions, books the appointment into Google Calendar, HubSpot or ServiceTitan while the caller is still on the line, and texts back any call it could not take within 60 seconds. Pricing is a monthly rate with included minutes, then per minute, with no per-call fees. Keres sets it up for you.',
     heroVertical: 'default',
     flowH2: 'How a call goes',
     flowLede:
@@ -117,10 +117,10 @@ export const agentPages: AgentPage[] = [
     testimonialProves: 'after-hours calls being answered, qualified and booked',
     faqs: [
       { q: 'Does it sound like a robot?', a: 'It sounds like a competent front desk. It answers in two rings, uses your vocabulary, and says "let me get someone for you" instead of guessing. Ask for a live test call when we talk and judge it yourself — that is the fastest demo there is.' },
-      { q: 'How much does Remi cost?', a: `${priceSentence('Remi', 'answer', 'your call volume, locations and integrations')} It is a monthly rate with included minutes, then per minute; there is no per-call charge and no surcharge for simultaneous calls. Found starts separately at $249/month. Published prices for other AI receptionists and answering services are compared on /ai-receptionist-cost.` },
-      { q: 'How long does setup take?', a: 'Five business days. Twenty minutes on how you answer today, then we write your intake script, connect your number, calendar and CRM, and you call it yourself until it answers the way you would.' },
+      { q: 'How much does Remi cost?', a: `${priceSentence('Remi', 'answer', 'your call volume, locations and integrations')} It is a monthly rate with included minutes, then per minute; there is no per-call charge. Found starts separately at $249/month. Published prices for other AI receptionists and answering services are compared on /ai-receptionist-cost.` },
+      { q: 'How long does setup take?', a: 'It depends on your call flows and integrations. Twenty minutes on how you answer today, then Keres writes your intake script and connects your number, calendar and CRM. We agree the timing on that first call, and you call Remi yourself until it answers the way you would.' },
       { q: 'What if a caller needs a human?', a: 'Remi warm-transfers under rules you set, and falls back to a "call me now" alert with the intake attached if the transfer is not picked up.' },
-      { q: 'Can it handle several calls at once?', a: 'Yes, unlimited simultaneous calls with no surcharge for taking them at once — the whole point during a storm week or a Monday morning rush. Past your included minutes you pay your quoted per-minute rate.' },
+      { q: 'What about a storm week or a Monday morning rush?', a: 'Your quote sizes Remi’s included minutes to your busy season, so plan it around your heaviest week, not an average one. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. Ask on your first call how Remi handles your peak volume.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month, and your number stays yours.' },
       { q: 'Is Remi HIPAA compliant?', a: 'No. Keres AI is not HIPAA certified or SOC 2 audited and does not sign BAAs today. Tell us your requirements before you sign up.' },
     ],
@@ -198,7 +198,7 @@ export const agentPages: AgentPage[] = [
     faqs: [
       { q: 'Will it annoy my customers?', a: 'The cadence is yours, everything is opt-out in one word, and Theo stops the moment somebody answers. Three touches on an estimate over a week is the schedule most firms would run themselves if they had the time.' },
       { q: 'What does it cost?', a: `${priceSentence('Theo on the Convert plan', 'convert', 'your appointment volume and integrations')} Estimate and post-consult follow-up come with Grow.` },
-      { q: 'How long does setup take?', a: 'Five business days, and usually less if Remi is already answering — your appointment types and cadences are the only new things to configure.' },
+      { q: 'How long does setup take?', a: 'It depends on your appointment types, cadences and integrations, and it is quicker if Remi is already answering. Keres sets it up for you and agrees the timing on your first call.' },
       { q: 'What if someone replies with a real question?', a: 'It goes to a person. Theo handles scheduling and confirmation; anything that turns into a negotiation or a technical question is handed to you with the thread attached.' },
       { q: 'Do I need Remi first?', a: 'No, but it is the usual order. Theo works on appointments booked any way at all, including ones your front desk books by hand.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month.' },
@@ -263,7 +263,7 @@ export const agentPages: AgentPage[] = [
     faqs: [
       { q: 'Is this just mass texting my customers?', a: 'No. Each campaign targets a segment you approve, with a reason that applies to that segment, and every reply is handled as a conversation. You see the list and the message before anything sends.' },
       { q: 'What does it cost?', a: `${priceSentence('June on the Grow plan', 'grow', 'your list size and campaign volume')} Individual reactivation campaigns can also be quoted on their own if you want to try one before committing.` },
-      { q: 'How long does setup take?', a: 'Five business days for the plan. A single campaign is usually live inside a week of us getting access to the list.' },
+      { q: 'How long does setup take?', a: 'It depends on your list and your integrations. Keres sets it up for you and agrees the timing on your first call, and you approve the list and the message before anything sends.' },
       { q: 'What happens when someone replies?', a: 'Interested people are qualified and booked. Anyone who says no is marked in your CRM and not contacted again by that campaign. Anything that needs a person comes to you with the thread.' },
       { q: 'Will it damage my reputation?', a: 'It is designed not to. Every customer gets the same review request, anyone who reports a problem reaches the owner directly, opt-outs are honoured in one word, and June never contacts a bought or scraped list.' },
       { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month.' },

@@ -82,7 +82,7 @@ const switchSteps = [
   'On a 20-minute call, share your current script and escalation rules.',
   'Connect your calendar so Remi books into it.',
   'Place test calls yourself and adjust anything that sounds wrong.',
-  'Most accounts are live in five business days.',
+  'Go live once it answers the way you would; the timing is agreed on your first call.',
 ];
 ---
 <!-- Pages that are not roundups yet are templated, with unsourced claims about
@@ -235,11 +235,11 @@ const switchSteps = [
         <div class="prose">
           <h2>The key difference</h2>
           {c.pillar === 'inbound' ? (
-            <p>The difference is the model. Keres is a <strong>done-for-you AI receptionist</strong>: we map your call flows, connect your calendar and field-service tools, set the AI up for your business, and launch in five business days. You don't build a bot; we run it for you.</p>
+            <p>The difference is the model. Keres is a <strong>done-for-you AI receptionist</strong>: we map your call flows, connect your calendar and field-service tools, set the AI up for your business, and launch once you have tested it. You don't build a bot; we run it for you.</p>
           ) : (
             <p>The difference is where execution stops. Most outbound tools give you infrastructure to run yourself — you still need to manage sequences, review replies, and book the meetings manually. Keres does the whole motion: targeting, personalization, sending, reply handling, and booking. You focus on the meetings it books, not the machine that books them.</p>
           )}
-          <p>See the <a href={secondaryCta.href}>{secondaryCta.label}</a> for the full picture, or <a href="/quote">book a 30-minute demo</a> to watch it work live.</p>
+          <p>See the <a href={secondaryCta.href}>{secondaryCta.label}</a> for the full picture, or <a href="/quote">book a 20-minute call</a> to hear it work live.</p>
         </div>
       </section>
     </>
@@ -277,7 +277,7 @@ const switchSteps = [
   <CtaBand
     heading={isRoundup ? 'Hear Keres answer a call before you choose' : `See why teams pick Keres over ${c.competitor}`}
     sub={c.pillar === 'inbound'
-      ? 'Book a demo and watch Keres answer a call and book an appointment in under sixty seconds.'
+      ? 'Book a 20-minute call and hear Remi answer, qualify and book a call.'
       : 'Book a demo and watch Keres book a meeting end to end — targeting, sending, replies, and scheduling.'}
   />
 </Layout>

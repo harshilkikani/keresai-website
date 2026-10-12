@@ -41,7 +41,7 @@ const faqs = [
   { q: 'Is per-minute or per-call billing cheaper?', a: 'Per-minute billing is cheaper when calls are short. Per-call billing is cheaper when calls are long, because a ten-minute call costs the same as a one-minute call. Per-caller billing, which Goodcall uses, is cheaper when the same people call several times a month.' },
   { q: 'What is the cheapest AI receptionist?', a: 'On published prices, Smith.ai’s AI receptionist is free for up to 25 calls a month, then $3 per call. The lowest paid plans are Upfirst at $24.95 for 30 calls and Dialzara at $29 for 60 minutes. At 100 calls a month averaging three minutes from 100 different callers, Goodcall’s $79 Starter plan was the lowest of the plans that publish an overage rate.' },
   { q: 'Is an AI receptionist cheaper than a human receptionist?', a: `In wages alone, yes. The BLS puts the ${BLS.year} national median wage for receptionists and information clerks at ${usd(BLS.medianAnnual)} a year (${usd(BLS.medianHourly)} an hour), before payroll taxes and benefits, for about 40 hours of coverage a week. Published AI plans start under $100 a month. A receptionist also does work an AI receptionist does not, such as greeting visitors.` },
-  { q: 'How much does Keres AI charge for Remi?', a: 'Keres AI quotes Remi to your call volume: a monthly rate with included minutes, then per minute, with no per-call fees and no surcharge for simultaneous calls, month-to-month. Found, which runs your website and Google Business Profile, is from $249 a month ($499 for law firms).' },
+  { q: 'How much does Keres AI charge for Remi?', a: 'Keres AI quotes Remi to your call volume: a monthly rate with included minutes, then per minute, with no per-call fees, month-to-month. Found, which runs your website and Google Business Profile, is from $249 a month ($499 for law firms).' },
   { q: 'Why are Ruby, Rosie and Abby Connect missing from the 100-call example?', a: 'Their pricing pages list an entry plan but not the rate charged past it, so the cost of 100 calls cannot be worked out from published figures. We left them out rather than guess. AnsweringLegal does not publish prices at all.' },
 ];
 
@@ -145,7 +145,7 @@ const webpage = webPageSchema({
 
       <h2>Is an AI receptionist cheaper than an answering service?</h2>
       <p>On published prices, usually yes. In the 100-call example, the AI plans come to {usd(monthlyCost(aiEx[0]))} to {usd(monthlyCost(aiEx[aiEx.length - 1]))} a month, while the live plans that publish overage rates come to {liveEx.map((e) => `${usd(monthlyCost(e))} (${e.vendor.replace(/ \((.*)\)$/, ' $1')})`).join(' and ')}. Entry prices tell the same story: paid AI plans start at $24.95, live plans at $99 (PATLive, 50 minutes) to $300 (Smith.ai, 30 calls).</p>
-      <p>What you get differs. A live service puts a person on the call, which helps with upset callers, unusual requests and callers who refuse to talk to AI. An AI receptionist follows your script, can take several calls at once, and can book into your calendar during the call. If a human on every call matters to you, the price gap is the cost of that. Compare live, hybrid and AI options on the <a href="/best-ai-receptionist">best AI receptionists</a> page.</p>
+      <p>What you get differs. A live service puts a person on the call, which helps with upset callers, unusual requests and callers who refuse to talk to AI. An AI receptionist follows your script the same way on every call and can book into your calendar during the call. If a human on every call matters to you, the price gap is the cost of that. Compare live, hybrid and AI options on the <a href="/best-ai-receptionist">best AI receptionists</a> page.</p>
 
       <h2>Is an AI receptionist cheaper than hiring a receptionist?</h2>
       <p>The U.S. Bureau of Labor Statistics puts the national median wage for receptionists and information clerks (SOC 43-4171) at <strong>{usd(BLS.medianAnnual)} a year, or {usd(BLS.medianHourly)} an hour</strong>, in its {BLS.year} Occupational Employment and Wage Statistics (<a href={BLS.url} rel="noopener" target="_blank">BLS OEWS, 43-4171</a>). That is about {usd(Math.round(BLS.medianAnnual / 12))} a month in wages alone, before payroll taxes, benefits and paid time off, for roughly 40 of the week’s 168 hours.</p>
@@ -155,7 +155,7 @@ const webpage = webPageSchema({
       <ul>
         <li><strong>A monthly rate with included minutes</strong>, quoted to your call volume.</li>
         <li><strong>Per minute after the included minutes</strong>, at the rate in your quote.</li>
-        <li><strong>No per-call fees</strong> and <strong>no surcharge for simultaneous calls</strong>.</li>
+        <li><strong>No per-call fees</strong>. Your quote sizes the included minutes to your busy season.</li>
         <li><strong>Month-to-month</strong>, with no long contract.</li>
       </ul>
       <p>Keres AI also sells Found, which builds and runs your website and Google Business Profile and asks customers for reviews, from $249 a month ($499 for law firms). See <a href="/pricing">pricing</a>, <a href="/agents/inbound">how Remi works</a>, or <a href="/hear-it">hear Remi answer a call</a>.</p>

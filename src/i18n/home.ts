@@ -6,12 +6,12 @@ import { priceFrom } from '../config/business';
 export const home = {
   en: {
     title: 'Websites & AI Receptionist for Local Businesses | Keres AI',
-    whatIs: { h2: 'What is Keres AI?', text: 'Keres AI helps local service businesses get found and get every call answered. Found builds and runs your website, Google Business Profile, reviews and listings from $249 a month ($499 for law firms). Remi, Keres AI’s AI receptionist, answers every call in two rings, 24/7, and books the appointment into Google Calendar, HubSpot or ServiceTitan. Everything is month-to-month, and most accounts are live in five business days.' },
-    description: 'A website and a managed Google profile so local customers find you, and Remi answering every call in two rings. Live in five days, from $249/month.',
+    whatIs: { h2: 'What is Keres AI?', text: 'Keres AI builds and runs websites and Google Business Profiles for local service businesses (Found, from $249/month; $499 for law firms) and answers their calls with Remi, an AI receptionist that picks up in two rings, 24/7, books into Google Calendar, HubSpot or ServiceTitan, and texts back missed callers within 60 seconds. Everything is month-to-month, and Keres sets it up for you.' },
+    description: 'A website and a managed Google profile so local customers find you, and Remi answering every call in two rings, 24/7. Month-to-month, from $249/month.',
     eyebrow: 'AI workers for local businesses',
     h1: [['Get', 'found.'], ['Get', 'answered.'], ['Get', 'booked.']],
-    lede: 'Hire one, hire all. Each does one job, reports to you in a text every morning{bundle}. Live in five days, month-to-month.',
-    facts: [['Answers in', '2', ' rings'], ['Live in', '5', ' days']], factBundle: ['Bundles from', '/mo'],
+    lede: 'Keres AI gets local service businesses found and answered: Found runs your website and Google profile, and Remi picks up every call in two rings. Hire one worker or all six; each reports to you in a text every morning{bundle}. Month-to-month.',
+    facts: [['Answers in', '2', ' rings'], ['Texts back in', '60', ' seconds']], factBundle: ['Bundles from', '/mo'],
     ledeBundle: ', and starts from {price}/mo', hearRemi: '— hear Remi answer',
     atAGlance: 'At a glance', getAQuote: 'Get a quote', call: 'Call',
     board: {
@@ -52,7 +52,7 @@ export const home = {
       foot: 'Six more specific pages — HVAC, plumbing, roofing, septic, towing and med spas — sit under', footLink: 'all industries',
     },
     integrations: { eyebrow: 'Integrations', h2: 'Which calendars and CRMs does Keres AI connect to?', lede: 'A booking that lives only inside our software is not a booking. Remi writes to the tools your team already opens every morning.', aria: 'Connected today', foot: 'Connected today. Clio and Lawmatics, Jobber and Housecall Pro, Dentrix and Open Dental, and Follow Up Boss are rolling out — ask where yours is.', footLink: 'See all integrations' },
-    customTeaser: { eyebrow: 'Custom workers', h2: 'Need a job done that isn’t on this page?', text: 'We build one-job agents for the recurring work nobody on your team has time for, and we run three on our own company. Fixed build price, monthly run fee, first version in two weeks.', cta: 'See custom agents' },
+    customTeaser: { eyebrow: 'Custom workers', h2: 'Need a job done that isn’t on this page?', text: 'We build one-job agents for the recurring work nobody on your team has time for. Fixed build price, monthly run fee, first version in two weeks.', cta: 'See custom agents' },
     calc: { eyebrow: 'Missed-call calculator', h2: 'How much are missed calls costing you?', lede: 'Four inputs and the arithmetic shown in full, because a number you cannot check is not worth having. Pick your industry and it loads typical figures to start from.', link: 'Open the full calculator' },
     proof: { eyebrow: 'Proof', h2: 'In their words, or not at all.' },
     start: {
@@ -60,16 +60,16 @@ export const home = {
       steps: [
         ['Call us, or book 20 minutes', 'We map what happens today when your phone rings — who it goes to, what gets asked, and where it stops. Twenty minutes, no deck.'],
         ['We build your site, your listing and your intake script', 'Your services, your hours, your prices, your handoff rules. Then your number, calendar and CRM go in.'],
-        ['Live in five business days', 'You call it yourself first and keep tuning until it answers the way you would. Month-to-month from there, and the Daily Brief starts the next morning.'],
+        ['You test it, then it goes live', 'You call it yourself first and keep tuning until it answers the way you would. Timing depends on your call flows and integrations, and we agree it on the first call. Month-to-month from there, and the Daily Brief starts the next morning.'],
       ],
     },
     faq: {
       eyebrow: 'Questions', h2: 'The questions everyone asks first.',
       items: [
-        ['How much does Keres AI cost?', 'Found — the website, Google listing, reviews and listings layer — starts at $249/month, $499/month for law firms. Remi, the AI receptionist, {answerCost}: a monthly rate with included minutes, then per minute, no per-call fees and no surcharge for simultaneous calls. Every worker is month-to-month with no cancellation fee. <a href="/pricing">See what changes the quote</a>.'],
+        ['How much does Keres AI cost?', 'Found — the website, Google listing, reviews and listings layer — starts at $249/month, $499/month for law firms. Remi, the AI receptionist, {answerCost}: a monthly rate with included minutes, then per minute, no per-call fees. Every worker is month-to-month with no cancellation fee. <a href="/pricing">See what changes the quote</a>.'],
         ['Do I have to buy the whole team?', 'No. Most firms start at one door — Found if nobody can find them, Remi if the phone is the leak — and add the next stage once that one is working. You can also buy Found on its own and keep answering calls yourself.'],
         ['What if a caller needs a human?', 'Remi hands off. You set the rules — an emergency, a named client, anyone who asks for a person — and the call warm-transfers to your on-call number. If nobody picks up, you get a "call me now" alert with everything Remi already collected, so the caller never repeats themselves.'],
-        ['How long does setup take?', 'Five business days for most accounts. Day one is a 20-minute call to map how you answer now; then we write your intake script, connect your number, calendar and CRM, and you test it yourself before it takes a real call.'],
+        ['How long does setup take?', 'It depends on your call flows and integrations. Day one is a 20-minute call to map how you answer now; then Keres writes your intake script and connects your number, calendar and CRM. We agree the timing on that first call, and you test Remi yourself before it answers a customer.'],
         ['Is there a contract?', 'No. Every plan is month-to-month, there is no build fee on the Found base tier, and you can change plans or cancel any month.'],
         ['Does it sound like a robot?', 'It sounds like a competent front desk. Remi answers in two rings, uses your vocabulary — consult, job, chair time, showing — and says "let me get someone for you" rather than guessing when it does not know. <a href="/hear-it">Hear sample calls</a>, or ask for a live test call when we talk.'],
       ],
@@ -79,12 +79,12 @@ export const home = {
   },
   es: {
     title: 'Trabajadores de IA para negocios locales | Keres AI',
-    whatIs: { h2: '¿Qué es Keres AI?', text: 'Keres AI ayuda a negocios de servicios locales a aparecer en Google y a contestar cada llamada. Found crea y administra tu sitio web, tu ficha de Google, tus reseñas y tus directorios desde $249 al mes ($499 para bufetes). Remi, el recepcionista con IA de Keres AI, contesta cada llamada en dos timbres, las 24 horas, y agenda la cita en Google Calendar, HubSpot o ServiceTitan. Hoy Remi contesta en inglés. Todo es mes a mes y la mayoría de las cuentas están listas en cinco días hábiles.' },
-    description: 'Un sitio web hecho para convertir y una ficha de Google administrada para que aparezcas, y Remi contestando cada llamada en dos timbres para que se agende. En cinco días, desde $249/mes.',
+    whatIs: { h2: '¿Qué es Keres AI?', text: 'Keres AI crea y administra sitios web y Perfiles de Negocio de Google para negocios de servicios locales (Found, desde $249/mes; $499 para bufetes) y contesta sus llamadas con Remi, un recepcionista con IA que contesta en dos timbres, las 24 horas, agenda en Google Calendar, HubSpot o ServiceTitan y responde por mensaje de texto a las llamadas perdidas en menos de 60 segundos. Hoy Remi contesta llamadas solo en inglés. Todo es mes a mes y Keres lo configura por ti.' },
+    description: 'Un sitio web hecho para convertir y una ficha de Google administrada para que aparezcas, y Remi contestando cada llamada en dos timbres para que se agende. Mes a mes, desde $249/mes.',
     eyebrow: 'Trabajadores de IA para negocios locales',
     h1: [['Que', 'te', 'encuentren.'], ['Que', 'te', 'contesten.'], ['Que', 'te', 'reserven.']],
-    lede: 'Contrata uno o contrátalos todos. Cada uno hace una sola tarea, te reporta cada mañana por mensaje de texto{bundle}. En marcha en cinco días, mes a mes.',
-    facts: [['Contesta en', '2', ' timbres'], ['En marcha en', '5', ' días']], factBundle: ['Paquetes desde', '/mes'],
+    lede: 'Keres AI hace que a los negocios de servicios locales los encuentren y les contesten: Found administra tu sitio web y tu ficha de Google, y Remi contesta cada llamada en dos timbres. Contrata un trabajador o los seis; cada uno te reporta cada mañana por mensaje de texto{bundle}. Mes a mes.',
+    facts: [['Contesta en', '2', ' timbres'], ['Responde por texto en', '60', ' segundos']], factBundle: ['Paquetes desde', '/mes'],
     ledeBundle: ', y empieza desde {price}/mes', hearRemi: '— escucha a Remi contestar',
     atAGlance: 'De un vistazo', getAQuote: 'Pedir cotización', call: 'Llamar',
     board: {
@@ -125,7 +125,7 @@ export const home = {
       foot: 'Seis páginas más específicas (HVAC, plomería, techos, sépticos, grúas y med spas) están bajo', footLink: 'todas las industrias',
     },
     integrations: { eyebrow: 'Integraciones', h2: '¿Con qué calendarios y CRM se conecta Keres AI?', lede: 'Una cita que solo vive dentro de nuestro software no es una cita. Remi escribe en las herramientas que tu equipo ya abre cada mañana.', aria: 'Conectadas hoy', foot: 'Conectadas hoy. Clio y Lawmatics, Jobber y Housecall Pro, Dentrix y Open Dental, y Follow Up Boss están en camino: pregunta por la tuya.', footLink: 'Ver todas las integraciones' },
-    customTeaser: { eyebrow: 'Trabajadores a medida', h2: '¿Necesitas una tarea que no está en esta página?', text: 'Construimos agentes de una sola tarea para el trabajo recurrente que nadie en tu equipo tiene tiempo de hacer, y usamos tres en nuestra propia empresa. Precio fijo de desarrollo, cuota mensual, primera versión en dos semanas.', cta: 'Ver agentes a medida' },
+    customTeaser: { eyebrow: 'Trabajadores a medida', h2: '¿Necesitas una tarea que no está en esta página?', text: 'Construimos agentes de una sola tarea para el trabajo recurrente que nadie en tu equipo tiene tiempo de hacer. Precio fijo de desarrollo, cuota mensual, primera versión en dos semanas.', cta: 'Ver agentes a medida' },
     calc: { eyebrow: 'Calculadora de llamadas perdidas', h2: '¿Cuánto te cuestan las llamadas perdidas?', lede: 'Cuatro datos y la aritmética a la vista, porque un número que no puedes comprobar no vale nada. Elige tu industria y carga cifras típicas para empezar.', link: 'Abrir la calculadora completa' },
     proof: { eyebrow: 'Pruebas', h2: 'Con sus palabras, o nada.' },
     start: {
@@ -133,16 +133,16 @@ export const home = {
       steps: [
         ['Llámanos o agenda 20 minutos', 'Mapeamos lo que pasa hoy cuando suena tu teléfono: a quién le llega, qué se pregunta y dónde se detiene. Veinte minutos, sin presentación.'],
         ['Construimos tu sitio, tu ficha y tu guion de admisión', 'Tus servicios, tus horarios, tus precios, tus reglas de transferencia. Luego entran tu número, tu calendario y tu CRM.'],
-        ['En marcha en cinco días hábiles', 'Primero lo llamas tú y lo ajustamos hasta que conteste como lo harías tú. Desde ahí, mes a mes, y el resumen diario empieza a la mañana siguiente.'],
+        ['Lo pruebas y entra en marcha', 'Primero lo llamas tú y lo ajustamos hasta que conteste como lo harías tú. Los plazos dependen de tus flujos de llamadas e integraciones, y los acordamos en la primera llamada. Desde ahí, mes a mes, y el resumen diario empieza a la mañana siguiente.'],
       ],
     },
     faq: {
       eyebrow: 'Preguntas', h2: 'Las preguntas que todos hacen primero.',
       items: [
-        ['¿Cuánto cuesta Keres AI?', 'Found (el sitio web, la ficha de Google, las reseñas y los directorios) empieza en $249/mes, $499/mes para bufetes de abogados. Remi, el recepcionista con IA, {answerCost}: una tarifa mensual con minutos incluidos, luego por minuto, sin cargos por llamada ni recargo por llamadas simultáneas. Todo es mes a mes, sin cargo por cancelar. <a href="/pricing">Ver qué cambia la cotización</a>.'],
+        ['¿Cuánto cuesta Keres AI?', 'Found (el sitio web, la ficha de Google, las reseñas y los directorios) empieza en $249/mes, $499/mes para bufetes de abogados. Remi, el recepcionista con IA, {answerCost}: una tarifa mensual con minutos incluidos, luego por minuto, sin cargos por llamada. Todo es mes a mes, sin cargo por cancelar. <a href="/pricing">Ver qué cambia la cotización</a>.'],
         ['¿Tengo que comprar todo el equipo?', 'No. La mayoría empieza por una puerta (Found si nadie los encuentra, Remi si la fuga es el teléfono) y agrega la siguiente etapa cuando la primera ya funciona. También puedes contratar solo Found y seguir contestando tú mismo.'],
         ['¿Y si quien llama necesita a una persona?', 'Remi transfiere. Tú pones las reglas (una emergencia, un cliente con nombre, cualquiera que pida a una persona) y la llamada pasa en caliente a tu número de guardia. Si nadie contesta, recibes una alerta de "llámame ahora" con todo lo que Remi ya recopiló, para que quien llama nunca lo repita.'],
-        ['¿Cuánto tarda la puesta en marcha?', 'Cinco días hábiles para la mayoría de las cuentas. El primer día es una llamada de 20 minutos para mapear cómo contestas hoy; luego escribimos tu guion de admisión, conectamos tu número, calendario y CRM, y lo pruebas tú mismo antes de que tome una llamada real.'],
+        ['¿Cuánto tarda la puesta en marcha?', 'Depende de tus flujos de llamadas y tus integraciones. El primer día es una llamada de 20 minutos para mapear cómo contestas hoy; luego escribimos tu guion de admisión y conectamos tu número, calendario y CRM. Acordamos los plazos en esa primera llamada, y tú pruebas a Remi antes de que conteste a un cliente.'],
         ['¿Hay contrato?', 'No. Todos los planes son mes a mes, no hay costo de construcción en el nivel base de Found, y puedes cambiar de plan o cancelar cualquier mes.'],
         ['¿Suena como un robot?', 'Suena como una recepción competente. Remi contesta en dos timbres, usa tu vocabulario (consulta, trabajo, tiempo de sillón, visita) y dice "déjame comunicarte con alguien" en lugar de adivinar cuando no sabe. <a href="/hear-it">Escucha llamadas de muestra</a>, o pide una llamada de prueba en vivo cuando hablemos.'],
       ],

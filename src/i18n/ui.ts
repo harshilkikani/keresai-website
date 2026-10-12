@@ -45,7 +45,7 @@ export const ui = {
     },
     quotePage: {
       title: 'Get a Quote in 20 Minutes | Keres AI',
-      description: 'Five questions, then a 20-minute call with your quote already worked out. Month-to-month, live in five business days.',
+      description: 'Five questions, then a 20-minute call with your quote already worked out. Month-to-month, set up for you.',
       eyebrow: 'Get a quote', h1: 'Five questions. Then a 20-minute call with the number ready.',
       lede: 'Tell us who you are and what happens to your calls today. We come to the call with a quote worked out for your volume', ledeCall: ', or you can skip the form and call',
     },
@@ -53,7 +53,7 @@ export const ui = {
       eyebrowLong: 'An AI workforce for businesses whose sales team is whoever picks up the phone',
       atAGlance: 'At a glance', twoDoors: 'Two ways in: get found, get answered', getFound: 'Get found', getAnswered: 'Get answered',
       calcEyebrow: 'Missed-call calculator', calcH2: 'Put your own numbers in.', calcLede: 'Four inputs and the arithmetic shown in full. The figures start at typical values for your industry.',
-      startEyebrow: 'How it starts', startH2: 'Three steps, five business days.',
+      startEyebrow: 'How it starts', startH2: 'Three steps, set up for you.',
       quoteBand: 'Get a quote — five questions, then a 20-minute call with the number ready', getAQuote: 'Get a quote', seeMyQuote: 'See my quote',
     },
     calc: {
@@ -75,7 +75,7 @@ export const ui = {
   },
   es: {
     skip: 'Saltar al contenido principal',
-    remiGate: 'Hoy Remi contesta en inglés; la atención en español llega pronto.',
+    remiGate: 'Hoy Remi contesta llamadas solo en inglés.',
     nav: {
       home: 'Keres AI. Inicio', workers: 'Trabajadores', allWorkers: 'Los seis, un solo pipeline', allWorkersSub: 'Cómo trabajan juntos', getFound: 'Que te encuentren', getAnswered: 'Que te contesten', industries: 'Industrias', pricing: 'Precios', custom: 'A medida', resources: 'Recursos',
       everythingInFound: 'Todo lo que incluye Found', fromPerMonth: 'desde $249 / mes', allSevenStages: 'Las siete etapas', howTheFourWork: 'Cómo trabajan los cuatro juntos',
@@ -116,7 +116,7 @@ export const ui = {
     },
     quotePage: {
       title: 'Cotización en 20 minutos | Keres AI',
-      description: 'Cinco preguntas y luego una llamada de 20 minutos con tu cotización ya calculada. Mes a mes, en marcha en cinco días hábiles.',
+      description: 'Cinco preguntas y luego una llamada de 20 minutos con tu cotización ya calculada. Mes a mes, lo configuramos por ti.',
       eyebrow: 'Pedir cotización', h1: 'Cinco preguntas. Luego una llamada de 20 minutos con el número listo.',
       lede: 'Cuéntanos quién eres y qué pasa hoy con tus llamadas. Llegamos a la llamada con una cotización calculada para tu volumen', ledeCall: ', o sáltate el formulario y llama al',
     },
@@ -124,7 +124,7 @@ export const ui = {
       eyebrowLong: 'Una fuerza de trabajo de IA para negocios donde el equipo de ventas es quien contesta el teléfono',
       atAGlance: 'De un vistazo', twoDoors: 'Dos puertas: que te encuentren, que te contesten', getFound: 'Que te encuentren', getAnswered: 'Que te contesten',
       calcEyebrow: 'Calculadora de llamadas perdidas', calcH2: 'Pon tus propios números.', calcLede: 'Cuatro datos y la aritmética a la vista. Las cifras empiezan en valores típicos de tu industria.',
-      startEyebrow: 'Cómo empieza', startH2: 'Tres pasos, cinco días hábiles.',
+      startEyebrow: 'Cómo empieza', startH2: 'Tres pasos, lo configuramos por ti.',
       quoteBand: 'Pedir cotización: cinco preguntas y luego una llamada de 20 minutos con el número listo', getAQuote: 'Pedir cotización', seeMyQuote: 'Ver mi cotización',
     },
     calc: {

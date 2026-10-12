@@ -81,7 +81,7 @@ const blurb = (g: typeof i) => (isLive(g) ? g.intro.slice(0, 110) + '…' : `Rol
         {i.syncs.map((s) => <li>{s}</li>)}
       </ul>
       {live
-        ? <p>Setup is done for you — we connect {i.name} during onboarding and most accounts are live within five business days. Pair it with the <a href="/agents/inbound">AI receptionist</a> for inbound and the <a href="/agents/outbound">AI SDR</a> for outbound.</p>
+        ? <p>Setup is done for you — Keres connects {i.name} during onboarding and agrees the go-live timing with you on the first call. Pair it with the <a href="/agents/inbound">AI receptionist</a> for inbound and the <a href="/agents/outbound">AI SDR</a> for outbound.</p>
         : <p>{note} Ask on a call where {i.name} is on the list.</p>}
     </div>
   </section>

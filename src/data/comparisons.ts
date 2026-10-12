@@ -76,7 +76,7 @@ export const comparisons: Comparison[] = [
     ],
     faqs: [
       { q: 'Is Keres a good Apollo alternative?', a: 'Yes — especially if your goal is booked meetings, not just a contact list. Keres runs the full outbound motion, manages deliverability, handles replies, and books meetings, which Apollo leaves to you.' },
-      { q: 'Can I switch from Apollo to Keres?', a: 'Yes. We migrate your sequences and lists during onboarding, set up authentication and warmup, and have you sending within five business days.' },
+      { q: 'Can I switch from Apollo to Keres?', a: 'Yes. We migrate your sequences and lists during onboarding, set up authentication and warmup, and agree the launch timing with you on the first call.' },
       { q: 'Does Keres replace Apollo entirely?', a: 'For outbound execution and booking, yes. Keres handles targeting, sending, deliverability, replies, and scheduling end to end.' },
     ],
   },
@@ -102,7 +102,7 @@ export const comparisons: Comparison[] = [
     faqs: [
       { q: 'Is Keres a good Instantly alternative?', a: 'Yes. Keres covers sending and warmup like Instantly, then adds AI personalization, reply handling, and booking so meetings end up on your calendar without manual work.' },
       { q: 'Does Keres handle deliverability like Instantly?', a: 'Yes — SPF, DKIM, DMARC, warmup, volume ramp, and list hygiene are all managed for you.' },
-      { q: 'Can I migrate my Instantly campaigns?', a: 'Yes, we migrate campaigns and inboxes during onboarding and typically have you live within five business days.' },
+      { q: 'Can I migrate my Instantly campaigns?', a: 'Yes, we migrate campaigns and inboxes during onboarding. Timing depends on your domains and warmup, and we agree it with you on the first call.' },
     ],
   },
   {
@@ -127,7 +127,7 @@ export const comparisons: Comparison[] = [
     faqs: [
       { q: 'Is Keres a good Smartlead alternative?', a: 'Yes, particularly if you want results without running the tooling yourself. Keres manages the infrastructure and uses AI to personalize, reply, and book meetings for you.' },
       { q: 'Do I have to manage sending myself?', a: 'No. Unlike self-serve tools, Keres is done-for-you — we handle setup, sending, deliverability, and optimization.' },
-      { q: 'How fast can I switch from Smartlead?', a: 'Most teams are live on Keres within five business days, including migration and warmup.' },
+      { q: 'How fast can I switch from Smartlead?', a: 'It depends on migration and warmup. Keres sets it up for you and agrees the timing on your first call.' },
     ],
   },
   {
@@ -177,7 +177,7 @@ export const comparisons: Comparison[] = [
     faqs: [
       { q: 'Is Keres AI a good Smith.ai alternative?', a: 'It fits businesses that want AI to answer and book the appointment, billed by minutes rather than per call. If you want a live person available on every call, Smith.ai’s human plans or another live service fit better.' },
       { q: 'Does Keres AI use human receptionists like Smith.ai?', a: 'No. Remi is AI. When a call needs a person, Remi texts or transfers it to your team under the escalation rules you set. Keres AI does not put live receptionists on the line.' },
-      { q: 'How is Keres AI’s pricing different from Smith.ai’s?', a: 'Smith.ai bills per call. Keres AI charges a monthly rate with included minutes, then per minute, with no per-call fees and no charge for simultaneous calls. Remi is quoted to your call volume; see <a href="/pricing">pricing</a>.' },
+      { q: 'How is Keres AI’s pricing different from Smith.ai’s?', a: 'Smith.ai bills per call. Keres AI charges a monthly rate with included minutes, then per minute, with no per-call fees. Remi is quoted to your call volume; see <a href="/pricing">pricing</a>.' },
     ],
   },
   {
@@ -205,7 +205,7 @@ export const comparisons: Comparison[] = [
       sections: [
         {
           h2: 'Ruby vs an AI receptionist: what changes?',
-          body: "<ul><li><strong>Who answers.</strong> Ruby's receptionists are people. An AI receptionist answers with a voice model that follows your script. People bring judgment to unusual calls; AI takes any number of calls at once without a queue.</li><li><strong>How you pay.</strong> Ruby counts receptionist minutes inside a monthly plan. AI receptionists bill by minute, call or caller, from lower entry prices (see the table).</li><li><strong>After hours.</strong> Ruby lists 24/7 live answering, including nights, weekends and holidays, so coverage alone is not a reason to switch.</li><li><strong>Booking.</strong> Ask whether the appointment is booked into your calendar during the call or passed to you as a message. Keres AI books into Google Calendar, HubSpot or ServiceTitan during the call.</li></ul>",
+          body: "<ul><li><strong>Who answers.</strong> Ruby's receptionists are people. An AI receptionist answers with a voice model that follows your script. People bring judgment to unusual calls; AI follows your script the same way on every call.</li><li><strong>How you pay.</strong> Ruby counts receptionist minutes inside a monthly plan. AI receptionists bill by minute, call or caller, from lower entry prices (see the table).</li><li><strong>After hours.</strong> Ruby lists 24/7 live answering, including nights, weekends and holidays, so coverage alone is not a reason to switch.</li><li><strong>Booking.</strong> Ask whether the appointment is booked into your calendar during the call or passed to you as a message. Keres AI books into Google Calendar, HubSpot or ServiceTitan during the call.</li></ul>",
         },
         {
           h2: 'Which Ruby alternative suits a law firm?',
@@ -247,7 +247,7 @@ export const comparisons: Comparison[] = [
     rows: [],
     detail: {
       linkLabel: 'Goodcall alternatives',
-      keresAnswer: 'Keres AI is a Goodcall alternative for local service businesses that want the AI receptionist set up and tuned for them instead of building it themselves. Its receptionist, Remi, answers in two rings, 24/7, and books into Google Calendar, HubSpot or ServiceTitan. Keres AI bills a monthly rate with included minutes, then per minute, with no per-call or per-caller fees, and most accounts go live in five business days.',
+      keresAnswer: 'Keres AI is a Goodcall alternative for local service businesses that want the AI receptionist set up and tuned for them instead of building it themselves. Its receptionist, Remi, answers in two rings, 24/7, and books into Google Calendar, HubSpot or ServiceTitan. Keres AI bills a monthly rate with included minutes, then per minute, with no per-call or per-caller fees, and Keres sets it up for you.',
       priceH2: "How does Goodcall's per-caller billing work?",
       price: "<p>Goodcall's Starter plan is <strong>$79 a month for 100 unique callers, then 79¢ for each extra caller</strong>, per <a href=\"https://www.goodcall.com/pricing\" rel=\"noopener nofollow\" target=\"_blank\">goodcall.com/pricing</a> on October 11, 2026. A unique caller is one phone number: Goodcall's page explains that a person who calls back five times in a month counts once. The page states there are no per-minute charges, and Starter includes one external tool integration. You can build and test a demo agent before paying, and you pay once you connect a number.</p>",
       why: [
@@ -279,7 +279,7 @@ export const comparisons: Comparison[] = [
     },
     faqs: [
       { q: 'Is Keres AI a good Goodcall alternative?', a: 'It fits owners who would rather not build and maintain the agent themselves. Keres AI writes the call flows, connects the calendar or CRM and tunes Remi after launch. If you prefer to configure your own agent for a low monthly price, a self-serve tool may suit you better.' },
-      { q: 'Do I have to set up Keres AI myself?', a: 'No. Keres AI sets Remi up for you; most accounts are live within five business days.' },
+      { q: 'Do I have to set up Keres AI myself?', a: 'No. Keres AI sets Remi up for you and agrees the timing on your first call, and you test Remi yourself before it answers a customer.' },
       { q: 'Does Keres AI integrate with my field-service software?', a: 'ServiceTitan, Google Calendar and HubSpot today, plus Zapier. Jobber and Housecall Pro are rolling out.' },
     ],
   },
@@ -346,7 +346,7 @@ export const comparisons: Comparison[] = [
     rows: [
       { feature: 'AI answers & books appointments', keres: 'Yes', them: 'Limited' },
       { feature: 'Purpose-built for service businesses', keres: 'Yes', them: 'No' },
-      { feature: 'Done-for-you setup (live in ~5 days)', keres: 'Yes', them: 'No' },
+      { feature: 'Done-for-you setup', keres: 'Yes', them: 'No' },
       { feature: 'Field-service integrations', keres: 'Yes', them: 'Limited' },
       { feature: 'Outbound email worker available (Sol, priced separately)', keres: 'Yes', them: 'Limited' },
     ],
@@ -418,7 +418,7 @@ export const comparisons: Comparison[] = [
       { feature: 'Books appointments during the call', keres: 'Yes', them: 'No' },
       { feature: 'ServiceTitan integration', keres: 'Yes', them: 'Varies' },
       { feature: 'Emergency dispatch alerts', keres: 'Yes', them: 'No' },
-      { feature: 'Done-for-you setup (live in ~5 days)', keres: 'Yes', them: 'Self-serve' },
+      { feature: 'Done-for-you setup', keres: 'Yes', them: 'Self-serve' },
     ],
     faqs: [
       { q: 'Is Keres a better Numa alternative for home services?', a: 'For businesses that need live appointment booking and field-service integrations, yes. Keres answers calls and books jobs directly in ServiceTitan, and Housecall Pro — Numa focuses on text and missed-call deflection.' },
