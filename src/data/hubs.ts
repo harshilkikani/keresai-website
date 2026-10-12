@@ -122,6 +122,7 @@ export const hubs: Hub[] = [
     compliance:
       'Conflict screening happens before any advice is given, and Remi never offers legal advice. Call data is retained on your schedule and access is limited to the people who run your account. Keres does not sign DPAs or BAAs today, so ask before you sign.',
     children: [
+      { label: 'Best AI receptionists for law firms', href: '/best-ai-receptionist-for-law-firms' },
       { label: 'Ruby Receptionists alternatives', href: '/ruby-alternative' },
       { label: 'What an AI receptionist costs', href: '/ai-receptionist-cost' },
       { label: 'Answering Legal alternative', href: '/answering-legal-alternative' },
@@ -188,6 +189,7 @@ export const hubs: Hub[] = [
       'Google ranks Local Services Ads on how fast you answer and how you are reviewed — which is exactly what Remi fixes. Found covers the site, the Google Business Profile, review generation, listings and LSA setup from $249 a month.',
     children: [
       { label: 'AI receptionist for HVAC', href: '/ai-receptionist-for-hvac' },
+      { label: 'Best AI receptionists for HVAC companies', href: '/best-ai-receptionist-for-hvac' },
       { label: 'AI receptionist for plumbers', href: '/ai-receptionist-for-plumbers' },
       { label: 'AI receptionist for roofing', href: '/ai-receptionist-for-roofing' },
       { label: 'AI receptionist for septic', href: '/ai-receptionist-for-septic' },
@@ -321,6 +323,7 @@ export const hubs: Hub[] = [
     foundLine:
       'Buyers check your reviews and your profile before they call the number on the sign. Found covers the site, the Google Business Profile, review generation and listings from $249 a month.',
     children: [
+      { label: 'Best AI receptionists for real estate agents', href: '/best-ai-receptionist-for-real-estate' },
       { label: 'Best AI receptionists compared', href: '/best-ai-receptionist' },
       { label: 'Google Business Profile management', href: '/google-business-profile-management' },
       { label: 'Lead response time calculator', href: '/tools/lead-response-time-calculator' },

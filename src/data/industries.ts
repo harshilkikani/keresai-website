@@ -45,6 +45,8 @@ export interface TradeContent {
   compareH2: string;
   compareIntro: string;
   checklist: string[];
+  /** Optional link to the sourced "best AI receptionist for …" roundup for this trade. */
+  roundup?: { href: string; label: string };
   /** Optional pricing comparison (HTML). */
   priceH2?: string;
   priceBody?: string;
@@ -167,6 +169,7 @@ const allIndustries: Industry[] = [
         'Can it ask about maintenance-plan membership and note it on the job?',
         'Who writes the script and the emergency rules, and how long until it is live?',
       ],
+      roundup: { href: '/best-ai-receptionist-for-hvac', label: 'Best AI receptionists for HVAC companies, compared with sources' },
       ctaHeading: 'Get HVAC calls out of voicemail before the next heat wave',
       ctaSub: 'Book a 30-minute call, tell us your emergency rules, and hear Remi take an HVAC call.',
     },
