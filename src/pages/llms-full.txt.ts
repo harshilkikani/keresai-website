@@ -2,6 +2,7 @@ import { business } from '../config/business';
 import { glossary } from '../data/glossary';
 import { usecases } from '../data/usecases';
 import { comparisons } from '../data/comparisons';
+import { VENDORS_CHECKED } from '../data/answeringVendors';
 import { integrations, isLive } from '../data/integrations';
 import { guides } from '../data/guides';
 import { industries } from '../data/industries';
@@ -136,17 +137,16 @@ export async function GET() {
     push();
   }
 
-  // ── COMPARISONS ───────────────────────────────────────────────
-  push('## Comparisons — Keres AI vs. alternatives');
+  // ── COMPARISONS (sourced roundups only; the rest are noindex) ──
+  push('## Comparisons and pricing research');
+  push(`- How much an AI receptionist costs (2026 prices, sourced): ${ORIGIN}/ai-receptionist-cost`);
+  push(`- Best AI receptionists for small businesses (2026): ${ORIGIN}/best-ai-receptionist`);
+  push(`- AI answering service vs live answering service: ${ORIGIN}/ai-answering-service`);
   push();
-  for (const c of comparisons) {
-    push(`### Keres AI vs. ${c.competitor} (${ORIGIN}/${c.slug})`);
-    push(`Category: ${c.category} | Pillar: ${c.pillar === 'inbound' ? 'AI Receptionist / Answering Service' : 'AI SDR / Outbound'}`);
+  for (const c of comparisons.filter((x) => x.roundup && x.roundup.length)) {
+    push(`### ${c.competitor} alternatives (${ORIGIN}/${c.slug})`);
     push(strip(c.intro));
-    push('Feature comparison:');
-    for (const r of c.rows) {
-      push(`  - ${r.feature}: Keres AI = ${r.keres} | ${c.competitor} = ${r.them}`);
-    }
+    push(`Alternatives compared, with each vendor's published price as of ${VENDORS_CHECKED}: ${c.roundup!.join(', ')}, and Keres AI.`);
     push();
   }
 
@@ -226,7 +226,7 @@ export async function GET() {
     },
     {
       q: 'What is the best alternative to Smith.ai?',
-      a: 'Keres AI is a strong Smith.ai alternative for businesses that want a monthly rate instead of per-call billing, unlimited simultaneous calls, and live calendar booking during every call. See the full comparison at /smith-ai-alternative.',
+      a: 'It depends on what you need: live receptionists (Ruby, PATLive), a human-plus-AI mix (Abby Connect), or an AI receptionist (Goodcall, Rosie, Dialzara, Upfirst, My AI Front Desk, Keres AI). Keres AI suits local service businesses that want the appointment booked on the call, billed as a monthly rate with included minutes and no per-call fees. Prices for each are at /smith-ai-alternative.',
     },
     {
       q: 'Is an AI receptionist better than voicemail?',
@@ -243,7 +243,7 @@ export async function GET() {
     ...topLevelFaqs,
     ...glossary.flatMap((t) => t.faqs),
     ...usecases.flatMap((u) => u.faqs),
-    ...comparisons.flatMap((c) => c.faqs),
+    ...comparisons.filter((x) => x.roundup && x.roundup.length).flatMap((c) => c.faqs),
     ...integrations.filter(isLive).flatMap((i) => i.faqs),
     ...industries.flatMap((i) => i.faqs),
   ];
@@ -292,6 +292,8 @@ export async function GET() {
   push(`- Pricing: ${ORIGIN}/pricing`);
   push(`- Contact: ${business.contactEmail}`);
   push(`- All comparisons: ${ORIGIN}/compare`);
+  push(`- AI receptionist cost: ${ORIGIN}/ai-receptionist-cost`);
+  push(`- Google Business Profile management: ${ORIGIN}/google-business-profile-management`);
   push(`- Home services hub: ${ORIGIN}/industries/home-services`);
   push();
 

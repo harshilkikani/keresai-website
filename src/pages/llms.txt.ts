@@ -86,7 +86,7 @@ Houston, Phoenix, Dallas, Atlanta, Chicago, Miami, Los Angeles, Charlotte, Tampa
 
 ## Benchmarks (estimates; primary sources linked where they exist)
 - [Benchmarks index](${u('/benchmarks')})
-- [Legal intake conversion](${u('/benchmarks/legal-intake-conversion')}) · [HVAC answering](${u('/benchmarks/hvac-answering')}) · [Dental no-show](${u('/benchmarks/dental-no-show')}) · [Roofing lead response](${u('/benchmarks/roofing-lead-response')}) · [AI receptionist cost study](${u('/benchmarks/ai-receptionist-cost-study')})
+- [Legal intake conversion](${u('/benchmarks/legal-intake-conversion')}) · [HVAC answering](${u('/benchmarks/hvac-answering')}) · [Dental no-show](${u('/benchmarks/dental-no-show')}) · [Roofing lead response](${u('/benchmarks/roofing-lead-response')}) · [AI receptionist cost study](${u('/ai-receptionist-cost')})
 
 ## Comparisons
 Answering services and AI receptionists:
