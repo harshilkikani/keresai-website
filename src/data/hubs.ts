@@ -107,10 +107,10 @@ export const hubs: Hub[] = [
       'A prospective client calling a law firm is anxious and ready to act now, so the firm that answers live and books the consultation usually earns the retainer. Calls that hit voicemail rarely produce a callback — the caller simply dials the next firm on the list, and accidents, arrests and family emergencies do not wait for office hours.',
     stats: [
       {
-        value: 'First',
-        label: 'responder usually signs the client',
-        source: 'Legal intake benchmarks',
-        sourceHref: '/benchmarks/legal-intake-conversion',
+        value: '7x',
+        label: 'as likely to qualify a lead contacted within an hour',
+        source: 'Harvard Business Review, 2011',
+        sourceHref: 'https://hbr.org/2011/03/the-short-life-of-online-sales-leads',
       },
       {
         value: '5 min',
@@ -361,7 +361,7 @@ export const hubs: Hub[] = [
       'Remi answers listing calls in two rings, 24/7, qualifies the buyer or seller and books the showing, evenings included. Website and Google profile from $249/mo.',
     h1: 'Answer every listing call in two rings. Book the showing before they call the next agent.',
     answer:
-      'Keres AI helps real estate agents and teams answer every listing call in two rings, 24/7. Remi, its AI receptionist, asks whether the caller already has an agent, is pre-approved and when they want to move, then books the showing on your calendar and texts you the lead. Website form enquiries are picked up within minutes. Found runs your website, Google Business Profile and reviews from $249 a month. Remi writes leads to HubSpot; Keres AI has no Follow Up Boss integration today.',
+      'Keres AI is a Houston-based company that helps real estate agents and teams answer every listing call in two rings, 24/7. Remi, the Keres AI receptionist, asks whether the caller already has an agent and is pre-approved, and asks about the move timeline. Remi then books the showing on your calendar and texts you the lead. Website form enquiries are picked up within minutes, and missed callers get a text back within 60 seconds. Found runs your website, Google Business Profile and reviews from $249 a month, with no build fee at the base tier. For example, a buyer who calls about a yard sign on a Saturday afternoon is qualified and booked while the agent is still at a showing. Remi writes leads to HubSpot and books into Google Calendar or HubSpot; Keres AI has no Follow Up Boss integration today.',
     sub:
       'Remi, the AI receptionist from Keres AI, answers the listing line in two rings and picks up website form enquiries within minutes. Remi asks whether they are working with an agent, whether they are pre-approved, and what their timeline is, then books the showing while you are still in the car.',
     vertical: 'real-estate',
@@ -369,32 +369,32 @@ export const hubs: Hub[] = [
       {
         h2: 'How does Remi handle a listing call?',
         body: [
-          'Remi by Keres AI answers listing and sign calls in two rings, 24/7, including evenings and weekends when agents are showing. Remi identifies the property the caller is asking about, then asks whether they are buying or selling, whether they already work with an agent, whether they are pre-approved, their price range and when they want to move.',
-          'Remi books the showing or listing consultation into Google Calendar or HubSpot during the call and texts the caller a confirmation. Website form enquiries are picked up within minutes, and any call Remi misses gets a text back within 60 seconds. Fair housing rules apply to Remi too, so the script sticks to the property, the showing and your process, written with your broker.',
+          'Remi by Keres AI is an AI receptionist that answers listing and sign calls in two rings, 24/7, including evenings and weekends when agents are showing. First, Remi identifies the property the caller is asking about. Next, Remi asks whether the caller is buying or selling, already works with an agent and is pre-approved, then asks about price range and move timeline.',
+          'Finally, Remi books the showing or listing consultation into Google Calendar or HubSpot during the call and texts the caller a confirmation. Website form enquiries are picked up within minutes, and any call Remi misses gets a text back within 60 seconds. For example, a seller who calls the sign number gets a listing consultation booked instead of a showing. Fair housing rules apply to Remi too, so the script sticks to the property, the showing and your process, written with your broker.',
         ],
       },
       {
         h2: 'What does Keres AI cost for a real estate agent?',
         body: [
-          'Found by Keres AI costs from $249 a month for a real estate agent or team and covers the website, Google Business Profile, review requests and listings, with no build fee at the base tier. Remi, the AI receptionist, is quoted to your lead volume: one monthly rate with included minutes, then per minute, with no per-call fees.',
-          `Both are month-to-month, with 30 days’ written notice to cancel, and Keres AI sets Remi up for you after a 30-minute call. For comparison, Allo adds an AI receptionist to its paid phone plans for $32 a month per agent billed yearly, and My AI Front Desk starts at $99 a month, according to each vendor’s pricing page on ${VENDORS_CHECKED}.`,
+          'Found by Keres AI costs from $249 a month for a real estate agent or team. Found covers the website, Google Business Profile, review requests and listings, with no build fee at the base tier. Remi, the AI receptionist, is quoted to your lead volume: one monthly rate with included minutes, then per minute, with no per-call fees.',
+          `Both are month-to-month, with 30 days’ written notice to cancel. Keres AI sets Remi up for you after a 30-minute call. For comparison, Allo adds an AI receptionist to its paid phone plans for $32 a month per agent billed yearly, and My AI Front Desk starts at $99 a month, according to each vendor’s pricing page on ${VENDORS_CHECKED}. For example, a solo agent who wants a stronger Google profile first can start with Found and add Remi later.`,
         ],
       },
       {
         h2: 'Which CRMs does Remi write real estate leads to?',
         body: [
-          'Remi writes each lead to HubSpot today, tagged with the listing or source that produced it, and books showings into Google Calendar or HubSpot. Keres AI has no Follow Up Boss or kvCORE integration today; Zapier can pass leads to other tools, so ask on your first call what that looks like for your CRM.',
-          'Answering Zillow and Realtor.com message inboxes directly is rolling out; calls from your listings already ring your number, and Remi answers them. If your follow-up runs entirely in Follow Up Boss, the <a href="/best-ai-receptionist-for-real-estate">real estate roundup</a> lists vendors that name it on their own sites, such as Smith.ai.',
+          'HubSpot is the CRM Remi writes real estate leads to today. Remi tags each lead with the listing or source behind the call, and books showings into Google Calendar or HubSpot. As of October 2026, Keres AI has no Follow Up Boss or kvCORE integration. Zapier can pass leads to other tools, so ask on your first call how Zapier would work with your CRM.',
+          'Answering Zillow and Realtor.com message inboxes directly is rolling out; calls from your listings already ring your number, and Remi answers every listing call. If your follow-up runs entirely in Follow Up Boss, the <a href="/best-ai-receptionist-for-real-estate">real estate roundup</a> lists vendors that name Follow Up Boss on the vendors’ own sites, such as Smith.ai. For example, a team on HubSpot gets the lead, the caller’s answers and the booked showing without retyping anything from a voicemail.',
         ],
       },
     ],
     calcPreset: 'real-estate',
     benchmark: { href: '/missed-call-statistics', label: 'Missed-call and lead-response statistics' },
-    problemH2: 'Why speed to lead decides the commission',
+    problemH2: 'Why does speed to lead decide the commission?',
     problemAnswer:
-      'A buyer enquiring about a listing is comparing you against every other agent whose number is on a sign, and the one who answers first usually gets the showing. Portal leads and listing calls arrive in the evening and at weekends, which is exactly when an agent is driving, showing, or at dinner.',
+      'Speed to lead is the time between a buyer’s first call or enquiry and a real answer, and the agent with the shortest time usually gets the showing. A buyer enquiring about a listing is comparing you against every other agent whose number is on a sign. Portal leads and listing calls arrive in the evening and at weekends, which is exactly when an agent is driving, showing, or at dinner. For example, a Saturday open-house call that goes to voicemail can become a buyer touring with another agent by Sunday. Remi by Keres AI answers the call in two rings, 24/7, and texts back any missed caller within 60 seconds. Lead-response research collected on the Keres AI statistics page explains why the first responder usually wins.',
     stats: [
-      { value: 'First', label: 'responder usually wins the lead', source: 'Lead-response research', sourceHref: '/missed-call-statistics' },
+      { value: '7x', label: 'as likely to qualify a lead contacted within an hour', source: 'Harvard Business Review, 2011', sourceHref: 'https://hbr.org/2011/03/the-short-life-of-online-sales-leads' },
       { value: '5 min', label: 'response window that lifts conversion', source: 'Lead-response research', sourceHref: '/missed-call-statistics' },
     ],
     callFlow: [

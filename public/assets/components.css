@@ -2600,9 +2600,9 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 }
 
 /* ─── Lead band: form beside calendar ────────────────────────── */
-.lead { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); align-items: start; margin-top: var(--space-5); }
-@media (min-width: 1024px) { .lead { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); } }
-.lead .qf { margin: 0; min-width: 0; }
+div.lead { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); align-items: start; margin-top: var(--space-5); }
+@media (min-width: 1024px) { div.lead { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); } }
+div.lead .qf { margin: 0; min-width: 0; }
 .book { padding: var(--space-5); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); }
 .book__title { margin: 0 0 var(--space-2); font-family: var(--serif); font-size: var(--text-2); font-weight: 600; letter-spacing: -0.012em; line-height: 1.15; color: var(--ink-0); }
 .book__lede { margin: 0 0 var(--space-4); font-size: var(--text-0); line-height: 1.5; color: var(--ink-2); }
@@ -2614,7 +2614,7 @@ select.qf__input { appearance: none; background-image: url("data:image/svg+xml,%
 /* phones: the calendar card is one slim row until tapped */
 @media (max-width: 1023px) {
   .book { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: var(--space-3) var(--space-4); }
-  .lead { margin-top: 8px; gap: var(--space-3); }
+  div.lead { margin-top: 8px; gap: var(--space-3); }
   .book { flex-wrap: nowrap; padding: 10px 14px; }
   .book__host .btn-k { padding-block: 8px; }
   .book__title { flex: 1 1 0; min-width: 0; margin: 0; font-size: var(--text--1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -2697,3 +2697,5 @@ html[data-motion] .pipe__stage:focus-within { opacity: 1; transform: none; point
 .k-mock__caption a { display: inline-block; padding-block: 4px; }
 main:focus { outline: none; }
 .site__services li, .scope__row dd, .sms__bubble { overflow-wrap: anywhere; min-width: 0; }
+/* A lede followed by body copy in the same block needs breathing room. */
+.k-lede + .k-body { margin-top: var(--space-4); }
