@@ -1,0 +1,101 @@
+---
+// How Keres AI writes, checks, dates and corrects its pages. Linked from the
+// footer and from every "Reviewed by the Keres AI team" line. Only practices
+// the site already follows belong here; the change log records what was
+// published, newest first.
+import Layout from '../layouts/Layout.astro';
+import Schema from '../components/Schema.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { organizationSchema, breadcrumbSchema } from '../data/schema';
+import { business } from '../config/business';
+
+const path = '/editorial-policy';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Editorial policy', path }];
+const email = business.contactEmail;
+
+// Newest first. Add an entry whenever a page family is published or a
+// correction changes what a page says.
+const changeLog: { date: string; label: string; items: string[] }[] = [
+  {
+    date: '2026-10-12',
+    label: 'October 12, 2026',
+    items: [
+      'Published this editorial policy.',
+      'Added a “Last updated · Reviewed by the Keres AI team” line to the product, industry, trade, glossary, use-case, integration, tool, About, Pricing and Trust pages. The date is the day the page’s content last changed.',
+      'About: added how Keres AI works with a new client and a table of live and rolling-out integrations, generated from the same list as the integrations pages.',
+      'Trust & Security: added the data-handling practices already stated in the security overview (encryption in transit, access controls, export or deletion on request within 15 business days, no training of third-party AI models on client data).',
+      'Structured data: free tools are described as free creative works rather than software products, and each service, tool and glossary page names its main subject.',
+    ],
+  },
+  {
+    date: '2026-10-11',
+    label: 'October 11, 2026',
+    items: [
+      'Published sourced roundups: best AI receptionists for small businesses, for HVAC companies, for law firms and for real estate agents, and best Google Business Profile management services. Every vendor price comes from the vendor’s own site, checked October 11, 2026.',
+      'Published the AI receptionist cost guide and the AI vs live answering service comparison, and rebuilt the five alternatives pages (Smith.ai, Ruby, Goodcall, Rosie, AnsweringLegal) from vendor pricing pages.',
+      'Statistics and benchmark pages now name Keres AI as the source of every estimate and link primary sources where they exist.',
+      'Calculators show the formula in words and label their default inputs as assumptions.',
+      'Removed claims Keres AI could not confirm, including a fixed go-live time, concurrency limits, flat billing and an unsourced percentage, and merged pages that covered the same topic.',
+    ],
+  },
+];
+---
+<Layout
+  title="Editorial Policy: How We Check and Correct | Keres AI"
+  description="How Keres AI checks vendor prices, labels estimates and examples, discloses that it sells Remi and Found, and corrects mistakes. Includes a dated change log."
+  path={path}
+  pageType="AboutPage"
+>
+  <Schema slot="head" graph={[breadcrumbSchema(crumbs), organizationSchema]} />
+
+  <Breadcrumbs crumbs={crumbs} />
+  <div class="page-hero container">
+    <span class="eyebrow">Editorial policy</span>
+    <h1>How we write, check and <span class="accent">correct</span></h1>
+    <p class="lead answer-block">Keres AI writes every page on this site and sells two of the things it compares: Remi, an AI receptionist, and Found, websites and Google Business Profile management. So we say that on the comparison pages, take every competitor price from the vendor’s own pricing page and date it, label estimates and examples as ours, and correct mistakes when they are reported to <a href={`mailto:${email}`}>{email}</a>.</p>
+  </div>
+
+  <section class="page-section container">
+    <div class="prose">
+      <h2>Who writes and reviews these pages?</h2>
+      <p>The Keres AI team. Pages are drafted with AI assistance and reviewed by the Keres AI team before they are published. Pages are bylined to Keres AI as a company, not to a named person.</p>
+
+      <h2>What is our conflict of interest?</h2>
+      <p>Keres AI sells Remi (an AI receptionist) and Found (a website, Google Business Profile, reviews and listings for local businesses), and also Theo, June, Sol and custom AI workers. Roundups and alternatives pages compare Remi or Found with competitors. Where Keres AI appears in a comparison, it is listed in the same columns, under the same rules, as every other option, and the roundups say at the top that Keres AI wrote them.</p>
+
+      <h2>How do we check vendor prices?</h2>
+      <ul>
+        <li>Every competitor price and feature comes from that vendor’s own pricing or product page, not from review sites or memory.</li>
+        <li>Each comparison shows the date the prices were checked. Prices are rechecked on the vendor’s page before that date is changed.</li>
+        <li>Where a vendor does not publish a price or a detail, the page says it is not published. We do not estimate it.</li>
+        <li>We quote each vendor’s lowest published plan as the vendor shows it, in US dollars.</li>
+      </ul>
+
+      <h2>What don’t we do?</h2>
+      <ul>
+        <li>No paid placements. Vendors do not pay to be listed, ranked or left out.</li>
+        <li>No invented ratings, scores or reviews. Comparisons have no overall score, and the site shows no ratings or reviews of Keres AI because it has none to show yet.</li>
+        <li>No call-quality claims about other products. We compare published information; we have not tested how other vendors’ receptionists sound on a call, and we do not claim to have.</li>
+      </ul>
+
+      <h2>How do the calculators and estimates work?</h2>
+      <p>Each calculator states its formula in words and labels its default inputs as assumptions; replace them with your own numbers to get your own result. Figures on the statistics and benchmark pages are either from a primary source, which is linked, or labelled as a Keres AI estimate. Example call transcripts and demo recordings are labelled as examples and use example data, not customer calls.</p>
+
+      <h2>What does “Last updated” mean?</h2>
+      <p>The “Last updated” date at the foot of a page is the day its content last changed. The “Updated” or “checked” date on a comparison is the day its vendor prices were last checked on the vendors’ own pages.</p>
+
+      <h2>How do I report a mistake?</h2>
+      <p>Email <a href={`mailto:${email}`}>{email}</a> with the page and what is wrong, ideally with a link to the source. We check it against that source, correct the page and update its date, and record significant corrections in the change log below. Vendors are welcome to send a link to a changed pricing page.</p>
+
+      <h2 id="change-log">Change log</h2>
+      {changeLog.map((entry) => (
+        <>
+          <h3><time datetime={entry.date}>{entry.label}</time></h3>
+          <ul>
+            {entry.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </>
+      ))}
+    </div>
+  </section>
+</Layout>

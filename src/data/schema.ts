@@ -167,6 +167,8 @@ export const organizationSchema = {
   disambiguatingDescription:
     'Keres AI (keresai.com) sells websites, Google Business Profile management and an AI receptionist to local service businesses in the United States. Not affiliated with keres.ai, the Keras deep-learning library or Kore.ai.',
   slogan: 'Never miss another lead.',
+  // How pages are written, sourced, dated and corrected.
+  publishingPrinciples: `${ORIGIN}/editorial-policy`,
   areaServed: { '@type': 'Country', name: 'United States' },
   email: business.contactEmail,
   // knowsAbout uses DefinedTerm @id nodes so knowledge graphs resolve entity
