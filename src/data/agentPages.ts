@@ -53,11 +53,11 @@ export const agentPages: AgentPage[] = [
     heroVertical: 'default',
     flowH2: 'How does Remi handle a call, step by step?',
     flowLede:
-      'Remi handles every call in the same six steps, in this order, whether it is a Tuesday afternoon or a Sunday at 2 a.m.: ring, greet, qualify, book, confirm and notify.',
+      'Remi by Keres AI is an AI receptionist with the same six steps on every call, on a Tuesday afternoon or a Sunday at 2 a.m. First comes the ring, then the greeting, intake, booking, confirmation and, finally, the owner notice.',
     flow: [
-      { label: 'Ring', text: 'Remi picks up inside two rings. No hold music, no phone tree, no "press one for service".' },
-      { label: 'Greet', text: 'Your greeting, your business name, your tone. Callers are told they are speaking to an assistant if they ask.' },
-      { label: 'Qualify', text: 'Your intake script runs — matter type, job type, procedure, listing — in the words your vertical actually uses.' },
+      { label: 'Ring', text: 'Remi picks up inside two rings, with no hold music and no phone tree.' },
+      { label: 'Greet', text: 'Your greeting, your business name, your tone. Any caller who asks is told the voice is an assistant.' },
+      { label: 'Qualify', text: 'Your intake script runs (matter type, job type, procedure, listing) in the words your vertical actually uses.' },
       { label: 'Book', text: 'Real availability offered from your calendar, and the appointment written in while the caller is still on the line.' },
       { label: 'Confirm', text: 'A confirmation text the caller can reply to, with reschedule and cancel handled in the same thread.' },
       { label: 'Notify', text: 'After every call, Remi writes an intake summary into HubSpot, ServiceTitan or Google Calendar. Calls your rules mark urgent go to your on-call person immediately. Everything else appears in the Owner Daily Brief, a single text sent every morning.' },
@@ -67,7 +67,7 @@ export const agentPages: AgentPage[] = [
         id: 'intake',
         h2: 'What questions does Remi ask callers?',
         answer:
-          'Remi runs the intake script your business already uses rather than a generic call-centre form. A law firm gets matter type, opposing party and conflict details; a plumbing company gets job type, service address and urgency; a dental practice gets procedure, insurance and whether the patient is on file; a real-estate team gets listing, pre-approval and timeline.',
+          'An intake script is the set of questions a business asks every new caller, and Remi runs the script your business already uses rather than a generic call-centre form. First, the owner approves every question before Remi answers a real customer. For example, a law firm gets matter type, opposing party and conflict details; a plumbing company gets job type, service address and urgency. A dental practice gets procedure, insurance and whether the patient is on file, and a real-estate team gets listing, pre-approval and timeline. After the call, Remi writes the answers into the connected tool (HubSpot, ServiceTitan or Google Calendar) set up by Keres AI.',
         bullets: [
           'Law firms: matter type, conflict details, urgency, whether a deadline is already running.',
           'Home services: job type, equipment, service address, access notes, emergency grading.',
@@ -79,7 +79,7 @@ export const agentPages: AgentPage[] = [
         id: 'booking',
         h2: 'Which calendars and CRMs does Remi book into?',
         answer:
-          `Remi books into Google Calendar, HubSpot and ServiceTitan during the call. Remi reads real availability and writes the appointment while the caller is on the line, so nobody is told that someone will ring them back, and Zapier passes each lead to other apps. ${ROLLING_OUT_INTEGRATIONS} are rolling out and are not live yet.`,
+          `Remi books into Google Calendar, HubSpot and ServiceTitan during the call. Remi reads real availability and writes the appointment while the caller is on the line, so nobody is told to wait for a call back. For example, an HVAC company on ServiceTitan sees the booked job before the caller hangs up. A law firm on HubSpot sees the consultation next to the contact record. Additionally, Zapier passes each lead to other apps. As of October 2026, ${ROLLING_OUT_INTEGRATIONS} are rolling out and are not live yet.`,
         bullets: [
           `Connected today: ${LIVE_INTEGRATIONS}.`,
           `Rolling out, not live yet: ${ROLLING_OUT_INTEGRATIONS}.`,
@@ -90,12 +90,12 @@ export const agentPages: AgentPage[] = [
       {
         h2: 'What happens to a call Remi can’t take?',
         answer:
-          'Remi texts back any call it could not take within 60 seconds. If a call still gets away, for example a bad line, a caller who hangs up or a number that rings during an outage, the text asks a real question rather than sending an autoresponder, and Remi carries the conversation on by SMS until it can book or hand off.',
+          'A missed call is any call Remi could not complete, for example because of a bad line, a caller who hangs up or a number that rings during a carrier outage. First, Remi texts back every missed caller within 60 seconds. The text asks a real question, such as what the caller needs and when, rather than sending an autoresponder. Remi then carries the conversation on by SMS with the same intake script used on the phone. If the caller wants an appointment, Remi books the slot into Google Calendar, HubSpot or ServiceTitan by text. If the caller needs a person, Remi hands off under the same rules the owner sets for calls. Finally, the exchange appears in the next morning text, so the owner sees every missed caller and the outcome. Keres AI quotes Remi as one monthly rate with included minutes and no per-call fees.',
       },
       {
         h2: 'Does Remi answer web chat and texts?',
         answer:
-          'Plenty of people will not phone you. Remi answers the chat widget on your website and your business text line with the same script, and picks up website form enquiries in minutes. Answering marketplace inboxes (Yelp, Thumbtack, Avvo, Zillow) directly is rolling out — in minutes, rather than whenever somebody next checks the inbox.',
+          'Yes. Remi is the same receptionist on the phone, on website chat and on your business text line. Plenty of people will not phone a business, especially after hours. Remi answers the chat widget on your website and your business text line with the same intake script. Additionally, Remi picks up website form enquiries in minutes. For example, a homeowner who fills in the website form late at night gets a reply in minutes instead of waiting for the morning. Every chat, text and form enquiry shows up in the same morning text as the calls. As of October 2026, answering marketplace inboxes (Yelp, Thumbtack, Avvo, Zillow) directly is rolling out and is not live yet.',
         bullets: [
           'Web chat on your site, with the same intake script as the phone.',
           'Business SMS answered and continued in thread.',
@@ -105,7 +105,7 @@ export const agentPages: AgentPage[] = [
       {
         h2: 'What happens when a caller needs a person?',
         answer:
-          'When a caller needs a person, Remi warm-transfers the call to your on-call number under rules you set, such as emergencies, named clients or anyone who asks for a human. If nobody picks up, Remi sends a "call me now" alert carrying everything already collected, so the caller never repeats themselves and the escalation does not become a lost lead.',
+          'A warm transfer is a live handoff of the call to a person instead of a voicemail box. When a caller needs a person, Remi warm-transfers the call to your on-call number under rules you set. For example, the rules can cover emergencies, named clients or anyone who asks for a human. If nobody picks up, Remi sends a "call me now" alert carrying everything already collected. The caller never repeats anything, and the escalation does not become a lost lead. Remi by Keres AI is built to hand off rather than guess: when Remi does not know an answer, Remi says so and offers to get someone. Finally, calls that match no urgent rule are summarised in the morning text.',
         bullets: [
           'Warm transfer on your rules: emergencies, named clients, anyone who asks for a human.',
           '"Call me now" alert with the full intake attached when the transfer is not answered.',
