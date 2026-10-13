@@ -13,6 +13,7 @@ const faqs = [
   { q: 'Is Keres HIPAA compliant? Will you sign a BAA?', a: 'Not today. Keres is not HIPAA certified and does not sign BAAs. If your practice needs a BAA for phone intake, tell us before you sign up so we can say plainly whether Keres fits.' },
   { q: 'Is Keres SOC 2 certified?', a: 'No. Keres does not hold a SOC 2 report. We describe the practices we follow on this page; if your business requires a certification, ask before you sign.' },
   { q: 'How is my data protected?', a: 'Traffic is encrypted in transit, access is limited to the people who need it, and your data is never used to train third-party models.' },
+  { q: 'Can I get my data exported or deleted?', a: 'Yes. Email <a href="mailto:ops@keresai.com">ops@keresai.com</a> and your data is exported or deleted within 15 business days of the request.' },
 ];
 ---
 <Layout
@@ -23,7 +24,7 @@ const faqs = [
   <Schema slot="head" graph={[faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">Trust &amp; Security</span>
     <h1>Built to be <span class="accent">trusted with your calls</span></h1>
     <p class="lead">Keres AI answers your customers’ calls and handles their data every day. Here’s how we protect it: encryption in transit, access limited to the people who run your account, and no training of third-party models on your data.</p>
@@ -31,7 +32,7 @@ const faqs = [
       <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href="/legal/security.html" class="btn btn-outline">Security details</a>
     </div>
-  </header>
+  </div>
 
   <section class="page-section container">
     <div class="answer-block">
@@ -52,6 +53,16 @@ const faqs = [
 
   <section class="page-section container">
     <div class="prose">
+      <h2>How does Keres AI handle client data?</h2>
+      <p>The basics, as the <a href="/legal/security.html">security overview</a> states them:</p>
+      <ul>
+        <li><strong>Encryption in transit.</strong> Traffic between callers, our systems and the tools we write to is encrypted.</li>
+        <li><strong>Access controls.</strong> Least privilege: only the people who run your account can see it, and access ends when a person’s role no longer needs it.</li>
+        <li><strong>Retention.</strong> Configured per engagement; we keep only what the service needs to work.</li>
+        <li><strong>Export and deletion.</strong> On request, within 15 business days. Email <a href="mailto:ops@keresai.com">ops@keresai.com</a>.</li>
+        <li><strong>No model training.</strong> We do not train third-party AI models on client data.</li>
+        <li><strong>Website processors.</strong> The vendors behind this website (hosting, contact forms, call scheduling, page-view counting and ad measurement) are listed in the <a href="/legal/privacy.html">privacy policy</a>.</li>
+      </ul>
       <p>Read the details in our <a href="/legal/security.html">security overview</a> and <a href="/legal/privacy.html">privacy policy</a>. Have specific compliance requirements? <a href="/quote">Book a call</a> and we’ll tell you honestly whether Keres fits.</p>
     </div>
   </section>
