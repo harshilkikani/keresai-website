@@ -198,7 +198,7 @@ export const agentPages: AgentPage[] = [
       'Theo is quoted to your appointment volume and integrations, and can be added to Remi or Found at any time.',
     testimonialProves: 'no-shows falling and estimates closing after a follow-up nobody had time to make',
     faqs: [
-      { q: 'Will it annoy my customers?', a: 'The cadence is yours, everything is opt-out in one word, and Theo stops the moment somebody answers. Three touches on an estimate over a week is the schedule most firms would run themselves if they had the time.' },
+      { q: 'Will it annoy my customers?', a: 'The cadence is yours, everything is opt-out in one word, and Theo stops the moment somebody answers. Three touches on an estimate over a week is a schedule an office could run by hand if it had the time.' },
       { q: 'What does it cost?', a: 'Theo is quoted to your appointment volume and integrations on a 30-minute call, month-to-month, with confirmations, reminders and estimate follow-up in the same quote.' },
       { q: 'How long does setup take?', a: 'It depends on your appointment types, cadences and integrations, and it is quicker if Remi is already answering. Keres sets it up for you and agrees the timing on your first call.' },
       { q: 'What if someone replies with a real question?', a: 'It goes to a person. Theo handles scheduling and confirmation; anything that turns into a negotiation or a technical question is handed to you with the thread attached.' },

@@ -6,6 +6,7 @@ import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema, webPageSchema } from '../data/schema';
 import { answeringVendors, keresRow, VENDORS_CHECKED } from '../data/answeringVendors';
+import { ROLLING_OUT_INTEGRATIONS } from '../data/integrations';
 
 // "AI answering service" head term. Competitor facts come only from
 // answeringVendors.ts (vendor pricing pages, dated); Keres facts from the
@@ -72,14 +73,14 @@ const webpage = webPageSchema({ path, name: 'AI answering service vs live answer
     <div class="prose">
       <h2>Per minute, per call or included minutes: which billing model suits you?</h2>
       <ul>
-        <li><strong>Per minute</strong> (PATLive and many live services): cheapest when calls are short; long intake calls get expensive.</li>
         <li><strong>Per call</strong> (Smith.ai, Upfirst): predictable per caller; expensive when many short calls come in.</li>
         <li><strong>Per unique caller</strong> (Goodcall): repeat callers don’t cost extra.</li>
-        <li><strong>Included minutes, then per minute</strong> (Keres AI, Ruby, Abby Connect): a pool sized to your volume, so a normal month is one known number; a busy season can go past the pool.</li>
+        <li><strong>Included minutes, then per minute</strong> (Keres AI, Dialzara, PATLive): a pool sized to your volume, so a normal month is one known number; a busy season goes past the pool at a published or quoted per-minute rate. Short calls use little of the pool; long intake calls use more.</li>
+        <li><strong>Monthly plans with included minutes</strong> (Ruby, Abby Connect, Rosie): a set pool each month; their pricing pages do not publish a rate past the plan, so ask before you sign.</li>
       </ul>
 
       <h2>Can an AI answering service book appointments?</h2>
-      <p>Some can, some only take messages. Remi checks real availability and books the appointment into Google Calendar, HubSpot or ServiceTitan while the caller is on the line, then texts a confirmation. Jobber, Housecall Pro, Clio and other integrations are rolling out.</p>
+      <p>Some can, some only take messages. Remi checks real availability and books the appointment into Google Calendar, HubSpot or ServiceTitan while the caller is on the line, then texts a confirmation. {ROLLING_OUT_INTEGRATIONS} are rolling out and are not live yet.</p>
 
       <h2>When is a live answering service the better choice?</h2>
       <p>Choose people when every caller must reach a human, when calls need judgement a script can’t cover, or when you need agreements Keres does not sign today, such as a BAA. Choose AI when you want every call answered in two rings at any hour, booked on the call, without paying for receptionist minutes on routine calls.</p>

@@ -45,7 +45,7 @@ const byStage: Record<number, { services: Service[]; ctaHref: string; ctaLabel: 
       {
         name: 'Google Business Profile Management',
         plan: 'Found',
-        desc: 'One-time optimization — categories, services, photos, verification — then weekly posts, photo updates, review responses, spam-listing removal and monthly insights.',
+        desc: 'One-time optimization — categories, services, photos, verification — then weekly posts, photo updates, review responses, spam-listing reports to Google and monthly insights.',
       },
       {
         name: 'Review Generation & Reputation',

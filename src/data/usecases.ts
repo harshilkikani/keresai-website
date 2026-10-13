@@ -176,7 +176,7 @@ const allUsecases: UseCase[] = [
     ],
     faqs: [
       { q: 'Is Keres cheaper than a receptionist?', a: 'Typically yes — one monthly rate that’s well below the cost of a full-time front-desk hire, while covering nights and weekends too.' },
-      { q: 'Does it replace my front desk entirely?', a: 'Many businesses use Keres for after-hours and overflow, and others run it as their full front desk. It scales to whatever coverage you need. See <a href="/glossary/front-desk-automation">front desk automation</a>.' },
+      { q: 'Does it replace my front desk entirely?', a: 'It does not have to. You can use Keres AI for after-hours and overflow only, or run Remi as your full front desk. Coverage is set to whatever you need. See <a href="/glossary/front-desk-automation">front desk automation</a>.' },
     ],
     related: ['after-hours-answering', 'overflow-call-handling', 'lead-capture'],
     cta: { href: '/pricing', label: 'See pricing' },
