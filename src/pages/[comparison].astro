@@ -20,8 +20,12 @@ const isRoundup = alternatives.length > 0;
 const d = c.detail;
 const byType = (t: string) => alternatives.filter((v) => v.type === t).map((v) => v.name);
 const listNames = (xs: string[]) => xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+// First paragraph on the page: the direct answer, Keres named last and disclosed in the byline below it.
+const roundupLead = isRoundup
+  ? `The best ${c.competitor} alternatives in 2026 are ${listNames([...alternatives.map((v) => v.name), 'Remi by Keres AI'])}, depending on whether you want live receptionists, AI or both, and whether you would rather pay per call, per minute or per caller.`
+  : '';
 const roundupAnswer = isRoundup
-  ? `The main ${c.competitor} alternatives are ${listNames(alternatives.map((v) => v.name))}. ` +
+  ? 'Of the alternatives, ' +
     [byType('Human').length ? `${listNames(byType('Human'))} ${byType('Human').length > 1 ? 'use' : 'uses'} live receptionists` : '',
      byType('Hybrid').length ? `${listNames(byType('Hybrid'))} ${byType('Hybrid').length > 1 ? 'mix' : 'mixes'} people and AI` : '',
      byType('AI').length ? `${listNames(byType('AI'))} ${byType('AI').length > 1 ? 'answer' : 'answers'} with AI` : ''].filter(Boolean).join('; ') +
@@ -113,8 +117,12 @@ const switchSteps = [
     {isRoundup
       ? <h1><span class="accent">{c.h1Accent}</span> alternatives, compared</h1>
       : <h1>Why teams choose Keres over <span class="accent">{c.h1Accent}</span></h1>}
-    {isRoundup && <p class="updated" style="font-size:14px;color:var(--text-dim);margin:-8px 0 16px">Updated <time datetime="2026-10-11">October 11, 2026</time></p>}
-    <p class="lead">{c.intro}</p>
+    {isRoundup ? (
+      <>
+        <p class="lead">{roundupLead}</p>
+        <p class="byline" style="font-size:14px;color:var(--text-dim);margin:14px 0 0">Written by Keres AI, which sells Remi, one of the options below. Prices checked on {VENDORS_CHECKED} on each vendor’s own pricing page. Updated <time datetime={VENDORS_CHECKED_ISO}>{VENDORS_CHECKED}</time>.</p>
+      </>
+    ) : <p class="lead">{c.intro}</p>}
     <div class="hero-ctas">
       <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href={isRoundup ? '/hear-it' : secondaryCta.href} class="btn btn-outline">{isRoundup ? 'Hear Remi answer a call' : secondaryCta.label}</a>
@@ -122,11 +130,12 @@ const switchSteps = [
   </div>
 
   <!-- DIRECT ANSWER BLOCK (AI citation target) -->
-  <section class="page-section container">
+  <section class="page-section container" aria-labelledby={isRoundup ? 'answer-title' : undefined}>
+    {isRoundup && <div class="prose"><h2 id="answer-title">How do the {c.competitor} alternatives differ?</h2></div>}
     <div class="answer-block">
       {isRoundup ? (
         <>
-          <p>{roundupAnswer} They also bill differently: per call, per minute, per caller or with included minutes.</p>
+          <p>{c.intro} {roundupAnswer} They also bill differently: per call, per minute, per caller or with included minutes.</p>
           {d && <p style="margin-top:14px">{d.keresAnswer}</p>}
         </>
       ) : (
@@ -172,6 +181,15 @@ const switchSteps = [
         </table>
       </div>
       <p class="prose" style="margin-top:6px">Prices are each vendor’s lowest published plan, taken from its own pricing page on {VENDORS_CHECKED}. They change; check the linked page before you buy. Sources: {alternatives.map((v, i) => (<>{i > 0 ? ' · ' : ''}<a href={v.source} rel="noopener nofollow" target="_blank">{v.name}</a></>))}.</p>
+    </section>
+  )}
+
+  {isRoundup && (
+    <section class="page-section container" aria-labelledby="method-title">
+      <div class="prose">
+        <h2 id="method-title">How did we compare these {c.competitor} alternatives?</h2>
+        <p>Keres AI compared {alternatives.length} {c.competitor} alternatives on four points: who answers (AI, people or both), how each one bills (per minute, per call or per caller), its lowest published plan, and who the vendor says it is for. Every figure comes from the vendor’s own pricing or product page, checked on {VENDORS_CHECKED}, and the table links each source. Where a vendor publishes no price or no overage rate, the page says so instead of estimating one. This is a comparison of published information, not a test of call quality, and there is no overall score; each pick below is matched to a need. Keres AI wrote this page and sells Remi, which sits in the same table under the same rules, labelled “that’s us”. Prices change, so check the linked page before you buy.</p>
+      </div>
     </section>
   )}
 
@@ -258,7 +276,7 @@ const switchSteps = [
   <FaqSection faqs={c.faqs} title={`${c.competitor} alternative — FAQ`} />
 
   {isRoundup ? (
-    <section class="page-section container" aria-labelledby="related-title">
+    <aside class="page-section container" aria-labelledby="related-title">
       <div class="section-label">Also comparing</div>
       <h2 id="related-title" class="section-title" style="margin-bottom:8px">More AI receptionist comparisons</h2>
       <ul class="prose">
@@ -268,7 +286,7 @@ const switchSteps = [
         <li><a href="/compare">All comparisons</a></li>
         <li><a href="/hear-it">Hear Remi answer a call</a></li>
       </ul>
-    </section>
+    </aside>
   ) : relatedComparisons.length > 0 && (
     <section class="page-section container">
       <div class="section-label">Also comparing</div>

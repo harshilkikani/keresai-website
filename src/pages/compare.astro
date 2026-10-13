@@ -5,6 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { organizationSchema, breadcrumbSchema, webPageSchema, articleSchema, VENDORS_CHECKED_ISO } from '../data/schema';
 import { comparisons, ROUNDUP_SLUGS } from '../data/comparisons';
+import { VENDORS_CHECKED } from '../data/answeringVendors';
 
 const path = '/compare';
 const title = 'AI Receptionist Alternatives Compared (2026) | Keres AI';
@@ -59,17 +60,18 @@ const compareListSchema = {
   <div class="page-hero container">
     <span class="eyebrow">Comparisons</span>
     <h1>AI receptionist and answering service <span class="accent">alternatives, compared</span></h1>
-    <p class="updated" style="font-size:14px;color:var(--text-dim);margin:-8px 0 16px">Updated <time datetime="2026-10-11">October 11, 2026</time></p>
-    <p class="lead">Who answers, how each one bills and the price each vendor publishes, taken from the vendors’ own sites. Keres AI wrote these pages and sells one of the receptionists in them.</p>
+    <p class="lead">The main AI receptionist and answering service options in 2026 are live services (Ruby, PATLive, AnsweringLegal), hybrid services that mix people and AI (Smith.ai, Abby Connect), self-serve AI receptionists (Goodcall, Rosie, Dialzara, Upfirst, My AI Front Desk), and done-for-you AI such as Remi by Keres AI. The pages below compare each on who answers, how it bills and the price it publishes.</p>
+    <p class="byline" style="font-size:14px;color:var(--text-dim);margin:14px 0 0">Written by Keres AI, which sells Remi, one of the options compared. Prices checked on {VENDORS_CHECKED} on each vendor’s own site. Updated <time datetime={VENDORS_CHECKED_ISO}>{VENDORS_CHECKED}</time>.</p>
     <div class="hero-ctas">
       <a href="/best-ai-receptionist" class="btn btn-primary">Best AI receptionists</a>
       <a href="/ai-receptionist-cost" class="btn btn-outline">AI receptionist cost</a>
     </div>
   </div>
 
-  <section class="page-section container">
+  <section class="page-section container" aria-labelledby="answer-title">
+    <div class="prose"><h2 id="answer-title">How does Keres AI compare with answering services?</h2></div>
     <div class="answer-block">
-      <p>Keres AI sells websites, Google Business Profile management and an AI receptionist (Remi) to local service businesses. Compared with answering services like Smith.ai and Ruby, Remi answers with AI rather than live receptionists, books the appointment during the call, and bills a monthly rate with included minutes, then per minute, with no per-call fees. The pages below show each alternative with the price it publishes.</p>
+      <p>Keres AI sells websites, Google Business Profile management and an AI receptionist (Remi) to local service businesses. Compared with answering services like Smith.ai and Ruby, Remi answers with AI rather than live receptionists, books the appointment during the call, and bills a monthly rate with included minutes, then per minute, with no per-call fees. Remi answers in two rings, 24/7, in English only, and texts back missed callers within 60 seconds. The pages below show each alternative with the price it publishes, checked on {VENDORS_CHECKED}.</p>
     </div>
   </section>
 
@@ -105,8 +107,8 @@ const compareListSchema = {
 
   <section class="page-section container">
     <div class="prose">
-      <h2>What matters when you compare</h2>
-      <p>Two questions separate most options. First, who answers: a live receptionist, AI, or both on the same line. Second, how you are billed: per minute, per call or per caller, and what each extra unit costs once the plan runs out. The entry price only tells you what a quiet month costs.</p>
+      <h2>What matters when you compare answering services?</h2>
+      <p>Two questions separate most options. First, who answers: a live receptionist, AI, or both on the same line. Second, how you are billed: per minute, per call or per caller, and what each extra unit costs once the plan runs out. For example, Smith.ai and Upfirst count calls, Goodcall counts unique callers, and Dialzara, PATLive and Keres AI count minutes past an included allowance. The entry price only tells you what a quiet month costs.</p>
       <p>Then check what happens on the call: whether the appointment is booked into your calendar or CRM, how urgent calls reach you, and who sets the receptionist up. <a href="/hear-it">Hear Remi answer a call</a> or <a href="/pricing">see how Keres AI prices it</a>.</p>
     </div>
   </section>

@@ -58,17 +58,18 @@ const webpage = webPageSchema({ path, name: title, description, speakableSelecto
   <div class="page-hero container">
     <span class="eyebrow">Buyer’s guide · 2026</span>
     <h1>Best Google Business Profile management <span class="accent">services</span> (2026)</h1>
-    <p class="updated" style="font-size:14px;color:var(--text-dim);margin:-8px 0 16px">Updated <time datetime={GBP_VENDORS_CHECKED_ISO}>{GBP_VENDORS_CHECKED}</time></p>
-    <p class="lead" style="font-size:16px">Written by Keres AI, which sells one of the options below (Found). Prices and features come from each vendor’s own site, checked {GBP_VENDORS_CHECKED}.</p>
+    <p class="lead">The best Google Business Profile management services in 2026 are BrightLocal, Localo and Merchynt’s Paige if you will do the work yourself with software, BrightLocal’s managed service, Hibu or Scorpion if you want it done for you, and Found by Keres AI or Thryv if you also need the website built and run.</p>
+    <p class="byline" style="font-size:14px;color:var(--text-dim);margin:14px 0 0">Written by Keres AI, which sells Found, one of the options below. Prices and features checked on {GBP_VENDORS_CHECKED} on each vendor’s own site. Updated <time datetime={GBP_VENDORS_CHECKED_ISO}>{GBP_VENDORS_CHECKED}</time>.</p>
     <div class="hero-ctas">
       <a href="#table-title" class="btn btn-primary">See the comparison</a>
       <a href="/google-business-profile-management" class="btn btn-outline">What management includes</a>
     </div>
   </div>
 
-  <section class="page-section container">
+  <section class="page-section container" aria-labelledby="answer-title">
+    <div class="prose"><h2 id="answer-title">Which Google Business Profile management option should you choose?</h2></div>
     <div class="answer-block">
-      <p>The best Google Business Profile management option depends on who does the work. If you will do it yourself, software such as BrightLocal (from $41 a month), Localo ($49) or Merchynt’s Paige ($99) schedules posts and tracks reviews. If you want it done for you, BrightLocal’s managed service costs $1,299 a month; Hibu and Scorpion quote privately. If you also need a website, Keres AI’s Found starts at $249 a month and Thryv at $99.</p>
+      <p>Google Business Profile management is the weekly work of keeping your Google listing accurate and active: posts, photos, review requests and replies, and consistent listings. The best option depends on who does that work. If you will do it yourself, software such as BrightLocal (from $41 a month), Localo ($49) or Merchynt’s Paige ($99) schedules posts and tracks reviews. If you want it done for you, BrightLocal’s managed service costs $1,299 a month; Hibu and Scorpion quote privately. If you also need a website, Found by Keres AI starts at $249 a month ($499 for law firms) and Thryv at $99. Every figure is the lowest price on the vendor’s own page, checked {GBP_VENDORS_CHECKED}.</p>
     </div>
   </section>
 
@@ -154,7 +155,7 @@ const webpage = webPageSchema({ path, name: title, description, speakableSelecto
 
   <FaqSection faqs={faqs} title="Google Business Profile management FAQ" />
 
-  <section class="page-section container" aria-labelledby="related-title">
+  <aside class="page-section container" aria-labelledby="related-title">
     <div class="section-label">Keep reading</div>
     <h2 id="related-title" class="section-title" style="margin-bottom:8px">Related pages</h2>
     <ul class="prose">
@@ -164,7 +165,7 @@ const webpage = webPageSchema({ path, name: title, description, speakableSelecto
       <li><a href="/best-ai-receptionist">Best AI receptionists for small businesses</a></li>
       <li><a href="/compare">All comparisons</a></li>
     </ul>
-  </section>
+  </aside>
 
   <CtaBand heading="Get your website and profile managed" sub="Book a 30-minute call and get a quote for Found." />
 </Layout>

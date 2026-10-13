@@ -26,7 +26,7 @@ const faqs = [
   { q: 'What is the best AI receptionist for a law firm?', a: 'The one whose intake matches your practice areas and whose output lands where your team works. LegalClerk.ai is AI built only for legal intake. Smith.ai mixes AI with live receptionists and lists conflict checks. Ruby, AnsweringLegal and LEX Reception answer with people. Keres AI suits firms that want AI intake booked into Google Calendar or HubSpot, with the website run by the same team. More on <a href="/industries/law-firms">Keres AI for law firms</a>.' },
   { q: 'Can an AI receptionist run a conflict check?', a: 'It should not. It can collect the names your firm needs, such as the caller, the opposing party and anyone else involved, and pass them on. Your firm runs the check in its own system. Remi never clears a conflict and never tells a caller the firm can take the matter.' },
   { q: 'Will an AI receptionist give legal advice?', a: 'A well-scripted one will not. Remi does not assess cases, predict outcomes or explain the law; it takes the facts and books the consultation with an attorney. Test any vendor by asking it “Do I have a case?” and listening to the answer.' },
-  { q: 'Which legal answering services work with Clio?', a: 'From each vendor’s own pages: Smith.ai’s pricing page names Clio, LEX Reception lists Clio among its legal integrations, and LegalClerk.ai names Clio and MyCase. Keres AI’s Clio integration is rolling out, so Remi books into Google Calendar or HubSpot today. Compare more on the <a href="/answering-legal-alternative">AnsweringLegal alternatives</a> and <a href="/ruby-alternative">Ruby alternatives</a> pages.' },
+  { q: 'Which legal answering services work with Clio?', a: 'From each vendor’s own pages: Smith.ai’s pricing page names Clio, LEX Reception lists Clio among its legal integrations, and LegalClerk.ai names Clio and MyCase. Keres AI has no Clio integration today, so Remi books into Google Calendar or HubSpot. Compare more on the <a href="/answering-legal-alternative">AnsweringLegal alternatives</a> and <a href="/ruby-alternative">Ruby alternatives</a> pages.' },
   { q: 'Should a law firm choose AI or a live receptionist?', a: 'Live receptionists suit firms whose callers are often distressed or prefer a person; LEX Reception pledges real people on customer-facing calls, and Ruby and AnsweringLegal answer with people. AI suits firms that want the same intake on every call at any hour. Smith.ai offers both on one line. The <a href="/smith-ai-alternative">Smith.ai alternatives</a> page compares the mixed options.' },
   { q: 'How much does Keres AI cost for a law firm?', a: 'Found for law firms (website, Google Business Profile, reviews and listings) starts at $499 a month. Remi is quoted to your call volume: one monthly rate with included minutes, then per minute, month-to-month. Book a 30-minute call on the <a href="/quote">quote page</a>.' },
 ];
@@ -60,8 +60,8 @@ const webpage = webPageSchema({
   <div class="page-hero container">
     <span class="eyebrow">Buyer’s guide · Law firms · 2026</span>
     <h1>Best AI receptionists for <span class="accent">law firms</span> (2026)</h1>
-    <p class="updated" style="font-size:14px;color:var(--text-dim);margin:-8px 0 16px">Updated <time datetime="2026-10-11">October 11, 2026</time></p>
-    <p class="lead" style="font-size:16px">Written by Keres AI, which sells Remi, one of the options below. Competitor facts come from each vendor's own pages, checked on the date shown.</p>
+    <p class="lead">The best AI receptionists for law firms in 2026 are LegalClerk.ai for AI built only for legal intake, Smith.ai for AI and live receptionists on one line, Ruby, AnsweringLegal and LEX Reception for live people, and Remi by Keres AI for AI intake that books the consultation into Google Calendar or HubSpot during the call.</p>
+    <p class="byline" style="font-size:14px;color:var(--text-dim);margin:14px 0 0">Written by Keres AI, which sells Remi, one of the options below. Prices and features checked on {VENDORS_CHECKED} on each vendor's own site. Updated <time datetime="2026-10-11">October 11, 2026</time>.</p>
     <div class="hero-ctas">
       <a href="#table-title" class="btn btn-primary">See the comparison</a>
       <a href="/hear-it" class="btn btn-outline">Hear Remi answer a call</a>
@@ -99,7 +99,7 @@ const webpage = webPageSchema({
       <h2>Which option suits which law firm?</h2>
 
       <h3>Keres AI (Remi)</h3>
-      <p>Remi answers new-client calls in two rings, 24/7, runs intake questions by practice area, collects the caller’s and opposing party’s names for the conflict check your firm runs, and books the consultation into Google Calendar or HubSpot during the call. It also handles website chat, the text line and form enquiries, and texts back missed callers within 60 seconds. Billing is one monthly rate with included minutes, then per minute, with no per-call fees; Found for law firms runs the website, Google Business Profile, reviews and listings from $499 a month. Limitations: the Remi price is quoted, not published; Remi answers in English only; the Clio integration is still rolling out; and Keres AI is not SOC 2 certified and does not sign BAAs or DPAs.</p>
+      <p>Remi answers new-client calls in two rings, 24/7, runs intake questions by practice area, collects the caller’s and opposing party’s names for the conflict check your firm runs, and books the consultation into Google Calendar or HubSpot during the call. It also handles website chat, the text line and form enquiries, and texts back missed callers within 60 seconds. Billing is one monthly rate with included minutes, then per minute, with no per-call fees; Found for law firms runs the website, Google Business Profile, reviews and listings from $499 a month. Limitations: the Remi price is quoted, not published; Remi answers in English only; Keres AI has no Clio integration today; and Keres AI is not SOC 2 certified and does not sign BAAs or DPAs.</p>
 
       <h3>Smith.ai</h3>
       <p>Smith.ai combines AI with live receptionists. Its legal page lists practice-specific intake, conflict checks, case management integration, bilingual support and payment collection, and says prospects, clients, court staff and opposing counsel can follow different call paths. Billing is per call: the AI tier is free for 25 calls a month, then $3 a call, and human plans start at $300 for 30 calls. Long intake calls cost no more than short ones, but calls from existing clients and court staff each count.</p>
@@ -126,7 +126,7 @@ const webpage = webPageSchema({
 
   <FaqSection faqs={faqs} title="AI receptionists for law firms: FAQ" />
 
-  <section class="page-section container" aria-labelledby="related-title">
+  <aside class="page-section container" aria-labelledby="related-title">
     <div class="section-label">Keep comparing</div>
     <h2 id="related-title" class="section-title" style="margin-bottom:8px">Where can law firms compare more?</h2>
     <ul class="prose">
@@ -135,7 +135,7 @@ const webpage = webPageSchema({
       <li><a href="/answering-legal-alternative">AnsweringLegal alternatives</a> · <a href="/ruby-alternative">Ruby alternatives</a> · <a href="/smith-ai-alternative">Smith.ai alternatives</a></li>
       <li><a href="/benchmarks/legal-intake-conversion">Legal intake conversion benchmarks</a></li>
     </ul>
-  </section>
+  </aside>
 
   <CtaBand
     heading="Hear how Remi handles a new-client call"

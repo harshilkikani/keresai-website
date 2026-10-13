@@ -384,6 +384,15 @@ export const integrationCategories = [
 export const isLive = (i: Integration) => i.status === 'live';
 /** Names of the integrations that work today, for copy that lists them. */
 export const liveIntegrationNames = integrations.filter(isLive).map((i) => i.name);
+/** Names of the integrations that are rolling out (not live). The only list pages should use. */
+export const rollingOutIntegrationNames = integrations.filter((i) => !isLive(i)).map((i) => i.name);
+/** "A, B and C" */
+export const joinNames = (names: readonly string[]) =>
+  names.length < 2 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+/** "Google Calendar, HubSpot, ServiceTitan and Zapier": for copy that lists what works today. */
+export const LIVE_INTEGRATIONS = joinNames(liveIntegrationNames);
+/** Every rolling-out integration, for copy that lists them. Derived, so it never drifts from the data above. */
+export const ROLLING_OUT_INTEGRATIONS = joinNames(rollingOutIntegrationNames);
 /** The honest one-liner shown wherever a rolling-out integration appears. */
 export const rollingOutNote = (name: string) =>
-  `The ${name} integration is rolling out and is not live yet. Today Keres connects to ${liveIntegrationNames.join(', ').replace(/, ([^,]*)$/, ' and $1')}.`;
+  `The ${name} integration is rolling out and is not live yet. Today Keres connects to ${LIVE_INTEGRATIONS}.`;
