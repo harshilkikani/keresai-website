@@ -107,10 +107,10 @@ export const hubs: Hub[] = [
       'A prospective client calling a law firm is anxious and ready to act now, so the firm that answers live and books the consultation usually earns the retainer. Calls that hit voicemail rarely produce a callback — the caller simply dials the next firm on the list, and accidents, arrests and family emergencies do not wait for office hours.',
     stats: [
       {
-        value: 'First',
-        label: 'responder usually signs the client',
-        source: 'Legal intake benchmarks',
-        sourceHref: '/benchmarks/legal-intake-conversion',
+        value: '7x',
+        label: 'as likely to qualify a lead contacted within an hour',
+        source: 'Harvard Business Review, 2011',
+        sourceHref: 'https://hbr.org/2011/03/the-short-life-of-online-sales-leads',
       },
       {
         value: '5 min',
@@ -394,7 +394,7 @@ export const hubs: Hub[] = [
     problemAnswer:
       'Speed to lead is the time between a buyer’s first call or enquiry and a real answer, and the agent with the shortest time usually gets the showing. A buyer enquiring about a listing is comparing you against every other agent whose number is on a sign. Portal leads and listing calls arrive in the evening and at weekends, which is exactly when an agent is driving, showing, or at dinner. For example, a Saturday open-house call that goes to voicemail can become a buyer touring with another agent by Sunday. Remi by Keres AI answers the call in two rings, 24/7, and texts back any missed caller within 60 seconds. Lead-response research collected on the Keres AI statistics page explains why the first responder usually wins.',
     stats: [
-      { value: 'First', label: 'responder usually wins the lead', source: 'Lead-response research', sourceHref: '/missed-call-statistics' },
+      { value: '7x', label: 'as likely to qualify a lead contacted within an hour', source: 'Harvard Business Review, 2011', sourceHref: 'https://hbr.org/2011/03/the-short-life-of-online-sales-leads' },
       { value: '5 min', label: 'response window that lifts conversion', source: 'Lead-response research', sourceHref: '/missed-call-statistics' },
     ],
     callFlow: [

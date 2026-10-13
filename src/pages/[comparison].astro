@@ -70,7 +70,7 @@ const roundupArticle = isRoundup ? articleSchema({
   headline: c.title.replace(/\s*\|\s*Keres AI$/, ''),
   description: c.description,
   datePublished: VENDORS_CHECKED_ISO,
-  dateModified: VENDORS_CHECKED_ISO,
+  dateModified: '2026-10-12',
 }) : null;
 
 const webpage = webPageSchema({
@@ -120,7 +120,7 @@ const switchSteps = [
     {isRoundup ? (
       <>
         <p class="lead">{roundupLead}</p>
-        <p class="byline" style="font-size:14px;color:var(--text-dim);margin:14px 0 0">Written by Keres AI, which sells Remi, one of the options below. Prices checked on {VENDORS_CHECKED} on each vendor’s own pricing page. Updated <time datetime={VENDORS_CHECKED_ISO}>{VENDORS_CHECKED}</time>. <a href="/editorial-policy">How we check and correct prices</a>.</p>
+        <p class="byline" style="font-size:14px;color:var(--text-dim);margin:14px 0 0">Written by Keres AI, which sells Remi, one of the options below. Prices checked on {VENDORS_CHECKED} on each vendor’s own pricing page. Updated <time datetime="2026-10-12">October 12, 2026</time>. <a href="/editorial-policy">How we check and correct prices</a>.</p>
       </>
     ) : <p class="lead">{c.intro}</p>}
     <div class="hero-ctas">
