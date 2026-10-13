@@ -1,4 +1,6 @@
 import { priceSentence } from '../config/business';
+import { ROLLING_OUT_INTEGRATIONS } from './integrations';
+import { VENDORS_CHECKED } from './answeringVendors';
 // The four industry hubs. Each one is a real page with its own
 // vocabulary — consult / matter / conflict check for law, job /
 // dispatch / estimate for home services, recall / chair time /
@@ -31,6 +33,8 @@ export interface Hub {
   sub: string;
   /** Answer-first paragraph naming Keres AI, rendered under the hero for AI citation. */
   answer?: string;
+  /** Question-headed prose answers (HTML allowed), the facts the card grids below summarise. */
+  prose?: { h2: string; body: string[] }[];
   /** Drives the CallTranscript, DailyBrief and BookingConfirmation mocks. */
   vertical: Vertical;
   /** roi.js key, so the calculator lands on this vertical's defaults. */
@@ -71,8 +75,31 @@ export const hubs: Hub[] = [
     answer:
       'Keres AI helps law firms sign more of the clients who call. Remi, its AI intake receptionist, answers new-client calls in two rings, 24/7, collects the matter type, the opposing party and urgency, and books the consultation on your calendar. It never gives legal advice and never clears a conflict itself. Found for law firms (website, Google Business Profile, reviews and legal directories) starts at $499 a month.',
     sub:
-      'Remi, the AI receptionist from Keres AI, answers every new-client call in two rings, collects conflict-check details, qualifies the matter for your practice area, and books the consultation straight into your calendar. A single new case is worth thousands. Most of the calls that produce them arrive after your office is closed.',
+      'Remi, the AI receptionist from Keres AI, answers every new-client call in two rings, collects conflict-check details, qualifies the matter for your practice area, and books the consultation straight into your calendar. A single new case is worth thousands, and the calls that produce them often arrive after your office is closed.',
     vertical: 'law-firms',
+    prose: [
+      {
+        h2: 'How does Remi handle a new-client call for a law firm?',
+        body: [
+          'Remi by Keres AI is the AI receptionist that answers new-client calls in two rings, 24/7, including nights and weekends. Remi asks the intake questions for your practice areas, for example the incident date, injuries and insurer contact on a personal-injury call, or custody status and the next court date on a criminal-defense call.',
+          'Remi collects the full names of the caller, the opposing party and anyone else involved, then passes them to your team so the firm runs its own conflict check. Remi never gives legal advice and never tells a caller the firm can take the matter. When the facts are in, Remi books the consultation into Google Calendar or HubSpot during the call and texts a confirmation. Calls your rules mark urgent, such as an arrest or a filing deadline, go to the on-call attorney.',
+        ],
+      },
+      {
+        h2: 'What does Keres AI cost for a law firm?',
+        body: [
+          'Found for law firms costs from $499 a month and covers the firm website, the Google Business Profile, review requests and legal directories such as Avvo, FindLaw and Justia. Law-firm pricing sits above the $249 base because legal search is more competitive and the listings are different.',
+          'Remi, the AI receptionist, is quoted to your call volume and practice areas: one monthly rate with included minutes, then per minute, with no per-call fees. Both are month-to-month, and you cancel with 30 days’ written notice. There is no build fee at the Found base tier. The quote comes from a 30-minute call, and the office line, (973) 495-2223, is answered by a person. Keres AI does not publish a Remi price because call volume and intake length vary from firm to firm.',
+        ],
+      },
+      {
+        h2: 'What does Keres AI not do for law firms?',
+        body: [
+          'Remi answers in English only today, so a firm with many Spanish-speaking callers should weigh that first. Keres AI is not SOC 2 or HIPAA certified and does not sign BAAs or DPAs. Remi books into Google Calendar or HubSpot; Keres AI has no Clio, Lawmatics or MyCase integration today, although Zapier can pass intake to other tools.',
+          'Remi does not run conflict checks, assess cases or give legal advice: those decisions stay with your attorneys. If your firm wants a person on every call, a live legal answering service such as AnsweringLegal or LEX Reception is the better choice. The <a href="/best-ai-receptionist-for-law-firms">law-firm comparison</a> lists them alongside AI options, with the prices each vendor publishes.',
+        ],
+      },
+    ],
     calcPreset: 'legal',
     benchmark: { href: '/benchmarks/legal-intake-conversion', label: 'Legal intake conversion benchmarks' },
     problemH2: 'Why intake decides the case',
@@ -103,7 +130,7 @@ export const hubs: Hub[] = [
       { step: 'Matter qualification', text: 'Practice area, what happened, when it happened, whether there is a police report or filing, and whether any deadline is already running.' },
       { step: 'Urgency', text: 'A custody emergency and a slip-and-fall from March do not get the same handling. Remi grades the urgency on your rules and escalates the ones that cannot wait.' },
       { step: 'Consult booking', text: 'Real availability offered on the call, the consultation written into your calendar, and a confirmation text the caller can reply to.' },
-      { step: 'Intake record', text: 'The full intake summary is written to HubSpot (Clio and Lawmatics are rolling out), so the attorney reads the file rather than re-interviewing the client.' },
+      { step: 'Intake record', text: 'The full intake summary is written to HubSpot, or passed to other tools through Zapier, so the attorney reads the file rather than re-interviewing the client.' },
     ],
     segmentsH2: 'Practice areas',
     segments: [
@@ -114,7 +141,7 @@ export const hubs: Hub[] = [
     ],
     otherAgents: [
       { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Worker', text: 'Confirms the consultation, reminds the day before, handles the reschedule, and collects documents in advance so the attorney is not chasing a police report an hour before the meeting.' },
-      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Revives closed-lost consultations from the last six to twelve months, and asks every client for a review after the matter closes — anyone who reports a problem also reaches the partner directly.' },
+      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Revives closed-lost consultations from the last six to twelve months, and sends every client the same review request after the matter closes; a reply that mentions a problem also goes to the partner.' },
     ],
     foundFrom: 'from $499',
     foundLine:
@@ -136,11 +163,11 @@ export const hubs: Hub[] = [
     ],
     faqs: [
       { q: 'Does it give legal advice?', a: 'No, and it says so. Remi collects facts and conflict-check names, grades urgency and books the consultation. Anything that sounds like advice gets a "the attorney will go through that with you on Monday" and, if it is urgent, a warm transfer.' },
-      { q: 'How does the conflict check work?', a: 'Remi collects the caller’s name, the opposing party and any other involved party, then passes them to your team to run the conflict check (Clio and Lawmatics integrations are rolling out). It never clears a conflict on its own — that decision stays with the firm.' },
+      { q: 'How does the conflict check work?', a: 'Remi collects the caller’s name, the opposing party and any other involved party, then passes them to your team to run the conflict check (Keres AI has no Clio or Lawmatics integration today). It never clears a conflict on its own — that decision stays with the firm.' },
       { q: 'What does it cost?', a: `Found for firms starts at $499/month. ${priceSentence('Remi', 'answer', 'your call volume, practice areas and integrations')} Month-to-month, no setup fee on the Found base tier. To size what faster intake is worth, use the <a href="/tools/legal-intake-roi-calculator">legal intake ROI calculator</a>.` },
       { q: 'How long does setup take?', a: 'It depends on your call flows and integrations; Keres agrees the timing with you on the first call. We spend thirty minutes on how your intake runs today, write the script for your practice areas, connect your number and your calendar or CRM (Google Calendar, HubSpot; others through Zapier), and you test it before it answers a real client.' },
       { q: 'What if a caller needs an attorney right now?', a: 'You set the escalation rules — an arraignment, a custody emergency, a named existing client — and Remi warm-transfers to the on-call number. If nobody answers, the on-call attorney gets a "call me now" alert with the intake already written down.' },
-      { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month, and you keep your number and your data.' },
+      { q: 'Is there a contract?', a: 'No long-term contract. Month-to-month, cancel with 30 days’ written notice, and you keep your number and your data.' },
     ],
   },
 
@@ -156,11 +183,34 @@ export const hubs: Hub[] = [
     sub:
       'Remi, the AI receptionist from Keres AI, picks up in two rings while your crew is on a job — grades the emergency, takes the service address, gives a dispatch window and writes the job into ServiceTitan or your calendar. Anything it cannot take gets a text back inside 60 seconds.',
     vertical: 'home-services',
+    prose: [
+      {
+        h2: 'How does Remi answer and book a home-service call?',
+        body: [
+          'Remi by Keres AI answers your line in two rings, 24/7, while your crew is on a job. Remi grades each call on emergency rules you write with Keres AI: for example, a gas smell means telling the caller to leave the building and call the utility or 911 from outside, while no heat with an infant at home goes to your on-call tech now.',
+          'Remi then takes the job type, equipment, service address and access notes, offers a real arrival window and books the job into ServiceTitan, Google Calendar or HubSpot during the call, so dispatch sees the job where it already looks. Any call Remi cannot take gets a text back within 60 seconds, and the conversation carries on by SMS until the job is booked or handed to a person.',
+        ],
+      },
+      {
+        h2: 'What does Keres AI cost for a home-service business?',
+        body: [
+          'Found by Keres AI costs from $249 a month for a home-service business and covers the website, Google Business Profile management, a review request after every job and consistent listings, with no build fee at the base tier. Remi, the AI receptionist, is quoted to your call volume: one monthly rate with included minutes, then per minute, with no per-call fees.',
+          `Heat waves, freezes and storms bring the calls, so the quote sizes Remi’s included minutes to your busiest week rather than an average month. Everything is month-to-month, with 30 days’ written notice to cancel. For comparison, live answering services publish plans from $99 a month (PATLive, 50 minutes) and AI receptionists from $24.95 (Upfirst, 30 calls), according to each vendor’s pricing page on ${VENDORS_CHECKED}.`,
+        ],
+      },
+      {
+        h2: 'Which field-service software does Remi book into?',
+        body: [
+          `Remi books jobs into ServiceTitan, Google Calendar and HubSpot today, and Zapier passes each job to other apps. ${ROLLING_OUT_INTEGRATIONS} are rolling out and are not live yet, so a shop that schedules in Jobber or Housecall Pro would book into a shared Google Calendar in the meantime.`,
+          'In ServiceTitan, Remi creates the job with the call notes attached, so the technician is not calling the office for the address. Assignment stays with your dispatcher: Remi books the window, and dispatch decides which truck goes. See <a href="/integrations/servicetitan">how Remi writes jobs into ServiceTitan</a>.',
+        ],
+      },
+    ],
     calcPreset: 'home-services',
     benchmark: { href: '/benchmarks/hvac-answering', label: 'HVAC answering benchmarks' },
     problemH2: 'Why the phone beats the schedule',
     problemAnswer:
-      'Home-services demand arrives exactly when nobody can answer it: during a heat wave, after a storm, at 6 a.m. with no heat. A large share of calls come in outside office hours, and when the house is at 90°F the caller does not wait on hold — they call the next company on the list.',
+      'Home-services demand arrives exactly when nobody can answer it: during a heat wave, after a storm, at 6 a.m. with no heat. Keres AI estimates that 35–50% of HVAC demand arrives outside office hours, and when the house is at 90°F the caller does not wait on hold — they call the next company on the list.',
     stats: [
       { value: '30–45%', label: 'of calls go unanswered during peak season', source: 'HVAC answering benchmarks', sourceHref: '/benchmarks/hvac-answering' },
       { value: '35–50%', label: 'of demand arrives after hours', source: 'HVAC answering benchmarks', sourceHref: '/benchmarks/hvac-answering' },
@@ -170,7 +220,7 @@ export const hubs: Hub[] = [
       { step: 'Emergency grading', text: 'No heat with a newborn in the house is not the same call as a seasonal tune-up. Remi grades it on your rules and flags the ones that need a truck today.' },
       { step: 'Job qualification', text: 'Job type, equipment, service address, access notes, and whether this is the property you already quoted an estimate on.' },
       { step: 'Dispatch window', text: 'Remi offers the windows you actually have open and commits to one on the call, instead of promising that someone will ring back.' },
-      { step: 'Written to your software', text: 'The job lands in ServiceTitan or your calendar with the notes attached (Jobber and Housecall Pro are rolling out), so the tech is not calling the office for the address.' },
+      { step: 'Written to your software', text: `The job lands in ServiceTitan or your calendar with the notes attached (${ROLLING_OUT_INTEGRATIONS} are rolling out), so the tech is not calling the office for the address.` },
       { step: 'Missed-call text-back', text: 'Any call that still gets away gets a text inside 60 seconds asking what they need — and the conversation carries on by SMS.' },
     ],
     segmentsH2: 'Trades',
@@ -186,7 +236,7 @@ export const hubs: Hub[] = [
     ],
     foundFrom: 'from $249',
     foundLine:
-      'Google ranks Local Services Ads on how fast you answer and how you are reviewed — which is exactly what Remi fixes. Found covers the site, the Google Business Profile, review generation, listings and LSA setup from $249 a month.',
+      'Google says Local Services Ads ranking considers how responsive you are to customers and how you are reviewed, which is what Remi and review requests address. Found covers the site, the Google Business Profile, review generation, listings and LSA setup from $249 a month.',
     children: [
       { label: 'AI receptionist for HVAC', href: '/ai-receptionist-for-hvac' },
       { label: 'Best AI receptionists for HVAC companies', href: '/best-ai-receptionist-for-hvac' },
@@ -208,7 +258,7 @@ export const hubs: Hub[] = [
       { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi', 'answer', 'your call volume, locations and integrations')} Month-to-month.` },
       { q: 'How long does setup take?', a: 'It depends on your call flows and integrations, and the timing is agreed on your first call: thirty minutes on how calls run today, then your script, your number, and your calendar or ServiceTitan, and you test it yourself before it answers a customer.' },
       { q: 'What if the caller needs a person?', a: 'You set the rules — a gas smell, a flood, a commercial account — and Remi warm-transfers to your on-call number, with a "call me now" alert as the fallback.' },
-      { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month, and your number stays yours.' },
+      { q: 'Is there a contract?', a: 'No long-term contract. Month-to-month, cancel with 30 days’ written notice, and your number stays yours.' },
     ],
   },
 
@@ -224,6 +274,29 @@ export const hubs: Hub[] = [
     sub:
       'Remi, the AI receptionist from Keres AI, answers while your front desk is chairside — qualifies the procedure, checks what insurance you take, and books the chair time. Then Theo confirms it and June brings the recall list back.',
     vertical: 'dental-med-spa',
+    prose: [
+      {
+        h2: 'How does Remi book a dental or med spa appointment?',
+        body: [
+          'Remi by Keres AI answers in two rings, 24/7, while the front desk is chairside. Remi checks whether the caller is a new or existing patient, asks what the visit is for so the right length of chair time is booked, and asks plainly whether you accept their insurance plan. For a med spa, Remi asks which treatment or consultation the caller wants.',
+          'Remi then offers real openings and books the appointment into Google Calendar or HubSpot while the caller is still on the line, and texts a confirmation the caller can reply to. Remi collects only what is needed to book: name, contact details, the visit requested and a preferred time. Clinical history stays with your clinician, and Remi does not quote coverage or a patient’s out-of-pocket cost.',
+        ],
+      },
+      {
+        h2: 'What does Keres AI cost for a dental practice or med spa?',
+        body: [
+          'Found by Keres AI costs from $249 a month for a dental practice or med spa and covers the website, Google Business Profile, review requests and health-directory listings such as Healthgrades, with no build fee at the base tier. Remi, the AI receptionist, is quoted to your call volume: one monthly rate with included minutes, then per minute, with no per-call fees.',
+          'Theo, the Keres AI follow-up worker, sends confirmations and reminders to cut no-shows and is quoted separately. Everything is month-to-month, with 30 days’ written notice to cancel, and the quote comes from a 30-minute call. Keres AI estimates that a single no-show costs a practice $200 or more in lost production; the <a href="/benchmarks/dental-no-show">dental no-show estimates</a> show the reasoning.',
+        ],
+      },
+      {
+        h2: 'Does Keres AI meet HIPAA requirements?',
+        body: [
+          'No. Keres AI is not HIPAA certified or SOC 2 certified and does not sign Business Associate Agreements (BAAs) today. Under HIPAA, a practice generally needs a BAA with any vendor that handles protected health information on its behalf, so a practice that requires one should choose a vendor that signs it. Abby Connect’s pricing page, for example, mentions HIPAA compliance options.',
+          'Remi is configured to book appointments without collecting clinical history, and access to call data is limited to the people who run your account. Raise any compliance requirement on your first call, before you sign anything.',
+        ],
+      },
+    ],
     calcPreset: 'dental',
     benchmark: { href: '/benchmarks/dental-no-show', label: 'Dental no-show benchmarks' },
     problemH2: 'Why the empty chair is the real cost',
@@ -238,7 +311,7 @@ export const hubs: Hub[] = [
       { step: 'New patient or recall', text: 'Remi checks whether the caller is already on file, and flags anyone overdue for recall while it has them on the phone.' },
       { step: 'Procedure qualification', text: 'What is wrong, how long it has been going on, and whether this is cosmetic, hygiene or an emergency — so the right length of chair time gets booked.' },
       { step: 'Insurance pre-qualification', text: 'Whether you take their plan, asked plainly, before a treatment conversation that would only end in disappointment.' },
-      { step: 'Chair time booked', text: 'Real availability offered on the call and written to your calendar, with forms texted before the visit (Dentrix and Open Dental are rolling out).' },
+      { step: 'Chair time booked', text: 'Real availability offered on the call and written to your calendar, with forms texted before the visit (Keres AI has no Dentrix or Open Dental integration today).' },
       { step: 'Confirmation and reminders', text: 'Theo takes over: confirmation, reminders, reschedule handling, and the waitlist backfill when someone cancels.' },
     ],
     segmentsH2: 'Practices',
@@ -250,7 +323,7 @@ export const hubs: Hub[] = [
     ],
     otherAgents: [
       { slug: 'follow-up', name: 'Theo', title: 'Follow-Up Worker', text: 'Confirms every appointment, reminds on your schedule, handles reschedules in thread, and backfills a cancellation from the waitlist before the chair goes empty.' },
-      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Works the recall list every month, revives patients who lapsed, and asks every patient for a review after treatment — anyone who reports a problem also reaches the practice manager directly.' },
+      { slug: 'reactivation', name: 'June', title: 'Reactivation Worker', text: 'Works the recall list every month, revives patients who lapsed, and sends every patient the same review request after treatment; a reply that mentions a problem also goes to the practice manager.' },
     ],
     foundFrom: 'from $249',
     foundLine:
@@ -271,12 +344,12 @@ export const hubs: Hub[] = [
       { q: 'Can an AI receptionist book med spa treatments and consultations?', a: 'Yes. Remi answers in two rings, 24/7, asks which treatment or consultation the caller wants, offers real openings from your calendar, books it while the caller is on the line, and texts a confirmation they can reply to for a reschedule or cancellation.' },
       { q: 'Does Remi collect medical history or pre-treatment intake?', a: 'No. Remi books the treatment and collects only what is needed to book it: name, contact details, the treatment or consultation requested and a preferred time. Clinical history stays with your clinician. Keres is not HIPAA certified and does not sign BAAs, so raise any compliance requirement before you sign.' },
       { q: 'Will Remi answer calls from my ads and website?', a: 'Yes. Remi answers every call to the number you route to it, whatever ad, listing or page the caller found you on, including evenings and weekends when your front desk is closed.' },
-      { q: 'Does it integrate with our practice management system?', a: 'Google Calendar, HubSpot and ServiceTitan are connected today. Dentrix and Open Dental are rolling out — ask where yours is, and in the meantime Remi books to a shared calendar your front desk already watches.' },
+      { q: 'Does it integrate with our practice management system?', a: 'Google Calendar, HubSpot and ServiceTitan are connected today, plus Zapier. Keres AI has no Dentrix or Open Dental integration today, so Remi books to a shared calendar your front desk already watches.' },
       { q: 'Can it answer insurance questions?', a: 'It confirms which plans you accept and flags anything it cannot answer for your front desk. It does not quote coverage or estimate a patient’s out-of-pocket cost — that is a conversation for a person with the plan in front of them.' },
       { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi', 'answer', 'your call volume, locations and integrations')} Month-to-month.` },
       { q: 'How long does setup take?', a: 'It depends on your call flows and integrations, and the timing is agreed on your first call. Thirty minutes on how the front desk handles calls now, then your script, your number and your calendar, and you test it before a patient does.' },
       { q: 'What if the caller has an emergency?', a: 'You define what counts. Remi warm-transfers those to the on-call number and sends a "call me now" alert with what it already collected if nobody picks up.' },
-      { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month.' },
+      { q: 'Is there a contract?', a: 'No long-term contract. Month-to-month; cancel with 30 days’ written notice.' },
     ],
   },
 
@@ -285,13 +358,36 @@ export const hubs: Hub[] = [
     name: 'Real estate',
     title: 'AI Receptionist for Real Estate Teams | Keres AI',
     description:
-      'Remi answers every listing enquiry in seconds, qualifies the buyer or seller and books the showing, evenings included. Website and Google profile from $249/mo.',
-    h1: 'Answer every lead in seconds. Book the showing before they call the next agent.',
+      'Remi answers listing calls in two rings, 24/7, qualifies the buyer or seller and books the showing, evenings included. Website and Google profile from $249/mo.',
+    h1: 'Answer every listing call in two rings. Book the showing before they call the next agent.',
     answer:
-      'Keres AI helps real estate agents and teams answer every listing call in seconds. Remi, its AI receptionist, asks whether the caller already has an agent, is pre-approved and when they want to move, then books the showing on your calendar and texts you the lead. Found runs your website, Google Business Profile and reviews from $249 a month. Follow Up Boss integration is rolling out.',
+      'Keres AI helps real estate agents and teams answer every listing call in two rings, 24/7. Remi, its AI receptionist, asks whether the caller already has an agent, is pre-approved and when they want to move, then books the showing on your calendar and texts you the lead. Website form enquiries are picked up within minutes. Found runs your website, Google Business Profile and reviews from $249 a month. Remi writes leads to HubSpot; Keres AI has no Follow Up Boss integration today.',
     sub:
-      'Remi, the AI receptionist from Keres AI, answers the listing line and the portal enquiries in seconds — asks whether they are working with an agent, whether they are pre-approved, and what their timeline is — then books the showing while you are still in the car.',
+      'Remi, the AI receptionist from Keres AI, answers the listing line in two rings and picks up website form enquiries within minutes. Remi asks whether they are working with an agent, whether they are pre-approved, and what their timeline is, then books the showing while you are still in the car.',
     vertical: 'real-estate',
+    prose: [
+      {
+        h2: 'How does Remi handle a listing call?',
+        body: [
+          'Remi by Keres AI answers listing and sign calls in two rings, 24/7, including evenings and weekends when agents are showing. Remi identifies the property the caller is asking about, then asks whether they are buying or selling, whether they already work with an agent, whether they are pre-approved, their price range and when they want to move.',
+          'Remi books the showing or listing consultation into Google Calendar or HubSpot during the call and texts the caller a confirmation. Website form enquiries are picked up within minutes, and any call Remi misses gets a text back within 60 seconds. Fair housing rules apply to Remi too, so the script sticks to the property, the showing and your process, written with your broker.',
+        ],
+      },
+      {
+        h2: 'What does Keres AI cost for a real estate agent?',
+        body: [
+          'Found by Keres AI costs from $249 a month for a real estate agent or team and covers the website, Google Business Profile, review requests and listings, with no build fee at the base tier. Remi, the AI receptionist, is quoted to your lead volume: one monthly rate with included minutes, then per minute, with no per-call fees.',
+          `Both are month-to-month, with 30 days’ written notice to cancel, and Keres AI sets Remi up for you after a 30-minute call. For comparison, Allo adds an AI receptionist to its paid phone plans for $32 a month per agent billed yearly, and My AI Front Desk starts at $99 a month, according to each vendor’s pricing page on ${VENDORS_CHECKED}.`,
+        ],
+      },
+      {
+        h2: 'Which CRMs does Remi write real estate leads to?',
+        body: [
+          'Remi writes each lead to HubSpot today, tagged with the listing or source that produced it, and books showings into Google Calendar or HubSpot. Keres AI has no Follow Up Boss or kvCORE integration today; Zapier can pass leads to other tools, so ask on your first call what that looks like for your CRM.',
+          'Answering Zillow and Realtor.com message inboxes directly is rolling out; calls from your listings already ring your number, and Remi answers them. If your follow-up runs entirely in Follow Up Boss, the <a href="/best-ai-receptionist-for-real-estate">real estate roundup</a> lists vendors that name it on their own sites, such as Smith.ai.',
+        ],
+      },
+    ],
     calcPreset: 'real-estate',
     benchmark: { href: '/missed-call-statistics', label: 'Missed-call and lead-response statistics' },
     problemH2: 'Why speed to lead decides the commission',
@@ -302,11 +398,11 @@ export const hubs: Hub[] = [
       { value: '5 min', label: 'response window that lifts conversion', source: 'Lead-response research', sourceHref: '/missed-call-statistics' },
     ],
     callFlow: [
-      { step: 'Which listing', text: 'Remi identifies the property from the call, the portal enquiry or the sign-call number, so the conversation starts with the house they actually asked about.' },
+      { step: 'Which listing', text: 'Remi identifies the property from the call, the form enquiry or the sign-call number, so the conversation starts with the house they actually asked about.' },
       { step: 'Buyer or seller', text: 'Are they buying, selling, or both — and are they already working with an agent, asked before anyone spends an hour on an unrepresented tour.' },
       { step: 'Qualification', text: 'Pre-approval status, price range, timeline and area, captured in the caller’s own words rather than a form they abandon.' },
       { step: 'Showing booked', text: 'A showing or a listing consultation put straight on the calendar, with disclosures texted immediately.' },
-      { step: 'Written to your CRM', text: 'The lead and everything Remi learned lands in HubSpot (Follow Up Boss is rolling out), tagged with the source that produced it.' },
+      { step: 'Written to your CRM', text: 'The lead and everything Remi learned lands in HubSpot, tagged with the source that produced it (Keres AI has no Follow Up Boss integration today).' },
     ],
     segmentsH2: 'Teams',
     segments: [
@@ -331,7 +427,7 @@ export const hubs: Hub[] = [
     ],
     testimonials: [
       { proves: 'weekend listing calls turning into booked showings' },
-      { proves: 'portal leads answered in seconds instead of hours' },
+      { proves: 'listing calls answered in two rings instead of hours later' },
     ],
     faqs: [
       { q: 'Does it work with Zillow and Realtor.com leads?', a: 'Calls from your listings, yes: they ring your number and Remi answers. Website form enquiries are answered in minutes too. Answering Zillow and Realtor.com message inboxes directly is rolling out.' },
@@ -339,7 +435,7 @@ export const hubs: Hub[] = [
       { q: 'What does it cost?', a: `Found starts at $249/month. ${priceSentence('Remi', 'answer', 'your lead volume and integrations')} Month-to-month.` },
       { q: 'How long does setup take?', a: 'It depends on your call flows and integrations, and the timing is agreed on your first call: thirty minutes on how leads reach you now, then your script, your numbers, your calendar and your CRM, and you test it before a buyer does.' },
       { q: 'What if a caller wants me specifically?', a: 'Remi warm-transfers to you under rules you set, and sends a "call me now" alert with the lead detail if you cannot pick up.' },
-      { q: 'Is there a contract?', a: 'No. Month-to-month, cancel any month.' },
+      { q: 'Is there a contract?', a: 'No long-term contract. Month-to-month; cancel with 30 days’ written notice.' },
     ],
   },
 ];
