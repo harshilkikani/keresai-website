@@ -66,7 +66,7 @@ const peers = industries.filter((i) => i.slug !== ind.slug);
 
   <Breadcrumbs crumbs={crumbs} />
 
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">AI Receptionist · {ind.short}</span>
     <h1>The AI receptionist built for <span class="accent">{ind.nameLower}</span></h1>
     <p class="lead">{ind.intro}</p>
@@ -74,7 +74,7 @@ const peers = industries.filter((i) => i.slug !== ind.slug);
       <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href={t.calculator.href} class="btn btn-outline">Open the {t.calculator.label}</a>
     </div>
-  </header>
+  </div>
 
   <!-- DIRECT ANSWER (AI citation target) -->
   <section class="page-section container">

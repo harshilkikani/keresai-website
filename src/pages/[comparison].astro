@@ -108,7 +108,7 @@ const switchSteps = [
 
   <Breadcrumbs crumbs={crumbs} />
 
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">{c.category}</span>
     {isRoundup
       ? <h1><span class="accent">{c.h1Accent}</span> alternatives, compared</h1>
@@ -119,7 +119,7 @@ const switchSteps = [
       <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href={isRoundup ? '/hear-it' : secondaryCta.href} class="btn btn-outline">{isRoundup ? 'Hear Remi answer a call' : secondaryCta.label}</a>
     </div>
-  </header>
+  </div>
 
   <!-- DIRECT ANSWER BLOCK (AI citation target) -->
   <section class="page-section container">

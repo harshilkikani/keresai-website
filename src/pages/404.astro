@@ -10,7 +10,7 @@ import Schema from '../components/Schema.astro';
 >
   <Schema slot="head" graph={[]} />
   <script slot="head" src="/assets/notfound.js" is:inline></script>
-  <header class="page-hero container" style="text-align:center">
+  <div class="page-hero container" style="text-align:center">
     <span class="eyebrow">404</span>
     <h1 style="margin-inline:auto">This page took a <span class="accent">wrong turn</span></h1>
     <p class="lead" style="margin-inline:auto">The page you're looking for doesn't exist. But every call still gets answered.</p>
@@ -18,5 +18,5 @@ import Schema from '../components/Schema.astro';
       <a href="/" class="btn btn-primary">Back to home</a>
       <a href="/agents/inbound" class="btn btn-outline">See the AI receptionist</a>
     </div>
-  </header>
+  </div>
 </Layout>
