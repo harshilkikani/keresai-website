@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
 import IndustryRoundupTable from '../components/IndustryRoundupTable.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, articleSchema, itemListSchema } from '../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, articleSchema, itemListSchema, vendorMentions } from '../data/schema';
 import { keresRow, vendorsFor, VENDORS_CHECKED } from '../data/answeringVendors';
 
 const path = '/best-ai-receptionist-for-real-estate';
@@ -53,7 +53,7 @@ const webpage = webPageSchema({
 });
 ---
 <Layout title={title} description={description} path={path} ogType="article">
-  <Schema slot="head" graph={[article, list, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[{ ...article, mentions: vendorMentions(list) }, list, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 

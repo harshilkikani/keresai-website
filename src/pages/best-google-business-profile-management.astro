@@ -4,7 +4,7 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, articleSchema, itemListSchema } from '../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, articleSchema, itemListSchema, vendorMentions } from '../data/schema';
 import { gbpVendors, keresGbpRow, GBP_VENDORS_CHECKED, GBP_VENDORS_CHECKED_ISO, GBP_CATEGORY_LABEL, type GbpCategory } from '../data/gbpVendors';
 
 // Answers "best Google Business Profile management service for small
@@ -51,7 +51,7 @@ const list = itemListSchema({
 const webpage = webPageSchema({ path, name: title, description, speakableSelectors: ['.answer-block', '.faq-a'] });
 ---
 <Layout title={title} description={description} path={path} ogType="article">
-  <Schema slot="head" graph={[article, list, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[{ ...article, mentions: vendorMentions(list) }, list, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 

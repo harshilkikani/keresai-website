@@ -4,6 +4,9 @@ import { PHONE } from './site';
 import { workers } from './workers';
 import { glossary } from './glossary';
 import { NOINDEX_GLOSSARY } from '../seo/indexing.mjs';
+import { workers as workersEs } from '../i18n/data.es';
+import { answeringVendors, specialistVendors, keresRow } from './answeringVendors';
+import { gbpVendors, keresGbpRow } from './gbpVendors';
 
 /** Glossary terms the Organization claims expertise in (indexable pages only). */
 const KNOWS_ABOUT = [
@@ -45,8 +48,41 @@ const WORKER_SERVICE: Record<string, { serviceType: string; description?: string
   },
 };
 
-const workerServiceName = (w: (typeof workers)[number]) =>
+/** "Remi by Keres AI": the brand in the name keeps Remi apart from unrelated products called Remi. */
+const workerServiceName = (w: { slug: string; name: string }) =>
+  w.slug === 'custom' ? 'Custom AI worker by Keres AI' : `${w.name} by Keres AI`;
+/** The pre-2026-10 node name, kept as an alternateName so the entity reads as the same one. */
+const workerServiceAltName = (w: (typeof workers)[number]) =>
   `${w.name} — ${WORKER_SERVICE[w.slug]?.serviceType ?? w.job}`;
+
+// Offer price notes. Found's from-price comes from business.foundFrom; the law
+// firm tier ($499) is published on /services/found and /pricing. Every other
+// worker is quoted, so its Offer carries a description and never a price.
+const foundFrom = Number(business.foundFrom) || 0;
+const FOUND_LAW_FROM = 499;
+const monthlyFrom = (minPrice: number) => ({
+  '@type': 'UnitPriceSpecification',
+  minPrice,
+  priceCurrency: 'USD',
+  unitCode: 'MON',
+});
+const QUOTED: Record<string, string> = {
+  inbound: 'Quoted: one monthly rate with included minutes, then per minute.',
+  custom: 'Quoted: a fixed build price and a monthly run fee, scoped on a 30-minute call.',
+};
+const quotedNote = (slug: string) => QUOTED[slug] ?? 'Quoted to your volume on a 30-minute call.';
+
+/** The Offers on a worker's own Service node (no itemOffered: the Service is the subject). */
+const serviceOffers = (w: (typeof workers)[number]) => {
+  const base = { '@type': 'Offer', url: `${ORIGIN}/pricing`, offeredBy: { '@id': ORG_ID } };
+  if (w.slug === 'found' && foundFrom) {
+    return [
+      { ...base, name: 'Found', priceCurrency: 'USD', priceSpecification: monthlyFrom(foundFrom) },
+      { ...base, name: 'Found for law firms', priceCurrency: 'USD', priceSpecification: monthlyFrom(FOUND_LAW_FROM) },
+    ];
+  }
+  return [{ ...base, name: w.name, description: quotedNote(w.slug) }];
+};
 
 /** One Service node per worker, referenced by the Organization's offer catalog. */
 export const workerServiceSchemas = workers.map((w) => ({
@@ -54,10 +90,12 @@ export const workerServiceSchemas = workers.map((w) => ({
   '@type': 'Service',
   '@id': `${ORIGIN}${w.href}#service`,
   name: workerServiceName(w),
+  alternateName: workerServiceAltName(w),
   serviceType: WORKER_SERVICE[w.slug]?.serviceType ?? w.job,
   description: WORKER_SERVICE[w.slug]?.description ?? `${w.name}: ${w.job}. Includes ${w.includes.join('; ')}.`,
   url: `${ORIGIN}${w.href}`,
   provider: { '@id': ORG_ID },
+  brand: { '@id': ORG_ID },
   areaServed: { '@type': 'Country', name: 'United States' },
   // Language lives on the channel, not the Service (Service has no
   // availableLanguage). Every worker works in English only today.
@@ -67,7 +105,21 @@ export const workerServiceSchemas = workers.map((w) => ({
     availableLanguage: ENGLISH,
   },
   audience: { '@type': 'Audience', audienceType: 'Local businesses: home services, law firms, dental practices, med spas, real estate' },
+  offers: serviceOffers(w),
 }));
+
+/**
+ * The worker Service nodes as the Spanish pages carry them: the same @id and
+ * facts, with the description replaced by the Spanish copy those pages show
+ * (src/i18n/data.es.ts). The workers still answer in English only.
+ */
+export const workerServiceSchemasEs = (opts: { includes?: boolean } = {}) =>
+  workerServiceSchemas.map((node) => {
+    const es = workersEs.find((x) => `${ORIGIN}${x.href}#service` === node['@id']);
+    if (!es) return node;
+    const description = opts.includes ? `${es.name}: ${es.job}. Incluye: ${es.includes.join('; ')}.` : `${es.name}: ${es.job}.`;
+    return { ...node, description };
+  });
 
 /** The worker's #service node by slug (inbound, found, custom…). */
 export const workerService = (slug: string) => {
@@ -77,16 +129,12 @@ export const workerService = (slug: string) => {
   return node;
 };
 
-// Offer price notes. Found's from-price comes from business.foundFrom; the law
-// firm tier ($499) is published on /services/found and /pricing.
-const foundFrom = Number(business.foundFrom) || 0;
-const FOUND_LAW_FROM = 499;
-const monthlyFrom = (minPrice: number) => ({
-  '@type': 'UnitPriceSpecification',
-  minPrice,
-  priceCurrency: 'USD',
-  unitCode: 'MON',
-});
+/** A short, self-describing pointer at a worker's #service node (isRelatedTo, ItemList items). */
+export const workerServiceRef = (slug: string) => {
+  const w = workers.find((x) => x.slug === slug);
+  if (!w) throw new Error(`No worker ${slug}`);
+  return { '@type': 'Service', '@id': `${ORIGIN}${w.href}#service`, name: workerServiceName(w), url: `${ORIGIN}${w.href}` };
+};
 
 const offerFor = (w: (typeof workers)[number]) => {
   const itemOffered = { '@type': 'Service', '@id': `${ORIGIN}${w.href}#service`, name: workerServiceName(w) };
@@ -94,10 +142,7 @@ const offerFor = (w: (typeof workers)[number]) => {
   if (w.slug === 'found') {
     return foundFrom ? { ...base, priceSpecification: monthlyFrom(foundFrom) } : base;
   }
-  if (w.slug === 'inbound') {
-    return { ...base, description: 'Quoted: one monthly rate with included minutes, then per minute.' };
-  }
-  return { ...base, description: 'Quoted to your volume on a call.' };
+  return { ...base, description: quotedNote(w.slug) };
 };
 
 export const organizationSchema = {
@@ -113,6 +158,7 @@ export const organizationSchema = {
     width: 192,
     height: 192,
   },
+  image: `${ORIGIN}/assets/img/og-image.png`,
   description:
     'Keres AI sells AI workers for local businesses. Each does one job: Found gets you found (website, Google listing, reviews), Remi answers every call in two rings and books it, Theo confirms and reminds, June brings past customers back, Sol finds new customers by email, and Custom is built for any recurring job. Every worker reports in one morning text. Month-to-month; setup timing is agreed on the first call. Site available in English and Spanish; Remi answers calls in English only.',
   // Brand variants and disambiguation: an unrelated keres.ai, the Keras library
@@ -142,9 +188,11 @@ export const organizationSchema = {
     '@type': 'ContactPoint',
     contactType: 'sales',
     ...((PHONE ?? CONTACT_PHONE) ? { telephone: (PHONE ?? CONTACT_PHONE)!.e164 } : {}),
-    url: `${ORIGIN}/quote`,
+    // /contact is the indexable contact page (/quote is noindex). Sales and
+    // support run in English; Spanish support is not confirmed.
+    url: `${ORIGIN}/contact`,
     email: business.contactEmail,
-    availableLanguage: ['English', 'Spanish'],
+    availableLanguage: ENGLISH,
   },
   // The roster as an offer catalog. Found carries its published from-price;
   // every other worker is quoted, so its Offer has a description and no price.
@@ -156,7 +204,7 @@ export const organizationSchema = {
       {
         '@type': 'Offer',
         name: 'Found for law firms',
-        itemOffered: { '@type': 'Service', '@id': `${ORIGIN}/services/found#service`, name: workerServiceName(workers.find((w) => w.slug === 'found')!) },
+        itemOffered: { '@type': 'Service', '@id': `${ORIGIN}/services/found#service`, name: workerServiceName({ slug: 'found', name: 'Found' }) },
         url: `${ORIGIN}/services/found`,
         priceSpecification: monthlyFrom(FOUND_LAW_FROM),
       },
@@ -200,36 +248,8 @@ export function breadcrumbSchema(crumbs: { name: string; path: string }[]) {
   };
 }
 
-// Augments a product schema (e.g. SoftwareApplication) with Review +
-// AggregateRating nodes — but ONLY from real testimonials. Never fabricate
-// reviews: Google de-indexes fake review markup. Returns the base unchanged
-// when there are no testimonials.
-export function withReviews(
-  base: Record<string, unknown>,
-  testimonials: { quote: string; author: string; rating?: number }[],
-) {
-  if (!testimonials.length) return base;
-  const out: Record<string, unknown> = { ...base };
-  out.review = testimonials.map((t) => ({
-    '@type': 'Review',
-    reviewBody: t.quote,
-    author: { '@type': 'Person', name: t.author },
-    ...(typeof t.rating === 'number'
-      ? { reviewRating: { '@type': 'Rating', ratingValue: t.rating, bestRating: 5 } }
-      : {}),
-  }));
-  const rated = testimonials.filter((t) => typeof t.rating === 'number') as { rating: number }[];
-  if (rated.length) {
-    const avg = rated.reduce((s, t) => s + t.rating, 0) / rated.length;
-    out.aggregateRating = {
-      '@type': 'AggregateRating',
-      ratingValue: Math.round(avg * 10) / 10,
-      reviewCount: rated.length,
-      bestRating: 5,
-    };
-  }
-  return out;
-}
+// No Review / AggregateRating / Person helpers on purpose: the site shows no
+// real reviews and names no founder. Add them only when real ones exist.
 
 export function definedTermSchema(opts: { term: string; definition: string; path: string }) {
   return {
@@ -249,19 +269,35 @@ export function definedTermSchema(opts: { term: string; definition: string; path
   };
 }
 
+/**
+ * Which worker(s) a derived Service page (an industry, trade, integration or
+ * use-case page) applies. Anything not listed is Remi's.
+ */
+const RELATED_WORKERS: Record<string, string[]> = {
+  '/industries/home-services': ['inbound', 'found'],
+  '/industries/law-firms': ['inbound', 'found'],
+  '/industries/dental-med-spa': ['inbound', 'found'],
+  '/industries/real-estate': ['inbound', 'found'],
+  '/use-cases/financing-follow-up': ['inbound', 'follow-up'],
+  '/use-cases/maintenance-plan-reactivation': ['inbound', 'reactivation'],
+};
+
 export function serviceSchema(opts: {
   name: string;
   description: string;
   path: string;
   serviceType: string;
   audience?: string;
-  /** Stable @id, e.g. the one the Organization's offer catalog points at. */
+  /** Stable @id; defaults to `<url>#service`, which the page's WebPage takes as mainEntity. */
   id?: string;
+  /** Worker slugs this page's service applies; defaults from RELATED_WORKERS, then Remi. */
+  relatedTo?: string[];
 }) {
+  const related = opts.relatedTo ?? RELATED_WORKERS[opts.path] ?? ['inbound'];
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    ...(opts.id ? { '@id': opts.id } : {}),
+    '@id': opts.id ?? `${ORIGIN}${opts.path}#service`,
     name: opts.name,
     serviceType: opts.serviceType,
     description: opts.description,
@@ -271,6 +307,27 @@ export function serviceSchema(opts: {
     ...(opts.audience ? {
       audience: { '@type': 'Audience', audienceType: opts.audience },
     } : {}),
+    isRelatedTo: related.map(workerServiceRef),
+  };
+}
+
+/**
+ * A free on-site tool (checker, calculator, estimator) as a CreativeWork. Not
+ * WebApplication/SoftwareApplication: those want ratings the site does not
+ * have. The page's WebPage takes `#tool` as its mainEntity.
+ */
+export function toolSchema(opts: { path: string; name: string; description: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    '@id': `${ORIGIN}${opts.path}#tool`,
+    name: opts.name,
+    description: opts.description,
+    url: ORIGIN + opts.path,
+    isAccessibleForFree: true,
+    inLanguage: 'en-US',
+    provider: { '@id': ORG_ID },
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   };
 }
 
@@ -324,24 +381,65 @@ export function howToSchema(opts: {
   };
 }
 
+// Vendors the roundups compare, by the name they are listed under, with the
+// home-page URL the page cites. Keres's own rows point at its #service nodes.
+const VENDOR_URLS = new Map<string, string>([
+  ...Object.values(answeringVendors).map((v) => [v.name, v.url] as [string, string]),
+  ...Object.values(specialistVendors).map((v) => [v.name, v.url] as [string, string]),
+  ...gbpVendors.map((v) => [v.name, v.url] as [string, string]),
+]);
+const KERES_ROWS: Record<string, string> = { [keresRow.name]: 'inbound', [keresGbpRow.name]: 'found' };
+
+/** The `item` a roundup ListItem points at: the vendor as an Organization, or Keres's own Service. */
+const listItemTarget = (name: string, url?: string) => {
+  if (KERES_ROWS[name]) return workerServiceRef(KERES_ROWS[name]);
+  const vendorUrl = VENDOR_URLS.get(name);
+  if (vendorUrl) return { '@type': 'Organization', name, url: vendorUrl };
+  if (url) return { '@type': 'WebPage', '@id': `${ORIGIN}${url}#webpage`, name, url: ORIGIN + url };
+  return null;
+};
+
 // ItemList schema — use for feature comparison tables so AI crawlers can extract
-// structured comparison data rather than parsing HTML tables.
+// structured comparison data rather than parsing HTML tables. Items named after
+// a compared vendor (or Keres's own row) link to it; `url` links a site page.
 export function itemListSchema(opts: {
   name: string;
-  items: { name: string; description: string }[];
+  items: { name: string; description: string; url?: string }[];
 }) {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: opts.name,
-    itemListElement: opts.items.map((item, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: item.name,
-      description: item.description,
-    })),
+    numberOfItems: opts.items.length,
+    itemListElement: opts.items.map((item, i) => {
+      const target = listItemTarget(item.name, item.url);
+      return {
+        '@type': 'ListItem',
+        position: i + 1,
+        name: item.name,
+        description: item.description,
+        ...(target ? { item: target } : {}),
+      };
+    }),
   };
 }
+
+/** The compared vendors in a roundup ItemList, as Article `mentions` (Keres's own row left out). */
+export function vendorMentions(list: { itemListElement: { item?: Record<string, unknown> }[] }) {
+  return list.itemListElement
+    .map((li) => li.item)
+    .filter((it): it is Record<string, unknown> => !!it && it['@type'] === 'Organization');
+}
+
+/** Sources a page links, as `citation` CreativeWorks (name as the page shows it, and its URL). */
+export const citations = (sources: { label: string; url: string }[]) =>
+  sources.map((s) => ({ '@type': 'CreativeWork', name: s.label, url: s.url }));
+
+/** The two lead-response studies /missed-call-statistics links in its sources list. */
+export const LEAD_RESPONSE_SOURCES = [
+  { label: 'Oldroyd & InsideSales.com, Lead Response Management Study (15,000 leads, six companies)', url: 'https://www.mortech.com/hs-fs/hub/25649/file-13535879-pdf/docs/mit_study.pdf' },
+  { label: 'Oldroyd, McElheran & Elkington, “The Short Life of Online Sales Leads,” Harvard Business Review (2011)', url: 'https://scholarsarchive.byu.edu/facpub/9711' },
+];
 
 // Statistics ItemList — emits each statistic as a ListItem so AI crawlers can
 // lift individual data points as citable claims. Pair with Article + FAQ on

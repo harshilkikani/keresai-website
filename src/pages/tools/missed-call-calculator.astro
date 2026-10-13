@@ -6,7 +6,7 @@ import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FaqSection from '../../components/FaqSection.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema } from '../../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, toolSchema } from '../../data/schema';
 
 const path = '/tools/missed-call-calculator';
 const crumbs = [
@@ -33,7 +33,7 @@ const webpage = webPageSchema({
   description="Free missed-call calculator: enter call volume, answer rate and average job value to see the revenue you lose to unanswered calls each month."
   path={path}
 >
-  <Schema slot="head" graph={[faqSchema(faqs), breadcrumbSchema(crumbs), webpage, organizationSchema]} />
+  <Schema slot="head" graph={[toolSchema({ path, name: 'Missed Call Revenue Calculator', description: 'Free calculator: enter call volume, answer rate and average job value to estimate the revenue lost to unanswered calls each month.' }), faqSchema(faqs), breadcrumbSchema(crumbs), webpage, organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
   <header class="page-hero container">

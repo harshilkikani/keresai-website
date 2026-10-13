@@ -4,7 +4,7 @@ import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FaqSection from '../../components/FaqSection.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema } from '../../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, toolSchema } from '../../data/schema';
 
 const path = '/tools/deliverability-checker';
 const ORIGIN = 'https://www.keresai.com';
@@ -20,25 +20,18 @@ const faqs = [
   { q: 'How do I fix what this finds?', a: 'You add or correct TXT records in your domain’s DNS. Keres sets up and monitors SPF, DKIM, and DMARC for you, warms your inboxes, and ramps volume safely — Sol, the outbound worker from Keres AI, can have it handled for you.' },
 ];
 
-const webApp = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
+const tool = toolSchema({
+  path,
   name: 'Email Deliverability Checker',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
-  url: ORIGIN + path,
-  description:
-    'Free tool that checks a domain’s SPF, DKIM, DMARC, and MX records and reports email-deliverability issues.',
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  provider: { '@id': `${ORIGIN}/#organization` },
-};
+  description: 'Free tool that checks a domain’s SPF, DKIM, DMARC, and MX records and reports email-deliverability issues.',
+});
 ---
 <Layout
   title="Free Email Deliverability Checker | Keres AI"
   description="Free email deliverability checker. Enter your domain to instantly check SPF, DKIM, DMARC, and MX records and see what’s keeping your email out of the inbox."
   path={path}
 >
-  <Schema slot="head" graph={[webApp, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[tool, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
   <header class="page-hero container">

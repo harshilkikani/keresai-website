@@ -5,7 +5,7 @@ import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FaqSection from '../../components/FaqSection.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema } from '../../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, toolSchema } from '../../data/schema';
 import { calculators } from '../../data/calculators';
 
 export function getStaticPaths() {
@@ -29,7 +29,7 @@ const webpage = webPageSchema({
 const calcOut = calcDefaultResult(c);
 ---
 <Layout title={c.title} description={c.description} path={path}>
-  <Schema slot="head" graph={[faqSchema(c.faqs), breadcrumbSchema(crumbs), webpage, organizationSchema]} />
+  <Schema slot="head" graph={[toolSchema({ path, name: c.title.replace(/\s*\|\s*Keres AI$/, ''), description: c.description }), faqSchema(c.faqs), breadcrumbSchema(crumbs), webpage, organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 

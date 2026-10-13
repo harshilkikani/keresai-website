@@ -11,6 +11,7 @@ import {
   webPageSchema,
   articleSchema,
   statisticListSchema,
+  citations,
 } from '../../data/schema';
 import { benchmarks } from '../../data/benchmarks';
 
@@ -48,7 +49,7 @@ const webpage = webPageSchema({
 });
 ---
 <Layout title={b.title} description={b.description} path={path} ogType="article">
-  <Schema slot="head" graph={[article, webpage, faqSchema(b.faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[{ ...article, ...(b.sources?.length ? { citation: citations(b.sources) } : {}) }, webpage, faqSchema(b.faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 

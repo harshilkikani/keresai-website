@@ -11,6 +11,8 @@ import {
   webPageSchema,
   articleSchema,
   statisticListSchema,
+  citations,
+  LEAD_RESPONSE_SOURCES,
 } from '../data/schema';
 
 const path = '/missed-call-statistics';
@@ -65,7 +67,7 @@ const webpage = webPageSchema({
   path={path}
   ogType="article"
 >
-  <Schema slot="head" graph={[article, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[{ ...article, citation: citations(LEAD_RESPONSE_SOURCES) }, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 

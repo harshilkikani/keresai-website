@@ -18,7 +18,7 @@ const webpage = webPageSchema({
 
 const list = itemListSchema({
   name: 'Keres AI — Service business benchmarks',
-  items: benchmarks.map((b) => ({ name: `${b.h1} ${b.h1Accent}`, description: b.description })),
+  items: benchmarks.map((b) => ({ name: `${b.h1} ${b.h1Accent}`, description: b.description, url: `/benchmarks/${b.slug}` })),
 });
 ---
 <Layout

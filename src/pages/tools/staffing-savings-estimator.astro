@@ -4,7 +4,7 @@ import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FaqSection from '../../components/FaqSection.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema } from '../../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, toolSchema } from '../../data/schema';
 
 const path = '/tools/staffing-savings-estimator';
 const ORIGIN = 'https://www.keresai.com';
@@ -18,24 +18,18 @@ const faqs = [
   { q: 'Can an AI receptionist replace front-desk staff?', a: 'Many businesses use an AI receptionist for after-hours and overflow while keeping daytime staff; others run it as the full front desk. It answers in two rings, 24/7, on a monthly plan, so you get coverage without staffing nights and weekends.' },
   { q: 'How much can I save with an AI receptionist?', a: 'Savings depend on your call volume and current coverage. Keres is one monthly rate — typically well below a full-time hire plus a per-minute answering service. Book a demo for an exact quote against these numbers.' },
 ];
-const webApp = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
+const tool = toolSchema({
+  path,
   name: 'Front-Desk Staffing Cost Estimator',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
-  url: ORIGIN + path,
   description: 'Free tool that estimates the fully-loaded annual cost of front-desk phone coverage.',
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  provider: { '@id': `${ORIGIN}/#organization` },
-};
+});
 ---
 <Layout
   title="Front-Desk Staffing Cost Estimator | Keres AI"
   description="Free staffing cost estimator. See the fully-loaded annual cost of front-desk phone coverage — and how many hours of the week your team still can’t answer."
   path={path}
 >
-  <Schema slot="head" graph={[webApp, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[tool, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
   <header class="page-hero container">

@@ -41,6 +41,30 @@ fromLayout.forEach(add);
 graph.forEach(add);
 if (!byId.has(organizationSchema['@id'])) add(organizationSchema);
 
+// The page's WebPage-family node (Layout always emits it first after WebSite).
+const page = fromLayout.find((n) => String(n['@id'] ?? '').endsWith('#webpage'));
+const webPage = page ? byId.get(page['@id'] as string) : undefined;
+if (webPage) {
+  const url = webPage.url as string;
+  // mainEntity: the thing the page is about, when the page defines it under
+  // the conventional @id (#service, #tool, #term) and did not name another.
+  if (!webPage.mainEntity) {
+    const main = ['#service', '#tool', '#term'].map((h) => url + h).find((id) => byId.has(id));
+    if (main) webPage.mainEntity = { '@id': main };
+  }
+  // speakable: only selectors whose class is in the rendered page. Indexable
+  // pages that did not declare any get the answer-first blocks they have.
+  const classes = (Astro.locals as { keresClasses?: Set<string> }).keresClasses;
+  if (classes) {
+    const exists = (sel: string) => /^\.[\w-]+$/.test(sel) && classes.has(sel.slice(1));
+    const declared = (webPage.speakable as { cssSelector?: string[] } | undefined)?.cssSelector;
+    const wanted = declared ?? ((Astro.locals as { keresIndexable?: boolean }).keresIndexable ? ['.answer-block', '.faq-a', '.lead'] : []);
+    const kept = wanted.filter(exists);
+    if (kept.length) webPage.speakable = { '@type': 'SpeakableSpecification', cssSelector: kept };
+    else delete webPage.speakable;
+  }
+}
+
 const doc = { '@context': 'https://schema.org', '@graph': ordered };
 ---
 <script type="application/ld+json" set:html={JSON.stringify(doc)} />

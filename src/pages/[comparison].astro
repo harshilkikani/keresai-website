@@ -4,7 +4,7 @@ import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, itemListSchema, webPageSchema, articleSchema, VENDORS_CHECKED_ISO } from '../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, itemListSchema, webPageSchema, articleSchema, vendorMentions, VENDORS_CHECKED_ISO } from '../data/schema';
 import { comparisons, ROUNDUP_SLUGS } from '../data/comparisons';
 import { answeringVendors, keresRow, VENDORS_CHECKED } from '../data/answeringVendors';
 
@@ -98,7 +98,7 @@ const switchSteps = [
      competitors: noindex until rewritten. -->
 <Layout title={c.title} description={c.description} path={path} noindexFollow={!isRoundup}>
   <Schema slot="head" graph={[
-    ...(roundupArticle ? [roundupArticle] : []),
+    ...(roundupArticle && roundupList ? [{ ...roundupArticle, mentions: vendorMentions(roundupList) }] : []),
     faqSchema(c.faqs),
     isRoundup ? roundupList : comparisonList,
     webpage,
