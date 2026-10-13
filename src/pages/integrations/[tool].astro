@@ -50,14 +50,14 @@ const blurb = (g: typeof i) => (isLive(g) ? g.intro.slice(0, 110) + '…' : `Rol
   ]} />
 
   <Breadcrumbs crumbs={crumbs} />
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">{i.category} · {live ? 'Integration' : 'Rolling out'}</span>
     <h1>Keres AI + <span class="accent">{i.name}</span></h1>
     <div class="hero-ctas">
       <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href="/integrations" class="btn btn-outline">All integrations</a>
     </div>
-  </header>
+  </div>
 
   <section class="page-section container">
     <div class="answer-block">

@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import Schema from '../components/Schema.astro';
 import CustomPage from '../components/CustomPage.astro';
-import { organizationSchema, faqSchema, workerService } from '../data/schema';
+import { organizationSchema, faqSchema, workerService, breadcrumbSchema } from '../data/schema';
 import { customCopy, customFaqs } from '../i18n/custom';
 const c = customCopy('en');
 ---
 <Layout title={c.title} description={c.description} path="/custom" locale="en">
-  <Schema slot="head" graph={[organizationSchema, faqSchema(customFaqs('en')), workerService('custom')]} />
+  <Schema slot="head" graph={[organizationSchema, faqSchema(customFaqs('en')), workerService('custom'), breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Custom AI workers', path: '/custom' }])]} />
   <CustomPage locale="en" />
   <script slot="scripts" src="/assets/quote.js?v=4" defer is:inline></script>
 </Layout>

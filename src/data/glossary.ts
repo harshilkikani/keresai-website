@@ -35,24 +35,24 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is an ai receptionist',
     title: 'What Is an AI Receptionist? Definition | Keres AI',
     description:
-      'An AI receptionist answers business calls 24/7, qualifies callers, and books appointments automatically. Learn how it works, how it differs from an answering service, and what it costs.',
+      'An AI receptionist answers business calls 24/7, qualifies callers and books appointments. How it works, how it differs from an answering service, and costs.',
     definition:
-      'An AI receptionist is software that answers your business phone automatically, 24/7. It greets callers in a natural voice, answers questions, qualifies the lead, books or reschedules appointments on your calendar, and sends your team a summary — so no call goes to voicemail and no lead is lost, even after hours. How Keres AI handles it: Remi, Keres AI’s AI receptionist, answers in two rings, 24/7, asks your intake questions, books into Google Calendar, HubSpot or ServiceTitan, and texts back missed callers within 60 seconds.',
+      'An AI receptionist is software that answers your business phone automatically, 24/7. It greets callers in a natural voice, answers questions, qualifies the lead, books or reschedules appointments on your calendar, and sends your team a summary — so no call goes to voicemail and no lead is lost, even after hours. How Keres AI handles it: Remi by Keres AI answers in two rings, 24/7, asks your intake questions, books into Google Calendar, HubSpot or ServiceTitan, and texts back missed callers within 60 seconds.',
     sections: [
       {
         h2: 'How does an AI receptionist work?',
         body:
-          'You point your existing business number at the AI. When a call comes in, the AI answers within two rings, follows the call flows you configure, and acts on what the caller needs — checking calendar availability, booking the appointment, capturing contact details, and escalating emergencies to a human by text. Everything is logged to your CRM automatically. It uses <a href="/glossary/conversational-ai">conversational AI</a> to understand open-ended answers instead of a keypad menu.',
+          '<p>An AI receptionist works by answering your existing business number with <a href="/glossary/conversational-ai">conversational AI</a>, so it understands open-ended answers instead of relying on a keypad menu. You forward or port your number to the service. When a call comes in, the AI answers, follows the call flows you configure and acts on what the caller needs: it checks calendar availability, books the appointment, captures contact details and escalates emergencies to a person by text or transfer.</p><p>For example, Remi by Keres AI answers in two rings, 24/7, asks the intake questions you approve, books into Google Calendar, HubSpot or ServiceTitan during the call, and texts back missed callers within 60 seconds. Other tools connect through Zapier. The call summary is written to your calendar or CRM, so nobody retypes a message the next morning.</p>',
       },
       {
-        h2: 'AI receptionist vs. answering service vs. voicemail',
+        h2: 'How is an AI receptionist different from an answering service or voicemail?',
         body:
-          'Voicemail captures a message and hopes you call back. A traditional <a href="/glossary/ai-answering-service">answering service</a> uses human operators who usually just take a message — and bill per minute. An AI receptionist actually <strong>completes the task</strong>: it books the appointment during the call, works 24/7 on a monthly plan, and never puts a caller on hold. Businesses that hand most routine calls to software this way call it <a href="/glossary/front-desk-automation">front desk automation</a>.',
+          `<p>Voicemail records a message and waits for a callback. A traditional <a href="/glossary/ai-answering-service">answering service</a> uses human operators who mostly take messages, billed per minute or per call depending on the vendor: according to their own pricing pages on ${VENDORS_CHECKED}, PATLive starts at $99 a month for 50 minutes and Smith.ai’s human plans at $300 for 30 calls.</p><p>An AI receptionist is software that answers the call itself and <strong>completes the task</strong>, for example booking the appointment during the call, at any hour. AI receptionists usually sell a monthly plan with included minutes or calls, from $24.95 a month (Upfirst, 30 calls). Remi by Keres AI is billed as one monthly rate with included minutes, then per minute, with no per-call fees. Businesses that hand most routine calls to software this way call it <a href="/glossary/front-desk-automation">front desk automation</a>.</p>`,
       },
       {
         h2: 'Which businesses use AI receptionists?',
         body:
-          'Any business that lives on the phone: <a href="/ai-receptionist-for-hvac">HVAC</a> and <a href="/ai-receptionist-for-plumbers">plumbing</a> contractors, <a href="/industries/dental-med-spa">dental practices</a>, <a href="/industries/dental-med-spa">med spas</a>, <a href="/industries/real-estate">real estate teams</a>, and <a href="/industries/law-firms">law firms</a> — wherever a missed call is a lost customer.',
+          '<p>AI receptionists suit any business that lives on the phone and loses work when a call goes to voicemail: <a href="/ai-receptionist-for-hvac">HVAC</a> and <a href="/ai-receptionist-for-plumbers">plumbing</a> contractors, <a href="/industries/dental-med-spa">dental practices and med spas</a>, <a href="/industries/real-estate">real estate teams</a> and <a href="/industries/law-firms">law firms</a>.</p><p>The questions change by trade. An HVAC call needs emergency rules, such as what to do about a gas smell; a law-firm call needs intake by practice area and the names for a conflict check; a real estate call needs pre-approval and timeline. An AI receptionist is a weaker fit when every caller must reach a person, when callers mostly speak a language the service does not answer in (Remi by Keres AI answers in English only), or when a practice needs a vendor that signs a HIPAA business associate agreement.</p>',
       },
     ],
     related: ['ai-answering-service', 'virtual-receptionist', 'appointment-booking-automation', 'missed-call-text-back'],
@@ -78,7 +78,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Why do businesses switch from per-minute answering services?',
         body:
-          'Per-minute human answering services get expensive fast during busy seasons, and most just take a message you still have to act on. An AI answering service flips that: monthly plans with included minutes, answers around the clock, and completed bookings instead of callback slips.',
+          'Human answering services bill per minute or per call, depending on the vendor, so a busy season raises the bill, and many take a message you still have to act on. An AI answering service flips that: monthly plans with included minutes, answers around the clock, and completed bookings instead of callback slips.',
       },
       {
         h2: 'What can an AI answering service do?',
@@ -114,7 +114,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'Human virtual receptionist vs AI receptionist',
         body:
-          '<p>A human virtual receptionist is a trained person at a remote answering company. People handle unusual calls well and can use judgment a script did not anticipate. Most human services bill by the minute or by the call, and one person handles one call at a time, so a busy hour can mean hold time or a message instead of a booking.</p> <p>An <a href="/glossary/ai-receptionist">AI receptionist</a> is software that answers in a natural voice. It answers at 3 a.m. the same way it answers at 3 p.m. and asks every caller the same intake questions. It is weaker on calls that need real judgment, which is why a good setup sends those to a person.</p>',
+          '<p>A human virtual receptionist is a trained person at a remote answering company. People handle unusual calls well and can use judgment a script did not anticipate. Human services bill by the minute or by the call, depending on the vendor, and one person handles one call at a time, so a busy hour can mean hold time or a message instead of a booking.</p> <p>An <a href="/glossary/ai-receptionist">AI receptionist</a> is software that answers in a natural voice. It answers at 3 a.m. the same way it answers at 3 p.m. and asks every caller the same intake questions. It is weaker on calls that need real judgment, which is why a good setup sends those to a person.</p>',
       },
       {
         h2: 'What does a virtual receptionist cost?',
@@ -170,7 +170,7 @@ export const glossary: GlossaryTerm[] = [
     ],
     related: ['missed-call-recovery', 'ai-receptionist', 'call-overflow', 'lead-qualification'],
     faqs: [
-      { q: 'Is missed-call text-back the same as an AI receptionist?', a: 'No — text-back reacts after a call is missed, while an AI receptionist answers the call live and books the appointment in the moment. Many businesses use both.' },
+      { q: 'Is missed-call text-back the same as an AI receptionist?', a: 'No — text-back reacts after a call is missed, while an AI receptionist answers the call live and books the appointment in the moment. The two work together: Remi by Keres AI answers live and also texts back any call it could not take within 60 seconds.' },
       { q: 'How fast should the text go out?', a: 'Within a minute, while the caller still has the phone in their hand and before they dial the next business. Remi sends it within 60 seconds.' },
     ],
     cta: { href: '/tools/missed-call-calculator', label: 'Calculate your missed-call losses' },
@@ -204,7 +204,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'How does Keres AI handle it?',
         body:
-          '<p>Set your phone to forward busy or unanswered calls to <a href="/agents/inbound">Remi</a>. Remi answers in two rings, asks your intake questions, books into Google Calendar, HubSpot or ServiceTitan, and escalates to a person by your rules. Calls it couldn’t take get a text back within 60 seconds. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. See <a href="/use-cases/overflow-call-handling">overflow call handling</a>.</p>',
+          '<p>Set your phone to forward busy or unanswered calls to <a href="/agents/inbound">Remi</a>, Keres AI’s AI receptionist. Remi answers in two rings, asks your intake questions, books into Google Calendar, HubSpot or ServiceTitan, and escalates to a person by your rules. Calls it couldn’t take get a text back within 60 seconds. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. See <a href="/use-cases/overflow-call-handling">overflow call handling</a>.</p>',
       },
     ],
     related: ['ai-receptionist', 'call-routing', 'missed-call-text-back', 'virtual-receptionist'],
@@ -535,7 +535,7 @@ export const glossary: GlossaryTerm[] = [
     description:
       'Missed-call recovery is winning back the revenue from calls you did not answer. How to measure it, the four ways to close the gap, and where text-back fits.',
     definition:
-      'Missed-call recovery is the practice of recapturing the revenue from calls your business doesn’t answer. Because most callers who hit voicemail never call back — they dial a competitor — recovery means answering more calls live (with a 24/7 AI receptionist) and instantly re-engaging the ones you do miss by text, so leads don’t walk.',
+      'Missed-call recovery is the practice of recapturing the revenue from calls your business doesn’t answer. Because most callers who hit voicemail are assumed not to call back (a Keres AI working assumption: they dial a competitor), recovery means answering more calls live (with a 24/7 AI receptionist) and instantly re-engaging the ones you do miss by text, so leads don’t walk.',
     sections: [
       {
         h2: 'Why do missed calls cost so much?',
@@ -556,7 +556,7 @@ export const glossary: GlossaryTerm[] = [
     related: ['ai-receptionist', 'missed-call-text-back', 'call-overflow', 'lead-qualification'],
     faqs: [
       { q: 'How do I measure missed-call recovery?', a: 'Track four numbers each month: calls received, calls missed, missed calls that turned into a conversation, and jobs booked from those conversations. Multiply booked jobs by your average ticket to put a dollar figure on it.' },
-      { q: 'What percentage of missed calls are lost for good?', a: 'Most — the majority of callers who reach voicemail never leave a message and simply call the next business, so an unanswered call is usually a lost lead.' },
+      { q: 'What percentage of missed calls are lost for good?', a: 'No reliable public figure exists for every industry. Keres AI’s working assumption is that most callers who reach voicemail do not leave a message, because an urgent caller can simply ring the next business in the search results; treat any missed call as a likely lost lead. The <a href="/missed-call-statistics">missed-call statistics</a> page shows the reasoning and the lead-response studies that are published.' },
       { q: 'How does AI recover missed calls?', a: 'An AI receptionist answers calls you’d otherwise miss (after hours, overflow) live, and missed-call text-back instantly re-engages any that still slip through.' },
     ],
     cta: { href: '/use-cases/lead-capture', label: 'Recover your missed calls' },
@@ -717,7 +717,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'How does Keres AI handle it?',
         body:
-          '<p>Reminders are handled by <a href="/agents/follow-up">Theo</a>, Keres AI’s follow-up worker, included from the Convert plan. Theo confirms each appointment as soon as it is booked, reminds by text and voice on the schedule you set, handles a reschedule in the same thread, and offers a cancelled slot to your waitlist. The appointments themselves come from <a href="/agents/inbound">Remi</a>, which books into Google Calendar, HubSpot or ServiceTitan.</p>',
+          '<p>Reminders are handled by <a href="/agents/follow-up">Theo</a>, Keres AI’s follow-up worker, quoted separately from Remi. Theo confirms each appointment as soon as it is booked, reminds by text and voice on the schedule you set, handles a reschedule in the same thread, and offers a cancelled slot to your waitlist. The appointments themselves come from <a href="/agents/inbound">Remi</a>, which books into Google Calendar, HubSpot or ServiceTitan.</p>',
       },
     ],
     related: ['appointment-booking-automation', 'no-show-rate', 'ai-receptionist', 'patient-intake'],
@@ -977,7 +977,7 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is a no-show rate',
     title: 'What Is No-Show Rate? How to Reduce It With AI | Keres AI',
     description:
-      'No-show rate is the percentage of booked appointments where the client doesn\'t arrive. Learn what drives it and how automated reminders and easy rescheduling cut it.',
+      'No-show rate is the share of booked appointments where the client doesn’t arrive. How to calculate it, what drives it, and how reminders cut it.',
     definition:
       'No-show rate is the percentage of scheduled appointments where the patient or client doesn\'t appear and hasn\'t cancelled. For service businesses, dental practices, and med spas, a high no-show rate means unbillable time, disrupted schedules, and lost revenue. Automated appointment reminders and easy rescheduling — sent by text at the right intervals — are the most reliable way to cut no-show rates significantly. How Keres AI handles it: Theo, Keres AI’s follow-up worker, confirms each appointment, reminds on your schedule and handles reschedules by text.',
     sections: [
@@ -1007,7 +1007,7 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is lead response time',
     title: 'What Is Lead Response Time? Definition | Keres AI',
     description:
-      'Lead response time is how quickly you contact a new lead after they reach out. Research consistently shows the first business to respond wins the job — learn how AI closes the gap.',
+      'Lead response time is how quickly you contact a new lead after they reach out. What published research found about speed, and how to cut response time.',
     definition:
       'Lead response time (also called speed to lead) is the time between a prospect first reaching out — calling, submitting a form, or clicking an ad — and receiving a response from your business. Research consistently shows that responding within minutes, not hours, sharply increases the likelihood of qualifying the lead, and the first business to respond often wins the job. Every minute of delay reduces your chance of closing. How Keres AI handles it: Remi answers calls in two rings, 24/7, and texts back any caller it missed within 60 seconds.',
     sections: [
@@ -1125,7 +1125,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'How does Keres AI’s Found handle it?',
         body:
-          '<p><a href="/services/found">Found</a> optimizes the profile once (categories, services, photos and verification), then works it every week: posts, photo updates, review responses, reporting spam listings that compete with you, and monthly insights. It runs the profile alongside your website, review requests and listings so all of them agree. The number on the profile can be answered by <a href="/agents/inbound">Remi</a> in two rings, 24/7.</p>',
+          '<p><a href="/services/found">Found</a> optimizes the profile once (categories, services, photos and verification), then works it every week: posts, photo updates, review responses, reporting spam listings that compete with you, and monthly insights. It runs the profile alongside your website, review requests and listings so all of them agree. The number on the profile can be answered by <a href="/agents/inbound">Remi</a>, Keres AI’s AI receptionist, in two rings, 24/7.</p>',
       },
     ],
     related: ['map-pack', 'review-generation', 'nap-consistency', 'local-services-ads'],
@@ -1173,7 +1173,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'How does Keres AI’s Found handle it?',
         body:
-          '<p>Local Services Ads setup and response is an add-on to <a href="/services/found">Found</a>: verification, listing, and answering. <a href="/agents/inbound">Remi</a> answers each lead’s call in two rings, 24/7, asks your intake questions and books into Google Calendar, HubSpot or ServiceTitan. Found also sends a review request after every job and manages your <a href="/google-business-profile-management">Google Business Profile</a>, which covers the review side of the ranking factors.</p>',
+          '<p>Local Services Ads setup and response is an add-on to <a href="/services/found">Found</a>: verification, listing, and answering. <a href="/agents/inbound">Remi</a>, Keres AI’s AI receptionist, answers each lead’s call in two rings, 24/7, asks your intake questions and books into Google Calendar, HubSpot or ServiceTitan. Found also sends a review request after every job and manages your <a href="/google-business-profile-management">Google Business Profile</a>, which covers the review side of the ranking factors.</p>',
       },
     ],
     related: ['google-business-profile', 'review-generation', 'map-pack', 'lead-response-time'],

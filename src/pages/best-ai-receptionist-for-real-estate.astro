@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
 import IndustryRoundupTable from '../components/IndustryRoundupTable.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, articleSchema, itemListSchema } from '../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, articleSchema, itemListSchema, vendorMentions } from '../data/schema';
 import { keresRow, vendorsFor, VENDORS_CHECKED } from '../data/answeringVendors';
 
 const path = '/best-ai-receptionist-for-real-estate';
@@ -23,9 +23,9 @@ const vendors = vendorsFor('real-estate', ['Allo', 'My AI Front Desk', 'Rosie', 
 const keres = { ...keresRow, fitFor: keresRow.industries!['real-estate']! };
 
 const faqs = [
-  { q: 'What is the best AI receptionist for a real estate agent?', a: 'The one that answers a sign call in seconds, qualifies the buyer and books the showing into the calendar and CRM you already use. Allo suits agents who want a new phone system with AI built in. My AI Front Desk and Rosie are low-cost AI options. Smith.ai mixes AI with people, and Ruby uses live receptionists. Keres AI suits agents who want Remi set up for them and their website run by the same team. See <a href="/industries/real-estate">Keres AI for real estate</a>.' },
-  { q: 'Can an AI receptionist book a showing?', a: 'Most of these can. Keres AI books into Google Calendar or HubSpot during the call. Allo says viewings sync to your calendar and CRM, and My AI Front Desk books showings. Rosie sends booking links on its $49 plan and books on your calendar from its $149 plan. Smith.ai schedules showings, and Ruby works with scheduling platforms.' },
-  { q: 'Which AI receptionists work with Follow Up Boss?', a: 'Smith.ai’s real estate page names Follow Up Boss, kvCORE and LionDesk. Allo’s pricing page names HubSpot, Pipedrive, Attio and Salesforce for CRM sync. Keres AI’s Follow Up Boss integration is rolling out; today Remi writes leads to HubSpot. If your CRM is not named on a vendor’s own page, ask how the lead gets there.' },
+  { q: 'What is the best AI receptionist for a real estate agent?', a: 'The one that answers a sign call at once, qualifies the buyer and books the showing into the calendar and CRM you already use. Allo suits agents who want a new phone system with AI built in. My AI Front Desk and Rosie are low-cost AI options. Smith.ai mixes AI with people, and Ruby uses live receptionists. Keres AI suits agents who want Remi set up for them and their website run by the same team. See <a href="/industries/real-estate">Keres AI for real estate</a>.' },
+  { q: 'Can an AI receptionist book a showing?', a: 'Several can. Keres AI books into Google Calendar or HubSpot during the call. Allo says viewings sync to your calendar and CRM, and My AI Front Desk books showings. Rosie sends booking links on its $49 plan and books on your calendar from its $149 plan. Smith.ai schedules showings, and Ruby works with scheduling platforms.' },
+  { q: 'Which AI receptionists work with Follow Up Boss?', a: 'Smith.ai’s real estate page names Follow Up Boss, kvCORE and LionDesk. Allo’s pricing page names HubSpot, Pipedrive, Attio and Salesforce for CRM sync. Keres AI has no Follow Up Boss integration today; Remi writes leads to HubSpot, and Zapier can pass them to other tools. If your CRM is not named on a vendor’s own page, ask how the lead gets there.' },
   { q: 'What should the receptionist say when a caller asks if a neighborhood is good for families?', a: 'Fair housing rules apply to everyone answering for you, AI included. Keep the script to facts about the property, the showing and your process, and point callers to public sources for schools and crime data. Write those answers with your broker before the receptionist goes live.' },
   { q: 'Is an AI receptionist better than a live answering service for agents?', a: 'AI answers several leads at once and asks the same qualifying questions every time; a person handles an upset seller or a delicate situation better. Ruby answers with people, and Smith.ai offers both on one line. Compare them on the <a href="/ruby-alternative">Ruby alternatives</a>, <a href="/smith-ai-alternative">Smith.ai alternatives</a> and <a href="/rosie-alternative">Rosie alternatives</a> pages.' },
   { q: 'How much does Keres AI cost for a real estate agent?', a: 'Found (website, Google Business Profile, reviews and listings) starts at $249 a month. Remi is quoted to your lead volume: one monthly rate with included minutes, then per minute, month-to-month. Book a 30-minute call on the <a href="/quote">quote page</a>, or compare all vendors on the <a href="/best-ai-receptionist">best AI receptionists</a> page.' },
@@ -53,25 +53,25 @@ const webpage = webPageSchema({
 });
 ---
 <Layout title={title} description={description} path={path} ogType="article">
-  <Schema slot="head" graph={[article, list, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[{ ...article, mentions: vendorMentions(list) }, list, webpage, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">Buyer’s guide · Real estate · 2026</span>
     <h1>Best AI receptionists for <span class="accent">real estate agents</span> (2026)</h1>
-    <p class="updated" style="font-size:14px;color:var(--text-dim);margin:-8px 0 16px">Updated <time datetime="2026-10-11">October 11, 2026</time></p>
-    <p class="lead" style="font-size:16px">Written by Keres AI, which sells Remi, one of the options below. Competitor facts come from each vendor's own pages, checked on the date shown.</p>
+    <p class="lead">The best AI receptionists for real estate agents in 2026 are Allo for a phone system with AI built in, My AI Front Desk and Rosie for low-cost AI, Smith.ai for AI and people on one line, Ruby for live receptionists, and Remi by Keres AI for listing calls answered in two rings and showings booked into Google Calendar or HubSpot.</p>
+    <p class="byline" style="font-size:14px;color:var(--text-dim);margin:14px 0 0">Written by Keres AI, which sells Remi, one of the options below. Prices and features checked on {VENDORS_CHECKED} on each vendor's own site. Updated <time datetime="2026-10-11">October 11, 2026</time>. <a href="/editorial-policy">How we check and correct prices</a>.</p>
     <div class="hero-ctas">
       <a href="#table-title" class="btn btn-primary">See the comparison</a>
       <a href="/hear-it" class="btn btn-outline">Hear Remi answer a call</a>
     </div>
-  </header>
+  </div>
 
   <section class="page-section container" aria-labelledby="answer-title">
     <div class="prose"><h2 id="answer-title">What is the best AI receptionist for real estate agents?</h2></div>
     <div class="answer-block">
-      <p>The best AI receptionist for a real estate agent answers listing calls in seconds, asks about pre-approval, agent and timeline, and books the showing. Allo adds an AI receptionist to a phone system for $32 a month per agent, billed yearly. My AI Front Desk ($99) and Rosie ($49) are low-cost AI options. Smith.ai mixes AI with people; Ruby uses live receptionists. Keres AI suits agents who want Remi booking showings into Google Calendar or HubSpot.</p>
+      <p>The best AI receptionist for a real estate agent answers listing calls at once, asks about pre-approval, agent and timeline, and books the showing. Allo adds an AI receptionist to a phone system for $32 a month per agent, billed yearly. My AI Front Desk ($99) and Rosie ($49) are low-cost AI options. Smith.ai mixes AI with people; Ruby uses live receptionists. Keres AI suits agents who want Remi booking showings into Google Calendar or HubSpot.</p>
     </div>
   </section>
 
@@ -99,7 +99,7 @@ const webpage = webPageSchema({
       <h2>Which option suits which agent or team?</h2>
 
       <h3>Keres AI (Remi)</h3>
-      <p>Remi answers listing and sign calls in two rings, 24/7, asks whether the caller is buying or selling, already has an agent, is pre-approved and when they plan to move, and books the showing into Google Calendar or HubSpot during the call. It also answers website chat, the text line and form enquiries, and texts back missed callers within 60 seconds. Billing is one monthly rate with included minutes, then per minute, with no per-call fees; Found runs the website, Google Business Profile, reviews and listings from $249 a month. Limitations: the Remi price is quoted, not published; Remi answers in English only; and Follow Up Boss is still rolling out, so leads go to HubSpot today.</p>
+      <p>Remi answers listing and sign calls in two rings, 24/7, asks whether the caller is buying or selling, already has an agent, is pre-approved and when they plan to move, and books the showing into Google Calendar or HubSpot during the call. It also answers website chat, the text line and form enquiries, and texts back missed callers within 60 seconds. Billing is one monthly rate with included minutes, then per minute, with no per-call fees; Found runs the website, Google Business Profile, reviews and listings from $249 a month. Limitations: the Remi price is quoted, not published; Remi answers in English only; and Remi does not write to Follow Up Boss today, so leads go to HubSpot.</p>
 
       <h3>Allo</h3>
       <p>Allo is a business phone system with an AI receptionist add-on. Its real estate page says it answers, texts back missed leads and books viewings while you are at a showing, then syncs the lead to your CRM; its pricing page names HubSpot, Pipedrive, Attio and Salesforce. The add-on is $32 a month per agent billed yearly, on top of a paid plan (Business from $32 per seat billed yearly, $45 monthly). It suits teams ready to move their phone line to Allo. Allo notes its pricing is early and can still change.</p>
@@ -126,7 +126,7 @@ const webpage = webPageSchema({
 
   <FaqSection faqs={faqs} title="AI receptionists for real estate: FAQ" />
 
-  <section class="page-section container" aria-labelledby="related-title">
+  <aside class="page-section container" aria-labelledby="related-title">
     <div class="section-label">Keep comparing</div>
     <h2 id="related-title" class="section-title" style="margin-bottom:8px">Where can agents compare more?</h2>
     <ul class="prose">
@@ -135,7 +135,7 @@ const webpage = webPageSchema({
       <li><a href="/ruby-alternative">Ruby alternatives</a> · <a href="/smith-ai-alternative">Smith.ai alternatives</a> · <a href="/rosie-alternative">Rosie alternatives</a></li>
       <li><a href="/missed-call-statistics">Missed-call and lead-response statistics</a></li>
     </ul>
-  </section>
+  </aside>
 
   <CtaBand
     heading="Hear Remi answer a listing call"

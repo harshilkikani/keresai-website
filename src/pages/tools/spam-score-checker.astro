@@ -4,7 +4,7 @@ import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FaqSection from '../../components/FaqSection.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema } from '../../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, toolSchema } from '../../data/schema';
 
 const path = '/tools/spam-score-checker';
 const ORIGIN = 'https://www.keresai.com';
@@ -19,31 +19,25 @@ const faqs = [
   { q: 'How do I lower my spam score?', a: 'Remove trigger phrases and ALL-CAPS, cut exclamation marks and extra links, keep the subject 30–50 characters, and write in plain, specific, personalized language instead of promotional copy.' },
   { q: 'Is my email content sent anywhere?', a: 'No. This checker runs entirely in your browser — nothing you paste is uploaded or stored.' },
 ];
-const webApp = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
+const tool = toolSchema({
+  path,
   name: 'Email Spam-Score Checker',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
-  url: ORIGIN + path,
   description: 'Free tool that scores email subject and body content for spam-filter risk and suggests fixes.',
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  provider: { '@id': `${ORIGIN}/#organization` },
-};
+});
 ---
 <Layout
   title="Free Email Spam-Score Checker | Keres AI"
   description="Free email spam-score checker: paste a subject and body to score spam-filter risk and get specific fixes. Runs in your browser; nothing is uploaded."
   path={path}
 >
-  <Schema slot="head" graph={[webApp, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[tool, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">Free tool</span>
     <h1>Will your email <span class="accent">land in spam?</span></h1>
     <p class="lead">A free tool from Keres AI. Paste your subject and body. We’ll score the content for spam-filter risk and tell you exactly what to fix — all in your browser, nothing uploaded.</p>
-  </header>
+  </div>
 
   <section class="page-section container container-narrow">
     <div class="answer-block">

@@ -76,7 +76,7 @@ export const transcripts: Record<Vertical, Transcript> = {
       { who: 'caller', t: '0:38', text: 'How soon could I talk to an actual attorney?' },
       { who: 'remi', t: '0:44', text: 'Tomorrow. There is a consult at 9:30 AM or 2:00 PM. Which works?' },
       { who: 'caller', t: '0:52', text: '9:30.' },
-      { who: 'remi', t: '0:56', text: 'Booked. Your intake summary is in the case file and the firm has it now.' },
+      { who: 'remi', t: '0:56', text: 'Booked. The firm has your intake summary now, and you’ll get a text confirming the consultation.' },
     ],
     outcome: [
       { k: 'Consult booked', v: 'Mon 9:30 AM' },

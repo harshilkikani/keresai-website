@@ -36,11 +36,11 @@ const articleSchema = {
   <Schema slot="head" graph={[articleSchema, breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">{cs.industry} · Case study</span>
     <h1>{cs.headline}</h1>
     <p class="lead">{cs.summary}</p>
-  </header>
+  </div>
 
   <section class="page-section container">
     <div class="feature-grid">

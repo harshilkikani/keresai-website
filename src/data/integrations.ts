@@ -121,7 +121,7 @@ export const integrations: Integration[] = [
       { q: 'Can Keres create deals in HubSpot?', a: 'Yes — as leads qualify, Keres creates contacts, deals, and follow-up tasks for your team.' },
     ],
     related: ['zapier', 'google-calendar', 'outlook'],
-    setup: 'On your first call you decide what Remi should create in HubSpot: which pipeline and stage a new lead goes to, which properties your intake answers fill, and who owns new contacts. Keres connects HubSpot with access you authorize, maps the fields, and you place test calls to check the records before Remi answers a customer.',
+    setup: 'On your first call you decide what Remi, Keres AI’s AI receptionist, should create in HubSpot: which pipeline and stage a new lead goes to, which properties your intake answers fill, and who owns new contacts. Keres connects HubSpot with access you authorize, maps the fields, and you place test calls to check the records before Remi answers a customer.',
     writes: 'For each caller: a contact with the name, number and answers to your intake questions, plus a record of the call and its outcome. Where you choose, a deal or a follow-up task for your team, and the booked meeting.',
     limits: 'Keres writes the fields you agree on during setup. Custom objects and unusual workflows are scoped on the call, not assumed. Reporting and pipeline clean-up stay in your hands, so if a property matters to your reports, name it on the first call.',
   },
@@ -384,6 +384,15 @@ export const integrationCategories = [
 export const isLive = (i: Integration) => i.status === 'live';
 /** Names of the integrations that work today, for copy that lists them. */
 export const liveIntegrationNames = integrations.filter(isLive).map((i) => i.name);
+/** Names of the integrations that are rolling out (not live). The only list pages should use. */
+export const rollingOutIntegrationNames = integrations.filter((i) => !isLive(i)).map((i) => i.name);
+/** "A, B and C" */
+export const joinNames = (names: readonly string[]) =>
+  names.length < 2 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+/** "Google Calendar, HubSpot, ServiceTitan and Zapier": for copy that lists what works today. */
+export const LIVE_INTEGRATIONS = joinNames(liveIntegrationNames);
+/** Every rolling-out integration, for copy that lists them. Derived, so it never drifts from the data above. */
+export const ROLLING_OUT_INTEGRATIONS = joinNames(rollingOutIntegrationNames);
 /** The honest one-liner shown wherever a rolling-out integration appears. */
 export const rollingOutNote = (name: string) =>
-  `The ${name} integration is rolling out and is not live yet. Today Keres connects to ${liveIntegrationNames.join(', ').replace(/, ([^,]*)$/, ' and $1')}.`;
+  `The ${name} integration is rolling out and is not live yet. Today Keres connects to ${LIVE_INTEGRATIONS}.`;

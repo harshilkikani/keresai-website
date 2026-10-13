@@ -82,7 +82,7 @@ const otherStates = states.filter((x) => x.slug !== s.slug);
 
   <Breadcrumbs crumbs={crumbs} />
 
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">AI Receptionist · {s.stateFull}</span>
     <h1>The 24/7 AI receptionist for <span class="accent">{s.stateFull} businesses</span></h1>
     <p class="lead">{s.intro}</p>
@@ -90,7 +90,7 @@ const otherStates = states.filter((x) => x.slug !== s.slug);
       <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href="/tools/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
     </div>
-  </header>
+  </div>
 
   <!-- DIRECT ANSWER BLOCK -->
   <section class="page-section container">

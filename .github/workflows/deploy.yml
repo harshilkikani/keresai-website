@@ -21,6 +21,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Full history: sitemap <lastmod> and the pages' "Last updated"
+          # dates come from each source file's last commit (src/seo/lastmod.mjs).
+          fetch-depth: 0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:

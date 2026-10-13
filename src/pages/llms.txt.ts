@@ -23,6 +23,7 @@ import { benchmarks } from '../data/benchmarks';
 import { calculators } from '../data/calculators';
 import { integrations, isLive } from '../data/integrations';
 import { guides } from '../data/guides';
+import { glossary } from '../data/glossary';
 import { listablePath } from '../seo/indexing.mjs';
 
 /** Absolute URL for a path, or '' when the path is noindex. */
@@ -57,7 +58,7 @@ Key facts:
 - Six workers, hired one at a time or together. Found (website, Google Business Profile management, review requests and listings) starts at $249/month ($499 for law firms), month-to-month.
 - Remi, the AI receptionist, answers every call in two rings, 24/7, including nights, weekends and holidays. It books into Google Calendar, HubSpot or ServiceTitan (other tools through Zapier), texts back missed callers within 60 seconds, and also handles website chat, text-line and form enquiries.
 - Remi billing: one monthly rate with included minutes, then per minute. No per-call fees. Quoted, not published: ${u('/pricing')}. Theo, June and Sol are quoted to your volume; Custom has a fixed build price and a monthly run fee.
-- Month-to-month, no contract. Setup timing is agreed on the first call.
+- Billed monthly; the terms ask for 30 days' written notice to cancel. Setup timing is agreed on the first call.
 - Owner Daily Brief: one morning text with calls answered, leads qualified, appointments booked, no-shows prevented, reviews posted, and which source produced the bookings. Every worker reports to the same text.
 - Human escalation is a feature: warm transfer under rules you set, or a "call me now" alert carrying the intake already collected.
 - Site available in English and Spanish (homepage, pricing, custom-worker page under ${u('/es')}). Remi answers calls in English only.
@@ -75,8 +76,8 @@ ${workers
 On a customer's own line each worker introduces itself with whatever name that customer configures. Remi, Theo, June and Sol are the product's default names.
 
 ## How to buy
-- Get a quote: ${u('/quote') || `${ORIGIN}/quote`} — five questions, then a 30-minute call; the booking calendar is on the same page.
-- Custom worker: ${u('/custom')} — one recurring job, one-page scope, fixed build price, monthly run fee, first version in two weeks, you approve everything it publishes.
+- Contact and quotes: ${u('/contact')} — email, the office line or a quote request, then a 30-minute call. Setup is done for you, timing is agreed on that call, and you test Remi before it answers customers.
+- Custom worker: ${u('/custom')} — one recurring job, one-page scope, fixed build price, monthly run fee, you approve everything it publishes.
 
 ## The pipeline — seven stages
 A small firm's revenue is one pipeline, and Keres covers every stage of it. A customer can start at whichever stage leaks most.
@@ -122,7 +123,8 @@ ${bullets([
 ])}
 
 ## Industry hubs
-${hubs.map((h) => link(h.name, `/industries/${h.slug}`, `: ${h.sub.split('. ')[0]}.`)).filter(Boolean).map((x) => `- ${x}`).join('\n')}
+- ${link('Industries index', '/industries', ': every industry Keres AI serves.')}
+${hubs.map((h) => link(h.name, `/industries/${h.slug}`, `: ${h.sub.split('. ')[0].replace(/[.\s]+$/, '')}.`)).filter(Boolean).map((x) => `- ${x}`).join('\n')}
 
 Trade pages beneath the home-services hub:
 - ${dot(industries.map((i) => link(i.short ?? i.name, `/ai-receptionist-for-${i.slug}`)))}
@@ -170,24 +172,13 @@ ${bullets([
 ## Glossary (definitions)
 ${bullets([
   link('Glossary index', '/glossary'),
-  dot([
-    link('AI receptionist', '/glossary/ai-receptionist'), link('AI answering service', '/glossary/ai-answering-service'),
-    link('Missed-call recovery', '/glossary/missed-call-recovery'), link('Legal intake', '/glossary/legal-intake'),
-    link('Lead response time', '/glossary/lead-response-time'),
-  ]),
-  dot([
-    link('Google Business Profile', '/glossary/google-business-profile'), link('Map pack', '/glossary/map-pack'),
-    link('Review generation', '/glossary/review-generation'), link('NAP consistency', '/glossary/nap-consistency'),
-  ]),
-  dot([
-    link('AI SDR', '/glossary/ai-sdr'), link('Email deliverability', '/glossary/email-deliverability'),
-    link('Inbox warmup', '/glossary/inbox-warmup'),
-  ]),
+  ...glossary.map((t) => link(t.term, `/glossary/${t.slug}`)),
 ])}
 
 ## Trust and company
 ${bullets([
-  link('Trust & security', '/trust', ': encryption in transit and limited access; not SOC 2 or HIPAA certified, no BAAs.'),
+  link('Trust & security', '/trust', ': encryption in transit and limited access; export or deletion on request within 15 business days; not SOC 2 or HIPAA certified, no BAAs.'),
+  link('Editorial policy', '/editorial-policy', ': how vendor prices are checked and dated, how estimates are labelled, the conflict of interest, and how to report a correction.'),
   dot([link('About', '/about'), link('Partners', '/partners'), link('Contact', '/contact')]),
 ])}
 

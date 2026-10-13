@@ -3,11 +3,71 @@ import Layout from '../layouts/Layout.astro';
 import Schema from '../components/Schema.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { organizationSchema, breadcrumbSchema } from '../data/schema';
+import { organizationSchema, breadcrumbSchema, faqSchema } from '../data/schema';
 import { business, CONTACT_PHONE } from '../config/business';
+import { integrations, isLive, liveIntegrationNames } from '../data/integrations';
 
 const path = '/about';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path }];
+const email = business.contactEmail;
+const listed = (xs: string[]) => xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+
+// Live first, then rolling out; both straight from src/data/integrations.ts,
+// the list the /integrations pages are built from.
+const integrationRows = [...integrations].sort((a, b) => Number(isLive(b)) - Number(isLive(a)));
+const liveBooking = liveIntegrationNames.filter((n) => n !== 'Zapier');
+
+// Every question heading on this page with the paragraph (or list) under it.
+// The page renders from this array and the FAQPage node is built from it, so
+// the structured data is the visible text, word for word.
+const sell = {
+  q: 'What does Keres AI sell?',
+  a: 'AI workers that each do one job for a local business. Found builds and runs the website, Google Business Profile, reviews and listings, from $249 a month ($499 for law firms). Remi, the AI receptionist, answers every call in two rings, 24/7, and books the appointment; it is quoted to your call volume as one monthly rate with included minutes, then per minute. Theo, June and Sol, and custom workers, are quoted.',
+};
+const faqs = [
+  sell,
+  {
+    q: 'Who is Keres AI for?',
+    a: 'Local businesses whose sales team is whoever picks up the phone: <a href="/industries/home-services">HVAC, plumbing, roofing and other home service contractors</a>, <a href="/industries/law-firms">law firms</a>, <a href="/industries/dental-med-spa">dental practices and med spas</a>, and <a href="/industries/real-estate">real estate agents and teams</a>, across the United States.',
+  },
+  {
+    q: 'Why does Keres AI exist?',
+    a: 'Keres AI estimates that service businesses miss 25–40% of inbound calls, and most callers who reach voicemail do not call back (<a href="/missed-call-statistics">how we got there</a>). The leads are there; the capacity to answer them often isn’t. Found makes sure the business is easy to find, and Remi makes sure the call that follows is answered and booked.',
+  },
+  {
+    q: 'How does Keres AI work with a new client?',
+    a: 'It starts with a 30-minute call about how your calls and intake run today. Keres AI then does the setup for you: we write Remi’s script and connect your number and your calendar or CRM. The timing depends on your call flows and integrations, and we agree it on that first call. You test Remi yourself before it answers a single customer.',
+  },
+  {
+    q: 'What does Keres AI connect to?',
+    a: `Today Remi books into ${listed(liveBooking)}, and reaches other tools through Zapier. The other integrations in the table below are rolling out and are not live yet; each page says so. See <a href="/integrations">integrations</a>.`,
+  },
+  {
+    q: 'What doesn’t Keres AI do?',
+    a: '<ul><li>It does not run Google Ads.</li><li>Remi does not give legal, medical or financial advice, and does not clear a legal conflict itself.</li><li>Keres AI is not SOC 2 or HIPAA certified and does not sign BAAs or DPAs (<a href="/trust">trust and security</a>).</li><li>It does not train third-party AI models on client data.</li><li>Remi answers in English only.</li></ul>',
+  },
+  {
+    q: 'How does Keres AI check what it publishes?',
+    a: 'Pages are drafted with AI assistance and reviewed by the Keres AI team. Competitor prices come from each vendor’s own pricing page and carry the date they were checked, and estimates are labelled as Keres AI estimates. Keres AI sells Remi and Found, so its comparisons say so. The <a href="/editorial-policy">editorial policy</a> covers how pages are checked and corrected.',
+  },
+  {
+    q: 'Is Keres AI related to Keras, Kore.ai or keres.ai?',
+    a: 'No. Keres AI (keresai.com) is not affiliated with keres.ai, the Keras deep-learning library or Kore.ai.',
+  },
+  {
+    q: 'Where is Keres AI based?',
+    a: 'Keres AI is based in Houston, Texas, and works with local service businesses across the United States.',
+  },
+  {
+    q: 'How do I contact Keres AI?',
+    a: `Email <a href="mailto:${email}">${email}</a>${CONTACT_PHONE ? `, call the office at <a href="${CONTACT_PHONE.href}">${CONTACT_PHONE.display}</a> (a person answers)` : ''}, or <a href="/quote">get a quote</a> and book a 30-minute call.`,
+  },
+];
+const [, ...rest] = faqs;
+const connectIdx = rest.findIndex((f) => f.q === 'What does Keres AI connect to?');
+const before = rest.slice(0, connectIdx + 1);
+const after = rest.slice(connectIdx + 1);
+const isList = (a: string) => a.startsWith('<ul>');
 ---
 <Layout
   title="About Keres AI: Websites & AI Receptionist"
@@ -18,63 +78,66 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path }];
 >
   <Schema slot="head" graph={[
     breadcrumbSchema(crumbs),
+    faqSchema(faqs),
     organizationSchema,
   ]} />
 
   <Breadcrumbs crumbs={crumbs} />
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">About</span>
     <h1>About <span class="accent">Keres AI</span></h1>
     <p class="lead answer-block">Keres AI sells done-for-you growth services to local service businesses. Found builds and runs a business’s website, Google Business Profile, reviews and listings from $249 a month ($499 for law firms). Remi, its AI receptionist, answers every call in two rings, 24/7, and books the appointment. Theo, June and Sol handle reminders and estimate follow-up, past-customer reactivation, and outbound email.</p>
     <div class="hero-ctas"><a href="/quote" class="btn btn-primary">Get a quote</a></div>
-  </header>
+  </div>
 
   <section class="page-section container">
     <div class="prose">
-      <h2>What does Keres AI sell?</h2>
+      <h2>{sell.q}</h2>
+      <p set:html={sell.a} />
       <div class="compare-wrap">
         <table class="compare-table">
           <thead><tr><th>Worker</th><th>Job</th><th>Price</th></tr></thead>
           <tbody>
             <tr><td><a href="/services/found">Found</a></td><td>Website, Google Business Profile, reviews and listings</td><td>From $249/month ($499 for law firms)</td></tr>
-            <tr><td><a href="/agents/inbound">Remi</a></td><td>AI receptionist: answers every call in two rings and books it</td><td>Quoted to call volume; included minutes, then per-minute; no per-call fees</td></tr>
+            <tr><td><a href="/agents/inbound">Remi</a></td><td>AI receptionist: answers every call in two rings and books it</td><td>Quoted to call volume; included minutes, then per minute; no per-call fees</td></tr>
             <tr><td><a href="/agents/follow-up">Theo</a></td><td>Confirmations, reminders and estimate follow-up</td><td>Quoted</td></tr>
             <tr><td><a href="/agents/reactivation">June</a></td><td>Brings past customers back and asks every customer for a review</td><td>Quoted</td></tr>
             <tr><td><a href="/agents/outbound">Sol</a></td><td>Outbound email with deliverability set up first</td><td>Quoted</td></tr>
+            <tr><td><a href="/custom">Custom</a></td><td>A worker built for one recurring job in your business</td><td>Quoted: fixed build price and a monthly run fee</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Everything is month-to-month with no cancellation fee. See <a href="/pricing">pricing</a> for what changes a quote.</p>
+      <p>Billing is monthly, and the <a href="/legal/terms.html">terms</a> ask for 30 days’ written notice to cancel. See <a href="/pricing">pricing</a> for what changes a quote.</p>
 
-      <h2>Who is Keres AI for?</h2>
-      <p>Local businesses whose sales team is whoever picks up the phone: <a href="/industries/home-services">HVAC, plumbing, roofing and other home service contractors</a>, <a href="/industries/law-firms">law firms</a>, <a href="/industries/dental-med-spa">dental practices and med spas</a>, and <a href="/industries/real-estate">real estate agents and teams</a>, across the United States.</p>
+      {before.map((f) => (
+        <>
+          <h2>{f.q}</h2>
+          {isList(f.a) ? <Fragment set:html={f.a} /> : <p set:html={f.a} />}
+        </>
+      ))}
 
-      <h2>Why does it exist?</h2>
-      <p>Keres AI estimates that service businesses miss 25–40% of inbound calls, and most callers who reach voicemail do not call back (<a href="/missed-call-statistics">how we got there</a>). The leads are there; the capacity to answer them often isn’t. Found makes sure the business is easy to find, and Remi makes sure the call that follows is answered and booked.</p>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <caption class="visually-hidden">Keres AI integrations: live and rolling out</caption>
+          <thead><tr><th>Integration</th><th>Category</th><th>Status</th></tr></thead>
+          <tbody>
+            {integrationRows.map((i) => (
+              <tr>
+                <td>{isLive(i) ? <a href={`/integrations/${i.slug}`}>{i.name}</a> : i.name}</td>
+                <td>{i.category}</td>
+                <td>{isLive(i) ? 'Live' : 'Rolling out, not live yet'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      <h2>How does onboarding work?</h2>
-      <p>A 30-minute call on how your calls and intake run today. We write the script, connect your number and your calendar or CRM, and you test it yourself before it answers a customer. Timing depends on your call flows and integrations, and we agree it on that first call.</p>
-
-      <h2>What does Keres AI connect to?</h2>
-      <p>Today: Google Calendar, HubSpot, ServiceTitan and Zapier. Rolling out: Jobber, Housecall Pro, Clio, Lawmatics, Follow Up Boss, Dentrix and Open Dental. See <a href="/integrations">integrations</a>.</p>
-
-      <h2>What Keres AI does not do</h2>
-      <ul>
-        <li>It does not run Google Ads; it sets up and answers Local Services Ads.</li>
-        <li>Remi never gives legal, medical or financial advice, and never clears a legal conflict itself.</li>
-        <li>Keres AI is not SOC 2 or HIPAA certified and does not sign BAAs today (<a href="/trust">trust and security</a>).</li>
-        <li>It never uses your data to train third-party AI models.</li>
-        <li>Remi answers in English today.</li>
-      </ul>
-
-      <h2>Is Keres AI related to Keras, Kore.ai or keres.ai?</h2>
-      <p>No. Keres AI (keresai.com) is not affiliated with keres.ai, the Keras deep-learning library or Kore.ai.</p>
-
-      <h2>Where is Keres AI based?</h2>
-      <p>Keres AI is based in Houston, Texas, and works with local service businesses across the United States. Most setup happens over the phone and by video; Houston-area clients can meet in person.</p>
-
-      <h2>How do I contact Keres AI?</h2>
-      <p>Email <a href={`mailto:${business.contactEmail}`}>{business.contactEmail}</a>{CONTACT_PHONE && <>, call the office at <a href={CONTACT_PHONE.href}>{CONTACT_PHONE.display}</a></>}, or <a href="/quote">get a quote</a> and book a 30-minute call.</p>
+      {after.map((f) => (
+        <>
+          <h2>{f.q}</h2>
+          {isList(f.a) ? <Fragment set:html={f.a} /> : <p set:html={f.a} />}
+        </>
+      ))}
     </div>
   </section>
 

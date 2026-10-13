@@ -20,7 +20,7 @@ const crumbs = [
 
 const faqs = [
   { q: 'How much does Google Business Profile management cost?', a: 'Doing it yourself costs time rather than money. Software tools charge a monthly fee per location. Done-for-you services vary by scope; Keres AI includes weekly profile management in Found, which starts at $249 a month ($499 for law firms) with the website, review requests and listings, month-to-month.' },
-  { q: 'How long until Google Business Profile changes show results?', a: 'Profile changes tend to move within two to six weeks; listings and citations take a full cycle to propagate. Reviews start the week the request flow is switched on, because they depend on your job volume.' },
+  { q: 'How long until Google Business Profile changes show results?', a: 'There is no fixed timeline. Google reviews profile edits before they appear, and listings and citations take a full update cycle to spread across directories, so Keres AI reports what changed each month instead of promising a date. Review requests start the week the request flow is switched on; how many reviews arrive depends on your job volume.' },
   { q: 'Can I ask every customer for a review?', a: 'Yes, and you should ask all of them the same way. Google’s policies do not allow selectively asking only happy customers or discouraging negative reviews, and the FTC rule on consumer reviews restricts suppressing them.' },
   { q: 'Does Google Business Profile still have chat or Q&A?', a: 'No. Google ended Business Profile chat on July 31, 2024, and removed the Questions & Answers section from Business Profiles in late 2025. Any service that still sells those is out of date.' },
   { q: 'Do I need a website if I have a Google Business Profile?', a: 'The profile gets you into the map results; the website is where a searcher checks you out and books. Found manages both together so the name, services and hours agree everywhere.' },
@@ -41,11 +41,11 @@ const webpage = webPageSchema({ path, name: title, description, speakableSelecto
 
   <Breadcrumbs crumbs={crumbs} />
 
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">Google Business Profile</span>
     <h1>Google Business Profile management: <span class="accent">what it includes and what it costs</span></h1>
     <p class="lead">Updated October 11, 2026.</p>
-  </header>
+  </div>
 
   <section class="page-section container">
     <div class="answer-block">
@@ -61,7 +61,7 @@ const webpage = webPageSchema({ path, name: title, description, speakableSelecto
         <li><strong>Weekly posts:</strong> offers, seasonal reminders and recent work, so the profile shows activity.</li>
         <li><strong>Photo updates:</strong> real jobs and real staff, not stock images.</li>
         <li><strong>Review replies:</strong> a response to every review, positive or negative, drafted for your approval.</li>
-        <li><strong>Spam-listing removal:</strong> reporting fake or duplicate listings that take your map position.</li>
+        <li><strong>Spam-listing reports:</strong> reporting fake or duplicate listings that take your map position to Google, which decides whether to remove them.</li>
         <li><strong>Monthly insights:</strong> searches, calls, direction requests and which keywords found you.</li>
         <li><strong>Consistent listings:</strong> the same name, address and phone on Apple, Bing, Yelp, Nextdoor, Angi and your trade directories, so Google trusts the profile.</li>
       </ul>

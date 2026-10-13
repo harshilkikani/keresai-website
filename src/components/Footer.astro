@@ -74,6 +74,7 @@ const roleOf = (slug: string) => (agents.find((a) => a.slug === slug)?.title ?? 
       <ul>
         <li><a href="/about">{ui.footer.about}</a></li>
         <li><a href="/trust">{ui.footer.security}</a></li>
+        <li><a href="/editorial-policy">{locale === 'es' ? 'Política editorial' : 'Editorial policy'}</a></li>
         <li><a href="/compare">{ui.footer.compare}</a></li>
         <li><a href="/partners">{ui.footer.partners}</a></li>
         <li><a href="/contact">{ui.footer.contact}</a></li>

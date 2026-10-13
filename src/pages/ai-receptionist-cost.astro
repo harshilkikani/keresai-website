@@ -66,20 +66,20 @@ const webpage = webPageSchema({
 
   <Breadcrumbs crumbs={crumbs} />
 
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">Pricing · 2026</span>
     <h1>How much does an AI receptionist cost? <span class="accent">2026 prices compared</span></h1>
-    <p class="updated" style="font-size:14px;color:var(--text-dim);margin:-8px 0 16px">Updated <time datetime="2026-10-11">October 11, 2026</time> · Written by Keres AI, which sells an AI receptionist (Remi)</p>
-    <p class="lead">What AI receptionists and live answering services charge, taken from each vendor’s own pricing page, with the arithmetic for a typical month shown in full.</p>
+    <p class="lead">An AI receptionist costs about $25 to $100 a month on published entry plans in 2026, while live answering services start at $99 to $300 a month. Below: what each vendor charges, taken from its own pricing page, with the arithmetic for a typical month shown in full.</p>
+    <p class="byline" style="font-size:14px;color:var(--text-dim);margin:14px 0 0">Written by Keres AI, which sells Remi, one of the AI receptionists below. Prices checked on {VENDORS_CHECKED} on each vendor’s own pricing page. Updated <time datetime="2026-10-11">October 11, 2026</time>. <a href="/editorial-policy">How we check and correct prices</a>.</p>
     <div class="hero-ctas">
       <a href="/quote" class="btn btn-primary">Get a quote for Remi</a>
       <a href="/best-ai-receptionist" class="btn btn-outline">Best AI receptionists</a>
     </div>
-  </header>
+  </div>
 
   <section class="page-section container">
     <div class="answer-block">
-      <p>AI receptionists publish entry plans from about $25 to $100 a month in 2026: Upfirst $24.95 for 30 calls, Dialzara $29 for 60 minutes, Rosie $49 for 250 minutes, Goodcall $79 for 100 callers and My AI Front Desk $99 for 200 minutes. Live answering services start higher: Ruby at $250 for 50 minutes, Smith.ai at $300 for 30 calls. Keres AI quotes Remi to your call volume.</p>
+      <p>AI receptionists publish entry plans from about $25 to $100 a month in 2026: Upfirst $24.95 for 30 calls, Dialzara $29 for 60 minutes, Rosie $49 for 250 minutes, Goodcall $79 for 100 callers and My AI Front Desk $99 for 200 minutes. Live answering services start higher: PATLive at $99 for 50 minutes, Ruby at $250 for 50 minutes and Smith.ai at $300 for 30 calls. Keres AI quotes Remi to your call volume: one monthly rate with included minutes, then per minute, with no per-call fees.</p>
       <p style="margin-top:12px;font-size:14px;color:var(--text-dim)">Source: each vendor’s pricing page, checked {VENDORS_CHECKED}.</p>
     </div>
   </section>
@@ -152,11 +152,12 @@ const webpage = webPageSchema({
       <p>Published AI receptionist plans start under $100 a month and answer around the clock. But a receptionist does more than answer the phone: greeting visitors, handling paperwork, and judgment calls an AI should not make. For many small businesses the choice is not either-or; an AI receptionist covers after-hours, overflow and lunch breaks while staff handle the front desk.</p>
 
       <h2>How does Keres AI price Remi?</h2>
+      <p>Remi by Keres AI is billed as one monthly rate that includes a set number of minutes, then a per-minute rate after that, with no per-call fees. Keres AI does not publish a Remi price, because the right number of included minutes depends on how many calls you get and how long they run. Tell Keres AI roughly what your busiest month looks like, and you get all three numbers on a 30-minute call.</p>
       <ul>
         <li><strong>A monthly rate with included minutes</strong>, quoted to your call volume.</li>
         <li><strong>Per minute after the included minutes</strong>, at the rate in your quote.</li>
         <li><strong>No per-call fees</strong>. Your quote sizes the included minutes to your busy season.</li>
-        <li><strong>Month-to-month</strong>, with no long contract.</li>
+        <li><strong>Month-to-month</strong>, with no long contract; cancel with 30 days’ written notice.</li>
       </ul>
       <p>Keres AI also sells Found, which builds and runs your website and Google Business Profile and asks customers for reviews, from $249 a month ($499 for law firms). See <a href="/pricing">pricing</a>, <a href="/agents/inbound">how Remi works</a>, or <a href="/hear-it">hear Remi answer a call</a>.</p>
     </div>
@@ -164,7 +165,7 @@ const webpage = webPageSchema({
 
   <FaqSection faqs={faqs} title="AI receptionist cost FAQ" />
 
-  <section class="page-section container" aria-labelledby="related-title">
+  <aside class="page-section container" aria-labelledby="related-title">
     <div class="section-label">Keep comparing</div>
     <h2 id="related-title" class="section-title" style="margin-bottom:8px">Related comparisons</h2>
     <ul class="prose">
@@ -172,10 +173,10 @@ const webpage = webPageSchema({
       {roundups.map((r) => <li><a href={`/${r.slug}`}>{r.detail?.linkLabel ?? `${r.competitor} alternatives`}</a></li>)}
       <li><a href="/compare">All comparisons</a></li>
     </ul>
-  </section>
+  </aside>
 
   <CtaBand
     heading="Get Remi quoted to your call volume"
-    sub="Tell us roughly how many calls you get and how long they run. We will quote the monthly rate, the included minutes and the per-minute rate after."
+    sub="Remi is billed as one monthly rate with included minutes, then per minute, with no per-call fees. Tell Keres AI roughly how many calls you get and how long they last, and you get the monthly rate, the included minutes and the per-minute rate on a 30-minute call."
   />
 </Layout>

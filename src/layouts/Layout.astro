@@ -12,6 +12,8 @@ import { type Locale, translatedPaths, stripLocale, localePath, ogLocale, l } fr
 import { t } from '../i18n/ui';
 import { websiteSchema } from '../data/schema';
 import { isIndexable } from '../seo/indexing.mjs';
+import { lastModFor } from '../seo/lastmod.mjs';
+import PageReviewed from '../components/PageReviewed.astro';
 
 export interface Props {
   title: string;
@@ -50,6 +52,12 @@ export interface Props {
    * heroes, weight 300/400). Defaults from the path — see DISPLAY_HERO.
    */
   heroFont?: 'display' | 'serif';
+  /**
+   * Show "Last updated <date> · Reviewed by the Keres AI team" at the end of
+   * <main> (with dateModified on the WebPage node). Defaults on for the page
+   * families in REVIEWED; pass false to hide it or true to add it.
+   */
+  reviewed?: boolean;
 }
 
 const {
@@ -68,6 +76,7 @@ const {
   pageType = 'WebPage',
   mainEntityId,
   heroFont,
+  reviewed,
 } = Astro.props;
 const quoteTarget = quoteHref ?? (go ? '#quote' : l(locale, '/quote'));
 const bookTarget = quoteHref || go ? '#book' : l(locale, '/quote') + '#book';
@@ -138,6 +147,26 @@ const DISPLAY_HERO = [
 const heroFace = heroFont ?? (DISPLAY_HERO.some((re) => re.test(basePath)) ? 'display' : 'serif');
 const heroFontFile = heroFace === 'display' ? '/assets/fonts/fraunces-600.woff2' : '/assets/fonts/fraunces-400.woff2';
 
+// Pages that carry the visible "Last updated · Reviewed by" line: the
+// evergreen product, industry and reference pages. Roundups, guides and data
+// pages show their own dated "Updated" line instead.
+const REVIEWED = [
+  /^\/industries(\/[^/]+)?$/, /^\/ai-receptionist-for-[^/]+$/, /^\/(24-7-ai-receptionist|ai-answering-service)$/,
+  /^\/agents\/[^/]+$/, /^\/services\/found$/, /^\/glossary\/[^/]+$/, /^\/use-cases\/[^/]+$/,
+  /^\/integrations\/[^/]+$/, /^\/tools(\/[^/]+)?$/, /^\/(about|pricing|trust|editorial-policy)$/, /^\/es\/pricing$/,
+];
+const showReviewed = reviewed ?? (indexable && isIndexable(path) && REVIEWED.some((re) => re.test(path)));
+const lastMod = showReviewed ? lastModFor(path) : null;
+
+// The page body, rendered before the head so the schema can be checked
+// against it: speakable selectors are kept only where the class exists in
+// the page (Schema.astro reads keresClasses).
+const bodyHtml = await Astro.slots.render('default');
+const bodyClasses = new Set<string>();
+for (const m of bodyHtml.matchAll(/\sclass="([^"]*)"/g)) for (const c of m[1].split(/\s+/)) if (c) bodyClasses.add(c);
+(Astro.locals as { keresClasses?: Set<string> }).keresClasses = bodyClasses;
+(Astro.locals as { keresIndexable?: boolean }).keresIndexable = indexable && !isNotFound && isIndexable(path);
+
 // The page's one WebPage-family node: language, site membership, and the link
 // to its translation, so search and AI crawlers see the EN/ES pair as one
 // work. Schema.astro (rendered in every page's head slot, after this
@@ -155,6 +184,7 @@ const webPageNode = {
   isPartOf: { '@id': `${origin}/#website` },
   about: { '@id': `${origin}/#organization` },
   ...(mainEntityId ? { mainEntity: { '@id': mainEntityId } } : {}),
+  ...(lastMod ? { dateModified: lastMod, reviewedBy: { '@id': `${origin}/#organization` } } : {}),
   ...(hasTwin && locale === 'en' ? { workTranslation: twinNode('es') } : {}),
   ...(hasTwin && locale === 'es' ? { translationOfWork: twinNode('en') } : {}),
 };
@@ -195,12 +225,13 @@ const META_DOMAIN_VERIFICATION = '';
     script-src  — plus gstatic.com for the website-call-conversion loader
     frame-src   — Google Ads conversion frames and the Meta pixel iframe
   img-src is already 'self' data: https:, which covers every tracking
-  pixel, so it needs no change.
+  pixel, so it needs no change. upgrade-insecure-requests turns any stray
+  http:// subresource into https:// instead of loading it in the clear.
   Note there is deliberately NO 'unsafe-inline' in script-src: the GA4
   and Meta bootstraps live in /assets/tracking.js so the policy stays
   tight. Never inline a tag snippet — it will be blocked silently.
 -->
-<meta http-equiv="Content-Security-Policy" content={`default-src 'none'; script-src 'self' ${motionHash} https://gc.zgo.at https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net https://www.gstatic.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; font-src 'self'; img-src 'self' data: https:; connect-src 'self' ${callbackOrigin} https://formspree.io https://calendly.com https://keresai.goatcounter.com https://dns.google https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://connect.facebook.net https://graph.facebook.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://pagead2.googlesyndication.com https://www.facebook.com; frame-src https://calendly.com https://td.doubleclick.net https://www.google.com https://www.googletagmanager.com https://www.facebook.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self';`} />
+<meta http-equiv="Content-Security-Policy" content={`default-src 'none'; script-src 'self' ${motionHash} https://gc.zgo.at https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net https://www.gstatic.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; font-src 'self'; img-src 'self' data: https:; connect-src 'self' ${callbackOrigin} https://formspree.io https://calendly.com https://keresai.goatcounter.com https://dns.google https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://connect.facebook.net https://graph.facebook.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://pagead2.googlesyndication.com https://www.facebook.com; frame-src https://calendly.com https://td.doubleclick.net https://www.google.com https://www.googletagmanager.com https://www.facebook.com; form-action 'self' https://formspree.io; base-uri 'self'; manifest-src 'self'; worker-src 'self'; media-src 'self'; upgrade-insecure-requests;`} />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
@@ -313,7 +344,8 @@ const META_DOMAIN_VERIFICATION = '';
   </header>
 )}
 <main id="main" tabindex="-1">
-  <slot />
+  <Fragment set:html={bodyHtml} />
+  {lastMod && <PageReviewed date={lastMod} locale={locale} />}
 </main>
 {!bare && (go ? <GoFooter locale={locale} /> : <Footer locale={locale} />)}
 

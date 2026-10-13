@@ -47,7 +47,7 @@ const articleSchema = article({
 
   <Breadcrumbs crumbs={crumbs} />
   <article class="guide-wrap">
-    <header class="guide-hero">
+    <div class="guide-hero">
       <span class="guide-category">{g.category}</span>
       <h1 class="guide-title" set:html={g.titleHtml} />
       {g.readTime && (
@@ -57,7 +57,7 @@ const articleSchema = article({
           <span>Updated <time datetime={g.dateModified}>{new Date(g.dateModified + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time></span>
         </div>
       )}
-    </header>
+    </div>
 
     <section class="guide-body" set:html={body} />
   </article>

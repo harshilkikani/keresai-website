@@ -11,6 +11,7 @@ import {
   webPageSchema,
   articleSchema,
   statisticListSchema,
+  citations,
 } from '../../data/schema';
 import { benchmarks } from '../../data/benchmarks';
 
@@ -48,11 +49,11 @@ const webpage = webPageSchema({
 });
 ---
 <Layout title={b.title} description={b.description} path={path} ogType="article">
-  <Schema slot="head" graph={[article, webpage, faqSchema(b.faqs), breadcrumbSchema(crumbs), organizationSchema]} />
+  <Schema slot="head" graph={[{ ...article, ...(b.sources?.length ? { citation: citations(b.sources) } : {}) }, webpage, faqSchema(b.faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">{b.eyebrow}</span>
     <h1>{b.h1} <span class="accent">{b.h1Accent}</span></h1>
     <p class="lead">{b.lead}</p>
@@ -60,7 +61,7 @@ const webpage = webPageSchema({
       <a href="/tools/missed-call-calculator" class="btn btn-primary">Calculate your losses</a>
       <a href="/quote" class="btn btn-outline">Get a quote</a>
     </div>
-  </header>
+  </div>
 
   <section class="page-section container">
     <div class="answer-block">
@@ -84,7 +85,8 @@ const webpage = webPageSchema({
   <section class="page-section container" aria-labelledby="method-title">
     <div class="prose">
       <h2 id="method-title">How were these numbers put together?</h2>
-      <p>The ranges on this page are Keres AI estimates drawn from public industry reporting and the arithmetic shown in each section. They are not from a Keres customer study, and they are directional, not guarantees: your own numbers depend on your call volume, close rate and average ticket.</p>
+      <p>The ranges on this page are Keres AI working assumptions, not measured data and not from a Keres customer study. Each one is reasoned from how {b.category.toLowerCase()} businesses take calls, as set out below, and they are directional, not guarantees: your own numbers depend on your call volume, close rate and average ticket.</p>
+      <ul>{b.method.map((m) => <li><strong>{m.figure}:</strong> {m.reasoning}</li>)}</ul>
       {b.sources && b.sources.length > 0 && (
         <>
           <p>Primary research cited on this page:</p>
@@ -130,6 +132,6 @@ const webpage = webPageSchema({
 
   <CtaBand
     heading="Stop losing leads to voicemail"
-    sub="Book a free 30-minute call and hear Remi answer, qualify and book a call."
+    sub="Book a free 30-minute call and hear Remi, Keres AI’s AI receptionist, answer, qualify and book a call."
   />
 </Layout>

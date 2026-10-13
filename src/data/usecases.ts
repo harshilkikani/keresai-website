@@ -176,7 +176,7 @@ const allUsecases: UseCase[] = [
     ],
     faqs: [
       { q: 'Is Keres cheaper than a receptionist?', a: 'Typically yes — one monthly rate that’s well below the cost of a full-time front-desk hire, while covering nights and weekends too.' },
-      { q: 'Does it replace my front desk entirely?', a: 'Many businesses use Keres for after-hours and overflow, and others run it as their full front desk. It scales to whatever coverage you need. See <a href="/glossary/front-desk-automation">front desk automation</a>.' },
+      { q: 'Does it replace my front desk entirely?', a: 'It does not have to. You can use Keres AI for after-hours and overflow only, or run Remi as your full front desk. Coverage is set to whatever you need. See <a href="/glossary/front-desk-automation">front desk automation</a>.' },
     ],
     related: ['after-hours-answering', 'overflow-call-handling', 'lead-capture'],
     cta: { href: '/pricing', label: 'See pricing' },
@@ -210,7 +210,7 @@ const allUsecases: UseCase[] = [
       { q: 'Can I see which calls were screened out?', a: 'Yes. Screened calls are logged, so you can spot a real customer who was misjudged and adjust the rules with Keres.' },
     ],
     details: [
-      { h2: 'How does screening work without blocking real customers?', body: '<p>Remi answers every call in two rings and starts the way it would with a customer, by asking your first intake question. Callers who answer like customers go through your normal flow: the questions, the booking, and a handoff to your team under the rules you set. Robocalls, solicitors and obvious spam are not transferred to your team, and screened calls are logged, so you can check what was filtered. Nothing is blocked before it is answered, which is why real customers still get through.</p>' },
+      { h2: 'How does screening work without blocking real customers?', body: '<p>Remi by Keres AI answers every call in two rings and starts the way it would with a customer, by asking your first intake question. Callers who answer like customers go through your normal flow: the questions, the booking, and a handoff to your team under the rules you set. Robocalls, solicitors and obvious spam are not transferred to your team, and screened calls are logged, so you can check what was filtered. Nothing is blocked before it is answered, which is why real customers still get through.</p>' },
       { h2: 'Who is it for?', body: '<p>Any local service business whose number is published on Google, directories, yard signs or vehicle wraps: HVAC, plumbing, roofing and towing companies, law firms, dental practices and real estate teams. If your team has started letting the phone ring because so many calls are junk, screening is usually the first fix. Pair it with <a href="/use-cases/overflow-call-handling">overflow call handling</a> so busy hours are covered too, and see how the <a href="/glossary/ai-receptionist">AI receptionist</a> works end to end.</p>' },
       { h2: 'What does it cost?', body: '<p>Remi is one monthly rate with included minutes, then per minute, with no per-call fees, month-to-month. The rate is quoted to your call volume on a 30-minute call; see <a href="/pricing">pricing</a>.</p>' },
     ],

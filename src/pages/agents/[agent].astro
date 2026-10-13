@@ -13,7 +13,8 @@ import AgentMock from '../../components/AgentMock.astro';
 import DailyBrief from '../../components/DailyBrief.astro';
 import { organizationSchema, breadcrumbSchema, faqSchema, workerService, receptionistVideoSchema, outboundVideoSchema } from '../../data/schema';
 import { agentPages } from '../../data/agentPages';
-import { agents, agentBySlug, plans, planBySlug, PHONE } from '../../data/site';
+import { agents, agentBySlug, PHONE } from '../../data/site';
+import { priceAmount } from '../../config/business';
 import { hubs } from '../../data/hubs';
 
 export function getStaticPaths() {
@@ -22,9 +23,10 @@ export function getStaticPaths() {
 
 const { page } = Astro.props;
 const agent = agentBySlug(page.slug);
-const plan = planBySlug(agent.includedIn.toLowerCase());
-// Only a real number is printed; an empty or 'Quoted' price never renders as '/mo'.
-const planPriced = /^from \$\d/.test(plan.from);
+// Each worker is priced on its own (there are no plan tiers). Only a real
+// number is printed; an empty price renders as "quoted to your volume".
+const priceKey = ({ inbound: 'remi', 'follow-up': 'theo', reactivation: 'june', outbound: 'sol' } as const)[page.slug as 'inbound'];
+const workerPrice = priceKey ? priceAmount(priceKey) : '';
 const path = `/agents/${page.slug}`;
 const crumbs = [
   { name: 'Home', path: '/' },
@@ -64,7 +66,7 @@ const others = agents.filter((a) => a.slug !== page.slug);
         </div>
         <ul class="k-hero__facts" aria-label="At a glance">
           <li><span class="k-hero__fact-k">Stage</span><span class="k-hero__fact-v">{agent.stage}</span></li>
-          {planPriced && <li><span class="k-hero__fact-k">From</span><span class="k-hero__fact-v" data-figure>{plan.from.replace('from ', '')}/mo</span></li>}
+          {workerPrice && <li><span class="k-hero__fact-k">From</span><span class="k-hero__fact-v" data-figure>{workerPrice}/mo</span></li>}
         </ul>
       </div>
       <div class="k-hero__mock">
@@ -128,10 +130,7 @@ const others = agents.filter((a) => a.slug !== page.slug);
         <div class="k-split__aside">
           <Eyebrow>See it</Eyebrow>
           <h2 id="media-title" class="k-h2">{page.media.label}</h2>
-          <p class="k-lede">
-            Nothing above the fold on this site loads a video. This one waits until you press
-            play, so the page is fast on a phone between jobs.
-          </p>
+          <p class="k-lede">{page.media.about ?? page.media.caption}</p>
         </div>
         <div class="k-split__mock">
           <figure class="k-shot">
@@ -172,10 +171,11 @@ const others = agents.filter((a) => a.slug !== page.slug);
     <div class="k-band">
       <div class="k-band__head">
         <Eyebrow>By industry</Eyebrow>
-        <h2 id="ind-title" class="k-h2">{agent.name} in your vocabulary.</h2>
+        <h2 id="ind-title" class="k-h2">How does {agent.name} work in your industry?</h2>
         <p class="k-lede k-measure">
-          The script, the questions and the integrations change by vertical. These are the four
-          we build for.
+          {agent.name}&rsquo;s script, questions and integrations change by vertical. Keres AI builds
+          for four groups of local businesses: home services, law firms, dental practices and med
+          spas, and real estate agents.
         </p>
       </div>
       <ul class="k-inds">
@@ -217,11 +217,11 @@ const others = agents.filter((a) => a.slug !== page.slug);
   <Section tone="inverse" spacing="standard" labelledby="plan-title">
     <div class="k-close k-close--wide">
       <Eyebrow>Pricing</Eyebrow>
-      <h2 id="plan-title" class="k-h2">{planPriced ? `${plan.name}, ${plan.from} a month.` : `${plan.name}, quoted to your volume.`}</h2>
+      <h2 id="plan-title" class="k-h2">{workerPrice ? `${agent.name}, from ${workerPrice} a month.` : `${agent.name}, quoted to your volume.`}</h2>
       <p class="k-lede">{page.planLine} Quoted to your volume, month-to-month, set up for you.</p>
       <p class="k-body">
         Also on the team: {others.map((o) => o.name).join(', ')}.
-        <a href="/services">See how the four work together</a>, or
+        <a href="/services">See how the six workers fit together</a>, or
         <a href="/pricing">what changes the quote</a>.
       </p>
       <div class="k-close__ctas">

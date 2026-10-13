@@ -5,6 +5,8 @@
 // what the lowest published plan includes, and who it suits by its own
 // positioning. Anything not on the vendor's page is left out, not guessed.
 export const VENDORS_CHECKED = 'October 11, 2026';
+/** The same date for Spanish pages. Change both together. */
+export const VENDORS_CHECKED_ES = '11 de octubre de 2026';
 
 /** Industries with their own "best AI receptionist for …" roundup. */
 export type VendorIndustry = 'hvac' | 'law' | 'real-estate';
@@ -233,8 +235,8 @@ export const keresRow: AnsweringVendor = {
   source: 'https://www.keresai.com/pricing',
   industries: {
     hvac: { fit: 'Field-service trades: asks your intake questions, follows the emergency rules you set and books the job into ServiceTitan, Google Calendar or HubSpot.', source: '/industries/home-services' },
-    law: { fit: 'Law firm intake by practice area: collects the names your firm needs for its conflict check and books the consultation into Google Calendar or HubSpot (Clio is rolling out).', source: '/industries/law-firms' },
-    'real-estate': { fit: 'Agents and teams: asks about pre-approval, agent and timeline, and books the showing into Google Calendar or HubSpot (Follow Up Boss is rolling out).', source: '/industries/real-estate' },
+    law: { fit: 'Law firm intake by practice area: collects the names your firm needs for its conflict check and books the consultation into Google Calendar or HubSpot (no Clio integration today).', source: '/industries/law-firms' },
+    'real-estate': { fit: 'Agents and teams: asks about pre-approval, agent and timeline, and books the showing into Google Calendar or HubSpot (no Follow Up Boss integration today).', source: '/industries/real-estate' },
   },
 };
 

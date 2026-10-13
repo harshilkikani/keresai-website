@@ -138,7 +138,7 @@ export const comparisons: Comparison[] = [
     title: 'Smith.ai Alternatives (2026): Prices and Billing | Keres AI',
     description: 'Eight Smith.ai alternatives side by side: human, AI or hybrid, how each bills (per call, minute or caller), and the lowest published price.',
     h1Accent: 'Smith.ai',
-    intro: 'Smith.ai pairs AI with live receptionists and bills per call. If you are comparing alternatives, the real differences are who answers (a person, AI or both) and how you are billed. Here are the main options with the prices each vendor publishes, and where Keres AI fits.',
+    intro: 'Smith.ai pairs AI with live receptionists and bills per call. If you are comparing alternatives, the real differences are who answers (a person, AI or both) and how you are billed.',
     roundup: ['Ruby', 'PATLive', 'Abby Connect', 'Goodcall', 'Rosie', 'Dialzara', 'Upfirst', 'My AI Front Desk'],
     rows: [],
     detail: {
@@ -188,7 +188,7 @@ export const comparisons: Comparison[] = [
     title: 'Ruby Receptionist Alternatives (2026): Prices | Keres AI',
     description: 'Eight Ruby Receptionists alternatives side by side: live, AI or hybrid answering, how each one bills, and the lowest published price, plus where Keres AI fits.',
     h1Accent: 'Ruby',
-    intro: 'Ruby answers calls with live, US-based receptionists on monthly plans with included minutes. If you are weighing alternatives, the choice comes down to people, AI or both, and how you want to be billed. Here are the main options with the prices each vendor publishes, and where Keres AI fits.',
+    intro: 'Ruby answers calls with live, US-based receptionists on monthly plans with included minutes. If you are weighing alternatives, the choice comes down to people, AI or both, and how you want to be billed.',
     roundup: ['Smith.ai', 'PATLive', 'Abby Connect', 'Goodcall', 'Rosie', 'Dialzara', 'Upfirst', 'My AI Front Desk'],
     rows: [],
     detail: {
@@ -209,7 +209,7 @@ export const comparisons: Comparison[] = [
         },
         {
           h2: 'Which Ruby alternative suits a law firm?',
-          body: "<p>Law firms comparing Ruby usually care most about intake and their case-management system. From the table: Smith.ai and Abby Connect both name Clio among the integrations on their own sites; PATLive offers live US-based receptionists by the minute; and Upfirst names Clio and starts at $24.95 a month for 30 calls. AnsweringLegal answers only for law firms but does not publish prices; see <a href=\"/answering-legal-alternative\">AnsweringLegal alternatives</a>. Keres AI's Clio and Lawmatics integrations are rolling out; today Remi books through Google Calendar, HubSpot or Zapier. More on <a href=\"/industries/law-firms\">Keres AI for law firms</a>.</p>",
+          body: "<p>Law firms comparing Ruby usually care most about intake and their case-management system. From the table: Smith.ai and Abby Connect both name Clio among the integrations on their own sites; PATLive offers live US-based receptionists by the minute; and Upfirst names Clio and starts at $24.95 a month for 30 calls. AnsweringLegal answers only for law firms but does not publish prices; see <a href=\"/answering-legal-alternative\">AnsweringLegal alternatives</a>. Keres AI has no Clio or Lawmatics integration today; Remi books into Google Calendar or HubSpot, and Zapier can pass the intake to other tools. More on <a href=\"/industries/law-firms\">Keres AI for law firms</a>.</p>",
         },
       ],
       bestFor: [
@@ -242,7 +242,7 @@ export const comparisons: Comparison[] = [
     title: 'Goodcall Alternatives (2026): Prices Compared | Keres AI',
     description: 'Seven Goodcall alternatives side by side: AI, human or hybrid, how each bills (per caller, call or minute), and the lowest published price.',
     h1Accent: 'Goodcall',
-    intro: 'Goodcall is a self-serve AI phone agent billed by unique caller. If you are comparing alternatives, the differences are setup (do it yourself or done for you), who answers, and how billing works. Here are the main options with the prices each vendor publishes, and where Keres AI fits.',
+    intro: 'Goodcall is a self-serve AI phone agent billed by unique caller. If you are comparing alternatives, the differences are setup (do it yourself or done for you), who answers, and how billing works.',
     roundup: ['Smith.ai', 'Rosie', 'Dialzara', 'Upfirst', 'My AI Front Desk', 'Ruby', 'PATLive'],
     rows: [],
     detail: {
@@ -291,7 +291,7 @@ export const comparisons: Comparison[] = [
     title: 'Rosie Alternatives (2026): AI Answering Prices | Keres AI',
     description: 'Six Rosie alternatives side by side: AI, human or hybrid, how each one bills, and the lowest published price, plus where Keres AI fits.',
     h1Accent: 'Rosie',
-    intro: 'Rosie is a low-cost AI answering service on monthly plans with included minutes. If you are comparing alternatives, the differences are price per minute or call, who answers, and how much setup you want to do yourself. Here are the main options with the prices each vendor publishes, and where Keres AI fits.',
+    intro: 'Rosie is a low-cost AI answering service on monthly plans with included minutes. If you are comparing alternatives, the differences are price per minute or call, who answers, and how much setup you want to do yourself.',
     roundup: ['Goodcall', 'Dialzara', 'Upfirst', 'My AI Front Desk', 'Smith.ai', 'PATLive'],
     rows: [],
     detail: {
@@ -363,7 +363,7 @@ export const comparisons: Comparison[] = [
     title: 'AnsweringLegal Alternatives for Law Firms (2026) | Keres AI',
     description: 'Five AnsweringLegal alternatives for law firms side by side: live, AI or hybrid answering, how each bills, and the lowest published price.',
     h1Accent: 'AnsweringLegal',
-    intro: 'AnsweringLegal answers for law firms only, with US-based receptionists; it does not publish prices. If you are comparing alternatives, the choice is live receptionists, AI, or both, and how you are billed. Here are the main options with the prices each vendor publishes, and where Keres AI fits.',
+    intro: 'AnsweringLegal answers for law firms only, with US-based receptionists; it does not publish prices. If you are comparing alternatives, the choice is live receptionists, AI, or both, and how you are billed.',
     roundup: ['Smith.ai', 'Ruby', 'PATLive', 'Abby Connect', 'Upfirst'],
     rows: [],
     detail: {
@@ -380,7 +380,7 @@ export const comparisons: Comparison[] = [
       sections: [
         {
           h2: 'What should a law firm look for in an AnsweringLegal alternative?',
-          body: "<ul><li><strong>Intake questions by practice area.</strong> A personal-injury call needs different questions from a family-law or criminal-defense call.</li><li><strong>Opposing-party capture.</strong> The receptionist should collect the caller's and opposing party's names so your firm can run its conflict check before the consultation.</li><li><strong>On-call attorney escalation.</strong> Clear rules for which calls reach an attorney right away, such as a new arrest or a filing deadline.</li><li><strong>Calendar booking.</strong> Whether the consultation is booked on the call or left as a message.</li><li><strong>Case-management sync.</strong> AnsweringLegal's site names Clio Grow, MyCase, PracticePanther, Smokeball, Lawmatics and others. Check that your system is supported by any alternative. Keres AI's Clio and Lawmatics integrations are rolling out; today Remi books through Google Calendar, HubSpot or Zapier.</li><li><strong>Confidentiality terms.</strong> Ask every vendor for them in writing. Keres AI is not SOC 2 certified and does not sign BAAs or DPAs.</li></ul><p>More on how Remi handles intake for firms: <a href=\"/industries/law-firms\">Keres AI for law firms</a>.</p>",
+          body: "<ul><li><strong>Intake questions by practice area.</strong> A personal-injury call needs different questions from a family-law or criminal-defense call.</li><li><strong>Opposing-party capture.</strong> The receptionist should collect the caller's and opposing party's names so your firm can run its conflict check before the consultation.</li><li><strong>On-call attorney escalation.</strong> Clear rules for which calls reach an attorney right away, such as a new arrest or a filing deadline.</li><li><strong>Calendar booking.</strong> Whether the consultation is booked on the call or left as a message.</li><li><strong>Case-management sync.</strong> AnsweringLegal's site names Clio Grow, MyCase, PracticePanther, Smokeball, Lawmatics and others. Check that your system is supported by any alternative. Keres AI has no Clio or Lawmatics integration today; Remi books into Google Calendar or HubSpot, and Zapier can pass the intake to other tools.</li><li><strong>Confidentiality terms.</strong> Ask every vendor for them in writing. Keres AI is not SOC 2 certified and does not sign BAAs or DPAs.</li></ul><p>More on how Remi handles intake for firms: <a href=\"/industries/law-firms\">Keres AI for law firms</a>.</p>",
         },
       ],
       bestFor: [

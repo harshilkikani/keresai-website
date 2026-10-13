@@ -1,6 +1,6 @@
-<p>The biggest misconception about AI automation is that you need to rip out your current systems to deploy it. You don't. A well-architected AI agent sits on top of your existing stack &mdash; your CRM, scheduling tool, accounting software &mdash; and talks to them via their APIs. This guide walks through how that integration actually works.</p>
+<p>A common misconception about AI automation is that you need to rip out your current systems to deploy it. You don't. A well-architected AI agent sits on top of your existing stack &mdash; your CRM, scheduling tool, accounting software &mdash; and talks to them via their APIs. This guide walks through how that integration actually works.</p>
 
-    <p><strong>How Keres AI handles it:</strong> Remi connects to Google Calendar, HubSpot and ServiceTitan today, and to most other tools through Zapier; Keres AI sets the connection up for you and lists the rest as rolling out until they are live.</p>
+    <p><strong>How Keres AI handles it:</strong> Remi connects to Google Calendar, HubSpot and ServiceTitan today, and to other tools through Zapier; Keres AI sets the connection up for you and lists the rest as rolling out until they are live.</p>
 
     <h2><span class="num">01</span>What "integration" really means</h2>
 
@@ -11,7 +11,7 @@
     <ul>
       <li><strong>CRM / job management.</strong> ServiceTitan, Housecall Pro, Jobber, FieldEdge, or similar. The agent reads customer history and writes new jobs.</li>
       <li><strong>Calendar / dispatch.</strong> Either built into the CRM, or a separate tool like Google Calendar.</li>
-      <li><strong>Accounting / invoicing.</strong> QuickBooks, Xero, Sage. The agent drafts invoices and sends reminders.</li>
+      <li><strong>Accounting / invoicing.</strong> QuickBooks, Xero, Sage. An agent can draft invoices and send reminders (Keres AI does not connect to accounting software today).</li>
       <li><strong>Communication.</strong> Twilio, RingCentral, or similar for SMS and voice.</li>
     </ul>
 
@@ -38,20 +38,13 @@
 
     <h2><span class="num">03</span>Which tools integrate well</h2>
 
-    <p>Here's what the public documentation of common field service tools offers for integration:</p>
+    <p>ServiceTitan, Jobber, Housecall Pro and QuickBooks Online each publish developer documentation for their APIs; check what your plan includes, because API access is not always on the entry tier. Older desktop-only CRMs usually need middleware or a workaround.</p>
 
-    <ul>
-      <li><strong>ServiceTitan:</strong> Full API. Integration is clean.</li>
-      <li><strong>Housecall Pro:</strong> API available. Good for intake and job creation.</li>
-      <li><strong>Jobber:</strong> API available. Solid.</li>
-      <li><strong>FieldEdge:</strong> Has API. Works.</li>
-      <li><strong>QuickBooks Online:</strong> Robust API. Invoice automation is easy.</li>
-      <li><strong>Older desktop-only CRMs:</strong> Usually require middleware or workaround.</li>
-    </ul>
+    <p>Where Keres AI stands today: Remi writes jobs into ServiceTitan and books into Google Calendar and HubSpot, and Zapier passes leads to other apps. Jobber, Housecall Pro and FieldEdge are rolling out and are not live yet; the <a href="/integrations">integrations page</a> lists every tool and its status.</p>
 
     <h2><span class="num">04</span>What can go wrong</h2>
 
-    <p>The most common integration failures we see:</p>
+    <p>Common integration failures, and the usual fix for each:</p>
 
     <ul>
       <li><strong>Permission issues.</strong> Your API token doesn't have write access to the right objects. Fix: work with your CRM admin to scope properly.</li>
@@ -65,7 +58,7 @@
     <p>Before any integration ships, three questions:</p>
 
     <ul>
-      <li><strong>Where does the data live?</strong> If you're in regulated territory (HIPAA for medical fleets, SOC 2 requirements, etc.), the answer matters.</li>
+      <li><strong>Where does the data live?</strong> If you're in regulated territory (HIPAA, SOC 2 requirements and so on), the answer matters. Keres AI is not SOC 2 or HIPAA certified and does not sign BAAs.</li>
       <li><strong>Who has access to the API credentials?</strong> Scope narrowly. Rotate regularly. Never check them into code.</li>
       <li><strong>What's logged?</strong> Every agent action should be auditable after the fact. "The AI booked this job" needs to be traceable.</li>
     </ul>

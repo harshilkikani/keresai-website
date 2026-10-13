@@ -5,7 +5,7 @@ import Schema from '../../components/Schema.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FaqSection from '../../components/FaqSection.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema } from '../../data/schema';
+import { organizationSchema, faqSchema, breadcrumbSchema, webPageSchema, toolSchema } from '../../data/schema';
 import { calculators } from '../../data/calculators';
 
 export function getStaticPaths() {
@@ -29,15 +29,15 @@ const webpage = webPageSchema({
 const calcOut = calcDefaultResult(c);
 ---
 <Layout title={c.title} description={c.description} path={path}>
-  <Schema slot="head" graph={[faqSchema(c.faqs), breadcrumbSchema(crumbs), webpage, organizationSchema]} />
+  <Schema slot="head" graph={[toolSchema({ path, name: c.title.replace(/\s*\|\s*Keres AI$/, ''), description: c.description }), faqSchema(c.faqs), breadcrumbSchema(crumbs), webpage, organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
 
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">{c.eyebrow}</span>
     <h1>{c.h1} <span class="accent">{c.h1Accent}</span></h1>
     <p class="lead">{c.lead}</p>
-  </header>
+  </div>
 
   <section class="page-section container">
     <div class="answer-block">
@@ -113,7 +113,7 @@ const calcOut = calcDefaultResult(c);
 
   <CtaBand
     heading="Turn these numbers into booked jobs"
-    sub="Book a free 30-minute call and hear Remi answer, qualify and book a call."
+    sub="Book a free 30-minute call and hear Remi, Keres AI’s AI receptionist, answer, qualify and book a call."
   />
 
   <script slot="scripts" src="/assets/calc.js?v=1" is:inline></script>
