@@ -53,7 +53,7 @@ export const agentPages: AgentPage[] = [
     heroVertical: 'default',
     flowH2: 'How does Remi handle a call, step by step?',
     flowLede:
-      'Remi by Keres AI is an AI receptionist with the same six steps on every call, on a Tuesday afternoon or a Sunday at 2 a.m. First comes the ring, then the greeting, intake, booking, confirmation and, finally, the owner notice.',
+      'Remi by Keres AI is an AI receptionist with the same six steps on every call, for example on a Tuesday afternoon or a Sunday at 2 a.m. First comes the ring, then the greeting, intake, booking, confirmation and, finally, the owner notice.',
     flow: [
       { label: 'Ring', text: 'Remi picks up inside two rings, with no hold music and no phone tree.' },
       { label: 'Greet', text: 'Your greeting, your business name, your tone. Any caller who asks is told the voice is an assistant.' },
@@ -95,7 +95,7 @@ export const agentPages: AgentPage[] = [
       {
         h2: 'Does Remi answer web chat and texts?',
         answer:
-          'Yes. Remi is the same receptionist on the phone, on website chat and on your business text line. Plenty of people will not phone a business, especially after hours. Remi answers the chat widget on your website and your business text line with the same intake script. Additionally, Remi picks up website form enquiries in minutes. For example, a homeowner who fills in the website form late at night gets a reply in minutes instead of waiting for the morning. Every chat, text and form enquiry shows up in the same morning text as the calls. As of October 2026, answering marketplace inboxes (Yelp, Thumbtack, Avvo, Zillow) directly is rolling out and is not live yet.',
+          'Yes. Remi by Keres AI is the same receptionist on the phone, on website chat and on your business text line. Plenty of people will not phone a business, especially after hours. Remi answers the chat widget on your website and your business text line with the same intake script. Additionally, Remi picks up website form enquiries in minutes. For example, a homeowner who fills in the website form late at night gets a reply in minutes instead of waiting for the morning. Every chat, text and form enquiry shows up in the same morning text as the calls. As of October 2026, answering marketplace inboxes (Yelp, Thumbtack, Avvo, Zillow) directly is rolling out and is not live yet.',
         bullets: [
           'Web chat on your site, with the same intake script as the phone.',
           'Business SMS answered and continued in thread.',

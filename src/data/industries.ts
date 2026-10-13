@@ -137,7 +137,7 @@ const allIndustries: Industry[] = [
         '<strong>Gas smell or a carbon monoxide alarm.</strong> Remi tells the caller to leave the building and call the gas utility or 911 from outside, then alerts your on-call tech.',
         '<strong>No heat with someone vulnerable at home</strong>, such as an infant or an elderly person, or no heat below an outdoor temperature you choose.',
         '<strong>No cooling during a heat advisory.</strong>',
-        '<strong>Water pouring from an indoor unit or a ceiling</strong> under an air handler. Some shops send a truck tonight; others book the first slot tomorrow.',
+        '<strong>Water pouring from an indoor unit or a ceiling</strong> under an air handler. For example, some shops send a truck tonight; others book the first slot tomorrow.',
         '<strong>Everything else</strong> (tune-ups, a noisy blower, thermostat questions, replacement quotes) books into a normal slot.',
       ],
       emergencyNote:
@@ -236,7 +236,7 @@ const allIndustries: Industry[] = [
         '<strong>Sewage backing up into the home</strong>, or every drain in the house backing up at once.',
         '<strong>No water at all to the property.</strong>',
         '<strong>A gas smell near a water heater or gas line.</strong> Remi tells the caller to leave the building and call the gas utility or 911, then alerts your on-call plumber.',
-        '<strong>No hot water</strong> is urgent for some shops in winter and next-day work for others. You choose.',
+        'For example, <strong>no hot water</strong> is urgent for some shops in winter and next-day work for others. You choose.',
         '<strong>Routine work</strong> (a dripping tap, a running toilet, a fixture install, a water-heater quote) books into a normal window.',
       ],
       emergencyNote:
