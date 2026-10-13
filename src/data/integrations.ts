@@ -121,7 +121,7 @@ export const integrations: Integration[] = [
       { q: 'Can Keres create deals in HubSpot?', a: 'Yes — as leads qualify, Keres creates contacts, deals, and follow-up tasks for your team.' },
     ],
     related: ['zapier', 'google-calendar', 'outlook'],
-    setup: 'On your first call you decide what Remi should create in HubSpot: which pipeline and stage a new lead goes to, which properties your intake answers fill, and who owns new contacts. Keres connects HubSpot with access you authorize, maps the fields, and you place test calls to check the records before Remi answers a customer.',
+    setup: 'On your first call you decide what Remi, Keres AI’s AI receptionist, should create in HubSpot: which pipeline and stage a new lead goes to, which properties your intake answers fill, and who owns new contacts. Keres connects HubSpot with access you authorize, maps the fields, and you place test calls to check the records before Remi answers a customer.',
     writes: 'For each caller: a contact with the name, number and answers to your intake questions, plus a record of the call and its outcome. Where you choose, a deal or a follow-up task for your team, and the booked meeting.',
     limits: 'Keres writes the fields you agree on during setup. Custom objects and unusual workflows are scoped on the call, not assumed. Reporting and pipeline clean-up stay in your hands, so if a property matters to your reports, name it on the first call.',
   },

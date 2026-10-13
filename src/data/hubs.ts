@@ -177,7 +177,7 @@ export const hubs: Hub[] = [
     title: 'AI Receptionist & Websites for Contractors | Keres AI',
     description:
       'Remi answers in two rings, qualifies the job and books it into ServiceTitan or your calendar. Website and Google profile for contractors from $249/month.',
-    h1: 'You’re on a roof. The phone’s ringing. Remi answers, books the job, and texts back the ones it can’t.',
+    h1: 'You’re on a roof. The phone’s ringing. Remi by Keres AI answers, books the job, and texts back the ones it can’t.',
     answer:
       'Keres AI gives home service contractors two things: Found, a website plus Google Business Profile and review management from $249 a month, and Remi, an AI receptionist that answers every call in two rings, 24/7, flags emergencies like no heat or a burst pipe, and books the job into ServiceTitan or Google Calendar. Calls Remi cannot take get a text back within 60 seconds.',
     sub:

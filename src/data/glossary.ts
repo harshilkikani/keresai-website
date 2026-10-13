@@ -204,7 +204,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'How does Keres AI handle it?',
         body:
-          '<p>Set your phone to forward busy or unanswered calls to <a href="/agents/inbound">Remi</a>. Remi answers in two rings, asks your intake questions, books into Google Calendar, HubSpot or ServiceTitan, and escalates to a person by your rules. Calls it couldn’t take get a text back within 60 seconds. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. See <a href="/use-cases/overflow-call-handling">overflow call handling</a>.</p>',
+          '<p>Set your phone to forward busy or unanswered calls to <a href="/agents/inbound">Remi</a>, Keres AI’s AI receptionist. Remi answers in two rings, asks your intake questions, books into Google Calendar, HubSpot or ServiceTitan, and escalates to a person by your rules. Calls it couldn’t take get a text back within 60 seconds. Billing is a monthly rate with included minutes, then per minute, with no per-call fees. See <a href="/use-cases/overflow-call-handling">overflow call handling</a>.</p>',
       },
     ],
     related: ['ai-receptionist', 'call-routing', 'missed-call-text-back', 'virtual-receptionist'],
@@ -977,7 +977,7 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is a no-show rate',
     title: 'What Is No-Show Rate? How to Reduce It With AI | Keres AI',
     description:
-      'No-show rate is the percentage of booked appointments where the client doesn\'t arrive. Learn what drives it and how automated reminders and easy rescheduling cut it.',
+      'No-show rate is the share of booked appointments where the client doesn’t arrive. How to calculate it, what drives it, and how reminders cut it.',
     definition:
       'No-show rate is the percentage of scheduled appointments where the patient or client doesn\'t appear and hasn\'t cancelled. For service businesses, dental practices, and med spas, a high no-show rate means unbillable time, disrupted schedules, and lost revenue. Automated appointment reminders and easy rescheduling — sent by text at the right intervals — are the most reliable way to cut no-show rates significantly. How Keres AI handles it: Theo, Keres AI’s follow-up worker, confirms each appointment, reminds on your schedule and handles reschedules by text.',
     sections: [
@@ -1007,7 +1007,7 @@ export const glossary: GlossaryTerm[] = [
     targetKeyword: 'what is lead response time',
     title: 'What Is Lead Response Time? Definition | Keres AI',
     description:
-      'Lead response time is how quickly you contact a new lead after they reach out. Research consistently shows the first business to respond wins the job — learn how AI closes the gap.',
+      'Lead response time is how quickly you contact a new lead after they reach out. What published research found about speed, and how to cut response time.',
     definition:
       'Lead response time (also called speed to lead) is the time between a prospect first reaching out — calling, submitting a form, or clicking an ad — and receiving a response from your business. Research consistently shows that responding within minutes, not hours, sharply increases the likelihood of qualifying the lead, and the first business to respond often wins the job. Every minute of delay reduces your chance of closing. How Keres AI handles it: Remi answers calls in two rings, 24/7, and texts back any caller it missed within 60 seconds.',
     sections: [
@@ -1125,7 +1125,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'How does Keres AI’s Found handle it?',
         body:
-          '<p><a href="/services/found">Found</a> optimizes the profile once (categories, services, photos and verification), then works it every week: posts, photo updates, review responses, reporting spam listings that compete with you, and monthly insights. It runs the profile alongside your website, review requests and listings so all of them agree. The number on the profile can be answered by <a href="/agents/inbound">Remi</a> in two rings, 24/7.</p>',
+          '<p><a href="/services/found">Found</a> optimizes the profile once (categories, services, photos and verification), then works it every week: posts, photo updates, review responses, reporting spam listings that compete with you, and monthly insights. It runs the profile alongside your website, review requests and listings so all of them agree. The number on the profile can be answered by <a href="/agents/inbound">Remi</a>, Keres AI’s AI receptionist, in two rings, 24/7.</p>',
       },
     ],
     related: ['map-pack', 'review-generation', 'nap-consistency', 'local-services-ads'],
@@ -1173,7 +1173,7 @@ export const glossary: GlossaryTerm[] = [
       {
         h2: 'How does Keres AI’s Found handle it?',
         body:
-          '<p>Local Services Ads setup and response is an add-on to <a href="/services/found">Found</a>: verification, listing, and answering. <a href="/agents/inbound">Remi</a> answers each lead’s call in two rings, 24/7, asks your intake questions and books into Google Calendar, HubSpot or ServiceTitan. Found also sends a review request after every job and manages your <a href="/google-business-profile-management">Google Business Profile</a>, which covers the review side of the ranking factors.</p>',
+          '<p>Local Services Ads setup and response is an add-on to <a href="/services/found">Found</a>: verification, listing, and answering. <a href="/agents/inbound">Remi</a>, Keres AI’s AI receptionist, answers each lead’s call in two rings, 24/7, asks your intake questions and books into Google Calendar, HubSpot or ServiceTitan. Found also sends a review request after every job and manages your <a href="/google-business-profile-management">Google Business Profile</a>, which covers the review side of the ranking factors.</p>',
       },
     ],
     related: ['google-business-profile', 'review-generation', 'map-pack', 'lead-response-time'],

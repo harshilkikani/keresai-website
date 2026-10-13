@@ -5,7 +5,7 @@ import type { Locale } from './index';
 export const custom = {
   en: {
     title: 'Custom AI Workers for One Recurring Job | Keres AI',
-    description: 'We build AI agents that do one recurring job in your business and report to you in a text every morning. Fixed build price, monthly run fee, first version in two weeks.',
+    description: 'Keres AI builds custom AI workers that do one recurring job in your business and report to you by text each morning, for a fixed build price and a monthly fee.',
     eyebrow: 'Custom workers',
     h1: 'A worker for the job nobody on your team has time for.',
     lede: 'Keres AI builds Custom workers: AI agents that do one recurring job in your business and report to you in a text every morning, quoted from a one-page scope.',
