@@ -5,6 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema, webPageSchema } from '../data/schema';
+import { VENDORS_CHECKED } from '../data/answeringVendors';
 
 // One page for "24/7 / after-hours answering" (the /use-cases/after-hours-answering
 // page now redirects here). Emergency handling is described as rules the owner
@@ -45,26 +46,27 @@ const webpage = webPageSchema({ path, name: '24/7 AI Receptionist', description:
 
   <section class="page-section container">
     <div class="answer-block">
-      <p>Remi, Keres AI’s AI receptionist, answers your business phone 24/7, including nights, weekends and holidays, in two rings. It asks your intake questions, books the appointment into Google Calendar, HubSpot or ServiceTitan, alerts your on-call person when a call matches the emergency rules you set, and texts back anyone it could not help within 60 seconds. There is no after-hours rate.</p>
+      <p>Remi is the Keres AI receptionist, and Remi answers your business phone 24/7, including nights, weekends and holidays, in two rings. Remi asks your intake questions, books the appointment into Google Calendar, HubSpot or ServiceTitan, alerts your on-call person when a call matches the emergency rules you set, and texts back anyone Remi could not help within 60 seconds. There is no after-hours rate: billing is one monthly rate with included minutes, then per minute, with no per-call fees. For example, an 11 p.m. leak call reaches the on-call plumber, and a Sunday estimate request is booked for Monday morning. Remi also answers website chat, the text line and website form enquiries at any hour.</p>
     </div>
   </section>
 
   <section class="page-section container">
     <div class="prose">
       <h2>Why do after-hours calls matter so much?</h2>
-      <p>Most callers who reach voicemail do not call back; they dial the next business that answers. After hours is when that leak is worst, because emergencies, motivated buyers and new clients all call when the front desk has gone home. Keres AI estimates that service businesses miss 25–40% of inbound calls overall, higher after hours (<a href="/missed-call-statistics">how we got there</a>).</p>
+      <p>After-hours calls matter because a caller who reaches voicemail rarely waits. Most callers who reach voicemail do not call back and dial the next business on the list instead. After hours is when the leak is worst, because emergencies, motivated buyers and new clients all call when the front desk has gone home. A week has 168 hours, and a 40-hour front desk covers fewer than a quarter of the week. According to the U.S. Bureau of Labor Statistics, the national median wage for receptionists was $38,010 a year in May 2025 (<a href="https://www.bls.gov/oes/current/oes434171.htm" rel="noopener" target="_blank">BLS OEWS</a>), for the 40-hour week alone. Keres AI estimates that service businesses miss 25–40% of inbound calls overall, higher after hours (<a href="/missed-call-statistics">how we got there</a>). For example, a furnace failing on a Saturday night produces the most valuable call an HVAC company gets all weekend. Remi answers the Saturday call in two rings, at the weekday rate.</p>
 
       <h2>What happens when a call comes in at 2 a.m.?</h2>
+      <p>A call at 2 in the morning is a normal call for Remi: the steps match a daytime call, the rate is the same, and there is no after-hours surcharge. For example, a burst pipe overnight gets the same intake questions as a booking request at noon. Remi by Keres AI follows five steps on every overnight call.</p>
       <ol>
-        <li>Remi answers in two rings and asks what the caller needs.</li>
-        <li>It asks your intake questions for that kind of job, matter or appointment.</li>
-        <li>If the call matches one of your emergency rules, it alerts your on-call person by text with the details.</li>
-        <li>Otherwise it offers real times from your calendar and books the appointment on the call, then texts the caller a confirmation.</li>
-        <li>Everything lands in your calendar or CRM, and the night’s calls are in one text the next morning.</li>
+        <li>First, Remi answers in two rings and asks what the caller needs.</li>
+        <li>Next, Remi asks your intake questions for that kind of job, matter or appointment.</li>
+        <li>If the call matches one of your emergency rules, Remi alerts your on-call person by text with the details.</li>
+        <li>Otherwise Remi offers real times from your calendar, books the appointment on the call, and texts the caller a confirmation.</li>
+        <li>Finally, everything lands in Google Calendar, HubSpot or ServiceTitan, and the night’s calls are in one text the next morning.</li>
       </ol>
 
       <h2>Which calls count as emergencies?</h2>
-      <p>You decide, during a 30-minute setup call. A typical home-services setup flags no heat or no cooling with vulnerable people in the house, an active leak, or a sewage backup; a law firm might flag an arrest or a court date tomorrow; a property manager a lockout. For anything that sounds like a gas leak, Remi tells the caller to leave the building and call the gas utility or 911, then alerts your on-call person. Everything else is booked for the next open slot.</p>
+      <p>An emergency is any call your rules define as urgent. You decide during a 30-minute setup call with Keres AI. For example, a typical home-services setup flags no heat or no cooling with vulnerable people in the house, an active leak, or a sewage backup. A law firm might flag an arrest or a court date tomorrow, and a property manager might flag a lockout. For a caller reporting a gas smell, Remi tells the caller to leave the building and call the gas utility or 911, then alerts your on-call person. Calls matching a rule reach the on-call person by text with the details Remi collected, whether the call comes overnight or on a holiday. Finally, everything else is booked for the next open slot in Google Calendar, HubSpot or ServiceTitan. The owner sees every overnight call in the next morning text.</p>
 
       <h2>What does it look like by trade?</h2>
       <ul>
@@ -75,7 +77,7 @@ const webpage = webPageSchema({ path, name: '24/7 AI Receptionist', description:
       </ul>
 
       <h2>What does 24/7 coverage cost?</h2>
-      <p>Remi is quoted to your call volume: one monthly rate with included minutes, then per minute, with no per-call fees and no after-hours surcharge. Compare it with answering services and other AI receptionists on <a href="/ai-receptionist-cost">what an AI receptionist costs</a>, or see <a href="/pricing">pricing</a>.</p>
+      <p>Remi is quoted to your call volume: one monthly rate with included minutes, then per minute, with no per-call fees and no after-hours surcharge. Keres AI does not publish a Remi price, because night and weekend volume varies so much by trade. For context, published AI receptionist plans start at $24.95 a month (Upfirst, 30 calls) and $29 a month (Dialzara, 60 minutes). Live answering starts at $99 a month for 50 minutes (PATLive), according to each vendor’s pricing page on {VENDORS_CHECKED}. A full-time receptionist costs a national median of $38,010 a year in wages (BLS, May 2025) and covers about 40 of the week’s 168 hours. Compare Remi with answering services and other AI receptionists on <a href="/ai-receptionist-cost">what an AI receptionist costs</a>, or see <a href="/pricing">pricing</a>.</p>
 
       <p>More on how Remi works: <a href="/agents/inbound">the AI receptionist</a> · <a href="/ai-answering-service">AI answering service vs live answering</a> · <a href="/hear-it">example calls</a>.</p>
     </div>

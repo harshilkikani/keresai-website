@@ -113,10 +113,10 @@ const allIndustries: Industry[] = [
     ],
     trade: {
       answer:
-        '<strong>Keres AI’s receptionist for HVAC companies is Remi</strong>, an AI agent that answers every call in two rings, 24/7, through heat waves and cold snaps. Remi asks your intake questions (system type, symptoms, address), grades the call against the emergency rules you set, and books the visit into Google Calendar, HubSpot or ServiceTitan. Billing is a monthly rate with included minutes, then per-minute, with no per-call fees. Keres sets it up for you.',
+        '<strong>Keres AI’s receptionist for HVAC companies is Remi</strong>, an AI agent that answers every call in two rings, 24/7, through heat waves and cold snaps. First, Remi asks your intake questions (system type, symptoms, address). Next, Remi grades the call against the emergency rules you set. Finally, Remi books the visit into Google Calendar, HubSpot or ServiceTitan while the caller is still on the line. For example, a no-heat call with an infant at home goes to the on-call tech, and a tune-up request books into next week. Billing is a monthly rate with included minutes, then per-minute, with no per-call fees. Keres sets everything up for you.',
       painsH2: 'Why do HVAC companies miss so many calls?',
       painsNote:
-        'HVAC call volume follows the weather, not your staffing plan. The first 90-degree week of the summer and the first hard freeze of the winter are when a full office still sends callers to voicemail, and a homeowner sweating through the night does not wait for a callback.',
+        'HVAC call volume is a function of the weather, not your staffing plan. The first 90-degree week of the summer and the first hard freeze of the winter are when a full office still sends callers to voicemail. A homeowner sweating through the night does not wait for a callback. Keres AI estimates that 35–50% of HVAC demand arrives after hours, a directional estimate from the Keres AI HVAC call answering benchmarks rather than a measurement. For example, a tech on a roof cannot take the next booking while the dispatcher is already on another line. An answering service can take a message, but a message is not a booked visit on the technician’s board.',
       callH2: 'What an HVAC call to Remi sounds like',
       call: [
         { who: 'Remi', line: 'Thanks for calling [your company], this is Remi. How can I help?' },
@@ -132,16 +132,16 @@ const allIndustries: Industry[] = [
         'In this example the owner’s rules say no heat plus an infant is an emergency, so Remi transfers instead of offering tomorrow morning. Under a different rule, Remi would book the first open visit and text the caller a confirmation.',
       emergencyH2: 'Can an AI receptionist handle HVAC emergency calls?',
       emergencyIntro:
-        'You decide which HVAC calls count as emergencies, and Keres writes those rules into Remi’s script during setup. Remi does not invent its own. A typical HVAC setup flags these:',
+        'An HVAC emergency is a call your rules flag as urgent. You decide which calls count, and Keres writes the rules into Remi’s script during setup. A typical setup flags:',
       emergencyRules: [
-        '<strong>Gas smell or a carbon monoxide alarm.</strong> Remi tells the caller to leave the building and call the gas utility or 911 from outside, then alerts your on-call tech. It does not troubleshoot or book it as a normal visit.',
-        '<strong>No heat with someone vulnerable at home</strong>, such as an infant, an elderly person or someone with a medical condition, or no heat below an outdoor temperature you choose.',
-        '<strong>No cooling during a heat advisory</strong>, with the same question about who is in the house.',
+        '<strong>Gas smell or a carbon monoxide alarm.</strong> Remi tells the caller to leave the building and call the gas utility or 911 from outside, then alerts your on-call tech.',
+        '<strong>No heat with someone vulnerable at home</strong>, such as an infant or an elderly person, or no heat below an outdoor temperature you choose.',
+        '<strong>No cooling during a heat advisory.</strong>',
         '<strong>Water pouring from an indoor unit or a ceiling</strong> under an air handler. Some shops send a truck tonight; others book the first slot tomorrow.',
         '<strong>Everything else</strong> (tune-ups, a noisy blower, thermostat questions, replacement quotes) books into a normal slot.',
       ],
       emergencyNote:
-        'When a call matches an emergency rule, Remi warm-transfers it to your on-call number. If nobody picks up, the tech gets a “call me now” alert with the address and notes already written down. Read more about <a href="/glossary/emergency-dispatch">emergency dispatch</a>.',
+        'When a call matches an emergency rule, Remi warm-transfers the call to your on-call number. If nobody picks up, the tech gets a “call me now” alert with the address and notes. Read more about <a href="/glossary/emergency-dispatch">emergency dispatch</a>.',
       intakeH2: 'What does Remi ask an HVAC caller?',
       intakeIntro: 'The questions come from your script. A typical HVAC intake covers:',
       intake: [
@@ -155,10 +155,10 @@ const allIndustries: Industry[] = [
       ],
       booksH2: 'What can Remi book for an HVAC company?',
       softwareNote:
-        'ServiceTitan, yes. When Remi books an HVAC call it writes the customer, the job and the call notes into ServiceTitan, so dispatch sees the system type and symptoms before assigning a tech.',
+        'ServiceTitan, yes. ServiceTitan is a live Keres AI integration: when Remi books an HVAC call, Remi writes the customer, the job and the call notes into ServiceTitan, so dispatch sees the system type and symptoms before assigning a tech. Shops without ServiceTitan can book straight into Google Calendar, with the caller logged in HubSpot. Zapier passes each lead to other tools. As of October 2026, Jobber, Housecall Pro, FieldEdge and Service Fusion are rolling out and are not live yet. For example, a Housecall Pro shop should ask Keres AI on the first call what would fit in the meantime, such as Google Calendar plus Zapier. Keres AI sets up the connection during onboarding, and you test a booking yourself before Remi answers a customer.',
       costH2: 'What does a missed HVAC call cost?',
       costBody:
-        '<p>Keres AI estimates that HVAC companies miss 30–45% of inbound calls in peak season and that 35–50% of HVAC demand arrives after hours. It puts a typical service call at $300–$600, with replacements worth far more. These are directional estimates from the <a href="/benchmarks/hvac-answering">HVAC call answering benchmarks</a>, not measurements of your business.</p><p>Your own number is missed calls a month, times the share that would have booked, times your average ticket. Two follow-on jobs recover revenue from customers you already have: <a href="/use-cases/maintenance-plan-reactivation">maintenance-plan reactivation</a> and <a href="/use-cases/financing-follow-up">financing follow-up</a> for replacements.</p>',
+        '<p>Keres AI estimates HVAC companies miss 30–45% of inbound calls in peak season and estimates 35–50% of HVAC demand arrives after hours. Keres AI puts a typical service call at $300–$600, with replacements worth far more. Both figures are directional estimates from the <a href="/benchmarks/hvac-answering">HVAC call answering benchmarks</a>, not measurements of your business.</p><p>Your own number is missed calls a month, times the share of callers who would have booked, times your average ticket. For example, a shop missing 20 calls in a month, where half would have booked at $300, loses $3,000 in service calls before counting replacements. For comparison, the U.S. Bureau of Labor Statistics puts the national median receptionist wage at $38,010 a year (<a href="https://www.bls.gov/oes/current/oes434171.htm" rel="noopener" target="_blank">BLS, May 2025</a>), for about 40 hours of coverage a week. Two follow-on jobs recover revenue from customers you already have: <a href="/use-cases/maintenance-plan-reactivation">maintenance-plan reactivation</a> and <a href="/use-cases/financing-follow-up">financing follow-up</a> for replacements.</p>',
       calculator: { href: '/tools/hvac-missed-call-calculator', label: 'HVAC missed-call calculator' },
       compareH2: 'How do you compare AI receptionists for HVAC?',
       compareIntro: 'Ask every vendor the same questions, Keres included:',
@@ -209,10 +209,10 @@ const allIndustries: Industry[] = [
     ],
     trade: {
       answer:
-        '<strong>Keres AI gives plumbing companies Remi</strong>, an AI receptionist that picks up every call in two rings, day or night. For each caller Remi runs your plumbing intake (the problem, where the water is, whether it is shut off, owner or tenant), then books the job into ServiceTitan, Google Calendar or HubSpot. You pay a monthly rate that includes minutes, then per-minute beyond them, with no per-call fees. Keres sets it up for you.',
+        '<strong>Keres AI gives plumbing companies Remi</strong>, an AI receptionist picking up every call in two rings, day or night. First, Remi runs your plumbing intake: the problem, where the water is, whether the water is shut off, and owner or tenant. Finally, Remi books the job into ServiceTitan, Google Calendar or HubSpot during the call. You pay a monthly rate with included minutes, then per-minute beyond the included minutes, with no per-call fees. Keres sets everything up for you.',
       painsH2: 'Why do plumbers lose jobs to voicemail?',
       painsNote:
-        'A caller with water coming through the ceiling does not leave a message. They keep dialing down the search results until someone answers, and the plumber who picks up gets the job and, often, the customer for years.',
+        'A plumbing emergency is a call that cannot wait for a callback. A caller with water coming through the ceiling does not leave a message. The caller keeps dialing down the search results until someone answers, and the plumber who picks up gets the job and, often, the customer for years. Many plumbing calls also come when nobody is at a desk: evenings, weekends, holidays and the first freezing night of the winter. For example, a plumber under a sink at 5 p.m. cannot answer, and the office line rolls to voicemail. Remi by Keres AI answers in two rings and texts back anyone who hangs up within 60 seconds.',
       callH2: 'What a plumbing call to Remi sounds like',
       call: [
         { who: 'Remi', line: 'Thanks for calling [your company], this is Remi. What’s going on?' },
@@ -230,9 +230,9 @@ const allIndustries: Industry[] = [
         'Here the owner treats a leak that is already shut off as same-day work rather than a middle-of-the-night callout. If the caller could not stop the water, the rule would send the call straight to the on-call plumber.',
       emergencyH2: 'Which plumbing calls count as emergencies?',
       emergencyIntro:
-        'That is your decision, made once with Keres during setup and written into Remi’s script. A typical plumbing setup flags:',
+        'A plumbing emergency is a call your rules flag as urgent, set with Keres during setup. A typical plumbing setup flags:',
       emergencyRules: [
-        '<strong>Water that cannot be stopped</strong>: a burst pipe or failed supply line where the caller cannot find or close the shutoff. If water is near outlets or the panel, Remi tells the caller to keep clear of it.',
+        '<strong>Water that cannot be stopped</strong>: a burst pipe where the caller cannot find or close the shutoff. If water is near outlets or the panel, Remi tells the caller to keep clear of it.',
         '<strong>Sewage backing up into the home</strong>, or every drain in the house backing up at once.',
         '<strong>No water at all to the property.</strong>',
         '<strong>A gas smell near a water heater or gas line.</strong> Remi tells the caller to leave the building and call the gas utility or 911, then alerts your on-call plumber.',
@@ -240,7 +240,7 @@ const allIndustries: Industry[] = [
         '<strong>Routine work</strong> (a dripping tap, a running toilet, a fixture install, a water-heater quote) books into a normal window.',
       ],
       emergencyNote:
-        'Calls that match a rule are warm-transferred to the on-call plumber. If the transfer is not answered, Remi sends a “call me now” alert with the address, the problem and whether the water is off.',
+        'Calls matching a rule are warm-transferred to the on-call plumber. If nobody answers, Remi sends a “call me now” alert with the address, the problem and the shutoff status.',
       intakeH2: 'What does Remi ask a plumbing caller?',
       intakeIntro: 'Your script sets the questions. A typical plumbing script asks for:',
       intake: [
@@ -254,10 +254,10 @@ const allIndustries: Industry[] = [
       ],
       booksH2: 'What jobs can Remi book for a plumber?',
       softwareNote:
-        'ServiceTitan is live: Remi writes the customer and job into it while the caller is still on the line. Shops that run on a calendar book straight into Google Calendar, with the caller logged in HubSpot.',
+        'ServiceTitan is a live Keres AI integration: Remi writes the customer and job into ServiceTitan while the caller is still on the line. Shops that run on a calendar book straight into Google Calendar, with the caller logged in HubSpot. Zapier passes each lead to other tools. As of October 2026, Jobber, Housecall Pro, FieldEdge and Service Fusion are rolling out and are not live yet. For example, a plumbing shop on Jobber should ask Keres AI on the first call what would fit in the meantime, such as Google Calendar plus Zapier. Every booking also sends the caller a confirmation text the caller can reply to. Keres AI sets up the connection during onboarding, and you test a booking yourself before Remi answers a customer.',
       costH2: 'What does a missed plumbing call cost?',
       costBody:
-        '<p>Keres AI has not published a plumbing benchmark, so this page gives no plumbing statistic. The arithmetic is simple: missed calls a month, times the share that would have booked, times your average ticket.</p><p>Emergency calls weigh more than the average. A caller with water on the floor rarely waits for a callback, and a good emergency visit is often how a household picks its plumber for the next water heater.</p>',
+        '<p>Keres AI has not published a plumbing benchmark, so this page gives no plumbing statistic. The arithmetic is simple. First, count missed calls a month. Next, multiply by the share of callers who would have booked. Finally, multiply by your average ticket. For example, using round numbers rather than plumbing data, 20 missed calls a month, half of which would have booked at $300 each, come to $3,000 a month.</p><p>Emergency calls weigh more than the average. A caller with water on the floor rarely waits for a callback, and a good emergency visit is often how a household picks its plumber for the next water heater. For comparison, the U.S. Bureau of Labor Statistics puts the national median receptionist wage at $38,010 a year (<a href="https://www.bls.gov/oes/current/oes434171.htm" rel="noopener" target="_blank">BLS, May 2025</a>), for about 40 hours of coverage a week.</p>',
       calculator: { href: '/tools/missed-call-calculator', label: 'missed-call calculator' },
       compareH2: 'What should plumbers check before choosing an AI answering service?',
       compareIntro: 'A short list to take into any demo:',
