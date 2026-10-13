@@ -94,6 +94,16 @@ const h1Groups = c.h1;
   </div>
 </Section>
 
+<!-- ── HOW REMI WORKS, IN PROSE ───────────────────────── -->
+<Section spacing="standard" labelledby="remi-how-title" id="how-remi">
+  <div class="k-band__head">
+    <h2 id="remi-how-title" class="k-h2">{c.remiHow.h2}</h2>
+    <p class="k-lede k-measure">{c.remiHow.lede}</p>
+    <p class="k-body k-measure">{c.remiHow.body}</p>
+    <Button href={l(locale, '/agents/inbound')} variant="ghost">{c.remiHow.cta}</Button>
+  </div>
+</Section>
+
 <Section spacing="major" labelledby="roster-title" id="roster">
   <div class="k-band__head">
     <Eyebrow n={1}>{c.roster.eyebrow}</Eyebrow>
@@ -173,6 +183,7 @@ const h1Groups = c.h1;
       <Eyebrow n={4}>{c.found.eyebrow}</Eyebrow>
       <h2 id="found-title" class="k-h2">{c.found.h2}</h2>
       <p class="k-lede">{fill(c.found.lede, { price: foundPrice ? fill(c.found.priceClause, { from: `${m.from} ${foundPrice}` }) : '' })}</p>
+      <p class="k-body">{c.found.body}</p>
       {foundPrice && (
         <div class="k-found__foot">
           <p class="k-found__price">

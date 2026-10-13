@@ -149,13 +149,13 @@ export const foundServices: FoundService[] = [
   },
   {
     name: 'Google Business Profile Management',
-    desc: 'One-time optimization — categories, services, photos, verification — then weekly posts, photo updates, review responses, spam-listing removal and monthly insights.',
+    desc: 'One-time optimization — categories, services, photos, verification — then weekly posts, photo updates, review responses, spam-listing reports to Google and monthly insights.',
     brief: 'Set up once, then weekly posts, photos and review replies.',
   },
   {
     name: 'Review Generation & Reputation',
-    desc: 'An automated review request after every job or matter, owner responses drafted for your approval, problems reported straight to you so you can fix them, and a monthly rating report.',
-    brief: 'A request after every job, replies drafted for your OK, problems flagged to you first.',
+    desc: 'The same automated review request sent to every customer after each job or matter, owner responses drafted for your approval, any reply that mentions a problem also sent to you, and a monthly rating report.',
+    brief: 'The same review request to every customer after each job, and replies drafted for your OK.',
   },
   {
     name: 'Local Listings & Citations',
@@ -300,7 +300,7 @@ export const quoteFactors = [
 
 /** True of every plan, stated once and reused as a label/value pair. */
 export const planTerms = [
-  { k: 'Contract', v: 'Month-to-month. Cancel any month.' },
+  { k: 'Contract', v: 'Month-to-month. Cancel with 30 days’ written notice.' },
   { k: 'Setup', v: 'Done for you. Timing agreed on your first call.' },
   { k: 'Usage', v: 'Per-minute after your included minutes.' },
 ];

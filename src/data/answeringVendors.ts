@@ -5,6 +5,8 @@
 // what the lowest published plan includes, and who it suits by its own
 // positioning. Anything not on the vendor's page is left out, not guessed.
 export const VENDORS_CHECKED = 'October 11, 2026';
+/** The same date for Spanish pages. Change both together. */
+export const VENDORS_CHECKED_ES = '11 de octubre de 2026';
 
 /** Industries with their own "best AI receptionist for …" roundup. */
 export type VendorIndustry = 'hvac' | 'law' | 'real-estate';
