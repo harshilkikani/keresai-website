@@ -1,13 +1,18 @@
 {
+  "id": "/",
   "name": "Keres AI",
   "short_name": "Keres",
+  "description": "Websites, Google Business Profile management and an AI receptionist for local service businesses.",
+  "lang": "en-US",
   "start_url": "/",
+  "scope": "/",
   "display": "browser",
   "theme_color": "#C2410C",
   "background_color": "#FAF8F5",
   "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
-    { "src": "/favicon-96.png", "sizes": "96x96", "type": "image/png" }
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "/favicon-96.png", "sizes": "96x96", "type": "image/png", "purpose": "any" },
+    { "src": "/favicon-32.png", "sizes": "32x32", "type": "image/png", "purpose": "any" }
   ]
 }
