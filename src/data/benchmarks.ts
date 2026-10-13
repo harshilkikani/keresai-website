@@ -3,10 +3,10 @@
 // get lifted by AI search engines. Add an entry → a new page builds + appears in
 // the /benchmarks hub, sitemap, and llms-full.txt.
 //
-// HONESTY RULE: every figure below is an industry estimate or range, framed as
-// directional ("studies estimate", "industry benchmarks suggest"). Never invent
-// precise statistics or attribute them to named sources that do not exist —
-// fabricated data gets de-indexed and destroys trust.
+// HONESTY RULE: every range below without a linked source is a Keres AI
+// working assumption, not measured data, and each page shows the reasoning in
+// `method`. Never invent precise statistics or attribute them to sources that
+// do not exist; only the lead-response studies in `sources` are published research.
 export interface Benchmark {
   slug: string;
   category: string; // grouping label, e.g. "HVAC"
@@ -25,6 +25,8 @@ export interface Benchmark {
   related: { label: string; href: string }[];
   /** Primary sources for the figures that have one. Ranges without a source are labelled estimates. */
   sources?: { label: string; url: string }[];
+  /** The reasoning behind each Keres AI working assumption on the page, one item per figure. */
+  method: { figure: string; reasoning: string }[];
 }
 
 export const benchmarks: Benchmark[] = [
@@ -41,12 +43,17 @@ export const benchmarks: Benchmark[] = [
     lead: 'How many HVAC calls go unanswered, how much demand arrives after hours, and what a missed no-cool emergency really costs — the answering numbers every contractor should track.',
     datePublished: '2026-09-05',
     answer:
-      '<strong>Keres AI estimates that HVAC companies miss 30–45% of inbound calls during peak season</strong>, and that 35–50% of demand arrives after hours, when most offices are closed. Because a no-cool or no-heat call is urgent, callers who reach voicemail almost always dial a competitor — making peak-season answer rate one of the highest-leverage numbers in the business.',
+      '<strong>Keres AI estimates that HVAC companies miss 30–45% of inbound calls during peak season</strong>, and that 35–50% of demand arrives after hours, when most offices are closed. Because a no-cool or no-heat call is urgent, Keres AI assumes most callers who reach voicemail dial a competitor, which makes peak-season answer rate one of the highest-leverage numbers in the business. Both ranges are Keres AI working assumptions; the reasoning is below.',
     stats: [
       { num: '30–45%', stat: 'of HVAC calls go unanswered during peak season', context: 'Heat waves and cold snaps drive call volume far beyond what a normal front desk can pick up, so a large share of calls hit voicemail exactly when demand is highest.' },
       { num: '35–50%', stat: 'of HVAC demand arrives after hours', context: 'No-cool and no-heat failures do not respect business hours — a large share of calls come evenings, nights, and weekends when offices are closed.' },
       { num: '$300–$600', stat: 'typical value of a single HVAC service call', context: 'Even a routine repair is worth hundreds of dollars; a missed call is a missed ticket, and replacement jobs run into five figures.' },
-      { num: '2 rings', stat: 'the answer speed urgent callers expect', context: 'When the house is at 90°F, callers will not wait on hold — the business that picks up first books the job.' },
+      { num: '2 rings', stat: 'how fast Remi by Keres AI answers (a product spec, not a benchmark)', context: 'This is how Keres AI’s receptionist works, not an industry measurement. When the house is at 90°F, callers will not wait on hold, so the business that picks up first usually books the job.' },
+    ],
+    method: [
+      { figure: '30–45% of peak-season calls unanswered', reasoning: 'A typical HVAC office staffs its phones for an average week. When a heat wave or a cold snap multiplies call volume, the same one or two people cannot pick up every call, and calls stack up while they are on the line or out on a job. Keres AI assumes 30–45% of peak-season calls go unanswered for a shop with no overflow or after-hours coverage.' },
+      { figure: '35–50% of demand after hours', reasoning: 'An office open about 50 of the week’s 168 hours leaves the other 118 uncovered, and furnaces and air conditioners fail at any hour. Keres AI assumes 35–50% of HVAC demand arrives outside office hours, a little above its 30–45% working range for service businesses in general, because weather-driven failures do not stop at 5 p.m.' },
+      { figure: '$300–$600 per service call', reasoning: 'A diagnostic visit plus a common repair usually lands in the low hundreds of dollars, before any replacement. Keres AI uses $300–$600 as a working range; use your own average ticket in the calculator.' },
     ],
     sections: [
       { h2: 'Why do HVAC companies lose the most calls in peak season?', body: '<p>HVAC demand is spiky by nature: a heat wave or a cold snap can multiply call volume overnight. The same front desk that comfortably answers a slow week is overwhelmed the moment temperatures break, so the missed-call rate climbs exactly when each call is worth the most. The result is a peak-season paradox — your busiest, most profitable days are also when you lose the most leads to voicemail.</p>' },
@@ -80,7 +87,7 @@ export const benchmarks: Benchmark[] = [
     answer:
       '<strong>Keres AI’s view of roofing lead response: the first company to respond and inspect typically wins the insurance claim</strong> — lead-response research consistently finds that speed decides who wins the job. Because hail and wind events generate huge call surges in a few hours, a roofer whose phone goes to voicemail during a storm hands five-figure jobs directly to faster competitors. In the Lead Response Management study (15,000 web leads across six companies), the odds of qualifying a lead were 21 times higher when it was contacted within five minutes than at 30 minutes; a 2011 Harvard Business Review analysis found firms that responded within an hour were nearly seven times as likely to qualify the lead.',
     stats: [
-      { num: 'First', stat: 'responder usually wins the storm claim', context: 'Lead-response research consistently finds a strong majority of customers buy from the business that answers first; in a post-storm rush, the first roofer to inspect usually signs the contract.' },
+      { num: 'First', stat: 'responder usually wins the storm claim', context: 'The published lead-response studies found that fast contact sharply raises the odds of qualifying a lead. Keres AI assumes that in a post-storm rush, the first roofer to inspect usually signs the contract.' },
       { num: '5 min', stat: 'response window that dramatically lifts qualification odds', context: 'Studies of lead response time find that contacting a lead within five minutes makes it many times more likely to convert than waiting even 30 minutes.' },
       { num: '100s', stat: 'of calls a single storm can trigger in hours', context: 'A hailstorm can damage thousands of roofs in minutes, generating a call surge no normal front desk can absorb.' },
       { num: '$10k+', stat: 'typical value of a roof replacement job', context: 'A single missed storm lead can be a five-figure replacement or insurance job handed to a competitor.' },
@@ -99,6 +106,11 @@ export const benchmarks: Benchmark[] = [
     sources: [
       { label: 'Oldroyd, McElheran & Elkington, “The Short Life of Online Sales Leads,” Harvard Business Review (2011)', url: 'https://scholarsarchive.byu.edu/facpub/9711' },
       { label: 'Oldroyd & InsideSales.com, Lead Response Management Study (15,000 leads, six companies)', url: 'https://www.mortech.com/hs-fs/hub/25649/file-13535879-pdf/docs/mit_study.pdf' },
+    ],
+    method: [
+      { figure: 'First responder usually wins', reasoning: 'This follows from the two published lead-response studies cited below, which found that fast contact sharply raises the odds of qualifying a lead. Keres AI applies that finding to storm leads; it has not measured roofing win rates itself.' },
+      { figure: '100s of calls after a single storm', reasoning: 'A hail or wind event damages many roofs in the same area at the same time, so the calls arrive in the same few hours. Keres AI uses “hundreds” as an order of magnitude for a busy local roofer, not a measured count.' },
+      { figure: '$10,000+ per replacement', reasoning: 'A full tear-off and replacement on a single-family home involves many squares of material and several days of crew time. Keres AI uses $10,000 or more as a working figure; your own average job value belongs in the calculator.' },
     ],
     related: [
       { label: 'AI receptionist for roofing', href: '/ai-receptionist-for-roofing' },
@@ -136,6 +148,11 @@ export const benchmarks: Benchmark[] = [
       { q: 'What is a typical dental no-show rate?', a: 'Keres AI estimates dental no-show rates at 10–20%. Each missed appointment can cost $200 or more in lost production, and many no-shows trace back to reschedule calls the front desk could not answer.' },
       { q: 'How do missed calls cause dental no-shows?', a: 'When patients cannot reach the office to reschedule, the appointment simply lapses and the chair sits empty. Capturing and rebooking those calls — including after hours — is one of the most direct ways to reduce no-shows.' },
       { q: 'How can a dental practice reduce no-shows?', a: 'Answer and rebook every reschedule call, confirm appointments proactively, and cover after-hours demand. An <a href="/industries/dental-med-spa">AI receptionist</a> does all three automatically, 24/7.' },
+    ],
+    method: [
+      { figure: '10–20% no-show rate', reasoning: 'Keres AI assumes one in ten to one in five booked appointments goes unfilled without a confirmation and reminder process. This is a working assumption, not a measured rate; most practice-management systems report your own no-show rate, and that is the number to use.' },
+      { figure: '$200+ per no-show', reasoning: 'An empty chair loses the production of the visit that was booked. Keres AI uses $200 or more as roughly the value of a routine hygiene or basic restorative appointment; specialty and cosmetic visits are worth more.' },
+      { figure: '30%+ of calls missed at a busy front desk', reasoning: 'A front desk that is checking patients in and out cannot always pick up, and calls stack up at the busiest hours. Keres AI assumes 30% or more of calls can go unanswered at peak times; your phone system’s call log shows your real figure.' },
     ],
     related: [
       { label: 'AI receptionist for dental practices', href: '/industries/dental-med-spa' },
@@ -177,6 +194,11 @@ export const benchmarks: Benchmark[] = [
     sources: [
       { label: 'Oldroyd, McElheran & Elkington, “The Short Life of Online Sales Leads,” Harvard Business Review (2011)', url: 'https://scholarsarchive.byu.edu/facpub/9711' },
       { label: 'Oldroyd & InsideSales.com, Lead Response Management Study (15,000 leads, six companies)', url: 'https://www.mortech.com/hs-fs/hub/25649/file-13535879-pdf/docs/mit_study.pdf' },
+    ],
+    method: [
+      { figure: 'First responder usually signs the client', reasoning: 'This follows from the two published lead-response studies cited below. Keres AI applies their finding to legal intake; it has not measured law-firm sign-up rates itself.' },
+      { figure: '$1,000–$10,000+ per new case', reasoning: 'Fees vary widely by practice area, from flat-fee matters worth a few thousand dollars to contingency cases worth far more. Keres AI uses $1,000 to $10,000 or more as a working range; use your firm’s own average fee.' },
+      { figure: 'Many high-intent calls after hours', reasoning: 'Accidents, arrests and family emergencies happen at any hour, while most firms answer phones about 50 of the week’s 168 hours. Keres AI treats after-hours intake as a large share of demand without putting a precise figure on it.' },
     ],
     related: [
       { label: 'AI receptionist for legal intake', href: '/industries/law-firms' },

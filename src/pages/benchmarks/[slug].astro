@@ -84,7 +84,8 @@ const webpage = webPageSchema({
   <section class="page-section container" aria-labelledby="method-title">
     <div class="prose">
       <h2 id="method-title">How were these numbers put together?</h2>
-      <p>The ranges on this page are Keres AI estimates drawn from public industry reporting and the arithmetic shown in each section. They are not from a Keres customer study, and they are directional, not guarantees: your own numbers depend on your call volume, close rate and average ticket.</p>
+      <p>The ranges on this page are Keres AI working assumptions, not measured data and not from a Keres customer study. Each one is reasoned from how {b.category.toLowerCase()} businesses take calls, as set out below, and they are directional, not guarantees: your own numbers depend on your call volume, close rate and average ticket.</p>
+      <ul>{b.method.map((m) => <li><strong>{m.figure}:</strong> {m.reasoning}</li>)}</ul>
       {b.sources && b.sources.length > 0 && (
         <>
           <p>Primary research cited on this page:</p>
