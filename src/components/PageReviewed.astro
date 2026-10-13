@@ -1,0 +1,24 @@
+---
+// "Last updated <date> · Reviewed by the Keres AI team", rendered by
+// Layout.astro at the end of <main> on the page families that carry it. The
+// date is the git date of the page's content source (src/seo/lastmod.mjs), the
+// same one the sitemap <lastmod> and the WebPage dateModified use.
+import type { Locale } from '../i18n';
+export interface Props { date: string; locale?: Locale }
+const { date, locale = 'en' } = Astro.props;
+const [y, m, d] = date.split('-').map(Number);
+const shown = new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(locale === 'es' ? 'es-US' : 'en-US', {
+  year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+});
+---
+<div class="page-reviewed container">
+  {locale === 'es'
+    ? <p>Última actualización: <time datetime={date}>{shown}</time> · <a href="/editorial-policy">Revisado por el equipo de Keres AI</a></p>
+    : <p>Last updated <time datetime={date}>{shown}</time> · <a href="/editorial-policy">Reviewed by the Keres AI team</a></p>}
+</div>
+<style>
+  .page-reviewed { padding-top: 20px; padding-bottom: 28px; }
+  .page-reviewed p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-dim, #6b6b6b); }
+  .page-reviewed a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  .page-reviewed a:hover { color: var(--orange, #C2410C); }
+</style>
