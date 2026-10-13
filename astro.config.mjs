@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { isIndexable, REDIRECTS, ORIGIN } from './src/seo/indexing.mjs';
+import { lastModFor } from './src/seo/lastmod.mjs';
 
 export default defineConfig({
   site: 'https://www.keresai.com',
@@ -17,8 +18,12 @@ export default defineConfig({
       // historical .html URLs (customPages below); the auto-discovered
       // extensionless /guides/* routes are dropped there.
       filter: (page) => isIndexable(page),
-      // No lastmod/changefreq/priority: Google ignores the last two, and a
-      // build-time lastmod on every URL tells it nothing changed-wise.
+      // lastmod is the git date of the file the page's content lives in
+      // (src/seo/lastmod.mjs), the same date the page shows as "Last updated"
+      // and emits as WebPage dateModified. Never a blanket build time, except
+      // as the fallback when history is unavailable. No changefreq/priority:
+      // Google ignores both.
+      serialize: (item) => ({ ...item, lastmod: lastModFor(item.url) }),
       // Guides keep their historical .html URLs; list them explicitly.
       customPages: [
         'https://www.keresai.com/guides/septic-automation-playbook.html',
@@ -35,6 +40,7 @@ export default defineConfig({
     // @astrojs/sitemap strips that slash when it writes the file (whatever
     // serialize() returns) under trailingSlash 'never', so put it back after
     // the sitemap is written: sitemap URL == canonical, home included.
+    // Also publish the index at /sitemap.xml, the path tools and crawlers guess.
     {
       name: 'keres:sitemap-home-slash',
       hooks: {
@@ -43,8 +49,13 @@ export default defineConfig({
           for (const f of (await readdir(dir)).filter((n) => /^sitemap-\d+\.xml$/.test(n))) {
             const file = new URL(f, dir);
             const xml = await readFile(file, 'utf8');
-            await writeFile(file, xml.replace(`<loc>${ORIGIN}</loc>`, `<loc>${ORIGIN}/</loc>`));
+            // serialize() hands back dates; the plugin writes them as midnight
+            // UTC timestamps. Write the plain W3C date the pages show instead.
+            await writeFile(file, xml
+              .replace(`<loc>${ORIGIN}</loc>`, `<loc>${ORIGIN}/</loc>`)
+              .replace(/<lastmod>(\d{4}-\d{2}-\d{2})T00:00:00\.000Z<\/lastmod>/g, '<lastmod>$1</lastmod>'));
           }
+          await writeFile(new URL('sitemap.xml', dir), await readFile(new URL('sitemap-index.xml', dir), 'utf8'));
         },
       },
     },
