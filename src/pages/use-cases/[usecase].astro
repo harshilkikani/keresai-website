@@ -46,14 +46,14 @@ const webpage = webPageSchema({
   ]} />
 
   <Breadcrumbs crumbs={crumbs} />
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">Use Case</span>
     <h1 set:html={u.h1} />
     <div class="hero-ctas">
       <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href="/use-cases" class="btn btn-outline">All use cases</a>
     </div>
-  </header>
+  </div>
 
   <section class="page-section container">
     <div class="answer-block">
@@ -116,5 +116,5 @@ const webpage = webPageSchema({
   )}
 
   <FaqSection faqs={u.faqs} title={`${u.name} — FAQ`} />
-  <CtaBand heading="See it work for your business" sub="Book a free 30-minute call and hear Remi answer, qualify and book a call." cta={u.cta.label} href={u.cta.href} />
+  <CtaBand heading="See it work for your business" sub="Book a free 30-minute call and hear Remi, Keres AI’s AI receptionist, answer, qualify and book a call." cta={u.cta.label} href={u.cta.href} />
 </Layout>

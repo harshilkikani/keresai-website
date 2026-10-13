@@ -22,7 +22,7 @@ const bundle = priceAmount('bundle');
 const build = priceAmount('customBuild');
 const run = priceAmount('customRun');
 const quote = l(locale, '/quote');
-import { answeringVendors, keresRow, VENDORS_CHECKED, answeringVendorsEs, vendorTypeEs } from '../data/answeringVendors';
+import { answeringVendors, keresRow, VENDORS_CHECKED, VENDORS_CHECKED_ES, answeringVendorsEs, vendorTypeEs } from '../data/answeringVendors';
 import type { AnsweringVendor } from '../data/answeringVendors';
 /** Vendor row in the page language: Spanish wording from answeringVendorsEs, English otherwise. */
 const row = (v: AnsweringVendor) => {
@@ -137,8 +137,8 @@ const keresCells = row(keresRow);
 <Section tone="raised" spacing="standard" labelledby="vs-title" id="compare">
   <h2 id="vs-title" class="k-h2">{locale === 'es' ? '¿Cómo se compara Keres AI con los servicios de contestación?' : 'How does Keres AI compare with answering services and AI receptionists?'}</h2>
   <p class="k-lede k-measure">{locale === 'es'
-    ? 'El plan más bajo que cada proveedor publica en su propia página de precios (en inglés), revisado el ' + VENDORS_CHECKED + '. Traducimos los datos sin cambiar las cifras.'
-    : 'Each vendor’s lowest published plan, from its own pricing page, checked ' + VENDORS_CHECKED + '.'}</p>
+    ? 'El plan más bajo que cada proveedor publica en su propia página de precios (en inglés), revisado el ' + VENDORS_CHECKED_ES + '. Traducimos los datos sin cambiar las cifras.'
+    : 'Each vendor’s lowest published plan, from its own pricing page, checked ' + VENDORS_CHECKED + '. Remi by Keres AI is the only row without a published price: it is quoted to your call volume.'}</p>
   <div class="compare-wrap">
     <table class="compare-table">
       <thead><tr><th>{locale === 'es' ? 'Opción' : 'Option'}</th><th>{locale === 'es' ? 'Quién contesta' : 'Who answers'}</th><th>{locale === 'es' ? 'Cómo cobra' : 'How it bills'}</th><th>{locale === 'es' ? 'Plan más bajo publicado' : 'Lowest published plan'}</th></tr></thead>

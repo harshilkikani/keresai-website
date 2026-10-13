@@ -82,6 +82,16 @@ const roiOut = roiResult({ leads: 250, answer: 60, job: 680, ah: 35 }, hub.calcP
     </Section>
   )}
 
+  <!-- ── QUESTION-LED PROSE: the facts the cards below summarise ── -->
+  {(hub.prose ?? []).map((q, i) => (
+    <Section tone={i % 2 === 0 ? 'raised' : 'ground'} spacing="standard" labelledby={`hub-q-${i}`}>
+      <div class="k-band__head">
+        <h2 id={`hub-q-${i}`} class="k-h2">{q.h2}</h2>
+        {q.body.map((para, j) => <p class:list={[j === 0 ? 'k-lede' : 'k-body', 'k-measure']} set:html={para} />)}
+      </div>
+    </Section>
+  ))}
+
   <!-- ── THE PROBLEM ────────────────────────────────────── -->
   <Section tone="raised" spacing="major" labelledby="problem-title">
     <div class="k-band">
@@ -97,7 +107,7 @@ const roiOut = roiResult({ leads: 250, answer: 60, job: 680, ah: 35 }, hub.calcP
         ))}
       </div>
       <p class="k-inds__foot">
-        The full data, with sources: <a href={hub.benchmark.href}>{hub.benchmark.label}</a>.
+        Keres AI estimates and the reasoning behind them: <a href={hub.benchmark.href}>{hub.benchmark.label}</a>.
       </p>
     </div>
   </Section>
@@ -107,10 +117,10 @@ const roiOut = roiResult({ leads: 250, answer: 60, job: 680, ah: 35 }, hub.calcP
     <div class="k-split k-split--top">
       <div class="k-split__aside">
         <Eyebrow>On the call</Eyebrow>
-        <h2 id="flow-title" class="k-h2">What Remi does, in order.</h2>
+        <h2 id="flow-title" class="k-h2">What does Remi do on the call, in order?</h2>
         <p class="k-lede">
-          Remi, your Inbound Agent, runs the script you would run if you had time to answer
-          every call yourself &mdash; in your vocabulary, in this order, every time.
+          Remi runs the script you would run if you had time to answer every call yourself:
+          in your vocabulary, in this order, every time.
         </p>
         <Button href="/agents/inbound" variant="ghost">Everything Remi does</Button>
       </div>
@@ -133,7 +143,7 @@ const roiOut = roiResult({ leads: 250, answer: 60, job: 680, ah: 35 }, hub.calcP
     <div class="k-band">
       <div class="k-band__head">
         <Eyebrow>{hub.segmentsH2}</Eyebrow>
-        <h2 id="seg-title" class="k-h2">Trained on what you actually ask.</h2>
+        <h2 id="seg-title" class="k-h2">Which {hub.segmentsH2.toLowerCase()} does Remi cover?</h2>
       </div>
       <ul class="k-svc">
         {hub.segments.map((s) => (
@@ -151,10 +161,11 @@ const roiOut = roiResult({ leads: 250, answer: 60, job: 680, ah: 35 }, hub.calcP
     <div class="k-band">
       <div class="k-band__head">
         <Eyebrow>After the call</Eyebrow>
-        <h2 id="others-title" class="k-h2">Answering is stage one of three.</h2>
+        <h2 id="others-title" class="k-h2">What happens after the call?</h2>
         <p class="k-lede k-measure">
-          Getting the appointment on the calendar is not the same as getting it kept, and the
-          list of people who already chose you is the cheapest pipeline you own.
+          Answering is stage one of three. Theo, the Keres AI follow-up worker, confirms and
+          reminds so the appointment is kept, and June, the reactivation worker, works the list
+          of people who already chose you and sends every customer the same review request.
         </p>
       </div>
       <ul class="k-team">
@@ -262,7 +273,7 @@ const roiOut = roiResult({ leads: 250, answer: 60, job: 680, ah: 35 }, hub.calcP
       <div class="k-band">
         <div class="k-band__head">
           <Eyebrow>Compliance</Eyebrow>
-          <h2 id="compliance-title" class="k-h2">The part your risk person asks about.</h2>
+          <h2 id="compliance-title" class="k-h2">How does Keres AI handle compliance and call data?</h2>
           <p class="k-lede k-measure">{hub.compliance}</p>
         </div>
         <Button href="/trust" variant="ghost">Read the security review</Button>

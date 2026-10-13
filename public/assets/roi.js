@@ -4,8 +4,8 @@
  *   would-close  = missed × close_rate            (per-vertical)
  *   lost_revenue = would-close × avg_ticket_value
  *
- * Per-vertical close rates reflect typical answered-lead → closed-deal
- * conversion: home services 25% (industry-median), real estate ~8%
+ * Per-vertical close rates are Keres AI assumptions for answered-lead → closed-deal
+ * conversion, not measured figures: home services 25%, real estate ~8%
  * (buyer-agent qualified-lead close), med spas ~50% (qualified inquiry
  * to booked appointment), professional services ~15% (qualified
  * consultation to engaged client).
@@ -65,7 +65,7 @@
     const noteEl = $("roi-note");
     if (noteEl) {
       const labelNice = tpl("label-" + s.vertical, (DEFAULTS[s.vertical]?.label || "Home-services").toLowerCase());
-      noteEl.textContent = fill(tpl("note", "Close rate ({rate}) is the typical answered-lead close rate for {vertical}. Swap in your own number if you track it."), { rate: pct(s.close), vertical: labelNice });
+      noteEl.textContent = fill(tpl("note", "Close rate ({rate}) is a Keres AI assumption for {vertical}, not a measured industry figure. Swap in your own number if you track it."), { rate: pct(s.close), vertical: labelNice });
     }
 
     const label = DEFAULTS[s.vertical]?.label || "Home-services";

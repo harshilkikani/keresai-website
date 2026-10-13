@@ -34,11 +34,11 @@ const tool = toolSchema({
   <Schema slot="head" graph={[tool, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">Free tool</span>
     <h1>Is your email <span class="accent">landing in spam?</span></h1>
     <p class="lead">A free tool from Keres AI: check your domain’s SPF, DKIM, and DMARC in seconds. Enter a domain and we’ll look up the records live and tell you exactly what to fix.</p>
-  </header>
+  </div>
 
   <section class="page-section container container-narrow">
     <div class="answer-block">

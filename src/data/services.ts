@@ -45,12 +45,12 @@ const byStage: Record<number, { services: Service[]; ctaHref: string; ctaLabel: 
       {
         name: 'Google Business Profile Management',
         plan: 'Found',
-        desc: 'One-time optimization — categories, services, photos, verification — then weekly posts, photo updates, review responses, spam-listing removal and monthly insights.',
+        desc: 'One-time optimization — categories, services, photos, verification — then weekly posts, photo updates, review responses, spam-listing reports to Google and monthly insights.',
       },
       {
         name: 'Review Generation & Reputation',
         plan: 'Found',
-        desc: 'A review request after every completed job or matter, owner responses drafted for your approval, problems reported straight to you so you can fix them, and a monthly rating report.',
+        desc: 'The same review request to every customer after each completed job or matter, owner responses drafted for your approval, any reply that mentions a problem also sent to you, and a monthly rating report.',
       },
       {
         name: 'Local Listings & Citations',
@@ -193,7 +193,7 @@ const byStage: Record<number, { services: Service[]; ctaHref: string; ctaLabel: 
       {
         name: 'Review & Referral Requests',
         plan: 'Convert',
-        desc: 'A review ask after every completed job or matter, problems reported straight to you so you can fix them, and referral asks to the customers who rated you highest.',
+        desc: 'The same review ask to every customer after each completed job or matter, any reply that mentions a problem also sent to you, and referral asks to the customers who rated you highest.',
       },
     ],
   },

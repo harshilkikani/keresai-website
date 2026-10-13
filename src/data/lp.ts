@@ -76,7 +76,7 @@ export const landingPages: LandingPage[] = [
     faqs: [
       {
         q: 'What does it cost?',
-        a: `${priceSentence('Remi on the Answer plan', 'answer', 'your call volume, practice areas and integrations')} Found — the website, Google Business Profile, reviews and listings layer — starts at $499/month for firms. Month-to-month, no setup fee on the Found base tier.`,
+        a: `${priceSentence('Remi', 'answer', 'your call volume, practice areas and integrations')} Found — the website, Google Business Profile, reviews and listings layer — starts at $499/month for firms. Month-to-month, no setup fee on the Found base tier.`,
       },
       {
         q: 'How long does setup take?',

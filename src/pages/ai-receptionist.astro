@@ -19,7 +19,7 @@ const faqs = [
   { q: 'Can the AI receptionist book and reschedule appointments?', a: 'Yes. Keres books, confirms, and reschedules directly on Google Calendar, HubSpot or ServiceTitan during the call, then sends an SMS confirmation.' },
   { q: 'Does it work after hours and on weekends?', a: 'Always. Keres answers nights, weekends, and holidays, and can cover overflow when your team is on another call — the times you lose the most leads.' },
   { q: 'How much does an AI receptionist cost?', a: 'Keres is one monthly rate quoted to your call volume, with included minutes — typically far less than a full-time receptionist or per-minute answering service. See the <a href="/pricing">pricing page</a> or book a demo for a quote.' },
-  { q: 'How long does setup take?', a: 'It depends on your call flows and integrations. We map your call flows, connect your number and calendar, set the AI up for your business, and agree the timing with you on the first call; you test it before it answers a customer. Month-to-month, cancel anytime.' },
+  { q: 'How long does setup take?', a: 'It depends on your call flows and integrations. We map your call flows, connect your number and calendar, set the AI up for your business, and agree the timing with you on the first call; you test it before it answers a customer. Month-to-month; cancel with 30 days’ written notice.' },
 ];
 
 const video = videoObjectSchema({
@@ -53,7 +53,7 @@ const webpage = webPageSchema({
 
   <Breadcrumbs crumbs={crumbs} />
 
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">AI Receptionist</span>
     <h1>The AI receptionist that <span class="accent">answers every call</span></h1>
     <p class="lead">Keres answers every inbound call in two rings, qualifies the caller, books the appointment on your calendar, and texts your team a summary — 24/7. Never lose another lead to voicemail.</p>
@@ -61,7 +61,7 @@ const webpage = webPageSchema({
       <a href="/quote" class="btn btn-primary">Get a quote</a>
       <a href="/tools/missed-call-calculator" class="btn btn-outline">Calculate missed-call losses</a>
     </div>
-  </header>
+  </div>
 
   <section class="page-section container">
     <div class="answer-block">
@@ -72,7 +72,7 @@ const webpage = webPageSchema({
   <section class="page-section container">
     <div class="prose">
       <h2>Why businesses miss calls — and what it costs</h2>
-      <p>Studies put missed inbound calls for service businesses at 25–40% — and most callers who hit voicemail never call back. They call the next business on the list. Every missed call is a missed job, and after-hours and overflow calls are the ones most at risk. See the full <a href="/missed-call-statistics">missed-call statistics</a>.</p>
+      <p>Keres AI’s working assumption is that service businesses miss 25–40% of inbound calls, and that most callers who hit voicemail never call back. They call the next business on the list. Every missed call is a missed job, and after-hours and overflow calls are the ones most at risk. See the full <a href="/missed-call-statistics">missed-call statistics</a>.</p>
       <p>Keres closes that gap completely. The moment a call comes in, the AI picks up, talks like a trained front-desk rep, and gets the caller booked before they have a chance to hang up.</p>
     </div>
   </section>
@@ -136,6 +136,6 @@ const webpage = webPageSchema({
 
   <CtaBand
     heading="See Keres answer a live call"
-    sub="Book a free 30-minute call and hear Remi answer, qualify and book a call."
+    sub="Book a free 30-minute call and hear Remi, Keres AI’s AI receptionist, answer, qualify and book a call."
   />
 </Layout>

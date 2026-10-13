@@ -12,6 +12,7 @@
 //   estimates already published on the matching /benchmarks page.
 // - Live integrations: Google Calendar, HubSpot, ServiceTitan, Zapier. Jobber
 //   and Housecall Pro are rolling out, not live.
+import { VENDORS_CHECKED } from './answeringVendors';
 export interface CallLine {
   who: 'Caller' | 'Remi';
   line: string;
@@ -89,7 +90,7 @@ const allIndustries: Industry[] = [
     description:
       'Keres AI answers HVAC calls 24/7 in two rings, books service and install visits, and flags no-heat and no-cool emergencies on your rules.',
     intro:
-      'HVAC demand spikes in heat waves and cold snaps, which is exactly when the office can’t pick up fast enough. Remi answers in two rings, books the service call, and alerts your on-call tech when a call matches the emergency rules you set.',
+      'HVAC demand spikes in heat waves and cold snaps, which is exactly when the office can’t pick up fast enough. Remi by Keres AI answers in two rings, 24/7, books the service call, and alerts your on-call tech when a call matches the emergency rules you set.',
     pains: [
       'A heat wave or cold snap that multiplies calls overnight',
       'No-heat and no-cool calls after 6 p.m. that land in voicemail',
@@ -141,7 +142,7 @@ const allIndustries: Industry[] = [
       ],
       emergencyNote:
         'When a call matches an emergency rule, Remi warm-transfers it to your on-call number. If nobody picks up, the tech gets a “call me now” alert with the address and notes already written down. Read more about <a href="/glossary/emergency-dispatch">emergency dispatch</a>.',
-      intakeH2: 'What Remi asks an HVAC caller',
+      intakeH2: 'What does Remi ask an HVAC caller?',
       intakeIntro: 'The questions come from your script. A typical HVAC intake covers:',
       intake: [
         { field: 'Name and callback number', why: 'so the tech can call ahead' },
@@ -184,7 +185,7 @@ const allIndustries: Industry[] = [
     description:
       'Keres AI answers plumbing calls 24/7, books service visits, and sends burst pipes and sewage backups to your on-call plumber on the rules you set.',
     intro:
-      'Plumbing emergencies don’t wait for business hours. Remi answers around the clock, books the job, and sends a burst pipe or a backup to your on-call plumber on the rules you set, so calls stop going to voicemail.',
+      'Remi by Keres AI is an AI answering service for plumbers that answers every call in two rings, 24/7, books the job into ServiceTitan, Google Calendar or HubSpot during the call, and sends a burst pipe or a sewage backup to your on-call plumber on the rules you set. Plumbing emergencies don’t wait for business hours, and with Remi the calls stop going to voicemail.',
     pains: [
       'Water-on-the-floor calls at night that reach voicemail',
       'Plumbers under a sink who can’t answer the next call',
@@ -240,8 +241,8 @@ const allIndustries: Industry[] = [
       ],
       emergencyNote:
         'Calls that match a rule are warm-transferred to the on-call plumber. If the transfer is not answered, Remi sends a “call me now” alert with the address, the problem and whether the water is off.',
-      intakeH2: 'What Remi asks a plumbing caller',
-      intakeIntro: 'Your script sets the questions. Most plumbing shops want:',
+      intakeH2: 'What does Remi ask a plumbing caller?',
+      intakeIntro: 'Your script sets the questions. A typical plumbing script asks for:',
       intake: [
         { field: 'Name, callback number and address', why: 'where the truck is going' },
         { field: 'The problem', why: 'leak, clog, no hot water, sewer smell, install' },
@@ -398,7 +399,7 @@ const allIndustries: Industry[] = [
     description:
       'Keres AI answers roofing calls 24/7, books estimates and storm inspections, and keeps answering through a storm-season surge.',
     intro:
-      'A hailstorm can fill a week of calls into one afternoon. Remi answers in two rings, books the estimate or inspection, and sends an active leak to your crew on the rules you set, so storm calls stop going to voicemail.',
+      'A hailstorm can fill a week of calls into one afternoon. Remi by Keres AI answers in two rings, 24/7, books the estimate or inspection, and sends an active leak to your crew on the rules you set, so storm calls stop going to voicemail.',
     pains: [
       'Hail and wind events that bring a week of calls in an afternoon',
       'Storm-damage calls in the evening, after the office has closed',
@@ -424,7 +425,7 @@ const allIndustries: Industry[] = [
         '<strong>For roofing companies, Keres AI runs Remi</strong>, an AI receptionist that answers every call within two rings, 24/7, including the hours after a hailstorm. Remi asks your roofing questions (storm date, active leak, claim status, roof type) and books inspections into Google Calendar, HubSpot or ServiceTitan. Pricing is a monthly rate with included minutes and a per-minute rate after that, with no per-call fees. Keres sets it up for you.',
       painsH2: 'Why do roofers lose storm leads?',
       painsNote:
-        'Storm demand arrives all at once. The same office that handles a normal Tuesday comfortably will miss dozens of calls the day after hail, and those are the homeowners with an insurance claim and a reason to hire quickly.',
+        'Roofers lose storm leads because storm demand arrives all at once. The same office that handles a normal Tuesday comfortably will miss dozens of calls the day after hail, and those are the homeowners with an insurance claim and a reason to hire quickly.',
       callH2: 'What a roofing call to Remi sounds like',
       call: [
         { who: 'Remi', line: 'Thanks for calling [your company], this is Remi.' },
@@ -453,7 +454,7 @@ const allIndustries: Industry[] = [
       ],
       emergencyNote:
         'Anything flagged is warm-transferred to the number you choose. If nobody answers, the crew lead gets a “call me now” alert with the address and what the caller described.',
-      intakeH2: 'What Remi asks a roofing caller',
+      intakeH2: 'What does Remi ask a roofing caller?',
       intakeIntro: 'Your intake script decides. A typical roofing intake asks for:',
       intake: [
         { field: 'Name, callback number and property address', why: 'where the estimator is going' },
@@ -481,9 +482,9 @@ const allIndustries: Industry[] = [
         'What languages does it answer in? Remi answers in English today.',
         'Is the per-minute rate after included minutes written into the quote?',
       ],
-      priceH2: 'Is an AI receptionist cheaper than an answering service for roofers?',
+      priceH2: 'Is an AI receptionist a cheaper alternative to an answering service for a roofing company?',
       priceBody:
-        '<p>Live answering services publish plans from about $250/month (Ruby, 50 minutes) and AI receptionists from about $25–$100/month; see <a href="/ai-receptionist-cost">what an AI receptionist costs</a>. For a roofer, the bigger difference is the storm week: a plan with a small minute allowance can run over fast, and a message-taker does not book the inspection.</p><p>Keres quotes Remi to your call volume, including your storm season: a monthly rate with included minutes, then per-minute, with no per-call fees. Ask on the call how Remi handles your storm-week peak. See <a href="/pricing">pricing</a>.</p>',
+        `<p>An AI receptionist is usually the cheaper alternative to a live answering service for a roofing company, and it books the inspection instead of taking a message. Live answering services publish entry plans of $99 a month for 50 minutes (PATLive) and $250 a month for 50 minutes (Ruby). AI receptionists publish entry plans from $24.95 a month for 30 calls (Upfirst), $29 for 60 minutes (Dialzara), $49 for 250 minutes (Rosie) and $79 for 100 callers (Goodcall). Prices come from each vendor’s own pricing page, checked ${VENDORS_CHECKED}; see <a href="/ai-receptionist-cost">what an AI receptionist costs</a>.</p><p>For a roofer, the storm week matters more than the entry price: a 50-minute plan covers about 16 three-minute calls, so a hail day can run past it fast. Remi by Keres AI is quoted to your call volume, including storm season: a monthly rate with included minutes, then per minute, with no per-call fees. See <a href="/pricing">pricing</a>.</p>`,
       ctaHeading: 'Book the inspection before the other roofer does',
       ctaSub: 'Book a 30-minute call and hear Remi take a storm call with your claim questions.',
     },
@@ -498,7 +499,7 @@ const allIndustries: Industry[] = [
     description:
       'Keres AI answers towing calls 24/7 in two rings, takes the location and vehicle details, and sends the job to your dispatcher on your rules.',
     intro:
-      'In towing, a stranded driver dials the next company the moment a call goes unanswered. Remi answers in two rings, around the clock, takes the location and the vehicle, and gets the job to your dispatcher, so calls stop going to voicemail.',
+      'In towing, a stranded driver dials the next company the moment a call goes unanswered. Remi by Keres AI answers in two rings, around the clock, takes the location and the vehicle, and gets the job to your dispatcher, so calls stop going to voicemail.',
     pains: [
       'Stranded drivers who call the next company on a busy line',
       'Nights and weekends with nobody in the office',
@@ -552,7 +553,7 @@ const allIndustries: Industry[] = [
       ],
       emergencyNote:
         'Urgent jobs are warm-transferred to your dispatcher or on-call driver. If the transfer is not picked up, Remi sends a “call me now” alert with the location and vehicle already written down.',
-      intakeH2: 'What Remi asks a towing caller',
+      intakeH2: 'What does Remi ask a towing caller?',
       intakeIntro: 'The script is yours. A typical towing intake asks:',
       intake: [
         { field: 'Is the caller safe?', why: 'asked before anything else' },
@@ -594,7 +595,7 @@ const allIndustries: Industry[] = [
     description:
       'Keres AI answers septic calls 24/7, books pumping and inspections, and sends backups and alarm calls to your crew on the rules you set.',
     intro:
-      'A septic backup is a call homeowners make to whoever answers first. Remi picks up in two rings, books routine pumping, and sends an alarm or a backup to your crew on the rules you set, so calls stop going to voicemail.',
+      'A septic backup is a call homeowners make to whoever answers first. Remi by Keres AI picks up in two rings, books routine pumping, and sends an alarm or a backup to your crew on the rules you set, so calls stop going to voicemail.',
     pains: [
       'Backup calls missed while the crew is out on a truck',
       'Routine pumping calls nobody had time to return',
@@ -646,7 +647,7 @@ const allIndustries: Industry[] = [
       ],
       emergencyNote:
         'Flagged calls are warm-transferred to the on-call crew. If nobody answers, Remi sends a “call me now” alert with the address, the symptoms and the last pump date.',
-      intakeH2: 'What Remi asks a septic caller',
+      intakeH2: 'What does Remi ask a septic caller?',
       intakeIntro: 'Your script decides. A typical septic intake covers:',
       intake: [
         { field: 'Name, callback number and property address', why: 'where the truck is going' },

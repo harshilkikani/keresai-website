@@ -15,7 +15,7 @@ const crumbs = [
 ];
 const faqs = [
   { q: 'How much does a front-desk receptionist cost?', a: 'Beyond salary, a front-desk hire carries 20–30% in benefits and overhead, and still only covers about 40 of the 168 hours in a week. This estimator shows your fully-loaded annual cost and how much of the week stays uncovered.' },
-  { q: 'Can an AI receptionist replace front-desk staff?', a: 'Many businesses use an AI receptionist for after-hours and overflow while keeping daytime staff; others run it as the full front desk. It answers in two rings, 24/7, on a monthly plan, so you get coverage without staffing nights and weekends.' },
+  { q: 'Can an AI receptionist replace front-desk staff?', a: 'Not necessarily. You can use an AI receptionist for after-hours and overflow while keeping daytime staff, or run it as the full front desk. It answers in two rings, 24/7, on a monthly plan, so you get coverage without staffing nights and weekends.' },
   { q: 'How much can I save with an AI receptionist?', a: 'Savings depend on your call volume and current coverage. Keres is one monthly rate — typically well below a full-time hire plus a per-minute answering service. Book a demo for an exact quote against these numbers.' },
 ];
 const tool = toolSchema({
@@ -32,11 +32,11 @@ const tool = toolSchema({
   <Schema slot="head" graph={[tool, faqSchema(faqs), breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">Free tool</span>
     <h1>What does your <span class="accent">front desk cost?</span></h1>
     <p class="lead">Salary is only part of it. See the fully-loaded annual cost of phone coverage — and how much of the week still goes unanswered.</p>
-  </header>
+  </div>
 
   <section class="page-section container container-narrow">
     <div class="answer-block">

@@ -35,7 +35,7 @@ const faqs = [
   },
   {
     q: 'Is there a contract?',
-    a: 'No. Found is month-to-month like every other plan, and there is no build fee at the base tier — design, hosting and the care plan are all inside the monthly price.',
+    a: 'No long-term contract. Found is month-to-month like every other plan, with 30 days’ written notice to cancel, and there is no build fee at the base tier: design, hosting and the care plan are all inside the monthly price.',
   },
   {
     q: 'Who owns the website?',
@@ -43,7 +43,7 @@ const faqs = [
   },
   {
     q: 'Can I keep my current website?',
-    a: 'Yes. Plenty of firms take the care plan, Google Business Profile management, reviews and listings and leave their existing site alone. The price comes down when we are not building and hosting a site for you.',
+    a: 'Yes. You can take Google Business Profile management, reviews and listings and leave your existing site alone. The price comes down when we are not building and hosting a site for you.',
   },
   {
     q: 'How much does Found cost?',
@@ -51,7 +51,7 @@ const faqs = [
   },
   {
     q: 'How long until it shows results?',
-    a: 'Google Business Profile changes tend to move within two to six weeks; listings and citations take a full cycle to propagate. Reviews start the week we switch on the request flow, because those depend on your job volume rather than on an algorithm.',
+    a: 'There is no fixed timeline. Google reviews profile edits before they appear, and listings and citations take a full update cycle to spread across directories, so Keres AI reports what changed each month instead of promising a date. Review requests start the week we switch on the request flow; how many reviews arrive depends on your job volume.',
   },
   {
     q: 'Do you run Google Ads too?',
@@ -85,10 +85,11 @@ const serviceNodes = [{
         <Eyebrow>Found &mdash; be found, then be answered</Eyebrow>
         <h1 id="found-title" class="k-display">Websites and Google Business Profile management for local businesses</h1>
         <p class="k-lede">
-          Keres AI&rsquo;s Found builds and runs a local service business&rsquo;s website and Google Business
-          Profile, sends a review request after every job and keeps listings consistent, from
-          {found.from.replace('from ', '')} a month ($499 for law firms), month-to-month. All of it is wired
-          to Remi, who answers the calls it generates.
+          Found by Keres AI is a done-for-you website and Google Business Profile service for contractors
+          and other local service businesses. Found builds and runs your website and Google Business
+          Profile, sends the same review request to every customer after each job and keeps listings
+          consistent, from {found.from.replace('from ', '')} a month ($499 for law firms), month-to-month.
+          All of it is wired to Remi, Keres AI&rsquo;s AI receptionist, who answers the calls it generates.
         </p>
         <div class="price-hero-ctas">
           {PHONE && <Button href={PHONE.href} variant="primary" event="tel_click">Call {PHONE.display}</Button>}
@@ -111,7 +112,7 @@ const serviceNodes = [{
           </div>
           <div class="price-fact">
             <span class="price-fact__k">Contract</span>
-            <span class="price-fact__v">Month-to-month.</span>
+            <span class="price-fact__v">Month-to-month; 30 days&rsquo; notice to cancel.</span>
           </div>
         </div>
       </div>
@@ -124,17 +125,17 @@ const serviceNodes = [{
         <Eyebrow>Who it&rsquo;s for</Eyebrow>
         <h2 id="for-title" class="k-h2">Who is Found for?</h2>
         <p class="k-lede k-measure answer-block">
-          Keres Found is a done-for-you website, Google Business Profile and review service for local
+          Found by Keres AI is a done-for-you website, Google Business Profile and review service for local
           service businesses: HVAC, plumbing, roofing, electrical, landscaping and cleaning companies,
           real estate agents, law firms, and dental and med-spa practices. It starts at $249 a month
           ($499 for law firms), month-to-month, with no build fee at the base tier.
         </p>
       </div>
       <ul class="k-svc">
-        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">HVAC, plumbing &amp; electrical</h3></div><p class="k-svc__desc">Service pages for each job type and the area you cover, emergency calls to action that ring the phone, and a Google profile kept current through the busy season.</p></li>
-        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">Roofing &amp; exteriors</h3></div><p class="k-svc__desc">Inspection and estimate requests front and centre, storm-season posts on your Google profile, and a review request after every finished job.</p></li>
-        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">Landscaping, cleaning &amp; other home services</h3></div><p class="k-svc__desc">A fast mobile site with click-to-call and a quote form, photos of real work on your profile, and listings that agree with each other.</p></li>
-        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">Real estate, law firms, dental &amp; med spas</h3></div><p class="k-svc__desc">The same scope, tuned to how your clients choose: profile, reviews and listings first, with consultation or showing requests booked by Remi.</p></li>
+        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">HVAC, plumbing &amp; electrical</h3></div><p class="k-svc__desc">For HVAC, plumbing and electrical contractors, Found builds a service page for each job type and each area you cover, puts click-to-call emergency buttons on every page, and keeps the Google Business Profile current through peak season.</p></li>
+        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">Roofing &amp; exteriors</h3></div><p class="k-svc__desc">For roofing and exterior contractors, Found puts inspection and estimate requests front and centre, posts storm-season updates to your Google profile, and sends a review request after every finished job.</p></li>
+        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">Landscaping, cleaning &amp; other home services</h3></div><p class="k-svc__desc">For landscaping, cleaning and other home-service businesses, Found builds a mobile website with click-to-call and a quote form, adds photos of your real work to your Google Business Profile, and keeps your name, address and phone the same on Apple, Bing, Yelp, Nextdoor and Angi.</p></li>
+        <li class="k-svc__item"><div class="k-svc__head"><h3 class="k-svc__name">Real estate, law firms, dental &amp; med spas</h3></div><p class="k-svc__desc">For real estate agents, law firms, dental practices and med spas, Found runs the same scope tuned to how clients choose: profile, reviews and listings first, with consultation or showing requests booked by Remi if you add it.</p></li>
       </ul>
       <p class="k-body" style="margin-top:18px">What profile management involves and costs: <a href="/google-business-profile-management">Google Business Profile management</a>. How Found compares with GBP software and other services: <a href="/best-google-business-profile-management">best Google Business Profile management services</a>. See it by industry: <a href="/industries/home-services">home services</a> · <a href="/industries/real-estate">real estate</a> · <a href="/industries/law-firms">law firms</a> · <a href="/industries/dental-med-spa">dental &amp; med spas</a>.</p>
     </div>
@@ -151,6 +152,7 @@ const serviceNodes = [{
           each other, and content written to be quoted by AI search. Two of the eight are
           add-ons, and they are marked.
         </p>
+
       </div>
       <ul class="k-svc">
         {foundServices.map((s) => (
@@ -163,6 +165,19 @@ const serviceNodes = [{
           </li>
         ))}
       </ul>
+      <div class="k-band__head" style="margin-top:28px;margin-bottom:0">
+        <h3 class="k-h3">What does Found include each month?</h3>
+        <p class="k-body k-measure">
+          Each month, Found by Keres AI hosts and maintains a website of five to eight pages built
+          for your trade, with updates, backups, security and speed monitoring under the care plan.
+          On your Google Business Profile, Found publishes weekly posts and photos, drafts a reply to
+          every review for your approval, reports spam listings to Google and tracks searches, calls
+          and direction requests. Every customer gets the same review request after each job, and a
+          reply that mentions a problem is also sent to you. Found keeps your name, address and phone
+          the same on Apple, Bing, Yelp, Nextdoor and Angi, plus Avvo and FindLaw for law firms. A
+          tracking number per channel shows which source produced each booked appointment.
+        </p>
+      </div>
     </div>
   </Section>
 
@@ -172,10 +187,12 @@ const serviceNodes = [{
         <Eyebrow>Pricing</Eyebrow>
         <h2 id="price-title" class="k-h2">How much does Found cost?</h2>
         <p class="k-lede">
-          One flat monthly fee covering design, hosting, the care plan, your Google Business
-          Profile, reviews and listings. What moves the number: how many locations you run,
-          whether you need the site built or just cared for, and whether you add AI search
-          visibility or Local Services Ads.
+          Found costs from $249 a month, or from $499 a month for law firms, as one flat monthly fee
+          covering design, hosting, the care plan, your Google Business Profile, reviews and
+          listings. There is no build fee at the base tier, and Found is month-to-month: cancel with
+          30 days&rsquo; written notice. What moves the number: how many locations you run, whether you
+          need the site built or just cared for, and whether you add AI search visibility or Local
+          Services Ads.
         </p>
         <div class="k-found__foot">
           <p class="k-found__price">
@@ -209,6 +226,14 @@ const serviceNodes = [{
       <div class="k-band__head">
         <Eyebrow>Why us and not an agency</Eyebrow>
         <h2 id="why-title" class="k-h2">How is Found different from a marketing agency?</h2>
+        <p class="k-lede k-measure">
+          Found is a fixed scope at a published monthly price, not an hourly retainer. Found by
+          Keres AI covers the website, the Google Business Profile, review requests and listings
+          from $249 a month, month-to-month, and reports bookings by source rather than sessions.
+          Keres AI does not run Google Ads or sell traffic. Keres AI sets up and answers Local
+          Services Ads, because Google says it ranks those ads partly on how responsive you are,
+          and Remi answers in two rings.
+        </p>
       </div>
       <ol class="k-steps">
         <li class="k-step">

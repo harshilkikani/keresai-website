@@ -26,9 +26,9 @@ const roundups = ROUNDUP_SLUGS.map((s) => comparisons.find((c) => c.slug === s)!
 const picks: { need: string; pick: string }[] = [
   { need: 'Lowest price', pick: 'Smith.ai’s AI receptionist is free for 25 calls a month, then $3 a call. The lowest paid plans are Upfirst ($24.95/mo for 30 calls) and Dialzara ($29/mo for 60 minutes). See <a href="/ai-receptionist-cost">what 100 calls a month cost</a> on each.' },
   { need: 'Live humans on every call', pick: 'Ruby ($250/mo for 50 minutes) and PATLive ($99/mo for 50 minutes, bilingual answering included) answer with US-based receptionists. Abby Connect ($165/mo) pairs a receptionist team with AI for routine calls, and Smith.ai offers AI with live receptionists on the same line.' },
-  { need: 'Legal intake', pick: 'AnsweringLegal answers only for law firms but does not publish prices. Smith.ai and Abby Connect both name Clio among their integrations. Keres AI runs intake by practice area, collects the caller’s and opposing party’s names for your conflict check, and books the consultation; its Clio and Lawmatics integrations are rolling out.' },
+  { need: 'Legal intake', pick: 'AnsweringLegal answers only for law firms but does not publish prices. Smith.ai and Abby Connect both name Clio among their integrations. Keres AI runs intake by practice area, collects the caller’s and opposing party’s names for your conflict check, and books the consultation into Google Calendar or HubSpot; it has no Clio or Lawmatics integration today.' },
   { need: 'Home services on ServiceTitan', pick: 'Keres AI books jobs into ServiceTitan during the call, and also into Google Calendar or HubSpot. If you are weighing another vendor, ask whether it books into ServiceTitan or sends you a message to enter. PATLive names Jobber among its integrations; Keres AI’s Jobber and Housecall Pro integrations are rolling out.' },
-  { need: 'Real estate agents', pick: 'Keres AI answers listing calls, asks about pre-approval and timeline, and books the showing into Google Calendar or HubSpot (Follow Up Boss is rolling out). My AI Front Desk suits agents who want phone, text and website chat answered by one AI.' },
+  { need: 'Real estate agents', pick: 'Keres AI answers listing calls, asks about pre-approval and timeline, and books the showing into Google Calendar or HubSpot (it does not write to Follow Up Boss today). My AI Front Desk suits agents who want phone, text and website chat answered by one AI.' },
   { need: 'Website and receptionist from one team', pick: 'Keres AI: Found builds and runs the website, Google Business Profile and reviews from $249/mo ($499 for law firms), and Remi answers the phone, quoted to your call volume.' },
   { need: 'Billing by caller', pick: 'Goodcall ($79/mo for 100 unique callers; a repeat caller counts once a month).' },
   { need: 'Spanish-speaking callers', pick: 'Rosie ($49/mo for 250 minutes) answers in English and Spanish; PATLive includes bilingual answering; Upfirst lists many languages. Keres AI’s Remi answers in English today.' },
@@ -69,26 +69,27 @@ const webpage = webPageSchema({
 
   <Breadcrumbs crumbs={crumbs} />
 
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">Buyer’s guide · 2026</span>
     <h1>Best AI receptionists for <span class="accent">small businesses</span> (2026)</h1>
-    <p class="updated" style="font-size:14px;color:var(--text-dim);margin:-8px 0 16px">Updated <time datetime="2026-10-11">October 11, 2026</time></p>
-    <p class="lead" style="font-size:16px">Written by Keres AI, which sells one of the receptionists below. Prices and features come from each vendor's own site, checked October 11, 2026.</p>
+    <p class="lead">The best AI receptionists for small businesses in 2026 are Upfirst and Dialzara for the lowest price, Ruby and PATLive for a live person on every call, Smith.ai and Abby Connect for people and AI together, and Remi by Keres AI for calls booked into ServiceTitan, HubSpot or Google Calendar with the website run by the same team.</p>
+    <p class="byline" style="font-size:14px;color:var(--text-dim);margin:14px 0 0">Written by Keres AI, which sells Remi, one of the options below. Prices checked on {VENDORS_CHECKED} on each vendor's own site. Updated <time datetime="2026-10-11">October 11, 2026</time>.</p>
     <div class="hero-ctas">
       <a href="/ai-receptionist-cost" class="btn btn-primary">Compare costs</a>
       <a href="/hear-it" class="btn btn-outline">Hear Remi answer a call</a>
     </div>
-  </header>
+  </div>
 
-  <section class="page-section container">
+  <section class="page-section container" aria-labelledby="answer-title">
+    <div class="prose"><h2 id="answer-title">Which AI receptionist should a small business choose?</h2></div>
     <div class="answer-block">
-      <p>The best AI receptionist depends on what you need. For the lowest price, Upfirst ($24.95 a month for 30 calls) and Dialzara ($29 for 60 minutes) publish the cheapest paid plans. For a person on every call, Ruby and PATLive use live receptionists, and Smith.ai and Abby Connect mix people with AI. AnsweringLegal answers only for law firms. Keres AI suits local service businesses that want calls booked into ServiceTitan, HubSpot or Google Calendar and their website run by the same team.</p>
+      <p>An AI receptionist is software that answers your business phone, asks your questions and books or routes the call. The right one depends on what you need most. For the lowest price, Upfirst ($24.95 a month for 30 calls) and Dialzara ($29 for 60 minutes) publish the cheapest paid plans, and Smith.ai’s AI tier is free for 25 calls a month. For a person on every call, Ruby ($250 for 50 minutes) and PATLive ($99 for 50 minutes) use live receptionists, while Smith.ai and Abby Connect mix people with AI. AnsweringLegal answers only for law firms. Keres AI suits local service businesses that want calls booked into ServiceTitan, HubSpot or Google Calendar during the call, and their website run by the same team. Every price is the vendor’s lowest published plan, according to its own pricing page on {VENDORS_CHECKED}.</p>
     </div>
   </section>
 
   <section class="page-section container">
     <div class="prose">
-      <h2>How we compared them</h2>
+      <h2>How did we compare these AI receptionists?</h2>
       <p>We compared ten services on four things: who answers (AI, people or both), how each one bills (per minute, per call or per caller), its lowest published plan, and who the vendor says it is for. Every figure comes from the vendor’s own pricing or product page on {VENDORS_CHECKED}; the table links each source. This is a comparison of published information, not a test of call quality, and there is no overall score: the picks below are by need. Keres AI wrote this page and sells Remi, which is listed in the same columns and under the same rules.</p>
     </div>
   </section>
@@ -124,7 +125,7 @@ const webpage = webPageSchema({
       <ul>{picks.map((p) => <li><strong>{p.need}:</strong> <Fragment set:html={p.pick} /></li>)}</ul>
 
       <h2>Best AI receptionists by industry</h2>
-      <p><strong>By industry:</strong> <a href="/best-ai-receptionist-for-hvac">HVAC companies</a> · <a href="/best-ai-receptionist-for-law-firms">law firms</a> · <a href="/best-ai-receptionist-for-real-estate">real estate agents</a>, each with the vendors that market to that industry.</p>
+      <p>The right AI receptionist depends on the trade. HVAC companies need emergency triage and booking into ServiceTitan. Law firms need intake by practice area and capture of the names for a conflict check. Real estate agents need an immediate answer, a text-back for missed calls, and leads tagged by listing source in the CRM. Keres AI publishes a separate vendor comparison for each: <a href="/best-ai-receptionist-for-hvac">HVAC companies</a>, <a href="/best-ai-receptionist-for-law-firms">law firms</a> and <a href="/best-ai-receptionist-for-real-estate">real estate agents</a>, each with the vendors that market to that industry.</p>
       <p>Comparing more than receptionists? See <a href="/guides/ai-tools-for-local-service-businesses.html">the best AI tools for local service businesses to get more leads</a>, from Google profile tools to follow-up.</p>
       <h3>Home services: HVAC, plumbing, roofing</h3>
       <p>Trade calls are urgent and often come after hours, so booking the job on the call matters more than a low entry price. Keres AI books into ServiceTitan, Google Calendar or HubSpot and texts the on-call tech under your emergency rules. See <a href="/industries/home-services">Keres AI for home services</a>.</p>
@@ -147,7 +148,7 @@ const webpage = webPageSchema({
 
   <FaqSection faqs={faqs} title="Best AI receptionist FAQ" />
 
-  <section class="page-section container" aria-labelledby="related-title">
+  <aside class="page-section container" aria-labelledby="related-title">
     <div class="section-label">Keep comparing</div>
     <h2 id="related-title" class="section-title" style="margin-bottom:8px">Alternatives by vendor</h2>
     <ul class="prose">
@@ -155,7 +156,7 @@ const webpage = webPageSchema({
       <li><a href="/ai-receptionist-cost">How much does an AI receptionist cost?</a></li>
       <li><a href="/compare">All comparisons</a></li>
     </ul>
-  </section>
+  </aside>
 
   <CtaBand
     heading="Hear Remi before you choose"

@@ -19,11 +19,11 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path }];
   <Schema slot="head" graph={[breadcrumbSchema(crumbs), organizationSchema]} />
 
   <Breadcrumbs crumbs={crumbs} />
-  <header class="page-hero container">
+  <div class="page-hero container">
     <span class="eyebrow">Contact</span>
     <h1>Let's <span class="accent">connect</span></h1>
-    <p class="lead">Questions about Found (websites and Google Business Profile management) or Remi (the AI receptionist)? Send a message below, email <a href={`mailto:${EMAIL}`}>{EMAIL}</a>{CONTACT_PHONE && <>, call <a href={CONTACT_PHONE.href} data-event="tel_click">{CONTACT_PHONE.display}</a></>}, or <a href="/quote">get a quote</a> and book a 30-minute call. We reply within 24 hours, and on the call we put Remi on the line so you can test it yourself.</p>
-  </header>
+    <p class="lead">Questions about Found (websites and Google Business Profile management) or Remi (Keres AI’s AI receptionist)? Send a message below, email <a href={`mailto:${EMAIL}`}>{EMAIL}</a>{CONTACT_PHONE && <>, call <a href={CONTACT_PHONE.href} data-event="tel_click">{CONTACT_PHONE.display}</a></>}, or <a href="/quote">get a quote</a> and book a 30-minute call. We reply within 24 hours, and on the call we put Remi on the line so you can test it yourself.</p>
+  </div>
 
   <section class="page-section container container-narrow">
     <div id="form-success" class="form-status-ok" style="display:none" tabindex="-1">
