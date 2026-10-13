@@ -535,7 +535,7 @@ export const glossary: GlossaryTerm[] = [
     description:
       'Missed-call recovery is winning back the revenue from calls you did not answer. How to measure it, the four ways to close the gap, and where text-back fits.',
     definition:
-      'Missed-call recovery is the practice of recapturing the revenue from calls your business doesn’t answer. Because most callers who hit voicemail never call back — they dial a competitor — recovery means answering more calls live (with a 24/7 AI receptionist) and instantly re-engaging the ones you do miss by text, so leads don’t walk.',
+      'Missed-call recovery is the practice of recapturing the revenue from calls your business doesn’t answer. Because most callers who hit voicemail are assumed not to call back (a Keres AI working assumption: they dial a competitor), recovery means answering more calls live (with a 24/7 AI receptionist) and instantly re-engaging the ones you do miss by text, so leads don’t walk.',
     sections: [
       {
         h2: 'Why do missed calls cost so much?',
