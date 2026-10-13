@@ -14,6 +14,9 @@ import {
 } from '../data/schema';
 import { industries, type Industry, type TradeContent } from '../data/industries';
 import { guidesFor } from '../data/guides';
+import { integrations, isLive, joinNames } from '../data/integrations';
+// Field-service tools that are not live yet, straight from integrations.ts.
+const fieldRollingOut = joinNames(integrations.filter((i) => !isLive(i) && i.category === 'Field Service').map((i) => i.name));
 
 export function getStaticPaths() {
   return industries.map((ind) => ({ params: { industry: ind.slug }, props: { ind } }));
@@ -80,6 +83,15 @@ const peers = industries.filter((i) => i.slug !== ind.slug);
   <section class="page-section container">
     <div class="answer-block"><p set:html={t.answer} /></div>
   </section>
+
+  {t.priceH2 && t.priceBody && (
+    <section class="page-section container" aria-labelledby="price-answer">
+      <div class="prose">
+        <h2 id="price-answer">{t.priceH2}</h2>
+        <Fragment set:html={t.priceBody} />
+      </div>
+    </section>
+  )}
 
   <section class="page-section container">
     <div class="prose">
@@ -151,7 +163,7 @@ const peers = industries.filter((i) => i.slug !== ind.slug);
         aria-label="Keres AI receptionist example call and operator portal"
         style="width:100%;max-width:720px;height:auto;border-radius:var(--radius-lg);border:1px solid var(--border)"
       ></video>
-      <p class="k-mock__caption">Recording uses example data. Nothing on this page loads a video until you press play.</p>
+      <p class="k-mock__caption">Recording uses a demo account and example data. The video loads only when you press play.</p>
     </section>
   )}
 
@@ -162,7 +174,7 @@ const peers = industries.filter((i) => i.slug !== ind.slug);
       <p>{t.softwareNote}</p>
       <ul>
         <li>Live: <a href="/integrations/servicetitan">ServiceTitan</a>, <a href="/integrations/google-calendar">Google Calendar</a>, <a href="/integrations/hubspot">HubSpot</a> and <a href="/integrations/zapier">Zapier</a></li>
-        <li>Rolling out, not live yet: Jobber and Housecall Pro</li>
+        <li>Rolling out, not live yet: {fieldRollingOut}</li>
       </ul>
     </div>
   </section>
@@ -175,15 +187,6 @@ const peers = industries.filter((i) => i.slug !== ind.slug);
       <p><a href={t.calculator.href}>Open the {t.calculator.label} →</a></p>
     </div>
   </section>
-
-  {t.priceH2 && t.priceBody && (
-    <section class="page-section container">
-      <div class="prose">
-        <h2>{t.priceH2}</h2>
-        <Fragment set:html={t.priceBody} />
-      </div>
-    </section>
-  )}
 
   <!-- NEUTRAL CHECKLIST -->
   <section class="page-section container">
